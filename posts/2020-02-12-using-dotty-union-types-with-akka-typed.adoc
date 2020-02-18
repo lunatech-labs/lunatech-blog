@@ -1,6 +1,6 @@
 = Using Dotty Union types with Akka Typed
 eloots
-v1.0, 2020-02-12
+v1.1, 2020-02-12
 :title: Using Dotty Union types with Akka Typed
 :tags: [dotty, akka]
 
@@ -52,7 +52,7 @@ Let's have a look at the protocol of the actors in our code:
 image::../media/2020-02-12-using-dotty-union-types-with-akka-typed/PingPongProtocol-1.png[{in-between-width}]
 
 As can be seen, the `Pinger` actor "understands" the `SendPing` and
-`StopPinging` messages while the `PingPong` actor understands the `Ping` message.
+`StopPingPong` messages while the `PingPong` actor understands the `Ping` message.
 Combining the flow of messages in the application with the protocol definitions,
 we see that we have to solve a problem: the `Pinger` actor needs to "understand"
 the response message from the `PingPong` actor. Let's have a look at the code of
@@ -274,3 +274,7 @@ Stay tuned for more on this.
 
 This is all very exciting and I can't wait till the day Scala 3.0.0 hits Maven
 Central!
+
+==== Article updates
+
+* 2020-02-19: fix mismatch in message name of `Pinger` protocol
