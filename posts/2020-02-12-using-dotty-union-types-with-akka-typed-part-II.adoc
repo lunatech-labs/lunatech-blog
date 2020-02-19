@@ -221,7 +221,7 @@ Does this make sense intuitively? It does: `externalBehavior` is declared as a b
 
 NOTE: One could say that from the outside, the internal behavior is not utilised to its full extent.
 
-The combination of Dotty Union types combined with generic `Behavior` having contravariant type parameter leads to a very simple implementation of the `Pinger` actor. The future will tell if, with Dotty, Akka will be able to exploit this in a future version.
+The combination of Dotty Union types combined with the generic `Behavior` of having a contravariant type parameter leads to a very simple implementation of the `Pinger` actor. The future will tell if, with Dotty, Akka will be able to exploit this in a future version.
 
 == Returning to best practices for coding up actors in Akka Typed
 
