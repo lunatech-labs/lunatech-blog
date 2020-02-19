@@ -1,6 +1,6 @@
 = Using Dotty Union types with Akka Typed
 eloots
-v1.0, 2020-02-12
+v1.1, 2020-02-19
 :title: Using Dotty Union types with Akka Typed
 :tags: [dotty, akka]
 
