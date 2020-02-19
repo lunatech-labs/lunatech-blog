@@ -56,8 +56,8 @@ object Pinger {
 The Dotty version of the `Pinger` actor suffers from the same problem. The protocol of the actor is _widened_ with the `PingPong.Pong` message. This means that _any_ actor can send a `Pong` message to the `Pinger` actor. The solution in this case is different from previous one:
 
 * The `apply` method in the `Pinger` object, will return a `Behavior[Command]` thus restoring the original protocol
-* The `Pinger` actor defines an internal behavior of type `Behavior[CommandIncludingResponses]`
-* The `Behavior[Command]` is derived from the `Behavior[CommandIncludingResponses]` by applying the `narrow` method on the latter
+* The `Pinger` actor defines an internal behavior of type `Behavior[CommandsAndResponses]`
+* The `Behavior[Command]` is derived from the `Behavior[CommandsAndResponses]` by applying the `narrow` method on the latter
 
 This leads to the following code:
 
@@ -94,7 +94,7 @@ object Pinger {
 }
 ----
 
-Admittedly, some magic has happened here and the question to ask is, _What is this `narrow` method doing?_. Let's look at that in the next section.
+Admittedly, some magic has happened here and the question to ask is, _What is this `narrow` method doing_? Let's look at that in the next section.
 
 == Clearing up some magic
 
