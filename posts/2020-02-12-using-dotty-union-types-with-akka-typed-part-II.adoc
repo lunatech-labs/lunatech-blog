@@ -131,7 +131,7 @@ First, we note that the `Behavior` class is generic: it has a type parameter `T`
 
 Second, we see that the class `ExtensibleBehavior`, which is a subclass of `Behavior`, has a `receive` method which takes a parameter `msg` of type `T`. Because functions (or _methods_), are contravariant in their argument types, the only possible variance case for the type parameter is invariant (`T`) or contravariant (`-T`). Because of type inference problems in Scala 2, the former was chosen.
 
-NOTE: Variance manifests itself in specific contexts and is a topic in itself with _contravariance_ being the least intuitive. We'll see however that in the case of `Behavior`, it is actually quite easy to understand. I'll get back to that later. For a comprehensive explanation of variance in Scala read https://docs.scala-lang.org/tour/variances.html[this article].
+NOTE: Variance manifests itself in specific contexts and is a topic in itself with _contravariance_ being the least intuitive. We'll see however that, in the case of `Behavior`, it is actually quite easy to understand. I'll get back to that later. For a comprehensive explanation of variance in Scala read https://docs.scala-lang.org/tour/variances.html[this article].
 
 Finally, we see from the definition of the `narrow` method, that it returns a behavior which is more restrictive in its type than the behavior on which it is called. The implementation of `narrow` uses `asInstanceOf` to apply this restriction. 
 
