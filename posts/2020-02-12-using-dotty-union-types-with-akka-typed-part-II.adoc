@@ -8,7 +8,7 @@ v1.0, 2020-02-19
 
 After posting the first article on https://www.lunatech.com/2020/02/using-dotty-union-types-with-akka-typed[Using Dotty Union types with Akka Typed], I received https://twitter.com/hseeberger/status/1227660145125199877?s=20[valuable feedback] via Twitter which made me decide to write this follow-up article.
 
-I will clean-up a few loose ends and add some new insights. Let's start by listing them:
+I will clean up a few loose ends and add some new insights. Let's start by listing them:
 
 1. In the Scala 2 version of the code, a message adapter is used, but the `WrappedPongResponse` message that wraps the response is part of the `Pinger` actor's protocol.
 2. The Dotty solution suffers from the same problem. Here, the `Pinger` actor's protocol is extended with the `PingPong.Pong` message.
