@@ -2,18 +2,29 @@
 eloots
 v1.0, 2020-02-19
 :title: Using Dotty Union types with Akka Typed - Part II
-:tags: [dotty, akka]
+:tags: [dotty, akka, scala]
+ifdef::backend-html5[]
+:in-between-width: width='85%'
+:half-width: width='50%'
+:half-size:
+:thumbnail: width='60'
+endif::[]
 
 == Introduction
 
-After posting the first article on https://www.lunatech.com/2020/02/using-dotty-union-types-with-akka-typed[Using Dotty Union types with Akka Typed], I received https://twitter.com/hseeberger/status/1227660145125199877?s=20[valuable feedback] via Twitter which made me decide to write this follow-up article.
+After posting the first article on https://www.lunatech.com/2020/02/using-dotty-union-types-with-akka-typed[Using Dotty Union types with Akka Typed], I received https://twitter.com/hseeberger/status/1227660145125199877?s=20[valuable feedback] via Twitter which made me decide to write this follow-up article. I will clean up a few loose ends and add some new insights.
 
-I will clean up a few loose ends and add some new insights. Let's start by listing them:
+Let's start by listing them:
 
-1. In the Scala 2 version of the code, a message adapter is used, but the `WrappedPongResponse` message that wraps the response is part of the `Pinger` actor's protocol.
-2. The Dotty solution suffers from the same problem. Here, the `Pinger` actor's protocol is extended with the `PingPong.Pong` message.
-3. In the fix for issue 2, we use a method in the Akka 2.6.1 library, `narrow`, and we'll look at how Dotty has the potential to simplify this approach.
-4. I'll finish up with summarising a few of the best practices for coding actors that are to a large extent based on the https://doc.akka.io/docs/akka/current/typed/style-guide.html#style-guide[Akka Typed Style guide].
+1. Both the Scala 2 and the Dotty version of the `Pinger` actor suffer from the same problem: the actor's protocol has been unnecessarily _widened_. It should be _narrowed_ back to the absolute minimum shown in _figure 1_.
+** In the Scala 2 version of the code, a message adapter is used that wraps the response from the `PingPong` actor. As part of the implementation, a `WrappedPongResponse` message _widens_ the actor protocol.
+** In the Dotty version of the code, the protocol is _widened_ with the `PingPong.Pong` message.
+2. In the fix for issue 1, we use a method in the Akka 2.6 library, `narrow`, and we'll look at how Dotty has the potential to simplify this approach.
+3. I'll finish up with summarising a few of the best practices for coding actors that are to a large extent based on the https://doc.akka.io/docs/akka/current/typed/style-guide.html#style-guide[Akka Typed Style guide].
+
+[#img-PingerProtocol]
+.The `Pinger` actor protocol
+image::../media/2020-02-12-using-dotty-union-types-with-akka-typed-part-II/PingerProtocol.png[{half-width}]
 
 == Restoring the `Pinger` actor's protocol
 
@@ -225,7 +236,7 @@ The combination of Dotty Union types combined with the generic `Behavior` of hav
 
 == Returning to best practices for coding up actors in Akka Typed
 
-I prefer to put the core behavior of a typed actor in a companion class. In simple cases, that may be considered overkill, but as a counter argument, I think that applying the same practice in a consistent manner helps to maintain a recurring and easily recognisable way of coding actors.
+For starters, the coding style I'm using is drawn from the https://doc.akka.io/docs/akka/current/typed/style-guide.html#style-guide[Akka Typed Style guide]. This guide leaves some choices to the programmer such as choosing between an _object oriented style_ or a _functional style_. For the functional style, I prefer to put the core behavior of a typed actor in a companion class. An advantage of this approach is that the method that will return the initial behavior doesn't have to take extra contextual parameters that need to be passed in: these can be added as class parameters. In simple cases, that may be considered overkill, but as a counter argument, I think that applying the same practice in a consistent manner helps to maintain a recurring and easily recognisable way of coding actors.
 
 The Dotty version of the `Pinger` actor will then look as follows:
 
