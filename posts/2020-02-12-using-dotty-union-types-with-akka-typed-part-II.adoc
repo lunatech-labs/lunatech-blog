@@ -225,7 +225,7 @@ The combination of Dotty Union types combined with the generic `Behavior` of hav
 
 == Returning to best practices for coding up actors in Akka Typed
 
-I prefer to put the core behavior of a typed actor in a companion class. In simple cases, that may be considered as overkill, but as a counter argument, I think that applying the same practice in a consistent manner, it helps to maintain a recurring and easily recognisable way of coding actors.
+I prefer to put the core behavior of a typed actor in a companion class. In simple cases, that may be considered overkill, but as a counter argument, I think that applying the same practice in a consistent manner helps to maintain a recurring and easily recognisable way of coding actors.
 
 The Dotty version of the `Pinger` actor will then look as follows:
 
