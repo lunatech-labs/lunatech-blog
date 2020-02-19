@@ -279,7 +279,7 @@ Note that we prevent the direct creation of instances of the `Pinger` actor by m
 In this article we have:
 
 * Shown in both Scala 2 and Dotty, we can hide the handling of responses to messages sent to other actors:
-** In Scala 2 we can use message adapters.
+** In Scala 2, we can use message adapters.
 ** In Dotty, we can use the `narrow` method on `Behavior`.
 * Looked at a potential alternative to `Behavior.narrow` which may become reality sometime in the future.
 * Looked at a best practice to code an Actor using Akka Typed.
