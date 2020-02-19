@@ -18,7 +18,7 @@ Let's start by listing them:
 
 1. Both the Scala 2 and the Dotty version of the `Pinger` actor suffer from the same problem: the actor's protocol has been unnecessarily _widened_. It should be _narrowed_ back to the absolute minimum shown in _figure 1_.
 ** In the Scala 2 version of the code, a message adapter is used that wraps the response from the `PingPong` actor. As part of the implementation, a `WrappedPongResponse` message _widens_ the actor protocol.
-** In the Dotty version of the code, the protocol is _widened_ with the `PingPong.Pong` message.
+** In the Dotty version of the code, the protocol is _widened_ with the `PingPong.Response` type of messages (of which there is only one specific instance: the `PingPong.Pong` message).
 2. In the fix for issue 1, we use a method in the Akka 2.6 library, `narrow`, and we'll look at how Dotty has the potential to simplify this approach.
 3. I'll finish up with summarising a few of the best practices for coding actors that are to a large extent based on the https://doc.akka.io/docs/akka/current/typed/style-guide.html#style-guide[Akka Typed Style guide].
 
