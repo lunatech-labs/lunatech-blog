@@ -35,7 +35,7 @@ object Pinger {
 
 The problem should be obvious: we shouldn't expose the `WrappedPongResponse` wrapper message as part of the `Pinger` actor's protocol. In other words, we have unnecessarily _widened_ the actor's protocol by adding the publicly accessible `WrappedPongResponse` message to it.
 
-Obviously, this is undesirable and the fix in this case is quite simple: we can mark this message as private and we're done:
+Obviously, this is undesirable, and the fix in this case is quite simple: we can mark this message as private and we're done:
 
 [source,scala,linenums]
 ----
