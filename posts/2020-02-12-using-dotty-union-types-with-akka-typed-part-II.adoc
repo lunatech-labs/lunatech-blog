@@ -109,7 +109,7 @@ Admittedly, some magic has happened here and the question to ask is, _What is th
 
 == Clearing up some magic
 
-The `Behavior` abstract class in Akka 2.6 defines the `narrow` method and here is a part of the relevant source code:
+The `Behavior` abstract class in Akka 2.6 defines the `narrow` method, and here is a part of the relevant source code:
 
 [source,scala,linenums]
 ----
