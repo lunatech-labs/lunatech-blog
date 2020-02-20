@@ -218,7 +218,7 @@ The last line in the _dotr_ session tells us that an instance of `Behavior[Pinge
 
 [source,scala,linenums]
 ----
-// We can mark the following variable as private, but that doesn't work in the REPL
+// We can mark the following variable as private, but this doesn't work in the REPL
 scala> val internalBehavior = new Behavior[Pinger.CommandsAndResponses] {} 
 val internalBehavior: Behavior[Pinger.CommandsAndResponses] = anon$1@8f221a7
 
