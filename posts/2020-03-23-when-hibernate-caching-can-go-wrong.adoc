@@ -220,7 +220,7 @@ What? Now we have lots of queries instead of just one! So our query caching actu
 
 Use entity cache if you are using query cache otherwise query caching will be a very doubtful performance improvement.
 
-==Catch #4
+== Catch #4
 
 === queries with parameters: overcache
 
@@ -236,7 +236,7 @@ Be careful using query cache and queries with parameters.
 
 == Catch #5
 
-==== cache settings: expire and overfill
+=== cache settings: expire and overfill
 
 For each cache you can separately configure these values in ehcache.xml file:
 ```
