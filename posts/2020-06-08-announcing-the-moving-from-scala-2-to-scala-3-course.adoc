@@ -12,29 +12,76 @@ endif::[]
 
 == Moving From Scala 2 to Scala 3
 
-After some early peeks at https://dotty.epfl.ch[the Dotty website] on a few occasions in 2019, I started looking more closely at the https://dotty.epfl.ch/docs/reference/overview.html[Dotty reference documentation] after reading the release notes of the https://dotty.epfl.ch/blog/2019/12/20/21th-dotty-milestone-release.html[0.21.0-RC1 Dotty release]. That release marked an important milestone, namely, the announcement of Dotty as feature-complete. After reading the article https://www.scala-lang.org/2019/12/18/road-to-scala-3.html[Scala 2 roadmap update: The Road to Scala 3], which was referenced in the release notes, I had all I needed to test some ideas with Dotty's new Union Types. You may have read the full report on this in https://www.lunatech.com/2020/02/using-dotty-union-types-with-akka-typed[part I] and https://www.lunatech.com/2020/02/using-dotty-union-types-with-akka-typed-part-ii[part II] of the ***Using Dotty Union types with Akka Typed*** articles.
+After some early peeks at https://dotty.epfl.ch[the Dotty website] on a few
+occasions in 2019, I started looking more closely at the
+https://dotty.epfl.ch/docs/reference/overview.html[Dotty reference documentation]
+after reading the release notes of the https://dotty.epfl.ch/blog/2019/12/20/21th-dotty-milestone-release.html[0.21.0-RC1 Dotty release].
+That release marked an important milestone, namely, the announcement of Dotty as
+feature-complete. After reading the article https://www.scala-lang.org/2019/12/18/road-to-scala-3.html[Scala 2 roadmap update: The Road to Scala 3], which was
+referenced in the release notes, I had all I needed to test some ideas with Dotty's
+new Union Types. You may have read the full report on this in https://www.lunatech.com/2020/02/using-dotty-union-types-with-akka-typed[part I] and
+https://www.lunatech.com/2020/02/using-dotty-union-types-with-akka-typed-part-ii[part II]
+of the ***Using Dotty Union types with Akka Typed*** articles. I'm pretty sure that
+this approach will be adopted in some form in a future version of the Akka toolkit
+as an alternative to the rather convoluted way of dealing with responses to messages
+in Akka Typed (something which is necessary because of some limitations of the Scala
+2 compiler).
 
-Pretty exciting stuff I still think, and I'm sure that this approach will be adopted in a future version of the Akka toolkit as an alternative to the rather convoluted way of dealing with responses to messages in Akka Typed (something which is necessary because of some limitations of the Scala 2 compiler).
+So, with that behind me, I was wondering about what to do next... Now, I've always
+been very keen on learning new stuff, but even more on sharing knowledge with
+others. I've taught many technical courses and [co-]developed different courses on
+Scala and Akka while at Lightbend. So, a little less than two months ago, I decided
+to start working on a new course that would target existing Scala 2 developers and
+that would help them with the move to Scala 3. The general idea I started from was
+to take an existing Scala 2 application, select a number of key features in Dotty,
+and apply these to the application in a step-by-step fashion. The end goal was to
+show how these features improve and reduce the complexity in the original code.
 
-So, with that behind me, I was wondering about what to do next... Now, I've always been very keen on learning new stuff, but even more on sharing knowledge with others. I've taught many technical courses and [co-]developed different courses on Scala and Akka while at Lightbend. So, a little less than two months ago, I decided to start working on a new course that would target existing Scala 2 developers and that would help them with the move to Scala 3. The general idea I started from was to take an existing Scala 2 application, select a number of key features in Dotty, and apply these to the application in a step-by-step fashion. The end goal was to show how these features improve and reduce the complexity in the original code.
+When I floated the idea about this new course at Lunatech, I got two enthusiastic
+colleagues, _Neil Benn_ and _Robin Raju_, to join me in the effort. After about 2
+months, we delivered the first edition of the two-day _"Moving from Scala 2 to Scala
+3"_ course to a group of colleagues.
 
-When I floated the idea about this new course at Lunatech, I got two enthusiastic colleagues, _Neil Benn_ and _Robin Raju_, to join me in the effort. After about 2 months, we delivered the first edition of the two-day _"Moving from Scala 2 to Scala 3"_ course to a group of colleagues.
+Between the start of the project and the first delivery, the alpha version of the
+course was kindly and thoroughly reviewed by members of the Scala Center. We
+received a lot of very useful feedback which resulted in a series of corresponding
+updates to the course materials. Speaking of which: We have a series of 11
+exercises, a course slide deck with approximately 140 slides, and a collection of
+code-snippets that can be used to demonstrate various features of the Dotty language
+covered in the course.
 
-Between the start of the project and the first delivery, the alpha version of the course was kindly and thoroughly reviewed by members of the Scala Center. We received a lot of very useful feedback which resulted in a series of corresponding updates to the course materials. Speaking of which: We have a series of 11 exercises, a course slide deck with approximately 140 slides, and a collection of code-snippets that can be used to demonstrate various features of the Dotty language covered in the course.
-
-Very important to note is that all these materials are open-sourced! You can find them in https://github.com/lunatech-labs/lunatech-scala-2-to-scala3-course[this public repository] on Github. This means that you can benefit from this at no extra cost but the effort you put into studying the course materials! _(Of course, should you wish to have this course taught to you in-class, ping us —although that will not be free of charge)_.
+Very important to note is that all these materials are open-sourced! You can find
+them in https://github.com/lunatech-labs/lunatech-scala-2-to-scala3-course[this
+public repository] on Github. This means that you can benefit from this at no extra
+cost but the effort you put into studying the course materials! _(Of course, should
+you wish to have this course taught to you in-class, feel free to reach out to us
+and we're happy to talk!)_.
 
 == What's next...
 
-So, _"What's next?"_, you may ask. Well, in fact, quite a bit... Here's list of things that are in the works:
+So, _"What's next?"_, you may ask. Well, in fact, quite a bit... Here's list of
+things that are in the works:
 
 * We plan to keep the course current with the release candidates of Dotty. At the time of writing, Dotty is at release 0.24.0-RC1 with 0.25 around the corner.
 * Robin is working on implementing CI/CD on the project. When that is done, we will automatically release the so-called _"studentified"_  and _"linearized"_ versions of the course.
 
-In a nutshell, a _"studentified"_ version of the course is an artefact generated from the https://github.com/lunatech-labs/lunatech-scala-2-to-scala3-course/tree/exercises-master/exercises[course master repository]. This artefact is a self-contained sbt project that has special functionality built-in to provide a friendly learning experience. A student can navigate between different exercises, pull in relevant test code automatically, read exercise instructions via a manual page command, save and restore the state of the code, and _"pull"_ the solution if required.
+In a nutshell, a _"studentified"_ version of the course is an artefact generated
+from the https://github.com/lunatech-labs/lunatech-scala-2-to-scala3-course/tree/exercises-master/exercises[course master repository].
+This artefact is a self-contained sbt project that has special functionality built-in
+to provide a friendly learning experience. A student can navigate between different
+exercises, pull in relevant test code automatically, read exercise instructions via
+a manual page command, save and restore the state of the code, and _"pull"_ the
+solution if required.
 
-A _"linearized"_ version of the course is a _git_ repository where every exercise in the course has a corresponding commit in the repo. As such, it can be used to quickly inspect the changes between subsequent exercises. This artefact also serves another purpose: it is an essential component in a workflow to evolve the code in exercises using _git interactive rebasing_.
+A _"linearized"_ version of the course is a _git_ repository where every exercise in
+the course has a corresponding commit in the repo. As such, it can be used to
+quickly inspect the changes between subsequent exercises. This artefact also serves
+another purpose: it is an essential component in a workflow to evolve the code in
+exercises using _git interactive rebasing_.
 
-The transformation to _"studentified"_  and _"linearized"_ artefacts is done by the https://github.com/lightbend/course-management-tools[Course Management Tools] _(CMT)_ that I developed at https://www.lightbend.com[Lightbend].
+The transformation to _"studentified"_  and _"linearized"_ artefacts is done by the
+https://github.com/lightbend/course-management-tools[Course Management Tools]
+_(CMT)_ that I developed at https://www.lightbend.com[Lightbend].
 
-Neil, Robin and myself have a tech talk to colleagues last week about _CMT_. You can view a recording of this talk https://youtube.com[here].
+Neil, Robin and myself had a tech talk with colleagues last week about _CMT_. You
+can view a recording of this talk https://youtube.com[here].
