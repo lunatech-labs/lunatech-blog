@@ -48,7 +48,7 @@ received a lot of very useful feedback which resulted in a series of correspondi
 updates to the course materials. Speaking of which: We have a series of 11
 exercises, a course slide deck with approximately 140 slides, and a collection of
 code-snippets that can be used to demonstrate various features of the Dotty language
-covered in the course. The topics and Dotty features that we address in the course  are:
+covered in the course. The topics and Dotty features that we cover in the course  are:
 
 * The Dotty compiler's syntax rewriting capabilities
 * https://dotty.epfl.ch/docs/reference/dropped-features/package-objects.html[Top Level Definitions]
@@ -78,7 +78,7 @@ So, _"What's next?"_, you may ask. Well, in fact, quite a bit... Here's list of
 things that are in the works:
 
 * We plan to keep the course current with the release candidates of Dotty. At the time of writing, Dotty is at release 0.24.0-RC1 with 0.25 around the corner.
-* Robin is working on implementing CI/CD on the project. When that is done, we will automatically release the so-called _"studentified"_  and _"linearized"_ versions of the course.
+* We will release versions of the course on a regular basis tracking Dotty's progress and our coverage of Dotty features. You can following along https://github.com/lunatech-labs/lunatech-scala-2-to-scala3-course/releases[here].
 * We're looking at covering other new features in Dotty in the course. Stay tuned for that!
 
 In a nutshell, a _"studentified"_ version of the course is an artifact generated
