@@ -48,7 +48,22 @@ received a lot of very useful feedback which resulted in a series of correspondi
 updates to the course materials. Speaking of which: We have a series of 11
 exercises, a course slide deck with approximately 140 slides, and a collection of
 code-snippets that can be used to demonstrate various features of the Dotty language
-covered in the course.
+covered in the course. The topics and Dotty features that we address in the course  are:
+
+* The Dotty compiler's syntax rewriting capabilities
+* https://dotty.epfl.ch/docs/reference/dropped-features/package-objects.html[Top Level Definitions]
+* https://dotty.epfl.ch/docs/reference/other-new-features/parameter-untupling.html[Parameter Untupling]
+* https://dotty.epfl.ch/docs/reference/contextual/extension-methods.html[New Extension Methods syntax]
+* Dotty Contextual Abstractions
+** https://dotty.epfl.ch/docs/reference/contextual/givens.html[Given Instances]
+** https://dotty.epfl.ch/docs/reference/contextual/given-imports.html[Given Imports]
+** https://dotty.epfl.ch/docs/reference/contextual/using-clauses.html[Using Clauses]
+** https://dotty.epfl.ch/docs/reference/contextual/using-clauses.html#summoning-instances[Summon]
+* https://dotty.epfl.ch/docs/reference/enums/enums.html[Enumerations]
+* https://dotty.epfl.ch/docs/reference/other-new-features/export.html[Export clauses]
+* https://dotty.epfl.ch/docs/reference/new-types/intersection-types.html[Intersection Types] & https://dotty.epfl.ch/docs/reference/new-types/union-types.html[Union Types]
+* https://dotty.epfl.ch/docs/reference/other-new-features/opaques.html[Opaque Type Aliases]
+* https://dotty.epfl.ch/docs/reference/contextual/multiversal-equality.html[Multiversal Equality]
 
 Very important to note is that all these materials are open-sourced! You can find
 them in https://github.com/lunatech-labs/lunatech-scala-2-to-scala3-course[this
