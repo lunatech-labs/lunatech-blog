@@ -99,5 +99,6 @@ The transformation to _"studentified"_  and _"linearized"_ artifacts is done by 
 https://github.com/lightbend/course-management-tools[Course Management Tools]
 _(CMT)_ that I developed at https://www.lightbend.com[Lightbend].
 
-Neil, Robin and myself had a tech talk with colleagues last week about _CMT_. You
-can view a recording of this talk https://youtube.com[here].
+Neil, Robin and myself had a tech talk with colleagues last week about _CMT_ and
+their use while building this course. You can view a recording of this talk 
+https://youtu.be/2zmXTGG7Nkg[here].
