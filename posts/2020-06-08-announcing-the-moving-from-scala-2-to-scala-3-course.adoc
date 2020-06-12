@@ -43,7 +43,7 @@ months, we delivered the first edition of the two-day _"Moving from Scala 2 to S
 3"_ course to a group of colleagues.
 
 Between the start of the project and the first delivery, the alpha version of the
-course was kindly and thoroughly reviewed by members of the Scala Center. We
+course was kindly and thoroughly reviewed by members of the Scala Center (thanks Sébastien and Julien!). We
 received a lot of very useful feedback which resulted in a series of corresponding
 updates to the course materials. Speaking of which: we have a series of 11
 exercises, a course slide deck with approximately 150 slides, and a collection of
