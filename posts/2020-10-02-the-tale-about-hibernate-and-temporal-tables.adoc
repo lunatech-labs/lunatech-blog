@@ -1,0 +1,154 @@
+= The tale about Hibernate and Temporal Tables
+Nataliia Dziubenko <nataliia.dziubenko@lunatech.nl>
+v1.0, 2020-10-02
+:title: The tale about Hibernate and Temporal Tables
+:tags: [hibernate, java, temporal, mssql]
+
+_thanks Willem-Jan Glerum for introducing me to this interesting behaviour_
+
+== Foreword
+
+Earlier this year, I was involved in solving a issue on a project that was using https://hibernate.org[Hibernate] + https://hibernate.org/orm/envers[Envers] and Microsoft SQL Server as the database. The choice of database was mainly driven by a project requirement to have history data and this can be provided by temporal tables. In the Java code that is used to query the database, there is an entity class for history data named `VersionedRecord`, which is a `@MappedSuperclass`, and a couple of entities are extending it.
+
+Much to our surprise, when we programmatically fetched data into these entities from the database, something unexpected happened: Hibernate returned the correct number of records, but it repeated the data for the first row, effectively ignoring the rest of the result set! Some investigation showed that this is caused by Hibernate's first-level caching, and we had to look for some trick to overcome this without changing the `VersionedRecord` entity class. The main goal was to make a change as painless as possible and avoid changes in the entity class: creation of extra entity class just for this purpose seemed like an overkill.
+
+In the remainder of this article, I will explain what happened on the clean and simple example that was used to experiment and also share a trick that we used to solve the problem. Hopefully this will be useful for someone else.
+
+== The experiment
+
+To make the experiment clean, I used only Hibernate and nothing on top of it. So, first of all I created a table with history table like this:
+[source,sql]
+----
+CREATE TABLE Department
+(
+    DeptID INT NOT NULL PRIMARY KEY CLUSTERED
+  , DeptName VARCHAR(50) NOT NULL
+  , SysStartTime DATETIME2 GENERATED ALWAYS AS ROW START NOT NULL
+  , SysEndTime DATETIME2 GENERATED ALWAYS AS ROW END NOT NULL
+  , PERIOD FOR SYSTEM_TIME (SysStartTime, SysEndTime)
+)
+WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = dbo.DepartmentHistory));
+----
+
+This example comes from official documentation about temporal tables. You can find it https://docs.microsoft.com/en-us/sql/relational-databases/tables/creating-a-system-versioned-temporal-table?view=sql-server-ver15[here].
+
+With the table definition in place, I added some records to it:
+
+[source,sql]
+----
+insert into department (deptid, deptname) values (1, 'test1');
+insert into department (deptid, deptname) values (2, 'test2');
+----
+And update some records so history table will also get filled:
+[source,sql]
+----
+update department set deptname = 'updated' where deptid = 1;
+update department set deptname = 'updated_again' where deptid = 1;
+update department set deptname = 'updated2' where deptid = 2;
+----
+if we query the history table:
+[source,sql]
+----
+select * from departmenthistory;
+----
+we will see information like this:
+
+image::../media/2020-10-02-the-tale-about-hibernate-and-temporal-tables/db_result_1.png[]
+
+The department with DeptId = 1 was updated twice, so both old values are here and department with DeptId = 2 was updated once, so one old value of this record is also in the history table now.
+
+And if we want to query all history records for department with DeptId = 1 we will do this:
+[source,sql]
+----
+select * from departmenthistory where deptid = 1;
+----
+And will get this result:
+
+image::../media/2020-10-02-the-tale-about-hibernate-and-temporal-tables/db_result_2.png[]
+
+So, that works as advertised! Now let's use Hibernate with just a simple small piece of code to run a native query:
+[source,java]
+----
+Query q = entityManager.createNativeQuery("select DeptId, DeptName from DepartmentHistory where DeptId = 1");
+----
+The result is the following (which completely makes sense):
+[source,java]
+----
+1 test1
+1 updated
+----
+Now we can create an Entity to easily operate with the data:
+[source,java]
+----
+@javax.persistence.Entity
+@Table(name = "DepartmentHistory")
+public class DepartmentHistory {
+
+    @Id
+    @Column(name = "DeptId")
+    private int DeptId;
+
+    @Column(name="DeptName")
+    private String DeptName;
+
+// other fields and getters and setters…
+
+}
+----
+
+...and map our result properly to our entity:
+
+[source,java]
+----
+Query q = entityManager
+    .createNativeQuery("select * from DepartmentHistory where DeptId = 1",
+    DepartmentHistory.class);
+----
+We expect to get the same result, but this is what we get instead:
+[source,java]
+----
+1 test1
+1 test1
+----
+So we get two rows, but they contain the **_same_** values. If there were more rows, they would all return the same data. This happens because of hibernate's first-level caching. Because all rows have the same ID, when we execute this query, Hibernate caches the result on the first row and reuses it for the rest of the rows.
+
+First level caching can not be turned off, there is no "nice and easy" way to solve this issue and have Hibernate properly working with temporal tables.
+
+Although…
+
+*…here is how we can trick Hibernate:*
+[source,java]
+----
+Query q = entityManager.createNativeQuery("SELECT ROW_NUMBER() OVER (ORDER BY deptid ASC) AS DeptId, * from DepartmentHistory where DeptId = 1",
+        DepartmentHistory.class);
+----
+We provide Hibernate with another (fake) DeptId, which is in fact the row count. This value will be different for each row and hibernate won't be reusing the result that it cached for the first row. Instead it will fetch every row. It is important to let the “fake” DeptId go first, so the real DeptId will be ignored during conversion of result to our entity. So, when we run it like that, the result is:
+[source,java]
+----
+1 test1
+2 updated
+----
+If we run this query without hibernate, this is what we will see:
+
+image::../media/2020-10-02-the-tale-about-hibernate-and-temporal-tables/db_result_3.png[]
+
+There is a duplicate column for DeptId, and only the first one is used by Hibernate.
+
+== Conclusion
+
+Of course, the result is not as clean as we would like: we still have fake IDs instead of the original ones, but this is how you can trick Hibernate without changing your domain. This solution makes sense only if we don’t care about the original ID (in our example we filter by original ID so we already know it anyway). If we select everything from the history table without filtering by ID, the result will be a mess:
+[source,java]
+----
+1 test1
+2 updated
+3 test2
+----
+There is no other easy 'trick' to get around this without changing your domain. But if you do the latter for this specific case, it may be a problem for normal queries, just keep that in mind.
+
+Entity class for history table can be really painful. Because the IDs are not unique, you can’t even use:
+[source,java]
+----
+entityManager.find(...)
+----
+
+In order to make a clean solution you will need to think about the way to generate unique IDs on the Java side. Just keep in mind, that row ID is not a reliable identifier, so it's not recommended to use it for your unique IDs.
