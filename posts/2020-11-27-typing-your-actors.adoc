@@ -197,7 +197,7 @@ final case class RoomData(
 * Think of your actor as a finite state machine.
 * Set data transformation as a function on the case class, making message handling more readable. It also allows to unit testing on transformations.
 
-Previously we had to request(_ask_) information out of one actor, however when actors request information out of each other there is a need for translation. Typed actors only can handle messages defined on their domain, so we need an https://doc.akka.io/docs/akka/current/typed/interaction-patterns.html#adapted-response[adapater].
+Previously we had to request(_ask_) information out of one actor, however when an actor sends a request to another actor, there is a need for translation of the response as Typed actors only can handle messages defined on their domain. This translation is done using an https://doc.akka.io/docs/akka/current/typed/interaction-patterns.html#adapted-response[adapater].
 
 [source,scala]
 ----
