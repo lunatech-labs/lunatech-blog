@@ -17,7 +17,7 @@ With the prevalence of multi-CPU computers and multi-core CPUs, the opportunity
 exists to speed-up the execution of applications in general and algorithms that
 lend themselves to parallelisation specifically.
 
-If we look at the latter, we may find that the algorithm can be decomposed in
+If we look at the latter, we may find that the algorithm can be decomposed into
 subtasks which can be executed in parallel. Getting the final result then
 consists of combining the sub-results of the subtasks. There we can distinguish
 two cases. In the first case, the order in which the sub-results are composed
@@ -911,7 +911,6 @@ location like shown in the final version of the stream processing:
     .mergeSubstreams
     .runWith(sumOfTerms)
 ----
-
 
 
 
