@@ -48,7 +48,7 @@ any flow control. What this means is that if we throw more work at an Actor
 than this Actor can process, work will get piled-up in a buffer (actually,
 the Actor's mailbox). The conclusion is that the Actor model can be applied in a
 straightforward way to problems of the first type, albeit that we need to be
-aware of potential ordering and flow control issue. We'll come back to this
+aware of potential ordering and flow control issues. We'll come back to this
 topic later when we discuss solutions to our sample problem based on
 https://doc.akka.io/docs/akka/current/stream[Akka Streams].
 
