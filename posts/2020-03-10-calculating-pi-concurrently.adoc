@@ -511,8 +511,8 @@ threads in the ForkJoinPool.
 == Conclusion on the `Future` approach
 
 Scala's `Future` API presents a very powerful way to perform asynchronous and
-concurrent execution of code. Even though it may take some time to get one's
-head around, once you grasp it, it's pretty cool and very powerful.
+concurrent execution of code. Even though it may take some time to wrap one's
+head around it, once you grasp it, it's pretty cool and very powerful.
 
 Now, as for π, is approach used in this article to calculate π a realistic way
 to calculate this number to say multi-billion digit precision? Not really for
