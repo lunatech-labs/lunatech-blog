@@ -741,7 +741,7 @@ terms of computational complexity with the former being the most complex.
 If we want to speed up the calculation, we need to focus on calculating the
 terms in parallel (just like in the `Future` based version).
 
-A first way to do this is use the `mapAsync` combinator on `Source` (or `Flow`).
+A first way to do this is to use the `mapAsync` combinator on `Source` (or `Flow`).
 `mapAsync` has two argument lists. The first one takes a single argument named
 `parallelism`: this is a number which, obviously will introduce parallel execution
 of a function that transforms an element in the stream. This function is passed
