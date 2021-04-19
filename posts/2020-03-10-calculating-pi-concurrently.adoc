@@ -43,7 +43,7 @@ we create a pool of Actors that execute code concurrently.
 This execution model allows us to implement concurrent execution of sub-tasks
 that fall in the first category mentioned earlier. Unless we take specific
 measures, we have no control over the order in which sub-results are returned.
-Another potential issue with an Actor based implementation is that we don't
+Another potential issue with an Actor based implementation is that we don't have
 any flow control. What this means is that if we throw more work at an Actor
 then that this Actor can process, work will get piled-up in a buffer (actually,
 the Actor's mailbox). Conclusion is that the Actor model can be applied in a
@@ -911,5 +911,4 @@ location like shown in the final version of the stream processing:
     .mergeSubstreams
     .runWith(sumOfTerms)
 ----
-
 
