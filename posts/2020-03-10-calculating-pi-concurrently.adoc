@@ -10,7 +10,14 @@ ifdef::backend-html5[]
 :thumbnail: width='60'
 endif::[]
 
-== Calculating π concurrently{blank}footnote:[This article is based on a blogpost by the author that was published in 2014. This article discusses an alternative implementation based on Akka Streams.]
+== Calculating π concurrently
+
+This article is a rewrite of a blogpost about calculating π concurrently using Scala's `Future` and that was published in 2014. Two major changes that are introduced are:
+
+= Discuss alternative implementations based on Akka Streams.
+= Use Scala 3 instead of Scala 2 and utilise the existing Akka 2.6.14 library that was compiled with Scala 2 in a transparant fashion.
+
+All source code shown in this article can be found https://github.com/eloots/calculating-pi-concurrently[here].
 
 === Introduction
 With the prevalence of multi-CPU computers and multi-core CPUs, the opportunity
@@ -113,44 +120,37 @@ a Scala feature so that we use `BigDecimal` in a more straightforward way:
 [source,scala]
 ----
 scala> import java.math.MathContext
-import java.math.{MathContext=>MC}
 
-scala> import scala.math.{ BigDecimal => ScalaBigDecimal }
-import scala.math.{BigDecimal=>ScalaBigDecimal}
+scala> import scala.math.{BigDecimal as ScalaBigDecimal}
 
-scala> object BigDecimal {
-         def apply(d: Double)(implicit mc: MathContext) = ScalaBigDecimal(d)(mc)
-       }
-defined object BigDecimal
+scala> object BigDecimal:
+         def apply(d: Int)(using mc: MathContext): BigDecimal = ScalaBigDecimal(d, mc)
+// defined object BigDecimal
 
-scala> implicit val mc = new MathContext(100)
-mc: java.math.MathContext = precision=100 roundingMode=HALF_UP
+scala> given MathContext = new MathContext(100)
+lazy val given_MathContext: java.math.MathContext
 
 scala> val one = BigDecimal(1)
-one: scala.math.BigDecimal = 1.0
+one: scala.math.BigDecimal = 1
 
 scala> val seven = BigDecimal(7)
-seven: scala.math.BigDecimal = 7.0
+seven: scala.math.BigDecimal = 7
 
 scala> println((one/seven).toString)
-0.1428571428571428571428571428571428571428571428571428571428571428571428571428571428571428571428571429
+0.1428571428571428571428571428571429
+
 ----
 
-If you're unfamiliar with Scala's implicits, the above may look a bit strange.
+If you're unfamiliar with Scala's contextual abstractions (formerly known as 'implicits'), the above may look a bit strange.
 In fact it works as follows: in object `BigDecimal`, we define an apply method
 that has two argument lists. The purpose of the first one is obvious.
 The second one takes a single argument, namely a `MathContext`. This argument
-(in fact, this applies to the argument list as a whole) is marked _implicit_.
+(in fact, this applies to the argument list as a whole) is marked _using_.
 What this will do is that the compiler will, in the current scope, look for
-a value of type `MathContext` marked as _implicit_. The declaration
-`implicit val mc = new MathContext(100)` meets that criterium. Hence, when
+a _given_ value of type `MathContext`. The declaration
+`given MathContext = new MathContext(100)` meets that criterium. Hence, when
 we invoke a call to the apply method in our `BigDecimal` object, value `mc`
 will automatically be passed as the second argument.
-
-The attentive user will also note that our apply method takes a `Double` as
-argument. Later on we use our apply method with an `Int` as argument.
-This works because there exists what is called an _implicit conversion_ from
-`Int` to `Double`.
 
 Cool, and now that we've got that out of the way, let's look at how we can
 perform the calculation.
@@ -180,7 +180,7 @@ scala> val chunkSize = (N + nChunks - 1) / nChunks
 chunkSize: Int = 47
 
 scala> val offsets = 0 until N by chunkSize
-offsets: scala.collection.immutable.Range = Range(0, 47, 94, 141, 188, 235, 282, 329, 376, 423, 470, 517, 564, 611, 658, 705, 752, 799, 846, 893, 940, 987, 1034, 1081, 1128, 1175, 1222, 1269, 1316, 1363, 1410, 1457, 1504, 1551, 1598, 1645, 1692, 1739, 1786, 1833, 1880, 1927, 1974, 2021, 2068, 2115, 2162, 2209, 2256, 2303, 2350, 2397, 2444, 2491, 2538, 2585, 2632, 2679, 2726, 2773, 2820, 2867, 2914, 2961)
+val offsets: Range = inexact Range 0 until 3000 by 47
 
 scala> println(s"Calculating π with ${nChunks*chunkSize} terms in $nChunks chunks of $chunkSize terms each")
 Calculating π with 3008 terms in 64 chunks of 47 terms each
@@ -191,18 +191,19 @@ in the BBPDEA formula, starting at term `offset`.
 
 [source,scala]
 ----
-  def piBBPdeaPart(offset: Int, n: Int): BigDecimal = {
-    def piBBPdeaTermI(i: Int): BigDecimal = {
+  def piBBPdeaPart(offset: Int, n: Int): BigDecimal =
+    def piBBPdeaTermI(i: Int): BigDecimal =
       BigDecimal(1) / BigDecimal(16).pow(i) * (
         BigDecimal(4) / (8 * i + 1) -
         BigDecimal(2) / (8 * i + 4) -
         BigDecimal(1) / (8 * i + 5) -
         BigDecimal(1) / (8 * i + 6)
       )
-    }
     println(s"Started @ offset: $offset ")
-    (offset until offset + n).foldLeft((BigDecimal(0))) { case (acc, i) => acc + piBBPdeaTermI(i) }
-  }
+    (offset until offset + n).foldLeft((BigDecimal(0))) {
+      case (acc, i) => acc + piBBPdeaTermI(i)
+    }
+  
 ----
 
 Relatively straightforward, and time to tie everything together.
@@ -214,9 +215,9 @@ the sum of the chunks:
 ----
   val piChunks: Future[Seq[BigDecimal]] =
     Future.sequence(
-      for { offset <- offsets }
+      for  offset <- offsets 
         yield Future(piBBPdeaPart(offset, chunkSize))
-  )
+    )
 
 ----
 
@@ -265,18 +266,18 @@ This is done as follows:
 
 [source,scala]
 ----
-    piF.onComplete {
-      case Success(pi) =>
-        val stopTime = System.currentTimeMillis
-        println(s"Pi:      ${pi}")
-        val delta = pi - Helpers.piReference
-        Helpers.printMsg(s"|Delta|: ${delta(new MathContext(8)).abs}")
-        Helpers.printCalculationTime(startTime, stopTime)
-        fjPool.shutdown()
-      case Failure(e) =>
-        println(s"An error occurred: ${e}")
-        fjPool.shutdown()
-    }
+  piF.onComplete {
+    case Success(pi) =>
+      val stopTime = System.currentTimeMillis
+      println(s"Pi:      ${pi}")
+      val delta = pi - Helpers.piReference
+      Helpers.printMsg(s"|Delta|: ${delta(new MathContext(8)).abs}")
+      Helpers.printCalculationTime(startTime, stopTime)
+      fjPool.shutdown()
+    case Failure(e) =>
+      println(s"An error occurred: ${e}")
+      fjPool.shutdown()
+  }
 ----
 
 Note that we are using a few helper functions such as `printMsg` and `printCalculationTime`
@@ -289,13 +290,29 @@ However, if we compile it, we get the following error:
 
 [source,scala]
 ----
-Error:(54, 64) not enough arguments for method apply: (implicit executor: scala.concurrent.ExecutionContext)scala.concurrent.Future[scala.math.BigDecimal] in object Future.
-Unspecified value parameter executor.
-  val piChunks = Future.sequence( offsets map {offset => Future(piBBPdeaPart(offset, chunkSize))} )
+[error] -- Error: /Users/ericloots/Trainingen/LBT/calculating-pi-concurrently/step_001_calculating_pi_with_futures/src/main/scala/com/lunatech/pi/Futures.scala:52:55
+[error] 52 |          yield Future(piBBPdeaPart(offset, chunkSize))
+[error]    |                                                       ^
+[error]    |Cannot find an implicit ExecutionContext. You might add
+[error]    |an (implicit ec: ExecutionContext) parameter to your method.
+[error]    |
+[error]    |The ExecutionContext is used to configure how and on which
+[error]    |thread pools asynchronous tasks (such as Futures) will run,
+[error]    |so the specific ExecutionContext that is selected is important.
+[error]    |
+[error]    |If your application does not define an ExecutionContext elsewhere,
+[error]    |consider using Scala's global ExecutionContext by defining
+[error]    |the following:
+[error]    |
+[error]    |implicit val ec: scala.concurrent.ExecutionContext = scala.concurrent.ExecutionContext.global
+[error]    |
+[error]    |The following import might fix the problem:
+[error]    |
+[error]    |  import concurrent.ExecutionContext.Implicits.global
                                                                ^
 ----
 
-Looking at the (simplified) signature of `Future` we see the following:
+Looking at the (simplified - Scala 2) signature of `Future` we see the following:
 
 [source,scala]
 ----
@@ -316,17 +333,15 @@ We can provide an ExecutionContext in the following way:
 ----
   val fjPool = new ForkJoinPool(12)
 
-  implicit val ec = ExecutionContext.fromExecutor( fjPool)
+    given ExecutionContext = ExecutionContext.fromExecutor(fjPool)
 ----
 
 Here, we create a ForkJoinPool with 12 threads and create an ExecutionContext from it.
-Since `ec` is declared as an implicit val, it will be picked-up by our calls to
-Future.apply...
+This 'given' value will now be picked-up by our calls to Future.apply...
 
 == Wrap-up
 
-Following is the complete code (which you can find in
-https://github.com/eloots/calculating-pi-concurrently[this repository]).
+Following is the complete code:
 
 [source,scala,linenums]
 ----
@@ -335,42 +350,38 @@ package com.lunatech.pi
 import java.math.MathContext
 import java.util.concurrent.ForkJoinPool
 
-import scala.concurrent._
-import scala.math.{BigDecimal => ScalaBigDecimal}
+import scala.concurrent.*
+import scala.math.{BigDecimal as ScalaBigDecimal}
 import scala.util.{Failure, Success}
 
-object Main {
-  def main(args: Array[String]): Unit = {
+object Main:
+  def main(args: Array[String]): Unit =
 
     val RunParams(iterationCount, precision) = Helpers.getRunParams(args)
 
     Helpers.printMsg(s"Iteration count = $iterationCount - Precision = $precision")
 
-    implicit val prec: MathContext = new MathContext(precision)
+    given MathContext = new MathContext(precision)
 
-    object BigDecimal {
-      def apply(d: Int)(implicit mc: MathContext): BigDecimal = ScalaBigDecimal(d, mc)
-    }
+    object BigDecimal:
+      def apply(d: Int)(using mc: MathContext): BigDecimal = ScalaBigDecimal(d, mc)
 
-    def piBBPdeaPart(offset: Int, n: Int): BigDecimal = {
-      def piBBPdeaTermI(i: Int): BigDecimal = {
+    def piBBPdeaPart(offset: Int, n: Int): BigDecimal =
+      def piBBPdeaTermI(i: Int): BigDecimal =
         BigDecimal(1) / BigDecimal(16).pow(i) * (
           BigDecimal(4) / (8 * i + 1) -
           BigDecimal(2) / (8 * i + 4) -
           BigDecimal(1) / (8 * i + 5) -
           BigDecimal(1) / (8 * i + 6)
         )
-      }
       println(s"Started @ offset: $offset ")
       (offset until offset + n).foldLeft((BigDecimal(0))) {
         case (acc, i) => acc + piBBPdeaTermI(i)
       }
-    }
 
     val fjPool = new ForkJoinPool(Settings.parallelism)
 
-    implicit val ec: ExecutionContextExecutor =
-      ExecutionContext.fromExecutor(fjPool)
+    given ExecutionContext = ExecutionContext.fromExecutor(fjPool)
 
     val N = iterationCount
     val nChunks = 64
@@ -378,13 +389,13 @@ object Main {
     val offsets = 0 to N by chunkSize
     Helpers.printMsg(s"Calculating π with ${nChunks * chunkSize} terms in $nChunks chunks of $chunkSize terms each")
     Helpers.printMsg(s"Threadpool size: ${Settings.parallelism}")
-    Helpers.printMsg(s"BigDecimal precision settings: ${implicitly[MathContext]}")
+    Helpers.printMsg(s"BigDecimal precision settings: ${summon[MathContext]}")
 
     val startTime = System.currentTimeMillis
 
     val piChunks: Future[Seq[BigDecimal]] =
       Future.sequence(
-        for { offset <- offsets }
+        for  offset <- offsets 
           yield Future(piBBPdeaPart(offset, chunkSize))
       )
 
@@ -402,8 +413,6 @@ object Main {
         println(s"An error occurred: ${e}")
         fjPool.shutdown()
     }
-  }
-}
 
 ----
 
@@ -416,26 +425,25 @@ Intel Core i7 processor), it produces the following output (values of π truncat
 
 ----
 man [e] > calculating-pi-concurrently > calculating pi with futures > run 3000 4000
-[info] Compiling 1 Scala source to /Users/ericloots/Trainingen/LBT/calculating-pi-concurrently/step_001_calculating_pi_with_futures/target/scala-2.13/classes ...
 [info] running com.lunatech.pi.Main 3000 4000
 Iteration count = 3000 - Precision = 4000
 Calculating π with 3008 terms in 64 chunks of 47 terms each
 Threadpool size: 12
 BigDecimal precision settings: precision=4000 roundingMode=HALF_UP
-Started @ offset: 47
 Started @ offset: 0
 Started @ offset: 94
 Started @ offset: 141
+Started @ offset: 47
 Started @ offset: 188
 Started @ offset: 235
 Started @ offset: 282
 Started @ offset: 329
-Started @ offset: 376
 Started @ offset: 423
+Started @ offset: 376
 Started @ offset: 470
 Started @ offset: 517
-[success] Total time: 3 s, completed 11 Mar 2020, 13:50:45
-man [e] > calculating-pi-concurrently > calculating pi with futures > Started @ offset: 564
+[success] Total time: 1 s, completed 19 Apr 2021, 18:51:35
+Started @ offset: 564
 Started @ offset: 611
 Started @ offset: 658
 Started @ offset: 705
@@ -487,24 +495,25 @@ Started @ offset: 2820
 Started @ offset: 2867
 Started @ offset: 2914
 Started @ offset: 2961
-Pi:      3.14159265358979323846264338327950288419716939937510582097494459230781640628...
+Pi:      3.141592653589793238462643383279502884197169...
 |Delta|: 2.8076968E-3630
-Calculation time: 3,560
+Calculation time: 1.345
+
 ----
 
 What we can observe is that, with 3,008 terms, we have correctly calculated more
 than 3,600 digits accurately.
 
-If we set the size of the ForkJoinPool to 1, 2, 4, 8, 16, 32 we get the
-following values for the calculation time (in seconds) respectively: 18.25,
-9.23, 5.91, 4.02, 4.47, 5.86
+If we set the size of the ForkJoinPool to 1, 2, 4, 8, 12, 16, 32 we get the
+following values for the calculation time (in seconds) respectively: 12.12,
+6.23, 3.03, 1.78, 1.34, 1.36, 1.43
 
 So, we see a near linear speed-up by going from one thread to two threads.
 A further increase of the thread-count doesn't yield a further linear speed-up:
 this may be caused by different factors, not in the least by the fact that we
 have a single chip processor with a shared on-chip cache.
-Of course, since it's a four core CPU (with hyper-threads that don't yield the
-same performance as the regular CPU threads), we don't get a speed-up beyond 8
+Of course, since it's a six core CPU (with hyper-threads that don't yield the
+same performance as the regular CPU threads), we don't get a speed-up beyond 12
 threads in the ForkJoinPool.
 
 == Conclusion on the `Future` approach
@@ -616,9 +625,10 @@ follows:
 [source,scala]
 ----
   val indexes = Source(0 to iterationCount)
+  
 ----
 
-In between the `Source` and the `Sink`, we need to have an Stream component that
+In between the `Source` and the `Sink`, we need to have a Stream component that
 transforms an index to a term. For this, we can apply the `map` combinator defined
 on `Source`. `map` takes a function as argument and we will supply the `piBBPdeaTermI`
 function for this.
@@ -653,7 +663,7 @@ The following code will build and run the complete stream:
     .runWith(sumOfTerms)
 ----
 
-So, we start from a stream if indexes and _map_ every index to a corresponding term
+So, we start from a stream of indexes and _map_ every index to a corresponding term
 value. Then, we apply `runWith(sumOfTerms)`, which will actually run the complete
 blueprint on a single Actor (which is invisible to us).
 
@@ -695,10 +705,10 @@ Calculation time: 20,698
 
 We see that our Akka Streams based version is about 9 times slower than the `Future`
 based one. That's a lot slower, but this shouldn't be surprising: as I mentioned, the
-blueprint runs on a single actor and it effectively is a single fused piece of code.
+blueprint runs on a single actor and it effectively is a single, fused piece of code.
 The materialiser, an Actor to be precise, processes stream elements sequentially.
 If you run the Akka Streams version, have a look at the CPU usage during the execution.
-Making the fair assumption that you're system has multiple CPU cores, you will see
+Making the fair assumption that your system has multiple CPU cores, you will see
 that this program only uses one core (at 100%). What we need is to utilise the power
 of the remaining cores. How do we go about that?
 
@@ -746,27 +756,12 @@ A first way to do this is to use the `mapAsync` combinator on `Source` (or `Flow
 `parallelism`: this is a number which, obviously will introduce parallel execution
 of a function that transforms an element in the stream. This function is passed
 as an argument in the second argument list. There's one catch: the transformed
-element value has to be wrapped in a `Future`. We can do that by changing the
-function that calculates a term to return a `Future` of the term like so:
+element value has to be wrapped in a `Future`. Our calculation now looks as follows:
 
 [source,scala]
 ----
-  def piBBPdeaTermIF(i: Int): Future[BigDecimal] = Future {
-    BigDecimal(1) / BigDecimal(16).pow(i) * (
-      BigDecimal(4) / (8 * i + 1) -
-        BigDecimal(2) / (8 * i + 4) -
-        BigDecimal(1) / (8 * i + 5) -
-        BigDecimal(1) / (8 * i + 6)
-      )
-  }
-----
-
-Our calculation now looks as follows:
-
-[source,scala]
-----
-  val piF: Future[BigDecimal] = indexes
-    .mapAsync(Settings.parallelism)(piBBPdeaTermIF)
+val piF: Future[BigDecimal] = indexes
+    .mapAsync(Settings.parallelism)(i => Future(piBBPdeaTermI(i)))
     .runWith(sumOfTerms)
 ----
 
@@ -820,7 +815,7 @@ Let's look at how this is done using a simple example:
           onFinish = Attributes.LogLevels.Info,
           onFailure = Attributes.LogLevels.Error)
       )
-      .mapAsync(Settings.parallelism)(piBBPdeaTermIF)
+      .mapAsync(Settings.parallelism)(i => Future(piBBPdeaTermI(i)))
       .runWith(sumOfTerms)
 ----
 
@@ -833,14 +828,14 @@ the code, we can tweak this level for individual elements as well as for [normal
 stream completion or stream failure.
 
 In the source code for this example, you will notice that I created an extension
-`myLogger` that allows one to add logging in a less verbose manner.
+`logAtInfo` that allows one to add logging in a less verbose manner.
 
 When this extension is applied, the code thus becomes:
 
 [source,scala]
 ----
   val piF: Future[BigDecimal] = indexes
-    .myLogger("pi-index")
+    .logAtInfo("pi-index")
     .mapAsync(Settings.parallelism)(piBBPdeaTermIF)
     .runWith(sumOfTerms)
 ----
@@ -850,7 +845,7 @@ When this extension is applied, the code thus becomes:
 An alternative way to speed-up our calculation is to utilise https://doc.akka.io/docs/akka/current/stream/stream-substream.html[Akka Substreams].
 One can consider Substreams as a way to de-multiplex a stream of elements. Substreams
 can be created in different ways, but we'll focus on the `groupBy` combinator.
-`GroupBy` takes two arguments, let's start with the second one: this is a function `f`
+`groupBy` takes two arguments, let's start with the second one: this is a function `f`
 that takes an element and which returns a key. The key will determine to which
 Substream the element will be sent. The idea is that `f` returns a finite number
 of unique key values. The first parameter `maxSubstreams` is the number of distinct
@@ -911,3 +906,13 @@ location like shown in the final version of the stream processing:
     .mergeSubstreams
     .runWith(sumOfTerms)
 ----
+
+The source code repository shows two more Akka Streams based implementations. These make use of the so-called Akka Streams Graph API and the balancer/merge approach respectively.
+
+=== Conclusions
+
+With this, we come to the conclusion of this article. We have implemented a CPU-bound computation and managed to exploit our computer's multi-processing (or multi-core processing) capabilities using two very different approaches. First we used Scala's `Future` API followed by an Akka Streams based approach.
+
+We have seen that the `Future` based implementation is more low level than the Akka Streams based one. Also, the latter produces more concise code and has more 'knobs' to control the concurrency of the execution.
+
+Another important feature of Akka Streams is that it implements flow control (aka back-pressure) which is important when we have to process a very large number (or even an indeterminate number) of elements: the slowest stream processing component in the overall flow will dictate the rate at which elements are produced upstream.
