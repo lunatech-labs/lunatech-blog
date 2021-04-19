@@ -45,7 +45,7 @@ that fall in the first category mentioned earlier. Unless we take specific
 measures, we have no control over the order in which sub-results are returned.
 Another potential issue with an Actor based implementation is that we don't have
 any flow control. What this means is that if we throw more work at an Actor
-then that this Actor can process, work will get piled-up in a buffer (actually,
+than this Actor can process, work will get piled-up in a buffer (actually,
 the Actor's mailbox). The conclusion is that the Actor model can be applied in a
 straightforward way to problems of the first type, albeit that we need to be
 aware of potential ordering and flow control issue. We'll come back to this
