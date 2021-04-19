@@ -579,7 +579,7 @@ processes elements one by one. It may filter elements out of a streams or transf
 them.
 * An Akka Stream definition that ties a `Source` to a `Sink`, potentially running
 through one or several `Flow` components is called a `Runnable Graph`. It can be
-considered to be a Blueprint of our stream processing. In itself, this Blueprint
+considered to be a blueprint of our stream processing. In itself, this blueprint
 doesn't process any elements.
 * The Blueprint (a `Runnable Graph`) can be executed by running it on a so-called
 _Materialiser_. The latter is just a fancy term for one (or more than one – we'll
