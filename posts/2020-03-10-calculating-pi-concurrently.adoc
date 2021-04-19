@@ -848,7 +848,7 @@ When this extension is applied, the code thus becomes:
 == Using Substreams to introduce concurrency
 
 An alternative way to speed-up our calculation is to utilise https://doc.akka.io/docs/akka/current/stream/stream-substream.html[Akka Substreams].
-One can consider Substreams as a way  to de-multiplex a stream of elements. Substreams
+One can consider Substreams as a way to de-multiplex a stream of elements. Substreams
 can be created in different ways, but we'll focus on the `groupBy` combinator.
 `GroupBy` takes two arguments, let's start with the second one: this is a function `f`
 that takes an element and which returns a key. The key will determine to which
