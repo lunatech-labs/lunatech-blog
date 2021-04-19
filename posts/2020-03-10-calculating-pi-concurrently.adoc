@@ -543,7 +543,7 @@ inspired the https://en.wikipedia.org/wiki/Chudnovsky_brothers[Chudnovsky brothe
 
 
 *PS1:* If the above code is run with `nChunks` set to 8 instead of 1000, the
-execution time jumps from ~4 seconds to about 7 seconds. Why's that? Well, it
+execution time jumps from ~4 seconds to ~7 seconds. Why's that? Well, it
 turns out that, with the lower number of chunks, the available CPU resources are
 not used efficiently. In order to find the root cause, you may want to
 investigate yourself. Run the two cases and observe the CPU utilization during a
