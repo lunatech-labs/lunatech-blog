@@ -76,8 +76,6 @@ can produce any individual digit of π without calculating all the digits
 preceding it! In this way, it is often used as a mechanism to verify the
 correctness of the calculated value of π using a different algorithm.
 
-Let's have a look at how we implement the calculation of π using `Future`.
-
 == On precision
 
 Obviously, if we calculate an approximation of π by calculating the sum of the
@@ -223,9 +221,10 @@ the sum of the chunks:
 ----
 
 Two things are important to note.
-First we map each offset in `offsets` to a Future[BigDecimal];
-each instance will be scheduled for execution within an execution context (that
-we haven't provided yet). What we end up with is a sequence of Futures.
+First we map each offset in `offsets` to a `Future[BigDecimal]`; it is
+here that we introduce concurrency and each part of the calculation
+will be scheduled for execution within an execution context (that
+we haven't provided yet). What we end up with is a sequence of `Future`s.
 Secondly, `Future.sequence` converts the `Seq[Future[BigDecimal]]` into a
 `Future[Seq[BigDecimal]]`.
 Pretty awesome.
@@ -539,7 +538,8 @@ _y-cruncher_ utilises a different formula than the one used in this article,
 namely the https://en.wikipedia.org/wiki/Chudnovsky_algorithm[Chudnovsky formula].
 Interesting to note is that earlier work by the famous, self-taught, and brilliant
 Indian mathematician https://en.wikipedia.org/wiki/Srinivasa_Ramanujan[Srinivasa Ramanujan]
-inspired the https://en.wikipedia.org/wiki/Chudnovsky_brothers[Chudnovsky brothers] to come up with their formula.
+inspired the https://en.wikipedia.org/wiki/Chudnovsky_brothers[Chudnovsky brothers]
+to come up with their formula.
 
 
 *PS1:* If the above code is run with `nChunks` set to 8 instead of 1000, the
@@ -549,7 +549,7 @@ not used efficiently. In order to find the root cause, you may want to
 investigate yourself. Run the two cases and observe the CPU utilization during a
 run and compare these between the two runs. It has something to do with a
 property of `BigDecimal`. You may wish to bump the precision used in the
-calculations to a higher value (e.g.  10,000) to make things better visible.
+calculations to a higher value (e.g. 10,000) to make things better visible.
 
 == Using Akka Streams instead of `Future`
 
