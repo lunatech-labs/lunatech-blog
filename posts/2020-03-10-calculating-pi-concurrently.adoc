@@ -564,7 +564,7 @@ will use the https://doc.akka.io/docs/akka/current/stream/stream-introduction.ht
 API. In the remainder of the article, we'll explore alternative approaches to
 implement the calculation of the number π using this API.
 
-We are not going to explain Akka Streams in detail: there are plenty of articles
+We are not going to explain Akka Streams in detail, as there are plenty of articles
 that do this very well. Let's limit ourselves to the following:
 
 * An [Akka] Stream processes a (possibly infinite) sequence of elements of a certain
