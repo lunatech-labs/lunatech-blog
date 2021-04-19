@@ -547,7 +547,7 @@ execution time jumps from ~4 seconds to ~7 seconds. Why's that? Well, it
 turns out that, with the lower number of chunks, the available CPU resources are
 not used efficiently. In order to find the root cause, you may want to
 investigate yourself. Run the two cases and observe the CPU utilization during a
-run  and compare these between the two runs. It has something to do with a
+run and compare these between the two runs. It has something to do with a
 property of `BigDecimal`. You may wish to bump the precision used in the
 calculations to a higher value (e.g.  10,000) to make things better visible.
 
