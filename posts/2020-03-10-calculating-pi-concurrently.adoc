@@ -14,8 +14,8 @@ endif::[]
 
 This article is a rewrite of a blogpost about calculating π concurrently using Scala's `Future` and that was published in 2014. Two major changes that are introduced are:
 
-= Discuss alternative implementations based on Akka Streams.
-= Use Scala 3 instead of Scala 2 and utilise the existing Akka 2.6.14 library that was compiled with Scala 2 in a transparant fashion.
+* Discuss alternative implementations based on Akka Streams.
+* Use Scala 3 instead of Scala 2 and utilise the existing Akka 2.6.14 library that was compiled with Scala 2 in a transparant fashion.
 
 All source code shown in this article can be found https://github.com/eloots/calculating-pi-concurrently[here].
 
@@ -911,8 +911,16 @@ The source code repository shows two more Akka Streams based implementations. Th
 
 === Conclusions
 
-With this, we come to the conclusion of this article. We have implemented a CPU-bound computation and managed to exploit our computer's multi-processing (or multi-core processing) capabilities using two very different approaches. First we used Scala's `Future` API followed by an Akka Streams based approach.
+With this, we come to the end of this article. We have implemented a CPU-bound
+computation and managed to exploit our computer's multi-processing (or multi-core
+processing) capabilities using two very different approaches. First we used Scala's
+`Future` API followed by an Akka Streams based approach.
 
-We have seen that the `Future` based implementation is more low level than the Akka Streams based one. Also, the latter produces more concise code and has more 'knobs' to control the concurrency of the execution.
+We have seen that the `Future` based implementation is more low level than the Akka
+Streams based one. Also, the latter produces more concise code and has more 'knobs'
+to control the concurrency of the execution.
 
-Another important feature of Akka Streams is that it implements flow control (aka back-pressure) which is important when we have to process a very large number (or even an indeterminate number) of elements: the slowest stream processing component in the overall flow will dictate the rate at which elements are produced upstream.
+Another important feature of Akka Streams is that it implements flow control
+(aka back-pressure) which is important when we have to process a very large number
+(or even an indeterminate number) of elements: the slowest stream processing component
+in the overall flow will dictate the rate at which elements are produced upstream.
