@@ -41,7 +41,7 @@ can execute code. This execution can be triggered by sending an Actor a message.
 In the context of concurrent execution of code, we can imagine a system where
 we create a pool of Actors that execute code concurrently.
 This execution model allows us to implement concurrent execution of sub-tasks
-that fall in the first category mentioned earlier: unless we take specific
+that fall in the first category mentioned earlier. Unless we take specific
 measures, we have no control over the order in which sub-results are returned.
 Another potential issue with an Actor based implementation is that we don't
 any flow control. What this means is that if we throw more work at an Actor
@@ -911,6 +911,5 @@ location like shown in the final version of the stream processing:
     .mergeSubstreams
     .runWith(sumOfTerms)
 ----
-
 
 
