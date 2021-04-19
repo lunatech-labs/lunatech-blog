@@ -735,7 +735,7 @@ at two alternatives in the following sections.
 == Using Akka Stream's `mapAsync` to introduce concurrency
 
 One thing we can learn from the first Akka Streams based implementation is that
-the term calculation and the summing of of the different terms differ a lot in
+the term calculation and the summing of the different terms differ a lot in
 terms of computational complexity with the former being the most complex.
 
 If we want to speed up the calculation, we need to focus on calculating the
