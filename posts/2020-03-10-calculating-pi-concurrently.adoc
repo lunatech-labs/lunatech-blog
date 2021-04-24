@@ -40,7 +40,7 @@ the product of the matrices in each group, then the order in which we combine
 the sub-results _does_ matter!
 
 In Scala, we have different tools available to write applications that execute
-code concurrently, and if we execute this code on a multi-CPU or multi-core
+code concurrently, and if we run this code on a multi-CPU or multi-core
 computer, we can achieve parallelism in the execution of this code.
 
 A first tool we have is Akka: Akka allows us to create so-called Actors that
@@ -70,14 +70,15 @@ the number π.
 Ok, this topic certainly has been beaten to death, but it's easy to understand,
 so we may just as well use it for demonstration purposes...
 
-First we need an algorithm to calculate π.
-
 I chose the https://en.wikipedia.org/wiki/Bailey–Borwein–Plouffe_formula[_Bailey--Borwein--Plouffe formula_] _(BBP)_
 discovered in 1995 by _Simon Plouffe_ :
 
 image::2020-03-10-calculating-pi-concurrently/Pi-formula.png[BBP digit extraction algorithm][{half-width}]
 
-This algorithm has a very interesting property (that we won't exploit in our
+There are more efficient ways to calculate π: for example, the https://en.wikipedia.org/wiki/Chudnovsky_algorithm[Chudnovsky algorithm] is a series that generates about 14 digits per term! I chose to not use this algorithm as it unnecessarily adds complexity
+to the topic of this article.
+
+The _BBP_ algorithm has a very interesting property (that we won't exploit in our
 case): if the calculation is performed in hexadecimal number base, the algorithm
 can produce any individual digit of π without calculating all the digits
 preceding it! In this way, it is often used as a mechanism to verify the
@@ -280,8 +281,10 @@ This is done as follows:
   }
 ----
 
-Note that we are using a few helper functions such as `printMsg` and `printCalculationTime`
-(defined in object `Helpers`).
+Note that we are using a few helper functions such as `printMsg` and
+`printCalculationTime` (defined in object `Helpers`) to print out the
+difference between the calculated value and a reference value of π (with the
+latter being read from a file).
 
 == Execution context and thread pools
 
@@ -384,7 +387,7 @@ object Main:
     given ExecutionContext = ExecutionContext.fromExecutor(fjPool)
 
     val N = iterationCount
-    val nChunks = 64
+    val nChunks = Settings.BPP_chunks
     val chunkSize = (N + nChunks - 1) / nChunks
     val offsets = 0 to N by chunkSize
     Helpers.printMsg(s"Calculating π with ${nChunks * chunkSize} terms in $nChunks chunks of $chunkSize terms each")
@@ -416,9 +419,9 @@ object Main:
 
 ----
 
-Note that the number of threads in the `ForkJoinPool` is obtained from a setting in
+Note that the number of threads in the `ForkJoinPool` and the number of _chunks_ are obtained from settings in
 object `Settings`. The actual value can be set as a configuration setting
-(`calculating-pi.parallelism`)
+(`calculating-pi.parallelism` and `calculating-pi.bpp-chunks` respectively).
 
 When this program is executed on my laptop (a MacBook Pro with a 2,6 GHz 6-Core
 Intel Core i7 processor), it produces the following output (values of π truncated):
@@ -501,14 +504,16 @@ Calculation time: 1.345
 
 ----
 
+Note that we set the number of _chunks_ to 64 in this run.
+
 What we can observe is that, with 3,008 terms, we have correctly calculated more
 than 3,600 digits accurately.
 
-If we set the size of the ForkJoinPool to 1, 2, 4, 8, 12, 16, 32 we get the
-following values for the calculation time (in seconds) respectively: 12.12,
-6.23, 3.03, 1.78, 1.34, 1.36, 1.43
+We can measure the effect of changing the Thread pool size on the total calculation time. The following graphs shows the relation between the two and it also shown another (orange) curve that plots the case when the system scales perfectly and unbounded.
 
-So, we see a near linear speed-up by going from one thread to two threads.
+image::2020-03-10-calculating-pi-concurrently/CalculationTimeTotalVersusThreadPoolSize.png[Measured versus theoretical scaling in function of Thread Pool size][{half-width}]
+
+So, we see a nearly linear speed-up by increasing the number of threads from 1 to 12.
 A further increase of the thread-count doesn't yield a further linear speed-up:
 this may be caused by different factors, not in the least by the fact that we
 have a single chip processor with a shared on-chip cache.
@@ -516,11 +521,27 @@ Of course, since it's a six core CPU (with hyper-threads that don't yield the
 same performance as the regular CPU threads), we don't get a speed-up beyond 12
 threads in the ForkJoinPool.
 
+We can do another experiment by setting the number of _chunks_ and the number of threads
+in the thread pool to 12. One would expect that this should be no impact. In practice
+however, the total execution time increases from 1.37s to 3.31s! How can that be?
+
+The explanation can be found by looking at the following graph which plots the time to calculate each term in the series (and this for a run with 10,000 calculated terms).
+
+image::2020-03-10-calculating-pi-concurrently/CalculationTimePerTerm.png[Calculation time per term][{half-width}]
+
+We see that the time to calculate terms decreases significantly between the first term and term 4,300 at which point it reaches kind of a plateau.
+
+As we divide the calculation into chunks, the first few chunks will determine the overall speed at which the calculation is performed.
+
+It turns out that the choice of chunking the calculation is not optimal. Another approach is to spread the calculation across different threads in a round robin fashion as illustrated in an alternative implementation in the source code.
+
 == Conclusion on the `Future` approach
 
 Scala's `Future` API presents a very powerful way to perform asynchronous and
 concurrent execution of code. Even though it may take some time to wrap one's
 head around it, once you grasp it, it's pretty cool and very powerful.
+
+We've also seen that we should _"know our data"_ as demonstrated with the _chunking_ versus round robin implementation.
 
 Now, as for π, is the approach used in this article to calculate π a realistic way
 to calculate this number to say multi-billion digit precision? Not really for
@@ -549,16 +570,6 @@ Interesting to note is that earlier work by the famous, self-taught, and brillia
 Indian mathematician https://en.wikipedia.org/wiki/Srinivasa_Ramanujan[Srinivasa Ramanujan]
 inspired the https://en.wikipedia.org/wiki/Chudnovsky_brothers[Chudnovsky brothers]
 to come up with their formula.
-
-
-*PS1:* If the above code is run with `nChunks` set to 8 instead of 1000, the
-execution time jumps from ~4 seconds to ~7 seconds. Why's that? Well, it
-turns out that, with the lower number of chunks, the available CPU resources are
-not used efficiently. In order to find the root cause, you may want to
-investigate yourself. Run the two cases and observe the CPU utilization during a
-run and compare these between the two runs. It has something to do with a
-property of `BigDecimal`. You may wish to bump the precision used in the
-calculations to a higher value (e.g. 10,000) to make things better visible.
 
 == Using Akka Streams instead of `Future`
 
@@ -647,7 +658,7 @@ this with the following `Sink`:
 There are a few things to point out here:
 
 * When looking at the type of `sumOfTerms` (annotated explicitly to point this out),
-we see that it accepts elements of type `Decimal`, but there's a second type parameter
+we see that it accepts elements of type `BigDecimal`, but there's a second type parameter
 of type `Future[BigDecimal]`. This is the type of the materialised value of the `Sink`.
 * `sumOfTerms` is implemented with `Sink.fold`. This particular fold is very similar
 to `foldLeft` on most of Scala collections. It takes an initial value for an accumulator
@@ -753,7 +764,7 @@ terms in parallel (just like in the `Future` based version).
 
 A first way to do this is to use the `mapAsync` combinator on `Source` (or `Flow`).
 `mapAsync` has two argument lists. The first one takes a single argument named
-`parallelism`: this is a number which, obviously will introduce parallel execution
+`parallelism`: this is a number which will introduce parallel execution
 of a function that transforms an element in the stream. This function is passed
 as an argument in the second argument list. There's one catch: the transformed
 element value has to be wrapped in a `Future`. Our calculation now looks as follows:
@@ -855,8 +866,12 @@ the splitting of our main stream into Substreams:
 
 [source,scala]
 ----
-  val piF = indexes
-    .groupBy(Settings.parallelism, _ % Settings.parallelism)
+    // A key generator which cycles through the sequence 
+    // 0, 1, ..., Settings.parallelism
+    val genKey: Int => Int = (index: Int) => index % Settings.parallelism
+
+    val piF: Future[BigDecimal] = indexes
+      .groupBy(maxSubstreams = Settings.parallelism, genKey)
 ----
 
 Next, we can perform the calculation of the terms in each Substream by mapping
@@ -864,10 +879,15 @@ over each index. Also, we can calculate the sum of all the terms in each Substre
 
 [source,scala]
 ----
-  val piF = indexes
-      .groupBy(Settings.parallelism, _ % Settings.parallelism)
-      .map(piBBPdeaTermI).async
-      .fold(BigDecimal(0)){case (acc, term) => acc + term}
+  val calculateSum = 
+    Flow[BigDecimal].fold(BigDecimal(0)){
+      case (acc, term) => acc + term
+    }
+    
+  val piF: Future[BigDecimal] = indexes
+    .groupBy(maxSubstreams = Settings.parallelism, genKey)
+    .map(index => piBBPdeaTermI(index))
+    .via(calculateSum)
 ----
 
 With this, we will have `Settings.parallelism` Substreams that each generate one
@@ -881,11 +901,12 @@ The stream processing now looks as follows:
 [source,scala]
 ----
   val piF: Future[BigDecimal] = indexes
-    .groupBy(Settings.parallelism, _ % Settings.parallelism)
-    .map(piBBPdeaTermI)
-    .fold(BigDecimal(0)){case (acc, term) => acc + term}
+    .groupBy(maxSubstreams = Settings.parallelism, genKey)
+    .map(index => piBBPdeaTermI(index))
+    .via(calculateSum)
     .mergeSubstreams
-    .runWith(sumOfTerms)
+    .via(calculateSum)
+    .runWith(Sink.head)
 ----
 
 An important note about the `mergeSubstreams` combinator is that it takes
@@ -900,12 +921,18 @@ location like shown in the final version of the stream processing:
 [source,scala]
 ----
   val piF: Future[BigDecimal] = indexes
-    .groupBy(Settings.parallelism, _ % Settings.parallelism)
-    .map(piBBPdeaTermI).async
-    .fold(BigDecimal(0)){case (acc, term) => acc + term}
+    .groupBy(maxSubstreams = Settings.parallelism, genKey)
+    .map(index => piBBPdeaTermI(index)).async
+    .via(calculateSum)
     .mergeSubstreams
-    .runWith(sumOfTerms)
+    .via(calculateSum)
+    .runWith(Sink.head)
 ----
+
+If we compare the different implementations of the calculation, we see that the
+`Future` based ones (the _Chunk_ based one, with a sufficiently high number of
+chunks, and the round-robin one) and the Akka Streams based ones, we can 
+conclude that their performance is on par.
 
 The source code repository shows two more Akka Streams based implementations. These make use of the so-called Akka Streams Graph API and the balancer/merge approach respectively.
 
