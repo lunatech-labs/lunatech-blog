@@ -67,7 +67,7 @@ so we may just as well use it for demonstration purposes...
 I chose the https://en.wikipedia.org/wiki/Bailey–Borwein–Plouffe_formula[_Bailey--Borwein--Plouffe formula_] _(BBP)_
 discovered in 1995 by _Simon Plouffe_ :
 
-image::../media/2020-03-10-calculating-pi-concurrently/Pi-formula.png[BBP digit extraction algorithm]
+image::../media/2021-04-28-calculating-pi-concurrently/Pi-formula.png[BBP digit extraction algorithm]
 
 There are more efficient ways to calculate π: for example, the https://en.wikipedia.org/wiki/Chudnovsky_algorithm[Chudnovsky algorithm] is a series that generates about 14 digits per term! I chose to not use this algorithm as it unnecessarily adds complexity
 to the topic of this article.
@@ -505,7 +505,7 @@ than 3,600 digits accurately.
 
 We can measure the effect of changing the Thread pool size on the total calculation time. The following graphs shows the relation between the two and it also shown another (orange) curve that plots the case when the system scales perfectly and unbounded.
 
-image::../media/2020-03-10-calculating-pi-concurrently/CalculationTimeTotalVersusThreadPoolSize.png[Measured versus theoretical scaling in function of Thread Pool size]
+image::../media/2021-04-28-calculating-pi-concurrently/CalculationTimeTotalVersusThreadPoolSize.png[Measured versus theoretical scaling in function of Thread Pool size]
 
 So, we see a nearly linear speed-up by increasing the number of threads from 1 to 12.
 A further increase of the thread-count doesn't yield a further linear speed-up:
@@ -521,13 +521,13 @@ however, the total execution time increases from 1.37s to 3.31s! How can that be
 
 The explanation can be found by looking at the following graph which plots the time to calculate each term in the series (and this for a run with 10,000 calculated terms).
 
-image::../media/2020-03-10-calculating-pi-concurrently/CalculationTimePerTerm.png[Calculation time per term]
+image::../media/2021-04-28-calculating-pi-concurrently/CalculationTimePerTerm.png[Calculation time per term]
 
 We see that the time to calculate terms decreases significantly between the first term and term 4,300 at which point it reaches kind of a plateau.
 
 As we divide the calculation into chunks, the first few chunks will determine the overall speed at which the calculation is performed: the chunk calculations are scheduled on a core (and effectively each running on a thread). The time to execute the calculation for a chunk is the sum of the time to calculate each term which is the area under the 'curve' for each thread. There's more than an order of magnitude difference between the first chunks and the last chunks (note that the Y-axis on the graph has a logarithmic scale). This is clearly illustrated in the following graphs that has the 12 threads superimposed on it:
 
-image::../media/2020-03-10-calculating-pi-concurrently/CalculationTimePerTermAndThreads.png[Calculation time per term]
+image::../media/2021-04-28-calculating-pi-concurrently/CalculationTimePerTermAndThreads.png[Calculation time per term]
 
 So it turns out that the choice of chunking the calculation is not optimal in this particular choice for the number of chunks. You should be able to figure out why increasing the number of chunks alleviates the problem.
 
