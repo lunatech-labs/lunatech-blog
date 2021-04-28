@@ -531,7 +531,7 @@ image::2020-03-10-calculating-pi-concurrently/CalculationTimePerTerm.png[Calcula
 
 We see that the time to calculate terms decreases significantly between the first term and term 4,300 at which point it reaches kind of a plateau.
 
-As we divide the calculation into chunks, the first few chunks will determine the overall speed at which the calculation is performed: the chunk calculations are scheduled on a core (and effectively each running on a thread). The time to execute the calculation for a chunk is the sum of the time to calculate each term which is the area under the 'curve' for each thread. There's more than an order of magnitude difference between the first chunks and the last chunks (note that the Y-axis on the graph has a logarithmic scale). This is clearly illustrated in the following graphs that has the 12 threads super imposed on it:
+As we divide the calculation into chunks, the first few chunks will determine the overall speed at which the calculation is performed: the chunk calculations are scheduled on a core (and effectively each running on a thread). The time to execute the calculation for a chunk is the sum of the time to calculate each term which is the area under the 'curve' for each thread. There's more than an order of magnitude difference between the first chunks and the last chunks (note that the Y-axis on the graph has a logarithmic scale). This is clearly illustrated in the following graphs that has the 12 threads superimposed on it:
 
 image::2020-03-10-calculating-pi-concurrently/CalculationTimePerTermAndThreads.png[Calculation time per term][{half-width}]
 
