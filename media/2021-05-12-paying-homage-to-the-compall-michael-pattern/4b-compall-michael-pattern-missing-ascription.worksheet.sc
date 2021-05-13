@@ -10,6 +10,14 @@ sealed trait UnitsModule {
 
   def add(km1: Kilometers, km2: Kilometers): Kilometers
   def toKilometers(miles: Miles): Kilometers
+
+  implicit class KmOps(val km: Kilometers) { // Value-classes can't be enclosed by a trait so we can't do ' extends AnyVal'
+    def +(km1: Kilometers): Kilometers = add(km, km1)
+  }
+
+  implicit class MiOps(val miles: Miles) { // Value-classes can't be enclosed by a trait so we can't do ' extends AnyVal'
+    def toKm: Kilometers = toKilometers(miles)
+  }
 }
 
 val Units = new UnitsModule {

@@ -10,12 +10,15 @@ object Units {
   def kilometres(value: Double): Option[Kilometers] = if (value < 0) None else Some(value)
   def miles(value: Double): Option[Miles] = if (value < 0) None else Some(value)
 
+  def add(km1: Kilometers, km2: Kilometers): Kilometers = km1 + km2
+  def toKilometers(miles: Miles): Kilometers = miles * 1.6
+
   extension (km: Kilometers) {
-    def + (km2: Kilometers): Kilometers = km + km2
+    def + (km2: Kilometers): Kilometers = add(km, km2)
   }
 
   extension (miles: Miles) {
-    def toKilometers: Kilometers = miles * 1.6
+    def toKm: Kilometers = toKilometers(miles)
   }
 }
 
@@ -30,7 +33,7 @@ class Rocket(booster: Booster) {
 
   def launch(): Unit = {
     // Kilometers and Miles are different types. So compiler prevents the previous bug
-    distance += booster.provideLaunchBoost().toKilometers
+    distance += booster.provideLaunchBoost().toKm
   }
 
   def distanceTravelled: Kilometers = distance

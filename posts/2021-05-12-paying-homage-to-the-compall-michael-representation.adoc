@@ -203,6 +203,67 @@ class Rocket(booster: Booster) {
 
 The various limitations of Value-classes are extensively discussed on the https://docs.scala-lang.org/overviews/core/value-classes.html#limitations[Scala Lang page on Value Classes] and on the https://docs.scala-lang.org/sips/value-classes.html[SIP-15 page] there is recognition that improvements can be made for certain use-cases (e.g. numerical computing).
 
+As a quick aside, one interesting limitation is that value classes cannot be nested. Although not strictly necessary for our particular use-case, imagine that we wanted to add some convenient syntax for invoking our helper functions `add` and `toKilometers` -- e.g. using `+` infix operator instead of `add` and being able to invoke `.toKm` on a `Miles` value instead of `toKilometers`. One typical usage of Value-classes is in combination with implicit classes to provide https://docs.scala-lang.org/overviews/core/value-classes.html#extension-methods[allocation-free _extension methods_]. However, if we attempt to define extension methods in this way, as in the following code snippet, then the code does not compile:
+
+[source,scala]
+----
+object Units {
+  final case class Kilometers private[Units] (value: Double) extends AnyVal
+  final case class Miles private[Units] (value: Double) extends AnyVal
+  ...
+
+  implicit class KmOps(val km: Kilometers) extends AnyVal {
+    def +(km2: Kilometers): Kilometers = add(km, km2)
+  }
+
+  implicit class MiOps(val miles: Miles) extends AnyVal {
+    def toKm: Kilometers = toKilometers(miles)
+  }
+}
+----
+
+This gives the following compilation error:
+
+[source]
+----
+implicit class KmOps(val km: Kilometers) extends AnyVal {
+                         ^
+error: value class may not wrap another user-defined value class
+----
+
+So in this case, to get around the limitation of nested value-classes, we have to define the extension methods using just `implicit class` without the `extends AnyVal`:
+
+[source,scala]
+----
+object Units {
+  final case class Kilometers private[Units] (value: Double) extends AnyVal
+  final case class Miles private[Units] (value: Double) extends AnyVal
+  ...
+
+  implicit class KmOps(val km: Kilometers) {
+    def +(km2: Kilometers): Kilometers = add(km, km2)
+  }
+
+  implicit class MiOps(val miles: Miles) {
+    def toKm: Kilometers = toKilometers(miles)
+  }
+}
+
+import Units._
+
+...
+
+class Rocket(booster: Booster) {
+  ...
+
+  def launch(): Unit = {
+    distance += booster.provideLaunchBoost().toKm
+  }
+
+  ...
+}
+----
+
 == What it looks like with the "Compall-Michael" pattern
 In contrast to the preceding well-known and widely-used techniques seen thus far in the post, the approach that I am calling here the "Compall-Michael" pattern is almost certainly less well known (even though in some respects it already has a very long heritage in Scala). This technique makes use of Scala's ability to emulate the ML module system, which I first heard Martin Odersky discuss in his flatMap Oslo talk in 2014 (https://www.slideshare.net/Odersky/flatmap-oslo-presentation-slides[click here for the slides]) and which is very well explained in this blog post from that same year entitled https://pellucidanalytics.tumblr.com/post/94532532890/scalas-modular-roots-earlier-this-year-martin["Scala's Modular Roots" by Dan James].
 
@@ -212,7 +273,8 @@ The signature can be thought of as the public API of our module _without_ any im
 - abstract type members `Kilometers` and `Miles`
 - abstract `val` declarations `ZeroKm` and `ZeroMi` that will represent "zero" values of our two types of unit
 - abstract `def` smart constructor declarations `kilometres` and `miles` that will allow us to create instances of our two types of unit
-- abstract `def` declarations that allow us to do useful things with our two types of unit, in this case a method `add` for adding two `Kilometers` values and a method `toKilometers` for converting a `Miles` value to a `Kilometers` value.
+- abstract `def` declarations that allow us to do useful things with our two types of unit, in this case a method `add` for adding two `Kilometers` values and a method `toKilometers` for converting a `Miles` value to a `Kilometers` value
+- and finally, if we want to, we can even define our extension methods from before, defined in terms of the `add` and `toKilometers` methods. (Note, however, that once again we cannot make use of "allocation-free extension methods" because of the limitation of only being able to define them at the top-level or enclosed in a statically accessible object.)
 
 [source,scala]
 ----
@@ -228,6 +290,14 @@ sealed trait UnitsModule {
 
   def add(km1: Kilometers, km2: Kilometers): Kilometers
   def toKilometers(miles: Miles): Kilometers
+
+  implicit class KmOps(val km: Kilometers) {
+    def +(km1: Kilometers): Kilometers = add(km, km1)
+  }
+
+  implicit class MiOps(val miles: Miles) {
+    def toKm: Kilometers = toKilometers(miles)
+  }
 }
 ----
 
@@ -265,8 +335,7 @@ class Rocket(booster: Booster) {
 
   def launch(): Unit = {
     // Kilometers and Miles are different types. So compiler prevents the previous bug
-    val launchBoost: Kilometers = toKilometers(booster.provideLaunchBoost())
-    distance = add(distance, launchBoost)
+    distance += booster.provideLaunchBoost().toKm
   }
 
   def distanceTravelled: Kilometers = distance
@@ -337,7 +406,7 @@ object Units {
 }
 ----
 
-However, these type aliases by themselves are not very useful. That is because, outside of the scope of `Units` we only know the type names `Kilometers` and `Miles` but we cannot do anything useful. At a minimum we need to provide a way to introduce values of our opaque types and a public API for working with values of our opaque types. So here again we reproduce the public API that we first introduced in the "Case class wrappers" section, with the only difference that instead of `Units.add` and `Units.toKilometers` functions, we make use of the Extension methods feature of Scala 3. (We could, of course, have achieved the same result using implicit classes with the previous approaches, but the combination of Opaque Types and Extension methods go well together in Scala 3 and make for a more elegant final solution).
+However, these type aliases by themselves are not very useful. That is because, outside of the scope of `Units` we only know the type names `Kilometers` and `Miles` but we cannot do anything useful. At a minimum we need to provide a way to introduce values of our opaque types and a public API for working with values of our opaque types. So here again we reproduce the public API that we first introduced in the "Case class wrappers" section, as well as the extension methods that provide convenient syntax for our `Units.add` and `Units.toKilometers` helper functions. However, for this we make use of the new Extension methods feature of Scala 3. The combination of Opaque Types and Extension methods go well together in Scala 3 and make for a cleaner final solution.
 
 [source,scala]
 ----
@@ -351,12 +420,15 @@ object Units {
   def kilometres(value: Double): Option[Kilometers] = if (value < 0) None else Some(value)
   def miles(value: Double): Option[Miles] = if (value < 0) None else Some(value)
 
+  def add(km1: Kilometers, km2: Kilometers): Kilometers = km1 + km2
+  def toKilometers(miles: Miles): Kilometers = miles * 1.6
+
   extension (km: Kilometers) {
-    def + (km2: Kilometers): Kilometers = km + km2
+    def + (km2: Kilometers): Kilometers = add(km, km2)
   }
 
   extension (miles: Miles) {
-    def toKilometers: Kilometers = miles * 1.6
+    def toKm: Kilometers = toKilometers(miles)
   }
 }
 ----
@@ -376,7 +448,7 @@ class Rocket(booster: Booster) {
 
   def launch(): Unit = {
     // Kilometers and Miles are different types. So compiler prevents the previous bug
-    distance += booster.provideLaunchBoost().toKilometers
+    distance += booster.provideLaunchBoost().toKm
   }
 
   def distanceTravelled: Kilometers = distance
