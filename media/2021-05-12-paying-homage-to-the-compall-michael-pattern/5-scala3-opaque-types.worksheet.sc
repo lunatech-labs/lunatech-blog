@@ -15,7 +15,7 @@ object Units {
   }
 
   extension (miles: Miles) {
-    def toKm: Kilometers = miles * 1.6
+    def toKilometers: Kilometers = miles * 1.6
   }
 }
 
@@ -30,7 +30,7 @@ class Rocket(booster: Booster) {
 
   def launch(): Unit = {
     // Kilometers and Miles are different types. So compiler prevents the previous bug
-    distance += booster.provideLaunchBoost().toKm
+    distance += booster.provideLaunchBoost().toKilometers
   }
 
   def distanceTravelled: Kilometers = distance

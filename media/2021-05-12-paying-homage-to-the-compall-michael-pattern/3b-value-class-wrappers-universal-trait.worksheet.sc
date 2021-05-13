@@ -14,7 +14,7 @@ object Units {
   def miles(value: Double): Option[Miles] = if (value < 0) None else Some(Miles(value))
 
   def add(km1: Kilometers, km2: Kilometers): Kilometers = Kilometers(km1.value + km2.value)
-  def toKm(distance: Distance): Kilometers = distance match {
+  def toKilometers(distance: Distance): Kilometers = distance match {
     case miles: Miles => Kilometers(miles.value * 1.6)
     case kilometres: Kilometers => kilometres
   }
@@ -30,7 +30,7 @@ class Rocket(booster: Booster) {
   private var distance: Kilometers = ZeroKm
 
   def launch(): Unit = {
-    val launchBoost: Kilometers = toKm(booster.provideLaunchBoost()) // Allocation of Miles object
+    val launchBoost: Kilometers = toKilometers(booster.provideLaunchBoost()) // Allocation of Miles object
     distance = add(distance, launchBoost)
   }
 

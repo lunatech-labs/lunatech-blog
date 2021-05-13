@@ -3,7 +3,7 @@ object Units {
   final case class Miles(value: Double)
 
   def add(km1: Kilometers, km2: Kilometers): Kilometers = Kilometers(km1.value + km2.value)
-  def toKm(miles: Miles): Kilometers = Kilometers(miles.value * 1.6)
+  def toKilometers(miles: Miles): Kilometers = Kilometers(miles.value * 1.6)
 }
 
 import Units._
@@ -17,7 +17,7 @@ class Rocket(booster: Booster) {
 
   def launch(): Unit = {
     // Kilometers and Miles are different types. So compiler prevents the previous bug
-    val launchBoost: Kilometers = toKm(booster.provideLaunchBoost())
+    val launchBoost: Kilometers = toKilometers(booster.provideLaunchBoost())
     distance = add(distance, launchBoost)
   }
 

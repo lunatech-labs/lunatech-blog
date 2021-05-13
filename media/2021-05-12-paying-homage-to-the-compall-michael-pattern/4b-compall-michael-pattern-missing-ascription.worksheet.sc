@@ -9,7 +9,7 @@ sealed trait UnitsModule {
   def miles(value: Double): Option[Miles]
 
   def add(km1: Kilometers, km2: Kilometers): Kilometers
-  def toKm(miles: Miles): Kilometers
+  def toKilometers(miles: Miles): Kilometers
 }
 
 val Units = new UnitsModule {
@@ -23,7 +23,7 @@ val Units = new UnitsModule {
   def miles(value: Double): Option[Miles] = if (value < 0) None else Some(value)
 
   def add(km1: Kilometers, km2: Kilometers): Kilometers = km1 + km2
-  def toKm(miles: Miles): Kilometers = miles * 1.6
+  def toKilometers(miles: Miles): Kilometers = miles * 1.6
 }
 
 import Units._
