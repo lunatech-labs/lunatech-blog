@@ -18,7 +18,7 @@ In a nutshell, we want to have "compile-time wrapper types" that provide type-sa
 
 I will start by illustrating the example using well-known features of Scala 2 - _Plain type aliases_, _Case classes_, and _Value classes_ - before moving on to show the "Compall-Michael" representation, and then finally finishing with a solution using Scala 3 Opaque Types.
 
-(Note that I do not cover _all_ the ways that we can solve this in Scala -- most notably I do not cover approaches that make use of excellent libraries such as https://github.com/estatico/scala-newtype[scala-newtype]. Such approaches using third-party libraries are well worth considering in your own real-world use-cases.)
+(Note that I do not cover _all_ the ways that we can solve this in Scala -- e.g. using https://kubuszok.com/2017/tagged-or-anyval/[tagged types] or even other approaches that make use of excellent libraries such as https://github.com/estatico/scala-newtype[scala-newtype]. Such approaches using third-party libraries are well worth considering in your own real-world use-cases.)
 
 The example talks about Rockets, Boosters, Kilometers, and Miles and was inspired by the famous https://www.newscientist.com/article/dn17350-nasa-criticised-for-sticking-to-imperial-units/[Mars Probe story] of faulty conversion between metric and imperial units. (I feel the need to stress that if you are building an application and you need to work with dimensions and units of measure in a type-safe way then you would almost certainly want to use a https://www.squants.com/[proven library like Squants]. The snippets below simply constitute toy examples to illustrate and compare different approaches.)
 
