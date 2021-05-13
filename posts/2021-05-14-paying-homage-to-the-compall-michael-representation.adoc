@@ -1,6 +1,6 @@
 = Paying homage to the Compall-Michael pattern and anticipating Scala 3 Opaque Types
 njlbenn
-v1.0, 2021-05-12
+v1.0, 2021-05-14
 :title: Paying homage to the Compall-Michael pattern
 :tags: [scala, opaque-types]
 
