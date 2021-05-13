@@ -1,5 +1,5 @@
 object Units {
-  type Kilometres = Double
+  type Kilometers = Double
   type Miles = Double
 }
 
@@ -10,14 +10,14 @@ class Booster() {
 }
 
 class Rocket(booster: Booster) {
-  private var distance: Kilometres = 0
+  private var distance: Kilometers = 0
 
   def launch(): Unit = {
-    // Kilometres and Miles are transparent. They are both Double so this bug slips through
+    // Kilometers and Miles are transparent. They are both Double so this bug slips through
     distance += booster.provideLaunchBoost()
   }
 
-  def distanceTravelled: Kilometres = distance
+  def distanceTravelled: Kilometers = distance
 }
 
 val rocket: Rocket = new Rocket(new Booster())

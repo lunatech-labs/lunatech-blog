@@ -3,17 +3,17 @@
 import $scalac.`-Xsource:3`
 
 object Units {
-  final case class Kilometres private[Units] (value: Double) extends AnyVal
+  final case class Kilometers private[Units] (value: Double) extends AnyVal
   final case class Miles private[Units] (value: Double) extends AnyVal
 
-  val ZeroKm: Kilometres = Kilometres(0)
+  val ZeroKm: Kilometers = Kilometers(0)
   val ZeroMi: Miles = Miles(0)
 
-  def kilometres(value: Double): Option[Kilometres] = if (value < 0) None else Some(Kilometres(value))
+  def kilometres(value: Double): Option[Kilometers] = if (value < 0) None else Some(Kilometers(value))
   def miles(value: Double): Option[Miles] = if (value < 0) None else Some(Miles(value))
 
-  def add(km1: Kilometres, km2: Kilometres): Kilometres = Kilometres(km1.value + km2.value)
-  def toKm(miles: Miles): Kilometres = Kilometres(miles.value * 1.6)
+  def add(km1: Kilometers, km2: Kilometers): Kilometers = Kilometers(km1.value + km2.value)
+  def toKm(miles: Miles): Kilometers = Kilometers(miles.value * 1.6)
 }
 
 import Units._
@@ -23,15 +23,15 @@ class Booster() {
 }
 
 class Rocket(booster: Booster) {
-  private var distance: Kilometres = ZeroKm
+  private var distance: Kilometers = ZeroKm
 
   def launch(): Unit = {
-    // Kilometres and Miles are different types. So compiler prevents the previous bug
-    val launchBoost: Kilometres = toKm(booster.provideLaunchBoost())
+    // Kilometers and Miles are different types. So compiler prevents the previous bug
+    val launchBoost: Kilometers = toKm(booster.provideLaunchBoost())
     distance = add(distance, launchBoost)
   }
 
-  def distanceTravelled: Kilometres = distance
+  def distanceTravelled: Kilometers = distance
 }
 
 val rocket: Rocket = new Rocket(new Booster())

@@ -4,19 +4,19 @@ import $scalac.`-Xsource:3`
 
 object Units {
   sealed trait Distance extends Any
-  final case class Kilometres private[Units] (value: Double) extends AnyVal with Distance
+  final case class Kilometers private[Units] (value: Double) extends AnyVal with Distance
   final case class Miles private[Units] (value: Double) extends AnyVal with Distance
 
-  val ZeroKm: Kilometres = Kilometres(0)
+  val ZeroKm: Kilometers = Kilometers(0)
   val ZeroMi: Miles = Miles(0)
 
-  def kilometres(value: Double): Option[Kilometres] = if (value < 0) None else Some(Kilometres(value))
+  def kilometres(value: Double): Option[Kilometers] = if (value < 0) None else Some(Kilometers(value))
   def miles(value: Double): Option[Miles] = if (value < 0) None else Some(Miles(value))
 
-  def add(km1: Kilometres, km2: Kilometres): Kilometres = Kilometres(km1.value + km2.value)
-  def toKm(distance: Distance): Kilometres = distance match {
-    case miles: Miles => Kilometres(miles.value * 1.6)
-    case kilometres: Kilometres => kilometres
+  def add(km1: Kilometers, km2: Kilometers): Kilometers = Kilometers(km1.value + km2.value)
+  def toKm(distance: Distance): Kilometers = distance match {
+    case miles: Miles => Kilometers(miles.value * 1.6)
+    case kilometres: Kilometers => kilometres
   }
 }
 
@@ -27,14 +27,14 @@ class Booster() {
 }
 
 class Rocket(booster: Booster) {
-  private var distance: Kilometres = ZeroKm
+  private var distance: Kilometers = ZeroKm
 
   def launch(): Unit = {
-    val launchBoost: Kilometres = toKm(booster.provideLaunchBoost()) // Allocation of Miles object
+    val launchBoost: Kilometers = toKm(booster.provideLaunchBoost()) // Allocation of Miles object
     distance = add(distance, launchBoost)
   }
 
-  def distanceTravelled: Kilometres = distance
+  def distanceTravelled: Kilometers = distance
 }
 
 val rocket: Rocket = new Rocket(new Booster())

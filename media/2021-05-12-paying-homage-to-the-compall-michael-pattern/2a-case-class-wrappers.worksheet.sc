@@ -1,9 +1,9 @@
 object Units {
-  final case class Kilometres(value: Double)
+  final case class Kilometers(value: Double)
   final case class Miles(value: Double)
 
-  def add(km1: Kilometres, km2: Kilometres): Kilometres = Kilometres(km1.value + km2.value)
-  def toKm(miles: Miles): Kilometres = Kilometres(miles.value * 1.6)
+  def add(km1: Kilometers, km2: Kilometers): Kilometers = Kilometers(km1.value + km2.value)
+  def toKm(miles: Miles): Kilometers = Kilometers(miles.value * 1.6)
 }
 
 import Units._
@@ -13,15 +13,15 @@ class Booster() {
 }
 
 class Rocket(booster: Booster) {
-  private var distance: Kilometres = Kilometres(0)
+  private var distance: Kilometers = Kilometers(0)
 
   def launch(): Unit = {
-    // Kilometres and Miles are different types. So compiler prevents the previous bug
-    val launchBoost: Kilometres = toKm(booster.provideLaunchBoost())
+    // Kilometers and Miles are different types. So compiler prevents the previous bug
+    val launchBoost: Kilometers = toKm(booster.provideLaunchBoost())
     distance = add(distance, launchBoost)
   }
 
-  def distanceTravelled: Kilometres = distance
+  def distanceTravelled: Kilometers = distance
 }
 
 val rocket: Rocket = new Rocket(new Booster())

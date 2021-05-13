@@ -20,15 +20,15 @@ I will start by illustrating the example using well-known features of Scala 2 - 
 
 (Note that I do not cover _all_ the ways that we can solve this in Scala -- most notably I do not cover approaches that make use of excellent libraries such as https://github.com/estatico/scala-newtype[scala-newtype]. Such approaches using third-party libraries are well worth considering in your own real-world use-cases.)
 
-The example talks about Rockets, Boosters, Kilometres, and Miles and was inspired by the famous https://www.newscientist.com/article/dn17350-nasa-criticised-for-sticking-to-imperial-units/[Mars Probe story] of faulty conversion between metric and imperial units. (I feel the need to stress that if you are building an application and you need to work with dimensions and units of measure in a type-safe way then you would almost certainly want to use a https://www.squants.com/[proven library like Squants]. The snippets below simply constitute toy examples to illustrate and compare different approaches.)
+The example talks about Rockets, Boosters, Kilometers, and Miles and was inspired by the famous https://www.newscientist.com/article/dn17350-nasa-criticised-for-sticking-to-imperial-units/[Mars Probe story] of faulty conversion between metric and imperial units. (I feel the need to stress that if you are building an application and you need to work with dimensions and units of measure in a type-safe way then you would almost certainly want to use a https://www.squants.com/[proven library like Squants]. The snippets below simply constitute toy examples to illustrate and compare different approaches.)
 
 == Plain (Transparent) Type Aliases
-A typical Scala 2 approach is to use plain type aliases for readability. In the following code snippet, instead of using `Double`, we introduce two aliases `Kilometres` and `Miles` which help us to document when we are working in kilometres and when we are working in miles -- e.g. we can document that the `Booster` class works with miles as a unit of measure.
+A typical Scala 2 approach is to use plain type aliases for readability. In the following code snippet, instead of using `Double`, we introduce two aliases `Kilometers` and `Miles` which help us to document when we are working in kilometres and when we are working in miles -- e.g. we can document that the `Booster` class works with miles as a unit of measure.
 
 [source,scala]
 ----
 object Units {
-  type Kilometres = Double
+  type Kilometers = Double
   type Miles = Double
 }
 
@@ -39,19 +39,19 @@ class Booster() {
 }
 ----
 
-However, this does not provide any type-safety because the aliased type is transparent. Consider the following code snippet where we use the other defined alias `Kilometres` to help us to document that the `Rocket` class works with kilometres as a unit. The fact that `Miles` is transparently a `Double` means that we can inadvertently add kilometres and miles together and the code will compile just fine - meaning that a bug has just slipped through.
+However, this does not provide any type-safety because the aliased type is transparent. Consider the following code snippet where we use the other defined alias `Kilometers` to help us to document that the `Rocket` class works with kilometres as a unit. The fact that `Miles` is transparently a `Double` means that we can inadvertently add kilometres and miles together and the code will compile just fine - meaning that a bug has just slipped through.
 
 [source,scala]
 ----
 class Rocket(booster: Booster) {
-  private var distance: Kilometres = 0
+  private var distance: Kilometers = 0
 
   def launch(): Unit = {
-    // Kilometres and Miles are transparent. They are both Double so this bug slips through
+    // Kilometers and Miles are transparent. They are both Double so this bug slips through
     distance += booster.provideLaunchBoost()
   }
 
-  def distanceTravelled: Kilometres = distance
+  def distanceTravelled: Kilometers = distance
 }
 
 val rocket: Rocket = new Rocket(new Booster())
@@ -64,16 +64,16 @@ rocket.distanceTravelled
 Similarly, as these are just values of type `Double`, with just these plain type aliases we are unable to enforce certain constraints such as https://en.wikipedia.org/wiki/Distance#Distance_versus_directed_distance_and_displacement["distance cannot be negative"]. Ideally we want to https://blog.janestreet.com/effective-ml-revisited/[make this kind of illegal state unrepresentable].
 
 == Case class wrappers
-The simplest approach to achieve type-safety and catch the bug of mixing up miles and kilometres at compile-time would be to create distinct new "wrapper" types. In the following code snippet, we introduce two case classes `Kilometres` and `Miles` that each "wrap" their real underlying `Double` value. And because these are distinct types we are not able to just simply operate on miles when kilometres is the expected unit of measure. The case classes provide a way to create values of `Kilometres` and `Miles` and we provide two helper functions `Units.add` and `Units.toKm` for adding two values of `Kilometres` and for converting from `Miles` to `Kilometres`.
+The simplest approach to achieve type-safety and catch the bug of mixing up miles and kilometres at compile-time would be to create distinct new "wrapper" types. In the following code snippet, we introduce two case classes `Kilometers` and `Miles` that each "wrap" their real underlying `Double` value. And because these are distinct types we are not able to just simply operate on miles when kilometres is the expected unit of measure. The case classes provide a way to create values of `Kilometers` and `Miles` and we provide two helper functions `Units.add` and `Units.toKm` for adding two values of `Kilometers` and for converting from `Miles` to `Kilometers`.
 
 [source,scala]
 ----
 object Units {
-  final case class Kilometres(value: Double)
+  final case class Kilometers(value: Double)
   final case class Miles(value: Double)
 
-  def add(km1: Kilometres, km2: Kilometres): Kilometres = Kilometres(km1.value + km2.value)
-  def toKm(miles: Miles): Kilometres = Kilometres(miles.value * 1.6)
+  def add(km1: Kilometers, km2: Kilometers): Kilometers = Kilometers(km1.value + km2.value)
+  def toKm(miles: Miles): Kilometers = Kilometers(miles.value * 1.6)
 }
 
 import Units._
@@ -83,15 +83,15 @@ class Booster() {
 }
 
 class Rocket(booster: Booster) {
-  private var distance: Kilometres = Kilometres(0)
+  private var distance: Kilometers = Kilometers(0)
 
   def launch(): Unit = {
-    // Kilometres and Miles are different types. So compiler prevents the previous bug
-    val launchBoost: Kilometres = toKm(booster.provideLaunchBoost())
+    // Kilometers and Miles are different types. So compiler prevents the previous bug
+    val launchBoost: Kilometers = toKm(booster.provideLaunchBoost())
     distance = add(distance, launchBoost)
   }
 
-  def distanceTravelled: Kilometres = distance
+  def distanceTravelled: Kilometers = distance
 }
 
 val rocket: Rocket = new Rocket(new Booster())
@@ -101,24 +101,24 @@ rocket.launch();
 rocket.distanceTravelled
 ----
 
-Furthermore, if we wanted to enforce the constraints about distance only being positive, we could take the "smart constructor" approach to restrict how we obtain values of type `Kilometres` and `Miles`. There are quite a number of ways to achieve this in Scala. For a good explanation of the various ways to implement smart constructors I invite you to check out https://tuleism.github.io/blog/2020/scala-smart-constructors/[this recent blog post]. As I am using Scala 2.13.5 to compile these examples, I will take advantage of the newer cleaner approach of using a `private[foo]`` access modifier that is possible with the `-Xsource:3` compiler option. (If you are on a version of Scala pre-2.13.2, then I would personally recommend the approach of using `sealed abstract case class`, which is also explained in the linked blog post).
+Furthermore, if we wanted to enforce the constraints about distance only being positive, we could take the "smart constructor" approach to restrict how we obtain values of type `Kilometers` and `Miles`. There are quite a number of ways to achieve this in Scala. For a good explanation of the various ways to implement smart constructors I invite you to check out https://tuleism.github.io/blog/2020/scala-smart-constructors/[this recent blog post]. As I am using Scala 2.13.5 to compile these examples, I will take advantage of the newer cleaner approach of using a `private[foo]`` access modifier that is possible with the `-Xsource:3` compiler option. (If you are on a version of Scala pre-2.13.2, then I would personally recommend the approach of using `sealed abstract case class`, which is also explained in the linked blog post).
 
-In the following code snippet, the `private[Units]` modifier means we can only access the `Kilometres()` and `Miles()` constructors from within the scope of `object Units` -- externally the only way to obtain `Kilometres` and `Miles` values is through the `kilometres` and `miles` "smart constructors" that perform some validation.
+In the following code snippet, the `private[Units]` modifier means we can only access the `Kilometers()` and `Miles()` constructors from within the scope of `object Units` -- externally the only way to obtain `Kilometers` and `Miles` values is through the `kilometres` and `miles` "smart constructors" that perform some validation.
 
 [source,scala]
 ----
 object Units {
-  final case class Kilometres private[Units] (value: Double)
+  final case class Kilometers private[Units] (value: Double)
   final case class Miles private[Units] (value: Double)
 
-  val ZeroKm: Kilometres = Kilometres(0)
+  val ZeroKm: Kilometers = Kilometers(0)
   val ZeroMi: Miles = Miles(0)
 
-  def kilometres(value: Double): Option[Kilometres] = if (value < 0) None else Some(Kilometres(value))
+  def kilometres(value: Double): Option[Kilometers] = if (value < 0) None else Some(Kilometers(value))
   def miles(value: Double): Option[Miles] = if (value < 0) None else Some(Miles(value))
 
-  def add(km1: Kilometres, km2: Kilometres): Kilometres = Kilometres(km1.value + km2.value)
-  def toKm(miles: Miles): Kilometres = Kilometres(miles.value * 1.6)
+  def add(km1: Kilometers, km2: Kilometers): Kilometers = Kilometers(km1.value + km2.value)
+  def toKm(miles: Miles): Kilometers = Kilometers(miles.value * 1.6)
 }
 
 import Units._
@@ -128,15 +128,15 @@ class Booster() {
 }
 
 class Rocket(booster: Booster) {
-  private var distance: Kilometres = ZeroKm
+  private var distance: Kilometers = ZeroKm
 
   def launch(): Unit = {
-    // Kilometres and Miles are different types. So compiler prevents the previous bug
-    val launchBoost: Kilometres = toKm(booster.provideLaunchBoost())
+    // Kilometers and Miles are different types. So compiler prevents the previous bug
+    val launchBoost: Kilometers = toKm(booster.provideLaunchBoost())
     distance = add(distance, launchBoost)
   }
 
-  def distanceTravelled: Kilometres = distance
+  def distanceTravelled: Kilometers = distance
 }
 
 val rocket: Rocket = new Rocket(new Booster())
@@ -146,15 +146,15 @@ rocket.launch();
 rocket.distanceTravelled
 ----
 
-So we have achieved what we wanted -- which is that we prevent the bug at compile-time -- but at the cost of some runtime overhead because we now have to allocate wrapper `Kilometres` and `Miles` objects in memory. It is safe to bet that in practice for most applications this extra overhead is not critical and personally I reach for this simple approach most of the times. However, it is not unheard of to have some performance-critical use-cases where you want to avoid the overhead of unnecessarily allocating and garbage-collecting objects.
+So we have achieved what we wanted -- which is that we prevent the bug at compile-time -- but at the cost of some runtime overhead because we now have to allocate wrapper `Kilometers` and `Miles` objects in memory. It is safe to bet that in practice for most applications this extra overhead is not critical and personally I reach for this simple approach most of the times. However, it is not unheard of to have some performance-critical use-cases where you want to avoid the overhead of unnecessarily allocating and garbage-collecting objects.
 
 == Value-class wrappers
-Extending the wrappers with `AnyVal` promises to eliminate the overhead of using a the case-class wrapper presented in the previous section. Classes that extend `AnyVal`, in addition to meeting a number of other criteria as explained https://docs.scala-lang.org/overviews/core/value-classes.html[here on this Scala Lang page], are known as _value classes_. The compiler can still prevent the bug of incorrectly mixing up values of `Miles` and `Kilometres`, but without the need to allocate wrapper objects.
+Extending the wrappers with `AnyVal` promises to eliminate the overhead of using a the case-class wrapper presented in the previous section. Classes that extend `AnyVal`, in addition to meeting a number of other criteria as explained https://docs.scala-lang.org/overviews/core/value-classes.html[here on this Scala Lang page], are known as _value classes_. The compiler can still prevent the bug of incorrectly mixing up values of `Miles` and `Kilometers`, but without the need to allocate wrapper objects.
 
 [source,scala]
 ----
 object Units {
-  final case class Kilometres private[Units] (value: Double) extends AnyVal
+  final case class Kilometers private[Units] (value: Double) extends AnyVal
   final case class Miles private[Units] (value: Double) extends AnyVal
   ...
 }
@@ -163,25 +163,25 @@ object Units {
 ...
 ----
 
-However, in practice allocations can still happen in a number of situations. For example, imagine that we decide to allow the `toKm` method to accept values of a super-type `Distance` (of which `Kilometres` and `Miles` would be two sub-types), we could have code like the following.
+However, in practice allocations can still happen in a number of situations. For example, imagine that we decide to allow the `toKm` method to accept values of a super-type `Distance` (of which `Kilometers` and `Miles` would be two sub-types), we could have code like the following.
 
 [source,scala]
 ----
 object Units {
   sealed trait Distance extends Any
-  final case class Kilometres private[Units] (value: Double) extends AnyVal with Distance
+  final case class Kilometers private[Units] (value: Double) extends AnyVal with Distance
   final case class Miles private[Units] (value: Double) extends AnyVal with Distance
 
   ...
 
-  def toKm(distance: Distance): Kilometres = distance match {
-    case miles: Miles => Kilometres(miles.value * 1.6)
-    case kilometres: Kilometres => kilometres
+  def toKm(distance: Distance): Kilometers = distance match {
+    case miles: Miles => Kilometers(miles.value * 1.6)
+    case kilometres: Kilometers => kilometres
   }
 }
 ----
 
-This code is perfectly fine, but if you had chosen the `AnyVal` route to avoid allocations, then you would be disappointed to discover that now with the supertype-subtype relationship you will once again have allocations when you pass a value of `Kilometres` or `Miles` to the function `toKm`.
+This code is perfectly fine, but if you had chosen the `AnyVal` route to avoid allocations, then you would be disappointed to discover that now with the supertype-subtype relationship you will once again have allocations when you pass a value of `Kilometers` or `Miles` to the function `toKm`.
 
 [source,scala]
 ----
@@ -190,14 +190,14 @@ import Units._
 ...
 
 class Rocket(booster: Booster) {
-  private var distance: Kilometres = ZeroKm
+  private var distance: Kilometers = ZeroKm
 
   def launch(): Unit = {
-    val launchBoost: Kilometres = toKm(booster.provideLaunchBoost()) // Allocation of Miles object
+    val launchBoost: Kilometers = toKm(booster.provideLaunchBoost()) // Allocation of Miles object
     distance = add(distance, launchBoost)
   }
 
-  def distanceTravelled: Kilometres = distance
+  def distanceTravelled: Kilometers = distance
 }
 ----
 
@@ -209,48 +209,48 @@ In contrast to the preceding well-known and widely-used techniques seen thus far
 For an in-depth explanation of how the emulation of ML modules in Scala can be achieved, I invite you to read the blog post linked above (and if you want a crash course on ML modules then https://jozefg.bitbucket.io/posts/2015-01-08-modules.html[this blog post is a good quick read]). Here I will just say that the main aspects that interest us are emulating ML _signatures_ using `sealed trait` s and emulating ML _structures_ by implementing the signature with `new { ... }` and assigning it to a `val`. (In our use case we will not need to emulate ML _functors_ which is the third important aspect of the ML module system).
 
 The signature can be thought of as the public API of our module _without_ any implementation. This is an API that not only consists of abstract functions (`def` declarations) but also unassigned values (`val` declarations) and abstract types (`type` declarations). In the code snippet below we have our signature `UnitsModule` that we define as a `sealed trait` (it could equally by a `sealed abstract class`). Inside the signature, we reproduce the same public API that we introduced already in the "Case class wrappers" section. Specifically, we have:
-- abstract type members `Kilometres` and `Miles`
+- abstract type members `Kilometers` and `Miles`
 - abstract `val` declarations `ZeroKm` and `ZeroMi` that will represent "zero" values of our two types of unit
 - abstract `def` smart constructor declarations `kilometres` and `miles` that will allow us to create instances of our two types of unit
-- abstract `def` declarations that allow us to do useful things with our two types of unit, in this case a method `add` for adding two `Kilometres` values and a method `toKm` for converting a `Miles` value to a `Kilometres` value.
+- abstract `def` declarations that allow us to do useful things with our two types of unit, in this case a method `add` for adding two `Kilometers` values and a method `toKm` for converting a `Miles` value to a `Kilometers` value.
 
 [source,scala]
 ----
 sealed trait UnitsModule {
-  type Kilometres
+  type Kilometers
   type Miles
 
-  val ZeroKm: Kilometres
+  val ZeroKm: Kilometers
   val ZeroMi: Miles
 
-  def kilometres(value: Double): Option[Kilometres]
+  def kilometres(value: Double): Option[Kilometers]
   def miles(value: Double): Option[Miles]
 
-  def add(km1: Kilometres, km2: Kilometres): Kilometres
-  def toKm(miles: Miles): Kilometres
+  def add(km1: Kilometers, km2: Kilometers): Kilometers
+  def toKm(miles: Miles): Kilometers
 }
 ----
 
-The structure can be thought of as the implementation of the signature. In the following code snippet, we instantiate an anonymous class that implements the `UnitsModule` trait and assign the instance to `val Units`. In the body of the anonymous class we provide concrete definitions of the two types `Kilometres` and `Miles`, defining them both as `Double`. Similarly, we provide implementations of all the `val` and `def` declarations, and in these implementations we can treat values of type `Kilometres` and `Miles` as `Double` values (meaning e.g. that we can directly perform arithmetic operations such as `+` and `*` on these values.
+The structure can be thought of as the implementation of the signature. In the following code snippet, we instantiate an anonymous class that implements the `UnitsModule` trait and assign the instance to `val Units`. In the body of the anonymous class we provide concrete definitions of the two types `Kilometers` and `Miles`, defining them both as `Double`. Similarly, we provide implementations of all the `val` and `def` declarations, and in these implementations we can treat values of type `Kilometers` and `Miles` as `Double` values (meaning e.g. that we can directly perform arithmetic operations such as `+` and `*` on these values.
 
 [source,scala]
 ----
 val Units: UnitsModule = new UnitsModule {
-  type Kilometres = Double
+  type Kilometers = Double
   type Miles = Double
 
-  val ZeroKm: Kilometres = 0
+  val ZeroKm: Kilometers = 0
   val ZeroMi: Miles = 0
 
-  def kilometres(value: Double): Option[Kilometres] = if (value < 0) None else Some(value)
+  def kilometres(value: Double): Option[Kilometers] = if (value < 0) None else Some(value)
   def miles(value: Double): Option[Miles] = if (value < 0) None else Some(value)
 
-  def add(km1: Kilometres, km2: Kilometres): Kilometres = km1 + km2
-  def toKm(miles: Miles): Kilometres = miles * 1.6
+  def add(km1: Kilometers, km2: Kilometers): Kilometers = km1 + km2
+  def toKm(miles: Miles): Kilometers = miles * 1.6
 }
 ----
 
-However, even though on the _inside_ of the body of `new UnitsModule { ... }` we know that both `Kilometres` and `Miles` are represented as `Double` values, from the _outside_ the types `Units.Kilometres` and `Units.Miles` are completely different and cannot be used interchangeably. So the compiler can again prevent the bug of adding a value of type `Miles` to a value of type `Kilometres`. But in this case, there is absolutely no wrapping involved and the runtime representation of `Miles` and `Kilometres` values is indeed `Double`.
+However, even though on the _inside_ of the body of `new UnitsModule { ... }` we know that both `Kilometers` and `Miles` are represented as `Double` values, from the _outside_ the types `Units.Kilometers` and `Units.Miles` are completely different and cannot be used interchangeably. So the compiler can again prevent the bug of adding a value of type `Miles` to a value of type `Kilometers`. But in this case, there is absolutely no wrapping involved and the runtime representation of `Miles` and `Kilometers` values is indeed `Double`.
 
 [source,scala]
 ----
@@ -261,15 +261,15 @@ class Booster() {
 }
 
 class Rocket(booster: Booster) {
-  private var distance: Kilometres = ZeroKm
+  private var distance: Kilometers = ZeroKm
 
   def launch(): Unit = {
-    // Kilometres and Miles are different types. So compiler prevents the previous bug
-    val launchBoost: Kilometres = toKm(booster.provideLaunchBoost())
+    // Kilometers and Miles are different types. So compiler prevents the previous bug
+    val launchBoost: Kilometers = toKm(booster.provideLaunchBoost())
     distance = add(distance, launchBoost)
   }
 
-  def distanceTravelled: Kilometres = distance
+  def distanceTravelled: Kilometers = distance
 }
 
 val rocket: Rocket = new Rocket(new Booster())
@@ -279,24 +279,24 @@ rocket.launch();
 rocket.distanceTravelled
 ----
 
-The one big gotcha of this approach is that the ascription `val Units: UnitModule` is crucial. If you omit that then you break the abstraction and allow the outside world to see that `Kilometres` and `Miles` are just aliases for `Double` and you are back to square one. Having the type annotation `:UnitModule` means that the outside world can only treat `Kilometres` and `Miles` as _existential types_ (meaning, in a nutshell, that the outside world knows only that types of these two names exist, but nothing else). It is this subtle move that gives us the needed opacity around the real representation of `Kilometres` and `Miles`.
+The one big gotcha of this approach is that the ascription `val Units: UnitModule` is crucial. If you omit that then you break the abstraction and allow the outside world to see that `Kilometers` and `Miles` are just aliases for `Double` and you are back to square one. Having the type annotation `:UnitModule` means that the outside world can only treat `Kilometers` and `Miles` as _existential types_ (meaning, in a nutshell, that the outside world knows only that types of these two names exist, but nothing else). It is this subtle move that gives us the needed opacity around the real representation of `Kilometers` and `Miles`.
 
-So consider the following code snippet where we have forgotten the annotation and we have simply `val Units = new UnitsModule` (or we could have the same effect with `object Units extends UnitsModule`), now were are back to the situation where `Kilometres` and `Miles` are transparently `Double` and we are back to being able to make the original mistake of adding miles to kilometres.
+So consider the following code snippet where we have forgotten the annotation and we have simply `val Units = new UnitsModule` (or we could have the same effect with `object Units extends UnitsModule`), now were are back to the situation where `Kilometers` and `Miles` are transparently `Double` and we are back to being able to make the original mistake of adding miles to kilometres.
 
 [source,scala]
 ----
 val Units = new UnitsModule {
-  type Kilometres = Double
+  type Kilometers = Double
   type Miles = Double
 
-  val ZeroKm: Kilometres = 0
+  val ZeroKm: Kilometers = 0
   val ZeroMi: Miles = 0
 
-  def kilometres(value: Double): Option[Kilometres] = if (value < 0) None else Some(value)
+  def kilometres(value: Double): Option[Kilometers] = if (value < 0) None else Some(value)
   def miles(value: Double): Option[Miles] = if (value < 0) None else Some(value)
 
-  def add(km1: Kilometres, km2: Kilometres): Kilometres = km1 + km2
-  def toKm(miles: Miles): Kilometres = miles * 1.6
+  def add(km1: Kilometers, km2: Kilometers): Kilometers = km1 + km2
+  def toKm(miles: Miles): Kilometers = miles * 1.6
 }
 
 import Units._
@@ -307,14 +307,14 @@ class Booster() {
 }
 
 class Rocket(booster: Booster) {
-  private var distance: Kilometres = ZeroKm
+  private var distance: Kilometers = ZeroKm
 
   def launch(): Unit = {
-    // Kilometres and Miles are once again transparent so back to initial bug
+    // Kilometers and Miles are once again transparent so back to initial bug
     distance += booster.provideLaunchBoost()
   }
 
-  def distanceTravelled: Kilometres = distance
+  def distanceTravelled: Kilometers = distance
 }
 
 val rocket: Rocket = new Rocket(new Booster())
@@ -332,36 +332,36 @@ Opaque types were originally proposed in SIP-35 (cf. https://docs.scala-lang.org
 [source,scala]
 ----
 object Units {
-  opaque type Kilometres = Double
+  opaque type Kilometers = Double
   opaque type Miles = Double
 }
 ----
 
-However, these type aliases by themselves are not very useful. That is because, outside of the scope of `Units` we only know the type names `Kilometres` and `Miles` but we cannot do anything useful. At a minimum we need to provide a way to introduce values of our opaque types and a public API for working with values of our opaque types. So here again we reproduce the public API that we first introduced in the "Case class wrappers" section, with the only difference that instead of `Units.add` and `Units.toKm` functions, we make use of the Extension methods feature of Scala 3. (We could, of course, have achieved the same result using implicit classes with the previous approaches, but the combination of Opaque Types and Extension methods go well together in Scala 3 and make for a more elegant final solution).
+However, these type aliases by themselves are not very useful. That is because, outside of the scope of `Units` we only know the type names `Kilometers` and `Miles` but we cannot do anything useful. At a minimum we need to provide a way to introduce values of our opaque types and a public API for working with values of our opaque types. So here again we reproduce the public API that we first introduced in the "Case class wrappers" section, with the only difference that instead of `Units.add` and `Units.toKm` functions, we make use of the Extension methods feature of Scala 3. (We could, of course, have achieved the same result using implicit classes with the previous approaches, but the combination of Opaque Types and Extension methods go well together in Scala 3 and make for a more elegant final solution).
 
 [source,scala]
 ----
 object Units {
-  opaque type Kilometres = Double
+  opaque type Kilometers = Double
   opaque type Miles = Double
 
-  val ZeroKm: Kilometres = 0
+  val ZeroKm: Kilometers = 0
   val ZeroMi: Miles = 0
 
-  def kilometres(value: Double): Option[Kilometres] = if (value < 0) None else Some(value)
+  def kilometres(value: Double): Option[Kilometers] = if (value < 0) None else Some(value)
   def miles(value: Double): Option[Miles] = if (value < 0) None else Some(value)
 
-  extension (km: Kilometres) {
-    def + (km2: Kilometres): Kilometres = km + km2
+  extension (km: Kilometers) {
+    def + (km2: Kilometers): Kilometers = km + km2
   }
 
   extension (miles: Miles) {
-    def toKm: Kilometres = miles * 1.6
+    def toKm: Kilometers = miles * 1.6
   }
 }
 ----
 
-And now, even though inside the body of `Units` we can treat both `Kilometres` and `Miles` as `Double` values, on the outside, we cannot use these types interchangeably and we have to do the necessary conversion. Note that the extension methods make it a cleaner to add two `Kilometres` values and to convert from `Miles` to `Kilometres`.
+And now, even though inside the body of `Units` we can treat both `Kilometers` and `Miles` as `Double` values, on the outside, we cannot use these types interchangeably and we have to do the necessary conversion. Note that the extension methods make it a cleaner to add two `Kilometers` values and to convert from `Miles` to `Kilometers`.
 
 [source,scala]
 ----
@@ -372,14 +372,14 @@ class Booster() {
 }
 
 class Rocket(booster: Booster) {
-  private var distance: Kilometres = ZeroKm
+  private var distance: Kilometers = ZeroKm
 
   def launch(): Unit = {
-    // Kilometres and Miles are different types. So compiler prevents the previous bug
+    // Kilometers and Miles are different types. So compiler prevents the previous bug
     distance += booster.provideLaunchBoost().toKm
   }
 
-  def distanceTravelled: Kilometres = distance
+  def distanceTravelled: Kilometers = distance
 }
 
 // For fun, let's make use of Scala 3's Univeral Apply Methods to omit the 'new'
