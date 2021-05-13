@@ -101,7 +101,7 @@ rocket.launch();
 rocket.distanceTravelled
 ----
 
-Furthermore, if we wanted to enforce the constraints about distance only being positive, we could take the "smart constructor" approach to restrict how we obtain values of type `Kilometers` and `Miles`. There are quite a number of ways to achieve this in Scala. For a good explanation of the various ways to implement smart constructors I invite you to check out https://tuleism.github.io/blog/2020/scala-smart-constructors/[this recent blog post]. As I am using Scala 2.13.5 to compile these examples, I will take advantage of the newer cleaner approach of using a `private[foo]`` access modifier that is possible with the `-Xsource:3` compiler option. (If you are on a version of Scala pre-2.13.2, then I would personally recommend the approach of using `sealed abstract case class`, which is also explained in the linked blog post).
+Furthermore, if we wanted to enforce the constraints about distance only being positive, we could take the "smart constructor" approach to restrict how we obtain values of type `Kilometers` and `Miles`. There are quite a number of ways to achieve this in Scala. For a good explanation of the various ways to implement smart constructors I invite you to check out https://tuleism.github.io/blog/2020/scala-smart-constructors/[this recent blog post]. As I am using Scala 2.13.5 to compile these examples, I will take advantage of the newer cleaner approach of using a `private[foo]` access modifier that is possible with the `-Xsource:3` compiler option. (If you are on a version of Scala pre-2.13.2, then I would personally recommend the approach of using `sealed abstract case class`, which is also explained in the linked blog post).
 
 In the following code snippet, the `private[Units]` modifier means we can only access the `Kilometers()` and `Miles()` constructors from within the scope of `object Units` -- externally the only way to obtain `Kilometers` and `Miles` values is through the `kilometres` and `miles` "smart constructors" that perform some validation.
 
@@ -231,7 +231,7 @@ implicit class KmOps(val km: Kilometers) extends AnyVal {
 error: value class may not wrap another user-defined value class
 ----
 
-So in this case, to get around the limitation of nested value-classes, we have to define the extension methods using just `implicit class` without the `extends AnyVal`:
+So in this case, to get around the limitation of nested value-classes, we have to define the extension methods using just `implicit class` without the `extends AnyVal` (accepting that this will allocate new instances of these implicit classes when using the extension methods):
 
 [source,scala]
 ----
