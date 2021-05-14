@@ -10,13 +10,13 @@ object Units {
   val ZeroKm: Kilometers = Kilometers(0)
   val ZeroMi: Miles = Miles(0)
 
-  def kilometres(value: Double): Option[Kilometers] = if (value < 0) None else Some(Kilometers(value))
+  def kilometers(value: Double): Option[Kilometers] = if (value < 0) None else Some(Kilometers(value))
   def miles(value: Double): Option[Miles] = if (value < 0) None else Some(Miles(value))
 
   def add(km1: Kilometers, km2: Kilometers): Kilometers = Kilometers(km1.value + km2.value)
   def toKilometers(distance: Distance): Kilometers = distance match {
     case miles: Miles => Kilometers(miles.value * 1.6)
-    case kilometres: Kilometers => kilometres
+    case kilometers: Kilometers => kilometers
   }
 }
 

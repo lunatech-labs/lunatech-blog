@@ -5,7 +5,7 @@ sealed trait UnitsModule {
   val ZeroKm: Kilometers
   val ZeroMi: Miles
 
-  def kilometres(value: Double): Option[Kilometers]
+  def kilometers(value: Double): Option[Kilometers]
   def miles(value: Double): Option[Miles]
 
   def add(km1: Kilometers, km2: Kilometers): Kilometers
@@ -27,7 +27,7 @@ val Units = new UnitsModule {
   val ZeroKm: Kilometers = 0
   val ZeroMi: Miles = 0
 
-  def kilometres(value: Double): Option[Kilometers] = if (value < 0) None else Some(value)
+  def kilometers(value: Double): Option[Kilometers] = if (value < 0) None else Some(value)
   def miles(value: Double): Option[Miles] = if (value < 0) None else Some(value)
 
   def add(km1: Kilometers, km2: Kilometers): Kilometers = km1 + km2

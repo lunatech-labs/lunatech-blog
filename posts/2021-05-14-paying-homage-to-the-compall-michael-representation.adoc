@@ -103,7 +103,7 @@ rocket.distanceTravelled
 
 Furthermore, if we wanted to enforce the constraints about distance only being positive, we could take the "smart constructor" approach to restrict how we obtain values of type `Kilometers` and `Miles`. There are quite a number of ways to achieve this in Scala. For a good explanation of the various ways to implement smart constructors I invite you to check out https://tuleism.github.io/blog/2020/scala-smart-constructors/[this recent blog post]. As I am using Scala 2.13.5 to compile these examples, I will take advantage of the newer cleaner approach of using a `private[foo]` access modifier that is possible with the `-Xsource:3` compiler option. (If you are on a version of Scala pre-2.13.2, then I would personally recommend the approach of using `sealed abstract case class`, which is also explained in the linked blog post).
 
-In the following code snippet, the `private[Units]` modifier means we can only access the `Kilometers()` and `Miles()` constructors from within the scope of `object Units` -- externally the only way to obtain `Kilometers` and `Miles` values is through the `kilometres` and `miles` "smart constructors" that perform some validation.
+In the following code snippet, the `private[Units]` modifier means we can only access the `Kilometers()` and `Miles()` constructors from within the scope of `object Units` -- externally the only way to obtain `Kilometers` and `Miles` values is through the `kilometers` and `miles` "smart constructors" that perform some validation.
 
 [source,scala]
 ----
@@ -114,7 +114,7 @@ object Units {
   val ZeroKm: Kilometers = Kilometers(0)
   val ZeroMi: Miles = Miles(0)
 
-  def kilometres(value: Double): Option[Kilometers] = if (value < 0) None else Some(Kilometers(value))
+  def kilometers(value: Double): Option[Kilometers] = if (value < 0) None else Some(Kilometers(value))
   def miles(value: Double): Option[Miles] = if (value < 0) None else Some(Miles(value))
 
   def add(km1: Kilometers, km2: Kilometers): Kilometers = Kilometers(km1.value + km2.value)
@@ -176,7 +176,7 @@ object Units {
 
   def toKilometers(distance: Distance): Kilometers = distance match {
     case miles: Miles => Kilometers(miles.value * 1.6)
-    case kilometres: Kilometers => kilometres
+    case kilometers: Kilometers => kilometers
   }
 }
 ----
@@ -272,7 +272,7 @@ For an in-depth explanation of how the emulation of ML modules in Scala can be a
 The signature can be thought of as the public API of our module _without_ any implementation. This is an API that not only consists of abstract functions (`def` declarations) but also unassigned values (`val` declarations) and abstract types (`type` declarations). In the code snippet below we have our signature `UnitsModule` that we define as a `sealed trait` (it could equally by a `sealed abstract class`). Inside the signature, we reproduce the same public API that we introduced already in the "Case class wrappers" section. Specifically, we have:
 - abstract type members `Kilometers` and `Miles`
 - abstract `val` declarations `ZeroKm` and `ZeroMi` that will represent "zero" values of our two types of unit
-- abstract `def` smart constructor declarations `kilometres` and `miles` that will allow us to create instances of our two types of unit
+- abstract `def` smart constructor declarations `kilometers` and `miles` that will allow us to create instances of our two types of unit
 - abstract `def` declarations that allow us to do useful things with our two types of unit, in this case a method `add` for adding two `Kilometers` values and a method `toKilometers` for converting a `Miles` value to a `Kilometers` value
 - and finally, if we want to, we can even define our extension methods from before, defined in terms of the `add` and `toKilometers` methods. (Note, however, that once again we cannot make use of "allocation-free extension methods" because of the limitation of only being able to define them at the top-level or enclosed in a statically accessible object.)
 
@@ -285,7 +285,7 @@ sealed trait UnitsModule {
   val ZeroKm: Kilometers
   val ZeroMi: Miles
 
-  def kilometres(value: Double): Option[Kilometers]
+  def kilometers(value: Double): Option[Kilometers]
   def miles(value: Double): Option[Miles]
 
   def add(km1: Kilometers, km2: Kilometers): Kilometers
@@ -312,7 +312,7 @@ val Units: UnitsModule = new UnitsModule {
   val ZeroKm: Kilometers = 0
   val ZeroMi: Miles = 0
 
-  def kilometres(value: Double): Option[Kilometers] = if (value < 0) None else Some(value)
+  def kilometers(value: Double): Option[Kilometers] = if (value < 0) None else Some(value)
   def miles(value: Double): Option[Miles] = if (value < 0) None else Some(value)
 
   def add(km1: Kilometers, km2: Kilometers): Kilometers = km1 + km2
@@ -361,7 +361,7 @@ val Units = new UnitsModule {
   val ZeroKm: Kilometers = 0
   val ZeroMi: Miles = 0
 
-  def kilometres(value: Double): Option[Kilometers] = if (value < 0) None else Some(value)
+  def kilometers(value: Double): Option[Kilometers] = if (value < 0) None else Some(value)
   def miles(value: Double): Option[Miles] = if (value < 0) None else Some(value)
 
   def add(km1: Kilometers, km2: Kilometers): Kilometers = km1 + km2
@@ -417,7 +417,7 @@ object Units {
   val ZeroKm: Kilometers = 0
   val ZeroMi: Miles = 0
 
-  def kilometres(value: Double): Option[Kilometers] = if (value < 0) None else Some(value)
+  def kilometers(value: Double): Option[Kilometers] = if (value < 0) None else Some(value)
   def miles(value: Double): Option[Miles] = if (value < 0) None else Some(value)
 
   def add(km1: Kilometers, km2: Kilometers): Kilometers = km1 + km2
