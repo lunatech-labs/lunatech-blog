@@ -146,7 +146,7 @@ rocket.launch();
 rocket.distanceTravelled
 ----
 
-So we have achieved what we wanted -- which is that we prevent the bug at compile-time -- but at the cost of some runtime overhead because we now have to allocate wrapper `Kilometers` and `Miles` objects in memory. It is safe to bet that in practice for most applications this extra overhead is not critical and personally I reach for this simple approach most of the times. However, it is not unheard of to have some performance-critical use-cases where you want to avoid the overhead of unnecessarily allocating and garbage-collecting objects.
+So we have achieved what we wanted -- which is that we prevent the bug at compile-time -- but at the cost of some runtime overhead because we now have to allocate the wrapper `Kilometers` and `Miles` objects in memory. It is safe to bet that in practice for most applications this extra overhead is not critical and personally I reach for this simple approach most of the times. However, it is not unheard of to have some performance-critical use-cases where you want to avoid the overhead of unnecessarily allocating and garbage-collecting objects.
 
 == Value-class wrappers
 Extending the wrappers with `AnyVal` promises to eliminate the overhead of using a the case-class wrapper presented in the previous section. Classes that extend `AnyVal`, in addition to meeting a number of other criteria as explained https://docs.scala-lang.org/overviews/core/value-classes.html[here on this Scala Lang page], are known as _value classes_. The compiler can still prevent the bug of incorrectly mixing up values of `Miles` and `Kilometers`, but without the need to allocate wrapper objects.
