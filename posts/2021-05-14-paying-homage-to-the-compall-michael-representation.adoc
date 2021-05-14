@@ -1,8 +1,8 @@
-= Paying homage to the Compall-Michael pattern and anticipating Scala 3 Opaque Types
+= Paying homage to the Compall-Michael pattern, and anticipating Scala 3 Opaque Types
 njlbenn
 v1.0, 2021-05-14
-:title: Paying homage to the Compall-Michael pattern
-:tags: [scala, opaque-types]
+:title: Paying homage to the Compall-Michael pattern, and anticipating Scala 3 Opaque Types
+:tags: [scala, opaque-types, value-classes, extension-methods]
 
 Many Scala developers are excited by https://www.scala-lang.org/blog/2021/05/14/scala3-is-here.html[the arrival of Scala 3 in 2021]. Despite the risks that any language evolution brings, in the case of the evolution from Scala 2 to Scala 3, these are more than compensated for by the impressive range of new language features.
 
