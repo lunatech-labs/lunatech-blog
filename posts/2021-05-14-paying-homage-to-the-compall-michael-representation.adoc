@@ -4,7 +4,7 @@ v1.0, 2021-05-14
 :title: Paying homage to the Compall-Michael pattern
 :tags: [scala, opaque-types]
 
-Many Scala developers are excited by the arrival of Scala 3 in 2021. Despite the risks that any language evolution brings, in the case of the evolution from Scala 2 to Scala 3, these are more than compensated for by the impressive range of new language features.
+Many Scala developers are excited by https://www.scala-lang.org/blog/2021/05/14/scala3-is-here.html[the arrival of Scala 3 in 2021]. Despite the risks that any language evolution brings, in the case of the evolution from Scala 2 to Scala 3, these are more than compensated for by the impressive range of new language features.
 
 As for me, I already have my favourite new language feature -- _Opaque Types_. Scala for me has always been about the ability to express rich models of some domain in a type-safe way. Opaque types are another great addition to the toolbox.
 
