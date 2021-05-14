@@ -39,7 +39,7 @@ class Rocket(booster: Booster) {
   def distanceTravelled: Kilometers = distance
 }
 
-// For fun, let's make use of Scala 3's Univeral Apply Methods to omit the 'new'
+// For fun, let's make use of Scala 3's Universal Apply Methods to omit the 'new'
 val rocket: Rocket = Rocket(Booster())
 rocket.launch();
 
