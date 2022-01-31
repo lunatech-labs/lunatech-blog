@@ -35,3 +35,28 @@ and delete this line:
 
 then run brew install giter8 again.
 
+
+# How to deploy your post
+Merging your PR will update the `master` branch only. Besides `master` there's also `acceptance` and `production` branches.
+
+### Getting your post to the acceptance environment
+`acceptance` will allow you to see how your post looks like in `https://blog.acceptance.lunatech.com/`.
+```
+git checkout acceptance
+git rebase master
+git push origin acceptance
+```
+The blog engine needs to be manually restarted in clever cloud as well. Please ask your colleagues, if you don't know where to find it.
+
+### Getting your post to the production environment
+`production` will allow you to finally share your post with the world.
+```
+git checkout production
+git rebase acceptance
+git push origin production
+```
+The blog engine needs to be manually restarted in clever cloud as well. Please ask your colleagues, if you don't know where to find it.
+
+
+
+
