@@ -22,7 +22,7 @@ Il existe de nombreux types de tests comme par exemple les tests unitaires ou d�
 Cypress se focalise sur les tests end-to-end (E2E).
 Les tests E2E permettent de valider l’expérience utilisateur grâce à des scénarios prédéfinis. 
 Ces scénarios vont décrire un groupe d’actions qu’un utilisateur lambda sera amené à effectuer sur notre site. 
-Ce genre de test ne se soucie pas de l’implémentation interne de notre produit, mais va adopter le point de vue d’un utilisateur pour vérifier le comportement général de notre produit.
+Ce genre de test ne se soucie pas de l’implémentation interne, il va adopter le point de vue d’un utilisateur pour vérifier le comportement général du produit.
 
 ++++
 <div style="width:100%;height:0;padding-bottom:56%;position:relative;"><iframe src="https://giphy.com/embed/l3q2Uzjt0QB4oL7l6" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/jerseydemic-l3q2Uzjt0QB4oL7l6">via GIPHY</a></p>
