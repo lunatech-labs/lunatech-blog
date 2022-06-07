@@ -213,4 +213,4 @@ image::replay.png[Nous pouvons revoir toutes les étapes une par une, width = 70
 C’est très utile pour déboguer et on peut aussi enregistrer une vidéo de toutes ces actions afin de déboguer plus tard par exemple !
 
 Nous sommes arrivés au bout de ce premier article à propos de Cypress.
-J’espère que je vous ai donné envie d’en savoir plus, car nous allons explorer en détails le fonctionnement de Cypress et les bonnes pratiques dans l’article suivant !
+J’espère que je vous ai donné envie d’en savoir plus, car nous allons explorer en détail le fonctionnement de Cypress et les bonnes pratiques dans l’article suivant !
