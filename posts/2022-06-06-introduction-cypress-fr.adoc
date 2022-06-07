@@ -169,7 +169,7 @@ Cypress permet vraiment d’avoir un retour rapide et clair afin de déboguer au
 Passons à la dernière étape, filtrer par auteur. 
 Un peu plus compliqué, mais _pas impossible_ avec cet outil !
 Première chose à faire, simuler un clic de souris sur un auteur afin d’activer le tri. 
-Nous allons me prendre comme exemple (Vincent Brulé). 
+Pour cet exemple, l'auteur sera moi-même (Vincent Brulé). 
 Nous devons donc trouver un élément correspondant à mon nom et cliquez dessus. 
 L'élément qui nous intéresse est le suivant :
 
