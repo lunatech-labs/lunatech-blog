@@ -140,7 +140,7 @@ describe('First test with Cypress', () => {
 
 Le code se lit très facilement. 
 Nous nous attendons à ce qu’il y ait au moins un article sur la page (`gt` correspond à `greater than`). 
-Après avoir sauvegardé, nous voyons le résultat directement dans l’interface graphique :
+Après avoir sauvegardé, le résultat apparait dans l’interface graphique :
 
 image::blog-loaded.png[Test vérifiant si les aperçus sont bien affichés, width = 700]
 
