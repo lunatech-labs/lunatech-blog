@@ -23,6 +23,7 @@ Cypress focuses on end-to-end testing (E2E).
 The E2E tests allow us to validate the user experience through predefined scenarios. 
 These scenarios will describe a group of actions that an average user will perform on our site. 
 This kind of test does not care about the internal implementation of our product, but will adopt the point of view of a user to verify the general behavior of our product.
+This javascript dependency in your front-end projects will allow you to test your website from a user point of view.
 
 ++++
 <div style="width:100%;height:0;padding-bottom:56%;position:relative;"><iframe src="https://giphy.com/embed/l3q2Uzjt0QB4oL7l6" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/jerseydemic-l3q2Uzjt0QB4oL7l6">via GIPHY</a></p>

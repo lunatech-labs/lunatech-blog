@@ -12,7 +12,7 @@ Cet article est le début d’une série de trois articles consacrés à https:/
 . Pour aller plus loin avec Cypress
 . Comparaison de Cypress et ses concurrents
 
-Le but de ce premier article est de vous donner envie de découvrir et d’utiliser *Cypress*. 
+Le but de ce premier article est de vous donner envie de découvrir et d’utiliser *Cypress*.
 Pour cela, nous allons présenter cet outil et le mettre en pratique grâce à un exemple simple.
 
 == I/ À quoi sert Cypress ?
@@ -23,6 +23,7 @@ Cypress se focalise sur les tests end-to-end (E2E).
 Les tests E2E permettent de valider l’expérience utilisateur grâce à des scénarios prédéfinis. 
 Ces scénarios vont décrire un groupe d’actions qu’un utilisateur lambda sera amené à effectuer sur notre site. 
 Ce genre de test ne se soucie pas de l’implémentation interne, il va adopter le point de vue d’un utilisateur pour vérifier le comportement général du produit.
+Cette dépendance javascript dans vos projets front va donc vous permettre de tester votre site web d'un point de vue utilisateur.
 
 ++++
 <div style="width:100%;height:0;padding-bottom:56%;position:relative;"><iframe src="https://giphy.com/embed/l3q2Uzjt0QB4oL7l6" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/jerseydemic-l3q2Uzjt0QB4oL7l6">via GIPHY</a></p>
