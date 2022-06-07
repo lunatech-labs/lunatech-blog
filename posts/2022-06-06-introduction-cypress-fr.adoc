@@ -176,7 +176,7 @@ L'élément qui nous intéresse est le suivant :
 image::author.png[Élément représentant un auteur, width = 200]
 
 Il y a plusieurs façons de procéder. 
-Pour l’exemple, nous allons chercher un élément avec le texte *Vincent Brulé* sans passer par une classe ou un identifiant.
+Commençons par essayer de chercher un élément avec le texte *Vincent Brulé* sans passer par une classe ou un identifiant.
 
 [quote, Est-ce une bonne idée ?]
 Je ne suis pas un grand fan de cette technique car si le contenu change, notre test ne fonctionnera plus.
