@@ -144,7 +144,7 @@ Après avoir sauvegardé, le résultat apparait dans l’interface graphique :
 
 image::blog-loaded.png[Test vérifiant si les aperçus sont bien affichés, width = 700]
 
-En bas de la partie gauche, vous pouvez voir `expected 36 to be above 0` comme nous voulions.
+En bas de la partie gauche, vous pouvez voir `expected 36 to be above 0` qui est bien le résultat attendu.
 
 Imaginons que pendant la rédaction de notre test, nous nous soyons trompés. 
 Au lieu de `greater than`, nous spécifions `lower than` :
