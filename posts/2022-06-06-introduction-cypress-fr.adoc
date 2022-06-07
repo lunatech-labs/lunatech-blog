@@ -1,0 +1,216 @@
+= Présentation de Cypress
+VincentBrule
+v1.0, 2022-06-06
+:title: Présentation de Cypress
+:imagesdir: ../media/2022-06-06-introduction-cypress
+:lang: fr
+:tags: [test, cypress, web, js, ts]
+
+Cet article est le début d’une série de trois articles consacrés à https://www.cypress.io[Cypress] :
+
+. Présentation de Cypress
+. Pour aller plus loin avec Cypress
+. Comparaison de Cypress et ses concurrents
+
+Le but de ce premier article est de vous donner envie de découvrir et d’utiliser *Cypress*. 
+Pour cela, nous allons présenter cet outil et le mettre en pratique grâce à un exemple simple.
+
+== I/ À quoi sert Cypress ?
+
+Les tests sont et ont toujours été un point important dans un projet.
+Il existe de nombreux types de tests comme par exemple les tests unitaires ou d’intégration. 
+Cypress se focalise sur les tests end-to-end (E2E).
+Les tests E2E permettent de valider l’expérience utilisateur grâce à des scénarios prédéfinis. 
+Ces scénarios vont décrire un groupe d’actions qu’un utilisateur lambda sera amené à effectuer sur notre site. 
+Ce genre de test ne se soucie pas de l’implémentation interne de notre produit, mais va adopter le point de vue d’un utilisateur pour vérifier le comportement général de notre produit.
+
+++++
+<div style="width:100%;height:0;padding-bottom:56%;position:relative;"><iframe src="https://giphy.com/embed/l3q2Uzjt0QB4oL7l6" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/jerseydemic-l3q2Uzjt0QB4oL7l6">via GIPHY</a></p>
+++++
+
+Nous allons tout de suite passer à un cas pratique pour voir comment utiliser Cypress et je l’espère vous donner envie de tester aussi !
+
+== II/ Cas pratique
+=== 1. Préparation
+
+Pour ce cas pratique, nous allons utiliser le blog de Lunatech : https://blog.lunatech.com/. 
+Nous allons implémenter le scénario suivant :
+
+. Accéder au blog
+. Vérifier qu’il y a au moins un article présent sur la page d'accueil
+. Filtrer par l’auteur X
+. Vérifier que tous les articles restants sont de l’auteur X
+
+La première chose à faire est d’ouvrir notre projet JS/TS et d'https://docs.cypress.io/guides/getting-started/installing-cypress[installer Cypress]. 
+
+Rien de plus simple :
+[source, Shell]
+----
+yarn add cypress --dev
+OR
+npm install cypress --save-dev
+----
+
+Pour l’exemple, nous allons placer toute notre logique dans le dossier `cypress` et tester avec le navigateur `chrome`.
+Pour vous faire gagner du temps et ne pas taper le chemin complet jusqu’à l’exécutable Cypress, je vous conseille de mettre ce script dans votre `package.json` :
+[source, Shell]
+----
+  "scripts": {
+    "cypress:open": "cypress open"
+  }
+----
+
+[quote, Comment organiser le code ?]
+Dans ce premier article à propos de Cypress, nous allons organiser le code très simplement, mais dans l’article suivant nous allons explorer les bonnes pratiques pour avoir un code propre et maintenable dans le temps.
+
+Vous pouvez maintenant exécuter :
+[source, shell]
+----
+npm run cypress:open
+----
+
+Cette commande va ouvrir une interface graphique pour interagir avec Cypress.
+Vous devriez voir l'écran ci-dessous :
+
+image::first-screen-cypress.png[Page d'accueil, width = 700]
+
+Sur cet écran, vous pouvez choisir *E2E testing* (nous reviendrons sur toutes les subtilités de Cypress dans le prochain article dont le *Component Testing*).
+
+image::browser-cypress.png[Choix du navigateur, width = 700]
+
+Vous pouvez choisir différents navigateurs. 
+Dans notre cas, nous allons utiliser _Chrome_.
+Cypress va ensuite créer un projet de base pour commencer vos tests.
+Si tout s'est bien passé, vous devriez avoir cette structure de fichiers :
+
+image::fichiers-cypress.png[Fichiers créés par Cypress, width = 300]
+
+Vous avez maintenant tout mis en place pour passer au cas pratique. 
+Ne fermez pas l’interface graphique afin de pouvoir voir vos changements en temps réel !
+
+=== 2. Réalisation du cas pratique
+==== a. Accéder au blog
+Dans l’interface graphique, vous pouvez cliquer sur `Create new empty spec` pour avoir un nouveau fichier de base pour implémenter notre cas pratique :
+
+image::create-cypress.png[Bouton pour créer un nouveau test, width = 300]
+
+La première étape de notre exemple est d'accéder au blog de Lunatech qui est à l'adresse suivante : https://blog.lunatech.com/.
+Il nous suffit d'éditer le fichier `spec.cy.js` créé précédemment par Cypress.
+
+[source, javascript]
+----
+describe('First test with Cypress', () => {
+ it('should visit', () => {
+   cy.visit('https://blog.lunatech.com/')
+ })
+})
+----
+
+Nous pouvons utiliser `cy` pour avoir accès à la boite à outils mise à disposition par l'outil.
+`visit(url)` va indiquer que nous devons nous rendre sur cette url.
+Pour la suite des tests, il n'est pas nécessaire d'ajouter des délais d'attente pour attendre le chargement de la page, car Cypress s'occupe de ça pour nous !
+Après avoir sauvegardé votre fichier, vous pouvez cliquer sur celui-ci dans l’interface graphique afin de lancer notre scénario :
+
+image::first-test-cypress.png[Page d'accueil de l'interface graphique de Cypress, width = 700]
+
+Après avoir lancé le test, vous devriez voir la page d’accueil du blog de Lunatech comme ci-dessous :
+
+image::accueil-lunatech.png[Page d'accueil du blog de Lunatech, width = 700]
+
+La partie gauche de l'écran va enregistrer toutes les actions effectuées.
+La partie de droite montrera en temps réel ce qui se passe sur le site web.
+
+Ne fermez pas cet écran, car le rendu sera actualisé automatiquement au fur et à mesure de vos modifications !
+
+==== b. Vérification du chargement des articles
+La seconde étape est de vérifier que nous avons des articles de blog sur la page principale.
+Nous n’avons pas accès au code du site, par conséquent, nous utilisons l’inspecteur de notre navigateur pour trouver un moyen de cibler l’élément qui nous intéresse. 
+Après avoir vérifié, nous voyons que tous les aperçus d'article possèdent la classe `lb_post`. 
+Nous pouvons donc utiliser cet identifiant pour notre exemple.
+
+[source, javascript]
+----
+describe('First test with Cypress', () => {
+ it('should visit', () => {
+   cy.visit('https://blog.lunatech.com/')
+   cy.get(".lb_post").its('length').should('be.gt', 0)
+ })
+})
+----
+
+Le code se lit très facilement. 
+Nous nous attendons à ce qu’il y ait au moins un article sur la page (`gt` correspond à `greater than`). 
+Après avoir sauvegardé, nous voyons le résultat directement dans l’interface graphique :
+
+image::blog-loaded.png[Test vérifiant si les aperçus sont bien affichés, width = 700]
+
+En bas de la partie gauche, vous pouvez voir `expected 36 to be above 0` comme nous voulions.
+
+Imaginons que pendant la rédaction de notre test, nous nous soyons trompés. 
+Au lieu de `greater than`, nous spécifions `lower than` :
+
+[source, javascript]
+----
+describe('First test with Cypress', () => {
+ it('should visit', () => {
+   cy.visit('https://blog.lunatech.com/')
+   cy.get(".lb_post").its('length').should('be.lt', 0)
+ })
+})
+----
+
+Grâce au rechargement automatique, nous pouvons détecter notre erreur au plus vite avec un message simple et clair : 
+
+image::error.png[Affichage d'une erreur dans notre test, width = 500]
+
+Cypress permet vraiment d’avoir un retour rapide et clair afin de déboguer au plus vite notre code !
+
+==== c. Tri par auteur
+Passons à la dernière étape, filtrer par auteur. 
+Un peu plus compliqué, mais _pas impossible_ avec cet outil !
+Première chose à faire, simuler un clic de souris sur un auteur afin d’activer le tri. 
+Nous allons me prendre comme exemple (Vincent Brulé). 
+Nous devons donc trouver un élément correspondant à mon nom et cliquez dessus. 
+L'élément qui nous intéresse est le suivant :
+
+image::author.png[Élément représentant un auteur, width = 200]
+
+Il y a plusieurs façons de procéder. 
+Pour l’exemple, nous allons chercher un élément avec le texte *Vincent Brulé* sans passer par une classe ou un identifiant.
+
+[quote, Est-ce une bonne idée ?]
+Je ne suis pas un grand fan de cette technique car si le contenu change, notre test ne fonctionnera plus.
+Nous reviendrons sur les bonnes pratiques dans l'article suivant.
+
+Nous pouvons utiliser la commande https://docs.cypress.io/api/commands/contains[`contains`] qui permet de sélectionner un élément en fonction de son texte (exact ou avec une regex par exemple).
+Pour être sûr que tout a bien fonctionné, nous allons vérifier que la nouvelle URL pointe vers le bon auteur et vérifier que tous les aperçus présents correspondent à mes articles.
+
+[source, javascript]
+----
+describe('First test with Cypress', () => {
+ it('should visit', () => {
+   cy.contains('Vincent Brulé').click()
+   // We check the content of the url
+   cy.url().should('include', 'VincentBrule')
+   // We check that the author of all the previews in the page is Vincent Brulé
+   cy.get(".lb_post-author").each((author) => {
+      expect(author.text()).to.equal('Vincent Brulé')
+   })
+ })
+})
+----
+
+On sauvegarde et c’est tout, notre exemple est déjà implémenté ! 
+Au passage, une fonctionnalité très utile de l’outil graphique est de pouvoir explorer les étapes et voir directement sur la partie droite les actions effectuées par Cypress. 
+Par exemple, à la fin de notre exemple, nous voyons la page avec seulement mes articles :
+
+image::last-example.png[Résultat de notre exemple, width = 700]
+
+Et si on passe la souris sur la première étape où nous avons sélectionné tous les articles, on voit dans le rendu la page d’accueil avec tous les éléments en bleu : 
+
+image::replay.png[Nous pouvons revoir toutes les étapes une par une, width = 700]
+
+C’est très utile pour déboguer et on peut aussi enregistrer une vidéo de toutes ces actions afin de déboguer plus tard par exemple !
+
+Nous sommes arrivés au bout de ce premier article à propos de Cypress.
+J’espère que je vous ai donné envie d’en savoir plus, car nous allons explorer en détails le fonctionnement de Cypress et les bonnes pratiques dans l’article suivant !
