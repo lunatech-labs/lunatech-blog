@@ -12,7 +12,7 @@ This article is the beginning of a series of three articles dedicated to https:/
 . Going Further with Cypress
 . Comparing Cypress and its Competitors
 
-The goal of this first article is to make you want to discover and use *Cypress*. 
+The goal of this first article is to encourage you to discover and use *Cypress*.
 To do so, we will present this tool and put it into practice with a simple example.
 
 == I/ What is Cypress used for?
