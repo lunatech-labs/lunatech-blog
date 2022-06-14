@@ -17,7 +17,7 @@ To do so, we will present this tool and put it into practice with a simple examp
 
 == I/ What is Cypress used for?
 
-Tests are and always have been an important point in a project. 
+Tests are and always have been important in a project. 
 There are many types of testing such as unit testing and integration testing. 
 Cypress focuses on end-to-end testing (E2E).
 The E2E tests allow us to validate the user experience through predefined scenarios. 
