@@ -62,7 +62,7 @@ To save you time and not type the full path to the Cypress executable, I suggest
 ----
 
 [quote, How to organize the code?]
-In this first article about Cypress, we will organize the code very simply, but in the following article we will explore good practices to have a clean and maintainable code over time.
+In this first article about Cypress, we will organize the code very simply, but in the following article we will explore good practices to ensure clean and maintainable code over time.
 
 You can now run:
 [source, shell]
