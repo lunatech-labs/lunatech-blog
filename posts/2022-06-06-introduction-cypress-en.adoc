@@ -89,7 +89,7 @@ image::fichiers-cypress.png[Files created by Cypress, width = 300]
 Now you have everything in place to move on to the practical case. 
 Don't close the GUI so you can see your changes in real time!
 
-=== 2. Realization of the practical case
+=== 2. Building out the example
 ==== a. Access the blog
 In the GUI, you can click on `Create new empty spec` to have a new base file to implement our case study:
 
