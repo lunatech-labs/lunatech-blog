@@ -1,0 +1,228 @@
+= Sunny Tech 2022
+VincentBrule
+v1.0, 2022-07-02
+:title: Sunny Tech 2022
+:imagesdir: ../media/2022-07-02-sunny-tech
+:lang: fr
+:tags: [conférence, sunny tech, montpellier]
+
+== Sunny Tech ?
+https://sunny-tech.io/[Sunny Tech] s'est déroulée du 30 juin au 1er juillet 2022 sous le soleil de Montpellier.
+
+Cette conférence couvre une multitude de domaines :
+
+. Cloud & Devops
+. Méthodologies
+. Backend
+. Data
+. Web & Mobile & UI
+. Architecture
+. Atypique
+
+Les organisateurs nous ont concocté un _planning aux petits oignons_.
+Grâce à la diversité des sujets présentés, il y en avait vraiment pour tous les goûts et tous les profils.
+Si vous êtes intéressé, https://sunny-tech.io/schedule/[le programme est disponible sur le site].
+Les présentations étaient sous différentes formes.
+Tout d'abord, les présentations classiques d'une durée de 50 minutes.
+Ensuite, des ateliers pour apprendre en pratiquant d'une durée variable.
+Et pour finir, les quickies de 20 minutes.
+
+.Sunny tech 2022 par https://www.instagram.com/mel.owski/[Melowski]
+image::background.png[Sunny tech 2022 par Melowski, width = 700]
+
+=== L'organisation
+Avant de vous présenter mes découvertes coup de coeur de *Sunny Tech*, j'aimerais remercier tous les bénévoles qui ont rendu cet événement possible après plusieurs années d'absence dues à la Covid.
+On ne se rend pas compte en tant que participant, mais une organisation titanesque est nécessaire pour mettre en place une conférence de cette qualité !
+
+.Un grand merci aux organisateurs (image prise par @ponceto91)
+image::organisateur.jpeg[Un grand merci aux organisateurs (image prise par @ponceto91), width = 700]
+
+Je tiens aussi à souligner toutes les actions pour l'environnement mises en place comme :
+
+. la possibilité de ne pas prendre de goodies et en échange reverser le montant de ces objets à une https://twitter.com/SunnyTech_MTP/status/1541701793322831873[association]
+. un stand réservé pour une association locale, cette année nous avons pu rencontrer https://labelbleu.assoconnect.com/collect/description/233850-v-bulletin-d-adhesion-a-l-association-labelbleu-2022[LabelBleu]
+. un traiteur 0 déchet qui utilise que des récipients réutilisables comme des pots en verre (et la nourriture était très bonne, merci à https://instant-bocal.com/[Instant bocal])
+
+.Miam !
+image::food.jpeg[Bocaux en verre du traiteur de Sunny Tech, width = 800]
+
+Je vais maintenant vous présenter mes coups de coeur de cette conférence !
+Si jamais vous voulez avoir plus d'information que mon résumé, tous les talks ont été filmés et seront publiés prochainement. 
+Je mettrai à jour l'article une fois que toutes les présentations seront en ligne avec le lien pour les retrouver.
+
+== Coups de coeur à Sunny Tech
+
+=== Numérique et éthique : l'impossible équation ?
+
+.Keynote d'ouverture
+image::keynote.jpeg[Keynote Sunny Tech, width = 800]
+
+Ce sujet alarmant mais important nous a été présenté par *Audrey Neveu* et *Agnès Crepet*.
+Cette présentation est partagée entre deux grands axes.
+D'une part, les ressources nécessaires à toute notre vie numérique et d'autre part, les questions éthiques qui se posent avec les nouvelles technologies.
+Le duo est passionnant et leurs domaines de compétences se complètent parfaitement.
+Je ne vais pas m'attarder sur ces problèmes que nous connaissons tous de près ou de loin, mais sur les solutions proposées par les intervenants afin de rester sur une *note positive* !
+
+Pour commencer, concernant notre *vie privée* et nos *interactions sur Internet*, les entreprises doivent se focaliser sur 4 piliers :
+
+1. Droit à la *transparence*
+2. Droit à un *design propre*
+3. Droit à la *vie privée*
+4. Droit de *pouvoir partir*
+
+*Droit à un design propre* signifie que la solution n'utilise pas de dark pattern (voir définition en dessous) afin de tromper les utilisateurs.
+
+[quote, Définition Wikipédia d'un dark pattern]
+Un dark pattern ou dark UX (en français : interface truquée) est une interface utilisateur qui a été spécialement conçue pour tromper ou manipuler un utilisateur.
+
+Concernant l'impact écologique de tous nos appareils, plusieurs solutions sont possibles aussi :
+
+1. Louer au lieu d'acheter, sur https://commown.coop/[Commown] par exemple
+2. Adopter un opérateur responsable comme https://telecoop.fr/[Telecoop]
+3. Utiliser un système d'exploitation respectueux comme https://e.foundation/[e]
+4. Garder ses appareils le plus longtemps possible au lieu de succomber en permanence au dernier produit à la mode
+5. Favoriser des appareils facilement réparables, https://www.indicereparabilite.fr/[l'indice de réparabilité] peut vous aider à y voir plus clair. Le gouvernement français a créé une plateforme pour cela aussi : https://longuevieauxobjets.gouv.fr/
+
+Pour résumer, il y a beaucoup de choses à améliorer, mais des solutions existent et nous sommes les premiers acteurs à pouvoir faire changer les choses.
+
+Merci encore aux deux intervenantes de sensibiliser sur ce sujet primordial !
+
+=== Comment j'ai développé le détecteur de deepfakes le plus puissant du monde pour 100€
+
+https://twitter.com/mathishammel[Mathis Hammel] nous a présenté sa solution maison pour détecter les *deepfakes*.
+Le site https://thispersondoesnotexist.com[thispersondoesnotexist] génère de faux visages gratuitement et en libre accès.
+
+.Faux visage récupéré sur thispersondoesnotexist
+image::fake-face.jpeg[Faux visage récupéré sur thispersondoesnotexist, width = 800]
+
+Des individus mal intentionnés se servent de ce genre de services pour créer des faux profils en masse sur les réseaux sociaux.
+Pour remédier à cela, Mathis a créé de toute pièce une solution pour les détecter.
+
+.Résumé de la présentation réalisé par @ptibulle
+image::deep-fake.jpeg[Résumé de la présentation réalisé par @ptibulle, width = 800]
+
+Le speaker a commencé sa réflexion avec une solution simple mais efficace.
+Avant de l'expliquer, nous devons revenir sur les méthodes utilisées pour réaliser cette IA.
+
+La technique d'intelligence artificielle utilisée pour générer les images est un https://fr.wikipedia.org/wiki/R%C3%A9seaux_antagonistes_g%C3%A9n%C3%A9ratifs[GAN] (réseau antagoniste génératif).
+Ce type de modèle se base sur trois parties :
+
+1. un *generator* qui va produire des images aléatoires au début puis de plus en plus réalistes au fil de l'entraînement
+2. une banque de vraies images
+3. un *discriminator* qui va devoir détecter si l'image qu'on lui présente provient du générateur ou de la banque d'images
+
+Le but du générateur va donc être de produire une image la plus réaliste possible pour tromper le discriminator et le but du discriminator est de détecter le mieux possible les fausses images générées.
+Après de nombreux cycles d'entraînement, les deux modules vont s'améliorer et devenir de plus en plus performants.
+
+La première astuce pour détecter les fausses images générées par ce modèle provient de la *banque d'images utilisée*.
+En effet, les visages provenant de ce groupe de photos possèdent une particularité : _les yeux sont toujours placés au même endroit_.
+Par conséquent, l'IA va essayer de créer des images au plus proches des vraies et va donc aussi placer les yeux au même endroit.
+La solution la plus naïve est donc de regarder la position des yeux sur l'image et si elle correspond à la position connue, l'image est fausse.
+Mais cette solution est très peu robuste face aux modifications des photos, le présentateur a donc développé une méthode plus poussée.
+
+Pour cela, il a mis en place un service qui récupère et stocke les images du site _thispersondoesnotexist_.
+Il a effectué plusieurs optimisations afin de ne pas stocker les images brutes sur le serveur, car cela prendrait beaucoup trop d'espace disque.
+Ensuite, lorsque l'on souhaite détecter un faux visage, l'outil va comparer avec sa banque de données et en fonction d'un score, renvoyer oui ou non.
+Si vous voulez tester, Mathis héberge un https://fada.h25.io/[site web] permettant de détecter les fausses images directement depuis le navigateur.
+De plus, ce site web affiche des informations intéressantes comme des sosies, quand la fausse image a été générée, ou alors la technique des yeux expliquée précédemment.
+
+Ce talk est vraiment bien vulgarisé et on est capté directement par le sujet grâce à un très bon orateur !
+
+=== Il était une fois... les navigateurs
+
+*Noël Macé* et *Pierre Tibulle* nous ont présenté un sujet intéressant avec une présentation très originale !
+En effet, pendant que Noël explique les origines des navigateurs et leurs évolutions à travers le temps, Pierre dessine les slides en _temps réel_ sur la scène.
+
+.Il était une fois... les navigateurs
+image::live-drawing.jpg[Il était une fois... les navigateurs, width = 800]
+
+Grâce à ce duo, on accroche directement à l'histoire qui nous est racontée.
+J'admire beaucoup les personnes qui arrivent à sortir du cadre pour présenter leur sujet, un grand bravo à eux !
+
+Au passage, https://twitter.com/ptibulle[Pierre] a posté sur son fil twitter plusieurs résumés de talks auxquels il a participé (comme celui sur les deep fakes).
+
+=== Mais, à quoi ça sert un DevRel ?
+
+On a eu le privilège de recevoir deux licornes sur scène pour nous expliquer le métier de **DevRel** (Developer Relations).
+
+.Mais, à quoi ça sert un DevRel ?
+image::devrel.jpg[Mais, à quoi ça sert un DevRel ?, width = 800]
+
+J'ai beaucoup apprécié ce talk parce que le terme de *DevRel* était obscure pour moi.
+J'imaginais une personne qui saute de conférence en conférence pour vendre son entreprise.
+Mais après cette présentation pleine d'humour, on se rend compte que ce n'est que la partie émergée de l'iceberg.
+Cette illustration réalisée par https://twitter.com/manekinekko[@manekinekko] montre bien la partie *immergée de l'iceberg*.
+
+.The developer advocate iceberg by @manekinekko
+image::devrel2.jpeg[The developer advocate iceberg by @manekinekko, width = 800]
+
+Parmi toutes ces missions, il y en a plusieurs que je n'aurais jamais imaginé :
+
+. Recueillir le feedback directement auprès des utilisateurs pour ensuite les remonter dans les départements de son entreprise
+. Échanger avec le service marketing afin de mettre en valeur les fonctionnalités vraiment importantes pour l'utilisateur final
+. Coacher les équipes internes pour les aider à préparer un talk par exemple
+. Tester les produits en avant première pour vérifier que l'utilisation est agréable et convient aux habitudes du milieu
+. Créer de la documentation
+. etc.
+
+La liste est longue et c'est bien pour cela que résumer ce métier en quelques lignes est compliqué.
+
+Il y a aussi plusieurs points qui sont importants dans la vision d'un *DevRel* :
+
+. _des personnes tech qui parlent de technique_. Autrement dit, un DevRel a pratiqué, codé et testé une solution avant de la présenter
+. _être sincère_, c'est-à-dire, ne pas donner un discours commercial sans fond seulement dans l'objectif de vendre mais un discours sincère grâce à leurs expériences
+
+Je vous invite vivement à regarder la rediffusion de ce moment pour en savoir plus !
+https://noti.st/aurelievache/PJZgaj[Les slides sont aussi disponibles].
+
+=== Éclater ses collègues à Mario Kart
+
+Ce talk décalé présenté par https://twitter.com/_yannbertrand[Yann Bertrand] nous explique une multitude de techniques pour ne plus finir dernier à *Mario Kart* !
+Je trouve ça génial que ce fan de jeux vidéos et de compétitions e-sports puissent venir nous parler de sa passion dans une conférence comme Sunny Tech.
+
+Pour les joueurs de Mario Kart Deluxe 8, voici les principales techniques que je ne connaissais pas :
+
+. Si vous avez une pièce en objet principal, *gardez-la* car le prochain objet sera forcément un *objet de protection*
+. Quand une carapace rouge vous arrive dessus, vous pouvez rentrer dans un mur au dernier moment pour l'éviter
+. Pour *éviter une carapace bleue*, vous pouvez utiliser un *champignon* au moment où la carapace vous tombe dessus
+
+Par la suite, Yann nous a présenté plusieurs méthodes avancées, mais pour être honnête, je ne pense pas être capable de les reproduire un jour...
+
+Le week-end après la conférence a été l'occasion de tester toutes ces techniques et à ma plus grande surprise, je me suis vraiment amélioré !
+En considérant mon niveau initial, j'avais une bonne marge de progression...
+Si vous êtes un joueur de Mario Kart sur Nintendo Switch, je vous conseille fortement de regarder ce talk plusieurs fois !
+
+=== Camping Paradigme : Organise tes vacances en mode Agile !
+
+https://twitter.com/Laurie78645718[Laurie Coquillat] a imaginé et crée un jeu de société pour expliquer les méthodes *Agile* de façon ludique.
+
+.Camping Paradigme : Organise tes vacances en mode Agile !
+image::agile1.jpg[Camping Paradigme : Organise tes vacances en mode Agile !, width = 800]
+
+Dans cet atelier, vous devez organiser vos vacances en groupe avec des imprévus et des contraintes de la meilleure façon possible.
+Ce parallèle avec un projet IT permet aux participants de découvrir le monde de l'agilité d'une façon originale.
+
+.Plateau du jeu
+image::agile2.jpg[Plateau du jeu, width = 800]
+
+Il y a plusieurs points à prendre en compte durant notre aventure comme le mode de transport utilisé, les activités, les repas ou encore le logement choisi.
+Au cours de la partie, on peut tomber sur des cases galères représentant des imprévus auxquels il faut faire face en groupe.
+
+Laurie est présente tout au long de la partie pour nous guider et nous aider.
+À la fin de la partie, elle met en valeurs les parallèles avec nos projets habituels pour nous expliquer les différents frameworks Agile et leurs cas d'utilisation.
+
+Si jamais vous allez dans une conférence où Laurie fait cet atelier, allez-y les yeux fermés.
+Même si vous travaillez au quotidien avec l'esprit Agile, ce workshop permet de redécouvrir les bases et l’intérêt de ces méthodes de façon ludique !
+
+== Merci Sunny Tech
+C'était ma première fois à Sunny Tech et sûrement pas la dernière !
+
+Les billets pour la conférence ont un prix vraiment raisonnable (90 euros pour les deux jours si vous vous y prenez à la dernière minute) avec une organisation soignée et des bénévoles au top !
+N'hésitez pas à proposer des sujets pour l'année prochaine ou encore à participer à l'organisation car ils ont besoin de bénévoles pour rendre cet événement possible.
+
+Merci encore à tout le monde et à l'année prochaine sous le soleil de Montpellier !
+
+.Merci Sunny Tech par https://www.instagram.com/mel.owski/[Melowski]
+image::flamant.png[Merci Sunny Tech, width = 800]
+
+_J'aimerais aussi remercier https://www.instagram.com/mel.owski/[Melowski] qui a réalisé les deux illustrations avec les flamants rose spécialement pour cet article !_
