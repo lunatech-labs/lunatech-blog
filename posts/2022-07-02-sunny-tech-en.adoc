@@ -1,7 +1,7 @@
 = Sunny Tech 2022
 VincentBrule
 v1.0, 2022-07-02
-:title: Sunny Tech 2022
+:title: Sunny Tech 2022 (EN)
 :imagesdir: ../media/2022-07-02-sunny-tech
 :lang: en
 :tags: [conference, sunny tech, montpellier]
@@ -219,8 +219,8 @@ Don't hesitate to suggest topics for next year or to participate in the organiza
 
 Thanks again to everyone and see you next year in sunny Montpellier!
 
-.Thanks Sunny Tech https://www.instagram.com/mel.owski/[Melowski]
-image::flamant.png[Thanks Sunny Tech, width = 800]
+.Thanks Sunny Tech by https://www.instagram.com/mel.owski/[Melowski]
+image::flamant.png[Thanks Sunny Tech by Melowski, width = 800]
 
 _I would also like to thank https://www.instagram.com/mel.owski/[Melowski] who made the two illustrations with the pink flamingos especially for this article!_
 
