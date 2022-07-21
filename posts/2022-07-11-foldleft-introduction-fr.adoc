@@ -2,7 +2,7 @@
 ggarvanese
 v1.0, 2022-07-11
 :title: Parcourir des collections avec foldLeft et foldRight
-:imagesdir: ../media/2022-06-27-foldleft-introduction
+:imagesdir: ../media/2022-07-11-foldleft-introduction
 :lang: fr
 :tags: [fold, iteration, functional, scala]
 
