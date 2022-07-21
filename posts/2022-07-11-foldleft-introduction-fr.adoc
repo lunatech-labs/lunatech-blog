@@ -1,5 +1,5 @@
 = Parcourir des collections avec foldLeft et foldRight
-Guillaume Garvanèse
+ggarvanese
 v1.0, 2022-07-11
 :title: Parcourir des collections avec foldLeft et foldRight
 :imagesdir: ../media/2022-06-27-foldleft-introduction
