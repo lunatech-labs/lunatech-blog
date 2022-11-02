@@ -1,10 +1,17 @@
-# Custom JIT compilation with Runtime Multi-Stage Programming
+= Custom JIT compilation with Runtime Multi-Stage Programming
+markehammons
+v1.0, 2022-10-19
+:title: Custom JIT compilation with Runtime Multi-Stage Programming
+:imagesdir: ../media/2022-10-19-runtime-multistage-programming
+:lang: en
+:tags: [slinc, scala]
 
-For a while now I've been fiddling with a library called https://github.com/markehammons/slinc[Slinc], a way to link C code in Scala. Since my original version, I've been using context values, macros, and other tools to generate code for writing and reading representations of Structs into and out of native memory.
+For a while now I've been fiddling with a library called https://github.com/markehammons/slinc[Slinc], a way to link C code in Scala.
+Since my original version, I've been using context values, macros, and other tools to generate code for writing and reading representations of Structs into and out of native memory.
 
 Originally, I was using Scala 3 macros to produce native bindings and helper code, but I recently discovered that Runtime Multi-Stage Programming produces much more performant code. My Slinc project therefore is a real-world example of the worth of Runtime Multi-Stage Programming
 
-## A review of Macros
+== A review of Macros
 
 If you're not familiar with how macros work in Scala, the most simple way of writing them involves using quotes and splices.
 
@@ -47,7 +54,7 @@ yield '{(j: Int) => println(j + ${Expr(i)})} //${Expr(i)} smuggles the compile t
 
 Compile-time reflection and terms are also a thing in Scala 3 macros, but the usage of those is a story for another time.
 
-## Pursuing best-case performance with macros
+== Pursuing best-case performance with macros
 
 One of my first attempts at generating code to write data to native memory would take case classes like these:
 
@@ -235,7 +242,7 @@ So the new code is around 5x faster than before, but the write speed for Int has
 
 Some of my prototypes using other forms of inline methods and macros got up to 50ops/us, but is it possible to go faster? Well, not really at compile time. One of the reasons writing Int has been so fast is that we know it's size at compile time, and knowing where to write it is relatively simple. On the other hand, knowing where to write the elements of X is really very platform specific. Alignment, and how data for structs is padded depends on the host platform. X itself might be a simple case, but we want a general purpose way to write the data for any Struct, and we don't want to encode alignment and padding rules at compile time that may not apply at runtime.
 
-## Enter Runtime Multi-stage Programming
+== Enter Runtime Multi-stage Programming
 
 Runtime multi-stage programming in Scala 3 works a lot like macros. The big difference is that it's more limited with regards to what code it can produce, and it can include runtime data inside of code it generates.
 
