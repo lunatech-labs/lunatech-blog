@@ -1,8 +1,8 @@
 = Custom JIT compilation with Runtime Multi-Stage Programming
 markehammons
-v1.0, 2022-10-19
+v1.0, 2022-11-02
 :title: Custom JIT compilation with Runtime Multi-Stage Programming
-:imagesdir: ../media/2022-10-19-runtime-multistage-programming
+:imagesdir: ../media/2022-11-02-runtime-multistage-programming
 :lang: en
 :tags: [slinc, scala]
 
