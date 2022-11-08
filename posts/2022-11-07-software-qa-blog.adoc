@@ -29,7 +29,7 @@ Communication is key when it comes to setting testing strategies for the project
 
 Once you get answers to these basic questions, start observing how things are actually working and write them down.
 
-Next step is to focus on setting the testing strategy for the project and check how the testing culture can be embedded in the team.
+The next step is to focus on setting the testing strategy for project and check how testing culture can be embedded in the team.
 
 *Set the Test Strategy:*
 
