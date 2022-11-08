@@ -1,5 +1,5 @@
 = Struggles at the Beginning – Software Testers journal
-Tehreem fatima
+TehreemFatima07
 v1.0, 2022-11-07
 :title: Struggles at the Beginning – Software Testers journal
 :imagesdir: ../media/2022-11-07-software-qa-blog
@@ -12,11 +12,11 @@ The ultimate question in this scenario is “**Where do I stand as an individual
 
 Below are some useful tips that are helpful in this situation.
 
-*Get the Baseline:*
+== Get the Baseline
 
 Start with getting a view of the current state of the project. Go through the product vision, road map, backlog items and the development processes, figure out what the system does by creating mind maps and asking questions. This fosters and nurtures a good working relationship with the developers and product owners.
 
-*Communicate with people:*
+== Communicate with people
 
 Getting to know your team is one of the most important things you can do during your first few days in a new project. Not only will this help you understand their strengths and weaknesses, but it will also give you a better sense of how they work and what their expectations are for you as the tester. Take some time to introduce yourself to everyone on the team and learn about their roles in the project.
 
@@ -31,7 +31,7 @@ Once you get answers to these basic questions, start observing how things are ac
 
 The next step is to focus on setting the testing strategy for project and check how testing culture can be embedded in the team.
 
-*Set the Test Strategy:*
+== Set the Test Strategy
 
 With product teams and developers, it’s good to have an open and collaborative discussion on current technical practices and tools. It not only allows us to share existing knowledge but also helps to gain insights and new perspectives.
 
@@ -43,13 +43,13 @@ Create the test artifacts including the Test Strategy and the Test Plan document
 - What will be the test deliverables
 - How the bug reporting and tracking mechanism will work
 
-*Share the Testing Knowledge:*
+== Share the Testing Knowledge
 
 Arrange the Exploratory Testing session and create the Exploratory Testing Charter with the time boxed approach to record the observations about the product under test. Time box testing approach and the exploratory testing in the initial days of onboarding helps to find the potential bugs and the risk areas in the product or application under test. The charters created during this stage can also serve as the product documentation because they explain how the application is working with various steps.
 
 Mind maps are also one of the very useful tool for sharing the testing knowledge. Mind map is the visual representation of sharing the information with team and in this way testing will become a shared responsibility.
 
-*Pair Testing Session:*
+== Pair Testing Session
 
 Develop the approach of pair testing, where ideas about testing the product with the developers and the product owners can be shared. Listen to others about their ideas of testing and get to know what drives them. This session can be carried out with other fellow testers or the developers who are working on the same project. It will help in finding some early stage bugs and the edge cases for further testing.
 
