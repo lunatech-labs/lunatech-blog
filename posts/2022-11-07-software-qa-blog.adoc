@@ -12,7 +12,9 @@ We’ve all been there; either onboarded to a new project or a new company, and 
 The ultimate question in this scenario is “**Where do I stand as an individual Software Tester and how can I fit within the existing team structure?**”
 
 
-Below are some useful tips that are helpful in this situation
+
+Below are some useful tips that are helpful in this situation:
+
 
 == Get the Baseline
 
