@@ -7,6 +7,7 @@ v1.0, 2022-11-07
 :tags: [Testing, QA Culture]
 
 We’ve all been there; either onboarded to a new project or a new company, and joined a team that either has never tested its product or which has no set testing standards. As a Software Tester, you’re and should be used to being the new kid on the block, always with a mind full of questions.
+
 ++++
 </br>
 ++++
@@ -23,9 +24,11 @@ Start with getting a view of the current state of the project. Go through the pr
 == Communicate with people
 
 Getting to know your team is one of the most important things you can do during your first few days in a new project. Not only will this help you understand their strengths and weaknesses, but it will also give you a better sense of how they work and what their expectations are for you as the tester. Take some time to introduce yourself to everyone on the team and learn about their roles in the project.
+
 ++++
 </br>
 ++++
+
 Communication is key when it comes to setting testing strategies for the project. It is useful because the quality of work improves as the quality of communication within the team increases. Getting feedback from developers and the product owner about the project can be started by asking a simple set of questions like:
 
 - What is the development process of the project?
@@ -37,14 +40,17 @@ Once you get answers to these basic questions, start observing how things are ac
 ++++
 </br>
 ++++
+
 The next step is to focus on setting the testing strategy for project and check how testing culture can be embedded in the team.
 
 == Set the Test Strategy
 
 With product teams and developers, it’s good to have an open and collaborative discussion on current technical practices and tools. It not only allows us to share existing knowledge but also helps to gain insights and new perspectives.
+
 ++++
 </br>
 ++++
+
 Create the test artifacts including the Test Strategy and the Test Plan documents to explain:
 
 - How the step by step testing will be carried out
@@ -57,14 +63,17 @@ Create the test artifacts including the Test Strategy and the Test Plan document
 == Share the Testing Knowledge
 
 Arrange the Exploratory Testing session and create the Exploratory Testing Charter with the time boxed approach to record the observations about the product under test. Time box testing approach and the exploratory testing in the initial days of onboarding helps to find the potential bugs and the risk areas in the product or application under test. The charters created during this stage can also serve as the product documentation because they explain how the application is working with various steps.
+
 ++++
 </br>
 ++++
+
 Mind maps are also one of the very useful tool for sharing the testing knowledge. Mind map is the visual representation of sharing the information with team and in this way testing will become a shared responsibility.
 
 == Pair Testing Session
 
 Develop the approach of pair testing, where ideas about testing the product with the developers and the product owners can be shared. Listen to others about their ideas of testing and get to know what drives them. This session can be carried out with other fellow testers or the developers who are working on the same project. It will help in finding some early stage bugs and the edge cases for further testing.
+
 ++++
 </br>
 ++++
@@ -80,6 +89,7 @@ Software Testing is like the catalyst for change in the company because testers 
 ++++
 </br>
 ++++
+
 Happy Testing...
 
 
