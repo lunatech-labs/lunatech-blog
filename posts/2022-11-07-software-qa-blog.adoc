@@ -31,7 +31,9 @@ Once you get answers to these basic questions, start observing how things are ac
 
 The next step is to focus on setting the testing strategy for project and check how testing culture can be embedded in the team.
 
+
 == Set the Test Strategy
+
 
 With product teams and developers, it’s good to have an open and collaborative discussion on current technical practices and tools. It not only allows us to share existing knowledge but also helps to gain insights and new perspectives.
 
@@ -42,6 +44,7 @@ Create the test artifacts including the Test Strategy and the Test Plan document
 - What will be the testing lifecycle
 - What will be the test deliverables
 - How the bug reporting and tracking mechanism will work
+
 
 == Share the Testing Knowledge
 
