@@ -101,34 +101,27 @@ The Helios voting scheme is composed of five algorithms run by the organizer and
 
 During and after the voting process, verifiers can check that each step was executed properly by oberving the data on the bulleting board.
 
-TODO
-
-* plot with the 5 algos, maybe a vertical protocol with exchanged messages
 
 ....
-                      Public bulletin board
- 
-                   +--------------------------+
-                   |                          |
-            cast   |  +--------------------+  |   tally
-Vote 1  -----------+->| Encrypted ballot 1 +--+-------+
-                   |  +--------------------+  |       |
-                   |                          |       |
-                   |  +--------------------+  |       |
-Vote 2  -----------+->| Encrypted ballot 2 +--+-------+
-                   |  +--------------------+  |       |
-                   |                          |       |
- ...    -----------+->         ...         ---+-------+
-                   |                          |       |
-                   |  +--------------------+  |       |    +------------------+   reveal
-Vote n  -----------+->| Encrypted ballot n +--+-------+--->| Encrypted result +------------> Result
-                   |  +--------------------+  |            +------------------+
-                   |                          |
-                   +--------------------------+
-  
-      |                |                                                    |                |         
-      +----------------+                                                    +----------------+
-      Proof of encryption                                                   Proof of decryption
+                          voters                 bulletin board               organizer
+
+                             |                         |                          |
+                             |                         |                          | (secret key, public key) <- setup
+                             |                         |          public key      |
+                             + <-----------------------+------------------------- +
+                             |                         |                          |
+ballot = vote(v, public key) |                         |                          |
+                             |       cast(ballot)      |                          |
+          ...                | ----------------------> |                          |
+                             | ----------------------> |                          |
+                             |           ...           |                          |
+                             |                         |          ballots         |
+                             |                         | -----------------------> |
+                             |                         |                          | result = reveal(tally(ballots), secret key)
+                             |                         |          result          |
+                             |                         | <----------------------- |
+                             |                         |                          |
+                             |                         |                          |
 ....
 
 
