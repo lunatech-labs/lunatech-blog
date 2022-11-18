@@ -5,9 +5,10 @@ v1.0, 2022-10-06
 :lang: en
 :tags: [voting, crypto, zero-knowledge, en]
 
-Given the availability of technology in our society, as well as the need for tools supporting democratic decision making, it is not surprising that e-voting is a growing field of research.
-But unlike their name suggests it, e-voting shemes are not only digitalized version of traditional voting systems where paper ballots are counted by hand.
-They go a step further by leveraging cryptographic methods to provide privacy and verifiability guarantees.
+Given the availability of technology in our society as well as the need for tools supporting democratic decision making, it is not surprising that e-voting is a growing research field.
+But unlike suggested by their name, e-voting schemes are not only digitalized version of traditional voting systems where paper ballots are counted by hand.
+They go a step further by leveraging cryptographic methods to provide privacy and verifiability guarantees. 
+In particular, trust is shifted from the system to independent verifiers who can check that everything went well.
 
 The aim of this post is to gain an understanding of how this type of systems works with a concrete example. We will go over some background information on voting schemes, give a description of the Helios 2.0 scheme, look into a possible attack and finish with a few pointers about key parts of a simplified implementation.
 
@@ -21,50 +22,54 @@ The ballots can then be tallied by the organizer in possession of the necessary 
 
 .Voting process with some details we will get into later.
 ----
-                      Public bulletin board
+                      public bulletin board
  
                    +--------------------------+
                    |                          |
             cast   |  +--------------------+  |   tally
-Vote 1  -----------+->| Encrypted ballot 1 +--+-------+
+vote 1  -----------+->| encrypted ballot 1 +--+-------+
                    |  +--------------------+  |       |
                    |                          |       |
                    |  +--------------------+  |       |
-Vote 2  -----------+->| Encrypted ballot 2 +--+-------+
+vote 2  -----------+->| encrypted ballot 2 +--+-------+
                    |  +--------------------+  |       |
                    |                          |       |
  ...    -----------+->         ...         ---+-------+
                    |                          |       |
                    |  +--------------------+  |       |    +------------------+   reveal
-Vote n  -----------+->| Encrypted ballot n +--+-------+--->| Encrypted result +------------> Result
+vote n  -----------+->| encrypted ballot n +--+-------+--->| encrypted result +------------> result
                    |  +--------------------+  |            +------------------+
                    |                          |
                    +--------------------------+
 ----
 
 
-Voting schemes of this type aim at lowering the trust in the entity organizing the voting process while still providing necessary security guarantees. 
-They typically try to preserve the secrecy of each ballot while being publicly verifiable, so everyone is convinced of the integrity of the voting result without learning anything about the individual votes. We will see how this can be achieved in the next section.
+Voting schemes of this type aim at shifting the trust of the voters away from the system to some data published during the process.
+This means that instead relying on the system as a black-box, voters can be convinced of the integrity of the result by examining the public bulleting board.
+In parallel of being verifiable, these voting schemes naturally try to keep the content of each ballot hidden to preserve the privacy of the voters.
+We will see how this can be achieved in the next section.
 
 In order to limit the scope of this post, we do not worry about the eligibility of the voters. In other words, we assume that another system checks whether a vote comes from a legitimate voter or not.
-But this does not prevent legitimate voters from colluding and from potentially learning unexpected information, as we will see <<attack, later>>. 
-Another assumption we make is the existence of an honest bulletin board, which is some sort of public database trusted to display anything that has been written on it.
+But this does not prevent legitimate voters from colluding and potentially learning unexpected information, as we will see <<attack, later>>. 
+Another assumption we make is the existence of an honest bulletin board, which is some sort of public database trusted to display everything that has been written on it.
 
 == Helios
 
-In this section we discuss the Helios 2.0 voting scheme initially described in <<Adida2009>>. We begin with the verifiability property and how it motivates the design of this system.
+In this section we discuss the Helios 2.0 voting scheme initially described in <<Adida2009>>. 
+It did not introduce novel techniques or constructions but Helios was the first e-voting system publicly accessible and it was used for official elections, thus a significant amount of literature exists on the topic.
+We begin by examining the verifiability property and how it motivates the design of this system.
 
 === What can be verified?
 Let us start by giving more precisions about what we mean by __verifiability__. 
-The main objective of this property is for an external verifier (not in possession of any secret key) to be able to distinguigh whether the result of the vote is indeed the sum of the individual ballots cast by the voters. 
+The main objective of this property is for an external verifier (not in possession of any secret key) to be able to distinguish whether the result of the vote is indeed the sum of the individual ballots cast by the voters. 
 This is achieved in Helios by displaying the ballots and the result on a public bulletin board; using a <<encryption, special type of encryption>>, both of these data structures stay hidden while a verifier can still sum the ballots and check that the result is correct. 
 
 As a consequence of this encryption, the operation of creating an encrypted ballot as well as the action of revealing the result need to be verified. 
-To this end, a proof certifying that the ballot is valid is added to the ballot by the voter, and similarly the organizer adds a proof along the voting result ensuring that it corresponds to the summed ballots.
+To this end, a proof certifying the validity of the encryption is added to the ballot by the voter, and similarly the organizer publishes a proof along the voting result ensuring that it corresponds to the summed ballots.
 But these two proofs are also public, thus they have to attest the validity of the encryption and decryption steps without leaking information about the choice of the voter or the secret key of the organizer. 
-Cryptographic contructions called zero-knowloedge proofs serve this purpose are we will describe <<pok, later>> how they work and fulfill their role.
+Cryptographic constructions called zero-knowledge proofs serve this purpose and we will describe <<pok, later>> how they work and fulfill their role.
 
-To reformulate, verifiability in Helios consists of three steps across the voting process certifying its integrity to an external verifier. First a zero-knowledge proof in each ballot attests that a it is well formed, the special type of encryption then allows recalculation of the encrypted result, and finally a second zero-knowledge proof attests that the result is properly decrypted.
+To reformulate, verifiability in Helios consists of three steps across the voting process certifying its integrity to an external verifier. First a zero-knowledge proof in each ballot attests that they are well formed, the special type of encryption then allows recalculation of the encrypted result, and finally a second zero-knowledge proof attests that the result is properly decrypted.
 
 ....
 +------+     +------------------+     +------------------+     +--------+
@@ -77,15 +82,15 @@ To reformulate, verifiability in Helios consists of three steps across the votin
 
           |                        |                        |
           +------------------------+------------------------+
-                         chain of verifiablity
+                         chain of verifiability
 ....
 
-We will now describe how the voting scheme is used and built before coming back to the necessay building blocks, namely the encryption scheme and the zero-knowledge proofs.
+We will now describe how the voting scheme is used and built before coming back to the necessary building blocks, namely the encryption scheme and the zero-knowledge proofs.
 
 
 === Overview of the scheme
 
-In this part we descibe the participants of the voting process and what algorithms they execute.
+In this part we describe the participants of the voting process and which algorithms they execute.
 
 ==== Participants
 As mentioned earlier, three kinds of participants have a role in this voting process. First comes the __organizer__, who takes care of generating the necessary encryption/decryption keys at the beginning and reveals the voting result at the end. The organizer has to be trusted to not share his part of the key. Second are the _voters_, who make a choice regarding their vote and cast an encrypted ballot. Lastly come the _verifiers_, who check the steps of the verifiability chain to make sure of the integrity of the process. Anyone, voter or external, can act as a verifier.
@@ -99,29 +104,29 @@ The Helios voting scheme is composed of five algorithms run by the organizer and
 `+tally+`:: This step can be executed by anyone thanks to the type of encryption used. The ballots stay encrypted while they are combined to form the encrypted result. More details in the <<encryption, next part>>.
 `+reveal+`:: In the final step, the organizer uses her secret key to decrypt the encrypted result and reveals the voting result. A corresponding proof is also generated to attest that the result is indeed the decryption of the tally result.
 
-During and after the voting process, verifiers can check that each step was executed properly by oberving the data on the bulleting board.
+During and after the voting process, verifiers can check that each step was executed properly by observing the data on the bulletin board.
 
 
 ....
-                          voters                 bulletin board               organizer
+                           voters                 bulletin board               organizer
 
-                             |                         |                          |
-                             |                         |                          | (secret key, public key) <- setup
-                             |                         |          public key      |
-                             + <-----------------------+------------------------- +
-                             |                         |                          |
-ballot = vote(v, public key) |                         |                          |
-                             |       cast(ballot)      |                          |
-          ...                | ----------------------> |                          |
-                             | ----------------------> |                          |
-                             |           ...           |                          |
-                             |                         |          ballots         |
-                             |                         | -----------------------> |
-                             |                         |                          | result = reveal(tally(ballots), secret key)
-                             |                         |          result          |
-                             |                         | <----------------------- |
-                             |                         |                          |
-                             |                         |                          |
+                              |                         |                          |
+                              |                         |                          | (secret key, public key) <- setup
+                              |                         |          public key      |
+                              + <-----------------------+------------------------- +
+                              |                         |                          |
+ballot <- vote(v, public key) |                         |                          |
+                              |       cast(ballot)      |                          |
+             ...              | ----------------------> |                          |
+                              | ----------------------> |                          |
+                              |           ...           |                          |
+                              |                         |          ballots         |
+                              |                         | -----------------------> |
+                              |                         |                          | result <- reveal(tally(ballots), secret key)
+                              |                         |          result          |
+                              |                         | <----------------------- |
+                              |                         |                          |
+                              |                         |                          |
 ....
 
 
@@ -129,7 +134,7 @@ We will now discuss in more details how the encryption and the proofs of knowled
 
 === Encryption [[encryption]]
 
-In general, encryption is a method to hide information and to be able to transmit it over and exposed channel. 
+In general, encryption is a method to hide information and to be able to transmit it over an exposed channel. 
 Typically, a function called `encrypt` converts a plaintext message `m` into a ciphertext `c` which does not reveal anything about `m`. 
 Another function `decrypt` transforms `c` back into the recovered plaintext `m'`, which should be identical to `m`.
 
@@ -143,18 +148,19 @@ Another function `decrypt` transforms `c` back into the recovered plaintext `m'`
 ....
 
 In order execute those functions, another piece of information called __key__ is needed.
-In our context asymmetric encryption is used, which means that the key used to encrypt is different from the one used for decryption.
-More concretely, a public key is used to encrypt a vote into a ballot and the corresponding secret key allows the organizer to decrypt the voting result at the end. This means that the ballots on the bulletin board do not reveal anything about the underlying votes without access to the secret key.
+In our context we are dealing with asymmetric encryption, which means that the key used to encrypt is different from the one for decryption.
+More concretely, a public key is needed to encrypt a vote into a ballot and the corresponding secret key allows the organizer to decrypt the voting result at the end. 
+This means that the ballots on the bulletin board do not reveal anything about the underlying votes without access to the secret key.
 
-==== How it is used in Helios
-We consider the case where a vote is a sequence of 0's and 1's but at most one 1, indicating for which cantidate the vote is. For example, `(0, 1, 0)` is a vote for the second candidate.
-To form a ballot, each element of the vote is encrypted seperately using a __homomorphic__ encryption scheme.
+==== Application in Helios
+We consider the case where a vote is a sequence of 0's and 1's but at most one 1, indicating for which candidate the vote is. For example, `(0, 1, 0)` is a vote for the second candidate.
+To form a ballot, each element of the vote is encrypted separately using a __homomorphic__ encryption scheme.
 This type of encryption allows the encrypted ballots to be combined element-wise with each other and the result contains the sum of the votes for each candidate. 
 The voting organizer holding the secret key can then reveal the result using her secret key.
 
 Homomorphic encryption:: `+encrypt(a) * encrypt(b) == encrypt(a + b)+`
 
-For example, let us consider a very small election where Alice and Bob choose among three candidates. Alice of votes for the first candidate and Bob for the second, thus their ballots will be `b~a~ = (enc(1), enc(0), enc(0))` and `b~b~ = (enc(0), enc(1), enc(0))`. Thanks to the homomorphic property, the resulting tally will yield `(enc(1)*enc(0), enc(0)*enc(1), enc(0)*enc(0)) = (enc(1), enc(1), enc(0))`, which corresponds to the expected result when decrypted: `(1, 1, 0)`
+For example, let us consider a very small election where Alice and Bob choose among three candidates. Alice votes for the first candidate and Bob for the second, thus their ballots will be `b~a~ = (enc(1), enc(0), enc(0))` and `b~b~ = (enc(0), enc(1), enc(0))`. Thanks to the homomorphic property, the resulting tally will yield `(enc(1)*enc(0), enc(0)*enc(1), enc(0)*enc(0)) = (enc(1), enc(1), enc(0))`, which corresponds to the expected result when decrypted: `(1, 1, 0)`
 
 The homomorphic encryption scheme used in Helios is called https://en.wikipedia.org/wiki/ElGamal_encryption[ElGamal].
 
@@ -162,7 +168,7 @@ The homomorphic encryption scheme used in Helios is called https://en.wikipedia.
 
 The security of ElGamal is based on the hardness of solving a https://en.wikipedia.org/wiki/Discrete_logarithm[discrete logarithm], which is the operation of finding `x` given `h`, `g` and `p` such that `h = g^x^ mod p`. In other words, it is easy to calculate `h = g^x^` but much harder to recover `x = log~p~(h)` in modular arithmetic. Let us see how this can be used to form an encryption scheme.
 
-Setup:: Let the secret key `x` be a random number and let the public key be `h = g^x^ mod p`. `p` is a large prime number publicly known, and all the following operations are calculated modulo `p`. `g` is a genertor of the https://en.wikipedia.org/wiki/Cyclic_group[cyclic group] of order `p`.
+Setup:: Let the secret key `x` be a random number and let the public key be `h = g^x^ mod p`. `p` is a large prime number publicly known, and all the following operations are calculated modulo `p`. `g` is a generator of the https://en.wikipedia.org/wiki/Cyclic_group[cyclic group] of order `p`.
 
 Encryption:: Let the __ephemeral key__ `r` be a random number, and calculate the __shared secret__ `s = h^r^`. The ciphertext is the pair `(g^r^, m*s)`.
 
@@ -182,7 +188,7 @@ In the following example we examine the encryption, combination and decryption o
 * let `q = 53`, `p = 2q + 1 = 107` and `g = 75`: `+g+` generates a subgroup of `Z/pZ` of order `q`
 * (note that we have not mentioned `q` earlier for simplicity, but it does not change the rest of this example)
 * let the key pair be `x = 18` and `h = g^x^ = 35 mod p`
-* the encrypted ballots can be calulated as follows: 
+* the encrypted ballots can be calculated as follows: 
 ** choose a random value, say `r = 2`
 ** encryption of the first element of Alice's vote: `b~a1~ = (g^r^, h^r^ * g^m^) = (61, 48 * 75) = (61, 69)`
 ** note that the vote is projected in `Z/pZ` before being encrypted with `g^m^`
@@ -196,8 +202,7 @@ In the following example we examine the encryption, combination and decryption o
 
 Now that we know how the votes are kept private, the verifiability chain remains to be completed with proofs of proper encryption and decryption.
 
-==== Zero-knowledge in a nutshell
-In general, a https://en.m.wikipedia.org/wiki/Zero-knowledge_proof[zero-knowledge proof] is a protocol where a prover P attempts to convince a verifier V that she holds a piece of information without revealing anything about it. An typical example is https://www.zkdocs.com/docs/zkdocs/zero-knowledge-protocols/schnorr/[Schorr's protocol], where P proves to V that she knows the dicrete logarithm `x` such that `h = g^x^` (in modular arithmetic).
+In general, a https://en.m.wikipedia.org/wiki/Zero-knowledge_proof[zero-knowledge proof] is a protocol where a prover P attempts to convince a verifier V that she holds a piece of information without revealing anything about it. An typical example is https://www.zkdocs.com/docs/zkdocs/zero-knowledge-protocols/schnorr/[Schorr's protocol], where P proves to V that she knows the discrete logarithm `x` such that `h = g^x^` (in modular arithmetic).
 
 .Schorr's protocol
 ----
@@ -220,7 +225,7 @@ In general, a https://en.m.wikipedia.org/wiki/Zero-knowledge_proof[zero-knowledg
 P first choose a random value `r` and commits to it by sending `u = g^r^`. Next, V choose a random challenge `c` and sends it back. Lastly, P sends `z` such that `g^z^ = u * h^c^` and the only value satisfying this equality is `z = r + x * c`. She can only calculate `z` knowing `x`, thus V deduces that with a very high probability P indeed knows `x` such that `h = g^x^`.
 It is possible to prove that the verifier, if she behaves honestly, does not gain any knowledge in the process. See this https://blog.cryptographyengineering.com/2017/01/21/zero-knowledge-proofs-an-illustrated-primer-part-2/[blog post] for more insights.
 
-A proof of this kind can be made non-interactive by using a so called https://en.m.wikipedia.org/wiki/Fiat%E2%80%93Shamir_heuristic[Fiat-Shamir] transformation, which replaces the challenge sent by V with the hash of a public value. A https://en.wikipedia.org/wiki/Cryptographic_hash_function[hash function] is very hard to inverse, which means that a challenge chosen by hashing some value is hard to pre-calulate and can be considered random. In the case of Schorr's protocol, P can hash `g`, `h` and `u` to form the following non-interactive protocol.
+A proof of this kind can be made non-interactive by using a so called https://en.m.wikipedia.org/wiki/Fiat%E2%80%93Shamir_heuristic[Fiat-Shamir] transformation, which replaces the challenge sent by V with the hash of a public value. A https://en.wikipedia.org/wiki/Cryptographic_hash_function[hash function] is very hard to inverse, which means that a challenge chosen by hashing some value is hard to pre-calculate and can be considered random. In the case of Schorr's protocol, P can hash `g`, `h` and `u` to form the following non-interactive protocol.
 
 ----
 +-----------------+                +-----------------+
@@ -247,13 +252,13 @@ Another zero-knowledge proof attests that the voting result is decrypted correct
 === Attack on ballot privacy [[attack]]
 As explained in <<Bernhard2012>>, ElGamal as well as the Fiat-Shamir transformation used in Helios are https://en.m.wikipedia.org/wiki/Malleability_(cryptography)[malleable], which means that a ballot can be duplicated by re-randomization. An attacker can thus create a valid ballot containing the same vote as an existing one found on the public bulletin board.
 
-Example:: Given the first part of Alice's ballot `b~a1~ = (g^r^, h^r^ * g^1^) = (61, 69)`, anyone knowing the public key can generate a new valid ciphertext by adding a factor to the ephemeral key. Let `u = 2`, then `b~a1~' = (61 * g~u~, 69 * h~u~) = (83, 102)`. This new ballot is equivalent to `(g^r+u^, h^r+u^ * g^1^)` and is thus a valid encryption of `1`.
+For example, given the first part of Alice's ballot `b~a1~ = (g^r^, h^r^ * g^1^) = (61, 69)`, anyone knowing the public key can generate a new valid ciphertext by adding a factor to the ephemeral key. Let `u = 2`, then `b~a1~' = (61 * g~u~, 69 * h~u~) = (83, 102)`. This new ballot is equivalent to `(g^r+u^, h^r+u^ * g^1^)` and is thus a valid encryption of `1`.
 
-A possible consequence is that some malicious voters can collude against another one by duplicating its vote, which allows them to gain some information about it if they are numerous enough. In the extreme case, half of the voters could be malicious and the vote of their target could be determined with certainty by looking at the result of the voting process. Although the gravity of the breach might seem low since a high proportion of the voters have to be corrupted to lead to an actual leak, it shows that ballot privacy does not hold under certain conditions and confirms the need for proofs of privacy under well defined conditions.
+A possible consequence is that some malicious voters can collude against another one by duplicating its vote, which allows them to gain some information about it if they are numerous enough. In the extreme case, half of the voters could be malicious and the vote of their target could be determined with certainty by looking at the result of the voting process. Although the gravity of the breach might seem low since a high proportion of the voters have to be corrupted to lead to an actual leak, it shows that ballot privacy does not hold in certain cases and confirms the need for proofs of privacy under well defined conditions.
 
 == Implementation
 
-https://github.com/agoetschm/voting-helios-scala[This repo] contains a simplified implementation of Helios without any dependencies: the necessary discrete algebra objects and cryptographic primitives are implemented from scratch. Additionally, the code aims to be as clear and simple as possible in order to show how the different part of the scheme are put together. The strong typing of Scala helps to give expressive signatures to each function and make their role explicit.
+https://github.com/agoetschm/voting-helios-scala[This repo] contains a simplified implementation of Helios without any dependencies: the necessary discrete algebra objects and cryptographic primitives are implemented from scratch. Additionally, the code aims to be as clear and simple as possible in order to show how the different parts of the scheme are put together. The strong typing of Scala helps to give expressive signatures to each function and make their role explicit.
 
 === Structure
 We will go over the different layers composing the code in a bottom-up approach, going from the basic building blocks up to the final voting scheme.
@@ -380,7 +385,7 @@ In order to illustrate how this implementation of Helios can be used, https://gi
 
 == Conclusion
 
-Diving into the subject of voting schemes allowed us to discover some desirable privacy and verifiability properties in voting schemes and to see how they can be provided by leveraging well known cryptographic constructions. We introduced the concepts of homomorphic encryption and zero-knowledge proof, and we went over a simplified implentation of the Helios 2.0 voting scheme. 
+Diving into the subject of voting schemes allowed us to discover some desirable privacy and verifiability properties in voting schemes and to see how they can be provided by leveraging existing cryptographic constructions. We introduced the concepts of homomorphic encryption and zero-knowledge proof, and we went over a simplified implementation of the Helios 2.0 voting scheme. 
 
 We also described an attack on ballot privacy, which gives a concrete example of the need for continuous research in the field of voting systems. Democratic decisions are at the core of our society and the population needs to trust the process of taking them.
 
