@@ -2,6 +2,7 @@
 eloots
 v1.0, 2021-04-28
 :title: Comparing Concurrent Programming Alternatives
+:imagesdir: ../media/2021-04-28-calculating-pi-concurrently
 :lang: en
 :tags: [concurrency, akka, Future, streaming, streams, multiprocessing, parallelism, scala]
 
