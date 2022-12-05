@@ -1,7 +1,8 @@
 = Calculating π concurrently
-Eric Loots <eric.loots@lunatech.com>
+eloots
 v1.0, 2021-04-28
 :title: Comparing Concurrent Programming Alternatives
+:lang: en
 :tags: [concurrency, akka, Future, streaming, streams, multiprocessing, parallelism, scala]
 
 == Calculating π concurrently
