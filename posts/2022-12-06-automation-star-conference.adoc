@@ -28,24 +28,24 @@ The first day of the conference started with the Badge and goodies collection an
 
 In the following, I would like to briefly discuss the talks that we have attended:
 
-== 1. Making Great Waves: 8 Software Testing Convictions
+=== 1. Making Great Waves: 8 Software Testing Convictions
 
 Testing is an art as much as Engineering, we can take cues from prolific artists in how we approach quality in our own work. In this keynote *Andrew Knight* mentioned how we can create our own great waves in software testing. He covered following eight auspicious ideas which were inspired by ukiyo-e printing:
 
-- Focus on behavior
-- Prioritize on risk
-- Automate
-- Shift left and right
-- Give fast feedback
-- Go lean
-- Open up
-- Show empathy
+. Focus on behavior
+. Prioritize on risk
+. Automate
+. Shift left and right
+. Give fast feedback
+. Go lean
+. Open up
+. Show empathy
 
-== 2. WebDriver BiDi – The Future of Cross-Browser Automation
+=== 2. WebDriver BiDi – The Future of Cross-Browser Automation
 
 Pain of browser automation was explained in a very coolest way by *Jecelyn Yeen*. She started with the history of web and automation, followed by how browser automation works behind the scenes and then explained the pros and cons of different ways of browser automation. In the end she listed her experiences with the WebDriver BiDi project and its current progress.
 
-== 3. Mission Impossible: Automatic Usability Testing
+=== 3. Mission Impossible: Automatic Usability Testing
 
 If usability testing is part of the project then there are more chances of developing successful product. *Kimberly Snoyl* has delivered the talk focusing on the importance of UX testing, because sometimes the products are not user-friendly and users get frustrated easily while using it. To make processes simpler and better for the users, Kimberly is exploring the idea to create a tool which can automate some of the following 10 Usability Heuristics:
 
@@ -55,7 +55,7 @@ Her idea for creating a UX Automation tool won the EuroSTAR 2022 RisingSTAR awar
 
 image::../media/2022-12-06-automation-star-conference/Automatic Usability Testing.png[alt="Figure 2: How bottlenecks in UX can be solved by Automatic Usability Testing"]
 
-== 4. Test Automation: How to Start and Succeed
+=== 4. Test Automation: How to Start and Succeed
 
 An important subject of starting and succeeding the Test Automation process was explained by *Chris Loader* in a very effective way and this talk was one of the standouts for me at the conference. Because test automation requires much of the mental work and it feels quite overwhelming in the start.
 ++++
@@ -78,7 +78,7 @@ It would be difficult, almost impossible, for me to summarize the whole experien
 - In an Agile Environment support both manual and automated tests
 - You are never finished with automation, review and refactor your code regularly for making product more mature. Change tools, hardware when needed and keep a strict eye on the automation “health”.
 
-== 5. Automating Bias
+=== 5. Automating Bias
 
 QA Engineers often face the situation where one of the obvious bug is missed and that’s only because of the Cognitive Biases that influence the entire thought process. On the basis of this bias automation engineers also encode some of these biases into the automation test suite, which can lead to very bad outcomes for software. *Dermot Canniffe* explained these common biases that affect the process include:
 
@@ -90,7 +90,7 @@ We can resolve these biases by adopting three basic strategies which include:
 - Collaboration
 - Reframe Failure
 
-== 6. Your Principles of Testing
+=== 6. Your Principles of Testing
 
 In the last keynote, *Jenny Bramble* shared her own personal principles of testing. Key takeaway from this session is that having a roadmap and set of principles for ourselves will make us more proactive. Testing principles help us in taking the decisions, be it from choosing what falls into regression, to what gets automated, and even who to send invite to join the team.
 ++++
