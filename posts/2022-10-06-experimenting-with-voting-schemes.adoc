@@ -2,11 +2,12 @@
 agoetschm
 v1.0, 2022-10-06
 :title: Introduction to e-voting schemes
+:imagesdir: ../media/2022-10-06-experimenting-with-voting-schemes
 :lang: en
 :tags: [voting, crypto, zero-knowledge, en]
 
 Given the availability of technology in our society as well as the need for tools supporting democratic decision making, it is not surprising that e-voting is a growing research field.
-But unlike suggested by their name, e-voting schemes are not only digitalized version of traditional voting systems where paper ballots are counted by hand.
+But unlike suggested by their name, e-voting schemes are not only digitalized versions of traditional voting systems where paper ballots are counted by hand.
 They go a step further by leveraging cryptographic methods to provide privacy and verifiability guarantees. 
 In particular, trust is shifted from the system to independent verifiers who can check that everything went well.
 
@@ -21,27 +22,7 @@ This allows observers to check some properties of the ballots without seeing the
 The ballots can then be tallied by the organizer in possession of the necessary decryption material.
 
 .Voting process with some details we will get into later.
-----
-                      public bulletin board
- 
-                   +--------------------------+
-                   |                          |
-            cast   |  +--------------------+  |   tally
-vote 1  -----------+->| encrypted ballot 1 +--+-------+
-                   |  +--------------------+  |       |
-                   |                          |       |
-                   |  +--------------------+  |       |
-vote 2  -----------+->| encrypted ballot 2 +--+-------+
-                   |  +--------------------+  |       |
-                   |                          |       |
- ...    -----------+->         ...         ---+-------+
-                   |                          |       |
-                   |  +--------------------+  |       |    +------------------+   reveal
-vote n  -----------+->| encrypted ballot n +--+-------+--->| encrypted result +------------> result
-                   |  +--------------------+  |            +------------------+
-                   |                          |
-                   +--------------------------+
-----
+image::diagram1.png[diagram1, 800]
 
 
 Voting schemes of this type aim at shifting the trust of the voters away from the system to some data published during the process.
@@ -50,7 +31,7 @@ In parallel of being verifiable, these voting schemes naturally try to keep the 
 We will see how this can be achieved in the next section.
 
 In order to limit the scope of this post, we do not worry about the eligibility of the voters. In other words, we assume that another system checks whether a vote comes from a legitimate voter or not.
-But this does not prevent legitimate voters from colluding and potentially learning unexpected information, as we will see <<attack, later>>. 
+But this does not prevent legitimate voters from colluding and potentially learning private information, as we will see <<attack, later>>. 
 Another assumption we make is the existence of an honest bulletin board, which is some sort of public database trusted to display everything that has been written on it.
 
 == Helios
@@ -93,7 +74,7 @@ We will now describe how the voting scheme is used and built before coming back 
 In this part we describe the participants of the voting process and which algorithms they execute.
 
 ==== Participants
-As mentioned earlier, three kinds of participants have a role in this voting process. First comes the __organizer__, who takes care of generating the necessary encryption/decryption keys at the beginning and reveals the voting result at the end. The organizer has to be trusted to not share his part of the key. Second are the _voters_, who make a choice regarding their vote and cast an encrypted ballot. Lastly come the _verifiers_, who check the steps of the verifiability chain to make sure of the integrity of the process. Anyone, voter or external, can act as a verifier.
+As mentioned earlier, three kinds of participants have a role in this voting process. First comes the __organizer__, who takes care of generating the necessary encryption/decryption keys at the beginning and reveals the voting result at the end. The organizer has to be trusted to not share his part of the key. Second are the _voters_ who, as their name suggests it, vote and cast an encrypted ballot. Lastly come the _verifiers_, who check the steps of the verifiability chain to make sure of the integrity of the process. Anyone, voter or external, can act as a verifier.
 
 ==== Algorithms
 The Helios voting scheme is composed of five algorithms run by the organizer and the voters.
@@ -147,7 +128,7 @@ Another function `decrypt` transforms `c` back into the recovered plaintext `m'`
      public key      secret key
 ....
 
-In order execute those functions, another piece of information called __key__ is needed.
+In order to execute those functions, another piece of information called __key__ is needed.
 In our context we are dealing with asymmetric encryption, which means that the key used to encrypt is different from the one for decryption.
 More concretely, a public key is needed to encrypt a vote into a ballot and the corresponding secret key allows the organizer to decrypt the voting result at the end. 
 This means that the ballots on the bulletin board do not reveal anything about the underlying votes without access to the secret key.
@@ -202,7 +183,7 @@ In the following example we examine the encryption, combination and decryption o
 
 Now that we know how the votes are kept private, the verifiability chain remains to be completed with proofs of proper encryption and decryption.
 
-In general, a https://en.m.wikipedia.org/wiki/Zero-knowledge_proof[zero-knowledge proof] is a protocol where a prover P attempts to convince a verifier V that she holds a piece of information without revealing anything about it. An typical example is https://www.zkdocs.com/docs/zkdocs/zero-knowledge-protocols/schnorr/[Schorr's protocol], where P proves to V that she knows the discrete logarithm `x` such that `h = g^x^` (in modular arithmetic).
+In general, a https://en.m.wikipedia.org/wiki/Zero-knowledge_proof[zero-knowledge proof] is a protocol where a prover P attempts to convince a verifier V that she holds a piece of information without revealing anything about it. A typical example is https://www.zkdocs.com/docs/zkdocs/zero-knowledge-protocols/schnorr/[Schorr's protocol], where P proves to V that she knows the discrete logarithm `x` such that `h = g^x^` (in modular arithmetic).
 
 .Schorr's protocol
 ----
@@ -222,7 +203,7 @@ In general, a https://en.m.wikipedia.org/wiki/Zero-knowledge_proof[zero-knowledg
 |                 |                |  g^z = u * h^c  |
 +-----------------+                +-----------------+
 ----
-P first choose a random value `r` and commits to it by sending `u = g^r^`. Next, V choose a random challenge `c` and sends it back. Lastly, P sends `z` such that `g^z^ = u * h^c^` and the only value satisfying this equality is `z = r + x * c`. She can only calculate `z` knowing `x`, thus V deduces that with a very high probability P indeed knows `x` such that `h = g^x^`.
+P first choose a random value `r` and commits to it by sending `u = g^r^`. Next, V choose a random challenge `c` and sends it back. Lastly, P sends `z` such that `g^z^ = u * h^c^` and the only value satisfying this equality is `z = r + x * c`. P can only calculate `z` knowing `x`, thus V deduces that with a very high probability P indeed knows `x` such that `h = g^x^`.
 It is possible to prove that the verifier, if she behaves honestly, does not gain any knowledge in the process. See this https://blog.cryptographyengineering.com/2017/01/21/zero-knowledge-proofs-an-illustrated-primer-part-2/[blog post] for more insights.
 
 A proof of this kind can be made non-interactive by using a so called https://en.m.wikipedia.org/wiki/Fiat%E2%80%93Shamir_heuristic[Fiat-Shamir] transformation, which replaces the challenge sent by V with the hash of a public value. A https://en.wikipedia.org/wiki/Cryptographic_hash_function[hash function] is very hard to inverse, which means that a challenge chosen by hashing some value is hard to pre-calculate and can be considered random. In the case of Schorr's protocol, P can hash `g`, `h` and `u` to form the following non-interactive protocol.
@@ -281,13 +262,13 @@ trait EncryptionScheme[PT, CT, PK, SK, D, R]:
   val enc: (PT, PK, () => R) => CT
   val dec: (CT, SK) => PT
 
-trait HomomorphicEncryption[C]:
-  val combine: (C, C) => C
+trait HomomorphicEncryption[CT]:
+  val combine: (CT, CT) => CT
 
 class ElGamal extends EncryptionScheme[...] with HomomorphicEncryption[...]:
   ...
 ----
-The `EncryptionScheme` trait is an example of the conciseness achievable in Scala: it states that the `enc` function takes a plaintext, the public key, a source of randomness and return a ciphertext.
+The `EncryptionScheme` trait is an example of the conciseness achievable in Scala: it states that the `enc` function takes a plaintext `PT`, the public key `PK`, a source of randomness `R` and returns a ciphertext `CT`. The other type parameters correspond to the secret key `SK` and the domain `D`.
 
 As last layer, the https://github.com/agoetschm/voting-helios-scala/tree/develop/src/main/scala/voting/[voting] package defines the https://github.com/agoetschm/voting-helios-scala/tree/develop/src/main/scala/voting/scheme/definition/VotingScheme.scala[VotingScheme] trait and its main implementation https://github.com/agoetschm/voting-helios-scala/tree/develop/src/main/scala/voting/scheme/helios/Helios.scala[Helios].
 
