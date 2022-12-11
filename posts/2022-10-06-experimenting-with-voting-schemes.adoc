@@ -22,7 +22,7 @@ This allows observers to check some properties of the ballots without seeing the
 The ballots can then be tallied by the organizer in possession of the necessary decryption material.
 
 .Voting process with some details we will get into later.
-image::diagram1.png[diagram1, 800]
+image::diagram1.png[Voting scheme, width=750]
 
 
 Voting schemes of this type aim at shifting the trust of the voters away from the system to some data published during the process.
@@ -52,19 +52,7 @@ Cryptographic constructions called zero-knowledge proofs serve this purpose and 
 
 To reformulate, verifiability in Helios consists of three steps across the voting process certifying its integrity to an external verifier. First a zero-knowledge proof in each ballot attests that they are well formed, the special type of encryption then allows recalculation of the encrypted result, and finally a second zero-knowledge proof attests that the result is properly decrypted.
 
-....
-+------+     +------------------+     +------------------+     +--------+
-| vote +---->| encrypted ballot +---->| encrypted result +---->| result |
-+------+  |  +------------------+     +------------------+  |  +--------+
-          |                  |           ^                  |
-          |                  |           |                  |
-          v                  +-----------+                  v
-        proof                reproducible                 proof
-
-          |                        |                        |
-          +------------------------+------------------------+
-                         chain of verifiability
-....
+image::diagram2.png[Chain of verifiability, width=600]
 
 We will now describe how the voting scheme is used and built before coming back to the necessary building blocks, namely the encryption scheme and the zero-knowledge proofs.
 
@@ -88,27 +76,7 @@ The Helios voting scheme is composed of five algorithms run by the organizer and
 During and after the voting process, verifiers can check that each step was executed properly by observing the data on the bulletin board.
 
 
-....
-                           voters                 bulletin board               organizer
-
-                              |                         |                          |
-                              |                         |                          | (secret key, public key) <- setup
-                              |                         |          public key      |
-                              + <-----------------------+------------------------- +
-                              |                         |                          |
-ballot <- vote(v, public key) |                         |                          |
-                              |       cast(ballot)      |                          |
-             ...              | ----------------------> |                          |
-                              | ----------------------> |                          |
-                              |           ...           |                          |
-                              |                         |          ballots         |
-                              |                         | -----------------------> |
-                              |                         |                          | result <- reveal(tally(ballots), secret key)
-                              |                         |          result          |
-                              |                         | <----------------------- |
-                              |                         |                          |
-                              |                         |                          |
-....
+image::diagram3.png[Helios protocol, width=700]
 
 
 We will now discuss in more details how the encryption and the proofs of knowledge work in Helios.
@@ -119,14 +87,7 @@ In general, encryption is a method to hide information and to be able to transmi
 Typically, a function called `encrypt` converts a plaintext message `m` into a ciphertext `c` which does not reveal anything about `m`. 
 Another function `decrypt` transforms `c` back into the recovered plaintext `m'`, which should be identical to `m`.
 
-....
-+---+  encrypt  +---+  decrypt  +---+
-| m +---------->| c +---------->| m'|
-+---+     ^     +---+     ^     +---+
-          |               |
-          |               |
-     public key      secret key
-....
+image::diagram4.png[Encryption scheme, width=480]
 
 In order to execute those functions, another piece of information called __key__ is needed.
 In our context we are dealing with asymmetric encryption, which means that the key used to encrypt is different from the one for decryption.
@@ -159,25 +120,25 @@ As mentioned before, two ciphertexts can be combined homomorphically to form an 
 
 ==== Example
 
-In the following example we examine the encryption, combination and decryption of Alice's and Bob's votes using ElGamal encryption. This illustrates how the ballots are encrypted in practice and should give a more concrete intuition of how the votes stay private.
+In the following example we examine the encryption, combination and decryption of Alice's and Bob's votes using ElGamal encryption. This illustrates how the ballots are encrypted in practice and should give a more concrete intuition of how the votes stay private. Additionally, https://scastie.scala-lang.org/agoetschm/dL0eFJasTnyauCR1MXZadg/70[this code snippet] allows you interactively run the computation of the example.
 
 .Details of Alice's and Bob's encrypted ballots
 [%collapsible]
 ====
-
 * Alice wants to vote for the first candidate and Bob for the second: `v~a~ = (1, 0, 0)` and `v~b~ = (0, 1, 0)`
-* let `q = 53`, `p = 2q + 1 = 107` and `g = 75`: `+g+` generates a subgroup of `Z/pZ` of order `q`
+* let `q = 53`, `p = 2q + 1 = 107` and `g = 75`: `+g+` generates a subgroup of `Z/pZ` (set of integers modulo `p`) of order `q`
 * (note that we have not mentioned `q` earlier for simplicity, but it does not change the rest of this example)
 * let the key pair be `x = 18` and `h = g^x^ = 35 mod p`
 * the encrypted ballots can be calculated as follows: 
 ** choose a random value, say `r = 2`
 ** encryption of the first element of Alice's vote: `b~a1~ = (g^r^, h^r^ * g^m^) = (61, 48 * 75) = (61, 69)`
-** note that the vote is projected in `Z/pZ` before being encrypted with `g^m^`
+** note that the vote element `m = 1` is projected onto `Z/pZ` before being encrypted, i.e. it becomes `g^m^ = g = 75`
 ** similarly for the first element of Bob's vote with `r = 3`: `b~b1~ = (81, 75 * 1) = (81, 75)`
 * the encrypted sum for the first candidate is: `c~1~ = b~a1~ * b~b1~ = (61 * 81, 69 * 75) = (19, 39)`
 * and once decrypted: `s~1~ = 39 * (19^x^)^-1^ = 39 * 69^-1^ = 39 * 76 = 75 = g^1^`
 * the sum of the votes for the first candidate is indeed `1`
 ====
+
 
 === Zero-knowledge proofs [[pok]]
 
@@ -186,44 +147,15 @@ Now that we know how the votes are kept private, the verifiability chain remains
 In general, a https://en.m.wikipedia.org/wiki/Zero-knowledge_proof[zero-knowledge proof] is a protocol where a prover P attempts to convince a verifier V that she holds a piece of information without revealing anything about it. A typical example is https://www.zkdocs.com/docs/zkdocs/zero-knowledge-protocols/schnorr/[Schorr's protocol], where P proves to V that she knows the discrete logarithm `x` such that `h = g^x^` (in modular arithmetic).
 
 .Schorr's protocol
-----
-+-----------------+                +-----------------+
-|     Prover      |                |    Verifier     |
-|                 |                |                 |
-| choose random r |                |                 |
-|     u = g^r     |       u        |                 |
-|                 | -------------> |                 |
-|                 |                | choose random c |
-|                 |       c        |                 |
-|                 | <------------- |                 |
-|  z = r + x * c  |                |                 |
-|                 |       z        |                 |
-|                 | -------------> |                 |
-|                 |                |    check if     |
-|                 |                |  g^z = u * h^c  |
-+-----------------+                +-----------------+
-----
+image::shorr.png[Shorr, width=480]
+
 P first choose a random value `r` and commits to it by sending `u = g^r^`. Next, V choose a random challenge `c` and sends it back. Lastly, P sends `z` such that `g^z^ = u * h^c^` and the only value satisfying this equality is `z = r + x * c`. P can only calculate `z` knowing `x`, thus V deduces that with a very high probability P indeed knows `x` such that `h = g^x^`.
 It is possible to prove that the verifier, if she behaves honestly, does not gain any knowledge in the process. See this https://blog.cryptographyengineering.com/2017/01/21/zero-knowledge-proofs-an-illustrated-primer-part-2/[blog post] for more insights.
 
 A proof of this kind can be made non-interactive by using a so called https://en.m.wikipedia.org/wiki/Fiat%E2%80%93Shamir_heuristic[Fiat-Shamir] transformation, which replaces the challenge sent by V with the hash of a public value. A https://en.wikipedia.org/wiki/Cryptographic_hash_function[hash function] is very hard to inverse, which means that a challenge chosen by hashing some value is hard to pre-calculate and can be considered random. In the case of Schorr's protocol, P can hash `g`, `h` and `u` to form the following non-interactive protocol.
 
-----
-+-----------------+                +-----------------+
-|     Prover      |                |    Verifier     |
-|                 |                |                 |
-| choose random r |                |                 |
-|  u = g^r        |                |                 |
-|  c = H(g, h, u) |                |                 |
-|  z = r + x * c  |                |                 |
-|                 |     u, c, z    |                 |
-|                 | -------------> |                 |
-|                 |                |    check if     |
-|                 |                |  c = H(g, h, u) |
-|                 |                |      and        |
-|                 |                |  g^z = u * h^c  |
-+-----------------+                +-----------------+
-----
+
+image::fiatshamir.png[Fiat-Shamir, width=480]
 
 ==== Application in Helios
 In Helios, a zero-knowledge proof is used by each voter to convince an observer that its ballot contains only encryptions of 0 or 1. The statement that has to be proven is that either `log~g~(g^r^) = log~h~(h^r^*g^m^)` or `log~g~(g^r^) = log~h~(h^r^*g^m^)/g^m^` holds, respectively that either `m = 0` or `m = 1`.
@@ -233,7 +165,7 @@ Another zero-knowledge proof attests that the voting result is decrypted correct
 === Attack on ballot privacy [[attack]]
 As explained in <<Bernhard2012>>, ElGamal as well as the Fiat-Shamir transformation used in Helios are https://en.m.wikipedia.org/wiki/Malleability_(cryptography)[malleable], which means that a ballot can be duplicated by re-randomization. An attacker can thus create a valid ballot containing the same vote as an existing one found on the public bulletin board.
 
-For example, given the first part of Alice's ballot `b~a1~ = (g^r^, h^r^ * g^1^) = (61, 69)`, anyone knowing the public key can generate a new valid ciphertext by adding a factor to the ephemeral key. Let `u = 2`, then `b~a1~' = (61 * g~u~, 69 * h~u~) = (83, 102)`. This new ballot is equivalent to `(g^r+u^, h^r+u^ * g^1^)` and is thus a valid encryption of `1`.
+For example, given the first part of Alice's ballot `b~a1~ = (g^r^, h^r^ * g^1^) = (61, 69)`, anyone knowing the public key can generate a new valid ciphertext by adding a factor to the ephemeral key. Let `u = 2`, then `b~a1~' = (61 * g^u^, 69 * h^u^) = (83, 102)`. This new ballot is equivalent to `(g^r+u^, h^r+u^ * g^1^)` and is thus a valid encryption of `1` with randomness `r' = r + u`.
 
 A possible consequence is that some malicious voters can collude against another one by duplicating its vote, which allows them to gain some information about it if they are numerous enough. In the extreme case, half of the voters could be malicious and the vote of their target could be determined with certainty by looking at the result of the voting process. Although the gravity of the breach might seem low since a high proportion of the voters have to be corrupted to lead to an actual leak, it shows that ballot privacy does not hold in certain cases and confirms the need for proofs of privacy under well defined conditions.
 
