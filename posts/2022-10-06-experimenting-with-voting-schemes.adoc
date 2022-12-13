@@ -32,7 +32,8 @@ We will see how this can be achieved in the next section.
 
 In order to limit the scope of this post, we do not worry about the eligibility of the voters. In other words, we assume that another system checks whether a vote comes from a legitimate voter or not.
 But this does not prevent legitimate voters from colluding and potentially learning private information, as we will see <<attack, later>>. 
-Another assumption we make is the existence of an honest bulletin board, which is some sort of public database trusted to display everything that has been written on it.
+Another assumption we make is the existence of an honest bulletin board, which is some sort of public database trusted to display everything that has been written on it. 
+Lastly, we want to focus on verifiability and simplify the system presented in the following section by considering a single organizer; in the original scheme multiple organizers perform decentralized decryption to avoid a single point of trust, and for example to prevent an organizer from revealing the content of a ballot.
 
 == Helios
 
@@ -41,7 +42,7 @@ It did not introduce novel techniques or constructions but Helios was the first 
 We begin by examining the verifiability property and how it motivates the design of this system.
 
 === What can be verified?
-Let us start by giving more precisions about what we mean by __verifiability__. 
+Let us start by being more precise on what we mean by __verifiability__.
 The main objective of this property is for an external verifier (not in possession of any secret key) to be able to distinguish whether the result of the vote is indeed the sum of the individual ballots cast by the voters. 
 This is achieved in Helios by displaying the ballots and the result on a public bulletin board; using a <<encryption, special type of encryption>>, both of these data structures stay hidden while a verifier can still sum the ballots and check that the result is correct. 
 
@@ -63,6 +64,34 @@ In this part we describe the participants of the voting process and which algori
 
 ==== Participants
 As mentioned earlier, three kinds of participants have a role in this voting process. First comes the __organizer__, who takes care of generating the necessary encryption/decryption keys at the beginning and reveals the voting result at the end. The organizer has to be trusted to not share his part of the key. Second are the _voters_ who, as their name suggests it, vote and cast an encrypted ballot. Lastly come the _verifiers_, who check the steps of the verifiability chain to make sure of the integrity of the process. Anyone, voter or external, can act as a verifier.
+
+.Overview of the participants and the data they have access to
+[cols="1,2a,2a"]
+|===
+| Participant | Data | Role
+
+| organizer
+| secret key +
+public key +
+ballots
+| generate keys, tally ballots and provide a proof that the result is the decryption of the combined ballots
+
+| voter
+| public key
+| build a ballot and publish it with a proof of its validity
+
+| verifier
+|
+public key +
+ballots with their proofs of validity +
+result with its proof
+| verify that:
+
+* all ballots have a valid proof
+* the proof of the result attest that it come from the combined ballots
+|===
+
+
 
 ==== Algorithms
 The Helios voting scheme is composed of five algorithms run by the organizer and the voters.
@@ -120,7 +149,7 @@ As mentioned before, two ciphertexts can be combined homomorphically to form an 
 
 ==== Example
 
-In the following example we examine the encryption, combination and decryption of Alice's and Bob's votes using ElGamal encryption. This illustrates how the ballots are encrypted in practice and should give a more concrete intuition of how the votes stay private. Additionally, https://scastie.scala-lang.org/agoetschm/dL0eFJasTnyauCR1MXZadg/70[this code snippet] allows you interactively run the computation of the example.
+In the following example we examine the encryption, combination and decryption of Alice's and Bob's votes using ElGamal encryption. This illustrates how the ballots are encrypted in practice and should give a more concrete intuition of how the votes stay private. Additionally, https://scastie.scala-lang.org/agoetschm/dL0eFJasTnyauCR1MXZadg/71[this code snippet] allows you interactively run the computation of the example.
 
 .Details of Alice's and Bob's encrypted ballots
 [%collapsible]
