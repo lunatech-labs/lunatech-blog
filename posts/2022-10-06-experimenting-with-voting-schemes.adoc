@@ -88,7 +88,7 @@ result with its proof
 | verify that:
 
 * all ballots have a valid proof
-* the proof of the result attest that it come from the combined ballots
+* the proof of the result attests that it come from the combined ballots
 |===
 
 
