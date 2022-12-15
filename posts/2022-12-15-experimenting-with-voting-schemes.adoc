@@ -1,8 +1,8 @@
 = Introduction to e-voting schemes
 agoetschm
-v1.0, 2022-10-06
+v1.0, 2022-12-15
 :title: Introduction to e-voting schemes
-:imagesdir: ../media/2022-10-06-experimenting-with-voting-schemes
+:imagesdir: ../media/2022-12-15-experimenting-with-voting-schemes
 :lang: en
 :tags: [voting, crypto, zero-knowledge, en]
 
