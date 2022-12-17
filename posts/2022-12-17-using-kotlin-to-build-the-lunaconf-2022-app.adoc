@@ -1,0 +1,75 @@
+= Using Kotlin to build the Lunaconf 2022 App
+shabab477
+v1.0, 2022-12-16
+:title: Using Kotlin to build the Lunaconf 2022 App
+:imagesdir: ../media/2022-12-17-using-kotlin-to-build-the-lunaconf-2022-app
+:lang: en
+:tags: [kotlin, android, jetpack, en]
+
+At Lunatech Labs we have a wide variety of https://github.com/orgs/lunatech-labs/repositories[internal projects for our employees to contribute to]. This helps us to experiment with 
+different technologies and also build internal products for our organization. This year we decided to build an Android
+app for viewing schedules of the talks during the Lunaconf-2022 event.
+
+== Understanding what we are going to build
+
+https://www.youtube.com/watch?v=-DBmyEnMWew[Lunaconf] is an annual tech conference hosted by Lunatech Labs. Because we like to build/break stuff, we decided why not 
+create our app for the event. From preliminary talks with the product stakeholders, we understood that the app users
+should be able to view the event schedule, the speakers, and the topic. The app should also help identify different 
+rooms in the office.
+
+== Ok, so how did we build it?
+
+We know we are building an Android app. From here, we can go in two directions. 
+
+ . Use cross-platform frameworks: Work with Flutter, React Native, or Ionic
+ . Use native frameworks: Work with Java or Kotlin
+
+We considered building the app to be cross-platform. Flutter would be great for that. However, Flutter would require us 
+to learn [Dartlang](https://dart.dev/). Since the team responsible mainly consists of Java/Scala engineers, something like Kotlin would be perfect for us. 
+Also, developing the app with Kotlin doesn't necessarily mean we are not doing cross-platform. 
+With https://kotlinlang.org/lp/mobile/[Kotlin-Multiplatform], we can easily port our app to support other platforms in later iterations. 
+So we decided going native for the first iteration is the best solution for us.
+
+Now the question is whether we want to build our apps with Kotlin or Java. Java has been the primary language for Android development for a while, and at Lunatech
+we have experienced people working with Java/Scala, however, the newer Android features/libraries releases have first-class support for Kotlin in mind. 
+That means Java will not allow us to use Jetpack compose, a component-based UI building framework in Kotlin for Android and variety of other tooling that 
+the Android team created with Kotlin. Also, Kotlin's null safety will force us to avoid code that can 
+cause NPE, usually riddled in an Android app built with Java. After a few days of back and forth between 
+team members we decided we are going Native Android development with Kotlin and Jetpack Compose.
+
+== What we loved
+ . Jetpack Compose: Jetpack-Compose allowed individual team members to write components without someone creating the master screen first. That allowed team members to divide parts of the UI and work independently.
+ . Less code: We loved how little code we had to write to implement features. Those who implemented a https://stackoverflow.com/a/54655654/5223309[RecyclerView with a ViewModel] can relate to writing at least 100 lines of boilerplate code for that. With Jetpack Compose-s https://github.com/Foso/Jetpack-Compose-Playground/blob/master/app/src/main/java/de/jensklingenberg/jetpackcomposeplayground/mysamples/github/foundation/LazyColumnDemo.kt[LazyColumn], it requires only a few lines to create a list of items.
+ . Extension functions: If we need a function that creates String to date, we can create an https://kotlinlang.org/docs/extensions.html[extension function] on java.lang.String to convert a String to a Date object. This was useful to create utility functions on objects.
+ . Flows and Streams: We loved first-class support for https://kotlinlang.org/docs/flow.html[Flows and Streams] in Kotlin. It was exceptional how easy it was to define data flows from an HTTP request or query an internal SQLite database.
+ . Co-routines: https://developer.android.com/kotlin/coroutines[Co-routines] support was helpful for us to switch between the UI thread and the IO thread. Android requires the UI thread to be non-blocking. In most cases, we need to perform a network request and, based on the response payload do something on UI. That was easy to do with Kotlin. 
+ We need to be able to switch between the UI and IO contexts and be extra careful while doing so. With Java, we need to write a lot more code to switch contexts between UI and IO threads.
+ . Null Safety: Kotlin's https://kotlinlang.org/docs/null-safety.html[Null Safety] is another helpful feature of the language that we loved. The most common use case for causing an NPE in Android apps is when the app goes to the background right before a network request handler draws something to the UI. With Kotlin, it was easy for us to write code that avoided these caveats. That was a massive achievement.
+
+== What we didn't love
+. Same problems of component-based UI systems: We inherited all the relevant problems of using component-based UI frameworks/libraries like React/Flutter/Ionic when we decided to use Jetpack-Compose. We struggled with https://www.educative.io/answers/what-is-prop-drilling-in-react[prop drilling issues]. React solves the prop-drilling with the Context API, whereas Flutter has the Provider API, but Jetpack compose has nothing yet because it is so new. The only recommended way to solve it is by using a DI engine like HILT.
+. Experimental API: Since Jetpack-Compose is so new, a lot of the APIs we were using were https://stackoverflow.com/questions/71069737/this-material-api-is-experimental-and-is-likely-to-change-or-to-be-removed-in-th[experimental] and subject to change. That didn't boost our confidence in the code we were writing.
+. Navigation: Navigation was another problem we faced because Jetpack compose is a new framework. React solved it using the React Router; Flutter has a go_router package; but for Jetpack-Compose we had to write some custom code for maintaining the Navigation back stack.
+
+== What are the plans for Lunaconf-2023?
+
+Improvements to the Lunaconf app are an ongoing process. Lunaconf-2022 provided the opportunity to speak to the app users and talk about what they liked and what they would love to have for the app. Here's what we gathered:
+
+- Users would love to have a centralized source of truth for when and where talks are taking place during the event. The event schedule and the room where its taking place is very dynamic 
+and the users would like to have a real-time update on the changes.
+- They would love to support the presenters during their talks, sharing `heart` reactions to their topics.
+- Users would like the app to work in an offline first mode because if there is any disruption in the internet connectivity, they would not be able to see the event schedules.
+
+We are taking all this feedback into account. Currently, we are looking for volunteers inside the Lunatech who would help 
+build the CMS for the Lunaconf event. We are also working on the code cleanup process for newer features to be implemented as fast as possible.
+
+Lastly, I would like to thank https://github.com/kry00la[Leonardo], https://github.com/thinkmorestupidless[Trevor], 
+https://github.com/riiswa[Waris] and https://github.com/abensoussan[Alexandre], the incredible people who contributed to the project during Lunaconf-2022 
+and got features implemented in such a short time, all the while working full time on client projects. https://github.com/m-arlaud[Malcolm] for providing
+the figma designs for the app, and https://tr.linkedin.com/in/sheldon-knaggs[Sheldon] for managing the product so well. Special thanks
+to the Lunaconf attendees who provided us with valuable feedback.
+
+
+[bibliography]
+== References
+Image for background collected from https://9to5google.com/2022/10/24/jetpack-compose-material-you/[9to5google.com]
