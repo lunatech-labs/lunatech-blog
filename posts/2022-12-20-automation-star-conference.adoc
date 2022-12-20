@@ -17,13 +17,13 @@ Conference was focused mainly on test automation which covered a variety of diff
 
 == Things before the Conference
 
-One week before the conference an email was sent to all the attendees which has the instructions about the conference. The email also contained the link for the https://whova.com/portal/autom1_202210/?source=download_page/[whova app] where attendees can get live updates and chat with others. After registering on the app, all the information about the sessions and the speakers were available. Attendees can also initiate the discussion and can contact others like the ice breaking sessions. One interesting thing about the app was the Photo competition, where participants can post the conference pictures and picture with the maximum likes will receive the price.
+One week before the conference an email was sent to all the attendees which has the instructions about the conference. The email also contained the link for the https://whova.com/portal/autom1_202210/?source=download_page/[whova app] where attendees can get live updates and chat with others. After registering on the app, all the information about the sessions and the speakers were available. Attendees can also initiate the discussion and can contact others like the ice breaking sessions. One interesting thing about the app was the Photo competition, where participants can post the conference pictures and picture with the maximum likes will receive a prize.
 
 == Conference Program
 
 The https://automation.eurostarsoftwaretesting.com/conference/2022/programme/[conference program] included two days of Tutorials, keynotes, and talks led by experts from around the testing world. It also included exclusive networking and social events like lean coffee and Community Conversations. Prior to the conference, attendees have the option to choose the Tutorials and the sessions in the Whova App and from the app they can also download the slides for the presentations. The tutorials and talks were in German and English so attendees can select according to their preferred language. The tutorials were scheduled for half day and the talks were for forty-five minutes.
 
-== Begins the Conference
+== The Conference Begins
 
 The first day of the conference started with the Badge and goodies collection and morning coffee. Then attendees were directed to their selected tutorials which were scheduled for half day. Second half of the first day and the second day of the conference was the combination of Keynotes and talks. All attendees get to choose between different talks happening at the same time in separate conference rooms. At a time participants can attend one out of five talks.
 
