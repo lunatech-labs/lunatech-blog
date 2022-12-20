@@ -52,12 +52,12 @@ Pain of browser automation was explained in a very cool way by *Jecelyn Yeen*. S
 
 If usability testing is part of the project then there are more chances of developing a successful product. *Kimberly Snoyl* has delivered the talk focusing on the importance of UX testing, because sometimes products are not user-friendly and users get frustrated easily while using it. To make processes simpler and better for the users, Kimberly is exploring the idea to create a tool which can automate some of the following 10 Usability Heuristics:
 
-.Figure 1: Usability Heuristics
+. Usability Heuristics
 image::how _to_test_ux.png[alt="Figure 1: Usability Heuristics"]
 
 Her idea for creating a UX Automation tool won the EuroSTAR 2022 RisingSTAR award, because it solved the major problems in UX Testing, which are also listed below:
 
-.Figure 2: How bottlenecks in UX can be solved by Automatic Usability Testing
+. How bottlenecks in UX can be solved by Automatic Usability Testing
 image::automatic_usability_testing.png[alt="Figure 2: How bottlenecks in UX can be solved by Automatic Usability Testing"]
 
 === 4. Test Automation: How to Start and Succeed
@@ -76,7 +76,7 @@ First step of this process is to set the *good objectives* for the test automati
 
 After setting the objectives, next step is to understand the difference between the responsibilities for the Automation Tasks. Chris explained this by differentiating between the Testers and Automator's which is reflected in the following image:
 
-.Figure 3: Responsibilities of Automators and Testers
+. Responsibilities of Automators and Testers
 image::testers_and_automators_responsibility.png[alt="Figure 3: Responsibilities of Automators and Testers"]
 
 It would be difficult, almost impossible, for me to summarize the whole experience in just a few lines. Still I would outline few important takeaways:
@@ -90,7 +90,7 @@ It would be difficult, almost impossible, for me to summarize the whole experien
 
 QA Engineers often face the situation where one of the obvious bug is missed and that’s only because of the Cognitive Biases that influence the entire thought process. On the basis of this bias automation engineers also encode some of these biases into the automation test suite, which can lead to very bad outcomes for software. *Dermot Canniffe* explained these common biases that affect the process include:
 
-.Figure 4: Automation Biases
+. Automation Biases
 image::automation_bias.png[alt="Figure 4: Automation Biases"]
 
 We can resolve these biases by adopting three basic strategies which include:
@@ -109,7 +109,7 @@ In the last keynote, *Jenny Bramble* shared her own personal principles of testi
 
 Jenny also explained the Automation Testing principles, summary of which is explained in the picture:
 
-.Figure 5: Jenny's Principles of Testing
+. Jenny's Principles of Testing
 image::principles_of_testing.png[alt="Figure 5: Jenny's Principles of Testing"]
 
 ++++
@@ -122,7 +122,7 @@ Apart from the Keynotes and sessions, this conference has the *EXPO area* for th
 
 One highlight of the event was the *_Black Box Challenge_* by https://www.testresults.io/[TestResults.io], every participant who took the challenge was given 5 minutes to enter the black box and solve the puzzle. Rule of this challenge is that no one was allowed to tell what’s inside the box. Fun part was that everyone came out of the box with a very wide smile.
 
-.Figure 6: Participants who took the Black Box Challenge, you can spot me and Milan in polaroids
+. Participants who took the Black Box Challenge, you can spot me and Milan in polaroids
 image::black_box_challenge.JPG[alt="Figure 6: Participants who took the Black Box Challenge, you can spot me and Milan in polaroids"]
 
 The conference came to an end after two days of great learning and networking session. I truly enjoyed every single moment of the conference because it was my first Automation Star Conference and an amazing learning opportunity. The event was very well organised with everything being done on time and volunteers and organisers have put so much energy to make the event a great success.
