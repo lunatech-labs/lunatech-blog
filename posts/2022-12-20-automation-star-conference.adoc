@@ -2,14 +2,17 @@
 TehreemFatima07
 v1.0, 2022-12-06
 :title: AutomationSTAR 2022 Conference
-:imagesdir: ../media/2022-12-06-automation-star-conference
+:imagesdir: ../media/2022-12-20-automation-star-conference
 :lang: en
 :tags: [conference, automation testing]
 
+
 October 17 and 18 were the days for the Europe’s largest testing conference, https://automation.eurostarsoftwaretesting.com/[Automation STAR 2022]. About 100 passionate software testers gathered together in https://www.hilton.com/en/hotels/muchitw-hilton-munich-park/[Hilton Munich Park], for making automation testing experiences better.
+
 ++++
 </br>
 ++++
+
 Conference was focused mainly on test automation which covered a variety of different topics such as event driven test automation, cypress, test automation frameworks, strategy, functional testing, codeless test automation and soft skills of automation.
 
 == Things before the Conference
@@ -49,18 +52,20 @@ Pain of browser automation was explained in a very coolest way by *Jecelyn Yeen*
 
 If usability testing is part of the project then there are more chances of developing successful product. *Kimberly Snoyl* has delivered the talk focusing on the importance of UX testing, because sometimes the products are not user-friendly and users get frustrated easily while using it. To make processes simpler and better for the users, Kimberly is exploring the idea to create a tool which can automate some of the following 10 Usability Heuristics:
 
-image::../media/2022-12-06-automation-star-conference/how to test UX.png[alt="Figure 1: Usability Heuristics"]
+image::../how _to_test_ux.png[alt="Figure 1: Usability Heuristics"]
 
 Her idea for creating a UX Automation tool won the EuroSTAR 2022 RisingSTAR award, because it solved the major problems in UX Testing, which are also listed below:
 
-image::../media/2022-12-06-automation-star-conference/Automatic Usability Testing.png[alt="Figure 2: How bottlenecks in UX can be solved by Automatic Usability Testing"]
+image::../automatic_usability_testing.png[alt="Figure 2: How bottlenecks in UX can be solved by Automatic Usability Testing"]
 
 === 4. Test Automation: How to Start and Succeed
 
 An important subject of starting and succeeding the Test Automation process was explained by *Chris Loader* in a very effective way and this talk was one of the standouts for me at the conference. Because test automation requires much of the mental work and it feels quite overwhelming in the start.
+
 ++++
 </br>
 ++++
+
 First step of this process is to set the *good objectives* for the test automation which includes:
 
 - Reduce test execution time
@@ -69,20 +74,20 @@ First step of this process is to set the *good objectives* for the test automati
 
 After setting the objectives, next step is to understand the difference between the responsibilities for the Automation Tasks. Chris explained this by differentiating between the Testers and Automator's which is reflected in the following image:
 
-image::../media/2022-12-06-automation-star-conference/Testers and Automators responsibility.png[alt="Figure 3: Responsibilities of Automators and Testers"]
+image::../testers_and_automators_responsibility.png[alt="Figure 3: Responsibilities of Automators and Testers"]
 
 It would be difficult, almost impossible, for me to summarize the whole experience in just a few lines. Still I would outline few important takeaways:
 
-- Start automating with the Pilot project having realistic expectations, because its the easiest way to gain confidence with the automation test suite setup
-- Be selective in automating the tests because not everything can be automated
-- In an Agile Environment support both manual and automated tests
-- You are never finished with automation, review and refactor your code regularly for making product more mature. Change tools, hardware when needed and keep a strict eye on the automation “health”.
+* Start automating with the Pilot project having realistic expectations, because its the easiest way to gain confidence with the automation test suite setup
+* Be selective in automating the tests because not everything can be automated
+* In an Agile Environment support both manual and automated tests
+* You are never finished with automation, review and refactor your code regularly for making product more mature. Change tools, hardware when needed and keep a strict eye on the automation “health”.
 
 === 5. Automating Bias
 
 QA Engineers often face the situation where one of the obvious bug is missed and that’s only because of the Cognitive Biases that influence the entire thought process. On the basis of this bias automation engineers also encode some of these biases into the automation test suite, which can lead to very bad outcomes for software. *Dermot Canniffe* explained these common biases that affect the process include:
 
-image::../media/2022-12-06-automation-star-conference/Automation bias.png[alt="Figure 4: Automation Biases"]
+image::../automation_bias.png[alt="Figure 4: Automation Biases"]
 
 We can resolve these biases by adopting three basic strategies which include:
 
@@ -93,12 +98,15 @@ We can resolve these biases by adopting three basic strategies which include:
 === 6. Your Principles of Testing
 
 In the last keynote, *Jenny Bramble* shared her own personal principles of testing. Key takeaway from this session is that having a roadmap and set of principles for ourselves will make us more proactive. Testing principles help us in taking the decisions, be it from choosing what falls into regression, to what gets automated, and even who to send invite to join the team.
+
 ++++
 </br>
 ++++
+
 Jenny also explained the Automation Testing principles, summary of which is explained in the picture:
 
-image::../media/2022-12-06-automation-star-conference/Principles of Testing.png[alt="Figure 5: Jenny's Principles of Testing"]
+image::../principles_of_testing.png[alt="Figure 5: Jenny's Principles of Testing"]
+
 ++++
 </br>
 ++++
@@ -106,14 +114,16 @@ Apart from the Keynotes and sessions, this conference has the *EXPO area* for th
 ++++
 </br>
 ++++
+
 One highlight of the event was the *_Black Box Challenge_* by https://www.testresults.io/[TestResults.io], every participant who took the challenge was given 5 minutes to enter the black box and solve the puzzle. Rule of this challenge is that no one was allowed to tell what’s inside the box. Fun part was that everyone came out of the box with a very wide smile.
 
-image::../media/2022-12-06-automation-star-conference/Black Box challenge.JPG[alt="Figure 6: Participants who took the Black Box Challenge "]
+image::../black_box_challenge.JPG[alt="Figure 6: Participants who took the Black Box Challenge "]
 
 The conference came to an end after two days of great learning and networking session. I truly enjoyed every single moment of the conference because it was my first Automation Star Conference and an amazing learning opportunity. The event was very well organised with everything being done on time and volunteers and organisers have put so much energy to make the event a great success.
 ++++
 </br>
 ++++
+
 I can’t wait to join another edition of the AutomationSTAR conference, next one will be in 2023 and you can https://automation.eurostarsoftwaretesting.com/newsletter-sign-up/[register your interests] for the next conference. Call for Speakers will open in January 2023, so stay tuned.
 
 == Key Takeaways from the Conference for Lunatech
