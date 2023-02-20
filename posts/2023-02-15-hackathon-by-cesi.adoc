@@ -6,7 +6,7 @@ v1.0, 2023-02-15
 :tags: [hackathon, event, CESI, en]
 
 
-On the 28th of January 2023, the https://www.cesi.fr/[CESI engineering school] in La Rochelle hosted a hackathon with an apocalyptic theme. 25 participants gathered in teams of five to come up with innovative solutions to deal with an emergency situation. As with any event, it was essential for us to find sponsors to ensure that the event would be successful. We naturally thought Lunatech would be a good fit for us. They kindly agreed to finance the staff's hoodies and to send goodies for all of the participants.
+On the 28th of January 2023, the [CESI engineering school](https://www.cesi.fr/) in La Rochelle hosted a hackathon with an apocalyptic theme. 25 participants gathered in teams of five to come up with innovative solutions to deal with an emergency situation. As with any event, it was essential for us to find sponsors to ensure that the event would be successful. We naturally thought Lunatech would be a good fit for us. They kindly agreed to finance the staff's hoodies and to send goodies for all of the participants.
 
 image::../media/2023-02-15-hackathon-by-cesi/staff.jpeg[Staff,640,480]
 
