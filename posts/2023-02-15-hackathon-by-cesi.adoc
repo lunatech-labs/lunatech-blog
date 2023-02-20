@@ -6,9 +6,14 @@ v1.0, 2023-02-15
 :tags: [hackathon, event, CESI, en]
 
 
-On the 28th of January 2023, the [CESI engineering school](https://www.cesi.fr/) in La Rochelle hosted a hackathon with an apocalyptic theme. 25 participants gathered in teams of five to come up with innovative solutions to deal with an emergency situation. As with any event, it was essential for us to find sponsors to ensure that the event would be successful. We naturally thought Lunatech would be a good fit for us. They kindly agreed to finance the staff's hoodies and to send goodies for all of the participants.
+On the 28th of January 2023, the https://www.cesi.fr/[CESI engineering school] in La Rochelle hosted a hackathon with an apocalyptic theme. 25 participants gathered in teams of five to come up with innovative solutions to deal with an emergency situation. As with any event, it was essential for us to find sponsors to ensure that the event would be successful. We naturally thought Lunatech would be a good fit for us. They kindly agreed to finance the staff's hoodies and to send goodies for all of the participants.
 
 image::../media/2023-02-15-hackathon-by-cesi/staff.jpeg[Staff,640,480]
+
+
+The hackathon was divided in many parts, like brainstorming sessions, conferences, final presentation... The scheldule of this event was: 
+
+image::../media/2023-02-15-hackathon-by-cesi/scheldule.jpeg[Scheldule,480,520]
 
 The hackathon started with a presentation of the apocalyptic scenario: 
 
@@ -18,9 +23,9 @@ We need your help to find ways to protect the people and property of our city. Y
 We are counting on your ingenuity and determination to save our city. Good luck to you all!"
 
 The presentation was followed by a brainstorming session to generate ideas. In order to help participants in their search for ideas, different techniques were used such as the https://en.wikipedia.org/wiki/World_caf%C3%A9_(conversation)[World Cafe]. 
-This technique is great for brainstorming with an important number of groups, it goes as follows: each team has Post-it (a lot of them), a surface to stick them on and pens. During 5 minutes, each team put forth as many ideas as possible. The rule is quantity over quality. After 5 minutes, each team will go to the next team board, one member will stay to explain the idea to the other team. We can now repeat the first step for 5 minutes. The World Café allows each team to visit at least two different boards.
+This a great brainstorming technique for large groups, it goes as follows: each team has Post-it (a lot of them), a surface to stick them on and pens. During 5 minutes, each team put forth as many ideas as possible. The rule is quantity over quality. After 5 minutes, each team will go to the next team's board, one member will stay to explain the idea to the other team. We can now repeat the first step for 5 minutes. This technique allows each team to visit at least two different boards.
 
-Participants had the chance to attend three exciting conferences on the topics of "Low Tech", "Women in Engineering" and the "Engineer of the Future" during the morning. The objective was to encourage participants to integrate or build on these topics in the research and development of their ideas. The conferences brought a new perspective to the participants on the current and future challenges of engineering. "Low Tech" was presented as a creative and sustainable alternative to high-tech technologies for dealing with emergency situations. The place of women in engineering was discussed, highlighting the importance of diversity in engineering in order not to deprive ourselves of any skills and to build an inclusive as well as equitable solution. The "Engineer of the Future" was presented as being more ethical, sustainable and aware of the consequences of their actions.
+During the morning of the hackaton the participants had the chance to attend three exciting conferences on the topics of "Low Tech", "Women in Engineering" and the "Engineer of the Future". The objective was to encourage participants to integrate or build on these topics in the research and development of their ideas. The conferences brought a new perspective to the participants on the current and future challenges of engineering. "Low Tech" was presented as a creative and sustainable alternative to high-tech technologies for dealing with emergency situations. The place of women in engineering was discussed, highlighting the importance of diversity in engineering in order not to deprive ourselves of any skills, and to build an inclusive as well as equitable solution. The "Engineer of the Future" was presented as being more ethical, sustainable, and aware of the consequences of their actions.
 
 image::../media/2023-02-15-hackathon-by-cesi/conf.jpeg[Conference,640,480]
 
@@ -30,7 +35,7 @@ Lunch break was a key moment of the hackathon, as participants were able to disc
 
 image::../media/2023-02-15-hackathon-by-cesi/caterer.jpeg[Caterer,640,480]
 
-The teams then went back to work on developing their ideas and transform them into a real innovative concepts. The afternoon was also dedicated to the preparation of the final presentation during which the different teams had to face a jury in charge of establishing the ranking and an audience composed of all the coaches and parents.
+The teams then went back to work on developing their ideas and transform them into a real innovative concepts. The afternoon was also dedicated to prepare the final presentation during which the different teams had to face a jury in charge of ranking and an audience composed of all the coaches and parents.
 
 image::../media/2023-02-15-hackathon-by-cesi/public.jpeg[Public,640,480]
 
@@ -39,7 +44,7 @@ The day ended with a prize-giving ceremony. The first team was awarded airpods, 
 
 image::../media/2023-02-15-hackathon-by-cesi/winners.jpeg[Winners,640,480]
 
-The apocalyptic hackathon in La Rochelle was an exciting event for participants, who had the opportunity to develop their brainstorming skills and apply their creativity to challenging situations. The ideas presented how innovation and equity can help prepare communities to face emergency situations while preserving the environment and promoting social justice.
+The apocalyptic hackathon in La Rochelle was an exciting event, we had the opportunity to develop our brainstorming skills and apply our creativity to challenging situations. The ideas presented how innovation and equity can help prepare communities to face emergency situations while preserving the environment and promoting social justice.
 
 image::../media/2023-02-15-hackathon-by-cesi/final.jpeg[Final,480,680]
 
