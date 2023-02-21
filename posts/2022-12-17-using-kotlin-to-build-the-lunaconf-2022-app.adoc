@@ -63,7 +63,7 @@ and the users would like to have a real-time update on the changes.
 We are taking all this feedback into account. Currently, we are looking for volunteers inside the Lunatech who would help 
 build the CMS for the Lunaconf event. We are also working on the code cleanup process for newer features to be implemented as fast as possible.
 
-Lastly, I would like to thank https://github.com/kry00la[Leonardo], https://github.com/thinkmorestupidless[Trevor], 
+Lastly, I would like to thank https://github.com/kry00la[Leonardo], https://github.com/TehreemFatima07[Tehreem], https://github.com/thinkmorestupidless[Trevor], 
 https://github.com/riiswa[Waris] and https://github.com/abensoussan[Alexandre], the incredible people who contributed to the project during Lunaconf-2022 
 and got features implemented in such a short time, all the while working full time on client projects. https://github.com/m-arlaud[Malcolm] for providing
 the figma designs for the app, and https://tr.linkedin.com/in/sheldon-knaggs[Sheldon] for managing the product so well. Special thanks
