@@ -10,12 +10,12 @@ v1.0, 2023-02-15
 
 On the 28th of January 2023, the https://www.cesi.fr/[CESI engineering school] in La Rochelle hosted a hackathon with an apocalyptic theme. 25 participants gathered in teams of five to come up with innovative solutions to deal with an emergency situation. As with any event, it was essential for us to find sponsors to ensure that the event would be successful. We naturally thought Lunatech would be a good fit for us. They kindly agreed to finance the staff's hoodies and to send goodies for all of the participants.
 
-image::2023-02-15-hackathon-by-cesi/staff.jpeg[Staff,640,480]
+image::staff.jpeg[Staff,640,480]
 
 
 The hackathon was divided in many parts, like brainstorming sessions, conferences, final presentation... The scheldule of this event was: 
 
-image::2023-02-15-hackathon-by-cesi/scheldule.jpeg[Scheldule,480,520]
+image::scheldule.jpeg[Scheldule,480,520]
 
 The hackathon started with a presentation of the apocalyptic scenario: 
 
@@ -33,7 +33,7 @@ This a great brainstorming technique for large groups, it goes as follows: each 
 
 During the morning of the hackaton the participants had the chance to attend three exciting conferences on the topics of "Low Tech", "Women in Engineering" and the "Engineer of the Future". The objective was to encourage participants to integrate or build on these topics in the research and development of their ideas. The conferences brought a new perspective to the participants on the current and future challenges of engineering. "Low Tech" was presented as a creative and sustainable alternative to high-tech technologies for dealing with emergency situations. The place of women in engineering was discussed, highlighting the importance of diversity in engineering in order not to deprive ourselves of any skills, and to build an inclusive as well as equitable solution. The "Engineer of the Future" was presented as being more ethical, sustainable, and aware of the consequences of their actions.
 
-image::2023-02-15-hackathon-by-cesi/conf.jpeg[Conference,640,480]
+image::conf.jpeg[Conference,640,480]
 
 == Lunch Break
 
@@ -41,24 +41,24 @@ At around noon we stopped for lunch break and we were catered with a variety of 
 
 Lunch break was a key moment of the hackathon, as participants were able to discuss and exchange ideas with their teammates. This strengthened their cohesion and collaboration, which contributed to the success of their projects.
 
-image::2023-02-15-hackathon-by-cesi/caterer.jpeg[Caterer,640,480]
+image::caterer.jpeg[Caterer,640,480]
 
 == Preparation of the Presentation
 
 The teams then went back to work on developing their ideas and transform them into a real innovative concepts. The afternoon was also dedicated to prepare the final presentation during which the different teams had to face a jury in charge of ranking and an audience composed of all the coaches and parents.
 
-image::2023-02-15-hackathon-by-cesi/public.jpeg[Public,640,480]
+image::public.jpeg[Public,640,480]
 
 == Rewards and Closing of the Event
 
 After a few minutes/half hour the jury announced the results of the hackathon. The first place team conceptualized a survival school to teach people the skills needed to cope with an apocalyptic situation. The second place team developed the idea of a virtual reality simulation to help people prepare mentally and physically for the apocalypse. And finally the team completing the podium made a self-sufficient dome system, which can provide food, water and energy for people in an emergency situation.
 The day ended with a prize-giving ceremony. The first team was awarded airpods, the second team received wireless speakers, the third team was given gift cards while the fourth and fifth team received chocolate sets made by a local company.
 
-image::2023-02-15-hackathon-by-cesi/winners.jpeg[Winners,640,480]
+image::winners.jpeg[Winners,640,480]
 
 The apocalyptic hackathon in La Rochelle was an exciting event, we had the opportunity to develop our brainstorming skills and apply our creativity to challenging situations. The ideas presented how innovation and equity can help prepare communities to face emergency situations while preserving the environment and promoting social justice.
 
-image::2023-02-15-hackathon-by-cesi/final.jpeg[Final,480,680]
+image::final.jpeg[Final,480,680]
 
 Thanks a lot to _Titouan Guiochet_ who wrote this article with me!
 
