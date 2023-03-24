@@ -38,7 +38,7 @@ kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/core-install.yaml
 ----
 
-We then need to create a kubernetes deployment and service file
+We then need to create a kubernetes deployment and service file and push it on out git repo
 
 Deployment File
 
@@ -49,18 +49,18 @@ Deployment File
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: natan-deployment
+  name: luna-deployment
   labels:
-    app: natan
+    app: luna
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: natan
+      app: luna
   template:
     metadata:
       labels:
-        app: natan
+        app: luna
     spec:
       containers:
       - name: spring-boot-app
@@ -87,16 +87,16 @@ spec:
     targetPort: 3000
     nodePort: 30004
   selector:
-    app: natan
+    app: luna
 ----
 
-We add Argo CD Application
+We then create Argo CD application file which points to the git repo we just created
 [source,yaml]
 ----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: my-app
+  name: luna-app
   namespace: argocd
 spec:
   project: default
@@ -115,7 +115,23 @@ spec:
       - CreateNamespace=true
 ----
 
-Argo CD also comes with A UI which makes it good to visualize deployment processes. It can be accessed locally by port forwarding.
+We can apply this using
+[source,bash]
+----
+kubectl apply -n argocd -f application.yaml
+----
+
+We just need to verify the created kubernetes resource using kubectl get pods command and using kubectl get svc to check the services created.
+
+For fetching the minikube IP and a service’s Node port we can use:
+
+[source,bash]
+----
+minikube service my-app-service --url
+----
+
+
+At last Argo CD also comes with A UI which makes it good to visualize deployment processes. It can be accessed locally by port forwarding.
 To access the admin UI, we can
 [start=1]
 . First we get the decoded password using:
@@ -126,12 +142,7 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 image::diagram1.png[Argo CD admin ui, width=750]
 
 
-At last if we just need to verify the created kubernetes resource using kubectl get pods command and using kubectl get svc to check the services created. For fetching the minikube IP and a service’s Node port.
 
-[source,bash]
-----
-minikube service my-app-service --url
-----
 
 
 
