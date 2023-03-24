@@ -1,4 +1,4 @@
-= ArgoCD
+= Argo CD
 tesfayenati
 v1.0, 2023-24-03
 :title: Argo CD
