@@ -6,10 +6,12 @@ v1.0, 2023-03-24
 :lang: en
 :tags: [java, jpa, spring, data, specifications, dynamic query, en]
 
+
+image::spring_data_specification.jpg[Staff,640,480]
+
 == Introduction
 
 Java Persistance API alias JPA helps you to deal with your datas and in this post, we will see one of its aspect that will probably help you to have a clearer code when using filters in GET request in REST API for example.
-
 
 
 == The use case
