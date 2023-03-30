@@ -1,7 +1,7 @@
 = An intro to Argo CD
 tesfayenati
-v1.0, 2023-24-03
-:title: Argo CD
+v1.0, 2023-30-03
+:title: An intro to Argo CD
 :imagesdir: ../media/2023-03-24-argo-cd
 :lang: en
 :tags: [kubernetes, CI/CD, en]
