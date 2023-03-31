@@ -6,8 +6,6 @@ v1.0, 2023-03-30
 :lang: en
 :tags: [kubernetes, CI/CD, en]
 
-image::diagram2.png[Argo CD, max-width: fit-content]
-
 https://argo-cd.readthedocs.io/en/stable/[Argo CD] is a declarative, https://www.gitops.tech/[GitOps] continuous delivery tool for Kubernetes.
 The core idea of GitOps is having a Git repository that always contains declarative descriptions of the infrastructure currently desired in the production environment and an automated process to make the production environment match the described state in the repository. Argo CD follows the GitOps pattern of using Git repositories as the source of truth for defining the desired application state. It is implemented as a kubernetes controller which continuously monitors running applications and compares the current live state against the desired target state (as specified in the Git repo).Any modifications made to the desired target state in the Git repo can be automatically applied and reflected in the specified target environments.
 
