@@ -1,6 +1,6 @@
 = An intro to Argo CD
 tesfayenati
-v1.0, 2023-30-03
+v1.0, 2023-03-30
 :title: An intro to Argo CD
 :imagesdir: ../media/2023-03-24-argo-cd
 :lang: en
