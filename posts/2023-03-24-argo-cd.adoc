@@ -7,27 +7,27 @@ v1.0, 2023-03-30
 :tags: [kubernetes, CI/CD, en]
 
 https://argo-cd.readthedocs.io/en/stable/[Argo CD] is a declarative, https://www.gitops.tech/[GitOps] continuous delivery tool for Kubernetes.
-The core idea of GitOps is having a Git repository that always contains declarative descriptions of the infrastructure currently desired in the production environment and an automated process to make the production environment match the described state in the repository. Argo CD follows the GitOps pattern of using Git repositories as the source of truth for defining the desired application state. It is implemented as a kubernetes controller which continuously monitors running applications and compares the current live state against the desired target state (as specified in the Git repo).Any modifications made to the desired target state in the Git repo can be automatically applied and reflected in the specified target environments.
+The core idea of GitOps is having a Git repository that always contains declarative descriptions of the infrastructure currently desired in the production environment, and an automated process to make the production environment match the described state in the repository. Argo CD follows the GitOps pattern of using Git repositories as the source of truth for defining the desired application state. It is implemented as a kubernetes controller which continuously monitors running applications, and compares the current live state against the desired target state (as specified in the Git repo).Any modifications made to the desired target state in the Git repo can be automatically applied, and reflected in the specified target environments.
 
 
 == Difference with other CD pipelines
 
-Argo CD, in contrast to push-based CD solutions, is able to detect changes in the project and deploy it to Kubernetes. By using the push method, deployments to the cluster are initiated by an external system (often CD pipelines) following the successful completion of a prior CI pipeline or the commit to a git repository. In this method, the cluster is accessible to the pipeline system. With pull-based systems, there is an operator inside the cluster that periodically monitors the related git repositories and docker registries; if a change is detected, the cluster state is changed from within. Due to the fact that no external client possesses credentials that grant admin access to the cluster, this technique is widely regarded as being very secure.
+Argo CD, in contrast to push-based CD solutions, is able to detect changes in the project, and deploy it to Kubernetes. By using the push method, deployments to the cluster are initiated by an external system (often CD pipelines) following the successful completion of a prior CI pipeline or the commit to a git repository. In this method, the cluster is accessible to the pipeline system. With pull-based systems, there is an operator inside the cluster that periodically monitors the related git repositories, and docker registries; if a change is detected, the cluster state is changed from within. Due to the fact that no external client possesses credentials that grant admin access to the cluster, this technique is widely regarded as being very secure.
 
-The minimum requirement to get started using argo CD is an  *application custom* resource definition (CRD).
+== How to get Started with Argo CD?
+
+The minimum requirement to get started using argo CD is an  *application custom resource definition (CRD).*
 The Application CRD is the Kubernetes resource object representing a deployed application instance in an environment. It is defined by two key pieces of information:
 
 . Source reference to the desired state in Git (repository, revision, path, environment)
-. Destination reference to the target cluster and namespace.
+. Destination reference to the target cluster, and namespace.
 
-For the cluster one of server or name can be used, but not both (which will result in an error). Under the hood when the server is missing, it is calculated based on the name and used for any operations.
+*Example*
 
-Example
-
-This example assumes that you're familiar with core Git, Docker, Kubernetes, and Continuous Delivery. In addition you must have minikube configured locally. You can create your own docker image or use the docker  mentioned in  the example.
+This example assumes that you're familiar with core Git, Docker, Kubernetes, and Continuous Delivery. In addition, you must have minikube configured locally. You can create your own docker image or use the docker  mentioned in  the example.
 
 
-We first need to install Argo CD. The most common way using  kubectl command
+We first need to install Argo CD. The most common way is to use kubectl command.
 [source,bash]
 ----
 kubectl create namespace argocd
@@ -36,9 +36,9 @@ kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/core-install.yaml
 ----
 
-We then need to create a kubernetes deployment and service file and push it on out git repo
+secondly, We need to create a kubernetes deployment ,and service file, then push it on out git repo.
 
-Deployment File
+==== Deployment File
 
 [source,yaml]
 ----
@@ -68,7 +68,7 @@ spec:
 ----
 
 
-Service File
+==== Service File
 
 [source,yaml]
 ----
@@ -87,6 +87,9 @@ spec:
 ----
 
 We then create Argo CD application file which points to the git repo we just created
+
+==== Application CRD
+
 [source,yaml]
 ----
 apiVersion: argoproj.io/v1alpha1
@@ -111,15 +114,15 @@ spec:
       - CreateNamespace=true
 ----
 
-We can apply this using
+Lastly, apply application CRD using
 [source,bash]
 ----
 kubectl apply -n argocd -f application.yaml
 ----
 
-We just need to verify the created kubernetes resource using kubectl get pods command and using kubectl get svc to check the services created.
+We just need to verify the created kubernetes resource using *kubectl get pods* command, and using *kubectl get svc* to check the services created.
 
-For fetching the minikube IP and a service’s Node port we can use:
+For fetching the minikube IP, and a service’s Node port we can use:
 
 [source,bash]
 ----
@@ -127,7 +130,8 @@ minikube service my-app-service --url
 ----
 
 
-At last Argo CD also comes with A UI which makes it good to visualize deployment processes. It can be accessed locally by port forwarding.
+
+Argo CD also comes with A UI which makes it suitable to visualize deployment processes. It can be accessed locally by port forwarding.
 To access the admin UI, we can
 [start=1]
 . First we get the decoded password using:
@@ -146,3 +150,8 @@ kubectl port-forward svc/argocd-server -n argocd 8080:443
 . Then browse  https://localost:8080
 
 image::diagram1.png[Argo CD admin ui, max-width: fit-content]
+
+This was a short Introduction to Argo CD, which makes deployment process faster, and safer.
+
+
+
