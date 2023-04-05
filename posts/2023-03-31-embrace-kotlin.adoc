@@ -7,10 +7,8 @@ v1.0, 2023-03-31
 :tags: [scala, kotlin]
 
 Recently I have been intrigued by the buzz surrounding Kotlin, another powerful language on the JVM.
-The growing popularity and claims of a seamless transition from Scala to Kotlin have piqued my curiosity,
-prompting me to dive in and explore the language myself.
-In this blog post, I'll share my journey of learning Kotlin from a Scala developer's perspective and provide
-insights into the similarities and differences between the two languages that make the switch feel so smooth.
+The growing popularity and claims of a seamless transition from Scala to Kotlin have piqued my curiosity,prompting me to dive in and explore the language myself.
+In this blog post, I'll share my journey of learning Kotlin from a Scala developer's perspective and provideinsights into the similarities and differences between the two languages that make the switch feel so smooth.
 
 == Language similarities
 
@@ -22,7 +20,7 @@ Both Kotlin and Scala are statically-typed languages that run on the Java Virtua
 - Extension functions
 - Pattern matching (although more limited in Kotlin)
 These similarities create a strong foundation for Scala developers to quickly grasp Kotlin's syntax and paradigms.
-For me personally it was quite easy to create my first kotlin app without looking up "how-to"s, because structurally there would be nothing new.
+For me personally it was quite easy to create my first Kotlin app without looking up "how-to"s, because structurally there was nothing new.
 
 == Key differences between Kotlin and Scala:
 
@@ -31,15 +29,16 @@ Despite their similarities, there are some differences between Kotlin and Scala.
 - Scala has more advanced features, such as support of typeclasses, macros, more powerful and extensive pattern matching.
 - Java Interoperability: Kotlin prioritizes seamless Java interoperability, allowing developers to use Kotlin code alongside
 Java code without any issues. Scala has Java interoperability as well, but due to its more complex type system and language features, some constructs might require additional effort to work seamlessly with Java code.
-- Ecosystem and Community: Both Kotlin and Scala have active and growing caommunities.
+- Ecosystem and Community: Both Kotlin and Scala have active and growing communities.
 However, Kotlin's community is rapidly expanding, particularly in the Android development space, while Scala's community is more focused on big data, data processing, and backend services.
 
 == Understanding Kotlin's syntax
 
 While Kotlin's syntax is inspired by Scala, it's a bit more concise but also Java-like.
 You will quickly get used to the new syntax as it is very similar - I'll show some examples.
+A note: in all examples Scala 2 is used, unless explicitly stated.
 
-- Defining functions:
+==== Defining functions:
 
 Scala:
 [source,scala]
@@ -63,7 +62,7 @@ or
 fun greet(name: String): String = "Hello, $name!"
 ----
 
-- Immutable values:
+==== Immutable values:
 
 Scala:
 [source,scala]
@@ -77,7 +76,7 @@ Kotlin:
 val limit = 100
 ----
 
-- Mutable values:
+==== Mutable values:
 
 Scala:
 [source,scala]
@@ -91,10 +90,10 @@ Kotlin:
 var counter = 0
 ----
 
-- Data classes
+==== Data classes
 
-One of the most commonly used features in Scala is the case class, which provides an easy way to create immutable data structures
-with automatically generated equals, hashCode, toString, and copy methods. Data classes in Kotlin do exactly the same.
+One of the most commonly used features in Scala is the case class, which provides an easy way to create immutable data structures with automatically generated equals, hashCode, toString, and copy methods.
+_Data_ classes in Kotlin do exactly the same.
 
 Scala:
 [source,scala]
@@ -108,9 +107,13 @@ Kotlin:
 data class Person(val name: String, val age: Int)
 ----
 
-- Pattern matching:
+==== Pattern matching:
 
-Scala has powerful pattern matching capabilities, while Kotlin's when expression serves a similar purpose, albeit with some limitations
+Scala has powerful pattern matching capabilities, while Kotlin's _when_ expression serves a similar purpose, albeit with some limitations.
+Kotlin's when expression supports a limited set of patterns, such as matching against specific values, ranges, or types.
+In contrast, Scala allows for much more sophisticated patterns, including case classes, sequence patterns, tuple patterns, extractors (also known as unapply methods in Scala).
+Kotlin's pattern matching does not support deep matching or nested patterns out of the box while in Scala you can use case classes and extractors to create complex nested patterns that can match and extract values at multiple levels of an object hierarchy.
+Also in Kotlin's pattern matching, you cannot directly bind variables to parts of the matched object like in Scala.
 
 Scala:
 [source,scala]
@@ -132,14 +135,14 @@ else -> "Other"
 }
 ----
 
-- Extension functions:
+==== Extension functions:
 
-Extension Functions: Kotlin's extension functions allow you to extend existing classes without modifying their source code,
-which is similar to Scala's implicit classes. However, Kotlin's approach is more explicit and less prone to unexpected behavior, because
-in Kotlin, extension functions must be imported explicitly if they are defined in a different package than where they are being used.
+Extension Functions: Kotlin's extension functions allow you to extend existing classes without modifying their source code, which is similar to Scala's implicit classes (Scala 2).
+Kotlin's approach is more explicit and less prone to unexpected behavior, because in Kotlin, extension functions must be imported explicitly if they are defined in a different package from where they are being used.
 This makes it clear which functions are being used as extensions and helps avoid conflicts.
+Worth noting that Scala 3 also implements extensions explicitly.
 
-Scala:
+Scala2:
 [source,scala]
 ----
 implicit class RichString(val s: String) extends AnyVal {
@@ -148,6 +151,16 @@ implicit class RichString(val s: String) extends AnyVal {
 
 val word = "level"
 println(word.isPalindrome) // Output: true
+----
+
+Scala3:
+[source,scala]
+----
+extension (s: String) def isPalindrome(): Boolean = s == s.reverse
+
+val word = "level"
+
+println(word.isPalindrome())  // Output: true
 ----
 
 Kotlin:
@@ -159,10 +172,9 @@ val word = "level"
 println(word.isPalindrome()) // Output: true
 ----
 
-- Asynchronous code:
+==== Asynchronous code:
 
-Kotlin's coroutines are a powerful feature that provides a way to write asynchronous,
-non-blocking code just like Futures in Scala.
+Kotlin's coroutines are a powerful feature that provides a way to write asynchronous, non-blocking code just like Futures in Scala.
 
 Scala:
 [source,scala]
@@ -222,10 +234,10 @@ fun main() = runBlocking {
 ----
 
 
-- Leveraging the functional programming paradigm
+==== Leveraging the functional programming paradigm
 
-Kotlin, like Scala, supports functional programming. This means you can easily apply your knowledge of higher-order functions,
-immutability, and pattern matching to Kotlin. Here's an example of a simple map operation in both languages:
+Kotlin, like Scala, supports functional programming. This means you can easily apply your knowledge of higher-order functions, immutability, and pattern matching to Kotlin.
+Here's an example of a simple map operation in both languages:
 
 Scala:
 [source,scala]
@@ -241,7 +253,7 @@ val numbers = listOf(1, 2, 3, 4, 5)
 val doubled = numbers.map { x -> x * 2 }
 ----
 
-- Handling null safety
+==== Handling null safety
 
 One of Kotlin's major selling points is its null safety. Like Scala's Option, Kotlin uses the ? modifier to denote nullable types.
 Here's an example of how to handle null safety in both languages:
@@ -257,13 +269,13 @@ Kotlin:
 [source,kotlin]
 ----
 fun getName(id: Int): String? { return if (id == 1) "John" else null }
-val name = getName(1) ?: "
+val name = getName(1) ?: ""
 ----
 
 == Conclusion
 
-Overall starting with Kotlin having a background in Scala feels easy. I, of course, tried doing only basic things so far with it,
-but I will definitely get into tricky problems reather quickly and will let you know know how that goes :)
+Overall starting Kotlin with a background in Scala feels easy.
+Of course, I have only tried basic things so far with it, but I will definitely get into tricky problems rather quickly and will let you know know how that goes :)
 
 As a Scala developer, you might wonder if it's worth investing time in learning a new language like Kotlin.
 Although Scala is a powerful and expressive language, Kotlin brings its unique set of features and benefits that are worth exploring.
