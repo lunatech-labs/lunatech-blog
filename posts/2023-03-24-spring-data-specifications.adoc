@@ -1,0 +1,329 @@
+= Spring Data Specifications
+abensoussan
+v1.0, 2023-03-24
+:title: Spring Data Specifications
+:imagesdir: ../media/2023-03-24-spring-data-specifications
+:lang: en
+:tags: [java, jpa, spring, data, specifications, dynamic query, en]
+
+
+image::spring_data_specification.jpg[Staff,640,480]
+
+== Introduction
+
+Java Persistence API alias JPA helps you to deal with your datas and in this post, we will see one of its aspect that will probably help you to have a clearer code when using filters in GET request in REST API for example.
+
+
+== The use case
+
+In your application, you want to retrieve a list of entities from the database but with applying filters (or not).
+
+For example, we will work with the class `Vehicle` below :
+
+[source,java,linenums]
+----
+package com.demo.model;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "vehicle")
+public class Vehicle {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
+    private Long id;
+
+    private String type;
+    private String brand;
+    private String model;
+    private Integer horsepower;
+}
+
+----
+
+And here is the controller :
+
+[source,java,linenums]
+----
+package com.demo.controller;
+
+import com.hackbreakfast.demo.model.Vehicle;
+import com.hackbreakfast.demo.service.VehicleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/vehicle")
+public class VehicleController {
+
+    private final VehicleService vehicleService;
+
+    @Autowired
+    public VehicleController(VehicleService vehicleService) {
+        this.vehicleService = vehicleService;
+    }
+
+    @GetMapping("/list")
+    public List<Vehicle> getVehiclesList(
+            @RequestParam(name = "type", required = false) String type,
+            @RequestParam(name = "brand",required = false) String brand,
+            @RequestParam(name = "model", required = false) String model,
+            @RequestParam(name = "horsepower", required = false) Integer horsepower) {
+        return vehicleService.getFilteredVehicles(type, brand, model, horsepower);
+    }
+}
+----
+
+In this case, we will retrieve a list of vehicles that will match the filters that have been applied.
+For example, we only want vehicles with `type=car`.
+
+== Implementation with Derived Queries
+
+If we use `Derived Queries`, we will have to deal with a lot of methods whom the number and the names will grow each time we will add a new property to the entity.
+In the exemple, with only 4 properties, we will have all these methods in the repository file:
+
+[source,java,linenums]
+----
+package com.demo.repository;
+
+import com.demo.model.Vehicle;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import java.util.List;
+
+@Repository
+public interface VehicleRepository extends JpaRepository<Vehicle, Integer> {
+
+    List<Vehicle> findByType(String type);
+    List<Vehicle> findByBrand(String brand);
+    List<Vehicle> findByModel(String model);
+    List<Vehicle> findByHorsepower(Integer horsepower);
+    List<Vehicle> findByTypeAndBrand(String type, String brand);
+    List<Vehicle> findByTypeAndModel(String type, String model);
+    List<Vehicle> findByTypeAndHorsepower(String type, Integer horsepower);
+    List<Vehicle> findByBrandAndModel(String brand, String model);
+    List<Vehicle> findByBrandAndHorsepower(String brand, Integer horsepower);
+    List<Vehicle> findByModelAndHorsepower(String model, Integer horsepower);
+    List<Vehicle> findByTypeAndBrandAndModel(String type, String brand, String model);
+    List<Vehicle> findByTypeAndBrandAndHorsepower(String type, String brand, Integer horsepower);
+    List<Vehicle> findByTypeAndModelAndHorsepower(String type, String model, Integer horsepower);
+    List<Vehicle> findByBrandAndModelAndHorsepower(String brand, String model, Integer horsepower);
+    List<Vehicle> findByTypeAndBrandAndModelAndHorsepower(String type, String brand, String model, Integer horsepower);
+}
+----
+
+15 methods for only 4 properties !
+
+And these methods could be probably called with a service class like this one :
+
+[source,java,linenums]
+----
+package com.demo.service;
+
+import com.demo.model.Vehicle;
+import com.demo.repository.VehicleRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class VehicleService {
+
+    private final VehicleRepository vehicleRepository;
+
+    public VehicleService(VehicleRepository vehicleRepository) {
+        this.vehicleRepository = vehicleRepository;
+    }
+
+    public List<Vehicle> getFilteredVehicles(String type, String brand, String model, Integer horsepower) {
+
+        if(type != null && brand != null && model != null && horsepower != null) {
+            return vehicleRepository.findByTypeAndBrandAndModelAndHorsepower(type, brand, model, horsepower);
+        } else if (type != null && brand != null && model != null) {
+            return vehicleRepository.findByTypeAndBrandAndModel(type, brand, model);
+        } else if (type != null && brand != null && horsepower != null) {
+            return vehicleRepository.findByTypeAndBrandAndHorsepower(type, brand, horsepower);
+        } else if (type != null && model != null && horsepower != null) {
+            return vehicleRepository.findByTypeAndModelAndHorsepower(type, model, horsepower);
+        } else if (brand != null && model != null && horsepower != null) {
+            return vehicleRepository.findByBrandAndModelAndHorsepower(brand, model, horsepower);
+        } else if (type != null && brand != null) {
+            return vehicleRepository.findByTypeAndBrand(type, brand);
+        } else if (type != null && model != null) {
+            return vehicleRepository.findByTypeAndModel(type, model);
+        } else if (type != null && horsepower != null) {
+            return vehicleRepository.findByTypeAndHorsepower(type, horsepower);
+        } else if (brand != null && model != null) {
+            return vehicleRepository.findByBrandAndModel(brand, model);
+        } else if (brand != null && horsepower != null) {
+            return vehicleRepository.findByBrandAndHorsepower(brand, horsepower);
+        } else if (model != null && horsepower != null) {
+            return vehicleRepository.findByModelAndHorsepower(model, horsepower);
+        } else if (type != null) {
+            return vehicleRepository.findByType(type);
+        } else if (brand != null) {
+            return vehicleRepository.findByBrand(brand);
+        } else if (model != null) {
+            return vehicleRepository.findByModel(model);
+        } else if (horsepower != null) {
+            return vehicleRepository.findByHorsepower(horsepower);
+        } else {
+            return vehicleRepository.findAll();
+        }
+    }
+
+}
+----
+
+This is why Spring Data Specifications will help us !
+
+
+== Implementation with Spring Data Specifications
+
+Here we are ! We will use Spring Data Specifications !
+
+First of all, we will create a `VehicleSpecifications` class that uses `Specification` class.
+
+What we want is to add a `where clause` to the query for each initialized filter/parameter to retrieve entities whose properties have the values that match.
+If a parameter is not set, the `where clause` will not be added to the query.
+
+In input we can have 2 parameters :
+
+* the value of the initialized filter/parameter
+* the name of the property we want to match.
+
+Let's take a look at the code :
+
+[source,java,linenums]
+----
+package com.demo.repository;
+
+import com.demo.model.Vehicle;
+import org.springframework.data.jpa.domain.Specification;
+
+import java.util.Optional;
+
+public class VehicleSpecifications {
+
+    private VehicleSpecifications() {
+    }
+    /**
+    *
+     * @param maybeParam : the value of the filter
+     * @param entityPropertyName : the name of the property of the entity we want to match
+     * @return
+    */
+    public static Specification<Vehicle> integerEquals(Optional<Integer> maybeParam, String entityPropertyName) {
+        // equivalent where clause : entityPropertyParam=param
+        // example : horsepower=150
+        return (root, query, criteriaBuilder) -> maybeParam
+                .map(param -> criteriaBuilder.equal(root.get(entityPropertyName), param))
+                .orElseGet(criteriaBuilder::conjunction);
+    }
+
+    /**
+    *
+     * @param maybeParam : the value of the filter
+     * @param entityPropertyName : the name of the property of the entity we want to match
+     * @return
+    */
+    public static Specification<Vehicle> stringContained(Optional<String> maybeParam, String entityPropertyName) {
+        // equivalent where clause : entityPropertyParam LIKE %param%
+        // example : type LIKE %SUV%
+        return (root, query, criteriaBuilder) -> maybeParam
+                .map(param -> criteriaBuilder.like(root.get(entityPropertyName), "%" + param + "%"))
+                .orElseGet(criteriaBuilder::conjunction);
+    }
+
+    // The method that build the query
+    // Return all entities if all filters/parameters are not initialized
+    public static Specification<Vehicle> queryWithFilters(Optional<String> type, Optional <String> brand, Optional <String> model, Optional <Integer> horsepower) {
+        return Specification
+                .where(VehicleSpecifications.stringContained(type, "type"))
+                .and(VehicleSpecifications.stringContained(brand, "brand"))
+                .and(VehicleSpecifications.stringContained(model, "model"))
+                .and(VehicleSpecifications.integerEquals(horsepower, "horsepower"));
+    }
+}
+
+----
+
+We can remove all the derived query methods in the repository and add `JpaSpecificationExecutor<Vehicle>`:
+
+[source,java,linenums]
+----
+package com.demo.repository;
+
+import com.demo.model.Vehicle;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface VehicleRepository extends JpaRepository<Vehicle, Integer>, JpaSpecificationExecutor<Vehicle> {
+}
+
+----
+
+And now let's modify the method in the service class :
+
+[source,java,linenums]
+----
+public List<Vehicle> getFilteredVehicles(Optional<String> type, Optional <String> brand, Optional <String> model, Optional <Integer> horsepower) {
+    return vehicleRepository.findAll(VehicleSpecifications.queryWithFilters(type, brand, model, horsepower));
+}
+----
+
+And finally little changes in the controller method:
+
+[source,java,linenums]
+----
+@GetMapping("/list")
+public List<Vehicle> getVehiclesList(
+        @RequestParam(name = "type", required = false) Optional<String> type,
+        @RequestParam(name = "brand",required = false) Optional<String> brand,
+        @RequestParam(name = "model", required = false) Optional<String> model,
+        @RequestParam(name = "horsepower", required = false) Optional<Integer> horsepower) {
+    return vehicleService.getFilteredVehicles(type, brand, model, horsepower);
+}
+----
+
+== A little improvement
+
+We can configure the `Where Clause` as necessary.
+
+For example, in the method named `stringContained` we saw previously, if we want to get the list of the vehicles whom the type is 'SUV' but recorded as 'suv' in the database, the list will be empty.
+
+A simple solution would be to lower case the value passed in parameter and the value stored in the database. Here is the syntax :
+
+[source,java,linenums]
+----
+    public static Specification<Vehicle> stringContained(Optional<String> maybeParam, String field) {
+        return (root, query, criteriaBuilder) -> maybeParam
+                .map(param ->
+                        criteriaBuilder.like(
+                                criteriaBuilder.lower(
+                                        root.get(
+                                                field
+                                        )
+                                ), "%" + param.toLowerCase() + "%"
+                        ))
+                .orElseGet(criteriaBuilder::conjunction);
+    }
+
+----
+
+
+== Conclusion
+
+Through this post, we saw how to quickly implement `Spring Data Specification` in order to filter datas simply.
+
+Official documentation : https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#specifications
