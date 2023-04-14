@@ -9,7 +9,7 @@ v1.0, 2023-03-24
 
 == Introduction
 
-Java Persistance API alias JPA helps you to deal with your datas and in this post, we will see one of its aspect that will probably help you to have a clearer code when using filters in GET request in REST API for example.
+Java Persistence API alias JPA helps you to deal with your datas and in this post, we will see one of its aspect that will probably help you to have a clearer code when using filters in GET request in REST API for example.
 
 
 == The use case
