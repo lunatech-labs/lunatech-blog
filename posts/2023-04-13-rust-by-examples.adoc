@@ -2,6 +2,7 @@
 mcsuka
 v1.0, 2023-04-13
 :title: Rust by examples, for a Java developer
+:imagesdir: ../media/2023-04-13-rust-by-examples
 :lang: en
 :tags: [rust, java, scala]
 
@@ -9,7 +10,7 @@ v1.0, 2023-04-13
 
 In the late '90s I was a C developer when I discovered Java. I was enchanted by the rich standard API and its documentation, how much simpler it was than C++ STL, and that I did not have to care about freeing the allocated memory. Java has evolved a lot since then and the JVM has sprouted other, more advanced languages like Scala and Kotlin as well.
 
-JVM languages and other garbage-collecting languages (native, VM-based or interpreted) are good choice for 90% of the software development projects. However, there are cases when we have real-time constraints, or we need direct access to the memory or other hardware components. Operating systems and embedded systems have been developed in C in the last 50 years.
+JVM languages and other garbage-collecting languages (native, VM-based or interpreted) are good choice for 90% of the software development projects. However, there are cases when we have real-time constraints, or we need direct access to the memory or other hardware components. C has been the most popular choice for low-level coding, operating systems and embedded systems have been developed in C in the last 50 years.
 
 In the last couple of years Rust has emerged as a serious C competitor. In 2022 it made its way to the kernel development of the most important server operating system, Linux. Rust has:
 
@@ -25,7 +26,7 @@ This sounds really exciting, so I decided to go and discover Rust and compare it
 This blog post will not teach you Rust, just give a little taste of Rust programming through some incomplete *examples*.
 There will be more examples than explanations, a bit of computer science knowledge and familiarity with Java or Scala is expected from the reader.
 
-If you decide Rust is something worth to learn, you can start with https://www.rust-lang.org/learn.
+If you decide Rust is something worth to learn, you can start at https://www.rust-lang.org/learn.
 
 == Data Types and Variables
 
@@ -65,13 +66,13 @@ enum UserRole { // convention: PascalCase type name
 // enum with value and type:
 // We will discuss typed enums and structs in the Object Oriented features.
 // Option is part of standard lib, should not redefine it
-enum Option<T> {
+enum MyOption<T> {
     None,
-    Some(t: T),
+    Some(T),
 }
 
 // basic struct:
-struct User {
+struct BasicUser {
     id: u32,    // convention: snake_case variable name
     active: bool,
 }
@@ -80,7 +81,7 @@ struct User {
 struct IP4Address (u8, u8, u8, u8);
 ----
 
-But how to create a dynamic-size type, like a String? Rust defines some basic data basic dynamic types, like Vec, String or a HashMap in the standard library and our dynamic types can be built from these types. We will never need to allocate or deallocate memory manually, unless we want to use the ``unsafe`` superpowers.
+But how to create a dynamic-size data type, like a String? Rust defines some basic dynamic types, like Vec, String or a HashMap in the standard library and our dynamic types can be built from these types. We will never need to allocate or deallocate memory manually, unless we want to use the ``unsafe`` superpowers.
 [source,rust]
 ----
 // struct with dynamic-size elements
@@ -96,10 +97,10 @@ struct User {
 
 As you noticed, strings are a bit more complex in Rust than in Java. What is the difference between ``str``, ``&str``, ``String`` and ``&String``?
 
-* ``String`` is a UTF-8-encoded, growable string
-* ``&String`` is a reference to a ``String``
-* ``&mut String`` is a mutable reference to a ``String``
-* ``str`` is a string literal or a slice of a string literal. We can access ``str`` via a reference:
+* ``String`` is a UTF-8-encoded, growable string. It behaves like a StringBuffer in Java
+* ``&String`` is a reference to a ``String``. In Java we could not separate an object and its reference
+* ``&mut String`` is a mutable reference to a ``String``. Unlike Java, a Rust String object can be mutable
+* ``str`` is a string literal or a slice of a string literal, it is immutable. We access ``str`` via its reference:
 * ``&str`` is a reference to an ``str``
 ** It can also refer to a ``String``, because ``&String`` is coerced to ``&str`` (implicit deref coercion)
 * ``&mut str`` is a mutable reference to a ``String`` or an ``str``
@@ -119,10 +120,11 @@ Now let's create and update some variables:
 [source,rust]
 ----
 let s: &str = "abcd"; // immutable &str, referring to a string literal
-let s2 = "defg";      // immutable &str (inferred), referring to a string literal
 let slice1 = &s[0..2];// immutable &str referring to part of a string literal: "ab"
 let s = 3;            // re-define s to a new value, type is inferred i32 (default integer).
                       // Will not overwrite slice1
+let mut s2 = "defg";  // mutable &str (inferred type), referring to a string literal
+s2 = "hijk";          // updating an &str is re-pointing it to another string literal
 let mut c1 = '$';     // a single mutable character
 let c2 = '💖';        // a single immutable character
 let i: u32 = 2;       // immutable, type is set manually
@@ -238,7 +240,7 @@ fn return_match(pattern: String, lines: Vec<&str>) -> Option<String> {
         .map(|&line| line.to_string())  // map &str to a String instance
 }
 
-fn main() {
+fn example_2() {
     let lines = vec!["abcde", "defgh", "ghijk"];
     let pattern = "gh".to_string();
     let line = return_match(pattern, lines);
@@ -285,7 +287,7 @@ fn return_match_borrow(pattern: &str, lines: &'static Vec<&str>) -> Option<&'sta
 
 To me, ownership and lifetimes are the most cumbersome part of Rust development, but this is the price to pay to avoid garbage collection.
 ``Object`` in Java or ``AnyRef`` Scala are passed on as references and we do not need to worry about who owns them. Execution is as efficient as it can be, and Rust does not have much performance advantage over Java.
-This is possible, because the JVM counts the references to each object and the memory allocated to them is freed when there is no more reference remaining. However, garbage collection is an expensive, it consumes memory and processor cycles. It is done periodically, in multiple levels, making execution times fluctuate.
+This is possible, because the JVM counts the references to each object and the memory allocated to them is freed when there is no more reference remaining. However, garbage collection is expensive, it consumes memory and processor cycles. It is done periodically, in multiple levels, making execution times fluctuate.
 
 === Error handling
 
@@ -344,7 +346,7 @@ list.sort_by_key(|r| {
     sort_operations.push(txt);  // the closure takes ownership of txt, it can only be used once!
     r.0
 });
-// the code can be fixed by cloning txt: sort_operations.push(txt.clone);
+// the code can be fixed by cloning txt: sort_operations.push(txt.clone());
 ----
 
 === Iterators
@@ -359,9 +361,15 @@ Some of the adaptors consume the iterator (like terminal operations in Java Stre
 [source,rust]
 ----
 let v1: Vec<i32> = vec![1, 2, 3];
-let result = v1.iter()
+// Iterator adaptors are generic, Rust cannot infer the result type, we need to declare the type:
+let result: i32 = v1.iter()
     .map(|x| x + 1) // iterator adaptor
     .sum();         // consuming adaptor
+
+// Another choice: declare the type on the adaptor:
+let result = v1.iter()
+    .map(|x| x + 1)
+    .sum::<i32>();
 ----
 
 == Pattern Matching
@@ -381,7 +389,7 @@ Some example of ``match`` expressions:
 ----
 let msg = "ERROR";
 let option_int: Option<i32> = Some(42);
-let user = User { id: 1, active: true, name: String::from("Joe"), roles: vec![UserRole::Admin] };
+let user = User { id: 1, active: true, name: String::from("Joe"), roles: vec![UserRole::Managers] };
 let array = [1, 2, 3];
 let num = 3;
 
@@ -405,7 +413,7 @@ match option_int {
         println!("n={}", n);
         another_side_effect();
     }                       // no comma needed after curly bracket (but allowed)
-}
+};
 
 // match statement with struct values:
 // discarded values can be represented with _
@@ -421,7 +429,6 @@ let array_starting_with_1 = match array {
 };
 
 // match statement with multiple patterns and ranges
-//
 match num {
     1 | 2 => println!("Small number"),  // multiple pattern
     3..=7 => println!("Medium number"), // range should be inclusive
@@ -534,7 +541,7 @@ impl TitleBasics {
     }
 }
 // create a new instance, get a detail then set a detail:
-fn foo() {
+fn struct_impl() {
     let map: HashMap<&str, &str> = HashMap::from([
         ("id", "tt000001"),
         ("title_type", "documentary"),
@@ -646,7 +653,7 @@ pub async fn query_title_basics(db_pool: &PgPool, id: &str) -> Result<TitleBasic
         .bind(id)
         .fetch_one(db_pool)
         .await
-        .and_then(|row: PgRow| Ok(TitleBasics::from_db_row(&row)));
+        .and_then(|row: PgRow| Ok(TitleBasics::from_db_row(&row)))
 }
 
 
@@ -666,15 +673,15 @@ impl<'r> DbRow for TestDbRow<'r> {
 }
 
 // Test TitleBasics::from_db_row() without a database:
-// [#test] is an annotation macro
-[#test]
+// #[test] is an annotation macro
+#[test]
 fn test_title_basics_from_db_row() {
-    let values = HashMap::from([....]);
-    let test_row = Test_DbRow { values };
-    let title_basics = TitleBasics::from_db_row(test_row);
+    let values = HashMap::from([("tconst", "abcd")]);
+    let test_row = TestDbRow { map: values };
+    let title_basics = TitleBasics::from_db_row(&test_row);
 
-    assert_eq!(values["tconst"], title_basics.id);
-    ...
+    assert!(title_basics.id == "abcd");
+    // ...
 }
 ----
 
@@ -684,7 +691,7 @@ An example for overloading '+' from the https://doc.rust-lang.org/book/ch19-03-a
 ----
 use std::ops::Add;
 
-// #derive is an annotation macro, it will auto-generate the implementation
+// #[derive] is an annotation macro, it will auto-generate the implementation
 // for the traits Debug, Copy, Clone and PartialEq
 #[derive(Debug, Copy, Clone, PartialEq)]
 struct Point {
@@ -715,3 +722,5 @@ If you made it to the bottom, I hope you found this blog post useful. There are 
 Is Rust better than Java or Scala? Should we all switch to Rust? I don't think so. Managing ownership and lifetimes is a pain for the inexperienced rustacean like me. Rust is lacking useful features like inheritance and runtime introspection.
 
 Is Rust a viable alternative? Yes, it is. I think developing with Rust instead of Java, Scala, Kotlin, C#, Python or Golang is a sane choice. Rust is a feature rich language with a wide range of great 3rd party libraries. I would not mind working on commercial Rust projects.
+
+(the code examples are available at link:../media/2023-04-13-rust-by-examples/rust-by-examples.tar.gz[rust-by-examples.tar.gz])
