@@ -61,21 +61,21 @@ import java.util.Optional;
 @RequestMapping("/vehicle")
 public class VehicleController {
 
-    private final VehicleService vehicleService;
+  private final VehicleService vehicleService;
 
-    @Autowired
-    public VehicleController(VehicleService vehicleService) {
-        this.vehicleService = vehicleService;
-    }
+  @Autowired
+  public VehicleController(VehicleService vehicleService) {
+      this.vehicleService = vehicleService;
+  }
 
-    @GetMapping("/list")
-    public List<Vehicle> getVehiclesList(
-            @RequestParam(name = "type", required = false) String type,
-            @RequestParam(name = "brand",required = false) String brand,
-            @RequestParam(name = "model", required = false) String model,
-            @RequestParam(name = "horsepower", required = false) Integer horsepower) {
-        return vehicleService.getFilteredVehicles(type, brand, model, horsepower);
-    }
+  @GetMapping("/list")
+  public List<Vehicle> getVehiclesList(
+    @RequestParam(name = "type", required = false) String type,
+    @RequestParam(name = "brand",required = false) String brand,
+    @RequestParam(name = "model", required = false) String model,
+    @RequestParam(name = "horsepower", required = false) Integer horsepower) {
+      return vehicleService.getFilteredVehicles(type, brand, model, horsepower);
+  }
 }
 ----
 
@@ -99,21 +99,21 @@ import java.util.List;
 @Repository
 public interface VehicleRepository extends JpaRepository<Vehicle, Integer> {
 
-    List<Vehicle> findByType(String type);
-    List<Vehicle> findByBrand(String brand);
-    List<Vehicle> findByModel(String model);
-    List<Vehicle> findByHorsepower(Integer horsepower);
-    List<Vehicle> findByTypeAndBrand(String type, String brand);
-    List<Vehicle> findByTypeAndModel(String type, String model);
-    List<Vehicle> findByTypeAndHorsepower(String type, Integer horsepower);
-    List<Vehicle> findByBrandAndModel(String brand, String model);
-    List<Vehicle> findByBrandAndHorsepower(String brand, Integer horsepower);
-    List<Vehicle> findByModelAndHorsepower(String model, Integer horsepower);
-    List<Vehicle> findByTypeAndBrandAndModel(String type, String brand, String model);
-    List<Vehicle> findByTypeAndBrandAndHorsepower(String type, String brand, Integer horsepower);
-    List<Vehicle> findByTypeAndModelAndHorsepower(String type, String model, Integer horsepower);
-    List<Vehicle> findByBrandAndModelAndHorsepower(String brand, String model, Integer horsepower);
-    List<Vehicle> findByTypeAndBrandAndModelAndHorsepower(String type, String brand, String model, Integer horsepower);
+  List<Vehicle> findByType(String type);
+  List<Vehicle> findByBrand(String brand);
+  List<Vehicle> findByModel(String model);
+  List<Vehicle> findByHorsepower(Integer horsepower);
+  List<Vehicle> findByTypeAndBrand(String type, String brand);
+  List<Vehicle> findByTypeAndModel(String type, String model);
+  List<Vehicle> findByTypeAndHorsepower(String type, Integer horsepower);
+  List<Vehicle> findByBrandAndModel(String brand, String model);
+  List<Vehicle> findByBrandAndHorsepower(String brand, Integer horsepower);
+  List<Vehicle> findByModelAndHorsepower(String model, Integer horsepower);
+  List<Vehicle> findByTypeAndBrandAndModel(String type, String brand, String model);
+  List<Vehicle> findByTypeAndBrandAndHorsepower(String type, String brand, Integer horsepower);
+  List<Vehicle> findByTypeAndModelAndHorsepower(String type, String model, Integer horsepower);
+  List<Vehicle> findByBrandAndModelAndHorsepower(String brand, String model, Integer horsepower);
+  List<Vehicle> findByTypeAndBrandAndModelAndHorsepower(String type, String brand, String model, Integer horsepower);
 }
 ----
 
@@ -135,48 +135,48 @@ import java.util.Optional;
 @Service
 public class VehicleService {
 
-    private final VehicleRepository vehicleRepository;
+  private final VehicleRepository vehicleRepository;
 
-    public VehicleService(VehicleRepository vehicleRepository) {
-        this.vehicleRepository = vehicleRepository;
+  public VehicleService(VehicleRepository vehicleRepository) {
+    this.vehicleRepository = vehicleRepository;
+  }
+
+  public List<Vehicle> getFilteredVehicles(String type, String brand, String model, Integer horsepower) {
+
+    if(type != null && brand != null && model != null && horsepower != null) {
+      return vehicleRepository.findByTypeAndBrandAndModelAndHorsepower(type, brand, model, horsepower);
+    } else if (type != null && brand != null && model != null) {
+      return vehicleRepository.findByTypeAndBrandAndModel(type, brand, model);
+    } else if (type != null && brand != null && horsepower != null) {
+      return vehicleRepository.findByTypeAndBrandAndHorsepower(type, brand, horsepower);
+    } else if (type != null && model != null && horsepower != null) {
+      return vehicleRepository.findByTypeAndModelAndHorsepower(type, model, horsepower);
+    } else if (brand != null && model != null && horsepower != null) {
+      return vehicleRepository.findByBrandAndModelAndHorsepower(brand, model, horsepower);
+    } else if (type != null && brand != null) {
+      return vehicleRepository.findByTypeAndBrand(type, brand);
+    } else if (type != null && model != null) {
+      return vehicleRepository.findByTypeAndModel(type, model);
+    } else if (type != null && horsepower != null) {
+      return vehicleRepository.findByTypeAndHorsepower(type, horsepower);
+    } else if (brand != null && model != null) {
+      return vehicleRepository.findByBrandAndModel(brand, model);
+    } else if (brand != null && horsepower != null) {
+      return vehicleRepository.findByBrandAndHorsepower(brand, horsepower);
+    } else if (model != null && horsepower != null) {
+      return vehicleRepository.findByModelAndHorsepower(model, horsepower);
+    } else if (type != null) {
+      return vehicleRepository.findByType(type);
+    } else if (brand != null) {
+      return vehicleRepository.findByBrand(brand);
+    } else if (model != null) {
+      return vehicleRepository.findByModel(model);
+    } else if (horsepower != null) {
+      return vehicleRepository.findByHorsepower(horsepower);
+    } else {
+    return vehicleRepository.findAll();
     }
-
-    public List<Vehicle> getFilteredVehicles(String type, String brand, String model, Integer horsepower) {
-
-        if(type != null && brand != null && model != null && horsepower != null) {
-            return vehicleRepository.findByTypeAndBrandAndModelAndHorsepower(type, brand, model, horsepower);
-        } else if (type != null && brand != null && model != null) {
-            return vehicleRepository.findByTypeAndBrandAndModel(type, brand, model);
-        } else if (type != null && brand != null && horsepower != null) {
-            return vehicleRepository.findByTypeAndBrandAndHorsepower(type, brand, horsepower);
-        } else if (type != null && model != null && horsepower != null) {
-            return vehicleRepository.findByTypeAndModelAndHorsepower(type, model, horsepower);
-        } else if (brand != null && model != null && horsepower != null) {
-            return vehicleRepository.findByBrandAndModelAndHorsepower(brand, model, horsepower);
-        } else if (type != null && brand != null) {
-            return vehicleRepository.findByTypeAndBrand(type, brand);
-        } else if (type != null && model != null) {
-            return vehicleRepository.findByTypeAndModel(type, model);
-        } else if (type != null && horsepower != null) {
-            return vehicleRepository.findByTypeAndHorsepower(type, horsepower);
-        } else if (brand != null && model != null) {
-            return vehicleRepository.findByBrandAndModel(brand, model);
-        } else if (brand != null && horsepower != null) {
-            return vehicleRepository.findByBrandAndHorsepower(brand, horsepower);
-        } else if (model != null && horsepower != null) {
-            return vehicleRepository.findByModelAndHorsepower(model, horsepower);
-        } else if (type != null) {
-            return vehicleRepository.findByType(type);
-        } else if (brand != null) {
-            return vehicleRepository.findByBrand(brand);
-        } else if (model != null) {
-            return vehicleRepository.findByModel(model);
-        } else if (horsepower != null) {
-            return vehicleRepository.findByHorsepower(horsepower);
-        } else {
-            return vehicleRepository.findAll();
-        }
-    }
+  }
 
 }
 ----
@@ -211,45 +211,45 @@ import java.util.Optional;
 
 public class VehicleSpecifications {
 
-    private VehicleSpecifications() {
-    }
-    /**
-    *
-     * @param maybeParam : the value of the filter
-     * @param entityPropertyName : the name of the property of the entity we want to match
-     * @return
-    */
-    public static Specification<Vehicle> integerEquals(Optional<Integer> maybeParam, String entityPropertyName) {
-        // equivalent where clause : entityPropertyParam=param
-        // example : horsepower=150
-        return (root, query, criteriaBuilder) -> maybeParam
-                .map(param -> criteriaBuilder.equal(root.get(entityPropertyName), param))
-                .orElseGet(criteriaBuilder::conjunction);
-    }
+  private VehicleSpecifications() {
+  }
+  /**
+  *
+   * @param maybeParam : the value of the filter
+   * @param entityPropertyName : the name of the property of the entity we want to match
+   * @return
+  */
+  public static Specification<Vehicle> integerEquals(Optional<Integer> maybeParam, String entityPropertyName) {
+    // equivalent where clause : entityPropertyParam=param
+    // example : horsepower=150
+    return (root, query, criteriaBuilder) -> maybeParam
+      .map(param -> criteriaBuilder.equal(root.get(entityPropertyName), param))
+      .orElseGet(criteriaBuilder::conjunction);
+  }
 
-    /**
-    *
-     * @param maybeParam : the value of the filter
-     * @param entityPropertyName : the name of the property of the entity we want to match
-     * @return
-    */
-    public static Specification<Vehicle> stringContained(Optional<String> maybeParam, String entityPropertyName) {
-        // equivalent where clause : entityPropertyParam LIKE %param%
-        // example : type LIKE %SUV%
-        return (root, query, criteriaBuilder) -> maybeParam
-                .map(param -> criteriaBuilder.like(root.get(entityPropertyName), "%" + param + "%"))
-                .orElseGet(criteriaBuilder::conjunction);
-    }
+  /**
+  *
+   * @param maybeParam : the value of the filter
+   * @param entityPropertyName : the name of the property of the entity we want to match
+   * @return
+  */
+  public static Specification<Vehicle> stringContained(Optional<String> maybeParam, String entityPropertyName) {
+    // equivalent where clause : entityPropertyParam LIKE %param%
+    // example : type LIKE %SUV%
+    return (root, query, criteriaBuilder) -> maybeParam
+      .map(param -> criteriaBuilder.like(root.get(entityPropertyName), "%" + param + "%"))
+      .orElseGet(criteriaBuilder::conjunction);
+  }
 
-    // The method that build the query
-    // Return all entities if all filters/parameters are not initialized
-    public static Specification<Vehicle> queryWithFilters(Optional<String> type, Optional <String> brand, Optional <String> model, Optional <Integer> horsepower) {
-        return Specification
-                .where(VehicleSpecifications.stringContained(type, "type"))
-                .and(VehicleSpecifications.stringContained(brand, "brand"))
-                .and(VehicleSpecifications.stringContained(model, "model"))
-                .and(VehicleSpecifications.integerEquals(horsepower, "horsepower"));
-    }
+  // The method that build the query
+  // Return all entities if all filters/parameters are not initialized
+  public static Specification<Vehicle> queryWithFilters(Optional<String> type, Optional <String> brand, Optional <String> model, Optional <Integer> horsepower) {
+    return Specification
+      .where(VehicleSpecifications.stringContained(type, "type"))
+      .and(VehicleSpecifications.stringContained(brand, "brand"))
+      .and(VehicleSpecifications.stringContained(model, "model"))
+      .and(VehicleSpecifications.integerEquals(horsepower, "horsepower"));
+  }
 }
 
 ----
@@ -276,7 +276,7 @@ And now let's modify the method in the service class :
 [source,java,linenums]
 ----
 public List<Vehicle> getFilteredVehicles(Optional<String> type, Optional <String> brand, Optional <String> model, Optional <Integer> horsepower) {
-    return vehicleRepository.findAll(VehicleSpecifications.queryWithFilters(type, brand, model, horsepower));
+  return vehicleRepository.findAll(VehicleSpecifications.queryWithFilters(type, brand, model, horsepower));
 }
 ----
 
@@ -286,10 +286,10 @@ And finally little changes in the controller method:
 ----
 @GetMapping("/list")
 public List<Vehicle> getVehiclesList(
-        @RequestParam(name = "type", required = false) Optional<String> type,
-        @RequestParam(name = "brand",required = false) Optional<String> brand,
-        @RequestParam(name = "model", required = false) Optional<String> model,
-        @RequestParam(name = "horsepower", required = false) Optional<Integer> horsepower) {
+  @RequestParam(name = "type", required = false) Optional<String> type,
+  @RequestParam(name = "brand",required = false) Optional<String> brand,
+  @RequestParam(name = "model", required = false) Optional<String> model,
+  @RequestParam(name = "horsepower", required = false) Optional<Integer> horsepower) {
     return vehicleService.getFilteredVehicles(type, brand, model, horsepower);
 }
 ----
@@ -304,19 +304,18 @@ A simple solution would be to lower case the value passed in parameter and the v
 
 [source,java,linenums]
 ----
-    public static Specification<Vehicle> stringContained(Optional<String> maybeParam, String field) {
-        return (root, query, criteriaBuilder) -> maybeParam
-                .map(param ->
-                        criteriaBuilder.like(
-                                criteriaBuilder.lower(
-                                        root.get(
-                                                field
-                                        )
-                                ), "%" + param.toLowerCase() + "%"
-                        ))
-                .orElseGet(criteriaBuilder::conjunction);
-    }
-
+public static Specification<Vehicle> stringContained(Optional<String> maybeParam, String field) {
+  return (root, query, criteriaBuilder) -> maybeParam
+    .map(param ->
+          criteriaBuilder.like(
+            criteriaBuilder.lower(
+              root.get(
+                field
+              )
+            ), "%" + param.toLowerCase() + "%"
+          ))
+    .orElseGet(criteriaBuilder::conjunction);
+}
 ----
 
 
