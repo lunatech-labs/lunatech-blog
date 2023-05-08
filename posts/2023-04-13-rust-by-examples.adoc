@@ -8,7 +8,7 @@ v1.0, 2023-04-13
 
 :toc:
 
-In the late '90s I was a C developer when I discovered Java. I was enchanted by the rich standard API and its documentation, how much simpler it was than C++ STL, and that I did not have to care about freeing the allocated memory. Java has evolved a lot since then and the JVM has sprouted other, more advanced languages like Scala and Kotlin as well.
+In the late '90s I was a C developer when I discovered Java. I was enchanted by the rich standard API and its documentation, how much simpler it was than C++ Standard Template Library, and that I did not have to care about freeing the allocated memory. Java has evolved a lot since then and the JVM has sprouted other, more advanced languages like Scala and Kotlin as well.
 
 JVM languages and other garbage-collecting languages (native, VM-based or interpreted) are good choice for 90% of the software development projects. However, there are cases when we have real-time constraints, or we need direct access to the memory or other hardware components. C has been the most popular choice for low-level coding, operating systems and embedded systems have been developed in C in the last 50 years.
 
@@ -21,9 +21,10 @@ In the last couple of years Rust has emerged as a serious C competitor. In 2022 
 * Rich standard library, including collections, concurrent programming, I/O and platform abstractions.
 * A growing list of community-developed libraries on https://crates.io/
 
-This sounds really exciting, so I decided to discover Rust and compare it to the languages I use regularly. This blog post is a side-effect of my learning process, aimed to give a little taste of Rust programming through some incomplete *examples*. There will be more examples than explanations, a bit of computer science knowledge and familiarity with Java or Scala is expected from the reader.
+This sounds really exciting, so I decided to discover Rust and compare it to the languages I use regularly. This blog post is a side-effect of my learning process, aimed to give a little taste of Rust programming through some incomplete *examples*. There will be more examples than explanations and a bit of computer science knowledge and familiarity with Java or Scala is expected from the reader.
 
 If you think Rust programming is worth learning, you can start with https://www.rust-lang.org/learn.
+If you would like to test my code examples, I advise to install the official https://doc.rust-lang.org/book/ch01-01-installation.html[Rust distribution^], or add the `rust-analyzer` extension to VS Code. Online Rust compilers are quite limited, you won't be able to run the examples there.
 
 == Data Types and Variables
 
@@ -80,7 +81,7 @@ struct BasicUser {
 struct IP4Address (u8, u8, u8, u8);
 ----
 
-But how to create a dynamic-size data type, like a String? Rust defines some basic dynamic types, like Vec, String or a HashMap in the standard library and our dynamic types can be built from these types. We will never need to allocate or deallocate memory manually, unless we want to use the ``unsafe`` superpowers.
+But how to create a dynamic-size data type, like a String? Rust defines some basic dynamic types, like Vec (Vector), String or a HashMap in the standard library and our dynamic types can be built from these types. We will never need to allocate or deallocate memory manually, unless we want to use the ``unsafe`` superpowers.
 [source,rust]
 ----
 // struct with dynamic-size elements
@@ -94,19 +95,19 @@ struct User {
 
 === String types
 
-As you noticed, strings are a bit more complex in Rust than in Java. What is the difference between ``str``, ``&str``, ``String`` and ``&String``?
+Strings are a bit more complex in Rust than in Java. We have seen ``str`` and ``String`` types above:
 
 * ``String`` is a UTF-8-encoded, growable string. It behaves like a StringBuffer in Java
 * ``&String`` is a reference to a ``String``. In Java we could not separate an object and its reference
 * ``&mut String`` is a mutable reference to a ``String``. Unlike Java, a Rust String object can be mutable
-* ``str`` is a string literal or a slice of a string literal, it is immutable. We access ``str`` via its reference:
-* ``&str`` is a reference to an ``str``
-** It can also refer to a ``String``, because ``&String`` is coerced to ``&str`` (implicit deref coercion)
+* ``str`` is a string literal or a slice of a string literal. It is immutable. We access ``str`` via its reference:
+* ``&str`` is a reference to an ``str`` or to a ``String``
+** ``&String`` is automatically coerced to ``&str`` (implicit deref coercion). Function parameters typically defined as ``&str``, enabling to call it with either an ``&str`` or an ``&String`` parameter
 * ``&mut str`` is a mutable reference to a ``String`` or an ``str``
 
 === Variables and Values
 
-Just like Scala or Kotlin, Rust clearly differentiates immutable and mutable variables. Per default all variables are immutable:
+Just like Scala or Kotlin, Rust clearly differentiates immutable and mutable variables. Variables are immutable, unless marked explicitly mutable:
 [source,rust]
 ----
 let x: i32 = 1;     // immutable
@@ -233,29 +234,29 @@ Ownership is a set of rules that govern how a Rust program manages memory. If an
 This is not an issue for primitive types, because they are small, and they are copied as an argument or a return value. Passing on non-primitive types to a function will move their ownership to the function and this ownership is not returned. For example:
 [source,rust]
 ----
-fn return_match(pattern: String, lines: Vec<&str>) -> Option<String> {
+fn return_match(pattern: &str, lines: Vec<&str>) -> Option<String> {
     lines
         .iter()
-        .find(|&line| line.contains(&pattern))
+        .find(|&line| line.contains(pattern))
         .map(|&line| line.to_string())  // map &str to a String instance
 }
 
 fn example_2() {
     let lines = vec!["abcde", "defgh", "ghijk"];
-    let pattern = "gh".to_string();
+    let pattern = "gh";
     let line = return_match(pattern, lines);
-    // at this point "lines" and "pattern" went out of scope,
-    // their ownership is transferred to the return_match() function
+    // The ownership of "lines" was transferred to the return_match() function
+    // the scope of "lines" is ended, it cannot be used below this point
 }
 ----
 
 If we want to use these parameters again, we could pass their copy as argument:
 [source,rust]
 ----
-    let line = return_match(pattern.clone(), lines.clone());
+    let line = return_match(pattern, lines.clone());
 ----
 
-However, cloning large values is expensive and clone() is not necessarily implemented for all custom types.
+However, cloning large values is expensive and clone() would need to be implemented for custom types.
 The solution is to pass non-primitive types as references. The &x syntax lets us create a reference that refers to the value of x but does not own it. Because it does not own it, the value it points to will not be dropped when the reference stops being used. We call the action of creating a reference borrowing. As in real life, if a person owns something, you can borrow it from them. When you're done, you have to give it back. You don't own it.
 
 We could just return the found &str, and save the creation of the String, but the following code will fail to compile:
@@ -278,7 +279,7 @@ fn return_match_borrow<'a>(pattern: &str, lines: &'a Vec<&str>) -> Option<&'a st
 ....
 ----
 
-We have a special case, our input are static values and we can also use the special lifetime label ``'static``:
+A static item is a value which is valid for the entire duration of your program. When a function attribute is static, we can use the special lifetime label ``'static``:
 [source,rust]
 ----
 fn return_match_borrow(pattern: &str, lines: &'static Vec<&str>) -> Option<&'static str> {
@@ -323,7 +324,7 @@ let list1 = vec![1, 2, 3];
 let only_borrows = || println!("From closure: {:?}", list1);
 only_borrows();     // list is not changed and continues to be in scope
 
-// borrowing immutably:
+// borrowing mutably:
 let mut list2 = vec![1, 2, 3];
 let mut borrows_mutably = || list2.push(7);
 borrows_mutably();  // list is updated, but continues to be in scope
@@ -353,7 +354,7 @@ list.sort_by_key(|r| {
 
 (This section contains sentences and examples directly copied from the https://doc.rust-lang.org/book/ch13-02-iterators.html[Rust language guide^])
 
-The iterator pattern allows you to perform some task on a sequence of items in turn. An iterator is responsible for the logic of iterating over each item and determining when the sequence has finished. When you use iterators, you don't have to reimplement that logic yourself. In Rust, iterators are lazy, meaning they have no effect until you call methods that consume the iterator to use it up.
+The iterator pattern allows you to perform some task on a sequence of items in turn. An iterator is responsible for the logic of iterating over each item and determining when the sequence has finished. When you use iterators, you don't have to reimplement that logic yourself. In Rust, iterators are lazy, meaning they have no effect until you call methods that consume the iterator.
 
 Iterators implement the https://doc.rust-lang.org/std/iter/trait.Iterator.html[Iterator^] trait, that defines 75 methods to handle the elements. The iterator methods are also known as adapters (in the API doc) or adaptors (in the Rust language guide).
 Some of the adaptors consume the iterator (like terminal operations in Java Stream) others produce new iterators (like intermediate operations in Java Stream). If you know Scala or Java Stream, the iterator adaptors will not be surprising, although their names may be different.
@@ -438,7 +439,7 @@ match num {
 }
 ----
 
-Pattern matching can also be utilised with ``if let ``, ``while let`` and ``for`` loops:
+Pattern matching can also be utilised with ``if let``, ``while let`` and ``for`` loops:
 [source,rust]
 ----
 let bread_spread = Some("butter");
