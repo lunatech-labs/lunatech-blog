@@ -241,7 +241,7 @@ fn return_match(pattern: &str, lines: Vec<&str>) -> Option<String> {
         .map(|&line| line.to_string())  // map &str to a String instance
 }
 
-fn example_2() {
+fn ownership() {
     let lines = vec!["abcde", "defgh", "ghijk"];
     let pattern = "gh";
     let line = return_match(pattern, lines);
@@ -257,7 +257,7 @@ If we want to use these parameters again, we could pass their copy as argument:
 ----
 
 However, cloning large values is expensive and clone() would need to be implemented for custom types.
-The solution is to pass non-primitive types as references. The &x syntax lets us create a reference that refers to the value of x but does not own it. Because it does not own it, the value it points to will not be dropped when the reference stops being used. We call the action of creating a reference borrowing. As in real life, if a person owns something, you can borrow it from them. When you're done, you have to give it back. You don't own it.
+The solution is to pass non-primitive types as *references*. The &x syntax lets us create a reference that refers to the value of x but does not own it. Because it does not own it, the value it points to will not be dropped when the reference stops being used. We call the action of creating a reference *borrowing*. As in real life, if a person owns something, you can borrow it from them. When you're done, you have to give it back. You don't own it.
 
 We could just return the found &str, and save the creation of the String, but the following code will fail to compile:
 [source,rust]
@@ -276,7 +276,20 @@ We'll need to define the lifetime of the response and bind it to the lifetime of
 [source,rust]
 ----
 fn return_match_borrow<'a>(pattern: &str, lines: &'a Vec<&str>) -> Option<&'a str> {
-....
+    lines
+        .iter()
+        .find(|&line| line.contains(&pattern))
+        .map(|&line| line)
+}
+
+fn life_time() {
+    let lines = vec!["abcde", "defgh", "ghijk"];
+    let pattern = "gh";
+    let line = return_match_borrow(pattern, &lines);
+    // The ownership of "lines" is not transferred to the return_match() function
+    // "lines" can be used below this point:
+    let line0 = lines[0];
+}
 ----
 
 A static item is a value which is valid for the entire duration of your program. When a function attribute is static, we can use the special lifetime label ``'static``:
