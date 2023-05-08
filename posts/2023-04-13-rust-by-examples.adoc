@@ -1,0 +1,740 @@
+= Rust by examples, for a Java developer
+mcsuka
+v1.0, 2023-04-13
+:title: Rust by examples, for a Java developer
+:imagesdir: ../media/2023-04-13-rust-by-examples
+:lang: en
+:tags: [rust, java, scala]
+
+:toc:
+
+In the late '90s I was a C developer when I discovered Java. I was enchanted by the rich standard API and its documentation, how much simpler it was than C++ Standard Template Library, and that I did not have to care about freeing the allocated memory. Java has evolved a lot since then and the JVM has sprouted other, more advanced languages like Scala and Kotlin as well.
+
+JVM languages and other garbage-collecting languages (native, VM-based or interpreted) are good choice for 90% of the software development projects. However, there are cases when we have real-time constraints, or we need direct access to the memory or other hardware components. C has been the most popular choice for low-level coding, operating systems and embedded systems have been developed in C in the last 50 years.
+
+In the last couple of years Rust has emerged as a serious C competitor. In 2022 it made its way to the kernel development of the most important server operating system, Linux. Rust has:
+
+* Memory safety without garbage collection or implicit resource counters.
+* Some functional programming and object-oriented features, however it is neither OO nor FP language.
+* Simple asynchronous programming.
+* Pattern matching.
+* Rich standard library, including collections, concurrent programming, I/O and platform abstractions.
+* A growing list of community-developed libraries on https://crates.io/
+
+This sounds really exciting, so I decided to discover Rust and compare it to the languages I use regularly. This blog post is a side-effect of my learning process, aimed to give a little taste of Rust programming through some incomplete *examples*. There will be more examples than explanations and a bit of computer science knowledge and familiarity with Java or Scala is expected from the reader.
+
+If you think Rust programming is worth learning, you can start with https://www.rust-lang.org/learn.
+If you would like to test my code examples, I advise to install the official https://doc.rust-lang.org/book/ch01-01-installation.html[Rust distribution^], or add the `rust-analyzer` extension to VS Code. Online Rust compilers are quite limited, you won't be able to run the examples there.
+
+== Data Types and Variables
+
+Just like Java, Rust is a statically typed language, all types need to be known at compile time, but that's where the similarities end.
+
+We will use the following data types in our examples:
+
+* Scalars with fixed memory footprint:
+** Boolean: ``bool``
+** Integer: ``i128``,``i64``, ``i32``, ``i16``, ``i8``, ``isize`` (platform-word-size)
+** Unsigned Integer: ``u128``, ``u64``, ``u32``, ``u16``, ``u8``, ``usize`` (platform-word-size)
+** Floating point: ``f64``, ``f32``
+** Character: ``char``: Unicode character, 1-4 bytes (e.g. '*' is 1 byte, '♥' is 2 bytes '🚲' is 4 bytes)
+* Sequence (compound) types, with allocated memory footprint known at compile-time:
+** Tuple: heterogeneous lists of types, e.g. ``(500, 6.4, true)``. Special tuple is the Unit: ``()``
+** Array: fixed-size sequence of N elements of type T, e.g.``[1, 2, 3, 4]``
+** String literal: ``str`` is an array of bytes, but Rust ensures that the data is valid UTF-8
+** Slice: a dynamically sized type representing a sub-sequence of an array
+* User-defined Types: ``enum`` and ``struct``
+* Pointer types:
+** Shared (read-only) reference: ``&T`` pointing to a variable with T type
+** Mutable reference ``&mut T`` pointing to a variable with T type
+** Raw pointer: ``*const T``, and ``*mut T`` unsafe pointers to a memory address. Unlike other types, the raw pointers can take 0 (null) value
+* Functions and Closures: ``fn``
+* Traits: ``impl`` and ``trait``
+
+=== User-Defined Types
+
+User-defined data types can be built with ``enum`` or ``struct`` keywords:
+[source,rust]
+----
+// basic enum:
+enum UserRole { // convention: PascalCase type name
+    Team1,      // convention: PascalCase enum name
+    Team2,
+    Managers,   // convention: comma after last list element (optional)
+}
+
+// enum with value and type:
+// We will discuss typed enums and structs in the Object Oriented features.
+// Option is part of standard lib, should not redefine it
+enum MyOption<T> {
+    None,
+    Some(T),
+}
+
+// basic struct:
+struct BasicUser {
+    id: u32,    // convention: snake_case variable name
+    active: bool,
+}
+
+// tuple struct (named tuple type):
+struct IP4Address (u8, u8, u8, u8);
+----
+
+But how to create a dynamic-size data type, like a String? Rust defines some basic dynamic types, like Vec (Vector), String or a HashMap in the standard library and our dynamic types can be built from these types. We will never need to allocate or deallocate memory manually, unless we want to use the ``unsafe`` superpowers.
+[source,rust]
+----
+// struct with dynamic-size elements
+struct User {
+    id: u32,
+    active: bool,
+    name: String,
+    roles: Vec<UserRole>,
+}
+----
+
+=== String types
+
+Strings are a bit more complex in Rust than in Java. We have seen ``str`` and ``String`` types above:
+
+* ``String`` is a UTF-8-encoded, growable string. It behaves like a StringBuffer in Java
+* ``&String`` is a reference to a ``String``. In Java we could not separate an object and its reference
+* ``&mut String`` is a mutable reference to a ``String``. Unlike Java, a Rust String object can be mutable
+* ``str`` is a string literal or a slice of a string literal. It is immutable. We access ``str`` via its reference:
+* ``&str`` is a reference to an ``str`` or to a ``String``
+** ``&String`` is automatically coerced to ``&str`` (implicit deref coercion). Function parameters typically defined as ``&str``, enabling to call it with either an ``&str`` or an ``&String`` parameter
+* ``&mut str`` is a mutable reference to a ``String`` or an ``str``
+
+=== Variables and Values
+
+Just like Scala or Kotlin, Rust clearly differentiates immutable and mutable variables. Variables are immutable, unless marked explicitly mutable:
+[source,rust]
+----
+let x: i32 = 1;     // immutable
+let mut y: i32 = 2; // mutable
+----
+
+Variable types must be unambiguous at compile time. We either explicitly define the type or it is inferred by the compiler:
+[source,rust]
+----
+let a: bool = true;               // bool
+let b = false;                    // inferred bool
+let c: u16 = 1;                   // u16
+let c_ptr = &c;                   // inferred &u16, reference to an u16 variable
+let mut c_copy = *c_ptr;          // inferred u16, de-reference c_ptr
+c_copy = 166;                     // changing c_copy will not impact c_ptr or c
+let d = 2 + 2;                    // inferred i32, because i32 is the default integer
+let e: f32 = 3.1415;              // f32
+let f = 13.5;                     // inferred f64, because f64 is the default float
+let g = 3 + c;                    // inferred u16, because c is u16
+let h = 0;                        // inferred usize, because it is later used as an array index, which must be usize
+let mut arr1: [i64; 2] = [1, 2];  // array of i64, length=3
+let i = arr1[h];                  // inferred i64, bacause arr1 is array of i64
+arr1[0] = 3;                      // array element is addressed with a 0-based index
+let arr2 = [1, 2, 3, 4];          // inferred mutable [i32; 4]
+let sli1 = &arr2[0..2];           // inferred &[i32] reference to an array slice ([1, 2])
+let tup1: (bool, u32) = (true, 0);// tuple of (bool, u32)
+let mut tup2 = (12, 3.14, "abc"); // inferred mutable tuple (i32, f64, &str)
+tup2.0 = 13;                      // tuple element is addressed with a 0-based index
+let j = '💖';                     // inferred char
+let str1: &str = "abcd";          // &str, reference to an str
+let sli2 = &str1[0..2];           // &str referring to slice of a string literal ("ab")
+let mut user = User {             // mutable structure variable
+    id: 1,
+    active: true,
+    name: String::from("Joe"),    // create a new dynamic String from a literal.
+                                  // Equivalent to "Joe".to_string()
+    roles: vec![UserRole::Team2], // vec![] is a macro to initialise a Vec
+};
+user.active = false;              // update mutable structure
+user.name.push_str(" Smith");     // append to a String
+let localhost = IP4Address(127, 0, 0, 1);
+let first_byte = localhost.0;     // a tuple struct is adressed the same way as a tuple
+----
+
+Values and variables are usually defined within a function's scope, however it is possible to define constants and static variables globally:
+[source,rust]
+----
+static mut STARTUP_EPOCH_SECS: Option<i64> = None; // convention: globals are in UPPER_SNAKE_CASE
+const ABC_DE: &str = "abc de"; // type must be explicit for static and const
+----
+
+Variables and references cannot have ``null`` value, except the raw pointers in an ``unsafe`` scope. It is best to ignore ``unsafe`` until we need to interface with native C libraries.
+
+== Functions, Ownership and Lifetime
+
+=== Functions
+
+The program logic is implemented as a set of functions. A few sample functions:
+[source,rust]
+----
+// void function with a mutable argument, procedural style solution
+// convention: snake_case function and argument names
+fn search_pattern_for(pattern: &str, lines: &[&str], idx: &mut usize) {
+    for i in 0..lines.len() {
+        if lines[i].contains(pattern) {
+            *idx = i;
+            return;
+        }
+    }
+    *idx = usize::MAX;
+}
+
+// function with a return value, FP style solution
+// if there is no semicolon after the last line, it is considered a return value
+// ("expr" is the same as "return expr;")
+fn search_pattern_iter(pattern: &str, lines: &[&str]) -> usize {
+    lines
+        .iter()  // iterate over the elements,
+                 // just like .stream() in Java (:Iterator<&str>)
+        .enumerate() // extend each element with an index, as a tuple,
+                     // just like .zip in Scala (:Iterator<(usize, &str)>)
+        .find(|(_, &line)| line.contains(pattern)) // find the first element where the closure
+                                                   // returns true (:Option<(usize, &str)>)
+        .map_or(usize::MAX, |(idx, _)| idx) // take the index from the tuple, if found,
+                                            // set MAX_USIZE otherwise (:usize)
+}
+----
+
+The program entry-point is the main() function in the main.rs file:
+
+[source,rust]
+----
+fn main() {
+    let lines = ["abcde", "defgh", "ghijk"];
+    let pattern = "gh";
+
+    let mut idx: usize = usize::MAX;
+    search_pattern_for(pattern, &lines, &mut idx);
+    // println!() is a macro. Macros can have variable number of arguments,
+    // functions must have fixed number of arguments
+    println!("Matching line: {}", if idx < lines.len() {lines[idx]} else {"NOT FOUND"});
+
+    let idx = search_pattern_iter(pattern, &lines);
+    println!("Matching line: {}", if idx < lines.len() {lines[idx]} else {"NOT FOUND"});
+}
+----
+
+Crates and modules are used to modularise your Rust code. We are not discussing them in this blog, but it is good to know that per default functions are private to the module. If you want to call a function from another module, it needs to be defined public. This is the same for structures and enums as well:
+[source,rust]
+----
+pub struct MyStruct {...}
+pub enum MyEnum {...}
+pub fn my_func() {...}
+----
+
+=== Ownership
+
+Ownership is a set of rules that govern how a Rust program manages memory. If any of the rules is violated, the program won't compile:
+
+* Each value in Rust has an owner.
+* There can only be one owner at a time.
+* When the owner goes out of scope, the value will be dropped.
+
+This is not an issue for primitive types, because they are small, and they are copied as an argument or a return value. Passing on non-primitive types to a function will move their ownership to the function and this ownership is not returned. For example:
+[source,rust]
+----
+fn return_match(pattern: &str, lines: Vec<&str>) -> Option<String> {
+    lines
+        .iter()
+        .find(|&line| line.contains(pattern))
+        .map(|&line| line.to_string())  // map &str to a String instance
+}
+
+fn ownership() {
+    let lines = vec!["abcde", "defgh", "ghijk"];
+    let pattern = "gh";
+    let line = return_match(pattern, lines);
+    // The ownership of "lines" was transferred to the return_match() function
+    // the scope of "lines" is ended, it cannot be used below this point
+}
+----
+
+If we want to use these parameters again, we could pass their copy as argument:
+[source,rust]
+----
+    let line = return_match(pattern, lines.clone());
+----
+
+However, cloning large values is expensive and clone() would need to be implemented for custom types.
+The solution is to pass non-primitive types as *references*. The &x syntax lets us create a reference that refers to the value of x but does not own it. Because it does not own it, the value it points to will not be dropped when the reference stops being used. We call the action of creating a reference *borrowing*. As in real life, if a person owns something, you can borrow it from them. When you're done, you have to give it back. You don't own it.
+
+We could just return the found &str, and save the creation of the String, but the following code will fail to compile:
+[source,rust]
+----
+fn return_match_borrow(pattern: &str, lines: &Vec<&str>) -> Option<&str> {
+    lines
+        .iter()
+        .find(|&line| line.contains(&pattern))
+        .map(|&line| line)
+}
+// error: missing lifetime specifier
+// this function's return type contains a borrowed value, but the signature does not say whether it is borrowed from `pattern` or one of `lines`'s 2 lifetimes
+----
+
+We'll need to define the lifetime of the response and bind it to the lifetime of a function argument. Lifetimes are defined as labels in the format of ``'x``, where x identifies the lifetime:
+[source,rust]
+----
+fn return_match_borrow<'a>(pattern: &str, lines: &'a Vec<&str>) -> Option<&'a str> {
+    lines
+        .iter()
+        .find(|&line| line.contains(&pattern))
+        .map(|&line| line)
+}
+
+fn life_time() {
+    let lines = vec!["abcde", "defgh", "ghijk"];
+    let pattern = "gh";
+    let line = return_match_borrow(pattern, &lines);
+    // The ownership of "lines" is not transferred to the return_match() function
+    // "lines" can be used below this point:
+    let line0 = lines[0];
+}
+----
+
+A static item is a value which is valid for the entire duration of your program. When a function attribute is static, we can use the special lifetime label ``'static``:
+[source,rust]
+----
+fn return_match_borrow(pattern: &str, lines: &'static Vec<&str>) -> Option<&'static str> {
+....
+----
+
+To me, ownership and lifetimes are the most cumbersome part of Rust development, but this is the price to pay to avoid garbage collection.
+``Object`` in Java or ``AnyRef`` Scala are passed on as references and we do not need to worry about who owns them. Execution is as efficient as it can be, and Rust does not have much performance advantage over Java.
+This is possible, because the JVM counts the references to each object and the memory allocated to them is freed when there is no more reference remaining. However, garbage collection is expensive, it consumes memory and processor cycles. It is done periodically, in multiple levels, making execution times fluctuate.
+
+=== Error handling
+
+There is no ``Exception`` in Rust. Non-fatal errors are usually managed by setting a ``Result<R, E>`` response type for the functions. On success, the function returns ``Ok<R>`` on failure returns ``Err<E>``. And yes, it is the opposite order to ``Either<E, R>`` of Scala. There are constructs in Rust to make Result handling convenient, you can read the https://doc.rust-lang.org/book/ch09-00-error-handling.html[guide^] for more info.
+Fatal errors, ignorant error handling practices or calling the ``panic!`` macro will cause a 'panic'. By default, these panics will print a failure message, unwind, clean up the stack, and quit. There is no way to recover after a panic.
+
+== Functional Programming Features
+
+Rust gives us the choice to write procedural or FP style code. They are both fine and there is negligible performance difference between good for-loop and iterator based solutions. FP code is often easier to understand and naturally efficient, but loops can give greater control.
+
+=== Closures
+
+(This section contains sentences and examples directly copied from the https://doc.rust-lang.org/book/ch13-01-closures.html[Rust language guide^])
+
+Rust's closures are anonymous functions you can save in a variable or pass as arguments to other functions. You can create the closure in one place and then call the closure elsewhere to evaluate it in a different context. Unlike functions, closures can capture values from the scope in which they're defined.
+
+Closure expressions can be defined as variables, but their syntax resembles function syntax:
+[source,rust]
+----
+// this is a function:
+fn  add_one_v1   (x: u32) -> u32 { x + 1 }
+// these are equivalent closures:
+let add_one_v2 = |x: u32| -> u32 { x + 1 };
+let add_one_v3 = |x|             { x + 1 };
+let add_one_v4 = |x|               x + 1  ;
+----
+
+Closures can capture values from their environment in three ways, which directly map to the three ways a function can take a parameter: borrowing immutably, borrowing mutably, and taking ownership. The closure will decide which of these to use based on what the body of the function does with the captured values.
+[source,rust]
+----
+// borrowing immutably:
+let list1 = vec![1, 2, 3];
+let only_borrows = || println!("From closure: {:?}", list1);
+only_borrows();     // list is not changed and continues to be in scope
+
+// borrowing mutably:
+let mut list2 = vec![1, 2, 3];
+let mut borrows_mutably = || list2.push(7);
+borrows_mutably();  // list is updated, but continues to be in scope
+
+// taking ownership with the move keyword. This is mostly useful when passing a closure to a new thread:
+let mut list3 = vec![1, 2, 3];
+thread::spawn(move || {     // spawn fires up a new thread
+            list3.push(4);
+            println!("From thread: {:?}", list3);
+        })                  // returns a JoinHandle
+        .join()             // wait for the thread to finish and returns a Result<(), Error>
+        .unwrap();          // unwrap Result: returns the Ok value or panics on Err
+
+// taking ownership automatically (fails compilation):
+let mut list = [(10, 1), (3, 5), (7, 12)];
+let mut sort_operations = vec![];
+let txt = String::from("by key called");
+
+list.sort_by_key(|r| {
+    sort_operations.push(txt);  // the closure takes ownership of txt, it can only be used once!
+    r.0
+});
+// the code can be fixed by cloning txt: sort_operations.push(txt.clone());
+----
+
+=== Iterators
+
+(This section contains sentences and examples directly copied from the https://doc.rust-lang.org/book/ch13-02-iterators.html[Rust language guide^])
+
+The iterator pattern allows you to perform some task on a sequence of items in turn. An iterator is responsible for the logic of iterating over each item and determining when the sequence has finished. When you use iterators, you don't have to reimplement that logic yourself. In Rust, iterators are lazy, meaning they have no effect until you call methods that consume the iterator.
+
+Iterators implement the https://doc.rust-lang.org/std/iter/trait.Iterator.html[Iterator^] trait, that defines 75 methods to handle the elements. The iterator methods are also known as adapters (in the API doc) or adaptors (in the Rust language guide).
+Some of the adaptors consume the iterator (like terminal operations in Java Stream) others produce new iterators (like intermediate operations in Java Stream). If you know Scala or Java Stream, the iterator adaptors will not be surprising, although their names may be different.
+
+[source,rust]
+----
+let v1: Vec<i32> = vec![1, 2, 3];
+// Iterator adaptors are generic, Rust cannot infer the result type, we need to declare the type:
+let result: i32 = v1.iter()
+    .map(|x| x + 1) // iterator adaptor
+    .sum();         // consuming adaptor
+
+// Another choice: declare the type on the adaptor:
+let result = v1.iter()
+    .map(|x| x + 1)
+    .sum::<i32>();
+----
+
+== Pattern Matching
+
+Pattern matching is a turbo-charged switch/case statement or expression. Scala and Kotlin developers should be familiar with pattern matching and recently Java is introducing more and more pattern matching features as well.
+Patterns are a special syntax in Rust for matching against the structure of types, both complex and simple. A pattern consists of some combination of the following:
+
+* Literals
+* Destructured arrays, enums, structs, or tuples
+* Variables
+* Wildcards
+* Placeholders
+
+Patterns can be used in ``match``, ``if let`` and ``while let`` expressions, ``for`` loops, ``let`` statements  and function parameters.
+Some example of ``match`` expressions:
+[source,rust]
+----
+let msg = "ERROR";
+let option_int: Option<i32> = Some(42);
+let user = User { id: 1, active: true, name: String::from("Joe"), roles: vec![UserRole::Managers] };
+let array = [1, 2, 3];
+let num = 3;
+
+// match statement with literals:
+match msg {
+    "ERROR" => println!("error!"), // single-line expressions are separated by comma
+    txt => println!("{txt}!"),     // convention: comma after the last arm (optional)
+}                                  // no semicolon needed (but allowed)
+
+// match expression with enum and named variable:
+let double_val = match option_int {
+    None => None,           // all 'arms' of the match must be covered, otherwise compiler error
+    Some(n) => Some(2 * n), // n is the named variable
+};                          // semicolon is mandatory for expression, unless it is a return value
+
+// match statement with enum and value matching:
+match option_int {
+    None => {}              // do-nothing arms has an open-close curly bracket
+    Some(0) => println!("Zero is ignored!"),
+    Some(n) => {            // multi-line expressions or statements are in curly brackets
+        println!("n={}", n);
+        another_side_effect();
+    }                       // no comma needed after curly bracket (but allowed)
+};
+
+// match statement with struct values:
+// discarded values can be represented with _
+match user {
+    User {id, active: true, name: _, roles: _} => println!("User {id} is active!"),
+    User {id, active: false, name: _, roles: _} => println!("User {id} is inactive!"),
+}
+
+// match expression with array
+let array_starting_with_1 = match array {
+    [1, _, _] => Some(array),
+    _ => None,
+};
+
+// match statement with multiple patterns and ranges
+match num {
+    1 | 2 => println!("Small number"),  // multiple pattern
+    3..=7 => println!("Medium number"), // range should be inclusive
+    8..=9 => println!("Almost 10"),
+    ..=0 => println!("Too small!"),     // we may use ..=N or N.. ranges
+    _ => println!("Too big!"),
+}
+----
+
+Pattern matching can also be utilised with ``if let``, ``while let`` and ``for`` loops:
+[source,rust]
+----
+let bread_spread = Some("butter");
+let mut stack = vec!['a', 'b', 'c'];
+
+// if let:
+if let Some(spread) = bread_spread {
+    println!("The bread has {spread} on it");
+} else {
+    println!("The bread is plain");
+}
+
+// while let:
+while let Some(top) = stack.pop() {
+    println!("{}", top);
+}
+
+// for loop
+for (index, value) in stack.iter().enumerate() {
+    println!("{} is at index {}", value, index);
+}
+----
+
+Pattern matching can also be used with plain ``let`` statements:
+[source,rust]
+----
+// tuple:
+let (a, b) = (2, true);
+
+// this will fail compilation, because the pattern does not match the expression:
+let (a, b, c) = (2, true);
+
+// this will also fail, because the None option is not covered:
+fn foo(opt_value: Option<String>) {
+    let Some(a) = opt_value;
+    ....
+}
+----
+
+Pattern matching can also be used in function parameters:
+[source,rust]
+----
+fn transpose(&(x, y): &(i32, i32)) -> (i32, i32) {
+    (y, x)
+}
+----
+
+Pattern matching tuple function parameters will be useful for closures (invoking lambda expressions).
+
+== Object-Oriented Features
+
+Rust implements some OO features, but not all of them. It is possible to create "objects" to package data and procedures to operate on the object data. String or Vec instances can be considered objects. On the other hand, Rust does not implement inheritance or function overloading.
+
+This paragraph will give a few examples of:
+
+* Data Abstraction: manipulating object data via methods
+* Encapsulation: hiding implementation details
+* Parametric Polymorphism: implementing a trait (interface)
+* Ad-hoc Polymorphism: operator overloading
+
+=== Data Abstraction and Encapsulation
+
+We have already seen how to implement a ``struct`` or an ``enum``. We can add methods with the ``impl`` keyword:
+[source,rust]
+----
+// the struct fields are invisible from another module, unless they are defined public
+pub struct TitleBasics {
+    id: String,                     // this is a private field
+    pub title_type: Option<String>, // this is a public field
+    primary_title: Option<String>,
+    start_year: Option<i32>,
+}
+
+// path to crate::module::type, not entirely unlike a Java import
+use std::collections::HashMap;
+
+// add methods to TitleBasics
+impl TitleBasics {
+    // convert a HashMap to TitleBasics
+    pub fn from(fields: &HashMap<&str, &str>) -> TitleBasics {
+        TitleBasics {
+            id: fields["id"].to_string(), // map[key] will 'panic' if key is not found
+            title_type: fields
+                .get("title_type")        // map.get returns an Option<&str>
+                .map(|&s| s.to_string()),
+            primary_title: fields.get("primary_title").map(|&s| s.to_string()),
+            start_year: fields
+                .get("start_year")
+                .map(|&s| s.parse::<i32>().ok()).flatten(),
+        }
+    }
+    // get a detail
+    // &self is an implicit alias of the structure data
+    pub fn get_start_year(&self) -> &Option<i32> {
+        &self.start_year
+    }
+    // set a detail
+    pub fn set_start_year(&mut self, start_year: i32) {
+        self.start_year = Some(start_year);
+    }
+}
+// create a new instance, get a detail then set a detail:
+fn struct_impl() {
+    let map: HashMap<&str, &str> = HashMap::from([
+        ("id", "tt000001"),
+        ("title_type", "documentary"),
+        ("primary_title", "The Blue Planet"),
+        ("start_year", "1999"),
+    ]);
+    let mut tb = TitleBasics::from(&map);
+    // {:?} instructs the println macro to call the Debug::fmt() method of the Option
+    println!("start_year={:?}", tb.get_start_year());
+    tb.set_start_year(1998);
+    println!("start_year={:?}", tb.get_start_year());
+}
+----
+
+=== Polymorphism
+
+Of the different kinds of polymorphism in programming, Rust implements the (IMHO) most and least useful ones:
+
+* bounded parametric polymorphism: implement common behaviour of an object conforming to a trait
+* ad-hoc polymorphism of symbols: operator overloading
+
+A Rust ``trait`` is a similar construction as the Java ``interface`` or Scala ``trait``. A Rust trait can declare required (abstract) functions or define provided (implemented) methods. A trait object is a ``struct`` or ``enum`` that implements the trait. For example:
+[source,rust]
+----
+trait Animal {
+    fn name(&self) -> String;
+    fn species(&self) -> String;
+}
+
+struct Fox(String);
+
+struct Chicken(String);
+
+impl Animal for Fox {
+    fn name(&self) -> String {
+        self.0.clone()
+    }
+    fn species(&self) -> String {
+        "Fox".to_string()
+    }
+}
+
+impl Animal for Chicken {
+    fn species(&self) -> String {
+        "Chicken".to_string()
+    }
+    fn name(&self) -> String {
+        self.0.clone()
+    }
+}
+
+// &dyn indicates that the type is a trait, not an object type
+// the trait is implemented by Fox and Chicken trait objects
+fn assert_animal(animal: &dyn Animal, name: &str, species: &str) {
+    assert!(animal.name() == name);
+    assert!(animal.species() == species);
+}
+
+fn test_animals() {
+    let chicken = Chicken("Jenny".to_string());
+    let fox = Fox("Joe".to_string());
+
+    assert_animal(&chicken, "Jenny", "chicken");
+    assert_animal(&fox, "Joe", "Fox");
+}
+----
+
+A bit more complex example, reusing TitleBasics struct from the previous section:
+[source,rust]
+----
+// the following trait abstracts the access to a database row.
+// It may be implemented for different databases or for unit testing without a database.
+pub trait DbRow {
+    fn opt_string(&self, column: &str) -> Option<String>;
+    fn opt_i32(&self, column: &str) -> Option<i32>;
+}
+
+// add a from_db_row method to TitleBasics
+impl TitleBasics {
+    pub fn from_db_row(r: &dyn DbRow) -> TitleBasics {
+        TitleBasics {
+            id: r.opt_string("tconst").unwrap(),
+            title_type: r.opt_string("titletype"),
+            primary_title: r.opt_string("primarytitle"),
+            start_year: r.opt_i32("startyear"),
+        }
+    }
+}
+
+// Implement DbRow for Postgres
+// Although PgRow is coming from an external library, we can extend it,
+// a bit like implicit classes in Scala2
+use rocket_db_pools::sqlx::{Row, postgres::PgRow};
+impl DbRow for PgRow {
+    fn opt_string(&self, column: &str) -> Option<String> {
+        self.try_get::<String, &str>(column).ok()
+    }
+    fn opt_i32(&self, column: &str) -> Option<i32> {
+        self.try_get::<i32, &str>(column).ok()
+    }
+}
+
+// Use DB row for querying a DB table, with the rocket_db_pools library
+// "async" is an asynchronous function, practically meaning it returns a Future
+use rocket_db_pools::sqlx;
+use rocket_db_pools::sqlx::{Error, PgPool, postgres::PgRow};
+pub async fn query_title_basics(db_pool: &PgPool, id: &str) -> Result<TitleBasics, Error> {
+    sqlx::query("SELECT * FROM title_basics WHERE tconst = $1")
+        .bind(id)
+        .fetch_one(db_pool)
+        .await
+        .and_then(|row: PgRow| Ok(TitleBasics::from_db_row(&row)))
+}
+
+
+// A mock DB row used for unit testing
+struct TestDbRow<'r> {
+    map: HashMap<&'static str, &'r str>,
+}
+
+// Implement DbRow for the mock DB row
+impl<'r> DbRow for TestDbRow<'r> {
+    fn opt_string(&self, column: &str) -> Option<String> {
+        self.map.get(column).map(|x| x.to_string())
+    }
+    fn opt_i32(&self, column: &str) -> Option<i32> {
+        self.map.get(column).map(|x| x.parse::<i32>().unwrap())
+    }
+}
+
+// Test TitleBasics::from_db_row() without a database:
+// #[test] is an annotation macro
+#[test]
+fn test_title_basics_from_db_row() {
+    let values = HashMap::from([("tconst", "abcd")]);
+    let test_row = TestDbRow { map: values };
+    let title_basics = TitleBasics::from_db_row(&test_row);
+
+    assert!(title_basics.id == "abcd");
+    // ...
+}
+----
+
+Another, less-common polymorphism is operator overloading. You can find the list of overloadable operators https://doc.rust-lang.org/book/appendix-02-operators.html[here^]
+An example for overloading '+' from the https://doc.rust-lang.org/book/ch19-03-advanced-traits.html#default-generic-type-parameters-and-operator-overloading[Rust language guide^])
+[source,rust]
+----
+use std::ops::Add;
+
+// #[derive] is an annotation macro, it will auto-generate the implementation
+// for the traits Debug, Copy, Clone and PartialEq
+#[derive(Debug, Copy, Clone, PartialEq)]
+struct Point {
+    x: i32,
+    y: i32,
+}
+
+impl Add for Point {
+    type Output = Point;
+
+    fn add(self, other: Point) -> Point {
+        Point {
+            x: self.x + other.x,
+            y: self.y + other.y,
+        }
+    }
+}
+
+fn foo() {
+    assert_eq!(Point { x: 1, y: 0 } + Point { x: 2, y: 3 }, Point { x: 3, y: 3 });
+}
+----
+
+== Recap
+
+If you made it to the bottom, I hope you found this blog post useful. There are plenty more interesting topics in Rust programming, like unit testing, smart pointers or concurrency. Also, the discussed topics have more details to discover.
+
+Is Rust better than Java or Scala? Should we all switch to Rust? I don't think so. Managing ownership and lifetimes is a pain for the inexperienced rustacean like me. Rust is lacking useful features like inheritance and runtime introspection.
+
+Is Rust a viable alternative? Yes, it is. I think developing with Rust instead of Java, Scala, Kotlin, C#, Python or Golang is a sane choice. Rust is a feature rich language with a wide range of great 3rd party libraries. I would not mind working on commercial Rust projects.
+
+(the code examples are available at https://github.com/mcsuka/blogpost-rust-by-example )
