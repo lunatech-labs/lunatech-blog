@@ -13,10 +13,10 @@ In this blog post, I want to focus on Kotlin's more advanced features and explor
 
 When first diving into Kotlin from a Scala background, one of the most noticeable differences is the simplicity of Kotlin's type system.
 While it's not as intricate as Scala's, it's robust and expressive, offering everything you need for most projects.
-In this section, we will delve deeper into Kotlin's type system, variance annotations, and type projections, and draw comparisons with Scala's type system.
+In this section, we will delve deeper into Kotlin's type system, variance annotations, and type projections, as well as draw comparisons with Scala's type system.
 
 Just like Scala, Kotlin is a statically-typed language. All types are known at compile-time, which means the compiler can catch type-related errors early.
-Unlike Scala, Kotlin does not have a universal superclass (like Any) and lower bounds, and it handles nullability differently.
+Unlike Scala, Kotlin does not have a universal superclass (like Any) or lower bounds, and it handles nullability differently.
 While Scala has _Option_ and _Either_ types to encapsulate optional values and potential failure cases, Kotlin tries to eliminate _NullPointerExceptions_ by distinguishing nullable and non-nullable types at the type system level.
 Each type in Kotlin is either nullable (can hold a null value) or non-nullable (cannot hold a null value). This is indicated with a question mark suffix.
 Here's a simple example:
@@ -34,9 +34,9 @@ Variance annotations are Kotlin's solution to handling subtype relationships for
 If you're familiar with Scala's + and - variance annotations, Kotlin's _out_ (covariant) and _in_ (contravariant) keywords will feel quite familiar.
 
 However, Kotlin imposes stricter rules on variance to ensure type safety. In Kotlin, a type parameter marked as _out_ is only available in output positions (e.g., as the return type of a function) but not in input positions (e.g., as function parameters).
-Similarly, an _in_ parameter is only allowed in input positions. This safety measure helps prevent potential runtime _ClassCastException_ errors.
+Similarly, an _in_ parameter is only allowed at an input position. This safety measure helps prevent potential runtime _ClassCastException_ errors.
 
-Here's an example of using out (covariant) keyword in Kotlin:
+Here's an example of using the _out_ (covariant) keyword in Kotlin:
 
 [source,kotlin]
 ----
@@ -52,7 +52,7 @@ fun demo(str: MyProducer<String>) {
 
 In this example, T is declared as an out parameter, so MyProducer<String> can be treated as MyProducer<Any>, respecting the subtyping relationship between String and Any.
 
-And an example for in (contravariant):
+And an example for the _in_ (contravariant):
 
 [source,kotlin]
 ----
@@ -66,14 +66,14 @@ fun demo(ints: MyConsumer<Int>) {
     // ...
 }
 ----
-Here, T is declared as an in parameter, meaning MyConsumer<Int> can be treated as MyConsumer<Number>, again preserving the subtyping relationship.
+Here, T is declared as an _in_ parameter, meaning MyConsumer<Int> can be treated as MyConsumer<Number>, again preserving the subtyping relationship.
 
 ==== Type Projections
 In Kotlin, generic classes have type parameters which may come with variance annotations (like _in_ or _out_).
 However, not all classes can be (or should be) strictly defined as covariant or contravariant.
 There are cases where a class works with its type parameter in both _in_ and _out_ positions.
 
-This is where type projections come in. They let us define the variance for type parameters "on the fly", for specific instances of the class.
+This is where type projections come in. They let us define the variance for type parameters "on the fly" for specific instances of the class.
 This allows us to work with such classes in a more flexible and safer way.
 For example:
 
@@ -99,8 +99,8 @@ Type projections in Kotlin serve a similar purpose as use-site variance in Java 
 
 ==== Comparing with Scala's Type System
 While both Kotlin and Scala have powerful type systems, they each have unique features and handle some concepts differently.
-Scala's type system is more complex and powerful, with features such as higher-kinded types and implicit parameters, Scala can express complex abstractions that are not possible in Kotlin.
-It also offers more flexibility with its type inference, as it can infer return types and generic parameters in many cases.
+Scala's type system is more complex and powerful, with features such as higher-kinded types and implicit parameters.
+Scala can express complex abstractions that are not possible in Kotlin. It also offers more flexibility with its type inference, as it can infer return types and generic parameters in many cases.
 Additionally, Scala's use of type bounds (upper T <: Upper and lower T >: Lower) differs from Kotlin's _in_ and _out_ variance annotations, even though they serve similar purposes.
 
 Kotlin's type system is more focused on simplicity and safety. It aims to prevent common programming errors by providing strong null safety and making variance explicit.
