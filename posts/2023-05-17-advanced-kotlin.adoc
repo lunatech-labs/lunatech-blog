@@ -1,0 +1,326 @@
+= Embrace Kotlin: Where to Get Started for Scala Developers
+AnastasiiaL
+v1.0, 2023-03-31
+:title: Exploring Advanced Kotlin Features: A Deep Dive for Scala Developers
+:imagesdir: ../media/2023-03-31-embrace-kotlin
+:lang: en
+:tags: [scala, kotlin]
+
+Recently I shared my experience with trying out Kotlin coming from a Scala background. I talked about the syntax and some concept similarities.
+In this blog post, I want to focus on Kotlin's more advanced features and explore how Scala developers can leverage their existing knowledge to make the most out of Kotlin.
+
+== Kotlin's Type System: A Closer Look for Scala Developers
+
+When first diving into Kotlin from a Scala background, one of the most noticeable differences is the simplicity of Kotlin's type system.
+While it's not as intricate as Scala's, it's robust and expressive, offering everything you need for most projects.
+In this section, we will delve deeper into Kotlin's type system, variance annotations, and type projections, as well as draw comparisons with Scala's type system.
+
+Just like Scala, Kotlin is a statically-typed language. All types are known at compile-time, which means the compiler can catch type-related errors early.
+Unlike Scala, Kotlin does not have a universal superclass (like Any) or lower bounds, and it handles nullability differently.
+While Scala has _Option_ and _Either_ types to encapsulate optional values and potential failure cases, Kotlin tries to eliminate _NullPointerExceptions_ by distinguishing nullable and non-nullable types at the type system level.
+Each type in Kotlin is either nullable (can hold a null value) or non-nullable (cannot hold a null value). This is indicated with a question mark suffix.
+Here's a simple example:
+
+Kotlin:
+[source,kotlin]
+----
+var nonNullString: String = "Hello, World!"  // Non-Nullable String
+var nullString: String? = null  // Nullable String
+nonNullString = null // This line will cause a compile error
+----
+
+==== Variance Annotations
+Variance annotations are Kotlin's solution to handling subtype relationships for generic types.
+If you're familiar with Scala's + and - variance annotations, Kotlin's _out_ (covariant) and _in_ (contravariant) keywords will feel quite familiar.
+
+However, Kotlin imposes stricter rules on variance to ensure type safety. In Kotlin, a type parameter marked as _out_ is only available in output positions (e.g., as the return type of a function) but not in input positions (e.g., as function parameters).
+Similarly, an _in_ parameter is only allowed at an input position. This safety measure helps prevent potential runtime _ClassCastException_ errors.
+
+Here's an example of using the _out_ (covariant) keyword in Kotlin:
+
+[source,kotlin]
+----
+abstract class MyProducer<out T> {
+    abstract fun produce(): T
+}
+
+fun demo(str: MyProducer<String>) {
+    val objects: MyProducer<Any> = str // This is OK, since T is an out-parameter
+    // ...
+}
+----
+
+In this example, T is declared as an out parameter, so MyProducer<String> can be treated as MyProducer<Any>, respecting the subtyping relationship between String and Any.
+
+And an example for the _in_ (contravariant):
+
+[source,kotlin]
+----
+abstract class MyConsumer<in T> {
+    abstract fun consume(item: T)
+}
+
+fun demo(ints: MyConsumer<Int>) {
+    val anyConsumer: MyConsumer<Any> = ints // Error: Type mismatch.
+    val numberConsumer: MyConsumer<Number> = ints // This is OK, since T is an in-parameter
+    // ...
+}
+----
+Here, T is declared as an _in_ parameter, meaning MyConsumer<Int> can be treated as MyConsumer<Number>, again preserving the subtyping relationship.
+
+==== Type Projections
+In Kotlin, generic classes have type parameters which may come with variance annotations (like _in_ or _out_).
+However, not all classes can be (or should be) strictly defined as covariant or contravariant.
+There are cases where a class works with its type parameter in both _in_ and _out_ positions.
+
+This is where type projections come in. They let us define the variance for type parameters "on the fly" for specific instances of the class.
+This allows us to work with such classes in a more flexible and safer way.
+For example:
+
+[source,kotlin]
+----
+class MyMutableList<T> {
+    fun add(item: T) { /*...*/ }
+    fun get(index: Int): T { /*...*/ }
+}
+
+fun printFirst(myList: MyMutableList<out Any>) {
+    println(myList.get(0))
+}
+
+fun addToEnd(myList: MyMutableList<in String>, item: String) {
+    myList.add(item)
+}
+----
+In this example, MyMutableList works with T in both _in_ and _out_ positions, so we can't mark T as _in_ or _out_ in its declaration.
+Instead, we can use type projections in the functions _printFirst_ and _addToEnd_.
+
+Type projections in Kotlin serve a similar purpose as use-site variance in Java but are absent in Scala.
+
+==== Comparing with Scala's Type System
+While both Kotlin and Scala have powerful type systems, they each have unique features and handle some concepts differently.
+Scala's type system is more complex and powerful, with features such as higher-kinded types and implicit parameters.
+Scala can express complex abstractions that are not possible in Kotlin. It also offers more flexibility with its type inference, as it can infer return types and generic parameters in many cases.
+Additionally, Scala's use of type bounds (upper T <: Upper and lower T >: Lower) differs from Kotlin's _in_ and _out_ variance annotations, even though they serve similar purposes.
+
+Kotlin's type system is more focused on simplicity and safety. It aims to prevent common programming errors by providing strong null safety and making variance explicit.
+Though it might not offer the same level of flexibility and power as Scala's type system.
+
+== Delegates and Property Delegation: Adding Flexibility to Properties
+
+After getting to know Kotlin's type system in detail, it's time to explore another advanced Kotlin feature: Delegates and Property Delegation.
+This concept, which is not natively present in Scala, brings a lot of flexibility and power to how you can manage properties in your Kotlin classes.
+
+==== Understanding Property Delegation
+In Kotlin, delegation is a design pattern where an object expresses some of its responsibilities to another object, known as its delegate. This provides a way to reuse code without inheriting behavior from a parent class.
+Property delegation is a special form of this pattern where an object delegates the getter and setter responsibilities of a property to another object. To illustrate this concept, let's start with a simple example:
+
+[source,kotlin]
+----
+class Example {
+    var s: String by Delegate()
+}
+
+class Delegate {
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): String {
+        return "$thisRef, thank you for delegating '${property.name}' to me!"
+    }
+
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: String) {
+        println("$value has been assigned to '${property.name}' in $thisRef.")
+    }
+}
+
+fun main() {
+    val e = Example()
+    println(e.s)
+    e.s = "New Value"
+}
+----
+
+In this example, the _Example_ class has a property _p_ that delegates its getter and setter methods to a _Delegate_ object. This delegation is specified using the _by_ keyword.
+
+==== Kotlin's Built-In Delegates
+Kotlin's standard library provides several built-in delegates for common use cases:
+
+- _Lazy_ for lazy initialization.
+- _Observable_ for observing property changes.
+- _Vetoable_ for vetoing property changes.
+- _NotNull_ for non-null properties that must be initialized before being accessed.
+
+For example, here's how you can use the _lazy_ delegate:
+
+[source,kotlin]
+----
+val lazyValue: String by lazy {
+    println("Computed!")
+    "Hello, World!"
+}
+
+fun main() {
+    println(lazyValue)  // prints "Computed!" then "Hello, World!"
+    println(lazyValue)  // prints "Hello, World!"
+}
+----
+
+In this example, _lazyValue_ is only computed once, the first time it is accessed.
+
+Another example is _observable_, which allows you to execute custom logic whenever the property's value changes:
+
+[source,kotlin]
+----
+import kotlin.properties.Delegates
+
+class User {
+    var name: String by Delegates.observable("<no name>") { _, oldValue, newValue ->
+        println("User's name changed from $oldValue to $newValue")
+    }
+}
+
+fun main() {
+    val user = User()
+    user.name = "Alice" // prints: "User's name changed from <no name> to Alice"
+    user.name = "Bob" // prints: "User's name changed from Alice to Bob"
+}
+----
+
+==== Understanding Class Delegation
+Beyond properties, Kotlin also supports class delegation. This allows a class to delegate the implementation of an interface to another class, promoting composition over inheritance.
+
+[source,kotlin]
+----
+interface Printer {
+    fun print()
+}
+
+class RealPrinter : Printer {
+    override fun print() = println("Something")
+}
+
+class PrinterDelegate(p: Printer) : Printer by p
+
+fun main() {
+    val realPrinter = RealPrinter()
+    val printer = PrinterDelegate(realPrinter)
+    printer.print()  // prints "Something"
+}
+----
+
+==== Comparing with Scala
+In contrast, Scala does not have a built-in language feature for property or class delegation. You would typically handle such cases in Scala using trait mixins or composition patterns.
+There is no right or wrong, I am just highlighting a difference here.
+
+== Embracing Sealed Interfaces: Pattern Matching
+
+Sealed interfaces in Kotlin enable us to define a restricted hierarchy of types, allowing us to maintain more control over our type system.
+As with sealed classes, all implementations of a sealed interface must be declared in the same file as the interface itself.
+
+Here's a simple example of a sealed interface:
+
+[source,kotlin]
+----
+sealed interface Expr {
+    class Const(val number: Double) : Expr
+    class Add(val e1: Expr, val e2: Expr) : Expr
+    class Mult(val e1: Expr, val e2: Expr) : Expr
+}
+
+fun eval(expr: Expr): Double = when (expr) {
+    is Expr.Const -> expr.number
+    is Expr.Add -> eval(expr.e1) + eval(expr.e2)
+    is Expr.Mult -> eval(expr.e1) * eval(expr.e2)
+}
+----
+In this example, _Expr_ is a sealed interface with three implementations: _Const_, _Add_, and _Mult_.
+The eval function uses pattern matching to handle each type of _Expr_. Because _Expr_ is sealed, we know at compile-time that it can only have one of these three types, making our _when_ expression exhaustive.
+
+==== Comparing with Scala's Sealed Traits
+
+Sealed interfaces in Kotlin are similar to Scala's sealed traits. They both limit the extendability of a trait or interface to a known number of implementations, making them extremely useful for pattern matching.
+This feature can significantly improve the reliability of your code by making it impossible to forget a case when handling a type that belongs to a sealed hierarchy.
+While the syntax differs slightly, the concept is the same. Both Kotlin's sealed interfaces and Scala's sealed traits provide a way to define a type hierarchy where you know all possible subtypes at compile time, allowing for exhaustive when or match expressions.
+Kotlin's pattern matching has some limitations, mentioned in the previous blogpost (in short no support for deep matching, nested patterns, binding variables to parts of the matched object).
+
+== Inline Classes and Value Classes: Lightweight Wrapper for Primitive Types:
+
+This feature, similar to Scala's Value classes, allows us to create a type that carries some additional semantic meaning but without the runtime overhead of a full class.
+An inline class gets compiled to its underlying type, and no instantiation of the class occurs at runtime.
+
+Here is an example of an inline class:
+
+[source,kotlin]
+----
+inline class Password(val value: String)
+
+fun loginUser(id: String, password: Password) {
+    // ...
+}
+
+fun main() {
+    val userPassword = Password("secret")
+    loginUser("userId", userPassword)
+}
+----
+
+In this example, _Password_ is an inline class that wraps a _String_. But at runtime, _Password_ instances get compiled to simple _String_ instances.
+The use of inline classes allows us to convey additional semantic meaning (in this case, that the _String_ is a password), while also providing a type safety benefit (avoiding accidental mix-up of regular strings and passwords).
+
+==== Comparing with Scala
+
+Although inline classes in Kotlin and value classes in Scala serve a similar purpose, there are subtle differences.
+In Kotlin, inline classes can wrap any type and can also implement interfaces. They also allow for the use of null values if the wrapped type is nullable.
+On the other hand, Scala's Value classes can only extend AnyVal and can only have a single, parameterized field in the constructor. They can't take null values and cannot be subclassed or have another class/trait mixed into them.
+
+== Advanced Kotlin DSL Techniques
+
+A Domain-Specific Language (DSL) is a specialized language developed with a particular application domain in mind.
+Unlike general-purpose languages like Kotlin, Java, or Scala, DSLs are built with a specific set of tasks in mind.
+
+Kotlin's language features make it well-suited for creating internal DSLs.
+Thanks to its powerful language features, Kotlin allows developers to build internal DSLs with a look and feel that's close to natural language.
+Features like extension functions, operator overloading, lambda with receiver, and infix notation are some of the building blocks that make Kotlin a great language for DSL construction.
+
+Let's take a look at a simple DSL example for building HTML:
+
+[source,kotlin]
+----
+html {
+    head {
+        title {+"DSL Example"}
+    }
+    body {
+        h1 {+"Hello, DSL!"}
+        p {+"Welcome to the wonderful world of Kotlin DSLs."}
+    }
+}
+----
+
+This DSL is readable, expressive, and unambiguous. The HTML structure is clearly reflected in the code, making it easy to understand and maintain.
+
+==== Advanced Kotlin DSL Techniques
+There are several techniques that can help make your DSLs even more powerful and expressive:
+
+- Lambda with Receiver: This allows you to call methods on the object within the lambda without explicit referencing, giving your DSL a more natural language-like syntax.
+- Extension Functions: You can add new functionality to existing classes, allowing you to extend their use within your DSL.
+- Infix Functions: These functions can be called without dot notation or parentheses, making your DSL read more like English.
+- Operator Overloading: Kotlin allows you to overload a limited set of operators, enabling them to perform custom operations in the context of your DSL.
+
+These techniques can be used alone or together to create rich, expressive DSLs tailored to your specific needs.
+
+==== Kotlin DSLs vs Scala DSLs
+Scala, with its flexible syntax and advanced language features like implicit classes and custom operators, is also a popular choice for creating DSLs.
+I won't be judging who's the winner here :)
+I think both are good choices. And it depends largely on the specific use case and personal preference.
+
+== Concluding Thoughts
+
+As we conclude our deep dive into Kotlin's type system, inline classes, sealed interfaces, and advanced DSL techniques, we can see that Kotlin brings some impressive tools to the table.
+Its features offer a combination of safety, expressiveness, and efficiency, often with a straightforward and readable syntax.
+
+Coming from a Scala background, I've found that the transition to Kotlin isn't as challenging as one might fear.
+There are definite similarities between the two languages that help smooth the transition. However, there are also notable differences which make the learning journey interesting.
+
+As a parting thought, keep in mind that the best programming language is often the one that suits your specific needs and requirements.
+Learning new languages expands our horizons as developers, exposes us to new paradigms and ideas, and ultimately helps us write better code, irrespective of the language we choose.
+
+Happy Coding!
