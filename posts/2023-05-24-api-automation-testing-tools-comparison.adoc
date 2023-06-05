@@ -1,8 +1,8 @@
 = API Automation Testing Tools, a comparison
 TehreemFatima07
-v1.0, 2023-05-24
+v1.0, 2023-06-05
 :title: API Automation Testing Tools, a comparison
-:imagesdir: ../media/2023-05-24-api-automation-testing-tools-comparison
+:imagesdir: ../media/2023-06-05-api-automation-testing-tools-comparison
 :lang: en
 :tags: [api, test automation, testing techniques]
 
@@ -11,7 +11,7 @@ Internal projects at Lunatech play a crucial role in fostering growth, innovatio
 ++++
 </br>
 ++++
-Lunagraph is one of the internal projects that will revolutionize how we handle three crucial elements: People, Clients, and Projects. This innovative solution serves as the "source of truth" for these key elements, providing a reliable and consolidated platform that offers immense value to our internal clients.
+*Lunagraph* is one of the internal projects that will revolutionize how we handle three crucial elements: People, Clients, and Projects. This innovative solution serves as the "source of truth" for these key elements, providing a reliable and consolidated platform that offers immense value to our internal clients.
 ++++
 </br>
 ++++
@@ -47,7 +47,7 @@ pm.test('Response has valid data', function () {
 });
 ----
 
-`Newman - Newman is a command-line Collection Runner for Postman. It enables you to run and test a Postman Collection directly from the command line. It's built with extensibility in mind so that you can integrate it with your continuous integration (CI) servers and build systems. It helps to run a battery of tests from the command line even if the GUI (Graphical User Interface) is not ready`
+_Advantage: *Newman* is a command-line Collection Runner for Postman. It enables you to run and test a Postman Collection directly from the command line. It's built with extensibility in mind so that you can integrate it with your continuous integration (CI) servers and build systems. It helps to run a battery of tests from the command line even if the **GUI (Graphical User Interface) is not ready**_
 
 === 2. https://www.selenium.dev/[Selenium]
 Selenium is a very popular test automation tool for testing web (browser automation) and mobile applications which are powered by the cloud. It is not great at asserting if an individual API is working correctly or not.
@@ -101,7 +101,7 @@ const { Builder, By } = require('selenium-webdriver');
 })();
 ----
 
-`Selenium tests are useless when the GUI is not there.`
+_Limitation: Selenium tests are useless when the GUI is not there._
 
 === 3. https://playwright.dev/docs/api-testing[Playwright]
 Playwright is a Node.js library to automate Chromium, Firefox, and WebKit with a single API. Playwright is built to enable cross-browser web automation that is evergreen, capable, reliable, and fast.
@@ -141,12 +141,14 @@ const { chromium } = require('playwright');
 })();
 ----
 
-`Playwright can also be used for API automation even if there is no UI involved, but it is primarily designed for web UI testing`
+_Limitation: Playwright can also be used for API automation even if there is no UI involved, but it is primarily designed for web UI testing_
 
 === 4. https://docs.pact.io/getting_started/testing-scope[Pact]
 Pact is a tool specifically designed for *contract testing* of APIs. It allows users to create consumer-driven contracts that define the expectations between API consumers and providers.
-
-`Contract testing focuses on the compatibility and agreement between API consumer and provider, while Integration testing verifies the collaboration and correctness of interconnected components within a system.`
+++++
+</br>
+++++
+*Contract testing* focuses on the compatibility and agreement between API consumer and provider, while Integration testing verifies the collaboration and correctness of interconnected components within a system.
 ++++
 </br>
 ++++
@@ -195,7 +197,7 @@ describe('API Contract Tests', () => {
 });
 ----
 
-`Pact is for testing the contract used for communication, and not for testing particular UI behaviour or business logic.`
+_Limitation: Pact is for testing the contract used for communication, and not for testing particular UI behaviour or business logic._
 
 === 5. https://www.cypress.io/[Cypress]
 Cypress is a popular and user-friendly testing framework for end-to-end (E2E) testing of web applications. It is particularly popular among developers and testers familiar with JavaScript, as it does not require additional libraries, dependencies, or drivers to install. Cypress is executed in the same run loop as of application. Behind Cypress is a Node.js server process.
@@ -237,10 +239,11 @@ describe('API Testing with Cypress', () => {
 });
 ----
 
-`While Cypress offers some capabilities for API testing, it's important to note that it's primarily designed for web UI testing.`
+_Limitation: While Cypress offers some capabilities for API testing, it's important to note that it's primarily designed for web UI testing._
 
 === Comparison Table
 
+[%autowidth.stretch]
 |===
 |Features / Tools |Postman |Selenium |Playwright |Pact |Cypress
 
@@ -318,5 +321,7 @@ describe('API Testing with Cypress', () => {
 ++++
 </br>
 ++++
+=== Conclusion
+
 In conclusion, there are numerous API testing tools available that offer a range of features and functionalities. Each tool has its strengths and weaknesses, catering to different requirements and preferences. In case of Lunagraph it is crucial to consider that app is only single API integrated with internal application and has no GUI. By evaluating the above-mentioned tools we decided to go for the *Postman*, because of its ease of use, integration and reporting capabilities.
 
