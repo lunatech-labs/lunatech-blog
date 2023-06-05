@@ -2,7 +2,7 @@
 TehreemFatima07
 v1.0, 2023-06-05
 :title: API Automation Testing Tools, a comparison
-:imagesdir: ../media/2023-06-05-api-automation-testing-tools-comparison
+:imagesdir: ../media/2023-05-24-api-automation-testing-tools-comparison
 :lang: en
 :tags: [api, test automation, testing techniques]
 
