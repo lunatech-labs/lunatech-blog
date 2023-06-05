@@ -1,0 +1,322 @@
+= API Automation Testing Tools, a comparison
+TehreemFatima07
+v1.0, 2023-05-24
+:title: API Automation Testing Tools, a comparison
+:imagesdir: ../media/2023-05-24-api-automation-testing-tools-comparison
+:lang: en
+:tags: [api, test automation, testing techniques]
+
+
+Internal projects at Lunatech play a crucial role in fostering growth, innovation, and knowledge-sharing within employees. These projects serve as the sandbox where new joiners are given the opportunity to explore, learn, and contribute in a hands-on manner.
+++++
+</br>
+++++
+Lunagraph is one of the internal projects that will revolutionize how we handle three crucial elements: People, Clients, and Projects. This innovative solution serves as the "source of truth" for these key elements, providing a reliable and consolidated platform that offers immense value to our internal clients.
+++++
+</br>
+++++
+Lunagraph's vision is to be able to reliably service internal clients with a single API integration, previously many apps were used for this integration. One of the task for this project is to have automated testing of APIs for faster test maintenance and refactoring.
+
+=== What is an API Testing?
+API testing refers to the practice of testing Application Programming Interfaces (APIs) to ensure their functionality, reliability, security, and performance. It allows software teams to improve APIs without the worry of introducing bugs or disrupting current functionalities. The process of upgrading code dependencies becomes easier when API verification can be performed automatically.
+API testing can be automated by using a testing tool to programmatically execute API tests at certain times or frequencies, or in CI/CD pipelines.
+
+=== API Automation Testing Tools
+To start with the API Automation Testing, first step is to select the Testing tool. These tools aim to find errors and potential API code and business logic problems. They can test the functionality of APIs and their compatibility with different platforms and devices. This blog post explores some API Automation Testing tools, to present the strengths and weaknesses of them and to give the comparison that which tool best fits the purpose of API Testing of Lunagraph.
+
+=== 1. https://www.postman.com/[Postman]
+Postman is a collaboration platform for API development. It is a popular API client, and it allows us to design, build, share, test, and document APIs. Key features of the Postman include:
+
+- Easy-to-use REST client
+- Available for both automated and exploratory testing
+- Provide many integrations like support for Swagger & RAML formats
+- Run, test, document, and monitoring features
+- Black-box style test - Postman (and Newman) do not require direct access to the code for the System under Test (SUT), as they test it from the outside. It's ideally suited to exploring and collaborating on APIs and running functional API tests.
+
+Sample code for writing a test in Postman:
+[source,javascript]
+----
+// Perform assertions on the response
+pm.test('Status code is 200', function () {
+  pm.response.to.have.status(200);
+});
+
+pm.test('Response has valid data', function () {
+  var jsonData = pm.response.json();
+  pm.expect(jsonData).to.have.property('key', 'value');
+});
+----
+
+`Newman - Newman is a command-line Collection Runner for Postman. It enables you to run and test a Postman Collection directly from the command line. It's built with extensibility in mind so that you can integrate it with your continuous integration (CI) servers and build systems. It helps to run a battery of tests from the command line even if the GUI (Graphical User Interface) is not ready`
+
+=== 2. https://www.selenium.dev/[Selenium]
+Selenium is a very popular test automation tool for testing web (browser automation) and mobile applications which are powered by the cloud. It is not great at asserting if an individual API is working correctly or not.
+++++
+</br>
+++++
+Selenium tests perform UI actions on a website such as
+
+- Enter some text
+- Click on some buttons
+- Retrieve values from web elements
+
+API tests can be used to verify and validate the system earlier in the development cycle. Even when there’s not a single fragment of UI in place, the API tests can still be utilised to test the APIs in detail. Since, selenium is a browser automation tool, and it doesn't work well when there are no “buttons to press”.
+++++
+</br>
+++++
+Key features of the Selenium include:
+
+- Selenium supports making HTTP requests to APIs using programming languages like Java, Python, C#, etc. Libraries like HttpClient or HttpURLConnection can be used to send requests and receive responses.
+- Selenium provides a robust framework for automating test scenarios. Using Selenium WebDriver to write scripts that interact with APIs programmatically, perform test data setup, execute API requests, and validate the responses.
+- Selenium can be integrated with various test frameworks, such as JUnit, TestNG, NUnit, etc. These frameworks provide additional features like test organisation, reporting, and management, making it easier to structure and execute API tests.
+- Although primarily designed for web UI testing, Selenium's cross-browser compatibility allows you to test APIs across different browsers. This can be useful if you want to verify that your APIs function correctly on various browser platforms.
+
+Sample code for writing an api test using Selenium with JavaScript:
+[source,javascript]
+----
+const { Builder, By } = require('selenium-webdriver');
+
+(async () => {
+  // Set up Selenium WebDriver
+  const driver = await new Builder().forBrowser('chrome').build();
+
+  try {
+    // Make API request using WebDriver's get() method
+    await driver.get('https://api.example.com/users');
+
+    // Extract and validate the API response
+    const responseText = await driver.findElement(By.tagName('pre')).getText();
+    const responseJson = JSON.parse(responseText);
+
+    // Perform assertions on the API response
+    console.log(responseJson); // Display the response JSON
+    // Add your assertions here
+
+    // Optionally, perform additional API tests or actions using WebDriver
+
+  } finally {
+    // Close the WebDriver instance
+    await driver.quit();
+  }
+})();
+----
+
+`Selenium tests are useless when the GUI is not there.`
+
+=== 3. https://playwright.dev/docs/api-testing[Playwright]
+Playwright is a Node.js library to automate Chromium, Firefox, and WebKit with a single API. Playwright is built to enable cross-browser web automation that is evergreen, capable, reliable, and fast.
+++++
+</br>
+++++
+Key features of the Playwright include:
+
+- Cross-browser (Chromium, WebKit (the browser engine for Safari), and Firefox)
+- Cross-platform (Test on Windows, Linux, and macOS, locally or on CI, headless or headed)
+- Multi-language support (Playwright support C#, Java, and Python)
+- It supports different types of testing like end-to-end, functional, and API testing.
+- Even though Playwright supports API testing, its APIRequest method doesn't support disabling follow redirects.
+- Playwright has the limited REST API testing
+- It generates an HTML report to view test execution results in the browser. It contains visual mismatches and test artifacts like screenshots, traces, error logs, and video recordings.
+- Playwright's API capabilities, such as network interception and manipulation, make it convenient for API testing and automation tasks. It allows users to simulate different scenarios, handle headers and cookies, and perform assertions on the API responses.
+
+Sample code for writing an api test in Playwright:
+[source,javascript]
+----
+const { chromium } = require('playwright');
+
+(async () => {
+  const browser = await chromium.launch();
+  const context = await browser.newContext();
+  const page = await context.newPage();
+
+  // Make API requests using Playwright's page.goto() or fetch()
+  const response = await page.goto('https://api.example.com/users', { method: 'GET' });
+  const responseBody = await response.json();
+
+  // Perform assertions on the API response
+  expect(response.status()).toBe(200);
+  expect(responseBody.length).toBeGreaterThan(0);
+
+  await browser.close();
+})();
+----
+
+`Playwright can also be used for API automation even if there is no UI involved, but it is primarily designed for web UI testing`
+
+=== 4. https://docs.pact.io/getting_started/testing-scope[Pact]
+Pact is a tool specifically designed for *contract testing* of APIs. It allows users to create consumer-driven contracts that define the expectations between API consumers and providers.
+
+`Contract testing focuses on the compatibility and agreement between API consumer and provider, while Integration testing verifies the collaboration and correctness of interconnected components within a system.`
+++++
+</br>
+++++
+Key features of Pact includes:
+
+- Multi-language Support: Pact supports multiple programming languages, such as Java, Ruby, JavaScript, .NET, and more. This enables teams to write tests and generate contracts in their preferred programming language.
+- Pact facilitates integration testing by focusing on the interactions between API consumer and provider.
+- Pact integrates with CI/CD pipelines, enabling automated contract verification as part of the continuous integration and deployment process.
+- Pact offers reporting and test output features to track the results of contract tests. It helps identify any failures or discrepancies, making it easier to diagnose and resolve issues.
+- Pact offers extensibility through plugins and integrations with other testing and development tools. It can be integrated with various testing frameworks, build tools, and IDEs to enhance the testing workflow
+
+Sample code for writing an api test in Playwright:
+[source,javascript]
+----
+const { Pact } = require('@pact-foundation/pact');
+const axios = require('axios');
+
+describe('API Contract Tests', () => {
+  let provider;
+
+  beforeAll(async () => {
+    provider = new Pact({
+      consumer: 'YourConsumer',
+      provider: 'YourProvider',
+    });
+    await provider.setup();
+  });
+
+  it('should validate the API contract', async () => {
+    await provider.addInteraction({
+      uponReceiving: 'a request to get users',
+      withRequest: { method: 'GET', path: '/users' },
+      willRespondWith: { status: 200, body: [{ id: 1, name: 'John Doe' }] },
+    });
+
+    const response = await axios.get(provider.mockService.baseUrl + '/users');
+
+    expect(response.status).toBe(200);
+    expect(response.data).toEqual([{ id: 1, name: 'John Doe' }]);
+  });
+
+  afterAll(async () => {
+    await provider.verify();
+    await provider.finalize();
+  });
+});
+----
+
+`Pact is for testing the contract used for communication, and not for testing particular UI behaviour or business logic.`
+
+=== 5. https://www.cypress.io/[Cypress]
+Cypress is a popular and user-friendly testing framework for end-to-end (E2E) testing of web applications. It is particularly popular among developers and testers familiar with JavaScript, as it does not require additional libraries, dependencies, or drivers to install. Cypress is executed in the same run loop as of application. Behind Cypress is a Node.js server process.
+++++
+</br>
+++++
+Key Features of the Cypress include:
+
+- It provides various assertions and built-in commands to validate API responses. It can be used to verify the response status code, headers, and body content to ensure the API behaves as expected.
+- It allows to make HTTP requests to APIs using its built-in cy.request() command. You can send GET, POST, PUT, DELETE, and other HTTP methods, and capture the API responses for further validation.
+- Cypress comes with a test runner that provides an interactive environment for running tests and debugging. This allows to inspect API requests and responses in real-time, making it easier to identify and troubleshoot issues during API testing.
+- It only supports the JavaScript language for creating test cases.
+
+Sample code for writing an api test in Cypress:
+[source,javascript]
+----
+describe('API Testing with Cypress', () => {
+  it('Should verify API response', () => {
+    cy.request({
+      method: 'GET',
+      url: 'https://api.example.com/users',
+      headers: {
+        'Authorization': 'Bearer your_token_here'
+      },
+    }).then((response) => {
+      // Assertion on response status code
+      expect(response.status).to.equal(200);
+
+      // Assertion on response body or properties
+      expect(response.body).to.have.property('data');
+      expect(response.body.data).to.be.an('array').and.have.length.greaterThan(0);
+
+      // Assertion on specific data within the response
+      const user = response.body.data[0];
+      expect(user).to.have.property('name').that.is.a('string');
+      expect(user).to.have.property('email').that.is.a('string').and.contains('@');
+    });
+  });
+});
+----
+
+`While Cypress offers some capabilities for API testing, it's important to note that it's primarily designed for web UI testing.`
+
+=== Comparison Table
+
+|===
+|Features / Tools |Postman |Selenium |Playwright |Pact |Cypress
+
+|REST API Testing
+|&#9989;
+|Limited
+|Limited
+|Limited
+|Limited
+
+|Automated assertion generation
+|&#9989;
+|&#10062;
+|&#9989;
+|&#9989;
+|&#9989;
+
+|Data Driven Support
+|&#9989;
+|&#9989;
+|&#9989;
+|&#9989;
+|&#9989;
+
+|Code Reusability
+|&#9989;
+|&#9989;
+|&#9989;
+|Limited
+|&#9989;
+
+|Environment Handling
+|&#9989;
+|&#9989;
+|&#9989;
+|&#10062;
+|&#9989;
+
+|Test Reports
+|&#9989;
+|&#9989;
+|&#9989;
+|&#9989;
+|&#9989;
+
+|Scripting Languages
+|Javascript
+|Multiple
+|Multiple
+|Multiple
+|Javascript
+
+|Web UI Testing
+|&#9989;
+|&#9989;
+|&#9989;
+|&#10062;
+|&#9989;
+
+|API testing without GUI
+|&#9989;
+|&#10062;
+|&#9989;
+|&#9989;
+|&#10062;
+
+|Price
+|Free - $12per user /month
+|Open Source
+|Open Source
+|Open Source
+|Open Source
+|===
+
+++++
+</br>
+++++
+In conclusion, there are numerous API testing tools available that offer a range of features and functionalities. Each tool has its strengths and weaknesses, catering to different requirements and preferences. In case of Lunagraph it is crucial to consider that app is only single API integrated with internal application and has no GUI. By evaluating the above-mentioned tools we decided to go for the *Postman*, because of its ease of use, integration and reporting capabilities.
+
