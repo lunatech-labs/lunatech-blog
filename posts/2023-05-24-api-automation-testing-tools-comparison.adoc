@@ -19,11 +19,13 @@ Lunagraph's vision is to be able to reliably service internal clients with a sin
 
 === What is an API Testing?
 API testing refers to the practice of testing Application Programming Interfaces (APIs) to ensure their functionality, reliability, security, and performance. It allows software teams to improve APIs without the worry of introducing bugs or disrupting current functionalities. The process of upgrading code dependencies becomes easier when API verification can be performed automatically.
+API testing can be automated by using a testing tool to programmatically execute API tests at certain times or frequencies, or in CI/CD pipelines.
 
-To start with the API Testing, first step was to select the API Testing tool. This blog post explores the API Testing tools, to present the strengths and weakness of them and to give the comparison that which tools best fits the purpose of API Testing of Lunagraph
+=== API Automation Testing Tools
+To start with the API Automation Testing, first step is to select the Testing tool. These tools aim to find errors and potential API code and business logic problems. They can test the functionality of APIs and their compatibility with different platforms and devices. This blog post explores some API Automation Testing tools, to present the strengths and weaknesses of them and to give the comparison that which tool best fits the purpose of API Testing of Lunagraph.
 
 === 1. Postman
-Postman is a collaboration platform for API development. It is a popular API client and it allows us to design, build, share, test, and document APIs. Key features of the Postman include:
+Postman is a collaboration platform for API development. It is a popular API client, and it allows us to design, build, share, test, and document APIs. Key features of the Postman include:
 
 - Easy-to-use REST client
 - Available for both automated and exploratory testing
@@ -45,7 +47,7 @@ pm.test('Response has valid data', function () {
 });
 ----
 
-`Newman – Newman is Postman’s interface that runs a battery of tests from the command line even if the GUI (Graphical User Interface) is not ready`
+`Newman - Newman is a command-line Collection Runner for Postman. It enables you to run and test a Postman Collection directly from the command line. It's built with extensibility in mind so that you can integrate it with your continuous integration (CI) servers and build systems. It helps to run a battery of tests from the command line even if the GUI (Graphical User Interface) is not ready`
 
 === 2. Selenium
 Selenium is a very popular test automation tool for testing web (browser automation) and mobile applications which are powered by the cloud. It is not great at asserting if an individual API is working correctly or not.
@@ -58,7 +60,7 @@ Selenium tests perform UI actions on a website such as
 - Click on some buttons
 - Retrieve values from web elements
 
-API tests can be used to verify and validate the system earlier in the development cycle. Even when there’s not a single fragment of UI in place, the API tests can still be utilised to test the APIs in detail. Since, selenium is a browser automation tool and it doesn’t work well when there are no “buttons to press”.
+API tests can be used to verify and validate the system earlier in the development cycle. Even when there’s not a single fragment of UI in place, the API tests can still be utilised to test the APIs in detail. Since, selenium is a browser automation tool, and it doesn't work well when there are no “buttons to press”.
 ++++
 </br>
 ++++
@@ -114,7 +116,7 @@ Key features of the Playwright include:
 - It supports different types of testing like end-to-end, functional, and API testing.
 - Even though Playwright supports API testing, its APIRequest method doesn't support disabling follow redirects.
 - Playwright has the limited REST API testing
-- It generate an HTML report to view test execution results in the browser. It contains visual mismatches and test artifacts like screenshots, traces, error logs, and video recordings.
+- It generates an HTML report to view test execution results in the browser. It contains visual mismatches and test artifacts like screenshots, traces, error logs, and video recordings.
 - Playwright's API capabilities, such as network interception and manipulation, make it convenient for API testing and automation tasks. It allows users to simulate different scenarios, handle headers and cookies, and perform assertions on the API responses.
 
 Sample code for writing an api test in Playwright:
