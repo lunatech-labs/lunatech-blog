@@ -24,7 +24,7 @@ API testing can be automated by using a testing tool to programmatically execute
 === API Automation Testing Tools
 To start with the API Automation Testing, first step is to select the Testing tool. These tools aim to find errors and potential API code and business logic problems. They can test the functionality of APIs and their compatibility with different platforms and devices. This blog post explores some API Automation Testing tools, to present the strengths and weaknesses of them and to give the comparison that which tool best fits the purpose of API Testing of Lunagraph.
 
-=== 1. Postman
+=== 1. https://www.postman.com/[Postman]
 Postman is a collaboration platform for API development. It is a popular API client, and it allows us to design, build, share, test, and document APIs. Key features of the Postman include:
 
 - Easy-to-use REST client
@@ -49,7 +49,7 @@ pm.test('Response has valid data', function () {
 
 `Newman - Newman is a command-line Collection Runner for Postman. It enables you to run and test a Postman Collection directly from the command line. It's built with extensibility in mind so that you can integrate it with your continuous integration (CI) servers and build systems. It helps to run a battery of tests from the command line even if the GUI (Graphical User Interface) is not ready`
 
-=== 2. Selenium
+=== 2. https://www.selenium.dev/[Selenium]
 Selenium is a very popular test automation tool for testing web (browser automation) and mobile applications which are powered by the cloud. It is not great at asserting if an individual API is working correctly or not.
 ++++
 </br>
@@ -103,7 +103,7 @@ const { Builder, By } = require('selenium-webdriver');
 
 `Selenium tests are useless when the GUI is not there.`
 
-=== 3. Playwright
+=== 3. https://playwright.dev/docs/api-testing[Playwright]
 Playwright is a Node.js library to automate Chromium, Firefox, and WebKit with a single API. Playwright is built to enable cross-browser web automation that is evergreen, capable, reliable, and fast.
 ++++
 </br>
@@ -143,7 +143,7 @@ const { chromium } = require('playwright');
 
 `Playwright can also be used for API automation even if there is no UI involved, but it is primarily designed for web UI testing`
 
-=== 4. Pact
+=== 4. https://docs.pact.io/getting_started/testing-scope[Pact]
 Pact is a tool specifically designed for *contract testing* of APIs. It allows users to create consumer-driven contracts that define the expectations between API consumers and providers.
 
 `Contract testing focuses on the compatibility and agreement between API consumer and provider, while Integration testing verifies the collaboration and correctness of interconnected components within a system.`
@@ -197,7 +197,7 @@ describe('API Contract Tests', () => {
 
 `Pact is for testing the contract used for communication, and not for testing particular UI behaviour or business logic.`
 
-=== 5. Cypress
+=== 5. https://www.cypress.io/[Cypress]
 Cypress is a popular and user-friendly testing framework for end-to-end (E2E) testing of web applications. It is particularly popular among developers and testers familiar with JavaScript, as it does not require additional libraries, dependencies, or drivers to install. Cypress is executed in the same run loop as of application. Behind Cypress is a Node.js server process.
 ++++
 </br>
