@@ -245,7 +245,7 @@ _Limitation: While Cypress offers some capabilities for API testing, it's import
 
 [cols="5,3,3,3,3,3"]
 |===
-|Features / Tools |Postman |Selenium |Playwright |Pact    |Cypress  
+|Features / Tools |Postman |Selenium |Playwright |Pact    |Cypress
 
 |[.small]#REST API Testing#
 |&#9989;
@@ -319,6 +319,5 @@ _Limitation: While Cypress offers some capabilities for API testing, it's import
 |===
 
 === Conclusion
-
 In conclusion, there are numerous API testing tools available that offer a range of features and functionalities. Each tool has its strengths and weaknesses, catering to different requirements and preferences. In case of Lunagraph it is crucial to consider that app is only single API integrated with internal application and has no GUI. By evaluating the above-mentioned tools we decided to go for the *Postman*, because of its ease of use, integration and reporting capabilities.
 
