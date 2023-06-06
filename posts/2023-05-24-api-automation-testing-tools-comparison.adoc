@@ -245,72 +245,72 @@ _Limitation: While Cypress offers some capabilities for API testing, it's import
 
 [cols="5,3,3,3,3,3"]
 |===
-|Features / Tools |Postman |Selenium |Playwright |Pact |Cypress
+|Features / Tools |Postman |Selenium |Playwright |Pact    |Cypress
 
-|REST API Testing
+|[.small]#REST API Testing#
 |&#9989;
 |[.small]#Limited#
 |[.small]#Limited#
 |[.small]#Limited#
 |[.small]#Limited#
 
-|Automated assertion generation
+|[.small]#Automated assertion generation#
 |&#9989;
 |&#10062;
 |&#9989;
 |&#9989;
 |&#9989;
 
-|Data Driven Support
+|[.small]#Data Driven Support#
 |&#9989;
 |&#9989;
 |&#9989;
 |&#9989;
 |&#9989;
 
-|Code Reusability
+|[.small]#Code Reusability#
 |&#9989;
 |&#9989;
 |&#9989;
 |[.small]#Limited#
 |&#9989;
 
-|Environment Handling
+|[.small]#Environment Handling#
 |&#9989;
 |&#9989;
 |&#9989;
 |&#10062;
 |&#9989;
 
-|Test Reports
+|[.small]#Test Reports#
 |&#9989;
 |&#9989;
 |&#9989;
 |&#9989;
 |&#9989;
 
-|Scripting Languages
+|[.small]#Scripting Languages#
 |[.small]#Javascript#
 |[.small]#Multiple#
 |[.small]#Multiple#
 |[.small]#Multiple#
 |[.small]#Javascript#
 
-|Web UI Testing
+|[.small]#Web UI Testing#
 |&#9989;
 |&#9989;
 |&#9989;
 |&#10062;
 |&#9989;
 
-|API testing without GUI
+|[.small]#API testing without GUI#
 |&#9989;
 |&#10062;
 |&#9989;
 |&#9989;
 |&#10062;
 
-|Price
+|[.small]#Price#
 |[.small]#Free - $12per user /month#
 |[.small]#Open Source#
 |[.small]#Open Source#
@@ -319,6 +319,5 @@ _Limitation: While Cypress offers some capabilities for API testing, it's import
 |===
 
 === Conclusion
-
 In conclusion, there are numerous API testing tools available that offer a range of features and functionalities. Each tool has its strengths and weaknesses, catering to different requirements and preferences. In case of Lunagraph it is crucial to consider that app is only single API integrated with internal application and has no GUI. By evaluating the above-mentioned tools we decided to go for the *Postman*, because of its ease of use, integration and reporting capabilities.
 
