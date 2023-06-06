@@ -243,16 +243,16 @@ _Limitation: While Cypress offers some capabilities for API testing, it's import
 
 === Comparison Table
 
-[%autowidth.stretch]
+[cols="5,3,3,3,3,3"]
 |===
 |Features / Tools |Postman |Selenium |Playwright |Pact |Cypress
 
 |REST API Testing
 |&#9989;
-|Limited
-|Limited
-|Limited
-|Limited
+|[.small]#Limited#
+|[.small]#Limited#
+|[.small]#Limited#
+|[.small]#Limited#
 
 |Automated assertion generation
 |&#9989;
@@ -272,7 +272,7 @@ _Limitation: While Cypress offers some capabilities for API testing, it's import
 |&#9989;
 |&#9989;
 |&#9989;
-|Limited
+|[.small]#Limited#
 |&#9989;
 
 |Environment Handling
@@ -290,11 +290,11 @@ _Limitation: While Cypress offers some capabilities for API testing, it's import
 |&#9989;
 
 |Scripting Languages
-|Javascript
-|Multiple
-|Multiple
-|Multiple
-|Javascript
+|[.small]#Javascript#
+|[.small]#Multiple#
+|[.small]#Multiple#
+|[.small]#Multiple#
+|[.small]#Javascript#
 
 |Web UI Testing
 |&#9989;
@@ -311,16 +311,13 @@ _Limitation: While Cypress offers some capabilities for API testing, it's import
 |&#10062;
 
 |Price
-|Free - $12per user /month
-|Open Source
-|Open Source
-|Open Source
-|Open Source
+|[.small]#Free - $12per user /month#
+|[.small]#Open Source#
+|[.small]#Open Source#
+|[.small]#Open Source#
+|[.small]#Open Source#
 |===
 
-++++
-</br>
-++++
 === Conclusion
 
 In conclusion, there are numerous API testing tools available that offer a range of features and functionalities. Each tool has its strengths and weaknesses, catering to different requirements and preferences. In case of Lunagraph it is crucial to consider that app is only single API integrated with internal application and has no GUI. By evaluating the above-mentioned tools we decided to go for the *Postman*, because of its ease of use, integration and reporting capabilities.
