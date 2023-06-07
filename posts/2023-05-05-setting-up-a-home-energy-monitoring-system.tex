@@ -1,0 +1,216 @@
+\documentclass[a4paper]{article}
+
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{fixltx2e}
+\usepackage{xcolor}
+\usepackage[makeroom]{cancel}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepgfplotslibrary{fillbetween}
+
+\def\SP#1{\textsuperscript{#1}}
+\def\SB#1{\textsubscript{{#1}}}
+\def\SPSB#1#2{\rlap{\textsuperscript{#1}}\SB{#2}}
+
+\pgfplotsset{every axis/.append style={
+                    axis x line=middle,    % put the x axis in the middle
+                    axis y line=middle,    % put the y axis in the middle
+                    axis line style={<->}, % arrows on the axis
+                    xlabel={$x$},          % default put x on x-axis
+                    ylabel={$y$},          % default put y on y-axis
+                    label style={font=\large},
+                    tick xlabel style={font=\large}  
+                    }}
+
+\begin{document}
+In Europe, alternating current (AC) systems, the polarity of the line voltage cycles 50 times  per second (50Hz) following a sinusoidal curve. This means that each cycle takes 20ms\\
+
+When a load is connected to an AC line, the current will in general also be sinusoidal, but it may be shifted in phase by an angle $\theta$ (We'll get back to this later in this document as in the most general case,  current and voltage may deviate from a pure sinusoidal form).\\
+
+With respect to the phase angle, three cases can be distinguished:
+
+\begin{itemize}
+	\item $\theta$ = 0 for a resistive load. Examples of this an electrical heater system or an incandescent lightbulb.
+	\item $\theta$ $>$ 0 for inductive loads. The current lags the voltage. This is the case for electrical motors or coils.
+	\item  $\theta$ $<$ 0 for capacitive loads. The current precedes the voltage. This is the case for capacitors and battery chargers.
+\end{itemize}\\
+
+In the most general case, a load acts as a combination of a resistive and a reactive part, where the latter is either capacitive or inductive.\\
+
+The following graph show a line voltage and a current plotted over time. In this case, the current precedes the voltage by an angle (the so-called phase angle of 60 degrees ($\pi$/3 radians).\\
+
+\begin{tikzpicture}
+  \begin{axis}[
+    ymin=-1.1, ymax=1.1,
+    xmin=-1, xmax=7.0,
+    axis x line=middle,
+    axis y line=middle,
+    %axis line style={->},
+    %xtick distance = pi,
+    xlabel=$x (ms)$,
+    ylabel=$$,
+    %ylabel={$f(x) = sin(x)^2 - x +9$},
+    xtick={0.0, 1.5708, 3.1415, 4.7124, 6.2832,},
+    xticklabels={0, 5, 10, 15, 20},
+    yticklabels={},
+    domain=-0.1:2*pi+0.1,
+    every x tick/.style={color=black, thick},
+    legend pos=outer north east,
+        % (so the legend looks a bit better)
+    legend cell align=left,
+  ] 
+    \addplot+[samples=200, mark=no] {sin(deg(x))};
+    \addplot+[samples=200, mark=no] {0.7*sin(deg(x)-60)};
+    \legend{
+            Line voltage,
+            Current,
+    }
+  \end{axis}
+\end{tikzpicture}\\
+
+
+At any one point in time, the instantaneous power $P_t_$, is the product of the voltage $U_t_$ and current $I_t_$ at that time:\\
+
+\begin{align*}
+  P(t) &= U(t) * I(t)
+\end{align*}\\
+
+In figures 1 and 2, we plot the curves for the cases where $\theta = 0$ (purelly resistive load) and $\theta = \pi / 2$. The instantaneous power in the former case is always positive, whereas in the capacitive case it's alternately positive and negative. The physical interpretation is that for a resistive load, the direction of energy transfer is from the generating side to the consumption side. For the purely capacitive load case, energy flows in equal amounts from- and to the producer and the load. The effect is that, on balance, no net energy is transferred between the two and there's just energy "bouncing" between opposite ends.
+
+\begin{align*}
+ %\begin{equation}
+  U(t) &= U\SB{peak}  * sin(2\pi ft)\\
+ %\end{equation}
+
+  I(t) &= I\SB{peak} * sin(2\pi ft + \pi/3)\\
+\end{align*}\\
+
+\begin{figure}
+  \begin{tikzpicture}
+    \begin{axis}[
+      ymin=-1.1, ymax=1.1,
+      xmin=-1, xmax=7,
+      axis x line=middle,
+      axis y line=middle,
+      axis line style={->},
+      %xtick distance = pi,
+      xlabel=$x$,
+      ylabel=$y$,
+      %ylabel={$f(x) = sin(x)^2 - x +9$},
+      xtick={0, 1.5708, 3.1415, 4.7124, 6.2832,},
+      xticklabels={0, $\frac{\pi}{2}$, $\pi$, $\frac{3\pi}{2}$, $\pi$},
+      domain=-0.1:2*pi+0.1,
+      every x tick/.style={color=black, thick},
+      legend pos=outer north east,
+          % (so the legend looks a bit better)
+      legend cell align=left,
+    ] 
+      \addplot+[samples=200, mark=no] {sin(deg(x)};
+      \addplot+[samples=200, mark=no] {0.7 * sin(deg(x)};
+      \addplot+[draw=none,name path=B, mark=no] {0};
+      \addplot+[line width=1pt, color=black, samples=200, mark=no, name path = A] {sin(deg(x)) * 0.7 * sin(deg(x)};
+      \addplot+[green] fill between[of=A and B];
+      \legend{
+              U(x) = sin(x),
+              I(x) = 0.7 * sin(x),
+              P(x) = U(x) * I(x),
+      }
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Perfect resistive load case}\label{fig:myplot}
+\end{figure}\\
+
+\begin{figure}
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      ymin=-1.1, ymax=1.1,
+      xmin=-1, xmax=7,
+      axis x line=middle,
+      axis y line=middle,
+      axis line style={->},
+      %xtick distance = pi,
+      xlabel=$x$,
+      ylabel=$y$,
+      %ylabel={$f(x) = sin(x)^2 - x +9$},
+      xtick={0, 1.5708, 3.1415, 4.7124, 6.2832,},
+      xticklabels={0, $\frac{\pi}{2}$, $\pi$, $\frac{3\pi}{2}$, $\pi$},
+      domain=-0.1:2*pi+0.1,
+      every x tick/.style={color=black, thick},
+      legend pos=outer north east,
+          % (so the legend looks a bit better)
+      legend cell align=left,
+    ] 
+      \addplot+[samples=200, mark=no] {sin(deg(x)};
+      \addplot+[samples=200, mark=no] {0.7 * sin(deg(x)-90};
+      \addplot+[draw=none,name path=B, mark=no] {0};
+      \addplot+[line width=1pt, color=black, samples=200, mark=no, name path = A] {sin(deg(x)) * 0.7 * sin(deg(x)-90)};
+      \addplot+[green] fill between[of=A and B];
+      \legend{
+        U(x) = sin(x),
+        I(x) = 0.7 * sin(x + $\frac{\pi}{2}$),
+        P(x) = U(x) * I(x),
+      }
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Perfect capacitive load case}\label{fig:myplot}
+\end{figure}\\
+
+
+We want to calculate the average effective power of two sine waves that are out of phase by an angle of {\theta}.\\
+
+This can be expressed as 
+
+\begin{align*}
+  P_{real}_ &=\frac{1}{2 \pi}\int_0^{2\pi}\sin{x} * \sin{(x + \theta)}dx\\
+\end{align*}
+
+We transform the integral using these base trigonometric identities:
+
+\begin{align*}
+  \cos{(\alpha - \beta}) &= \cos{(\alpha)} cos{(\beta)} +  \sin{(\alpha)} sin{(\beta)}\\
+  \cos{(\alpha + \beta}) &= \cos{(\alpha)} cos{(\beta)} -  \sin{(\alpha)} sin{(\beta)}\\
+\end{align*}
+
+Subtracting these gives:
+
+\begin{align*}
+  \cos{(\alpha - \beta}) - \cos{(\alpha + \beta}) &= 2 \sin{(\alpha)} sin{(\beta)}\\
+\end{align*}
+
+or:
+
+\begin{align*}
+  \sin{(\alpha)} sin{(\beta)} = \frac{1}{2} (\cos{(\alpha - \beta}) - \cos{(\alpha + \beta}))
+\end{align*}
+
+Hence:
+
+\begin{align*}
+  \sin{(x)} sin{(x +\theta)} = \frac{1}{2} (\cos{(\theta}) - \cos{(2 x + \theta}))
+\end{align*}
+
+Applying this to P\SS{real}, we get
+
+\begin{align*}
+  P\SB{real} &= \frac{1}{2 \pi}\int_0^{2\pi}\sin{(x)} * \sin{(x + \theta)}dx\\
+  &= \frac{1}{4\pi}\int_0^{2\pi}\cos{(\theta}) dx - \frac{1}{4\pi}\cancelto{0}{\int_0^{2\pi}\cos{(2 x +\theta}) dx}\\
+  &= \frac{1}{4\pi}\cos{(\theta})\int_0^{2\pi} dx\\
+  &= \frac{1}{4\pi}\cos{(\theta}) \bigg[x \bigg]_{0}^{2\pi} dx\\
+  &= \frac{1}{4 \cancel{\pi}}\cos{(\theta}) 2\cancel{\pi}\\
+  &= \frac{\cos(\theta)}{2}
+\end{align*}
+
+We get the final result:
+
+\begin{align*}
+  P\SB{real} &=\frac{1}{2 \pi}\int_0^{2\pi}\sin{x} * \sin{(x + \theta)}dx = \frac{\cos{\theta}}{2}\\
+\end{align*}\\
+
+\begin{align*}
+  P\SB{real}\\
+  P\SPSB{2}{apparent} &= P\SPSB{2}{real} + P\SPSB{2}{reactive}\\
+  \sin{x} * \sin{(x + \theta)} &= 0.54\\
+\end{align*}
+
+\end{document}
