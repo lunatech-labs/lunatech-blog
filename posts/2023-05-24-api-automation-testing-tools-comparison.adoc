@@ -7,7 +7,7 @@ v1.0, 2023-06-05
 :tags: [api, test automation, testing techniques]
 
 
-Internal projects at Lunatech play a crucial role in fostering growth, innovation, and knowledge-sharing within employees. These projects serve as the sandbox where new joiners are given the opportunity to explore, learn, and contribute in a hands-on manner.
+Internal projects at Lunatech play a crucial role in fostering growth, innovation, and knowledge-sharing between employees. These projects serve as the sandbox where new joiners are given the opportunity to explore, learn, and contribute in a hands-on manner.
 ++++
 </br>
 ++++
@@ -242,81 +242,8 @@ describe('API Testing with Cypress', () => {
 _Limitation: While Cypress offers some capabilities for API testing, it's important to note that it's primarily designed for web UI testing._
 
 === Comparison Table
-
-[cols="5,3,3,3,3,3"]
-|===
-|Features / Tools |Postman |Selenium |Playwright |Pact    |Cypress
-
-|[.small]#REST API Testing#
-|&#9989;
-|[.small]#Limited#
-|[.small]#Limited#
-|[.small]#Limited#
-|[.small]#Limited#
-
-|[.small]#Automated assertion generation#
-|&#9989;
-|&#10062;
-|&#9989;
-|&#9989;
-|&#9989;
-
-|[.small]#Data Driven Support#
-|&#9989;
-|&#9989;
-|&#9989;
-|&#9989;
-|&#9989;
-
-|[.small]#Code Reusability#
-|&#9989;
-|&#9989;
-|&#9989;
-|[.small]#Limited#
-|&#9989;
-
-|[.small]#Environment Handling#
-|&#9989;
-|&#9989;
-|&#9989;
-|&#10062;
-|&#9989;
-
-|[.small]#Test Reports#
-|&#9989;
-|&#9989;
-|&#9989;
-|&#9989;
-|&#9989;
-
-|[.small]#Scripting Languages#
-|[.small]#Javascript#
-|[.small]#Multiple#
-|[.small]#Multiple#
-|[.small]#Multiple#
-|[.small]#Javascript#
-
-|[.small]#Web UI Testing#
-|&#9989;
-|&#9989;
-|&#9989;
-|&#10062;
-|&#9989;
-
-|[.small]#API testing without GUI#
-|&#9989;
-|&#10062;
-|&#9989;
-|&#9989;
-|&#10062;
-
-|[.small]#Price#
-|[.small]#Free - $12per user /month#
-|[.small]#Open Source#
-|[.small]#Open Source#
-|[.small]#Open Source#
-|[.small]#Open Source#
-|===
+.comparison table for the above-mentioned tools
+image::comparison table.png[alt="Figure 1: comparison table for the above mentioned tools"]
 
 === Conclusion
 In conclusion, there are numerous API testing tools available that offer a range of features and functionalities. Each tool has its strengths and weaknesses, catering to different requirements and preferences. In case of Lunagraph it is crucial to consider that app is only single API integrated with internal application and has no GUI. By evaluating the above-mentioned tools we decided to go for the *Postman*, because of its ease of use, integration and reporting capabilities.
