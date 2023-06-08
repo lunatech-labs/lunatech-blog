@@ -332,6 +332,7 @@ _Limitation: While Cypress offers some capabilities for API testing, it's import
 |&#10062;
 
 |[.small]#Price#
+
 |[.small]#Free - $15per user /month#
 |[.small]#Open Source#
 |[.small]#Open Source#
@@ -342,3 +343,4 @@ _Limitation: While Cypress offers some capabilities for API testing, it's import
 === Conclusion
 
 In conclusion, there are many API testing tools available that offer a range of features and functionalities. Each tool has its strengths and weaknesses, catering to different requirements and preferences. The vision of Lunagraph is to be able to reliably service our internal clients with a single API integration, without a GUI; so this was the main point in tool selection. After evaluating the aforementioned tools, we decided to go for *Postman*, as it was easy to use and had great integration and reporting capabilities, and it also works well for the apps without GUI.
+
