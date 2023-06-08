@@ -263,9 +263,82 @@ describe('API Testing with Cypress', () => {
 _Limitation: While Cypress offers some capabilities for API testing, it's important to note that it's primarily designed for web UI testing._
 
 === Comparison Table
-.comparison table for the above-mentioned tools
-image::comparison table.png[alt="Figure 1: comparison table for the above mentioned tools"]
+
+[cols="5,3,3,3,3,3"]
+|===
+|Features / Tools |Postman |Selenium |Playwright |Pact    |Cypress
+
+|[.small]#REST API Testing#
+|&#9989;
+|[.small]#Limited#
+|[.small]#Limited#
+|[.small]#Limited#
+|[.small]#Limited#
+
+|[.small]#Automated assertion generation#
+|&#9989;
+|&#10062;
+|&#9989;
+|&#9989;
+|&#9989;
+
+|[.small]#Data Driven Support#
+|&#9989;
+|&#9989;
+|&#9989;
+|&#9989;
+|&#9989;
+
+|[.small]#Code Reusability#
+|&#9989;
+|&#9989;
+|&#9989;
+|[.small]#Limited#
+|&#9989;
+
+|[.small]#Environment Handling#
+|&#9989;
+|&#9989;
+|&#9989;
+|&#10062;
+|&#9989;
+
+|[.small]#Test Reports#
+|&#9989;
+|&#9989;
+|&#9989;
+|&#9989;
+|&#9989;
+
+|[.small]#Scripting Languages#
+|[.small]#Javascript#
+|[.small]#Multiple#
+|[.small]#Multiple#
+|[.small]#Multiple#
+|[.small]#Javascript#
+
+|[.small]#Web UI Testing#
+|&#9989;
+|&#9989;
+|&#9989;
+|&#10062;
+|&#9989;
+
+|[.small]#API testing without GUI#
+|&#9989;
+|&#10062;
+|&#9989;
+|&#9989;
+|&#10062;
+
+|[.small]#Price#
+|[.small]#Free - $15per user /month#
+|[.small]#Open Source#
+|[.small]#Open Source#
+|[.small]#Open Source#
+|[.small]#Open Source#
+|===
 
 === Conclusion
 
-In conclusion, there are many API testing tools available that offer a range of features and functionalities. Each tool has its strengths and weaknesses, catering to different requirements and preferences. With Lunagraph, it is crucial to consider that app is only single API integrated with internal application and has no GUI. After evaluating the aforementioned tools, we decided to go for *Postman*, as it was easy to use and had great integration and reporting capabilities.
+In conclusion, there are many API testing tools available that offer a range of features and functionalities. Each tool has its strengths and weaknesses, catering to different requirements and preferences. The vision of Lunagraph is to be able to reliably service our internal clients with a single API integration, without a GUI; so this was the main point in tool selection. After evaluating the aforementioned tools, we decided to go for *Postman*, as it was easy to use and had great integration and reporting capabilities, and it also works well for the apps without GUI.
