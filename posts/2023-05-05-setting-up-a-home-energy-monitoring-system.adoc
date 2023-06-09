@@ -660,7 +660,29 @@ When measuring the cos(&#966;) of various equipment in the house, I noticed that
 [id=glossary]
 == Glossary
 
-* W Watt is the metric unit for Power which is equal to 1 Joule/second
-* kWh kilo Watt hour is a unit for energy. It is the total amount of energy that is consumed by a device that consumes 1 kW during 1 hour. 1 kWh = 1,000 Wh = 0.001 MWh (Mega Watt hour)
-* VAR: Volt-Ampère-Reactive, a unit of so-called reactive power. It's just a unit of power, but as it is used to characterise the reactive power component in an AC system, it's not expressed in Watts.
-* VA: Volt-Ampère, a unit of so-called apparent power.
+[cols="1,10"]
+|===
+|Term |Definition 
+
+|DC
+|_Direct Current_. A DC system is one where voltages and currents always have the same polarity in function of time. Note the loose utilisation of the term _current_: in general the term _direct_ applies to both voltages and currents in an electrical system.
+
+|AC
+|_Alternating Current_. Most AC systems have voltages and currents that change polarity periodically. The actual waveform can be sinusoidal, but doesn't have to be. With the advent of [power] electronics, currents may deviate a lot from the ideal sine wave form. In general, such deviations are undesirable as these may cause electromagnetic interference (https://en.wikipedia.org/wiki/Electromagnetic_interference[EMI]) issues.
+
+|W
+|_Watt_, abbreviated as _W_ is the metric unit for power. From a mechanical point of view, it is equal to 1 Joule/second where 1 Joule is the amount of energy used when exerting a force of 1 Newton over a distance of 1 meter. In electrical terms, a 1 Volt battery that is discharging a 1 Ampère current to a consumer, generates a power of 1 Watt.
+
+|VA
+|_Volt-Ampère_, a unit of so-called apparent power, mostly applicable to AC systems. The apparent power is calculated by multiplying the voltage measured over a consumer by the measured current flowing through that consumer. Depending on the type of consumer, the current and the voltage may be phase-shifted. This leads to the appearance of a real- (or effective) and a reactive power component, expressed respectively in Watt and VAR.
+
+|VAR
+|_Volt-Ampère-Reactive_, a unit of so-called reactive power. It's just a unit of power, but as it is used to characterise the reactive power component in an AC system, it's not expressed in Watts.
+
+|RMS
+|_Root-Mean-Square_. It is applicable to systems with periodic wave forms. A typical example is the use in AC systems. For pure sinusoidal wave forms, the RMS value is equal to the amplitude of the sine wave divided by &#8730;2. As a concrete example, when we talk about a 240V AC system, it means that the voltage sine wave has an RMS value equal to 240V. The amplitude (or peak) value is 240V * &#8730;2 = 339V.
+
+|cos(&#966;)
+|_cosine of &#966;_, where &#966; is the phase shift between waveforms of voltage and current. Also known as Power factor. Ideally, electrical consumers should have a cos(&#966;) equal to 1. Deviations from this ideal lead to non-zero reactive current- and power components which in turn lead to transmission losses. Note that cos(&#966;) can be generalised to non-sinusoidal waveforms.
+
+|===
