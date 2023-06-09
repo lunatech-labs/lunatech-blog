@@ -625,7 +625,7 @@ The relation between these components is the following:
 
 * P~reactive~ = P~a~ . sin(&#966;)
 
-(If you're interested about the theory around this topic, read link:media/2023-05-05-setting-up-a-home-energy-monitoring-system-power-factor.pdf[this article] about it.)
+(If you're interested about the theory around this topic, read link:../media/2023-05-05-setting-up-a-home-energy-monitoring-system-power-factor.pdf[this article] about it.)
 
 In electrical systems, cos(&#966;) is a value between 0 and 1. When the reactive power is 0, cos(&#966;) is equal to 1 and P~a~ and P~real~ have equal values.
 
