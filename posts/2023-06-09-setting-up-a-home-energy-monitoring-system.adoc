@@ -46,7 +46,7 @@ As I wanted to be independent of external factors (such as the _Smappee_ Cloud) 
 Next to the already cited main objective, there were other objectives I wanted to achieve:
 
 * If possible, implement the system without any programming.
-* Use _Open Source Software_ (OSS) only.
+* Use _Free Open Source Software_ (FOSS) only.
 * Capture all knowledge gained in building the system as to make it easily reproducible.
 * Simplify installation with automation.
 
@@ -112,7 +112,7 @@ Let’s call the last component the _IO/transformer/aggregator_.
 
 === Mapping of the architecture to specific components
 
-Various alternatives exist for each component mentioned earlier, but I selected these (OSS) implementations:
+Various alternatives exist for each component mentioned earlier, but I selected these (FOSS) implementations:
 
 * Time Series Database: https://github.com/influxdata/influxdb[InfluxDB]
 * Display server: https://github.com/grafana/grafana[Grafana Server]
@@ -451,7 +451,7 @@ It used to have rather poor documentation, but this is a thing of the past. When
 
 ==== Using _cloud-init_
 
-I started using _cloud-init_ many years ago on another Raspberry Pi project. Back then, I used the https://blog.hypriot.com[_Hypriot_] operating system (a derivative of https://www.raspberrypi.com/software[Raspbian]) which has integrated support for _cloud-init_ and _Docker_. The https://github.com/hypriot[Hypriot OSS project] has gone dormant since a few years, but one of the core contributors pointed out that Ubuntu Server has the same goodies incorporated. I switched to Ubuntu and never looked back.
+I started using _cloud-init_ many years ago on another Raspberry Pi project. Back then, I used the https://blog.hypriot.com[_Hypriot_] operating system (a derivative of https://www.raspberrypi.com/software[Raspbian]) which has integrated support for _cloud-init_ and _Docker_. The https://github.com/hypriot[Hypriot FOSS project] has gone dormant since a few years, but one of the core contributors pointed out that Ubuntu Server has the same goodies incorporated. I switched to Ubuntu and never looked back.
 
 A _cloud-init_ deployment is driven by a cloud-config file in YAML format. You can find the configuration for this project https://github.com/eloots/home-energy-monitoring-system-setup/blob/main/cloud-init/smappee-2.yml[here]. It's part of the _HEMS_ GitHub repository that also contains the Telegraf configuration https://github.com/eloots/home-energy-monitoring-system-setup/blob/main/telegrafConfiguration/etc/telegraf/telegraf.d/smappee-2.conf[smappee-2.conf] for the _Smappee Genius_ and https://github.com/eloots/home-energy-monitoring-system-setup/blob/main/telegrafConfiguration/etc/telegraf/telegraf.d/smappee.conf[smappee.conf] for the _Smappee Solar_.
 
@@ -470,7 +470,7 @@ $ flash -n home-iot -j -m cloud-init/meta-data -u cloud-init/smappee-2.yml \
 
 The <<project-objectives>> set at the start of the project were all achieved.
 
-No programming was required to build the _HEMS_. All software components are OSS, and we can provision a new _HEMS_ system in a matter of minutes in a reproducible way.
+No programming was required to build the _HEMS_. All software components are FOSS, and we can provision a new _HEMS_ system in a matter of minutes in a reproducible way.
 
 Apart from provisioning the HEMS, the only thing that needed to be changed was to configure the _Smappees_ to send their data to the _MQTT Broker_.
 
