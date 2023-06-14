@@ -141,7 +141,7 @@ The electricity system in the house is comprised of:
 
 - A _Smappee Solar_ that measures total energy consumption and total solar energy production.
 
-- A _Smappee Infinity_ that measures energy consumption of individual electrical devices or groups thereof. Examples of the former are the electrical furnace and dish washer. Wall sockets are grouped already and are an example of the latter.
+- A _Smappee Infinity_ that measures energy consumption of individual electrical devices or groups thereof. Examples of the former are the electric oven and dish washer. Wall sockets are grouped already and are an example of the latter.
 
 ==== The Home Energy Monitoring System
 
