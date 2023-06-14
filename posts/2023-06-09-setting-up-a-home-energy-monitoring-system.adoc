@@ -640,7 +640,7 @@ The Power Factor is a measure of an electrical system's energy utilisation effic
 
 * P~a~: Apparent power, which is the product of the measured voltage and current.
 
-* P~real~: Effective- or Real Power is the part that actually produces work in the broad sense of the word, it's not the internal efficiency of the device itself. For example, an incandescent lightbulb consuming 100W converts 98W to heat and only 2W to light. So, in this case, the Productive Power is 100W (this is not to be confused with the efficiency of that bulb which is 2%).
+* P~real~: Effective or Real Power is the part that actually produces work in the broad sense of the word, it's not the internal efficiency of the device itself. For example, an incandescent lightbulb consuming 100W converts 98W to heat and only 2W to light. So, in this case, the Productive Power is 100W (this is not to be confused with the efficiency of that bulb which is 2%).
 
 * P~reactive~: Reactive power (VAR - Volt-Ampère-Reactive) which is the part that doesn't perform any work, but that still results in energy flowing between the electricity producer and consumer.
 
