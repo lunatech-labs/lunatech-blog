@@ -60,7 +60,7 @@ The first one, a _Smappee Solar_ came with the solar panel installation and meas
 
 ** a _Smappee Power box_ that powers all connected _Smappee_ devices and that measures line voltage(s). It supports both mono-phase and tri-phase power systems. 
 
-** a _Smappee Genius_ which is the brain of the system. This device implements Wifi and physical Ethernet connectivity and acts as a Gateway.
+** a _Smappee Genius_ which is the "brain" of the system. This device implements Wifi and physical Ethernet connectivity and acts as a Gateway.
 
 ** one or up-to 7 _Smappee CT Hubs_ that each can measure current in up-to 4 electrical circuits.
 
