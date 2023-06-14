@@ -489,7 +489,7 @@ image::Grafana-aggregate-consumption-production.png[Smappee connection diagram]
 The six status panels at the top display the following information:
 
 * Total solar energy generated over the selected time period in kWh.
-* Average Solar power generated in kW over the last minute.
+* Average solar power generated in kW over the last minute.
 * Total energy consumption over the selected time period in kWh.
 * Average total energy consumption in kW over the last minute.
 * Mains voltage minimum and maximum value over the select time period in Volts.
