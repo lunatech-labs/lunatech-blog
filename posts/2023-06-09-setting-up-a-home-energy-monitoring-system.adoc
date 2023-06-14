@@ -583,7 +583,7 @@ The amount of energy produced in each section of the production curve is 4.21 kW
 * Steady state: 64.0%
 * Ramp-down: 14.9%
 
-The beautiful thing about this is that this exploration and calculation takes just a minute to complete.
+The beautiful thing about this is that the exploration and calculation takes just a minute to complete.
 
 === The "Energy Stats - Consumer details" dashboard
 
