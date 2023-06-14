@@ -67,7 +67,7 @@ Selenium tests perform UI actions on a website such as
 - Click on some buttons
 - Retrieve values from web elements
 
-API tests can verify and validate the system earlier in the development cycle. Even when there's not a single fragment of UI in place, we can still utilise the API tests to test the APIs thoroughly. This is because Selenium is a browser automation tool, and it doesn’t work well when there are no “buttons to press”.
+API tests can verify and validate the system earlier in the development cycle. Even when there's not a single fragment of UI in place, we can still utilise the API tests to test the APIs thoroughly. This is because Selenium is a browser automation tool, and it doesn't work well when there are no “buttons to press”.
 
 ++++
 </br>
@@ -177,7 +177,7 @@ Key features of Pact includes:
 - Pact offers reporting and test output features to track the results of contract tests. It helps identify any failures or discrepancies, making it easier to diagnose and resolve issues.
 - Pact offers extensibility through plugins and integrations with other testing and development tools. It integrates with various testing frameworks, build tools, and IDEs to enhance the testing workflow.
 
-Sample code for writing an api test in Playwright:
+Sample code for writing an api test in Pact:
 
 [source,javascript]
 ----
@@ -342,5 +342,5 @@ _Limitation: While Cypress offers some capabilities for API testing, it's import
 
 === Conclusion
 
-In conclusion, there are many API testing tools available that offer a range of features and functionalities. Each tool has its strengths and weaknesses, catering to different requirements and preferences. The vision of Lunagraph is to be able to reliably service our internal clients with a single API integration, without a GUI; so this was the main point in tool selection. After evaluating the aforementioned tools, we decided to go for *Postman*, as it was easy to use and had great integration and reporting capabilities, and it also works well for the apps without GUI.
+In conclusion, there are many API testing tools available that offer a range of features and functionalities. Each tool has its strengths and weaknesses, catering to different requirements and preferences. The vision of Lunagraph is to be able to reliably service our internal clients with a single API integration, without a GUI; so this was the main point in tool selection for api automation. After evaluating the aforementioned tools, we decided to go for *Postman*, as it was easy to use and had great integration and reporting capabilities, and it also works well for the apps without GUI.
 
