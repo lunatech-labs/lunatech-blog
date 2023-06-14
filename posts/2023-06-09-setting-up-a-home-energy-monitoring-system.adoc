@@ -493,7 +493,7 @@ The six status panels at the top display the following information:
 * Total energy consumption over the selected time period in kWh.
 * Average total energy consumption in kW over the last minute.
 * Mains voltage minimum and maximum value over the select time period in Volts.
-* Mains frequency in Herz (this value is measured by the _Smappee Genius_).
+* Mains frequency in hertz (this value is measured by the _Smappee Genius_).
 
 Next up are three line graphs showing one minute average values for:
 
