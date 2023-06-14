@@ -19,7 +19,7 @@ The next one shows the same graphs over a period of 16 days (from August 8th til
 
 image::08-16days.PNG[Production and consumption data over 16 consecutive days]
 
-The graph shows the granularity changes from 5 minutes to an hour on August 8th.
+The graph shows the granularity changes from 5 minutes to 1 hour on August 8th.
 
 The obvious question I asked myself was how to keep granular data longer, and I saw two options. First, I could ask the company behind the system to reinstate the longer data retention period. Second, I could investigate if I could build an energy monitoring system that would allow me to configure the data retention policy as I wished it to be. I chose option two, as it seemed to give me an opportunity to learn technologies I had never used before.
 
