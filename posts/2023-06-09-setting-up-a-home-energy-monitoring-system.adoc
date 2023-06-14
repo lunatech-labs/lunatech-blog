@@ -15,7 +15,7 @@ To illustrate the issue, let’s look at a couple of sample plots. The first one
 
 image::23-08.png[5 minute averages over one day on August 23rd]
 
-The next one shows the same graphs over a period of 16 days (from August 8th till August 23rd):
+The next one shows the same graphs over a period of 16 days (from August 8th till August 24th):
 
 image::08-16days.png[Production and consumption data over 16 consecutive days]
 
