@@ -501,7 +501,7 @@ Next up are three line graphs showing one-minute average values for:
 * Power budget
 * Power import
 
-The last two graphs display values that are not directly measured, but that are derived in Grafana from the data displayed in the first graph.
+The last two graphs display values that are not directly measured, but are derived in Grafana from the data displayed in the first graph.
 
 Even though the installed Solar panel capacity is about 4 kW, the production capacity is capped to 2500W by the lower rated power of the inverter attached to the panels.
 
