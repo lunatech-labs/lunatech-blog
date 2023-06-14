@@ -40,7 +40,7 @@ The primary aim of the _HEMS_ project was to collect _Smappee_ data at specific 
 
 For example, a _Smappee_, when configured to send data to an _MQTT Broker_ sends data at a one-second interval. One may want to aggregate this data at minutes, days, weeks, or months intervals. Each aggregation level may have specific data retention periods. For example, we may keep the high frequency 1-minute aggregates for a few months. On the other side of the spectrum, we may keep indefinitely the monthly averages (and obviously, as long as storage capacity permits).
 
-As I wanted to be independent of external factors (such as the _Smappee_ Cloud) as to not be exposed to the whims of external parties, I chose the _MQTT_ route for building my _HEMS_.
+As I wanted my solution to be independent of external factors (such as the _Smappee_ Cloud) as to not be exposed to the whims of external parties, I chose the _MQTT_ route for building my _HEMS_.
 
 
 Next to the already cited main objective, there were other objectives I wanted to achieve:
