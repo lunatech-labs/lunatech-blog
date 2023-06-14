@@ -512,7 +512,7 @@ The Grafana dashboard allows us to quickly answer questions like:
 * What is the total amount of energy produced by the solar panels during ramp-up in the morning till 13:00?
 * What is the total amount of energy produced by the solar panels for the remainder of the day?
 
-The top-left status panel tell us that the answer to the first question is 18.79 kWh.
+The top-left status panel tells us that the answer to the first question is 18.79 kWh.
 The second question is answered by hovering over the first graph during a moment at which maximum output is generated:
 
 image::Grafana-peak-production.png[Solar energy peak production]
