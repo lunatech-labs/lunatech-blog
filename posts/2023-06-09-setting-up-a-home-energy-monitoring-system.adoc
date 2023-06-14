@@ -566,7 +566,7 @@ Let's zoom out a bit:
 
 image::Grafana-finding-ratios-1.png[Finding production ratios - 1]
 
-Well; it's not been very sunny this spring, but it seems that April 19^th^ may be a good
+Well... it's not been very sunny this spring, but it seems that April 19^th^ may be a good
 candidate...
 
 image::Grafana-finding-ratios-2.png[Finding production ratios - 2]
