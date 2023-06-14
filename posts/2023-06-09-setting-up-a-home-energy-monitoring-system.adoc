@@ -181,7 +181,7 @@ The following screenshot shows the advanced configuration screen of a _Smappee_.
 
 image::smappee_mqtt_config_1.png[Smappee advanced configuration screen]
 
-Note that the configuration set the broker’s IP address to 192.168.68.201, the port number to 1883, and the transport layer communication protocol to TCP.
+Note that the configuration set the broker’s IP address to `192.168.68.201`, the port number to `1883`, and the transport layer communication protocol to TCP.
 
 With that configuration change, each _Smappee_ will now start sending _MQTT_ data to the broker. Note that we will lose data if the configuration is incorrect (e.g. wrong IP address or port number). Also, if the broker is down or unreachable, data will be lost.
 
