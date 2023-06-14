@@ -495,7 +495,7 @@ The six status panels at the top display the following information:
 * Mains voltage minimum and maximum value over the select time period in Volts.
 * Mains frequency in hertz (this value is measured by the _Smappee Genius_).
 
-Next up are three line graphs showing one minute average values for:
+Next up are three line graphs showing one-minute average values for:
 
 * Electricity production and total consumption
 * Power budget
