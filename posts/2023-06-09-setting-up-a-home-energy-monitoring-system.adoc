@@ -624,7 +624,7 @@ This dashboard contains two graphs that display the following data for all chann
 * Apparent and Real power 
 * cos(&#966;)
 
-We can have a look at the data for the garage when the hybrid car is charged:
+We can have a look at the data for the garage when the hybrid car is being charged:
 
 image::charging-hybrid-car-power.png[Power consumption during charging of hybrid car]
 
