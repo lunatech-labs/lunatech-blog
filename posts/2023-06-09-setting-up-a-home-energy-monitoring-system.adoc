@@ -615,7 +615,7 @@ image::power-profile-electrical-bike-charging.png[Power consumption profile for 
 
 We see that the power at which the battery is charged rises from an initial value of ±160W to 180W over a period of almost 2 hours. I think this is because it wasn't very warm outside, the battery's temperature rises during charging and the charging current is probably a function of that temperature, but that's an unconfirmed and personal theory. After reaching the peak, the charging slows down and stops after another one and a half hour.
 
-In conclusion, we can learn a lot about the different electrical consumers in the house and even learn a few special things about certain devices like the air conditioning.
+In conclusion, we can learn a lot about the different electrical consumers in the house and even learn a few special things about certain devices like the air-conditioning.
 
 === The Power Quality dashboard
 
