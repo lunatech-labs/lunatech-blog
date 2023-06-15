@@ -160,7 +160,7 @@ The electricity system in the house is comprised of:
 
 * I added the Raspberry Pi OS Metrics Telegraf configuration and Grafana Dashboard to monitor the Raspberry Pi.
 
-With this out of the way, let's look at configuration and system provisioning in the next chapters.
+With this out of the way, let's look at configuration and system provisioning in the next sections.
 
 == System provisioning
 
