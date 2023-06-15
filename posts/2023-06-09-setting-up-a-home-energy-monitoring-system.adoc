@@ -51,7 +51,6 @@ For example, a _Smappee_, when configured to send data to an _MQTT Broker_ sends
 
 As I wanted my solution to be independent of external factors (such as the _Smappee_ Cloud) as to not be exposed to the whims of external parties, I chose the _MQTT_ route for building my _HEMS_.
 
-
 Next to the already cited main objective, there were other objectives I wanted to achieve:
 
 * If possible, implement the system without any programming.
@@ -59,8 +58,18 @@ Next to the already cited main objective, there were other objectives I wanted t
 * Capture all knowledge gained in building the system as to make it easily reproducible.
 * Simplify installation with automation.
 
-We'll evaluate project objectives in the upcoming sections.
+We'll evaluate project objectives in the upcoming sections, but before we do that,
+let me give you a quick overview of the upcoming sections in this blog post:
 
+* <<intro-to_smappee>>: describes the hardware that is at the centre of the data acquisition.
+* <<hems-architecture>>: the application architecture and the mapping to a concrete implementation.
+* <<system-provisioning>>: describes how the setup is _industrialised_ using _cloud-init_ and _jinja_ templates.
+* <<configuring-telegraf>>: raw data measurements need to be transformed before being written to a database, a task that is performed by a component named Telegraf.
+* Before I summarise some ideas about <<future-work>> at the end of the article, we dive
+  into the different <<grafana-dashboards>> that I built in this project and the insights
+  these provide me.
+
+[id=intro-to_smappee]
 == A brief introduction to _Smappee_
 
 Smappees come in different versions of which I currently have two at home:
@@ -87,6 +96,7 @@ Even though the physical installation is best performed by a professional, anyon
 
 I've had the _Smappees_ in service for 3 years (_Smappee Solar_) and 9 months (_Smappee Infinity_) and both have proven to be very reliable and accurate systems.
 
+[id=hems-architecture]
 == _HEMS_ Architecture & Implementation
 
 === Architecture
@@ -164,6 +174,7 @@ The electricity system in the house is comprised of:
 
 With this out of the way, let's look at configuration and system provisioning in the next sections.
 
+[id=system-provisioning]
 == System provisioning
 
 It is a well-established fact that the Internet provides a wealth of information about setting up IT infrastructure and software. Obtaining accurate and up-to-date information can be a challenge though.
@@ -295,6 +306,7 @@ We recognise the four _CT Hubs_ with their respective Id and what each _CT Hub_ 
 
 Now that we know the message format of the raw data published via _MQTT_, we will look at how we can get the messages into the Time series database.
 
+[id=configuring-telegraf]
 === Configuring Telegraf
 
 Telegraf offers a series of plugins that fall into four categories: _Input_, _Processor_, _Aggregator_, and _Output_. Telegraf plugins that are relevant to our use case are:
@@ -485,6 +497,7 @@ Apart from provisioning the HEMS, the only thing that needed to be changed was t
 
 Finally, and that’s about the only manual step, we configure Grafana data sources and import Grafana dashboards.
 
+[id=grafana-dashboards]
 == The Grafana Dashboards
 
 Up to now, this article has focussed on the _HEMS_ implementation. Let’s shift to the Grafana dashboards I created and the insights these give into the energy production and consumption in the house.
