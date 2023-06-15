@@ -1,40 +1,27 @@
 \documentclass[a4paper]{article}
 
 \usepackage{amsmath,amssymb,amsfonts}
-\usepackage{fixltx2e}
-\usepackage{xcolor}
-\usepackage[makeroom]{cancel}
 \usepackage{pgfplots}
-\usepackage{tikz}
 \usepgfplotslibrary{fillbetween}
-\usepackage{subfig}
+\usepackage{tikz}
+\usepackage[skip=10pt plus1pt, indent=40pt]{parskip}
+\pgfplotsset{width=10cm,compat=1.9}
+\usepackage[makeroom]{cancel}
 
 \def\SP#1{\textsuperscript{#1}}
 \def\SB#1{\textsubscript{{#1}}}
 \def\SPSB#1#2{\rlap{\textsuperscript{#1}}\SB{#2}}
 
-\pgfplotsset{every axis/.append style={
-                    axis x line=middle,    % put the x axis in the middle
-                    axis y line=middle,    % put the y axis in the middle
-                    axis line style={<->}, % arrows on the axis
-                    xlabel={$x$},          % default put x on x-axis
-                    ylabel={$y$},          % default put y on y-axis
-                    label style={font=\large},
-                    tick xlabel style={font=\large}  
-                    }}
-
 \begin{document}
 
-\textbf{DRAFT - Not yet ready for final review but comments are welcome.}\
-
 In European alternating current (AC) systems, the polarity of the line
-voltage cycles 50 times per second (50 Hz) following a sinusoidal curve. 
-This means that each cycle takes 20 ms.\
+voltage cycles 50 times per second (50 Hz) following a sinusoidal curve.
+This means that each cycle takes 20 ms.
 
 When a load is connected to an AC line, the current will in general also
-be sinusoidal, but it may be shifted in phase by an angle $\theta$ (We'll 
+be sinusoidal, but it may be shifted in phase by an angle $\theta$ (We'll
 get back to this later in this document as in the most general case,
-current and voltage may deviate from a pure sinusoidal form).\
+current and voltage may deviate from a pure sinusoidal form).
 
 With respect to the phase angle, three cases can be distinguished:
 
@@ -44,13 +31,14 @@ With respect to the phase angle, three cases can be distinguished:
 	\item  $\theta$ $<$ 0 for capacitive loads. The current precedes the voltage. This is the case for capacitors and battery chargers.
 \end{itemize}\
 
-In the most general case, a load acts as a combination of a resistive 
-and a reactive part, where the latter is either capacitive or inductive.\
+In the most general case, a load acts as a combination of a resistive
+and a reactive part, where the latter is either capacitive or inductive.
 
 The following graph shows a line voltage and its current plotted over time. In
-this case, the current precedes the voltage by an angle (the so-called phase
-angle of 60 degrees ($\pi$/3 radians)).\
+this case, the current lags the voltage by a 60 degrees ($\pi$/3 radians) angle,
+the so-called phase angle.
 
+\vspace{20pt}
 
 \begin{tikzpicture}
   \begin{axis}[
@@ -58,52 +46,47 @@ angle of 60 degrees ($\pi$/3 radians)).\
     xmin=-1, xmax=7.0,
     axis x line=middle,
     axis y line=middle,
-    %axis line style={->},
-    %xtick distance = pi,
     xlabel=$time (ms)$,
     ylabel=$$,
-    %ylabel={$f(x) = sin(x)^2 - x +9$},
-    xtick={0.0, 1.5708, 3.1415, 4.7124, 6.2832,},
+    xtick={0.0, 1.5708, 3.1415, 4.7124, 6.2832},
     xticklabels={0, 5, 10, 15, 20},
     yticklabels={},
-    domain=-0.1:2*pi+0.1,
     every x tick/.style={color=black, thick},
-    legend pos=outer north east,
-        % (so the legend looks a bit better)
-    legend cell align=left,
-  ] 
+    domain=-0.1:2*pi+0.1,
+    legend style={at={(1,1)},anchor=north east,font=\small},
+    legend columns=2,
+  ]
     \addplot+[samples=200, mark=no] {sin(deg(x))};
-    \addplot+[samples=200, mark=no] {0.7*sin(deg(x)-60)};
+    \addplot+[samples=200, mark=no] {0.5*sin(deg(x)-60)};
     \legend{
-            Line voltage,
-            Current,
+       Line voltage,
+       Current,
     }
   \end{axis}
-\end{tikzpicture}\
+\end{tikzpicture}
 
-
-At any one point in time, the instantaneous power $P_t_$, is the product of
-the voltage $U_t_$ and current $I_t_$ at that time:\
+At any one point in time, the instantaneous power $P_t$, is the product of
+the voltage $U_t$ and current $I_t$ at that time:
 
 \begin{align*}
   P(t) &= U(t) * I(t)\
- \end{align*}\
- 
- with:\
- 
+\end{align*}\
+
+ with:
+
  \begin{align*}
   U(t) &= U\SB{peak} * sin(2\pi ft)\\
   I(t) &= I\SB{peak} * sin(2\pi ft - \theta)\\
 \end{align*}\
 
-This gives:\
+This gives:
 
 \begin{align*}
   P(t) &= U\SB{peak} * I\SB{peak} * sin(2\pi ft) * sin(2\pi ft - \theta)\\
 \end{align*}\
 
 We can now calculate the average (real) power by integrating P(t) over
-one cycle T and dividing it by T:\
+one cycle T and dividing it by T:
 
 \begin{align*}
   P\SB{real} &= U\SB{peak} * I\SB{peak} * \frac{1}{T} \int_0^{T}{sin(2\pi ft) * sin(2\pi ft - \theta)} dt\\
@@ -112,10 +95,10 @@ one cycle T and dividing it by T:\
 For simplicity, we can reason about the power by ignoring the fact that we
 are working with voltages and currents. We can even abstract away the
 frequency (or cycle period) and consider simple sine curves in a single
-cycle of 2$\pi$ radians.\
+cycle of 2$\pi$ radians.
 
 In figures 1 and 2, we plot the curves for the cases where $\theta = 0$,
-a purely "resistive load", and $\theta = \pi / 2$, a purely "inductive 
+a purely "resistive load", and $\theta = \pi / 2$, a purely "inductive
 load". The instantaneous power in the former case is always positive,
 whereas in the capacitive case it's alternately positive and negative.
 The physical interpretation is that for a resistive load, the direction of
@@ -123,12 +106,13 @@ energy transfer is from the generation side to the consumption side. For
 the purely capacitive load case, energy flows in equal amounts from and
 to the producer and the load. The effect is that, on balance, no net energy
 is transferred between the two and there's just energy "bouncing" between
-opposite ends.\
+opposite ends.
 
 \begin{align*}
   U(t) &= U\SB{peak}  * sin(2\pi ft)\\
   I(t) &= I\SB{peak} * sin(2\pi ft + \pi/3)
-\end{align*}\\
+\end{align*}\
+
 
 \begin{figure}
   \begin{tikzpicture}
@@ -142,29 +126,26 @@ opposite ends.\
       xlabel=$\theta$,
       ylabel=$y$,
       %ylabel={$f(x) = sin(x)^2 - x +9$},
-      xtick={0, 1.5708, 3.1415, 4.7124, 6.2832,},
+      xtick={0, 1.5708, 3.1415, 4.7124, 6.2832},
       xticklabels={0, $\frac{\pi}{2}$, $\pi$, $\frac{3\pi}{2}$, $\pi$},
       domain=-0.1:2*pi+0.1,
       every x tick/.style={color=black, thick},
-      legend pos=outer north east,
-          % (so the legend looks a bit better)
-      legend cell align=left,
-    ] 
+      legend style={at={(1.2,-0.05)},anchor=north east,font=\small},
+      legend columns=3,
+    ]
       \addplot+[samples=200, mark=no] {sin(deg(x)};
       \addplot+[samples=200, mark=no] {0.7 * sin(deg(x)};
+      \addplot+[line width=1pt, color=black, samples=200, mark=no, name path = A] {sin(deg(x)) * 0.7 * sin(deg(x))};
       \addplot+[draw=none,name path=B, mark=no] {0};
-      \addplot+[line width=1pt, color=black, samples=200, mark=no, name path = A] {sin(deg(x)) * 0.7 * sin(deg(x)};
       \addplot+[green] fill between[of=A and B];
       \legend{
               U(x) = sin(x),
               I(x) = 0.7 * sin(x),
-              P(x) = U(x) * I(x),
+              P(x) = U(x) * I(x)
       }
     \end{axis}
   \end{tikzpicture}
   \caption{Perfect resistive load case}\label{fig:myplot}
-
-  \centering
   \begin{tikzpicture}
     \begin{axis}[
       ymin=-1.1, ymax=1.1,
@@ -176,36 +157,34 @@ opposite ends.\
       xlabel=$\theta$,
       ylabel=$y$,
       %ylabel={$f(x) = sin(x)^2 - x +9$},
-      xtick={0, 1.5708, 3.1415, 4.7124, 6.2832,},
+      xtick={0, 1.5708, 3.1415, 4.7124, 6.2832},
       xticklabels={0, $\frac{\pi}{2}$, $\pi$, $\frac{3\pi}{2}$, $\pi$},
       domain=-0.1:2*pi+0.1,
       every x tick/.style={color=black, thick},
-      legend pos=outer north east,
-          % (so the legend looks a bit better)
-      legend cell align=left,
-    ] 
+      legend style={at={(1.2,-0.05)},anchor=north east,font=\small},
+      legend columns=3,
+    ]
       \addplot+[samples=200, mark=no] {sin(deg(x)};
-      \addplot+[samples=200, mark=no] {0.7 * sin(deg(x)-90};
+      \addplot+[samples=200, mark=no] {0.7 * sin(deg(x)+90};
+      \addplot+[line width=1pt, color=black, samples=200, mark=no, name path = A] {sin(deg(x)) * 0.7 * sin(deg(x)+90)};
       \addplot+[draw=none,name path=B, mark=no] {0};
-      \addplot+[line width=1pt, color=black, samples=200, mark=no, name path = A] {sin(deg(x)) * 0.7 * sin(deg(x)-90)};
       \addplot+[green] fill between[of=A and B];
       \legend{
-        U(x) = sin(x),
-        I(x) = 0.7 * sin(x + $\frac{\pi}{2}$),
-        P(x) = U(x) * I(x),
+              U(x) = sin(x),
+              I(x) = 0.7 * sin(x + $\frac{\pi}{2}$),
+              P(x) = U(x) * I(x)
       }
     \end{axis}
   \end{tikzpicture}
-  \caption{Perfect capacitive load case}\label{fig:myplot}
-\end{figure}\
+  \caption{Perfect capacitive load case}\label{fig:myplotLeading}
+\end{figure}
 
-
-We want to calculate the average effective power of two sine waves that are out of phase by an angle of {\theta}.\
+We want to calculate the average effective power of two sine waves that are out of phase by an angle of $\theta$.\
 
 This can be expressed as:\
 
 \begin{align*}
-  P_{real}_ &=\frac{1}{2 \pi}\int_0^{2\pi}\sin{x} * \sin{(x - \theta)}dx\\
+  P_{real} &=\frac{1}{2 \pi}\int_0^{2\pi}\sin{x} * \sin{(x - \theta)}dx\\
 \end{align*}
 
 We transform the integral using these base trigonometric identities:
@@ -245,14 +224,14 @@ Applying this to P\SB{real}, we get:
 \end{align*}\
 
 We get the final result in which we observe the appearance of
-the infamous cos(\phi) factor:\
+the infamous cos($\phi$) factor:
 
 \begin{align*}
   P\SB{real} &=\frac{1}{2 \pi}\int_0^{2\pi}\sin{x} * \sin{(x - \theta)}dx = \frac{\cos{\theta}}{2}\\
 \end{align*}\
 
 If we bring this into the domain of the calculation of the real power,
-we get:\
+we get:
 
 \begin{align*}
   P\SB{real} &= U\SB{peak} * I\SB{peak} * \frac{1}{T} \int_0^{T}{sin(2\pi ft) * sin(2\pi ft - \theta)} dt\\
@@ -265,7 +244,7 @@ multimeter or current probes, the devices would carry a label "True RMS
 Meter". So, what does RMS stand for and what is its definition?
 
 RMS is the acronym for "Root Mean Square",  and for sinusoidal waves (voltage
-or current), it's calculated as follows:\
+or current), it's calculated as follows:
 
 \begin{align*}
   V\SB{RMS} &= \sqrt{\frac{1}{T} \int_0^{T} V\SP{2}(t) dt}\\
@@ -277,51 +256,46 @@ Again, doing this for a pure sinusoidal waveform, this gives:
   V\SB{RMS} &= \sqrt{\frac{1}{2 \pi} \int_0^{2 \pi} (V\SB{peak} * sin(\theta))\SP{2} d\theta}\\
   &= \sqrt{\frac{V\SPSB{2}{peak}}{2 \pi} \int_0^{2 \pi} sin\SP{2}(\theta) d\theta}\\
   &= V\SB{peak} * \sqrt{\frac{1}{2 \pi} \int_0^{2 \pi} sin\SP{2}(\theta) d\theta}\\
-\end{align*}\
+\end{align*}
 
 We already encountered the integral of $\sin\SP{2}(\theta)$ in this article.
-It evaluates to $\pi$ so that we obtain:\\
+It evaluates to $\pi$ so that we obtain:
 
 \begin{align*}
   V\SB{RMS} &= V\SB{peak} * \sqrt{\frac{\pi}{2 \pi}}\\
   &= \frac{V\SB{peak}}{\sqrt{2}}\\
-\end{align*}\
+\end{align*}
 
-Similarly, we get a formula for $I\SB{RMS}$:\\
+Similarly, we get a formula for $I\SB{RMS}$:
 
 \begin{align*}
   I\SB{RMS} &= \frac{I\SB{peak}}{\sqrt{2}}\\
-\end{align*}\
-
-\begin{align*}
-  P\SPSB{2}{apparent} &= P\SPSB{2}{real} + P\SPSB{2}{reactive}\\
 \end{align*}
 
-Substituting the RMS values for the peak values in the formula for 
-$P\SB{real}$, we get the final, very simple and important result:\\
+Substituting the RMS values for the peak values in the formula for
+$P\SB{real}$, we get the final, very simple and important result:
 
 \begin{align*}
   P\SB{real} &= V\SB{peak} * I\SB{peak} * \frac{\cos{\theta}}{2}\\
   &= V\SB{RMS} * I\SB{RMS} * \cos{\theta} \\
 \end{align*}
 
-With $V\SB{RMS} * I\SB{RMS}$ being $P\SB{apparent}$, we  see that:\\
+With $V\SB{RMS} * I\SB{RMS}$ being $P\SB{apparent}$, we  see that:
 
 \begin{align*}
   P\SB{real} &= P\SB{apparent} * \cos{\theta} \\
 \end{align*}
 
-If we define $P\SB{reactive}$ to be:\\
+If we define $P\SB{reactive}$ to be:
 
 \begin{align*}
   P\SB{reactive} &= P\SB{apparent} * \sin{\theta} \\
 \end{align*}
 
-We also see that:\
+We also see that:
 
 \begin{align*}
   P\SPSB{2}{apparent} &= P\SPSB{2}{real} + P\SPSB{2}{reactive} \\
 \end{align*}
-
 
 \end{document}
