@@ -25,49 +25,49 @@ The admin console can be found at http://localhost:8080[localhost:8080] with bot
 On top of the default `master` realm let's create our own realm called `lunarealm`.
 
 .Creating a new Realm
-image::keycloak-create-realm.png[Create Realm, 300]
+image::keycloak-create-realm.png[Create Realm, 600]
 
 ==== Create a client
 Let's create the client `luna-vacation-bot` which is the one that is going to need to authenticate with the `luna-vacation-api` and use the API:
 
 .Creating a new client
-image::keycloak-new-client-1.png[Create client, 300]
+image::keycloak-new-client-1.png[Create client, 600]
 
 After setting the client id, name and description, click Next for the capability config section and turn `Client authentication` and `Service accounts roles` **on** and all the other authentication flows **off**. The client is now configured for the Client Credentials Flow in OAuth2. Click Next again and Save.
 
 .Configuring the client capability
-image::keycloak-new-client-2.png[Create client, 300]
+image::keycloak-new-client-2.png[Create client, 600]
 
 In order to increase our client security, we are also creating a new `Client Scope` called `luna-vacation-bot-scope` using the default settings:
 
 .Creating a new Client Scope
-image::keycloak-create-client-scope-1.png[Create client, 300]
+image::keycloak-create-client-scope-1.png[Create client, 600]
 
 Once you save the new scope, a couple of configuration tabs will show up: `Mappers` and `Scope`. Go to `Mappers` and choose `Configure a new mapper` and then choose `Audience`:
 
 .Creating a new Client Scope Mapper
-image::keycloak-create-client-scope-2.png[Create client, 300]
+image::keycloak-create-client-scope-2.png[Create client, 600]
 
 Give it a name and then set `luna-vacation-bot` in `Included Client Audience` and also add it to the tokens:
 
 .Configuring the new Client Scope Mapper
-image::keycloak-create-client-scope-3.png[Create client, 300]
+image::keycloak-create-client-scope-3.png[Create client, 600]
 
 Go back to the details of the `luna-vacation-bot` client, to `Client scopes`, `Add client scope` and choose the new `luna-vacation-bot-scope` Default scope and add it:
 
 .Adding the new client scope to the client
-image::keycloak-add-client-scope.png[Create client, 300]
+image::keycloak-add-client-scope.png[Create client, 600]
 
 One more client scope needs a final configuration. Go to the dedicated client scope called `luna-vacation-bot-dedicated` and click on it.
 In `Mappers` choose `Add mapper` > `From predefined mappers` and then add `audience resolve`:
 
 .Adding a predefined mapper to the client scope
-image::keycloak-dedicaded-scope.png[Create client, 300]
+image::keycloak-dedicaded-scope.png[Create client, 600]
 
 Finally, still inside the same `luna-vacation-bot-dedicated` scope, go to the `Scope` tag and set `Full scope allowed` off.
 
 .Modifying the client scope settings
-image::keycloak-dedicated-scope-full-scope.png[Create client, 300]
+image::keycloak-dedicated-scope-full-scope.png[Create client, 400]
 
 We are all set to start using JWT tokens!
 
@@ -77,7 +77,7 @@ To test if `luna-vacation-bot` can successfully get a JWT token we also need the
 The secret can be found in the `Credentials` tab:
 
 .Where to find the client's secret
-image::keycloak-client-secret.png[Client secret, 300]
+image::keycloak-client-secret.png[Client secret, 600]
 
 Let's use curl to generate the token:
 
@@ -109,7 +109,7 @@ We can confirm that the `issuer` (iss) of the token is `lunarealm` and that the 
 We are using https://kotlinlang.org/[Kotlin] and https://ktor.io/[Ktor] to build the API. Following the recent tendency, Ktor provides a project scaffolding https://start.ktor.io/[generator] that adds some sample code and allows adding plugins. Remember to add the Authentication JWT plugin.
 
 .Generating the luna-vacation-api project
-image::ktor-project-generator.png[Client secret, 400]
+image::ktor-project-generator.png[Client secret, 500]
 
 Download and open the project in your IDE of choice. The test dependencies and test folder can be removed.
 Following the documentation in https://ktor.io/docs/jwt.html[ktor.io] on how to handle JSON web tokens let's add the following dependencies in `build.gradle.kts`:
@@ -286,22 +286,22 @@ And what do we do with the `response` now? We send it to https://slack.com/[Slac
 You can create your own workspace at https://slack.com/[slack.com]. Once you have it, you can create a new https://api.slack.com/apps[App]. Choose `Create New App` and then `From scratch`:
 
 .Creating a new Slack App
-image::slack-create-app-1.png[Diagram, 300]
+image::slack-create-app-1.png[Diagram, 400]
 
 I named the app `ImIOnVacation` and added it to my personal workspace:
 
 .Configuring the Slack App workspace
-image::slack-create-app-2.png[Diagram, 300]
+image::slack-create-app-2.png[Diagram, 400]
 
 To finalize the App creation you need to set some permissions:
 
 .Configuring the Slack App permissions
-image::slack-app-permissions.png[Diagram, 300]
+image::slack-app-permissions.png[Diagram, 400]
 
 In `Basic Information` you can personalize the appearance off the app, but for now let's jump to `OAuth & Permission` and, from there, scroll down to the `Scopes` section. In `User Token Scopes` add the scopes `chat:write`:
 
 .Configuring the User Token Scopes
-image::slack-app-scopes.png[Diagram, 300]
+image::slack-app-scopes.png[Diagram, 400]
 
 Then scroll up and click `Install to Workspace`. That will take us to a permissions screen: click `Allow`. We can see that a `User OAuth Token` was created as well.
 
@@ -342,7 +342,7 @@ val response = slack.methods("xoxp-...").chatPostMessage { req: ChatPostMessageR
 Make sure `luna-vacation-api` is still running and now let's run `luna-vacation-bot`. If we check Slack we should see a message:
 
 .Slack message
-image::slack-message.png[Diagram, 300]
+image::slack-message.png[Diagram, 200]
 
 The complete source code for the https://github.com/LeonorLunatech/luna-vacation-api[luna-vacation-api] and https://github.com/LeonorLunatech/luna-vacation-bot[luna-vacation-bot] are available on GitHub.
 
