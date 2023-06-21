@@ -245,12 +245,13 @@ Kotlin's pattern matching has some limitations, mentioned in the previous blogpo
 
 This feature, similar to Scala's Value classes, allows us to create a type that carries some additional semantic meaning but without the runtime overhead of a full class.
 An inline class gets compiled to its underlying type, and no instantiation of the class occurs at runtime.
+Inline classes are a subset of value-based classes. They don't have an identity and can only hold values.
 
-Here is an example of an inline class:
+To declare an inline class, use the _value_ modifier before the name of the class:
 
 [source,kotlin]
 ----
-inline class Password(val value: String)
+value class Password(val value: String)
 
 fun loginUser(id: String, password: Password) {
     // ...
@@ -262,14 +263,30 @@ fun main() {
 }
 ----
 
+To declare an inline class for the JVM backend, the _value_ modifier has to be used along with the @JvmInline annotation before the class declaration:
+
+[source,kotlin]
+----
+// For JVM backends
+@JvmInline
+value class Password(val value: String)
+----
+
 In this example, _Password_ is an inline class that wraps a _String_. But at runtime, _Password_ instances get compiled to simple _String_ instances.
 The use of inline classes allows us to convey additional semantic meaning (in this case, that the _String_ is a password), while also providing a type safety benefit (avoiding accidental mix-up of regular strings and passwords).
 
 ==== Comparing with Scala
 
-Although inline classes in Kotlin and value classes in Scala serve a similar purpose, there are subtle differences.
+Example of a value class in Scala:
+
+[source,scala]
+----
+class Password(val value: String) extends AnyVal
+----
+Although inline classes in Kotlin and value classes in Scala serve a similar purpose, there are subtle differences due to differences in language implementations.
+
 In Kotlin, inline classes can wrap any type and can also implement interfaces. They also allow for the use of null values if the wrapped type is nullable.
-On the other hand, Scala's Value classes can only extend AnyVal and can only have a single, parameterized field in the constructor. They can't take null values and cannot be subclassed or have another class/trait mixed into them.
+On the other hand, Scala's Value classes can only extend AnyVal (or other universal traits). They can't take null values and can't have another class/trait mixed into them.
 
 == Advanced Kotlin DSL Techniques
 
