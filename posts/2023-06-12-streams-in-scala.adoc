@@ -3,7 +3,7 @@ zanio
 v1.0, 2023-06-12
 :title: Streams in Scala
 :lang: en
-:tags: [tag1, tag2, en]
+:tags: [streams, scala-streams, fs2, akka-streams, scala, zio-streams, call-by-name]
 
 == Outline
  1. <<Introduction>>
@@ -146,7 +146,38 @@ In the above snippet, we chained getLines with to(LazyList). With this, the cont
 
 [[stream-processing-libraries]]
 == Libraries that implement Streams better
-Scala provides several libraries that offer enhanced stream processing capabilities compared to the standard library. Some popular libraries for stream processing in Scala are:
+Some Scala libraries offer enhanced stream processing capabilities compared to the LazyList API. These libraries are implemented following the Reactive stream standard. Reactive Streams is an initiative to provide a standard for asynchronous stream processing with non-blocking back pressure.
+
+=== Reactive Stream
+https://www.reactive-streams.org/[The Reactive Streams standard] establishes two communication channels: an upstream demand channel and a downstream data channel. Publishers follow a request-based approach and only send data when a demand for a certain number of elements arrives through the demand channel. They can then push up to that requested number of elements downstream, either in batches or individually.
+As long as there is outstanding demand, the publisher can continue pushing data to the subscriber as it becomes available. However, when the demand is exhausted, the publisher cannot send data unless prompted by a demand signal from downstream. This mechanism, known as backpressure, ensures controlled flow and prevents overwhelming the subscriber. In response to backpressure, the source node can choose to allocate more resources, slow down its production, or even discard data.
+
+image::../media/2023-06-12-streams-in-scala/reactive-stream-representation.png[]
+
+To summarise, handling an un-bounded volume of data in an asynchronous system requires some form of control between the producer and the consumer otherwise we would have overwhelming data sent to the consumer from multiple threads. The Reactive stream standard Introduces a concept of back-pressure which is a means of communication between the producers and the consumer. The reactive stream defines an interface which must be implemented.
+
+The low-level interface of the Reactive streams:
+
+[source,scala]
+----
+trait Publisher[T] {
+ def subscribe(s: Subscriber[T]): Unit
+}
+
+trait Subscriber[T] {
+  def onSubscribe(s: Subscription): Unit
+  def onNext(t: T): Unit
+  def onError(t: Throwable): Unit
+  def onComplete(): Unit
+}
+
+trait Subscription {
+  def request(n: Int): Unit
+  def cancel(): Unit
+}
+----
+
+The below libraries take into account this reactive stream and implement high-level stream API
 
 === https://doc.akka.io/docs/akka/current/stream/index.html[Akka Streams]:
 Akka Streams is a powerful and scalable stream processing library built on top of the Akka toolkit. It provides a high-level DSL for composing and executing stream-based computations. Akka Streams offers backpressure support, fault-tolerance, and integration with other Akka components. It's widely used in building reactive and distributed systems.
@@ -164,7 +195,7 @@ These libraries provide advanced features, performance optimizations, concurrent
 
 [[conclusion]]
 == Conclusion
-To round up this article, we have seen how Scala Stream/LazyList work and how they can be used to process large data sets. We have also seen how LazyList are implemented by lazy evaluation ( call-by-name ). Finally, we have seen how Scala Streams can be used to process large log files and how they compare to other stream processing libraries.
+To round up this article, we have seen how Scala Stream/LazyList work and how they can be used to process large data sets. We have also seen how LazyList are implemented by lazy evaluation ( call-by-name ). Finally, we have seen how Scala LazyList can be used to process large log files and how they compare to other stream processing libraries.
 I have prepared a repository that shows how  to process large log files using Scala LazyList and Akka Streams. You can find the repository https://github.com/zanio/stream-in-scala[here]
 
 == References
@@ -177,6 +208,7 @@ I have prepared a repository that shows how  to process large log files using Sc
 7. https://fs2.io/#/getstarted/example
 8. https://monix.io/docs/current/intro/hello-world.html
 9. https://zio.dev/reference/stream/
+10. https://www.reactive-streams.org/
 
 
 
