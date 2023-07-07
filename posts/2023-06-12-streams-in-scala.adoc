@@ -3,7 +3,7 @@ zanio
 v1.0, 2023-06-12
 :title: Streams in Scala
 :lang: en
-:tags: [streams, scala-streams, fs2, akka-streams, scala, zio-streams, call-by-name]
+:tags: [streams, scala-streams, LazyList, fs2, akka-streams, scala, zio-streams, call-by-name, reactive-stream]
 
 == Outline
  1. <<Introduction>>
@@ -17,7 +17,7 @@ v1.0, 2023-06-12
 
 [[introduction]]
 == Introduction
-Streams in programming languages are a vital concept that allows developers to process infinite data without causing memory issues. In Scala, streams provide a unique way of working with collections in a lazy manner. The importance of stream lies in its ability to reduce the amount of memory required to process data by only computing elements when they are required. This reduces the chances of running into an out-of-memory error (OOM), one of the most common issues faced in large-scale data processing. One of Scala's fundamental stream implementations is call-by-name, which enables the lazy evaluation of streams, ensuring that computations are performed only when required. This approach greatly enhances memory utilization and helps prevent out-of-memory errors In this blog, we will explore the significance of streams in Scala programming and how they help solve memory management issues that could otherwise lead to an OOM error, we will delve into the significance of streams, explore key concepts and operations associated with Scala streams, and examine superior stream implementation libraries such as Akka Stream and FS2. Lastly, we will offer a cautionary note to address potential memory issues when utilizing streams in Scala. Let's immerse ourselves in the realm of Scala streams!
+Streams in programming languages are a vital concept that allows developers to process infinite data without causing memory issues. In Scala, streams provide a unique way of working with collections in a lazy manner. The importance of stream lies in its ability to reduce the amount of memory required to process data by only computing elements when they are required. This reduces the chances of running into an out-of-memory error (OOM), one of the most common issues faced in large-scale data processing. One of Scala's fundamental stream implementations is call-by-name, which enables the lazy evaluation of streams, ensuring that computations are performed only when required. This approach greatly enhances memory utilization and helps prevent out-of-memory errors In this blog, we will explore the significance of streams in Scala programming and how they help solve memory management issues that could otherwise lead to an OOM error, we will delve into the significance of streams, explore key concepts and operations associated with Scala streams, and examine superior stream implementation libraries such as Akka Stream and FS2. Let's immerse ourselves in the realm of Scala streams!
 
 [[why-streams]]
 == Why Streams
@@ -66,7 +66,7 @@ The Stream in Scala is part of the collection hierarchy which extends LinearSeq.
 (1 to 10000).to(LazyList) // output: LazyList(<not computed>)
 ----
 === Transformer Vs Terminator method:
-It is important that we know what this are. Transformer methods are collection methods that convert a given in‐ put collection to a new output collection, based on an algorithm you provide to transform the data. This includes methods like map, filter, and reverse. On the other hand Terminator methods are collection methods that perform a final computation on a collection and return a non-collection result, such as a single value or a boolean value. These methods effectively terminate the computation and produce a final output. Examples of terminator methods include methods like fold, reduce, count, and exists.  Be careful with methods that aren’t transformers. Calls to the following strict methods are evaluated immediately and can easily cause java.lang.OutOfMemoryError errors:
+It is important that we know what these are. Transformer methods are collection methods that convert a given input collection to a new output collection, based on an algorithm you provide to transform the data. This includes methods like map, filter, and reverse. On the other hand Terminator methods are collection methods that perform a final computation on a collection and return a non-collection result, such as a single value or a boolean value. These methods effectively terminate the computation and produce a final output. Examples of terminator methods include methods like fold, reduce, count, and exists.  Be careful with methods that aren’t transformers. Calls to the following strict methods are evaluated immediately and can easily cause java.lang.OutOfMemoryError errors:
 
 [[call-by-name]]
 == Call-by-name ( CBN )
@@ -92,7 +92,7 @@ def from[A](coll: collection.IterableOnce[A]): LazyList[A] = coll match {
 @inline private def newLL[A](state: => State[A]): LazyList[A] = new LazyList[A](() => state)
 ----
 
-This portion `( state: => State[A]  )` is called , call-by-name. The state parameter has a return type of => State[A].  This parameter is not evaluated when called, it's only evaluated when a terminating method is called. So all transforming method operate on the state without it being called.
+This portion `( state: => State[A]  )` is called , call-by-name. The state parameter has a return type of => State[A].  This parameter is not evaluated when passed, it's only evaluated when a terminating method is called. So all transforming method operate on the state without it being called.
 
 The same CBN is used as in the case below:
 
@@ -146,11 +146,11 @@ In the above snippet, we chained getLines with to(LazyList). With this, the cont
 
 [[stream-processing-libraries]]
 == Libraries that implement Streams better
-Some Scala libraries offer enhanced stream processing capabilities compared to the LazyList API. These libraries are implemented following the Reactive stream standard. Reactive Streams is an initiative to provide a standard for asynchronous stream processing with non-blocking back pressure.
+Some Scala libraries offer enhanced stream processing capabilities compared to the LazyList API. These libraries are implemented following the Reactive stream standard. https://www.reactive-streams.org/[Reactive Streams] is an initiative to provide a standard for asynchronous stream processing with non-blocking back pressure.
 
 === Reactive Stream
-https://www.reactive-streams.org/[The Reactive Streams standard] establishes two communication channels: an upstream demand channel and a downstream data channel. Publishers follow a request-based approach and only send data when a demand for a certain number of elements arrives through the demand channel. They can then push up to that requested number of elements downstream, either in batches or individually.
-As long as there is outstanding demand, the publisher can continue pushing data to the subscriber as it becomes available. However, when the demand is exhausted, the publisher cannot send data unless prompted by a demand signal from downstream. This mechanism, known as backpressure, ensures controlled flow and prevents overwhelming the subscriber. In response to backpressure, the source node can choose to allocate more resources, slow down its production, or even discard data.
+The Reactive Streams standard establishes two communication channels: an upstream demand channel and a downstream data channel. Publishers follow a request-based approach and only send data when a demand for a certain number of elements arrives through the demand channel. They can then push up to that requested number of elements downstream, either in batches or individually.
+As long as there is outstanding demand, the publisher can continue pushing data to the subscriber as it becomes available. However, when the demand is exhausted, the publisher cannot send data unless prompted by a demand signal from downstream. This mechanism, known as backpressure, ensures controlled flow and prevents overwhelming the subscriber. In response to backpressure, the source can choose to allocate more resources, slow down its production, or even discard data.
 
 image::../media/2023-06-12-streams-in-scala/reactive-stream-representation.png[]
 
