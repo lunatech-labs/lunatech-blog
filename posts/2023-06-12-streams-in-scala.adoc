@@ -3,7 +3,7 @@ zanio
 v1.0, 2023-06-12
 :title: Streams in Scala
 :lang: en
-:tags: [streams, scala-streams, LazyList, fs2, akka-streams, scala, zio-streams, call-by-name, reactive-stream]
+:tags: [streams, scala-streams, LazyList, fs2, akka-streams, scala, zio-streams, call-by-name, reactive-stream, back-pressure]
 
 == Outline
  1. <<Introduction>>
@@ -183,7 +183,7 @@ The below libraries take into account this reactive stream and implement high-le
 Akka Streams is a powerful and scalable stream processing library built on top of the Akka toolkit. It provides a high-level DSL for composing and executing stream-based computations. Akka Streams offers backpressure support, fault-tolerance, and integration with other Akka components. It's widely used in building reactive and distributed systems.
 
 === https://fs2.io/#/getstarted/example[fs2]:
-fs2 (Functional Streams for Scala) is a functional stream processing library that provides a purely functional, composable, and resource-safe approach to handling streams. It leverages functional programming concepts such as cats-effect and functional abstractions to build complex stream processing pipelines. fs2 focuses on efficiency, type safety, and composability.
+fs2 (Functional Streams for Scala) formally called Scalaz-Stream is a functional stream processing library that provides a purely functional, composable, and resource-safe approach to handling streams. It leverages functional programming concepts such as cats-effect and functional abstractions to build complex stream processing pipelines. fs2 focuses on efficiency, type safety, and composability. Beyound stream processing, fs2 can be used for https://underscore.io/blog/posts/2018/03/20/fs2.html[everything] from task execution to control flow.
 
 === https://monix.io/docs/current/intro/hello-world.html[Monix]:
 Monix is a library that provides reactive programming and asynchronous streams for Scala. It offers various abstractions like Observable, Iterant, and Task to handle asynchronous computations, data streams, and reactive programming. Monix supports backpressure and provides powerful operators for manipulating and transforming streams.
@@ -196,7 +196,7 @@ These libraries provide advanced features, performance optimizations, concurrent
 [[conclusion]]
 == Conclusion
 To round up this article, we have seen how Scala Stream/LazyList work and how they can be used to process large data sets. We have also seen how LazyList are implemented by lazy evaluation ( call-by-name ). Finally, we have seen how Scala LazyList can be used to process large log files and how they compare to other stream processing libraries.
-I have prepared a repository that shows how  to process large log files using Scala LazyList and Akka Streams. You can find the repository https://github.com/zanio/stream-in-scala[here]
+I have prepared a repository that shows how  to process large log files using LogStream ( Wrapper of Scala LazyList ), Akka stream, and Fs2 stream. You can find the repository https://github.com/lunatech-labs/lunatech-streams-in-scala[here]
 
 == References
 1. https://stackoverflow.com/questions/60128207/whats-the-difference-between-lazylist-and-stream-in-scala
