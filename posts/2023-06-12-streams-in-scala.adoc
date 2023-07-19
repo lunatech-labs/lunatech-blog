@@ -196,7 +196,7 @@ These libraries provide advanced features, performance optimizations, concurrent
 [[conclusion]]
 == Conclusion
 To round up this article, we have seen how Scala Stream/LazyList work and how they can be used to process large data sets. We have also seen how LazyList are implemented by lazy evaluation ( call-by-name ). Finally, we have seen how Scala LazyList can be used to process large log files and how they compare to other stream processing libraries.
-I have prepared a repository that shows how  to process large log files using LogStream ( Wrapper of Scala LazyList ), Akka stream, and Fs2 stream. You can find the repository https://github.com/lunatech-labs/lunatech-streams-in-scala[here]
+I have prepared a repository that shows how to process large log files using LogStream ( Wrapper of Scala LazyList ), Akka stream, and Fs2 stream. You can find the repository https://github.com/lunatech-labs/lunatech-streams-in-scala[here]
 
 == References
 1. https://stackoverflow.com/questions/60128207/whats-the-difference-between-lazylist-and-stream-in-scala
