@@ -70,7 +70,7 @@ It is important that we know what these are. Transformer methods are collection 
 
 [[call-by-name]]
 == Call-by-name ( CBN )
-Whilst you can begin using LazyList collection with the information provided so far, I think it would also be good to have a basic understanding of LazyList Implementation. Call-by-name (also known as pass-by-name) is a parameter evaluation strategy in programming languages where the argument expression is not evaluated before it is passed to a function or method. Instead, the expression is evaluated each time it is referenced within the function or method body. Just for note, the other parameter evaluation strategy is called, Call-by-value ( CBV )
+While you can begin using LazyList collections with the information provided so far, I think it would also be good to have a basic understanding of the LazyList Implementation. Call-by-name (also known as pass-by-name) is a parameter evaluation strategy in programming languages where the argument expression is not evaluated before it is passed to a function or method. Instead, the expression is evaluated each time it is referenced within the function or method body. Just for note, the other parameter evaluation strategy is called, Call-by-value ( CBV )
 
 When you create LazyList, these are generalised summaries of the sequence of events.
 
