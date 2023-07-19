@@ -1,4 +1,4 @@
-= Streams in Scala
+= Streams in Scala: An Introductory Guide
 zanio
 v1.0, 2023-06-12
 :title: Streams in Scala
@@ -6,18 +6,14 @@ v1.0, 2023-06-12
 :tags: [streams, scala-streams, LazyList, fs2, akka-streams, scala, zio-streams, call-by-name, reactive-stream, back-pressure]
 
 == Outline
- 1. <<Introduction>>
- 2. <<Why Streams>>
- 3. <<Scala Stream>>
- 4. <<call-by-name>>
- 5. <<lazylist-implementation>>
- 6. <<stream-processing-libraries>>
- 7. <<Conclusion>>
- 8. <<References>>
+ 1. <<Why Streams>>
+ 2. <<Scala Stream>>
+ 3. <<call-by-name>>
+ 4. <<lazylist-implementation>>
+ 5. <<stream-processing-libraries>>
+ 6. <<Conclusion>>
+ 7. <<References>>
 
-[[introduction]]
-== Introduction
-Streams in programming languages are a vital concept that allow developers to process infinite data without causing memory issues. In Scala, streams provide a unique way of working with collections in a lazy manner. The importance of streams lie in its ability to reduce the amount of memory required to process data by only computing elements when they are required. This reduces the chances of running into an out-of-memory error (OOM), one of the most common issues faced in large-scale data processing. One of Scala's fundamental stream implementations is "call-by-name", which enables the lazy evaluation of streams, ensuring that computations are performed only when required. This approach greatly enhances memory utilization and helps prevent out-of-memory errors. In this blog we will explore the significance of streams in Scala programming and how they help solve memory management issues that could otherwise lead to an OOM error. We will delve into the significance of streams, explore key concepts and operations associated with Scala streams, and examine superior stream implementation libraries such as Akka Stream and FS2. Let's immerse ourselves in the realm of Scala streams!
 
 [[why-streams]]
 == Why Streams
@@ -55,14 +51,14 @@ The above fixes the issue. It's the same task but with the use of toStream. What
 == Scala Stream
 image::../media/2023-06-12-streams-in-scala/scala-stream.png[]
 
-Stream in Scala is part of the collection hierarchy which extends LinearSeq. They're like views, only the elements that are accessed are computed. Other than this behaviour, a Stream behaves similarly to a List. The elements of stream are lazily computed. In the Scala Stream, only the first element are pre-computed but as of Scala 2.13 Stream was replace with LazyList where no element is computed unless requested. LazyList is designed to address the issues with Stream and provides a more predictable evaluation model.
+Stream in Scala is part of the collection hierarchy which extends LinearSeq. They're like views, only the elements that are accessed are computed. In views, elements are recomputed each time they are accessed. In a stream elements are retained as they are evaluated. Other than this behaviour, a Stream behaves similarly to a List. The elements of stream are lazily computed. In the Scala Stream, only the first element are pre-computed but as of Scala 2.13 Stream was replace with LazyList where no element is computed unless requested. LazyList is designed to address the issues with Stream and provides a more predictable evaluation model.
 
 [source,scala]
 ----
-// Stream prior to 2.13
+// Scala prior to 2.13
 (1 to 10000).toStream // output: Stream(1, <not computed>)
 
-// LazyList >= 2.13
+// Scala >= 2.13
 (1 to 10000).to(LazyList) // output: LazyList(<not computed>)
 ----
 === Transformer Vs Terminator method:
@@ -184,9 +180,6 @@ Akka Streams is a powerful and scalable stream processing library built on top o
 
 === https://fs2.io/#/getstarted/example[fs2]:
 fs2 (Functional Streams for Scala) formerly called Scalaz-Stream is a functional stream processing library that provides a purely functional, composable, and resource-safe approach to handling streams. It leverages functional programming concepts such as cats-effect and functional abstractions to build complex stream processing pipelines. fs2 focuses on efficiency, type safety, and composability. Beyond stream processing, fs2 can be used for https://underscore.io/blog/posts/2018/03/20/fs2.html[everything] from task execution to control flow.
-
-=== https://monix.io/docs/current/intro/hello-world.html[Monix]:
-Monix is a library that provides reactive programming and asynchronous streams for Scala. It offers various abstractions like Observable, Iterant, and Task to handle asynchronous computations, data streams, and reactive programming. Monix supports backpressure and provides powerful operators for manipulating and transforming streams.
 
 === https://zio.dev/reference/stream/[ZIO Streams]:
 ZIO Streams is part of the ZIO ecosystem, which is a powerful and purely functional library for building concurrent and resilient applications. ZIO Streams offers composable, resource-safe, and type-safe stream processing capabilities. It integrates well with other ZIO components, allowing you to build complex and concurrent stream-based workflows.
