@@ -55,7 +55,7 @@ The above fixes the issue. It's the same task but with the use of toStream. What
 == Scala Stream
 image::../media/2023-06-12-streams-in-scala/scala-stream.png[]
 
-The Stream in Scala is part of the collection hierarchy which extends LinearSeq. They're like views, only the elements that are accessed are computed. Other than this behaviour, a Stream behaves similarly to a List. The elements of stream are lazily computed. In Scala Stream, only the first element are pre-computed but as of Scala 2.13, Stream was replace with LazyList where no element is computed unless requested. LazyList is designed to address the issues with Stream and provides a more predictable evaluation model.
+Stream in Scala is part of the collection hierarchy which extends LinearSeq. They're like views, only the elements that are accessed are computed. Other than this behaviour, a Stream behaves similarly to a List. The elements of stream are lazily computed. In the Scala Stream, only the first element are pre-computed but as of Scala 2.13 Stream was replace with LazyList where no element is computed unless requested. LazyList is designed to address the issues with Stream and provides a more predictable evaluation model.
 
 [source,scala]
 ----
