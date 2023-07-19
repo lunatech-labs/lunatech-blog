@@ -1,4 +1,4 @@
-= Streams in Scala: An Introductory Guide
+= Streams in scala: An introductory guide
 zanio
 v1.0, 2023-06-12
 :title: Streams in Scala
@@ -39,6 +39,9 @@ The "GC overhead limit exceeded" error is an error message commonly encountered 
 
 How would we avoid running into this kind of error? Whilst we can consider increasing the heap size allocated to the JVM using the -Xmx flag, I would strongly discourage this as it doesn't fix the problem when we have more data or infinite data. This is where streaming comes in!
 
+> If your applications continuously require you to scale vertically ( increase the memory allocated to the application ) then you may want to consider building such application the streaming way. This will help you save cost and also make your application more stable.
+
+
 The above code would be rewritten to the following:
 
 [source,scala]
@@ -49,7 +52,7 @@ val r =(1 to 10000).toStream
    .sum
 ----
 
-The above fixes the issue. It's the same task but with the use of toStream. What changed? Chaining toStream made  ( 1 to 10,000 )  not to be computed ( 1,2,3...10000) when the code is ran except when it is required, So what  will see when you println ( 1 to 10000).toStream ? you will see something like Stream(1, <not computed>).  So the next question would be, when is an element of a stream required? An element of a stream is required when you call terminating operations like sum, size, foldleft,toList,toArray,foreach,reduce,foldLeft / foldRight,max / min,size,isEmpty. This operations requires one element after the other from the stream when it is called. One other thing you would notice if you ran that piece of code is that your IDE says that toStream is deprecated. We will also talk about this in the upcoming section.
+The above fixes the issue. It's the same task but with the use of toStream. What changed? Chaining `toStream` made  ( 1 to 10,000 )  not to be computed ( 1,2,3...10000) when the code is run except when it is required, So what  will see when you output `( 1 to 10000).toStream` ? you will see something like `Stream(1, <not computed>)`.  So the next question would be, when is an element of a stream required? An element of a stream is required when you call terminating operations like `sum, size, foldleft,toList,toArray,foreach,reduce,foldLeft / foldRight,max / min,size,isEmpty`. These operations require one element after the other from the stream when it is called. One other thing you would notice if you ran that piece of code is that your IDE says that toStream is deprecated. We will also talk about this in the upcoming section.
 
 [[scala-stream]]
 == Scala Stream
@@ -66,7 +69,12 @@ Stream in Scala is part of the collection hierarchy which extends LinearSeq. The
 (1 to 10000).to(LazyList) // output: LazyList(<not computed>)
 ----
 === Transformer Vs Terminator method:
-It is important that we know what these are. Transformer methods are collection methods that convert a given input collection to a new output collection, based on an algorithm you provide to transform the data. This includes methods like map, filter, and reverse. On the other hand Terminator methods are collection methods that perform a final computation on a collection and return a non-collection result, such as a single value or a boolean value. These methods effectively terminate the computation and produce a final output. Examples of terminator methods include methods like fold, reduce, count, and exists.  Be careful with methods that aren’t transformers. Calls to the following strict methods are evaluated immediately and can easily cause java.lang.OutOfMemoryError errors:
+
+_Transformer_ methods are collection methods (they're part of the collections API. Transformer methods convert a given input collection to a new output collection, based on an function you provide which maps input to output. Examples of Transformer methods includes `map`, `filter,` and `reverse`.
+
+_Terminator_ methods are collection API methods which perform a final computation on a collection and return a non-collection result, such as a single value or a boolean value, for example. Terminator methods effectively terminate the computation and produce a final output. Examples of terminator methods include `fold`, `reduce`, and `count`.
+
+> Be careful with Terminator methods. Calls to these methods are evaluated immediately and can easily cause java.lang.OutOfMemoryError errors:
 
 [[call-by-name]]
 == Call-by-name ( CBN )
@@ -177,7 +185,7 @@ trait Subscription {
 }
 ----
 
-The below libraries take into account this reactive stream and implement high-level stream API
+The below libraries take into account this reactive stream interface and implement high-level stream API
 
 === https://doc.akka.io/docs/akka/current/stream/index.html[Akka Streams]:
 Akka Streams is a powerful and scalable stream processing library built on top of the Akka toolkit. It provides a high-level DSL for composing and executing stream-based computations. Akka Streams offers backpressure support, fault-tolerance, and integration with other Akka components. It's widely used in building reactive and distributed systems.
@@ -192,7 +200,15 @@ These libraries provide advanced features, performance optimizations, concurrent
 
 [[conclusion]]
 == Conclusion
-To round up this article, we have seen how Scala Stream/LazyList work and how they can be used to process large data sets. We have also seen how LazyList are implemented by lazy evaluation ( call-by-name ). Finally, we have seen how the Scala LazyList can be used to process large log files and how they compare to other stream processing libraries.
+In this blog post we have seen how:
+
+- Scala's `Stream` and `LazyList` work and how they can be used to process large data sets. We have also seen - - `LazyList`s are implemented with lazy evaluation
+
+- The important distinction between `transformer` and `terminator` functions in the API
+
+- Scala's streams compare to other stream processing library's stream implementations
+
+
 I have prepared a repository that shows how to process large log files using LogStream ( Wrapper of Scala LazyList ), Akka stream, and Fs2 stream. You can find the repository https://github.com/lunatech-labs/lunatech-streams-in-scala[here]
 
 == References
@@ -203,7 +219,6 @@ I have prepared a repository that shows how to process large log files using Log
 5. https://github.com/inanna-malick/akka-streams-example/tree/master
 6. https://doc.akka.io/docs/akka/current/stream/index.html
 7. https://fs2.io/#/getstarted/example
-8. https://monix.io/docs/current/intro/hello-world.html
-9. https://zio.dev/reference/stream/
-10. https://www.reactive-streams.org/
+8. https://zio.dev/reference/stream/
+9. https://www.reactive-streams.org/
 
