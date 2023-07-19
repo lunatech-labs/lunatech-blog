@@ -33,7 +33,7 @@ val r =(1 to 10000)
 ----
 
 The above code would result in #java.lang.OutOfMemoryError: GC overhead limit exceeded.#
-When the above snippet is run, the jvm tries to allocate memory for the elements of the range and the first transformer ( map operation ) is called immediately, which also tries to allocate memory for each element in the map. In total, we end up having 100,000,000 elements which the jvm needs to allocate memory for in the heap space which exceeds the maximum heap size specified through the -Xmx flag on the jvm
+When the above snippet is ran, the jvm tries to allocate memory for the elements of the range and the first transformer ( map operation ) is called immediately, which also tries to allocate memory for each element in the map. In total, we end up having 100,000,000 elements which the jvm needs to allocate memory for in the heap space which exceeds the maximum heap size specified through the -Xmx flag on the jvm.
 
 The "GC overhead limit exceeded" error is an error message commonly encountered in Java-based applications, including Scala applications running on the Java Virtual Machine (JVM). This error occurs when the garbage collector is spending an excessive amount of time collecting garbage with little memory reclaimed. This error message is essentially an indication that the JVM is struggling to free up enough memory, and the application's performance is significantly impacted. It typically occurs when the garbage collector is running continuously, consuming an excessive amount of CPU time. To prevent the garbage collector from consuming an excessive amount of CPU time with little benefit, the JVM defines a threshold known as the "GC overhead limit." Once this is reached, An error is thrown.
 
