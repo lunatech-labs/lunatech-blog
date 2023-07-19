@@ -72,7 +72,7 @@ It is important that we know what these are. Transformer methods are collection 
 == Call-by-name ( CBN )
 While you can begin using LazyList collections with the information provided so far, I think it would also be good to have a basic understanding of the LazyList Implementation. Call-by-name (also known as pass-by-name) is a parameter evaluation strategy in programming languages where the argument expression is not evaluated before it is passed to a function or method. Instead, the expression is evaluated each time it is referenced within the function or method body. Just for note, the other parameter evaluation strategy is called, Call-by-value ( CBV )
 
-When you create LazyList, these are generalised summaries of the sequence of events.
+When you create a LazyList, these are generalised summaries of the sequence of events.
 
 [source,scala]
 ----
@@ -92,7 +92,7 @@ def from[A](coll: collection.IterableOnce[A]): LazyList[A] = coll match {
 @inline private def newLL[A](state: => State[A]): LazyList[A] = new LazyList[A](() => state)
 ----
 
-This portion `( state: => State[A]  )` is called , call-by-name. The state parameter has a return type of => State[A].  This parameter is not evaluated when passed, it's only evaluated when a terminating method is called. So all transforming method operate on the state without it being called.
+This portion `( state: => State[A]  )` is called call-by-name. The state parameter has a return type of => State[A].  This parameter is not evaluated when passed, it's only evaluated when a terminating method is called. So all transforming method operate on the state without it being called.
 
 The same CBN is used as in the case below:
 
@@ -120,7 +120,7 @@ object cons {
 ----
 
 [[lazylist-implementation]]
-== A Simple Use-case of Scala Stream
+== A Simple use-case of Scala Stream
 Let's consider a real-life scenario: Assume we are tasked with finding specific terms (e.g., success, failure, etc.) within large log files from various services running on our server. Our objective is to retrieve all occurrences of these terms and have the option to select the first few results. As you may have known, Scala provides a Source API for reading files. In this task, we would compare two approaches and see why one is better than the other.
 
 === 1st Attempt:
@@ -132,7 +132,7 @@ files.map {
   .take(10)
 }
 ----
-In the above snippet,we chained getLines and toList which ends up loading the content of the file to memory before filter is called. When we call toList, it evaluates immediately, and only after having the whole data, the filtering is applied. using a strict data structure like List would be a bad idea because of memory usage because the file could be large.
+In the above snippet, we chained getLines and toList which ends up loading the content of the file into memory before filter is called. When we call toList, it evaluates immediately, and only after having the whole data the filtering is applied. using a strict data structure like List would be a bad idea because of memory usage because the file could be large.
 
 === 2nd Attempt:
 [source,scala]
@@ -142,10 +142,10 @@ files.map {
 
 }
 ----
-In the above snippet, we chained getLines with to(LazyList). With this, the content of the files is not loaded into the memory we then apply the filter and take functions which still don't load the content. The content of the file is only loaded when we call a terminating method like foreach. So the benefit of this is that it would only compute the first ten lines that match the filter predicate so that we don't end up loading everything from file.
+In the above snippet we chained getLines with to(LazyList). With this, the content of the files is not loaded into memory.  We then apply the filter and take functions which still don't load the content. The content of the file is only loaded when we call a terminating method like foreach. So the benefit of this is that it would only compute the first ten lines that match the filter predicate so that we don't end up loading everything from file.
 
 [[stream-processing-libraries]]
-== Libraries that implement Streams better
+== Alternative Libraries that implement Streams
 Some Scala libraries offer enhanced stream processing capabilities compared to the LazyList API. These libraries are implemented following the Reactive stream standard. https://www.reactive-streams.org/[Reactive Streams] is an initiative to provide a standard for asynchronous stream processing with non-blocking back pressure.
 
 === Reactive Stream
@@ -154,7 +154,7 @@ As long as there is outstanding demand, the publisher can continue pushing data 
 
 image::../media/2023-06-12-streams-in-scala/reactive-stream-representation.png[]
 
-To summarise, handling an un-bounded volume of data in an asynchronous system requires some form of control between the producer and the consumer otherwise we would have overwhelming data sent to the consumer from multiple threads. The Reactive stream standard Introduces a concept of back-pressure which is a means of communication between the producers and the consumer. The reactive stream defines an interface which must be implemented.
+To summarise, handling an un-bounded volume of data in an asynchronous system requires some form of control between the producer and the consumer otherwise we would have overwhelming data sent to the consumer from multiple threads. The Reactive stream standard introduces a concept of back-pressure which is a means of communication between the producers and the consumer. The reactive stream defines an interface which must be implemented.
 
 The low-level interface of the Reactive streams:
 
@@ -183,7 +183,7 @@ The below libraries take into account this reactive stream and implement high-le
 Akka Streams is a powerful and scalable stream processing library built on top of the Akka toolkit. It provides a high-level DSL for composing and executing stream-based computations. Akka Streams offers backpressure support, fault-tolerance, and integration with other Akka components. It's widely used in building reactive and distributed systems.
 
 === https://fs2.io/#/getstarted/example[fs2]:
-fs2 (Functional Streams for Scala) formally called Scalaz-Stream is a functional stream processing library that provides a purely functional, composable, and resource-safe approach to handling streams. It leverages functional programming concepts such as cats-effect and functional abstractions to build complex stream processing pipelines. fs2 focuses on efficiency, type safety, and composability. Beyound stream processing, fs2 can be used for https://underscore.io/blog/posts/2018/03/20/fs2.html[everything] from task execution to control flow.
+fs2 (Functional Streams for Scala) formerly called Scalaz-Stream is a functional stream processing library that provides a purely functional, composable, and resource-safe approach to handling streams. It leverages functional programming concepts such as cats-effect and functional abstractions to build complex stream processing pipelines. fs2 focuses on efficiency, type safety, and composability. Beyond stream processing, fs2 can be used for https://underscore.io/blog/posts/2018/03/20/fs2.html[everything] from task execution to control flow.
 
 === https://monix.io/docs/current/intro/hello-world.html[Monix]:
 Monix is a library that provides reactive programming and asynchronous streams for Scala. It offers various abstractions like Observable, Iterant, and Task to handle asynchronous computations, data streams, and reactive programming. Monix supports backpressure and provides powerful operators for manipulating and transforming streams.
@@ -195,7 +195,7 @@ These libraries provide advanced features, performance optimizations, concurrent
 
 [[conclusion]]
 == Conclusion
-To round up this article, we have seen how Scala Stream/LazyList work and how they can be used to process large data sets. We have also seen how LazyList are implemented by lazy evaluation ( call-by-name ). Finally, we have seen how Scala LazyList can be used to process large log files and how they compare to other stream processing libraries.
+To round up this article, we have seen how Scala Stream/LazyList work and how they can be used to process large data sets. We have also seen how LazyList are implemented by lazy evaluation ( call-by-name ). Finally, we have seen how the Scala LazyList can be used to process large log files and how they compare to other stream processing libraries.
 I have prepared a repository that shows how to process large log files using LogStream ( Wrapper of Scala LazyList ), Akka stream, and Fs2 stream. You can find the repository https://github.com/lunatech-labs/lunatech-streams-in-scala[here]
 
 == References
@@ -209,6 +209,4 @@ I have prepared a repository that shows how to process large log files using Log
 8. https://monix.io/docs/current/intro/hello-world.html
 9. https://zio.dev/reference/stream/
 10. https://www.reactive-streams.org/
-
-
 
