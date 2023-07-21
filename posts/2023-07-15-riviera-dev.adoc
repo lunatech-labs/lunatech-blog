@@ -1,0 +1,162 @@
+= Riviera DEV 2023
+VincentBrule
+v1.0, 2023-07-15
+:title: Riviera DEV 2023
+:imagesdir: ../media/2023-07-15-riviera-dev
+:lang: en
+:tags: [conference, nice]
+
+== Riviera DEV ?
+After a great edition on a lake, https://rivieradev.fr/[Riviera DEV] is back in the Skema school from 10th to 12th July in Nice Sophia Antipolis.
+
+The conference takes place over three days, with several different talk formats.
+Riviera DEV's signature format is "We're not just coders" workshops.
+This format allows you to present a subject that is not purely technical, such as a passion.
+I'll be presenting one of the talks in this format later in the article.
+There were also some sports sessions for those who were brave enough in the sweltering heat!
+You can find the detailed programme https://rivieradev.fr/program[here].
+
+.Riviera Dev 2023
+image::talks.png[Riviera Dev's different talk formats, width = 700]
+
+=== The organisation
+Before I present my favourites from this year, I'd like to thank all the volunteers who make this conference possible.
+
+.Many thanks to the organizers
+image::end.jpg[Many thanks to the organizers and see you next year, width = 700]
+
+Apart from organizing this great conference, they are also providing financial support to several players in the Nicoise region.
+For example, https://lesmarabouteurs.fr/[a robotics club based in Antibes].
+Thanks to Riviera DEV, this club was able to participate in an international competition this year.
+They also bought PCs for teachers and trained them in the https://scratch.mit.edu/[Scratch] language.
+A big bravo to them!
+
+I'm now going to summarise three talks that I really enjoyed, and it was a tough choice to choose only three!
+If you'd like more information than my summary, all the talks were recorded and will be published shortly.
+
+== "Construire soi-même son clavier mécanique, idée bizarre ou idée de génie" (Translation: "Building your own mechanical keyboard: a bizarre idea or a stroke of genius?) - https://rivieradev.fr/orateur/1029[Benjamin Legrand]
+
+This talk was of particular interest to me, as I've been trying for several months to make my workspace as ergonomic as possible following a wrist pain.
+After presenting the history of keyboards and how they have evolved over time, we discovered the problems with current layouts.
+
+The first point is that the staggered layout of the keys is counterintuitive, which comes from the first typewriters.
+In fact, an orthogonal layout is more ergonomic because you just have to make a vertical movement to change lines without having to twist your wrists.
+
+.Staggered vs Orthogonal
+image::orthogonal.png[Staggered vs Orthogonal, width = 800]
+
+The second point is the angle of the wrists to the keyboard.
+Ideally, our wrists should be as shown in the photo below.
+I dare you to be in this position with a conventional keyboard! It's really not pleasant.
+
+.Wrist positions
+image::wrist.png[Wrist positions, width = 800]
+
+The solution to all these problems is the custom split keyboard.
+
+You can choose the layout of the keys.
+You can also position the keyboard in line with your handles to keep your arms parallel.
+
+.Split Keyboard
+image::keyboard1.jpeg[Example of a split keyboard, width = 800]
+
+If you buy blank keys, you can use software like QMK configurator to find the layout that suits you best, or change the layout to suit the context.
+
+.QMK configurator
+image::keyboard.jpg[QMK configurator, width = 800]
+
+I'm really looking forward to putting into practice what I've discovered in this talk.
+Thanks again to Benjamin!
+All his resources are on https://github.com/benjilegnard/make-your-own-keyboard/#readme[Github].
+
+
+=== Tu fais du CSS et tu connais pas les Layout Shifts ?! Nan mais... (Translation: You do CSS and you don't know Layout Shifts?! Seriously...) - https://rivieradev.fr/orateur/1042[Raphaël Goetter]
+
+"Layout shifts are visual instabilities, layout changes and content shifts during the display of a web page."
+
+We've all seen layout shifts when surfing the web.
+This can take different forms, such as an image that loads and moves the whole web page at once.
+Or a font that also takes a long time to load and moves all the text once it has been applied.
+In general, these problems occur with DOM elements added dynamically or resources loaded asynchronously.
+
+These Layout Shifts are problematic for users and also for SEO with the Cumulative layout shift (CLS) metric.
+For example, in the following video you can see just how frustrating the problem can be when you do the opposite action to the one initially planned.
+
+.Layout shift example
+image::layoutShift.gif[Layout shift example, width = 800]
+
+The causes of layout shifts fall into four broad categories:
+
+- page layout
+- animations
+- media
+- fonts
+
+Layout shifts are often caused by automatic values that depend on the content.
+In fact, as we can see from the example below taken from https://speakerdeck.com/goetter/tu-fais-du-web-et-tu-ne-connais-pas-les-layout-shifts-nan-mais-dot-dot-dot?slide=20[the slides], a grid container with an auto-flow on the columns is problematic.
+
+.Layout shift https://speakerdeck.com/goetter/tu-fais-du-web-et-tu-ne-connais-pas-les-layout-shifts-nan-mais-dot-dot-dot?slide=20[example]
+image::layout.png[Layout shift example, width = 800]
+
+This CSS code will tell the grid container to generate columns of equivalent size.
+As a result, at the start we only have a single column.
+Then the second column is loaded so the container splits into two columns, and again the same thing happens when the last column is loaded.
+So there are 4 layout shifts in this little example.
+
+These layout shifts are difficult to detect manually, but fortunately a number of tools exist to make the task easier!
+For example https://chrome.google.com/webstore/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk?hl=fr[Lightouse] will give you an indication of CLS as well as advice on how to avoid them.
+The Chrome DevTools are also very useful, as they allow you to replay the loading of your page step by step in order to identify layout shifts and detect problematic elements.
+
+If you're interested in this subject, I highly recommend Raphaël's https://speakerdeck.com/goetter/tu-fais-du-web-et-tu-ne-connais-pas-les-layout-shifts-nan-mais-dot-dot-dot[slides], which are packed with examples and advice.
+
+=== Les dessous des noms de domaines (Translation: Behind domain names) - https://rivieradev.fr/orateur/1086[Thomas Fabre]
+This talk was about domain names and how they work.
+Thomas worked for several years in a TLD (Top-Level Domain), AFNIC, which manages the `.fr` domain for example.
+
+Without domain names, our experience of the Internet would be radically different.
+Instead of typing the names of your favourite websites into your browser, you would have to remember the IP addresses of all the servers--a real headache.
+Thanks to DNS and domain names, we all have access to a directory that simplifies this task.
+
+After presenting the history of the Internet and domain names, Thomas described security risks such as *DNS Hijacking*.
+To sum up, in this type of attack, when the user calls a DNS to resolve their domain name into an IP address, the hacker will falsify the response and redirect the user to a malicious server.
+
+.DNS Hijacking (https://www.imperva.com/learn/application-security/dns-hijacking-redirection/[source])
+image::hacker.png[DNS Hijacking, width = 800]
+
+For more details on these attacks, I recommend this https://www.imperva.com/learn/application-security/dns-hijacking-redirection/[website].
+And if you own a domain name, remember to activate https://www.cloudflare.com/en-gb/dns/dnssec/how-dnssec-works/[DNSSEC] if possible to make these attacks more difficult.
+
+There are also some rather special domain names, such as `.onion`.
+These names are not present within the Internet DNS Root but are only accessible via the Tor Network.
+
+Thomas then explained the lifecycle of a domain name.
+
+.Domain name lifecycle (https://whc.ca/blog/the-life-cycle-of-a-domain-name/[source])
+image::lifecycle.svg[Domain name lifecycle, width = 800]
+
+There are five main stages:
+
+1. Available: The name is available for purchase.
+
+2. Active: You have purchased the domain name. You can do whatever you want with it as long as you think about renewing it.
+
+3. Expired: You have not renewed your domain. Your domain expires, but you can still renew it at no extra cost.
+
+4. Redemption: You can renew your domain if no one has purchased it, but you will be charged an additional fee.
+
+5. Pending Delete: The domain will become available.
+
+
+If you buy a domain name, remember to activate auto-renew to avoid any nasty surprises!
+In addition, there are websites like https://www.domcomp.com/[domcomp] to compare and find the best price to buy a domain name.
+
+Thanks to Thomas, who has managed to make a complicated subject fascinating!
+
+== Thanks Riviera Dev!
+Thanks again to all the organisers who made this conference possible!
+Thank you to https://lunatech.com/fr/[Lunatech] for giving me the opportunity to participate in this conference.
+
+The tickets prices are really reasonable, and they offer https://rivieradev.fr/inscriptions[special rates for students].
+All the photos from this year's event are available https://photos.app.goo.gl/zRDrLRPJ4oZpbuH98[here].
+
+Thanks again to everyone and see you next year in Nice!
