@@ -2,6 +2,7 @@
 zanio
 v1.0, 2023-06-12
 :title: Streams in Scala
+:imagesdir: ../media/2023-06-12-streams-in-scala
 :lang: en
 :tags: [streams, scala-streams, LazyList, fs2, akka-streams, scala, zio-streams, call-by-name, reactive-stream, back-pressure]
 
@@ -26,7 +27,7 @@ If you've ever run a program that has thrown the infamous Out Of Memory Error (O
 Let's take a look at an example. What would be the result of running this code:
 [source,scala]
 ----
-val r =(1 to 10000)
+val sum =(1 to 10000)
 .map(_ => Seq.fill(10000)(scala.util.Random.nextDouble))
 .map(_.sum)
 .sum
@@ -46,7 +47,7 @@ The above code would be rewritten to the following:
 
 [source,scala]
 ----
-val r =(1 to 10000).toStream
+val sum =(1 to 10000).toStream
    .map(_ => Seq.fill(10000)(scala.util.Random.nextDouble))
    .map(_.sum)
    .sum
@@ -56,7 +57,7 @@ The above fixes the issue. It's the same task but with the use of toStream. What
 
 [[scala-stream]]
 == Scala Stream
-image::../media/2023-06-12-streams-in-scala/scala-stream.png[]
+image::scala-stream.png[]
 
 Stream in Scala is part of the collection hierarchy which extends LinearSeq. They're like views, only the elements that are accessed are computed. In views, elements are recomputed each time they are accessed. In a stream elements are retained as they are evaluated. Other than this behaviour, a Stream behaves similarly to a List. The elements of stream are lazily computed. In the Scala Stream, only the first element are pre-computed but as of Scala 2.13 Stream was replace with LazyList where no element is computed unless requested. LazyList is designed to address the issues with Stream and provides a more predictable evaluation model.
 
@@ -160,7 +161,7 @@ Some Scala libraries offer enhanced stream processing capabilities compared to t
 The Reactive Streams standard establishes two communication channels: an upstream demand channel and a downstream data channel. Publishers follow a request-based approach and only send data when a demand for a certain number of elements arrives through the demand channel. They can then push up to that requested number of elements downstream, either in batches or individually.
 As long as there is outstanding demand, the publisher can continue pushing data to the subscriber as it becomes available. However, when the demand is exhausted, the publisher cannot send data unless prompted by a demand signal from downstream. This mechanism, known as backpressure, ensures controlled flow and prevents overwhelming the subscriber. In response to backpressure, the source can choose to allocate more resources, slow down its production, or even discard data.
 
-image::../media/2023-06-12-streams-in-scala/reactive-stream-representation.png[]
+image::reactive-stream-representation.png[]
 
 To summarise, handling an un-bounded volume of data in an asynchronous system requires some form of control between the producer and the consumer otherwise we would have overwhelming data sent to the consumer from multiple threads. The Reactive stream standard introduces a concept of back-pressure which is a means of communication between the producers and the consumer. The reactive stream defines an interface which must be implemented.
 
