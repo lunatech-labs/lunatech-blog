@@ -18,9 +18,9 @@ v1.0, 2023-06-12
 
 [[why-streams]]
 == Why Streams
-There are many reasons for using a stream-processing approach when writing software. In this blog post i'm going to focus on just one of those reasons: Memory Management.
+There are many reasons for using a stream-processing approach when writing software. In this blog post I'm going to focus on just one of those reasons: Memory Management.
 
-By processing elements one at a time streams enable you to avoid loading the entire dataset into memory, reducing the risk of encountering the dreaded 'Out of memory' error. Streams provide a lazy evaluation mechanism where elements are computed on-demand rather than being eagerly evaluated and stored in memory. This lazy evaluation, retaining only the necessary elements in memory, allows for efficient memory utilization especially when dealing with large datasets or potentially infinite sequences of data. With streams, you can confidently tackle memory-intensive tasks, knowing that the memory footprint is optimized, leading to more stable and scalable applications.
+By processing elements one at a time streams enables you to avoid loading the entire dataset into memory and reducing the risk of encountering the dreaded 'Out of memory' error. Streams provide a lazy evaluation mechanism where elements are computed on-demand rather than being eagerly evaluated and stored in memory. This lazy evaluation, retaining only the necessary elements in memory, allows for efficient memory utilization especially when dealing with large datasets or potentially infinite sequences of data. With streams, you can confidently tackle memory-intensive tasks, knowing that the memory footprint is optimized, leading to more stable and scalable applications.
 
 If you've ever run a program that has thrown the infamous Out Of Memory Error (OOM) they you're going to appreciate the power of streams in Scala.
 
