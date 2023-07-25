@@ -22,7 +22,7 @@ There are many reasons for using a stream-processing approach when writing softw
 
 By processing elements one at a time streams enables you to avoid loading the entire dataset into memory and reducing the risk of encountering the dreaded 'Out of memory' error. Streams provide a lazy evaluation mechanism where elements are computed on-demand rather than being eagerly evaluated and stored in memory. This lazy evaluation, retaining only the necessary elements in memory, allows for efficient memory utilization especially when dealing with large datasets or potentially infinite sequences of data. With streams, you can confidently tackle memory-intensive tasks, knowing that the memory footprint is optimized, leading to more stable and scalable applications.
 
-If you've ever run a program that has thrown the infamous Out Of Memory Error (OOM) they you're going to appreciate the power of streams in Scala.
+If you've ever run a program that has thrown the infamous Out Of Memory Error (OOM) then you're going to appreciate the power of streams in Scala.
 
 Let's take a look at an example. What would be the result of running this code:
 [source,scala]
@@ -71,7 +71,7 @@ Stream in Scala is part of the collection hierarchy which extends LinearSeq. The
 ----
 === Transformer Vs Terminator method:
 
-_Transformer_ methods are collection methods (they're part of the collections API. Transformer methods convert a given input collection to a new output collection, based on an function you provide which maps input to output. Examples of Transformer methods includes `map`, `filter,` and `reverse`.
+_Transformer_ methods are collection methods, they're part of the collections API. Transformer methods convert a given input collection to a new output collection, based on a function you provide which maps input to output. Examples of Transformer methods includes `map`, `filter,` and `reverse`.
 
 _Terminator_ methods are collection API methods which perform a final computation on a collection and return a non-collection result, such as a single value or a boolean value, for example. Terminator methods effectively terminate the computation and produce a final output. Examples of terminator methods include `fold`, `reduce`, and `count`.
 
