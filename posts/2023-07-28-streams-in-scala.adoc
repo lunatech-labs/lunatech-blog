@@ -1,8 +1,8 @@
 = Streams in scala: An introductory guide
 zanio
-v1.0, 2023-06-12
+v1.0, 2023-07-28
 :title: Streams in Scala
-:imagesdir: ../media/2023-06-12-streams-in-scala
+:imagesdir: ../media/2023-07-28-streams-in-scala
 :lang: en
 :tags: [streams, scala-streams, LazyList, fs2, akka-streams, scala, zio-streams, call-by-name, reactive-stream, back-pressure]
 
