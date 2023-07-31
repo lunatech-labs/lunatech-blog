@@ -202,7 +202,7 @@ trait Subscription {
   def cancel(): Unit
 }
 ----
-This interface is just a representation of the core component of reactive streams and the actual implementation is way harder and beyond the scope of this post. It's recommended you make use of the high-level stream API
+This interface is just a representation of the core components of reactive streams and the actual implementation is way harder and beyond the scope of this post. It's recommended you make use of the high-level stream API
 ++++
 </br>
 ++++
