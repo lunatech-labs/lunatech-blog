@@ -1,7 +1,7 @@
 = Streams In Scala - An Introductory Guide
 zanio
 v1.0, 2023-07-28
-:title: Streams In Scala - An Introductory Guide
+:title: Streams in Scala - An Introductory Guide
 :imagesdir: ../media/2023-07-28-streams-in-scala--an-introductory-guide
 :lang: en
 :tags: [streams, scala-streams, LazyList, fs2, akka-streams, scala, zio-streams, call-by-name, reactive-stream, back-pressure]
@@ -202,7 +202,7 @@ trait Subscription {
   def cancel(): Unit
 }
 ----
-This interface is just a representation of the core components of reactive streams and the actual implementation is way harder and beyond the scope of this post. It's recommended you make use of the high-level stream API
+> This interface is just a representation of the core components of reactive streams and the actual implementation is way harder and beyond the scope of this post. It's recommended you make use of the high-level stream API
 ++++
 </br>
 ++++
