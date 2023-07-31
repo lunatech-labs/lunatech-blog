@@ -1,4 +1,4 @@
-= Streams In Scala - An Introductory Guide
+= Streams in Scala - An Introductory Guide
 zanio
 v1.0, 2023-07-28
 :title: Streams in Scala - An Introductory Guide
