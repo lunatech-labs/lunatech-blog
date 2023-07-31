@@ -34,7 +34,7 @@ When the above snippet is ran, the jvm tries to allocate memory for the elements
 ++++
 </br>
 ++++
-The "GC overhead limit exceeded" error is an error message commonly encountered in Java-based applications, including Scala applications running on the Java Virtual Machine (JVM). This error occurs when the garbage collector is spending an excessive amount of time collecting garbage with little memory reclaimed. This error message is essentially an indication that the JVM is struggling to free up enough memory, and the application's performance is significantly impacted. It typically occurs when the garbage collector is running continuously, consuming an excessive amount of CPU time. To prevent the garbage collector from consuming an excessive amount of CPU time with little benefit, the JVM defines a threshold known as the "GC overhead limit." Once this is reached, An error is thrown.
+The "GC overhead limit exceeded" error is an error message commonly encountered in Java Virtual Machine (JVM) based applications. This error occurs when the garbage collector is spending an excessive amount of time collecting garbage with little memory reclaimed. This error message is essentially an indication that the JVM is struggling to free up enough memory, and the application's performance is significantly impacted. It typically occurs when the garbage collector is running continuously, consuming an excessive amount of CPU time. To prevent the garbage collector from consuming an excessive amount of CPU time with little benefit, the JVM defines a threshold known as the "GC overhead limit." Once this is reached, An error is thrown.
 ++++
 </br>
 ++++
@@ -58,7 +58,7 @@ The above fixes the issue. It's the same task but with the use of toStream. What
 == Scala Stream
 image::scala-stream.png[]
 
-Stream in Scala is part of the collection hierarchy which extends LinearSeq. They're like views, only the elements that are accessed are computed. In views, elements are recomputed each time they are accessed. In a stream elements are retained as they are evaluated. Other than this behaviour, a Stream behaves similarly to a List. The elements of stream are lazily computed. In the Scala Stream, only the first element are pre-computed but as of Scala 2.13 Stream was replace with LazyList where no element is computed unless requested. LazyList is designed to address the issues with Stream and provides a more predictable evaluation model.
+Stream in Scala is part of the collection hierarchy which extends LinearSeq. They're like views, only the elements that are accessed are computed. In views, elements are recomputed each time they're  accessed. In a stream elements are retained as they're evaluated. Other than this behaviour, a Stream behaves similarly to a List. The elements of stream are lazily computed. In the Scala Stream, only the first element is pre-computed. As of Scala 2.13 Stream was replace with LazyList where no element is computed unless requested. LazyList is designed to address the issues with Stream and provides a more predictable evaluation model.
 
 [source,scala]
 ----
@@ -75,7 +75,7 @@ _Transformer_ methods are collection methods, they're part of the collections AP
 ++++
 </br>
 ++++
-_Terminator_ methods are collection API methods which perform a final computation on a collection and return a non-collection result, such as a single value or a boolean value, for example. Terminator methods effectively terminate the computation and produce a final output. Examples of terminator methods include `fold`, `reduce`, and `count`.
+_Terminator_ methods are collection API methods which perform a final computation on a collection and return a non-collection result, such as an integer or a boolean value, for example. Terminator methods effectively terminate the computation and produce a final output. Examples of terminator methods include `fold`, `reduce`, and `count`.
 
 > Be careful with Terminator methods. Calls to these methods are evaluated immediately and can easily cause java.lang.OutOfMemoryError errors:
 
@@ -134,31 +134,35 @@ object cons {
 ----
 
 == A Simple use-case of Scala Stream
-Let's consider a real-life scenario: Assume we are tasked with finding specific terms (e.g., success, failure, etc.) within large log files from various services running on our server. Our objective is to retrieve all occurrences of these terms and have the option to select the first few results. As you may have known, Scala provides a Source API for reading files. In this task, we would compare two approaches and see why one is better than the other.
+Let's consider a real-life scenario: Assume we are tasked with finding specific terms (e.g., success, failure, etc.) within large log files from various services running on our server. Our objective is to retrieve all occurrences of these terms and have the option to select the first few results. As you may know, Scala provides a Source API for reading files. In this task, we would compare two approaches and see why one is better than the other.
 
 === 1st Attempt:
 [source,scala]
 ----
 files.map {
  case (file) =>
- Source.fromFile(file).getLines().toList.filter(_.contains("Success"))
+ Source.fromFile(file).getLines().toList
+  .filter(_.contains("Success"))
   .take(10)
 }
 ----
-In the above snippet, we chained getLines and toList which ends up loading the content of the file into memory before filter is called. When we call toList, it evaluates immediately, and only after having the whole data the filtering is applied. using a strict data structure like List would be a bad idea because of memory usage because the file could be large.
+In the above snippet, we chained getLines and toList which ends up loading the content of the file into memory before filter is called. When we call toList, it evaluates immediately, and only after having read all lines from the file the filtering is applied. using a strict data structure like List would be a bad idea because of memory usage because the file could be large.
 
 === 2nd Attempt:
 [source,scala]
 ----
 files.map {
- case (file) => Source.fromFile(file).getLines().to(LazyList).filter(_.contains("Success")).take(10)
+ case (file) =>
+  Source.fromFile(file).getLines().to(LazyList)
+  .filter(_.contains("Success"))
+  .take(10)
 
 }
 ----
 ++++
 </br>
 ++++
-In the above snippet we chained getLines with to(LazyList). With this, the content of the files is not loaded into memory.  We then apply the filter and take functions which still don't load the content. The content of the file is only loaded when we call a terminating method like foreach. So the benefit of this is that it would only compute the first ten lines that match the filter predicate so that we don't end up loading everything from file.
+In the above snippet we chained getLines with to(LazyList). With this, the content of the files is not loaded into memory.  We then apply the filter and take functions which still don't load the content. The content of the file is only loaded when we call a terminating method like foreach. The benefit of this approach is that it only compute the first ten lines that match the filter predicate so that we don't end up loading everything from file.
 
 == Alternative Libraries that implement Streams
 Some Scala libraries offer enhanced stream processing capabilities compared to the LazyList API. These libraries are implemented following the Reactive stream standard. https://www.reactive-streams.org/[Reactive Streams] is an initiative to provide a standard for asynchronous stream processing with non-blocking back pressure.
@@ -225,7 +229,7 @@ These libraries provide advanced features, performance optimizations, concurrent
 == Conclusion
 In this blog post we have seen how:
 
-- Scala's `Stream` and `LazyList` work and how they can be used to process large data sets. We have also seen - - `LazyList`s are implemented with lazy evaluation
+- Scala's `Stream` and `LazyList` work and how they can be used to process large data sets. We have also seen how `LazyList` are implemented with lazy evaluation
 
 - The important distinction between `transformer` and `terminator` functions in the API
 
