@@ -1,0 +1,19 @@
+name: check-image-size
+on: 
+ - pull_request
+jobs:
+  check-image-size:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: 
+          fetch-depth: 0
+      - shell: bash
+        run: |
+          files=$(git diff --name-only origin/${{ github.base_ref }} | grep -E '.+\.png$' | xargs du -h --threshold=1M | cut -f2)
+          for file in $files; do
+            echo "::warning title=Big image,file=$file::The image '$file' is bigger than 1MB. Consider reducing its pixel size to match the actual size on the website, or use pngcrush or similar to maximize the compression"
+          done
+          if ! [[ -z "$files" ]]; then
+            exit 1
+          fi
