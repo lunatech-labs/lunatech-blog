@@ -1,0 +1,98 @@
+= Meetup At The Rotterdam Office | Devoxx Try-out: Maintaining Maven at scale & Machine Learning in Java
+PeuTit
+v1.0, 2023-09-29
+:title: Meetup At The Rotterdam Office | Devoxx Try-out: Maintaining Maven at scale & Machine Learning in Java
+:lang: en
+:tags: [java, ml, oss, devoxx, en]
+
+Did you miss your chance to snag Devoxx tickets this time around? Are you eager to get a sneak peek into the Devoxx experience? We've got just the solution for you!
+
+Welcome to the **Devoxx Try-out**, this [meetup](https://www.meetup.com/rotterdamjug/events/295778651/?chapterContext=true&regToRsvp=true&isFromReg=true) was an exclusive pre-event proudly brought to you by us.
+
+## Maintaining Maven at Scale: Insights from the JUG Talk by Tim te Beek
+
+image::../media/2023-09-29-meetup-at-the-rotterdam-office-|-devoxx-try-out:-maintaining-maven-at-scale-&-machine-learning-in-java/talk1.jpeg[]
+
+Meet **Tim te Beek**, a seasoned software engineer at [Moderne](https://www.moderne.io/), where the magic of automating software refactoring at scale happens. Tim is no stranger to open-source contributions within the Java ecosystem. His journey into the heart of Apache Maven sheds light on the importance of open-source contributions and the drive to give back to the community.
+
+**The Journey of Open Source and Skills Development**
+
+Open source isn't just about code; it's about giving back and nurturing a thriving community. Tim drew parallels between open source and the role of parents who give selflessly, emphasizing that we learn and grow by mentoring others. Open-source contributions not only sharpen technical skills but also nurture crucial soft skills like language proficiency, persuasion, and presentation skills.
+
+**The State of Apache Maven**
+
+Apache Maven, a project with two decades of history, stands as a testament to the power of community-driven development. Maintained by volunteers, it plays a pivotal role in the software development landscape. However, as any project grows, technical debt begins to show. Tim hints at the upcoming 4.0 version of Maven, a testament to its evolution.
+
+**Challenges and Solutions**
+
+The challenges faced in maintaining Maven at scale are not unique. Tim and the community are hard at work automating the process, and [OpenRewrite](https://docs.openrewrite.org/) plays a key role in this transformation. It's a powerful tool in improving code quality and addressing security vulnerabilities, ensuring Maven's future resilience.
+
+**Automated Remediation**
+
+Tim delved into the concept of real automated remediation, a process that involves creating a code model and transforming it into an abstract syntax tree. The extensive library of recipes available for various projects is a testament to the efficiency of this approach, offering declarative YAML and imperative Java visitors as tools in the arsenal.
+
+**Contributing to Open Source**
+
+Contributors play a vital role in automating static analysis issues and migration engineering. Tim explained the differences between [OpenRewrite](https://docs.openrewrite.org/) (open source) and [Moderne](https://www.moderne.io/) (private SaaS platform), shedding light on the impactful changes made through contributions. He didn't shy away from discussing the backlog of Maven Jira projects and the persistence needed to address long-standing tickets.
+
+**Humor and Challenges**
+
+Amidst the technical intricacies, Tim shared a light-hearted moment from the talk, offering a humorous take on contributor agreements. It's a reminder that open source is not only about code but also about the camaraderie that makes the journey enjoyable.
+
+**Contributing to Apache Maven**
+
+Tim provided a demonstration of how to contribute to the Maven project using Moderne. He explained how recipes are applied, patterns are sought, and transformations are made. The option to write recipes in Java and the inclusion of unit tests add depth to the contribution process.
+
+**Getting Started in Open Source**
+
+Tim wrapped up by offering valuable advice on how to embark on your open-source journey. It starts with finding a project that aligns with your skills, following project guidelines, and starting with small but meaningful contributions. Patience and persistence are the keys to becoming a valued contributor.
+
+**Conclusion**
+
+In conclusion, Tim te Beek's talk on maintaining Maven at scale offers a glimpse into the world of open-source contributions and skills development. It highlights the critical role open source plays in the software development ecosystem and the enduring spirit of giving back. As we navigate the intricate landscape of Maven and other related projects, the future of open source shines bright, offering endless possibilities and opportunities for growth.
+
+## Exploring Machine Learning in Java: Insights from the JUG Talk by Jago de Vreede
+
+image::../media/2023-09-29-meetup-at-the-rotterdam-office-|-devoxx-try-out:-maintaining-maven-at-scale-&-machine-learning-in-java/talk2.jpeg[]
+
+**Jago de Vreede** is a full-stack software engineer at [OpenValue](https://www.openvalue.eu/), renowned for taking Java to uncharted territories and undertaking unconventional Java-based projects, like an automated guitar. His passion for knowledge sharing has graced conferences worldwide.
+
+**Machine Learning & Lego: A Unique Project**
+
+Jago's narrative embarked us on a quest to unravel a remarkable project that merges the worlds of machine learning and Lego. Picture a mammoth bin brimming with Lego pieces, and envision your mission: automate the process of identifying and sorting these playful components. Along this path, Jago contemplated two programming routes: the challenging journey of "Hard Java" and the more accessible avenue of "Easy Python."
+
+This project underscores the stark contrast in the prevalence of machine learning frameworks between Python and Java, paving the way for an exciting adventure in Java-based machine learning.
+
+**Machine Learning Frameworks in Java**
+
+Within the vast Java ecosystem, we encountered three noteworthy machine learning frameworks: DeepLearning4Java, DeepJavaLibrary, and others. These Java-centric frameworks have earned a reputation for their slightly superior speed compared to their Python counterparts in specific tasks, rendering them an enticing choice for this project.
+
+**Live Demo: Classifying Images**
+
+During the talk, Jago immersed the audience in a captivating live demonstration, where participants engage in the exhilarating task of classifying images as dogs, muffins, or mops. The interactive nature of this presentation breathed life into machine learning and showcases its practical applications.
+
+image::../media/2023-09-29-meetup-at-the-rotterdam-office-|-devoxx-try-out:-maintaining-maven-at-scale-&-machine-learning-in-java/chihuahua.jpeg[]
+
+**Setting Up a Dataset for Machine Learning**
+
+Jago unraveled the essential steps involved in crafting a dataset for machine learning, shedding light on the concept of batch sizes in the processing of training data.
+
+**Choosing the Right Model**
+
+At the core of any machine learning venture lies the pivotal decision of selecting the right model. Jago artfully explained the criteria governing model selection, with a keen focus on metrics such as accuracy and entropy loss. The notion of validation accuracy was explored in depth, coupled with insights into the strategic application of early stopping during training.
+
+**Learning Rate and Transfer Learning**
+
+Jago investigated the significance of learning rates in the training of machine learning models and introduced the intriguing concept of transfer learning. This technique involves harnessing a pre-trained model created in Python and seamlessly applying it within a Java environment.
+
+**The Lego Sorter Project**
+
+The pièce de résistance of this narrative was the Lego sorter project. Jago meticulously unveiled the inner workings of this endeavour or, from the intricacies of sorting Lego pieces based on a specified set to the intricacies of generating Lego brick images, expertly cropping them with OpenCV, and skillfully training the model. Furthermore, he illuminated the scalability of the project, demonstrating its robustness even with a reduced number of training images.
+
+**Project Results and Takeaways**
+
+Jago shared the awe-inspiring outcomes of the Lego sorter project, boasting an impressive 85% accuracy with generated images and surmounting the challenges posed by real-world photographs, achieving an accuracy rate of 95%. The talk culminated with profound takeaways, underscoring the feasibility of leveraging Java for machine learning, celebrating Java's speed advantage, acknowledging Python's wide ecosystem & active community, and extolling the captivating potential of cross-compatible models.
+
+**Conclusion**
+
+In closing, Jago de Vreede's talk unfolded an enthralling journey through the realm of machine learning in Java. It spotlights the immense potential Java holds in the sphere of machine learning, accentuating its remarkable adaptability in integrating models birthed in Python. As we gaze into the future, the application of machine learning across diverse domains promises an era of innovation, ushering in limitless possibilities.
