@@ -1,0 +1,63 @@
+= Akka Licence Change (One Year Later)
+njlbenn
+v1.0, 2023-10-02
+:title: Akka Licence Change (One Year Later)
+:tags: [akka, pekko, BSL, apache licence]
+
+In September 2022, the CEO and Founder of Lightbend, Jonas Bonér, announced, in a blog post, a change in the licencing of Akka. Instead of an Apache 2.0 Licence, all future releases of Akka would be covered by a new Business Source Licence (BSL) v1.1. The announcement was made one day after the 2.6.20 patch release of Akka Core and other modules and this release would turn out to be the last one under the Apache 2.0 Licence.
+
+At the time, the announcement generated a lot of reaction, including the decision by a part of the open-source community to create a fork of Akka. The forked project, called Apache Pekko, announced its first major release (v1.0.0) in July 2023.
+
+Recently at Lunatech, at the request of many of our clients, we have decided to revisit this topic, specifically with an objective to help our clients manage their exposure to the new BSL licence and, if necessary, to help them eliminate this exposure entirel. We have decided to share some of our thoughts on the topic in case they are valuable to a wider audience.
+
+== Some key points about the licence change
+
+To better understand the implications of the licence change, it is worth starting on the Lightbend webpage that tries to summarise the licence change in the form of an FAQ. Here are some points that stand out:
+- The back-porting of critical security patches to the 2.6.x line is scheduled to end in September 2023 (one year after the initial announcement of the licence change)
+- They have included a special exemption (a so-called Additional Use Grant) for Play users so that the "usage of certain parts of Akka required by Play" are exempt from the licence change.
+- Play users that directly use Akka components in their own code are not covered by the Additional Use Grant and so must have a licence to cover this direct usage of Akka.
+- Every release of Akka under the new BSL will revert back to an Apache 2.0 Licence after 3 years
+
+== The Play Framework exemption
+
+Many of our clients have a lot of production software that is built with the Play framework. So, the fact that there is an Additional Use Grant for Play in the new BSL is welcome news for them. However, as the FAQ page indicates, only the "usage of certain parts of Akka required by Play" is exempt. To understand better, we have to look at the Akka BSL licence itself, and specifically the "Additional Use Grant" clause:
+
+"If you develop an application using a version of Play Framework that utilizes binary versions of akka-streams and its dependencies, you may use such binary versions of akka-streams and its dependencies in the development of your application only as they are incorporated into Play Framework and solely to implement the functionality provided by Play Framework; provided that, they are only used in the following way: Connecting to a Play Framework websocket and/or Play Framework request/response bodies for server and play-ws client."
+
+That last phrase “Connecting to a Play Framework websocket and/or Play Framework request/response bodies for server and play-ws client” suggests that Additional Use Grant is actually quite limited. To get a better since of what are the limitations, it is worth going through the Play documentation to see what patterns of usage are likely allowed, likely disallowed, and those that are not clear.
+
+== Play Framework sticking with Akka pre-BSL version for immediate future
+
+We see that the “Play exemption” does not cover all uses of Akka inside a Play application. For our clients, one of the challenges will be to audit their applications to determine when there is code in our Play applications that falls outside the "Additional Use Grant".
+
+However, there is one thing that will mean that there is less risk of falling foul of the BSL, even for uses that are not covered by the Additional Use Grant. That is the fact that both the current version of Play (2.8) and the planned next release (2.9) will stick with the pre-BSL version of Akka. From the current draft of the unreleased Play 2.9 migration guide:
+
+Play 2.9.0 is using akka 2.6 and upgrades akka-http from 10.1 to 10.2. Play 2.9 will stick with those versions and not upgrade beyond them. That is because akka 2.6 and akka-http 10.2 are the last versions still using the Apache License, newer akka releases use the BSL, which Play avoids using.
+
+== Apache Pekko as a possible exit ramp
+
+Given that for the moment Play will continue to be based on Akka pre-BSL version (and so that is likely to be the version that is used transitively if a Play application uses Akka in a way that is theoretically not covered by the Additional Use Grant), this suggests that the main risk for our clients is the fact that after September 2023, Lightbend will no longer back-port critical security fixes to Akka 2.6.x.
+
+Note that since the licence change there has been 1 critical back-port (Release v2.6.21 · akka/akka ), which, incidentally has also been picked up by the Apache Pekko project (include critical TLS fix from Akka 2.6.21 (pekko-stream TLSActor) · Issue #442 · apache/incubator-pekko )
+
+Apache Pekko is proposed as a potential solution to mitigate the risk of either being on a version of Akka that will no longer receive critical security updates or of inadvertently depending on BSL code.
+
+It is worth noting, however, a possible migration to Pekko is not without its own risks (and I don’t just mean the general risks of migrating or rewriting software). By migrating to Pekko, one would be betting that the Apache Pekko project will be able to continue maintaining and evolving the framework - including security and bug fixes, and new functionality.
+
+On the positive side, at least from a technical perspective, migrating from an Akka 2.6.x project to Apache Pekko seems relatively mechanical if we have a look at the Apache Pekko Migration Guide. However, at the time of writing, not all Apache Pekko modules have been officially released.
+
+== Some recommendations
+
+=== Update to the latest available version of Play Framework
+
+At the time of writing, the latest available version of Play Framework is version 2.8.x. As mentioned above, version 2.8.x of Play Framework uses version 2.6.x of Akka.
+
+As a general rule, we should try to keep project dependencies up to date to the latest available. In this particular case, it is especially important to use the latest version of Play Framework because in the case of a likely migration from Akka to Apache Pekko, the Apache Pekko Migration Guide recommends that your project first be using version 2.6.x of Akka.
+
+=== Use the plugin sbt-licence report (or similar if using another build tool)
+
+As mentioned above, both the latest version of Play Framework (2.8.x) and the next planned version (2.9.x) depend on the pre-BSL version of Akka. This greatly reduces the risk that a project that is based on Play Framework will inadvertently contravene the new Akka BSL licence.
+
+However, there is of course still the risk that a project can explicitly override the version of Akka used by Play (as explained by the Play Framework documentation) and update to a BSL version, which then opens the risk of usage that is not covered by the "Additional Use Grant".
+
+In this case we might be able to use some tooling to reduce the risk again. For example, by using build tool plugins like sbt-licence-report to verify and fail the build if a dependency uses a disallowed licence.
