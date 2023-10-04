@@ -26,7 +26,34 @@ Many of our clients have a lot of production software that is built with the Pla
 
 That last phrase “Connecting to a Play Framework websocket and/or Play Framework request/response bodies for server and play-ws client” suggests that Additional Use Grant is actually quite limited. To get a better since of what are the limitations, it is worth going through the Play documentation to see what patterns of usage are likely allowed, likely disallowed, and those that are not clear.
 
-== Play Framework sticking with Akka pre-BSL version for immediate future
+=== Akka usage patterns - allowed / disallowed / grey area
+
+[cols="1,1"]
+|===
+|Likely allowed
+a|
+* https://www.playframework.com/documentation/2.8.x/ScalaBodyParsers#Writing-a-custom-body-parser["Writing custom body parsers"]
+** including https://www.playframework.com/documentation/2.8.x/ScalaFileUpload#Writing-your-own-body-parser["writing body parsers to handle large file uploads"]
+* https://www.playframework.com/documentation/2.8.x/ScalaStream#Sending-large-amounts-of-data["Streaming large server responses"]
+* https://www.playframework.com/documentation/2.8.x/ScalaComet["Using chunked responses with Comet"]
+* https://www.playframework.com/documentation/2.8.x/ScalaWebSockets#Handling-WebSockets-with-Akka-Streams-and-actors["Handling Websockets with Akka Streams and actors"]
+* https://www.playframework.com/documentation/2.8.x/ScalaFileUpload#Writing-your-own-body-parser["Submitting multipart form-data"] and https://www.playframework.com/documentation/2.8.x/ScalaWS#Submitting-Streaming-data["submitting streaming data"] with the Play REST Client
+
+|Likely disallowed
+a|
+* https://www.playframework.com/documentation/2.8.x/ScalaAkka#Creating-and-using-actors["Creating and using actors"]
+** except the special case described by https://www.playframework.com/documentation/2.8.x/ScalaWebSockets#Handling-WebSockets-with-Akka-Streams-and-actors["Handling Websockets with Akka Streams and actors"]
+* https://www.playframework.com/documentation/2.8.x/AkkaIntegrations["Advanced Akka integrations"]
+** including the use of modules like Alpakka 
+
+|Grey area
+a|
+* https://www.playframework.com/documentation/2.8.x/ScalaEmbeddingPlayAkkaHttp["Embedding an Akka HTTP server in your Play application"]
+* https://playframework.github.io/anorm/#akka-stream["Streaming DB results with Anorm"]
+** if, for example, this is used together with the pattern https://www.playframework.com/documentation/2.8.x/ScalaStream#Sending-large-amounts-of-data["Streaming large server responses"], which itself is likely allowed
+|===
+
+=== Play Framework sticking with Akka pre-BSL version for immediate future
 
 We see that the “Play exemption” does not cover all uses of Akka inside a Play application. For our clients, one of the challenges will be to audit their applications to determine when there is code in our Play applications that falls outside the "Additional Use Grant".
 
@@ -45,6 +72,28 @@ Apache Pekko is proposed as a potential solution to mitigate the risk of either 
 It is worth noting, however, a possible migration to Pekko is not without its own risks (and I don’t just mean the general risks of migrating or rewriting software). By migrating to Pekko, one would be betting that the Apache Pekko project will be able to continue maintaining and evolving the framework - including security and bug fixes, and new functionality.
 
 On the positive side, at least from a technical perspective, migrating from an Akka 2.6.x project to Apache Pekko seems relatively mechanical if we have a look at the Apache Pekko Migration Guide. However, at the time of writing, not all Apache Pekko modules have been officially released.
+
+[cols="1,1,1"]
+|===
+|Akka module |Pekko module |Pekko module released?
+
+|Akka (core) |Pekko (core) |Yes
+|Akka HTTP |Pekko HTTP |Yes
+|Akka gRPC |Pekko gRPC |Yes
+|Akka Cluster |Pekko Cluster |Yes
+|Akka Cluster Sharding |Pekko Cluster Sharding |Yes
+|Akka Management |Pekko Management |Yes
+|Akka Streams |Pekko Stream |Yes
+|Alpakka Kafka |Pekko Connectors Kafka |Yes
+|Alpakka |Pekko Connectors |No
+|Akka Persistence |Pekko Persistence |Yes
+|Akka Persistence R2DBC |Pekko Persistence R2DBC |No
+|Akka Persistence JDBC |Pekko Persistence JDBC |No
+|Akka Persistence Cassandra |Pekko Persistence Cassandra |No
+|Akka Persistence DynamoDB |Pekko Persistence DynamoDB |No
+|Akka Projections |Pekko Projection |No
+
+|===
 
 == Some recommendations
 
