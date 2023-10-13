@@ -1,8 +1,8 @@
 = Devoxx BE 2023
 nikashamova, yabets, jichay
-v1.0, 2023-10-11
+v1.0, 2023-10-13
 :title: Devoxx BE 2023
-:imagedir: ../media/2023-10-11-devoxx-be-2023
+:imagedir: ../media/2023-10-13-devoxx-be-2023
 :lang: en
 :tags: [java, devoxx, en]
 
@@ -12,7 +12,7 @@ conference.
 
 == Thoughts from Yabi
 
-image::../media/2023-10-11-devoxx-be-2023/battle-of-the-ai-coding-assistants.jpg[A presenter with one arm raised behind podium with screen titling "Battle of the AI Coding Assistants".]
+image::../media/2023-10-13-devoxx-be-2023/battle-of-the-ai-coding-assistants.jpg[A presenter with one arm raised behind podium with screen titling "Battle of the AI Coding Assistants".]
 
 Last week, I had the exhilarating opportunity to attend Devoxx Belgium, where a
 cascade of talks on Artificial Intelligence unfolded, each offering valuable
@@ -35,7 +35,7 @@ coding ventures.
 
 == Thoughts from Nika
 
-image::../media/2023-10-11-devoxx-be-2023/virtual-threads-in-quarkus.jpg[A presenter behind podium with screen titling "Virtual Threads in Quarkus".]
+image::../media/2023-10-13-devoxx-be-2023/virtual-threads-in-quarkus.jpg[A presenter behind podium with screen titling "Virtual Threads in Quarkus".]
 
 The Devoxx Belgium 2023 was an absolutely fantastic experience! There were many
 interesting talks across every timeslot, making it a challenge to pick just one
@@ -64,7 +64,7 @@ eagerly looking forward to reading it and sharing it with my fellow Lunatechies!
 
 == Thoughts from Jeremy
 
-image::../media/2023-10-11-devoxx-be-2023/mentorship-talk-photo.jpg[A presenter behind podium with slide titling "What can a mentor help you with?".]
+image::../media/2023-10-13-devoxx-be-2023/mentorship-talk-photo.jpg[A presenter behind podium with slide titling "What can a mentor help you with?".]
 
 Hey, I'm Jeremy, a junior software engineer at Lunatech, and it was my first
 time attending a Devoxx conference! It was a really great experience. There
