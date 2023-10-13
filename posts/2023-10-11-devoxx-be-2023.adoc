@@ -1,5 +1,5 @@
 = Devoxx BE 2023
-TODO author
+nikashamova, yabets, jichay
 v1.0, 2023-10-11
 :title: Devoxx BE 2023
 :imagedir: ../media/2023-10-11-devoxx-be-2023
