@@ -5,22 +5,22 @@ v1.0, 2023-10-11
 :lang: en
 :tags: [onboarding,tooling]
 
-One common occurrence as a developer is that you have to get familiar with a new project every now and then. This means getting to know the code, the context and the domain. It's even more frequent in a service company where we are not tied to one specific product. Unfortunately, making it easy for newcomers to get up to speed with a project is often not a big point of focus. So let's talk about it. Most of our observations will focus on onboarding specifically, but there is a larger point to make about the so-called developer experience (devX), because making a project more approachable for newcomers makes it better for everyone.
+One common occurrence as a developer is that you have to get familiar with a new project every now and then. This means getting to know the code, the context and the domain. It's even more frequent in a service company where we are not tied to one specific product. Unfortunately, making it easy for newcomers to get up to speed with a project is often not a big point of focus. So let's talk about it. Most of our observations will focus on onboarding specifically, but there is a larger point to make about the so-called developer experience (devX) because making a project more approachable for newcomers makes it better for everyone.
 
-== Why do we want an easier onboarding ?
+== Why do we want an easier onboarding?
 
 There is no real debate about whether we actually want developers to get started faster. The benefit is obvious: the sooner a developer can contribute, the sooner they produce value.
 
-At the same time, once a team knows the ins and outs of a system, they don't see the quirks and implicit conventions that hinders onboarding. It does not even slow them down, because they installed all the tooling and included everything in their daily routine. The benefit of an easy onboarding becomes less obvious. Why invest time on this, while we have features to do and the team is going full speed ?
+At the same time, once a team knows the ins and outs of a system, they don't see the quirks and implicit conventions that hinder onboarding. It does not even slow them down, because they installed all the tooling and included everything in their daily routine. The benefit of an easy onboarding becomes less obvious. Why invest time on this, while we have features to do and the team is going full speed?
 
 Still, there is value in a good onboarding, for a few reasons:
 
 *We won't always be there as a contractor.* The reality of being a contractor is that one day the project ends, no matter how well it went. Maybe there is nothing to add to the application, maybe the customer ran out of funds for this year. In both cases, the goal is that the customer can be autonomous and take over if needed.
 
-*The application might not need a full time team.* A lot of systems don't need new features every week. Maybe the customer will ask for a new webpage, a bugfix or an upgrade from time to time, but overall the project is in "maintenance mode". No one will be fully focused on that particular application most of their time. And a developer will have to do some kind of new onboarding every time to refresh their memory.
+*The application might not need a full-time team.* A lot of systems don't need new features every week. Maybe the customer will ask for a new webpage, a bugfix, or an upgrade from time to time, but overall the project is in "maintenance mode". No one will be fully focused on that particular application most of the time. And a developer will have to do some kind of new onboarding every time to refresh their memory.
 A developer might go away. At an individual level, life happens. Someone can get a better opportunity and leave the company, or they need to take a long sick leave, or they get hit by the https://en.wikipedia.org/wiki/Bus_factor[proverbial bus]. Then another person has to come in and fill the gap.
 
-*A smooth onboarding means a happy productive developer.* This one is more arguable as it's harder to measure. It's similar to learning about a new product, say a shiny new database. If the "getting started" page's instructions work immediately then it inspires confidence. On the other hand, if the first command fails, and you have to search on stackoverflow to get it working, it's irritating and does not convey a good image. The gist of it is that if you spend your day chasing information about how to start the app, by the time you get ready to actually code, you have exhausted your focus.
+*A smooth onboarding means a happy productive developer.* This one is more arguable as it's harder to measure. It's similar to learning about a new product, say a shiny new database. If the "getting started" page's instructions work immediately then it inspires confidence. On the other hand, if the first command fails, and you have to search on Stackoverflow to get it working, it's irritating and does not convey a good image. The gist of it is that if you spend your day chasing information about how to start the app, by the time you get ready to actually code, you have exhausted your focus.
 
 == Documentation is not a silver bullet
 
@@ -30,19 +30,19 @@ Don't get this wrong. Having some documentation is better than nothing at all. B
 
 - it gets outdated
 - it needs to be maintained, just like the code.
-- it's tedious to review: at least for your usual developer, it's time consuming to go over the doc and make sure everything is accurate. It's also complicated to judge that the doc quality is good enough.
+- it's tedious to review: at least for your usual developer, it's time-consuming to go over the doc and make sure everything is accurate. It's also complicated to judge that the doc quality is good enough.
 
-There are a few reasons why documentation is still the first tool we grab. In a nutshell, it's because it's easy to measure for everyone. You can answer the question "do we have documentation about setting up a new administrator ?" by a simple "yes" or "no", and even non technical people can see that the doc is there. Maybe the doc is badly written, not clear at all for a newcomer, but at least we can check the box and change the ticket status to done.
+There are a few reasons why documentation is still the first tool we grab. In a nutshell, it's because it's easy to measure for everyone. You can answer the question "Do we have documentation about setting up a new administrator ?" by a simple "yes" or "no", and even non-technical people can see that the doc is there. Maybe the doc is badly written, and not clear at all for a newcomer, but at least we can check the box and change the ticket status to done.
 
 With that said, you always need at least some documentation. Opening a repository only to find an empty readme.md with no pointers would make for a bad experience. The point is that the best documentation is the one you don't have to write.
 
 When tasked with writing new documentation we should stop and wonder: Do we really need it? Is there a way to reduce the size of the documentation we need to write? Maybe we can automate some things, or simplify a process. Note that it is just a convoluted way of paraphrasing the "Working software over comprehensive documentation" of the https://agilemanifesto.org/[agile manifesto].
 
-One might argue that if you write some code to alleviate the need for documentation, then that code also needs to be maintained. This is true but for code we have a few tools to help us (static analysis, unit tests, linters). It is also faster to run the code and see that it works (or not) compared to following manually a documented process.
+One might argue that if you write some code to alleviate the need for documentation, then that code also needs to be maintained. This is true but for code we have a few tools to help us (static analysis, unit tests, and linters). It is also faster to run the code, and see that it works (or not) compared to following manually a documented process.
 
 == Concrete advice and ideas
 
-Building on top on what we said until now:
+Building on top of what we said until now:
 
  - We want to minimize the need for documentation
  - We want to make it faster for a dev to get started
@@ -51,39 +51,39 @@ With that in mind, We'll try to give some guiding principles and actionable idea
 
 === Pay special attention to your readme
 
-The readme is a special piece of documentation. We are writing "readme" but really mean "the first documentation a developer sees when they open the project". As your entrypoint to your documentation it deserves some special care. Note that we are talking about the perspective of a private internal project; a public open source project will have different requirements.
+The readme is a special piece of documentation. We are writing "readme" but really mean "the first documentation a developer sees when they open the project". As your entry-point to your documentation, it deserves some special care. Note that we are talking about the perspective of a private internal project; a public open-source project will have different requirements.
 
 In general, the readme will have the following goals (this is not a plan, merely a few things we want to see in a readme):
 
  - Give a brief overview of what the system does.
-   + A few sentence explaining what are the main features
+   + A few sentences explaining what are the main features
    + Maybe one or two diagrams.
  - Present the dev environment
   + Useful scripts to know
   + Prerequisites
  - Explain how to start the application: even if it means stating the obvious (to you) and just writing mvn spring-boot:run.
- - Give some pointers to other parts of the documentation to go in depth
+ - Give some pointers to other parts of the documentation to go in-depth
 
-There are some compromises to think about. For instance, some people tend to think that IDE specific settings do not belong in the readme (but the readme can point to IDE specific separate files). In any case even if it's not in the readme you can keep track of useful external documentation and tools somewhere, so that everyone has a way to find them again.
+There are some compromises to think about. For instance, some people tend to think that IDE-specific settings do not belong in the readme (but the readme can point to IDE-specific separate files). In any case, even if it's not in the readme you can keep track of useful external documentation and tools somewhere so that everyone has a way to find them again.
 
 === Make your local environment easy to work with
 
-In an ideal case, you should be able to start everything in 2 commands. A classic setup is having some docker containers that will give you the service dependencies (database, message queue, etc.), and the application itself. Even with that simple setup, we often see additional actions required, for instance some environment variables to setup. Try to automate that:
+In an ideal case, you should be able to start everything in 2 commands. A classic setup is having some docker containers that will give you the service dependencies (database, message queue, etc.), and the application itself. Even with that simple setup, we often see additional actions required, for instance some environment variables to set up. Try to automate that:
 
  - provide a dev configuration ready to go
  - provide a bash script to automate things. For instance:
    + A configuration generator
-   + A script that call all the required commands
+   + A script that calls all the required commands
 
-An interesting tool to mention at this point is https://direnv.net/[direnv]. In a nutshell, direnv is a program that plugs into your shell and whenever you cd into a folder containing a `.envrc`, will source that content automatically. It sounds simple, but this allows to do some neat things:
+An interesting tool to mention at this point is https://direnv.net/[direnv]. In a nutshell, direnv is a program that plugs into your shell and whenever you cd into a folder containing a `.envrc`, will source that content automatically. It sounds simple, but this allows us to do some neat things:
 
- - set some environment variable needed by the dev environment
+ - set some environment variables needed by the dev environment
  - automatically check that the necessary programs are installed (no need to check manually by reading the doc)
- - automatically setup you tokens/credentials only for that project
+ - automatically set your tokens/credentials only for that project
  - add some custom commands to the PATH
  - automatically install all the necessary programs (this one needs proper tooling and is not trivial)
 
-As a concrete example. We recently used it on a project so that when a dev opens the folder they can get automatic warnings about their java version, if they are missing docker or maven, and automatically get some utilities such as project_start_infra which start a docker compose with the database. Here is how it might look like:
+As a concrete example. We recently used it on a project so that when a dev opens the folder they can get automatic warnings about their java version, if they are missing docker or maven, and automatically get some utilities such as project_start_infra which starts a docker compose with the database. Here is what it might look like:
 
 ```
 $ cd foo
@@ -117,7 +117,7 @@ It's frequent that the developer has several places where the doc can be placed:
 
 === Make everyone contribute to the documentation
 
-When writing documentation, usually a fairly good knowledge of the project is required (specifications, domain, prerequisites etc). But that doesn't mean that new developers should be sidelined.
+When writing documentation, usually a fairly good knowledge of the project is required (specifications, domain, prerequisites, etc). But that doesn't mean that new developers should be sidelined.
 
 Newcomers are in the perfect position to review your repository. They usually have time available since they are expected to get familiar with the project first anyway. They also can see the odd things about the project that the current developers might miss.
 
@@ -125,14 +125,14 @@ Some new developers might not be at ease with criticizing the code and documenta
 
 As a newcomer, be mindful and remember that there is usually a reason why onboarding is more or less smooth (lack of time is the usual suspect). Every frustration is an opportunity to improve things.
 
-This way, everyone can take part in the process. In particular it's a good way for a new developer to get their first contribution. It also ensures that the onboarding documentation really focuses on what matters. An experienced developer might insist on advanced content, but forget simple steps that are essential to get started.
+This way, everyone can take part in the process. In particular, it's a good way for a new developer to get their first contribution. It also ensures that the onboarding documentation really focuses on what matters. An experienced developer might insist on advanced content, but forget simple steps that are essential to get started.
 
 === Conclusion and further thoughts
 
 We have provided a few ideas, but it's impossible to have a one size fits all approach since each project has its own specificities. And we're sure that there are other tools that could be used.
 
-In particular, we can mention executable docs (also called https://blog.danslimmon.com/2019/07/15/do-nothing-scripting-the-key-to-gradual-automation/[do-nothing scripting], but the former has a nicer ring to it). The idea is really simple: instead of starting by writing documentation for a process write a script. When some step is not automated, just write what the user is supposed to do at that step. By blurring the line between documentation and code, you can automate the low hanging fruit and reduce the barrier to automation. While the idea seems interesting, we never really saw it used in the wild.
+In particular, we can mention executable docs (also called https://blog.danslimmon.com/2019/07/15/do-nothing-scripting-the-key-to-gradual-automation/[do-nothing scripting], but the former has a nicer ring to it). The idea is really simple: instead of starting by writing documentation for a process write a script. When some step is not automated, just write what the user is supposed to do at that step. By blurring the line between documentation and code, you can automate the low-hanging fruit and reduce the barrier to automation. While the idea seems interesting, we never really saw it used in the wild.
 
-Another interesting tool to mention is https://nixos.org/[Nix]. Nix is a sort of package manager which aim to have maximum build reproducibility (but that would need its own blog post). For our purpose, it can allow us to setup a complete dev environment with exact dependencies (not just your java dependencies but every single tool you can imagine),  without having to ask developers to manually download anything (it's the perfect match with direnv). However, nix is quite complicated (it's its own new language), so it's often overkill for simple projects. 
+Another interesting tool to mention is https://nixos.org/[Nix]. Nix is a sort of package manager that aims to have maximum build reproducibility (but that would need its own blog post). For our purpose, it can allow us to setup a complete dev environment with exact dependencies (not just your java dependencies but every single tool you can imagine),  without having to ask developers to manually download anything (it's the perfect match with direnv). However, nix is quite complicated (it's its own new language), so it's often overkill for simple projects. 
 
-Last but not least, a word of caution. Since nix, direnv and other tools help you manage complexity and make it more tolerable, they can have a perverse effect because it's tempting to complicate your setup more than needed . Start small and add things as the team gets more comfortable.
+Last but not least, a word of caution. Since nix, direnv, and other tools help you manage complexity and make it more tolerable, they can have a perverse effect because it's tempting to complicate your setup more than needed. Start small and add things as the team gets more comfortable.
