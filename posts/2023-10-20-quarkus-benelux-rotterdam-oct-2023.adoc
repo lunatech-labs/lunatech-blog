@@ -9,7 +9,7 @@ v1.0, 2023-10-20
 === Introduction
 Last Thursday, the https://www.meetup.com/quarkus-benelux/[Quarkus Benelux] meetup talks were hosted at our Rotterdam office.
 Now that the Covid-19 lockdowns are a thing of the past,
-I noticed this to be a more dynamic event, the attendance was higher and there was more energy in the air, in general.
+I noticed this to be a more dynamic event; the attendance was higher and there was more energy in the air, in general.
 I think the tasty drinks and the warm food added to the fun too.
 
 There were two very interesting talks: `Quarkus on Java 21` by https://twitter.com/wjglerum[Willem Jan Glerum] and
@@ -33,7 +33,7 @@ We examined both simple and complex examples of how `Record Patterns` and
 We also explored how `Quarkus` enables the writing of concurrent applications in a blocking, reactive, or virtual threads manner.
 Switching between these styles of concurrent application development is as simple as using annotations!
 However, these annotations should not be used indiscriminately. As the saying goes, ‘With great power comes great responsibility.’
-Both reactive and virtual threads coding styles have their strengths and weaknesses, and should be chosen carefully, based on the specific use case.
+Both reactive and virtual threads coding styles have their strengths and weaknesses which is why they should be chosen carefully based on the specific use case.
 
 In the final segment of his talk, Willem guided us through the potential issues that can arise from improper use of virtual threads. These include:
 
@@ -44,7 +44,7 @@ In the final segment of his talk, Willem guided us through the potential issues 
 - Thread safety
 
 We gained insights on how to better identify these issues. Willem also demonstrated how `Quarkus` facilitates the writing of tests
-that specifically detect thread pinning issues, using just a single, simple annotation.
+that specifically detect thread pinning issues using just a single, simple annotation.
 
 
 === The Quarkus Rainbow for FullStack/Web development by Andy Damevin
@@ -79,4 +79,4 @@ We were then given another chance to play this entertaining game!
 
 === Socializing
 After the talks, most attendees lingered to ask further questions or share ideas with the speakers and each other,
-all while enjoying a beer… or perhaps two.
+all while enjoying a beer… or perhaps a few.
