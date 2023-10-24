@@ -35,6 +35,18 @@ and delete this line:
 
 then run brew install giter8 again.
 
+# Provide compressed images
+Every blogpost has at least one image which makes the Lunatech blog relatively heavy in memory consumption.
+One way of to combat this is by compressing images using `pngcrush`. You can install it using brew:
+```commandline
+brew install pngcrush
+```
+You can then create a compressed version of each image (png/jpeg/gif) you are submitting alongside your blogpost:
+```commandline
+pngcrush -rem allb -brute -reduce in.png out.png
+```
+For very large images the command may take a long time to complete.
+
 
 # How to deploy your post
 Merging your PR will update the `master` branch only. Besides `master` there's also `acceptance` and `production` branches.
