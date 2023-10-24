@@ -1,0 +1,82 @@
+= Quarkus Benelux in Rotterdam
+LeonorLunatech
+v1.0, 2023-10-20
+:title: Quarkus Benelux in Rotterdam
+:imagedir: ../media/2023-10-13-quarkus-benelux-rotterdam-oct-2023
+:lang: en
+:tags: [quarkus, java, web-applications]
+
+=== Introduction
+Last Thursday, the https://www.meetup.com/quarkus-benelux/[Quarkus Benelux] meetup talks were hosted at our Rotterdam office.
+Now that the Covid-19 lockdowns are a thing of the past,
+I noticed this to be a more dynamic event; the attendance was higher and there was more energy in the air, in general.
+I think the tasty drinks and the warm food added to the fun too.
+
+There were two very interesting talks: `Quarkus on Java 21` by https://twitter.com/wjglerum[Willem Jan Glerum] and
+`The Quarkus Rainbow for FullStack/Web development` by https://twitter.com/Ia3andy[Andy Damevin].
+
+=== Quarkus on Java 21 by Willem Jan Glerum
+Willem Jan, a software engineer at Lunatech, gave an insightful and informative presentation.
+He began by familiarizing the audience with Java’s evolution in
+terms of release cadence and the varying maturity levels of the features available in each Java release.
+
+For the rest of the talk, Willem focused on the fully delivered features from https://ambr.top/en[Project Amber] and https://openjdk.org/projects/loom/[Project Loom]:
+
+- https://openjdk.org/jeps/440[Record Patterns]
+- https://openjdk.org/jeps/441[Pattern Matching for switch]
+- https://openjdk.org/jeps/444[Virtual Threads]
+
+We examined both simple and complex examples of how `Record Patterns` and
+`Pattern Matching for switch` can be utilized. Willem guided us through the different _flavours_ of threads like `OS thread`, `Platform thread`,
+`Virtual Thread`, `Carrier Thread`. It may sound like a lot of information, but Willem’s clear diagrams made the talk easy to follow.
+
+We also explored how `Quarkus` enables the writing of concurrent applications in a blocking, reactive, or virtual threads manner.
+Switching between these styles of concurrent application development is as simple as using annotations!
+However, these annotations should not be used indiscriminately. As the saying goes, ‘With great power comes great responsibility.’
+Both reactive and virtual threads coding styles have their strengths and weaknesses which is why they should be chosen carefully based on the specific use case.
+
+In the final segment of his talk, Willem guided us through the potential issues that can arise from improper use of virtual threads. These include:
+
+- Pinning
+- Monopolization
+- Carrier thread pool elasticity
+- Object pooling
+- Thread safety
+
+We gained insights on how to better identify these issues. Willem also demonstrated how `Quarkus` facilitates the writing of tests
+that specifically detect thread pinning issues using just a single, simple annotation.
+
+
+=== The Quarkus Rainbow for FullStack/Web development by Andy Damevin
+Andy, a Principal Software Engineer at Red Hat and the lead of the `Quarkus` FullStack/Web team, gave an engaging presentation.
+He began by briefly explaining what https://quarkus.io/[Quarkus] is and how it enables the creation of faster, lighter applications.
+
+The presentation continued in very interactive way, with the entire audience invited to participate in a game using their mobile phones.
+This was a fun version of the ‘freeze or die’ game, where each phone represented a player on screen. By shaking your phone,
+you could advance your player towards the finish line… provided you didn't ‘die’ along the way!
+
+The remainder of the talk was dedicated to explaining how `Quarkus` simplifies the process of creating such an interactive and scalable game.
+The extensions involved were:
+
+- https://quarkus.io/extensions/io.quarkiverse.quinoa/quarkus-quinoa[Quinoa]
+- https://docs.quarkiverse.io/quarkus-web-bundler/dev/index.html[Web Bundler]
+- https://quarkus.io/guides/qute[Qute]
+- https://quarkus.io/extensions/io.quarkiverse.renarde/quarkus-renarde[Renarde]
+- https://docs.quarkiverse.io/quarkus-playwright/dev/index.html[Playwright] for testing.
+
+`Quinoa` is an extension that streamlines the development, build, and serving of single-page apps or web components.
+The `Web Bundler` extension facilitates the bundling and minification of web app scripts dependencies and styles.
+`Qute` is a typesafe templating engine that prioritizes user experience through the https://quarkus.io/guides/ide-tooling[Quarkus Tools plugin].
+`Renarde` is an extension for server-side web development based on `Qute`, `Hibernate`, and `RESTEasy Reactive`, enhanced for https://htmx.org/[htmlx].
+Andy showed how these extensions work harmoniously together within the same code base, making it easy to understand.
+
+He demonstrated how to locally run both the server and client sides of the game, and illustrated how the `Playwright` extension enables effective cross-browser
+end-to-end testing of `Quarkus` web applications.
+
+To conclude, Andy demonstrated how simple it was to deploy the app to a https://kubernetes.io/[Kubernetes] cluster (in just 2 minutes!).
+We were then given another chance to play this entertaining game!
+
+
+=== Socializing
+After the talks, most attendees lingered to ask further questions or share ideas with the speakers and each other,
+all while enjoying a beer… or perhaps a few.
