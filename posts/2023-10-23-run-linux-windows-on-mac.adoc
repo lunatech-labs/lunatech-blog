@@ -1,0 +1,168 @@
+= Running Linux and Windows on a Mac M1/M2 laptop
+LeonorLunatech
+v1.0, 2023-10-25
+:title: Running Linux and Windows on a Mac M1/M2 laptop
+:imagesdir: ../media/2023-10-23-run-linux-windows-on-mac
+:lang: en
+:tags: [macos, linux, windows, testing]
+
+Recently, I encountered an error in the documentation of an open-source tool. I created a pull request with a proposed fix.
+However, I was then asked to test the fix in both Linux and Windows operating systems.
+But how could I achieve that if I only have access to a Macbook M1
+and my previous efforts of running a Linux Virtual Machine on it had completely failed?
+I decided to give it another shot and, this time, the results were much more promising!
+
+In this blog post, I will guide you through the process of setting up a Linux Virtual Machine(VM) using XCode,
+as well as running Windows 11, for free, using UTM. Before we begin, please ensure that you have at least 100GB of free space available on your drive.
+
+
+== Linux Virtual Machine on XCode
+To run Linux on your Mac, we need to begin by downloading a few necessary components:
+
+1. Ensure that XCode is installed and updated on your system.
+2. Select the Linux distribution you wish to run. This could be https://ubuntu.com/download/desktop[Ubuntu],
+https://www.debian.org/distrib/[Debian] or https://fedoraproject.org/en/workstation/download/[Fedora].
+It’s important to download the Linux ISO image that aligns with the architecture of your Mac (aarch64 or arm64 for
+Intel-based or Apple silicon, respectively). For this post, I’ll be using Ubuntu 22.04.3.
+3. Download the sample code from
+https://developer.apple.com/documentation/virtualization/running_gui_linux_in_a_virtual_machine_on_a_mac[Running GUI Linux in a Virtual Machine on a Mac].
+You’ll receive a zip archive named `RunningGUILinuxInAVirtualMachineOnAMac.zip`.
+The download button can be found at the top of the page, as shown in the picture below. Once downloaded, extract the contents of the zip file.
+
+.Download sample code clicking the `Download` button
+image::download-sample-code.png[Download sample code, 600]
+
+The `RunningGUILinuxInAVirtualMachineOnAMac` source code is an XCode project. This macOS app installs a Linux
+distribution from an ISO image into a VM, and then runs the installed Linux VM.
+
+To use it, open XCode and select `Open Existing Project`. Then, choose the `GUILinuxVirtualMachineSampleApp` folder.
+
+In the XCode Project Navigator, select the root folder. Proceed to the `Signing & Capabilities` panel and
+under `Signing Certificate`, choose the `Sign to Run Locally` option.
+
+.Signing & Capabilities settings
+image::sign-to-run-locally.png[Sign to run, 600]
+
+At the top of the XCode Project Navigator, initiate the project by clicking on the large arrow button.
+
+XCode will then prompt a file picker. Here, select the Linux ISO image that you previously downloaded.
+
+The VM will boot into the OS installer and display the installer’s user interface. Follow the provided installation instructions.
+Once the installation is complete, your Linux VM is ready for use.
+
+Please note: During the VM installation, you may encounter some errors while booting.
+However, Linux will start up after these initial errors. A little patience may be needed here.
+
+.Ubuntu VM running
+image::linux-vm.png[Sign to run, 600]
+
+You are now set to use your VM!
+
+== Windows 11 on UTM
+To run Windows for free on MacOS we will use an emulator called https://getutm.app/[UTM]. While UTM is available
+on the Mac App Store for approximately 10 eur, you can also download it for free directly from their https://mac.getutm.app/[website]
+at no cost. Remember to run the installer once it’s downloaded.
+
+.UTM installer
+image::utm-install.png[UTM installer, 600]
+
+Let’s set aside UTM for now and focus on obtaining a free version of Windows 11 for ARM. Although Microsoft has not
+officially released one yet, you can join the https://www.microsoft.com/en-us/software-download/windowsinsiderpreviewARM64[Windows Insider Program] and download a free
+preview of `Windows 11 on Arm`.
+
+.Download Windows 11 from Windows Insider Program
+image::windows-insider-program.png[Windows Insider Program, 600]
+
+Given that the file size exceeds 10GB, you might consider taking a coffee break while the download completes.
+
+Once the Windows 11 download is complete, launch UTM and opt for `Create a New Virtual Machine`.
+
+.Create a New Virtual Machine
+image::UTM-new-VM.png[Create a New Virtual Machine, 600]
+
+As you've downloaded an ARM version of Windows 11, select `Virtualize` in the subsequent screen. If you were attempting
+to run an Intel version of Windows 11 on an M1 or M2 Mac, you’d need to choose `Emulate` instead, which is expected to operate at a slower pace.
+
+.Virtualize / Emulate modes
+image::virtualize-emulate.png[Virtualize Emulate, 600]
+
+Select `Windows` as the operating system we are running.
+
+.Choose Operating System
+image::utm-choose-windows.png[Choose Operating System, 600]
+
+By default, UTM is configured to install Windows 10 or higher, along with the necessary drivers and SPICE tools, to ensure a
+smoother operation of your Windows VM.  You should check the `Import VHDX Image`, then click `Browse` to locate the `Boot ISO Image` disk image
+for Windows that you've downloaded.
+
+.Choose Boot image
+image::utm-choose-image.png[Choose Boot image, 600]
+
+You’ll need to specify the amount of memory and the number of CPU cores that the VM should use.
+You can start with the default settings and adjust them later if needed.
+
+.Choose Hardware
+image::utm-choose-hardware.png[Choose Hardware, 600]
+
+Next, you’ll encounter the `Shared directory` screen. This is essential if you wish to be able to transfer files
+between your Mac and the VM. Click `Browse…` to select an existing folder or create a new one for this purpose.
+
+.Shared Directory
+image::utm-shared-directory.png[Shared Directory, 600]
+
+The final `Summary` screen provides an overview of your chosen settings and allows you to name the VM.
+
+.Summary
+image::utm-summary-screen.png[Summary, 600]
+
+Once you click `Save`, UTM will begin preparing the VM. Upon completion, your new Windows VM will be listed.
+
+.List of created images
+image::utm-image-ready.png[Summary, 600]
+
+You’re now ready to boot the Windows VM. Click on the large arrow to initiate the VM. Within a few minutes,
+you should see the Windows setup screen. If you encounter a hurdle at the `Let's connect you to a network` screen during
+the Windows setup, shut down the VM and restart it. When you reach the
+`Language selection` screen, press `Shift-F10` to launch the `Windows command prompt`. Type `OOBE\BYPASSNRO` and press Enter.
+This command instructs Windows to bypass the network setup for the time being.
+
+.Configure Windows to allow skipping network setup
+image::utm-configure-no-network.png[Summary, 600]
+
+The VM will then restart. During the Windows setup procedure, you’ll be presented with an option for `I don’t have internet`
+when you arrive to the network screen.
+
+.Configure Network
+image::utm-choose-no-internet.png[No internet, 600]
+
+Select `I don’t have internet` and proceed to complete the Windows setup. We’ll address the internet connection issue later.
+
+Once you’ve completed the setup, you should be able to see the Windows desktop.
+
+.Windows Desktop
+image::utm-windows-startscreen.png[Windows Desktop, 600]
+
+Now, let’s address the internet connection issue. UTM has already set up a drive within the Windows VM to rectify this problem.
+Navigate to `My Computer` > `CD Drive (D:) UTM` and launch `spice-guest-tools-xxx.exe` where xxx is the version number.
+Follow the on-screen instructions to install these tools using the standard Windows installer. Once the installation is complete, reboot the VM.
+
+.SPICE Tools available in Drive D
+image::utm-install-spice-tools.png[Install spice tools, 600]
+
+You should now be able to enjoy your Windows VM with an active internet connection.
+
+.Windows VM with internet
+image::utm-windows-with-internet.png[Windows with internet, 600]
+
+
+== Conclusion
+In this blog post, we successfully set up both a Linux and a Windows VM. The Linux VM was configured
+using XCode, the ‘RunningGUILinuxInAVirtualMachineOnAMac’ project, and a free Linux distribution, requiring minimal
+configuration. The setup of the Windows VM involved a few additional steps.
+However, by utilizing UTM and the Windows Insider Program, we were able to accomplish this for free, using an ARM-specific image.
+
+
+
+
+
+
