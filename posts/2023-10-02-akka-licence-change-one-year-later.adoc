@@ -98,16 +98,33 @@ On the positive side, at least from a technical perspective, migrating from an A
 
 == Some recommendations
 
-=== Update to the latest available version of Play Framework
+Here we offer some recommendations. Note that these only apply to those cases where the organisation is earning more or is likely in the near future to be earning more than the 25M USD cap. For those earning less than the cap, as mentioned above, the commercial licence is granted at zero cost so they can continue using Akka and its modules in production.
 
-At the time of writing, the latest available version of Play Framework is version 2.8.x. As mentioned above, version 2.8.x of Play Framework uses version 2.6.x of Akka.
+=== Paying for the licence is a valid option
 
-As a general rule, we should try to keep project dependencies up to date to the latest available. In this particular case, it is especially important to use the latest version of Play Framework because in the case of a likely migration from Akka to Apache Pekko, the Apache Pekko Migration Guide recommends that your project first be using version 2.6.x of Akka.
+Paying for continued Akka use and future features is probably reasonable for complex applications that rely on the advanced distributed computing platform that Akka offers.
 
-=== Use the plugin sbt-licence report (or similar if using another build tool)
+In that case, the first thing you should do is speak to Lightbend to see how much it is actually going to cost you to stick with Akka and not have to make any changes at all. If it turns out to be more cost effective to come to a negotiated agreement with Lightbend for a commercial licence rather than paying the development costs to migrate away from Akka to an alternative solution, then paying for the licence is indeed a valid option. This is especially the case for those with complex distributed computing problems that rely on the proven features of Akka and would benefit from continued evolution of the framework.
 
-As mentioned above, both the latest version of Play Framework (2.8.x) and the next planned version (2.9.x) depend on the pre-BSL version of Akka. This greatly reduces the risk that a project that is based on Play Framework will inadvertently contravene the new Akka BSL licence.
+=== Be clear about the tradeoffs if migrating
 
-However, there is of course still the risk that a project can explicitly override the version of Akka used by Play (as explained by the Play Framework documentation) and update to a BSL version, which then opens the risk of usage that is not covered by the "Additional Use Grant".
+For those organisations that have decided that migrating away from Akka is a better choice than paying for a commercial licence, it is worth asking "Is your Akka system being actively developed? Are you adding new features or is it in maintenance mode?"
 
-In this case we might be able to use some tooling to reduce the risk again. For example, by using build tool plugins like sbt-licence-report to verify and fail the build if a dependency uses a disallowed licence.
+For applications that are in maintenance mode or where there are only the occasional evolutions and new features, migrating from Akka to Apache Pekko is likely to be the smoothest option. Of course there will still be a need to put resources into the initial migration, but consulting https://pekko.apache.org/docs/pekko/current/project/migration-guides.html[the Apache Pekko Migration Guide] we see that it is largely a 'Find/Replace' operation. However, the tradeoff for a relatively smooth initial migration might be that, given that Apache Pekko is a newly formed community, the pace of evolution and bringing new features might be slower than with Akka or other frameworks with more established communities and roadmaps.
+
+Migrating from Akka to Apache Pekko might also be a good first step to BEFORE a subsequent refactoring. The reality is that there are a lot of applications that don't need Akka for anything in particular, that don't have complex distributed computing problems, but do simple stuff and yet still use Akka because it was a popular choice at the time also for simple things. For such applications, the organisation is probably better off migrating to Pekko as a first step (and losing out on future features that they wouldn't need anyway), and then move away from this type of framework altogether as a second step.
+
+For applications being actively developed AND with more of a capacity to absorb this kind of migration work AND that have complex distributed computing problems AND that would benefit from a mature framework with an established community, there is more of a case for migrating to a different ecosystem like https://zio.dev/guides/migrate/from-akka/[ZIO] or https://typelevel.org/cats-effect/docs/concepts[Cats-Effect].
+
+=== For Play applications, update to the latest available version of Play Framework
+
+As a general rule, we advise our clients to try to keep project dependencies up to date to the latest official release. In this particular case, it is especially important to use the latest version of Play Framework because in the case of a possible migration from Akka to Apache Pekko, https://pekko.apache.org/docs/pekko/current/project/migration-guides.html[the Apache Pekko Migration Guide] recommends that your project first be using version 2.6.x of Akka. At the time of writing, the latest available version of Play Framework is version 2.8.x. As mentioned above, version 2.8.x of Play Framework uses version 2.6.x of Akka.
+
+So keeping up to date now will likely improve your options for the future.
+
+=== Use tooling to help detect disallowed licences
+
+This is a general recommendation not limited to the particular case of a change in the Akka licence. However, the Akka licence change has raised awareness among project teams in many companies that perhaps not enough attention is paid to the licences that different dependencies embark in their projects and the potential legal and commercial implications.
+
+Here is where automated tooling can help reduce the risk. For example, projects can use build tool plugins like https://github.com/sbt/sbt-license-report[sbt-licence-report] to verify and fail the build if a dependency uses a disallowed licence. (Similar plugins exist for other build tools like Maven and Gradle). Some of our clients with the most mature processes include the generation of licence reports as part of a regular audit trail.
+
