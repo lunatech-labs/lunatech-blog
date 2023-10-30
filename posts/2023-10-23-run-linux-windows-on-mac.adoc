@@ -1,5 +1,5 @@
 = Running Linux and Windows on a Mac M1/M2 laptop
-LeonorLunatech
+leo-bogastry
 v1.0, 2023-10-25
 :title: Running Linux and Windows on a Mac M1/M2 laptop
 :imagesdir: ../media/2023-10-23-run-linux-windows-on-mac
@@ -33,7 +33,7 @@ The download button can be found at the top of the page, as shown in the picture
 image::download-sample-code.png[Download sample code, 600]
 
 The `RunningGUILinuxInAVirtualMachineOnAMac` source code is an XCode project. This macOS app installs a Linux
-distribution from an ISO image into a VM, and then runs the installed Linux VM.
+distribution from an ISO image into a VM and then runs the installed Linux VM.
 
 To use it, open XCode and select `Open Existing Project`. Then, choose the `GUILinuxVirtualMachineSampleApp` folder.
 
@@ -157,12 +157,6 @@ image::utm-windows-with-internet.png[Windows with internet, 600]
 
 == Conclusion
 In this blog post, we successfully set up both a Linux and a Windows VM. The Linux VM was configured
-using XCode, the ‘RunningGUILinuxInAVirtualMachineOnAMac’ project, and a free Linux distribution, requiring minimal
+using XCode, the ‘RunningGUILinuxInAVirtualMachineOnAMac’ project, and a free Linux distribution -- all requiring minimal
 configuration. The setup of the Windows VM involved a few additional steps.
 However, by utilizing UTM and the Windows Insider Program, we were able to accomplish this for free, using an ARM-specific image.
-
-
-
-
-
-
