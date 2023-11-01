@@ -1,0 +1,546 @@
+= Telegram bot for file sharing using Quarkus
+https://github.com/iarmush
+v1.0, 2023-11-05
+:title: Telegram bot for file sharing using Quarkus
+:imagesdir: ../media/2023-11-05-telegram-bot-for-file-sharing-using-quarkus
+:lang: en
+:tags: [java, telegram, quarkus, en]
+
+
+== About what is it?
+The project's objective is to explore the practical applications of Quarkus. In this post, I won't delve into a detailed comparison with other similar frameworks, instead, I'll provide a brief and beginner-friendly overview. This overview will be somewhat high-level, omitting discussions on deployment and native features. Most of the concepts will be simplified to fit within a single class, avoiding complex patterns and minimizing the amount of code.
+
+Let's begin with the project idea: creating a Telegram bot. This bot will allow you to send one or more attachments and receive a link in return. You can share this link with people who may not use Telegram. When they open the link, they will be directed to a simple one-page frontend with a single button. Clicking on this button will enable them to download all the attachments as a zip file.
+
+Additionally, the entire source code for this project is available on https://github.com/iarmush/file-sharing-bot[GitHub].
+
+
+== Architecture and use case
+
+The primary user scenario unfolds as follows:
+
+1. The user initiates a Telegram bot and sends an attachment.
+2. The Telegram bot forwards this message to our backend application.
+3. The backend application stores this attachment in MinIO storage.
+4. The user sends the command `/link` to the Telegram bot to obtain a shareable link.
+5. The backend application generates a link to our frontend application and provides it to the user.
+6. The customer can copy and share this link. Upon opening the link, the customer will access the frontend application featuring a "Download" button.
+7. When the "Download" button is pressed, the frontend sends an HTTP request to our backend. The backend application retrieves all attachments associated with this user, compiles them into a zip file, and returns it to the user. Simultaneously, the backend application records the downloaded data in MongoDB.
+
+In terms of state diagrams:
+
+image::state_diagram.png[,600]
+
+
+== Backend
+For the backend, we'll be employing a conventional web server. Our journey begins with the https://quarkus.io/get-started/[Quarkus Get Started page].
+
+To get started, we need to follow step 1 on the provided link, which involves installing the Quarkus CLI.
+
+Now, we can execute
+```bash
+quarkus --help
+```
+to get familiar with the main functionality. This command will be our main entry point for any application manipulation. With its assistance we can create a skeleton, in fact, it will have everything that we need, and it will even be a ready-to-deploy application.
+
+Before we create an application we have to choose which extensions (or dependencies) we’re going to use.
+
+We can find them on https://quarkus.io/extensions/ or by executing
+```bash
+quarkus extension list
+```
+For our needs, it will be enough to add `quarkus-mongodb-panache` and `quarkus-resteasy-reactive`.
+
+Additionally, we have to manually add https://github.com/rubenlagus/TelegramBots - a library for creating telegram bots, and https://github.com/minio/minio-java - MinIO java client.
+
+While in the root directory of our new project, run this command -
+```bash
+quarkus create app com.example:backend \
+--extension=quarkus-mongodb-panache,quarkus-resteasy \
+--gradle
+```
+
+We can already run our application with the default implementation. To do so, navigate to the `/backend` directory and execute the command to start our application.
+```bash
+quarkus dev
+```
+
+Now, you can open the recommended welcome page at http://localhost:8080/
+
+image::welcome_page.png[,600]
+and http://localhost:8080/heloo default controller method.
+
+image::controller_hello.png[,600]
+
+It was quite easy, right?
+
+Before we dive into coding the bot's logic, we need to register our bot and obtain a username and token. To do this, please follow the official instructions provided here: https://core.telegram.org/bots/tutorial.
+
+It's worth noting that there isn't even a main class that we're used to in the source code, which can sometimes be considered boilerplate. However, let's go ahead and create one explicitly now.
+[source,java]
+----
+package com.example;
+
+import io.quarkus.runtime.Quarkus;
+import io.quarkus.runtime.QuarkusApplication;
+import io.quarkus.runtime.annotations.QuarkusMain;
+import org.jboss.logging.Logger;
+import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.TelegramBotsApi;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
+
+@QuarkusMain
+public class Main {
+
+    public static void main(String... args) {
+        Quarkus.run(MyApp.class, args);
+    }
+
+    public static class MyApp implements QuarkusApplication {
+        private static final Logger LOGGER = Logger.getLogger(MyApp.class);
+        private final TelegramLongPollingBot telegramLongPollingBot;
+
+        public MyApp(TelegramLongPollingBot telegramLongPollingBot) {
+            this.telegramLongPollingBot = telegramLongPollingBot;
+        }
+
+        @Override
+        public int run(String... args) {
+            try {
+                TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
+                telegramBotsApi.registerBot(telegramLongPollingBot);
+            } catch (TelegramApiException e) {
+                LOGGER.errorf(e, e.getMessage());
+            }
+            Quarkus.waitForExit();
+            return 0;
+        }
+    }
+}
+----
+
+Dependency injection in Quarkus is a CDI-based dependency injection - https://quarkus.io/guides/cdi. In the case of only one defined constructor, Quarkus uses constructor injection. To satisfy the constructor parameter let's create a corresponding bean using the method return type by [.yellow]#@Produce# annotation.
+
+[source,java]
+----
+    @Produces
+    public TelegramLongPollingBot telegramLongPollingBot() {
+        return new TelegramLongPollingBot(botConfig.token()) {
+            @Override
+            public String getBotUsername() {
+                return botConfig.username();
+            }
+
+            @Override
+            public void onUpdateReceived(Update update) {
+                try {
+                    var message = update.getMessage();
+                    if (message.hasText()) {
+                        messageService.handleText(message);
+                    } else if (message.hasDocument() || message.hasPhoto() || message.hasVideo()) {
+                        messageService.handleMedia(message);
+                    } else {
+                        execute(SendMessage.builder().text("Please send medias").build());
+                    }
+                } catch (TelegramApiException | IOException e) {
+                    LOGGER.errorf(e, "Error while receive update");
+                    throw new RuntimeException(e);
+                }
+            }
+        };
+    }
+----
+Yes, "if" is everywhere.
+
+Our bot is capable of receiving both text and media. In the case of text, it will expect the following supported commands:
+
+1. `/start` - to initiate a chat with the bot and begin sending media.
+2. `/link` - to generate a link for downloading all the data sent prior.
+3. `/finish` - to clear existing saved media and prepare for new uploads.
+
+[source,java]
+----
+    public void handleText(Message message) throws TelegramApiException {
+        var chatId = message.getChatId();
+        LOGGER.infof("Handled text in chatId: %s", chatId);
+
+        if (message.getText().equals(BotCommand.START.getName())) {
+            telegramLongPollingBot.execute(SendMessage.builder().text("""
+                            Hello! It's File sharing bot.
+                            Send me files, photos or videos.
+                            After use command /link for getting external link for downloading.
+                            """)
+                    .chatId(chatId)
+                    .build());
+        } else if (message.getText().equals(BotCommand.LINK.getName())) {
+            telegramLongPollingBot.execute(SendMessage.builder().text("""
+                            Use this link for downloading archive:
+                            http://localhost:3006/?chatId=%s
+                            """.formatted(chatId))
+                    .chatId(chatId)
+                    .build());
+        } else if (message.getText().equals(BotCommand.FINISH.getName())) {
+            minioService.deleteFilesAndBucket(String.valueOf(chatId));
+            telegramLongPollingBot.execute(SendMessage.builder()
+                    .text("File sharing is ready for new medias")
+                    .chatId(chatId)
+                    .build());
+        } else {
+            telegramLongPollingBot.execute(SendMessage.builder()
+                    .text("Unknown command")
+                    .chatId(chatId)
+                    .build());
+        }
+    }
+----
+Yes, hardcode it. Yes, "if" is everywhere (2).
+
+In the case of media attachment, it will expect a file, photo, or video.
+[source,java]
+----
+    public void handleMedia(Message message) throws TelegramApiException, IOException {
+        var chatId = message.getChatId();
+        LOGGER.infof("Handled media in chatId: %s", chatId);
+
+        String fileName;
+        String fileId;
+        String filePath;
+        if (message.getDocument() != null) {
+            fileName = message.getDocument().getFileName();
+            fileId = message.getDocument().getFileId();
+            filePath = telegramLongPollingBot.execute(new GetFile(fileId)).getFilePath();
+        } else if (message.getPhoto() != null) {
+            fileName = "photo_" + LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) + ".jpeg";
+            fileId = Collections.max(message.getPhoto(), Comparator.comparing(PhotoSize::getFileSize)).getFileId();
+            filePath = telegramLongPollingBot.execute(new GetFile(fileId)).getFilePath();
+        } else if (message.getVideo() != null) {
+            fileName = message.getVideo().getFileName();
+            fileId = message.getVideo().getFileId();
+            filePath = telegramLongPollingBot.execute(new GetFile(fileId)).getFilePath();
+        } else {
+            LOGGER.errorf("Error while handling media in chatId: :s", chatId);
+            throw new RuntimeException("Error while handling media in chatId: " + chatId);
+        }
+
+        var bytes = telegramLongPollingBot.downloadFileAsStream(filePath).readAllBytes();
+        minioService.uploadFile(String.valueOf(chatId), fileName, bytes);
+    }
+----
+Yes, hardcode it (2). Yes, "if" is everywhere (3).
+
+For interaction with MinIO we have to create a client bean like we already did it.
+[source,java]
+----
+    @Produces
+    public MinioClient minioClient() {
+        try {
+            return MinioClient.builder()
+                    .endpoint(
+                            minIOConfig.host(),
+                            minIOConfig.port(),
+                            minIOConfig.useSsl())
+                    .credentials(
+                            minIOConfig.accessKey(),
+                            minIOConfig.secretKey())
+                    .build();
+        } catch (Exception e) {
+            LOGGER.errorf(e, "Error while initializing minioClient");
+            throw new RuntimeException(e);
+        }
+    }
+----
+
+MinIO is a high-performance object storage server. MinIO's core concept is a "bucket" identified by a unique bucket ID. All files associated with a bucket are stored kinda together as a group. In our case, we'll use the chat ID as the bucket ID, which is unique for each Telegram user. This way, we can easily retrieve files by specifying the bucket ID and their respective names.
+
+[source,java]
+----
+    private byte[] getFileAsBytes(String bucketName, String objectName) {
+        try {
+            return minioClient.getObject(
+                    GetObjectArgs.builder()
+                            .bucket(bucketName)
+                            .object(objectName).build()).readAllBytes();
+        } catch (Exception e) {
+            LOGGER.errorf(e, "Error while getting object: :s  from bucket: :s", objectName, bucketName);
+            throw new RuntimeException(e);
+        }
+    }
+----
+
+And the same for uploading files.
+
+[source,java]
+----
+    public void uploadFile(String bucketName, String fileName, byte[] bytes) {
+        try {
+            createBucketIfNotExist(bucketName);
+            var putObjectArgs = PutObjectArgs.builder()
+                    .object(fileName)
+                    .bucket(bucketName)
+                    .stream(new ByteArrayInputStream(bytes), bytes.length, -1L)
+                    .build();
+
+            minioClient.putObject(putObjectArgs);
+        } catch (Exception e) {
+            LOGGER.errorf(e, "Error while uploading file: :s to bucket: :s", fileName, bucketName);
+            throw new RuntimeException(e);
+        }
+    }
+----
+
+And, yes, more or less the same for removing.
+
+[source,java]
+----
+    private void removeFiles(String bucketName) {
+        List<String> objectNameList = getObjectNamesInBucket(bucketName);
+        List<DeleteObject> deleteObjects = new LinkedList<>();
+        objectNameList.forEach(objectName -> deleteObjects.add(new DeleteObject(objectName)));
+
+        try {
+            Iterable<Result<DeleteError>> results = minioClient.removeObjects(
+                    RemoveObjectsArgs.builder().bucket(bucketName).objects(deleteObjects).build());
+
+            for (Result<DeleteError> result : results) {
+                DeleteError error = result.get();
+                LOGGER.errorf("Error in deleting object :s - :s", error.objectName(), error.message());
+            }
+        } catch (Exception e) {
+            LOGGER.errorf(e, "Error while removing bucket: :s", bucketName);
+            throw new RuntimeException(e);
+        }
+    }
+----
+
+Quarkus uses the Vert.x framework and a declarative approach to define and handle HTTP requests, making it well-suited for building efficient, reactive, and scalable web applications. This approach is quite different from the servlet-based model used in Spring. But we still  use familiar annotations, we just have to mention the specific return type in the case of the file output.
+
+[source,java]
+----
+    @GET
+    @Path("/api/v1/file-sharing-bot/download")
+    @Produces("application/zip")
+    public Response downloadZip(@NotNull @QueryParam("chatId") Long chatId) {
+        LOGGER.infof("Attempt to download in %s", chatId);
+        byte[] bytes = minioService.downloadZip(String.valueOf(chatId));
+        logDataService.save(chatId);
+        return Response.ok(bytes)
+                .header("Content-Disposition", "attachment; filename=file_sharing_bot.zip")
+                .build();
+    }
+----
+
+Almost nothing new and still quite easy, right?
+
+
+The last part is writing to MongoDB. https://quarkus.io/guides/mongodb-panache[Quarkus Panache] is a framework that streamlines and enriches the integration of MongoDB in Quarkus applications. It offers a user-friendly and type-safe approach for interacting with MongoDB databases.
+
+Everything that we need is to create an entity class
+
+[source,java]
+----
+@MongoEntity(collection = "logData")
+public class LogData extends PanacheMongoEntity {
+
+    @NotNull
+    @BsonProperty("chatId")
+    private Long chatId;
+
+    @NotNull
+    @BsonProperty("downloadDate")
+    public LocalDateTime downloadDate;
+}
+----
+
+repository class
+
+[source,java]
+----
+@ApplicationScoped
+public class LogDataRepository implements PanacheMongoRepository<LogData> {
+}
+----
+
+and related properties in `application.properties` file
+
+[source]
+----
+quarkus.mongodb.connection-string=mongodb://localhost:27018
+quarkus.mongodb.database=logData
+----
+
+And nothing more. Again, yes, it was quite easy.
+
+
+We're going to up MongoDB and MinIO using `docker-compose.yml` file.
+[source,yaml]
+----
+version: '3'
+
+services:
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27018:27017
+    networks:
+      - nw
+
+  minio:
+    image: minio/minio
+    restart: always
+    ports:
+      - 9000:9000
+      - 9001:9001
+    volumes:
+      - ~/minio/data:/data
+    environment:
+      - MINIO_ROOT_USER=testtest
+      - MINIO_ROOT_PASSWORD=testtest
+    command: server /data --console-address ":9001"
+    networks:
+      - nw
+
+networks:
+  nw:
+----
+
+After we run docker-compose our backend application is ready to up.
+Being in `/backend` directory run
+```bash
+quarkus dev
+```
+
+
+== Frontend
+For the frontend application, we will use https://docs.quarkiverse.io/quarkus-quinoa/dev/[Quarkus Quinoa project] using React with TypeScript.
+All possible framework combinations you can see on https://docs.quarkiverse.io/quarkus-quinoa/dev/web-frameworks.html.
+
+Being in the root of our repository execute
+```bash
+quarkus create app frontend -x=io.quarkiverse.quinoa:quarkus-quinoa --gradle
+```
+
+Inside our generated application we can see the directory  `src/main/webui` - it’s a root for our NodeJS application with `package.json` file. Let's remove the default implementation by removing the whole directory  `src/main/webui` and being in a  `frontend/src` execute
+```bash
+npx create-react-app webui --template typescript
+```
+(it requires an already installed `node` and `npx`).
+
+In directory `src/main/webui` we can see the new generated project.
+
+As usual, let's add `bootstrap`. Being in `/frontend/src/main/webui` execute
+```bash
+npm install bootstrap
+```
+
+The last thing we need is to change the `webui/src/App.tsx` file. We have to add one button and function that sends an HTTP request to our backend application for `onClick()` event. Also we will retrieve the chatId variable from the query parameter.
+[source,javascript]
+----
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
+import '../node_modules/bootstrap/dist/css/bootstrap.css';
+
+function App() {
+  const queryParams = new URLSearchParams(window.location.search);
+  const chatId = queryParams.get('chatId');
+
+  function download() {
+    window.location.href = `http://127.0.0.1:8091/api/v1/file-sharing-bot/download?chatId=${chatId}`;
+  }
+
+  return (
+      <div className="App">
+        <h1 className="display-1"> Click on the button to download</h1>
+        <button className="btn btn-primary" onClick={() => download()}>Download</button>
+      </div>
+  );
+}
+
+export default App;
+
+----
+
+Yes, hardcode it (3).
+
+And just in case change the default port for our application by adding the property `quarkus.http.port=3006` to `application.properties`
+
+Now we can build our application by
+```bash
+quarkus build
+```
+and run it
+```bash
+java -jar build/quarkus-app/quarkus-run.jar
+```
+
+Let's check that our app returns at least something. Open http://localhost:3006/
+
+image::frontend.png[,600]
+
+
+== User case
+
+What do we have now?
+
+1. Backend application
+2. Frontend application
+3. MongoDB and MinIO in docker
+
+And so, the final test case.
+
+1) Open the bot
+
+image::step1.png[,600]
+2) Click on "Start" button
+
+image::step2.png[,600]
+
+3) Send photo and file
+
+image::step3.png[,600]
+
+4) Send the text command `/link`
+
+image::step4.png[,600]
+
+5) Copy the URL and open it in the browser
+
+image::step5.png[,600]
+
+6) Click on the "Download" button, unzip the archive and check its content
+
+image::step6.png[,600]
+
+7) Connect to MongoDB using any UI client and check that we have data about our downloading
+
+image::step7.png[,600]
+
+8) Let's also check what we have in MinIO. Open the admin panel http://localhost:9001/ and login with user and password values that we specified in docker-compose.
+
+image::step8.png[,600]
+
+9) Here we have only one bucket. Open it.
+
+image::step9.png[,600]
+
+10) Here we can see two sent files.
+
+image::step10.png[,600]
+
+11) Move back to our bot. And send `/finish` command
+
+image::step11.png[,600]
+
+12) Move again back to MinIO admin panel and check that our bucket is empty.
+
+image::step12.png[,600]
+
+13) Bot is ready for the new session.
+
+
+== Conclusion
+That concludes our project overview. In this project, we've explored Quarkus' capabilities for both backend and frontend development. The backend is connected to a MinIO file storage and a MongoDB, while the frontend is a simple one-page application with literally one button.
+
+Please note that we haven't delved into in-depth reviews, and more importantly, we haven't covered Quarkus' advanced features such as native applications and deployment. Here https://quarkus.io/guides/ you can find lots of interesting guides for further exploration.
