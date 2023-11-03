@@ -1,5 +1,5 @@
 = JWT token validation in Ktor with Client Credentials Flow
-LeonorLunatech
+leo-bogastry
 v1.0, 2023-06-07
 :title: JWT token validation in Ktor with Client Credentials Flow
 :imagesdir: ../media/2023-06-07-kotlin-ktor-keycloak
@@ -344,7 +344,7 @@ Make sure `luna-vacation-api` is still running and now let's run `luna-vacation-
 .Slack message
 image::slack-message.png[Diagram, 200]
 
-The complete source code for the https://github.com/LeonorLunatech/luna-vacation-api[luna-vacation-api] and https://github.com/LeonorLunatech/luna-vacation-bot[luna-vacation-bot] are available on GitHub.
+The complete source code for the https://github.com/leo-bogastry/luna-vacation-api[luna-vacation-api] and https://github.com/leo-bogastry/luna-vacation-bot[luna-vacation-bot] are available on GitHub.
 
 === Next steps
 

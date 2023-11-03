@@ -1,5 +1,5 @@
 = Curry on Amsterdam 2018
-LeonorLunatech
+leo-bogastry
 v1.0, 2018-07-19
 :title: Curry on Amsterdam 2018
 :tags: [event]

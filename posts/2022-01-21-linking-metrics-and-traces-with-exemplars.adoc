@@ -1,5 +1,5 @@
 = Linking metrics and traces with Exemplars
-LeonorLunatech
+leo-bogastry
 v1.0, 2022-01-27
 :title: Linking metrics and traces with Exemplars
 :imagesdir: ../media/2022-01-21-linking-metrics-and-traces-with-exemplars
