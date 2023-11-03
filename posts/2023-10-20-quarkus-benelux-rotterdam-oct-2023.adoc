@@ -1,5 +1,5 @@
 = Quarkus Benelux in Rotterdam
-LeonorLunatech
+leo-bogastry
 v1.0, 2023-10-20
 :title: Quarkus Benelux in Rotterdam
 :imagedir: ../media/2023-10-13-quarkus-benelux-rotterdam-oct-2023
