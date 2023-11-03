@@ -3,16 +3,18 @@ njlbenn, eamelink, thinkmorestupidless
 v1.0, 2023-10-27
 :title: Akka Licence Change (One Year Later)
 :tags: [akka, pekko, BSL, apache licence]
+:lang: en
 
 In September 2022, the CEO and Founder of Lightbend, Jonas Bonér, announced, https://www.lightbend.com/blog/why-we-are-changing-the-license-for-akka[in a blog post, a change in the licencing of Akka]. Instead of an Apache 2.0 Licence, all future releases of Akka would be covered by a new Business Source Licence (BSL) v1.1. The announcement was made one day after https://akka.io/blog/news/2022/09/06/akka-2.6.20-released[the 2.6.20 patch release of Akka Core and other modules] and this release would turn out to be the last one under the Apache 2.0 Licence.
 
 At the time, the announcement generated a lot of reaction, including the decision by a part of the open-source community to create a fork of Akka. The forked project, called Apache Pekko, https://www.mail-archive.com/announce@apache.org/msg08350.html[announced its first major release (v1.0.0) in July 2023].
 
-Recently at Lunatech, at the request of many of our clients, we have decided to revisit this topic, specifically with an objective to help our clients manage their exposure to the new BSL licence and, if necessary, to help them eliminate this exposure entirel. We have decided to share some of our thoughts on the topic in case they are valuable to a wider audience.
+Recently at Lunatech, at the request of many of our clients, we have decided to revisit this topic, specifically with an objective to help our clients manage their exposure to the new BSL licence and, if necessary, to help them eliminate this exposure entirely. We have decided to share some of our thoughts on the topic in case they are valuable to a wider audience.
 
 == Some key points about the licence change
 
 To better understand the implications of the licence change, it is worth starting on the Lightbend webpage that tries https://www.lightbend.com/akka/license-faq[to summarise the licence change in the form of an FAQ]. Here are some points that stand out:
+
 - Any organisation wanting to use Akka in production need to obtain a commercial licence. However, for organisations with less than 25M USD in annual revenue, the licence will be granted free of charge
 - Lightbend pledged to continue providing critical patches to the open source version for another year after the initial announcement of the licence change (so scheduled to have finished September 2023)
 - They have included a special exemption (a so-called Additional Use Grant) for Play users so that the "usage of certain parts of Akka required by Play" are exempt from the licence change.
@@ -25,7 +27,7 @@ Many of our clients have a lot of production software that is built with the Pla
 
 "If you develop an application using a version of Play Framework that utilizes binary versions of akka-streams and its dependencies, you may use such binary versions of akka-streams and its dependencies in the development of your application only as they are incorporated into Play Framework and solely to implement the functionality provided by Play Framework; provided that, they are only used in the following way: Connecting to a Play Framework websocket and/or Play Framework request/response bodies for server and play-ws client."
 
-That last phrase “Connecting to a Play Framework websocket and/or Play Framework request/response bodies for server and play-ws client” suggests that Additional Use Grant is actually quite limited. To get a better since of what are the limitations, it is worth going through the Play documentation to see what patterns of usage are likely allowed, likely disallowed, and those that are not clear.
+That last phrase “Connecting to a Play Framework websocket and/or Play Framework request/response bodies for server and play-ws client” suggests that Additional Use Grant is actually quite limited. To get a better sense of what are the limitations, it is worth going through the Play documentation to see what patterns of usage are likely allowed, likely disallowed, and those that are not clear.
 
 === Akka usage patterns - allowed / disallowed / grey area
 
@@ -70,7 +72,7 @@ Note that since the licence change there has been 1 critical back-port (https://
 
 Apache Pekko is proposed as a potential solution to mitigate the risk of either being on a version of Akka that will no longer receive critical security updates or of inadvertently depending on BSL code.
 
-It is worth noting, however, a possible migration to Pekko is not without its own risks (and I don’t just mean the general risks of migrating or rewriting software). By migrating to Pekko, one would be betting that the Apache Pekko project will be able to continue maintaining and evolving the framework - including security and bug fixes, and new functionality.
+It is worth noting, however, that a possible migration to Pekko is not without its own risks (and I don’t just mean the general risks of migrating or rewriting software). By migrating to Pekko, one would be betting that the Apache Pekko project will be able to continue maintaining and evolving the framework - including security and bug fixes, and new functionality.
 
 On the positive side, at least from a technical perspective, migrating from an Akka 2.6.x project to Apache Pekko seems relatively mechanical if we have a look at https://pekko.apache.org/docs/pekko/current/project/migration-guides.html[the Apache Pekko Migration Guide]. However, at the time of writing, not all Apache Pekko modules have been officially released.
 
@@ -104,13 +106,13 @@ Here we offer some recommendations. Note that these only apply to those cases wh
 
 Paying for continued Akka use and future features is probably reasonable for complex applications that rely on the advanced distributed computing platform that Akka offers.
 
-In that case, the first thing you should do is speak to Lightbend to see how much it is actually going to cost you to stick with Akka and not have to make any changes at all. If it turns out to be more cost effective to come to a negotiated agreement with Lightbend for a commercial licence rather than paying the development costs to migrate away from Akka to an alternative solution, then paying for the licence is indeed a valid option. This is especially the case for those with complex distributed computing problems that rely on the proven features of Akka and would benefit from continued evolution of the framework.
+In that case, the first thing you should do is speak to Lightbend to see how much it is actually going to cost you to stick with Akka and not have to make any changes at all. If it turns out to be more cost-effective to come to a negotiated agreement with Lightbend for a commercial licence rather than paying the development costs to migrate away from Akka to an alternative solution, then paying for the licence is indeed a valid option. This is especially the case for those with complex distributed computing problems that rely on the proven features of Akka and would benefit from continued evolution of the framework.
 
 === Be clear about the tradeoffs if migrating
 
 For those organisations that have decided that migrating away from Akka is a better choice than paying for a commercial licence, it is worth asking "Is your Akka system being actively developed? Are you adding new features or is it in maintenance mode?"
 
-For applications that are in maintenance mode or where there are only the occasional evolutions and new features, migrating from Akka to Apache Pekko is likely to be the smoothest option. Of course there will still be a need to put resources into the initial migration, but consulting https://pekko.apache.org/docs/pekko/current/project/migration-guides.html[the Apache Pekko Migration Guide] we see that it is largely a 'Find/Replace' operation. However, the tradeoff for a relatively smooth initial migration might be that, given that Apache Pekko is a newly formed community, the pace of evolution and bringing new features might be slower than with Akka or other frameworks with more established communities and roadmaps.
+For applications that are in maintenance mode or where there are only the occasional evolutions and new features, migrating from Akka to Apache Pekko is likely to be the smoothest option. Of course, there will still be a need to put resources into the initial migration, but consulting https://pekko.apache.org/docs/pekko/current/project/migration-guides.html[the Apache Pekko Migration Guide] we see that it is largely a 'Find/Replace' operation. However, the tradeoff for a relatively smooth initial migration might be that, given that Apache Pekko is a newly formed community, the pace of evolution and bringing new features might be slower than with Akka or other frameworks with more established communities and roadmaps.
 
 Migrating from Akka to Apache Pekko might also be a good first step to BEFORE a subsequent refactoring. The reality is that there are a lot of applications that don't need Akka for anything in particular, that don't have complex distributed computing problems, but do simple stuff and yet still use Akka because it was a popular choice at the time also for simple things. For such applications, the organisation is probably better off migrating to Pekko as a first step (and losing out on future features that they wouldn't need anyway), and then move away from this type of framework altogether as a second step.
 
