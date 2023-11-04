@@ -4,7 +4,7 @@ v1.0, 2023-11-05
 :title: Telegram bot for file sharing using Quarkus
 :imagesdir: ../media/2023-11-05-telegram-bot-for-file-sharing-using-quarkus
 :lang: en
-:tags: [java, telegram, quarkus, en]
+:tags: [java, telegram, quarkus]
 
 
 == About what is it?
@@ -49,18 +49,18 @@ We can find them on https://quarkus.io/extensions/ or by executing:
 ```bash
 quarkus extension list
 ```
-For our needs, it will be enough to add `quarkus-mongodb-panache` and `quarkus-resteasy-reactive`.
+For our needs, it will be enough to add `quarkus-mongodb-panache`, `quarkus-resteasy-reactive` and `quarkus-quinoa`.
 
-Additionally, we have to manually add https://github.com/rubenlagus/TelegramBots - a library for creating telegram bots, and https://github.com/minio/minio-java - MinIO java client.
+Additionally, we have to manually add https://github.com/rubenlagus/TelegramBots - a library for creating telegram bots, and https://github.com/quarkiverse/quarkus-minio - MinIO java client by Quarkus.
 
 While in the root directory of our new project, run this command:
 ```bash
-quarkus create app com.example:backend \
---extension=quarkus-mongodb-panache,quarkus-resteasy \
+quarkus create app com.example:file-sharing-bot \
+--extension=quarkus-mongodb-panache,quarkus-resteasy,quarkus-quinoa \
 --gradle
 ```
 
-We can already run our application with the default implementation. To do so, navigate to the `/backend` directory and execute the command to start our application:
+We can already run our application with the default implementation. To do so, navigate to the root directory and execute the command to start our application:
 ```bash
 quarkus dev
 ```
@@ -68,9 +68,14 @@ quarkus dev
 Now, you can open the recommended welcome page at http://localhost:8080/
 
 image::welcome_page.png[,600]
-and http://localhost:8080/hello default controller method.
+
+and http://localhost:8080/hello default controller method
 
 image::controller_hello.png[,600]
+
+and http://localhost:8080/quinoa.html default frontend implementation
+
+image::quinoa_default.png[,600]
 
 It was quite easy, right?
 
@@ -177,7 +182,7 @@ Our bot is capable of receiving both text and media. In the case of text, it wil
         } else if (message.getText().equals(BotCommand.LINK.getName())) {
             telegramLongPollingBot.execute(SendMessage.builder().text("""
                             Use this link for downloading archive:
-                            http://localhost:3006/?chatId=%s
+                            http://localhost:8091/?chatId=%s
                             """.formatted(chatId))
                     .chatId(chatId)
                     .build());
@@ -229,28 +234,6 @@ In the case of media attachment, it will expect a file, photo, or video:
     }
 ----
 Yes, hardcode it (2). Yes, "if" is everywhere (3).
-
-For interaction with MinIO we have to create a client bean like we already did:
-[source,java]
-----
-    @Produces
-    public MinioClient minioClient() {
-        try {
-            return MinioClient.builder()
-                    .endpoint(
-                            minIOConfig.host(),
-                            minIOConfig.port(),
-                            minIOConfig.useSsl())
-                    .credentials(
-                            minIOConfig.accessKey(),
-                            minIOConfig.secretKey())
-                    .build();
-        } catch (Exception e) {
-            LOGGER.errorf(e, "Error while initializing minioClient");
-            throw new RuntimeException(e);
-        }
-    }
-----
 
 MinIO is a high-performance object storage server. MinIO's core concept is a "bucket" identified by a unique bucket name. All files associated with a bucket are stored kinda together as a group. In our case, we'll use the chat ID as the bucket name, which is unique for each Telegram user. This way, we can easily retrieve files by specifying the bucket name and their respective file names:
 [source,java]
@@ -330,7 +313,7 @@ Quarkus uses the Vert.x framework with a declarative approach to define and hand
 Almost nothing new and still quite easy, right?
 
 
-The last part is writing to MongoDB. https://quarkus.io/guides/mongodb-panache[Quarkus Panache] is a framework that streamlines and enriches the integration of MongoDB in Quarkus applications. It offers a user-friendly and type-safe approach for interacting with MongoDB databases.
+The next part is writing to MongoDB. https://quarkus.io/guides/mongodb-panache[Quarkus Panache] is a framework that streamlines and enriches the integration of MongoDB in Quarkus applications. It offers a user-friendly and type-safe approach for interacting with MongoDB databases.
 
 All we need is to create an entity class:
 [source,java]
@@ -356,51 +339,28 @@ public class LogDataRepository implements PanacheMongoRepository<LogData> {
 }
 ----
 
-and related properties in `application.properties` file:
-[source]
-----
-quarkus.mongodb.connection-string=mongodb://localhost:27018
-quarkus.mongodb.database=logData
-----
-
 And nothing more. Again, yes, it was quite easy.
 
 
-We're going to up MongoDB and MinIO using `docker-compose.yml` file:
-[source,yaml]
+In the last step, we will use the amazing Quarkus feature - https://quarkus.io/guides/dev-services[Dev Services] to provide https://quarkus.io/guides/dev-services#mongodb[MongoDB] and https://docs.quarkiverse.io/quarkus-minio/dev/index.html#dev-services[MinIO] docker containers.
+
+All we need to do is to add a few properties to `application.properties` file:
+[source]
 ----
-version: '3'
+quarkus.mongodb.devservices.enabled=true
+quarkus.mongodb.devservices.image-name=mongo
+quarkus.mongodb.devservices.port=27018
 
-services:
-  mongo:
-    image: mongo
-    restart: always
-    ports:
-      - 27018:27017
-    networks:
-      - nw
-
-  minio:
-    image: minio/minio
-    restart: always
-    ports:
-      - 9000:9000
-      - 9001:9001
-    volumes:
-      - ~/minio/data:/data
-    environment:
-      - MINIO_ROOT_USER=testtest
-      - MINIO_ROOT_PASSWORD=testtest
-    command: server /data --console-address ":9001"
-    networks:
-      - nw
-
-networks:
-  nw:
+quarkus.minio.devservices.enabled=true
+quarkus.minio.devservices.image-name=minio/minio
+quarkus.minio.devservices.access-key=testtest
+quarkus.minio.devservices.secret-key=testtest
+quarkus.minio.devservices.port=9000
 ----
 
-After we run docker-compose our backend application is ready to up.
-Being in `/backend` directory run:
+After we run our application in dev mode, Quarkus will up the specified containers automatically and create MinioClient with corresponding properties.
+
+Well, our backend application is ready to up. Being in the root directory run:
 ```bash
 quarkus dev
 ```
@@ -410,12 +370,7 @@ quarkus dev
 For the frontend application, we will use https://docs.quarkiverse.io/quarkus-quinoa/dev/[Quarkus Quinoa project] using React with TypeScript.
 All possible framework combinations you can see on https://docs.quarkiverse.io/quarkus-quinoa/dev/web-frameworks.html[Quarkus Quinoa - Web Frameworks]
 
-Being in the root of our repository execute:
-```bash
-quarkus create app frontend -x=io.quarkiverse.quinoa:quarkus-quinoa --gradle
-```
-
-Inside our generated application we can see the directory  `src/main/webui` - it’s the root for our NodeJS application with  a`package.json` file. Let's remove the default implementation by removing the whole directory `src/main/webui`.  Then place yourself in `frontend/src` and execute:
+Inside our generated application we can see the directory  `src/main/webui` - it’s the root for our NodeJS application with  a`package.json` file. Let's remove the default implementation by removing the whole directory `src/main/webui`.  Then place yourself in `file-sharing-bot/src/main` and execute:
 ```bash
 npx create-react-app webui --template typescript
 ```
@@ -458,18 +413,18 @@ export default App;
 
 Yes, hardcode it (3).
 
-And just in case, change the default port for our application by adding the property `quarkus.http.port=3006` to `application.properties`
+And just in case, change the default port for our application by adding the property `quarkus.http.port=8091` to `application.properties`
 
 Now we can build our application with:
 ```bash
 quarkus build
 ```
-and run it:
+and run backend and frontend simultaneously:
 ```bash
-java -jar build/quarkus-app/quarkus-run.jar
+quarkus dev
 ```
 
-Let's check that our app returns at least something. Open http://localhost:3006/
+Let's check that our app returns at least something. Open http://localhost:8091/
 
 image::frontend.png[,600]
 
@@ -491,7 +446,7 @@ image::step1.png[,600]
 
 image::step2.png[,600]
 
-3) Send photo and file.
+3) Send file and photo.
 
 image::step3.png[,600]
 
@@ -511,7 +466,7 @@ image::step6.png[,600]
 
 image::step7.png[,600]
 
-8) Let's also check what we have in MinIO. Open the admin panel http://localhost:9001/ and login with user and password values that we specified in docker-compose.
+8) Let’s also check what we have in MinIO. Open the MinIO admin panel (you can find the console admin port by running `docker ps`) and login with user and password values that we specified in `application.properties`.
 
 image::step8.png[,600]
 
