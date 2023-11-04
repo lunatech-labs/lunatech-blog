@@ -1,5 +1,5 @@
 = Telegram bot for file sharing using Quarkus
-https://github.com/iarmush
+iarmush
 v1.0, 2023-11-05
 :title: Telegram bot for file sharing using Quarkus
 :imagesdir: ../media/2023-11-05-telegram-bot-for-file-sharing-using-quarkus
@@ -19,12 +19,12 @@ Additionally, the entire source code for this project is available on https://gi
 
 The primary user scenario unfolds as follows:
 
-1. The user initiates a Telegram bot and sends an attachment.
+1. The user initiates a conversation with a Telegram bot and sends an attachment.
 2. The Telegram bot forwards this message to our backend application.
 3. The backend application stores this attachment in MinIO storage.
 4. The user sends the command `/link` to the Telegram bot to obtain a shareable link.
 5. The backend application generates a link to our frontend application and provides it to the user.
-6. The customer can copy and share this link. Upon opening the link, the customer will access the frontend application featuring a "Download" button.
+6. The user can copy and share this link, that accesses the frontend application which features a "Download" button.
 7. When the "Download" button is pressed, the frontend sends an HTTP request to our backend. The backend application retrieves all attachments associated with this user, compiles them into a zip file, and returns it to the user. Simultaneously, the backend application records the downloaded data in MongoDB.
 
 In terms of state diagrams:
@@ -37,7 +37,7 @@ For the backend, we'll be employing a conventional web server. Our journey begin
 
 To get started, we need to follow step 1 on the provided link, which involves installing the Quarkus CLI.
 
-Now, we can execute
+Now, we can execute:
 ```bash
 quarkus --help
 ```
@@ -45,7 +45,7 @@ to get familiar with the main functionality. This command will be our main entry
 
 Before we create an application we have to choose which extensions (or dependencies) we’re going to use.
 
-We can find them on https://quarkus.io/extensions/ or by executing
+We can find them on https://quarkus.io/extensions/ or by executing:
 ```bash
 quarkus extension list
 ```
@@ -53,14 +53,14 @@ For our needs, it will be enough to add `quarkus-mongodb-panache` and `quarkus-r
 
 Additionally, we have to manually add https://github.com/rubenlagus/TelegramBots - a library for creating telegram bots, and https://github.com/minio/minio-java - MinIO java client.
 
-While in the root directory of our new project, run this command -
+While in the root directory of our new project, run this command:
 ```bash
 quarkus create app com.example:backend \
 --extension=quarkus-mongodb-panache,quarkus-resteasy \
 --gradle
 ```
 
-We can already run our application with the default implementation. To do so, navigate to the `/backend` directory and execute the command to start our application.
+We can already run our application with the default implementation. To do so, navigate to the `/backend` directory and execute the command to start our application:
 ```bash
 quarkus dev
 ```
@@ -68,7 +68,7 @@ quarkus dev
 Now, you can open the recommended welcome page at http://localhost:8080/
 
 image::welcome_page.png[,600]
-and http://localhost:8080/heloo default controller method.
+and http://localhost:8080/hello default controller method.
 
 image::controller_hello.png[,600]
 
@@ -76,7 +76,7 @@ It was quite easy, right?
 
 Before we dive into coding the bot's logic, we need to register our bot and obtain a username and token. To do this, please follow the official instructions provided here: https://core.telegram.org/bots/tutorial.
 
-It's worth noting that there isn't even a main class that we're used to in the source code, which can sometimes be considered boilerplate. However, let's go ahead and create one explicitly now.
+It's worth noting that there isn't even a main class like we're used to seeing in the source code, and which is sometimes considered boilerplate. However, let's go ahead and create one explicitly now:
 [source,java]
 ----
 package com.example;
@@ -120,8 +120,9 @@ public class Main {
 }
 ----
 
-Dependency injection in Quarkus is a CDI-based dependency injection - https://quarkus.io/guides/cdi. In the case of only one defined constructor, Quarkus uses constructor injection. To satisfy the constructor parameter let's create a corresponding bean using the method return type by [.yellow]#@Produce# annotation.
+Dependency injection in Quarkus is a CDI-based dependency injection - https://quarkus.io/guides/cdi. In the case of only one defined constructor, Quarkus uses constructor injection. To satisfy the MyApp constructor parameter TelegramLongPollingBot, let's create the corresponding bean using the [.yellow]#@Produce# annotation.
 
+To satisfy the constructor parameter  of  let's create a corresponding bean using the method return type by [.yellow]#@Produce# annotation:
 [source,java]
 ----
     @Produces
@@ -141,7 +142,7 @@ Dependency injection in Quarkus is a CDI-based dependency injection - https://qu
                     } else if (message.hasDocument() || message.hasPhoto() || message.hasVideo()) {
                         messageService.handleMedia(message);
                     } else {
-                        execute(SendMessage.builder().text("Please send medias").build());
+                        execute(SendMessage.builder().text("Please send media").build());
                     }
                 } catch (TelegramApiException | IOException e) {
                     LOGGER.errorf(e, "Error while receive update");
@@ -196,7 +197,7 @@ Our bot is capable of receiving both text and media. In the case of text, it wil
 ----
 Yes, hardcode it. Yes, "if" is everywhere (2).
 
-In the case of media attachment, it will expect a file, photo, or video.
+In the case of media attachment, it will expect a file, photo, or video:
 [source,java]
 ----
     public void handleMedia(Message message) throws TelegramApiException, IOException {
@@ -229,7 +230,7 @@ In the case of media attachment, it will expect a file, photo, or video.
 ----
 Yes, hardcode it (2). Yes, "if" is everywhere (3).
 
-For interaction with MinIO we have to create a client bean like we already did it.
+For interaction with MinIO we have to create a client bean like we already did:
 [source,java]
 ----
     @Produces
@@ -251,8 +252,7 @@ For interaction with MinIO we have to create a client bean like we already did i
     }
 ----
 
-MinIO is a high-performance object storage server. MinIO's core concept is a "bucket" identified by a unique bucket ID. All files associated with a bucket are stored kinda together as a group. In our case, we'll use the chat ID as the bucket ID, which is unique for each Telegram user. This way, we can easily retrieve files by specifying the bucket ID and their respective names.
-
+MinIO is a high-performance object storage server. MinIO's core concept is a "bucket" identified by a unique bucket name. All files associated with a bucket are stored kinda together as a group. In our case, we'll use the chat ID as the bucket name, which is unique for each Telegram user. This way, we can easily retrieve files by specifying the bucket name and their respective file names:
 [source,java]
 ----
     private byte[] getFileAsBytes(String bucketName, String objectName) {
@@ -268,8 +268,7 @@ MinIO is a high-performance object storage server. MinIO's core concept is a "bu
     }
 ----
 
-And the same for uploading files.
-
+It is the same for uploading files:
 [source,java]
 ----
     public void uploadFile(String bucketName, String fileName, byte[] bytes) {
@@ -289,8 +288,7 @@ And the same for uploading files.
     }
 ----
 
-And, yes, more or less the same for removing.
-
+And, yes, it is more or less the same for removing:
 [source,java]
 ----
     private void removeFiles(String bucketName) {
@@ -313,8 +311,7 @@ And, yes, more or less the same for removing.
     }
 ----
 
-Quarkus uses the Vert.x framework and a declarative approach to define and handle HTTP requests, making it well-suited for building efficient, reactive, and scalable web applications. This approach is quite different from the servlet-based model used in Spring. But we still  use familiar annotations, we just have to mention the specific return type in the case of the file output.
-
+Quarkus uses the Vert.x framework with a declarative approach to define and handle HTTP requests, making it well-suited for building efficient, reactive, and scalable web applications. This approach is quite different from the servlet-based model used in Spring. But we still use familiar annotations. We just have to mention the specific return type in the case of the file output:
 [source,java]
 ----
     @GET
@@ -335,8 +332,7 @@ Almost nothing new and still quite easy, right?
 
 The last part is writing to MongoDB. https://quarkus.io/guides/mongodb-panache[Quarkus Panache] is a framework that streamlines and enriches the integration of MongoDB in Quarkus applications. It offers a user-friendly and type-safe approach for interacting with MongoDB databases.
 
-Everything that we need is to create an entity class
-
+All we need is to create an entity class:
 [source,java]
 ----
 @MongoEntity(collection = "logData")
@@ -352,8 +348,7 @@ public class LogData extends PanacheMongoEntity {
 }
 ----
 
-repository class
-
+repository class:
 [source,java]
 ----
 @ApplicationScoped
@@ -361,8 +356,7 @@ public class LogDataRepository implements PanacheMongoRepository<LogData> {
 }
 ----
 
-and related properties in `application.properties` file
-
+and related properties in `application.properties` file:
 [source]
 ----
 quarkus.mongodb.connection-string=mongodb://localhost:27018
@@ -372,7 +366,7 @@ quarkus.mongodb.database=logData
 And nothing more. Again, yes, it was quite easy.
 
 
-We're going to up MongoDB and MinIO using `docker-compose.yml` file.
+We're going to up MongoDB and MinIO using `docker-compose.yml` file:
 [source,yaml]
 ----
 version: '3'
@@ -406,7 +400,7 @@ networks:
 ----
 
 After we run docker-compose our backend application is ready to up.
-Being in `/backend` directory run
+Being in `/backend` directory run:
 ```bash
 quarkus dev
 ```
@@ -414,27 +408,27 @@ quarkus dev
 
 == Frontend
 For the frontend application, we will use https://docs.quarkiverse.io/quarkus-quinoa/dev/[Quarkus Quinoa project] using React with TypeScript.
-All possible framework combinations you can see on https://docs.quarkiverse.io/quarkus-quinoa/dev/web-frameworks.html.
+All possible framework combinations you can see on https://docs.quarkiverse.io/quarkus-quinoa/dev/web-frameworks.html[Quarkus Quinoa - Web Frameworks]
 
-Being in the root of our repository execute
+Being in the root of our repository execute:
 ```bash
 quarkus create app frontend -x=io.quarkiverse.quinoa:quarkus-quinoa --gradle
 ```
 
-Inside our generated application we can see the directory  `src/main/webui` - it’s a root for our NodeJS application with `package.json` file. Let's remove the default implementation by removing the whole directory  `src/main/webui` and being in a  `frontend/src` execute
+Inside our generated application we can see the directory  `src/main/webui` - it’s the root for our NodeJS application with  a`package.json` file. Let's remove the default implementation by removing the whole directory `src/main/webui`.  Then place yourself in `frontend/src` and execute:
 ```bash
 npx create-react-app webui --template typescript
 ```
-(it requires an already installed `node` and `npx`).
+(it requires https://nodejs.org/en/download/package-manager#alternatives-2[node] and https://www.npmjs.com/package/npx[npx] to be already installed).
 
-In directory `src/main/webui` we can see the new generated project.
+In the directory `src/main/webui` we can see the new generated project.
 
-As usual, let's add `bootstrap`. Being in `/frontend/src/main/webui` execute
+As usual, let's add `bootstrap`. Being in `/frontend/src/main/webui` execute:
 ```bash
 npm install bootstrap
 ```
 
-The last thing we need is to change the `webui/src/App.tsx` file. We have to add one button and function that sends an HTTP request to our backend application for `onClick()` event. Also we will retrieve the chatId variable from the query parameter.
+The last thing we need is to change the `webui/src/App.tsx` file. We have to add one button and the function that sends an HTTP request to our backend application when the `onClick()` event is triggered. We will also retrieve the chatId variable from the query parameter:
 [source,javascript]
 ----
 import React from 'react';
@@ -464,13 +458,13 @@ export default App;
 
 Yes, hardcode it (3).
 
-And just in case change the default port for our application by adding the property `quarkus.http.port=3006` to `application.properties`
+And just in case, change the default port for our application by adding the property `quarkus.http.port=3006` to `application.properties`
 
-Now we can build our application by
+Now we can build our application with:
 ```bash
 quarkus build
 ```
-and run it
+and run it:
 ```bash
 java -jar build/quarkus-app/quarkus-run.jar
 ```
@@ -490,30 +484,30 @@ What do we have now?
 
 And so, the final test case.
 
-1) Open the bot
+1) Open the bot.
 
 image::step1.png[,600]
-2) Click on "Start" button
+2) Click on the "Start" button, which is sending the `/start` command.
 
 image::step2.png[,600]
 
-3) Send photo and file
+3) Send photo and file.
 
 image::step3.png[,600]
 
-4) Send the text command `/link`
+4) Send the text command `/link`.
 
 image::step4.png[,600]
 
-5) Copy the URL and open it in the browser
+5) Copy the URL and open it in the browser.
 
 image::step5.png[,600]
 
-6) Click on the "Download" button, unzip the archive and check its content
+6) Click on the "Download" button, unzip the archive and check its content.
 
 image::step6.png[,600]
 
-7) Connect to MongoDB using any UI client and check that we have data about our downloading
+7) Connect to MongoDB using a UI client and confirm the presence of downloadable data.
 
 image::step7.png[,600]
 
@@ -529,7 +523,7 @@ image::step9.png[,600]
 
 image::step10.png[,600]
 
-11) Move back to our bot. And send `/finish` command
+11) Move back to our bot. And send `/finish` command.
 
 image::step11.png[,600]
 
@@ -541,6 +535,6 @@ image::step12.png[,600]
 
 
 == Conclusion
-That concludes our project overview. In this project, we've explored Quarkus' capabilities for both backend and frontend development. The backend is connected to a MinIO file storage and a MongoDB, while the frontend is a simple one-page application with literally one button.
+In this project, we've explored Quarkus' capabilities for both backend and frontend development. The backend is connected to a MinIO file storage and a MongoDB, while the frontend is a simple one-page application with literally one button.
 
-Please note that we haven't delved into in-depth reviews, and more importantly, we haven't covered Quarkus' advanced features such as native applications and deployment. Here https://quarkus.io/guides/ you can find lots of interesting guides for further exploration.
+Please note that we haven't delved into in-depth reviews, and more importantly, we haven't covered Quarkus' advanced features such as native applications and deployment. In https://quarkus.io/guides/[Quarkus guides] you can find lots of interesting guides for further exploration.
