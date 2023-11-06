@@ -51,7 +51,7 @@ quarkus extension list
 ```
 For our needs, it will be enough to add `quarkus-mongodb-panache`, `quarkus-resteasy-reactive` and `quarkus-quinoa`.
 
-Additionally, we have to manually add https://github.com/rubenlagus/TelegramBots - a library for creating telegram bots, and https://github.com/quarkiverse/quarkus-minio - MinIO java client by Quarkus.
+Additionally, we have to manually add https://github.com/rubenlagus/TelegramBots[TelegramBots] - a library for creating telegram bots, and https://github.com/quarkiverse/quarkus-minio[MinIO]- MinIO java client by Quarkus.
 
 While in the root directory of our new project, run this command:
 ```bash
@@ -65,7 +65,7 @@ We can already run our application with the default implementation. To do so, na
 quarkus dev
 ```
 
-Now, you can open the recommended welcome page at http://localhost:8080/
+Now, you can open the welcome page at http://localhost:8080/
 
 image::welcome_page.png[,600]
 
@@ -79,7 +79,7 @@ image::quinoa_default.png[,600]
 
 It was quite easy, right?
 
-Before we dive into coding the bot's logic, we need to register our bot and obtain a username and token. To do this, please follow the official instructions provided here: https://core.telegram.org/bots/tutorial.
+Before we dive into coding the bot's logic, we need to register our bot and obtain a username and token. To do this, please follow the official instructions provided in this https://core.telegram.org/bots/tutorial[telegram tutorial].
 
 It's worth noting that there isn't even a main class like we're used to seeing in the source code, and which is sometimes considered boilerplate. However, let's go ahead and create one explicitly now:
 [source,java]
@@ -125,9 +125,7 @@ public class Main {
 }
 ----
 
-Dependency injection in Quarkus is a CDI-based dependency injection - https://quarkus.io/guides/cdi. In the case of only one defined constructor, Quarkus uses constructor injection. To satisfy the MyApp constructor parameter TelegramLongPollingBot, let's create the corresponding bean using the [.yellow]#@Produce# annotation.
-
-To satisfy the constructor parameter  of  let's create a corresponding bean using the method return type by [.yellow]#@Produce# annotation:
+Dependency injection in Quarkus is a https://quarkus.io/guides/cdi[CDI-based dependency injection]. In the case of only one defined constructor, Quarkus uses constructor injection. To satisfy the MyApp constructor parameter TelegramLongPollingBot, let's create the corresponding bean using the [.yellow]#@Produce# annotation:
 [source,java]
 ----
     @Produces
@@ -157,7 +155,6 @@ To satisfy the constructor parameter  of  let's create a corresponding bean usin
         };
     }
 ----
-Yes, "if" is everywhere.
 
 Our bot is capable of receiving both text and media. In the case of text, it will expect the following supported commands:
 
@@ -200,7 +197,6 @@ Our bot is capable of receiving both text and media. In the case of text, it wil
         }
     }
 ----
-Yes, hardcode it. Yes, "if" is everywhere (2).
 
 In the case of media attachment, it will expect a file, photo, or video:
 [source,java]
@@ -233,7 +229,6 @@ In the case of media attachment, it will expect a file, photo, or video:
         minioService.uploadFile(String.valueOf(chatId), fileName, bytes);
     }
 ----
-Yes, hardcode it (2). Yes, "if" is everywhere (3).
 
 MinIO is a high-performance object storage server. MinIO's core concept is a "bucket" identified by a unique bucket name. All files associated with a bucket are stored kinda together as a group. In our case, we'll use the chat ID as the bucket name, which is unique for each Telegram user. This way, we can easily retrieve files by specifying the bucket name and their respective file names:
 [source,java]
@@ -358,19 +353,19 @@ quarkus.minio.devservices.secret-key=testtest
 quarkus.minio.devservices.port=9000
 ----
 
-After we run our application in dev mode, Quarkus will up the specified containers automatically and create MinioClient with corresponding properties.
+After we run our application in dev mode, Quarkus will start the specified containers automatically and create a MinioClient with the corresponding properties.
 
-Well, our backend application is ready to up. Being in the root directory run:
+Well, our backend application is ready to start. Being in the root directory run:
 ```bash
 quarkus dev
 ```
 
 
 == Frontend
-For the frontend application, we will use https://docs.quarkiverse.io/quarkus-quinoa/dev/[Quarkus Quinoa project] using React with TypeScript.
-All possible framework combinations you can see on https://docs.quarkiverse.io/quarkus-quinoa/dev/web-frameworks.html[Quarkus Quinoa - Web Frameworks]
+For the frontend application, we will use https://docs.quarkiverse.io/quarkus-quinoa/dev/[Quarkus Quinoa project] together with React and TypeScript.
+You can see all possible framework combinations on https://docs.quarkiverse.io/quarkus-quinoa/dev/web-frameworks.html[Quarkus Quinoa - Web Frameworks]
 
-Inside our generated application we can see the directory  `src/main/webui` - it’s the root for our NodeJS application with  a`package.json` file. Let's remove the default implementation by removing the whole directory `src/main/webui`.  Then place yourself in `file-sharing-bot/src/main` and execute:
+Inside our generated application we can see the directory  `src/main/webui` - it’s the root for our NodeJS application with a `package.json` file. Let's remove the default implementation by removing the whole directory `src/main/webui`.  Then place yourself in `file-sharing-bot/src/main` and execute:
 ```bash
 npx create-react-app webui --template typescript
 ```
@@ -408,12 +403,9 @@ function App() {
 }
 
 export default App;
-
 ----
 
-Yes, hardcode it (3).
-
-And just in case, change the default port for our application by adding the property `quarkus.http.port=8091` to `application.properties`
+To avoid port conflicts, change the default port for our application by adding the property `quarkus.http.port=8091` to `application.properties`
 
 Now we can build our application with:
 ```bash
@@ -466,7 +458,7 @@ image::step6.png[,600]
 
 image::step7.png[,600]
 
-8) Let’s also check what we have in MinIO. Open the MinIO admin panel (you can find the console admin port by running `docker ps`) and login with user and password values that we specified in `application.properties`.
+8) Let’s also check what we have it in MinIO. Open the MinIO admin panel (you can find the console admin port by running `docker ps`) and login with the user and password values that we specified in `application.properties`.
 
 image::step8.png[,600]
 
@@ -478,11 +470,11 @@ image::step9.png[,600]
 
 image::step10.png[,600]
 
-11) Move back to our bot. And send `/finish` command.
+11) Return to our bot and send the `/finish` command.
 
 image::step11.png[,600]
 
-12) Move again back to MinIO admin panel and check that our bucket is empty.
+12) Go back to the MinIO admin panel and check that our bucket is empty.
 
 image::step12.png[,600]
 
