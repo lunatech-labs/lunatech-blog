@@ -38,32 +38,39 @@ For the backend, we'll be employing a conventional web server. Our journey begin
 To get started, we need to follow step 1 on the provided link, which involves installing the Quarkus CLI.
 
 Now, we can execute:
-```bash
+[source,bash]
+----
 quarkus --help
-```
+----
+
 to get familiar with the main functionality. This command will be our main entry point for any application manipulation. With its assistance we can create a skeleton, in fact, it will have everything that we need, and it will even be a ready-to-deploy application.
 
 Before we create an application we have to choose which extensions (or dependencies) we’re going to use.
 
 We can find them on https://quarkus.io/extensions/ or by executing:
-```bash
+[source,bash]
+----
 quarkus extension list
-```
+----
+
 For our needs, it will be enough to add `quarkus-mongodb-panache`, `quarkus-resteasy-reactive` and `quarkus-quinoa`.
 
-Additionally, we have to manually add https://github.com/rubenlagus/TelegramBots[TelegramBots] - a library for creating telegram bots, and https://github.com/quarkiverse/quarkus-minio[MinIO]- MinIO java client by Quarkus.
+Additionally, we have to manually add the library for creating https://github.com/rubenlagus/TelegramBots[Telegram Bots] in Java, and https://github.com/quarkiverse/quarkus-minio[MinIO] Java client by Quarkus.
 
 While in the root directory of our new project, run this command:
-```bash
+
+[source,bash]
+----
 quarkus create app com.example:file-sharing-bot \
---extension=quarkus-mongodb-panache,quarkus-resteasy,quarkus-quinoa \
---gradle
-```
+  --extension=quarkus-mongodb-panache,quarkus-resteasy,quarkus-quinoa \
+  --gradle
+----
 
 We can already run our application with the default implementation. To do so, navigate to the root directory and execute the command to start our application:
-```bash
+[source,bash]
+----
 quarkus dev
-```
+----
 
 Now, you can open the welcome page at http://localhost:8080/
 
@@ -356,27 +363,31 @@ quarkus.minio.devservices.port=9000
 After we run our application in dev mode, Quarkus will start the specified containers automatically and create a MinioClient with the corresponding properties.
 
 Well, our backend application is ready to start. Being in the root directory run:
-```bash
+[source,bash]
+----
 quarkus dev
-```
-
+----
 
 == Frontend
 For the frontend application, we will use https://docs.quarkiverse.io/quarkus-quinoa/dev/[Quarkus Quinoa project] together with React and TypeScript.
 You can see all possible framework combinations on https://docs.quarkiverse.io/quarkus-quinoa/dev/web-frameworks.html[Quarkus Quinoa - Web Frameworks]
 
 Inside our generated application we can see the directory  `src/main/webui` - it’s the root for our NodeJS application with a `package.json` file. Let's remove the default implementation by removing the whole directory `src/main/webui`.  Then place yourself in `file-sharing-bot/src/main` and execute:
-```bash
+
+[source,bash]
+----
 npx create-react-app webui --template typescript
-```
+----
+
 (it requires https://nodejs.org/en/download/package-manager#alternatives-2[node] and https://www.npmjs.com/package/npx[npx] to be already installed).
 
 In the directory `src/main/webui` we can see the new generated project.
 
 As usual, let's add `bootstrap`. Being in `/frontend/src/main/webui` execute:
-```bash
+[source,bash]
+----
 npm install bootstrap
-```
+----
 
 The last thing we need is to change the `webui/src/App.tsx` file. We have to add one button and the function that sends an HTTP request to our backend application when the `onClick()` event is triggered. We will also retrieve the chatId variable from the query parameter:
 [source,javascript]
@@ -408,13 +419,16 @@ export default App;
 To avoid port conflicts, change the default port for our application by adding the property `quarkus.http.port=8091` to `application.properties`
 
 Now we can build our application with:
-```bash
+[source,bash]
+----
 quarkus build
-```
+----
+
 and run backend and frontend simultaneously:
-```bash
+[source,bash]
+----
 quarkus dev
-```
+----
 
 Let's check that our app returns at least something. Open http://localhost:8091/
 
