@@ -55,14 +55,7 @@ Merging your PR will update the `master` branch only. Besides `master` there's a
 
 The [acceptance blog post environment](https://blog.acceptance.lunatech.com/) will allow you to see how your post looks like.
 
-Applying your changes to the acceptance environment:
-
-```
-git checkout acceptance
-git rebase master
-git push origin acceptance
-```
-The blog engine needs to be manually restarted in clever cloud as well. Please ask your colleagues if you don't know how to do that.
+Simply get your PR merged to the main branch. Afterwards the blog engine needs to be manually restarted in clever cloud as well. Please ask your colleagues if you don't know how to do that.
 
 ### Getting your post to the production environment
 
