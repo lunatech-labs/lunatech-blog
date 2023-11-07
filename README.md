@@ -49,7 +49,7 @@ For very large images the command may take a long time to complete.
 
 
 # How to deploy your post
-Merging your PR will update the `master` branch only. Besides `master` there's also `acceptance` and `production` branches.
+Merging your PR will update the `main` branch only. Besides `main` there's also a `production` branch.
 
 ### Getting your post to the acceptance environment
 
@@ -65,7 +65,7 @@ Applying your changes in the acceptance environment to the production environmen
 
 ```
 git checkout production
-git rebase acceptance
+git rebase main
 git push origin production
 ```
 The blog engine needs to be manually restarted in clever cloud as well. Please ask your colleagues if you don't know how to do that.
