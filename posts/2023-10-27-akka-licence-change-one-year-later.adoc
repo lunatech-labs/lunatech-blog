@@ -1,9 +1,13 @@
 = Akka Licence Change (One Year Later)
-njlbenn, eamelink, thinkmorestupidless
+njlbenn; eamelink; thinkmorestupidless
 v1.0, 2023-10-27
 :title: Akka Licence Change (One Year Later)
 :tags: [akka, pekko, BSL, apache licence]
 :lang: en
+
+****
+*_Update 2023-11-14_*: Since the time of writing, the Play Framework maintainers have released a version 3.0 that is based on Pekko rather than Akka. Play 2.9 is thus the last version that is based on Akka. See https://www.playframework.com/documentation/3.0.x/General#Introducing-Apache-Pekko-and-Play-3.0[Introducing Apache Pekko and Play 3.0]. This is an important development for the scenario described below of those organisations that have applications built with the Play Framework and who have been considering the impact of the Akka Licence Change.
+****
 
 In September 2022, the CEO and Founder of Lightbend, Jonas Bonér, announced, https://www.lightbend.com/blog/why-we-are-changing-the-license-for-akka[in a blog post, a change in the licencing of Akka]. Instead of an Apache 2.0 Licence, all future releases of Akka would be covered by a new Business Source Licence (BSL) v1.1. The announcement was made one day after https://akka.io/blog/news/2022/09/06/akka-2.6.20-released[the 2.6.20 patch release of Akka Core and other modules] and this release would turn out to be the last one under the Apache 2.0 Licence.
 
