@@ -1,5 +1,5 @@
 = Akka Licence Change (One Year Later)
-njlbenn; eamelink; thinkmorestupidless
+njlbenn, eamelink, thinkmorestupidless
 v1.0, 2023-10-27
 :title: Akka Licence Change (One Year Later)
 :tags: [akka, pekko, BSL, apache licence]
