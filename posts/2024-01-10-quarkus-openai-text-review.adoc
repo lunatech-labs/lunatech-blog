@@ -1,0 +1,585 @@
+= Semantic Kernel API and Quarkus
+iarmush
+v1.0, 2024-01-10
+:title: Semantic Kernel API and Quarkus
+:imagesdir: ../media/2024-01-10-quarkus-openai-text-review
+:lang: en
+:tags: [java, quarkus, semantic kernel, openai]
+
+== About what is it?
+The goal is to create a simple microservice that uses the Semantic Kernel API to correct grammatical, punctuation, and logical mistakes in the input text by invoking OpenAI. We need the frontend application with an input field, checkboxes, and radio buttons for configuring additional features, and an output field. And the backend application for using invoking OpenAI.
+
+The entire source code for this project is available on https://github.com/iarmush/text-reviewer[GitHub].
+
+== Backend
+You can read more about the Quarkus CLI capabilities in the https://blog.lunatech.com/posts/2023-11-05-telegram-bot-for-file-sharing-using-quarkus[previous post]. Now we're going to create the Quarkus application, while in the root directory of our new project, run the following command
+
+[source,bash]
+----
+quarkus create app com.example:text-reviewer \
+    --extension=resteasy-reactive-jackson,quarkus-quinoa
+----
+
+`resteasy-reactive-jackson` - extension for developing REST applications with Quarkus. It also includes importing resteasy-reactive.
+`quarkus-quinoa` - extension for developing single page applications.
+
+We also need to add the Semantic Kernel dependencies. Add the following XML in the pom.xml:
+
+[source,bash]
+----
+    <properties>
+      <!-- ... -->
+      <semantic-kernel.version>0.2.11-alpha</semantic-kernel.version>
+    </properties>
+    <dependencyManagement>
+      <dependencies>
+        <!-- ... -->
+        <dependency>
+          <groupId>com.microsoft.semantic-kernel</groupId>
+          <artifactId>semantickernel-bom</artifactId>
+          <version>${semantic-kernel.version}</version>
+          <type>pom</type>
+          <scope>import</scope>
+        </dependency>
+      </dependencies>
+    </dependencyManagement>
+    <dependencies>
+      <!-- ... -->
+      <dependency>
+        <groupId>com.microsoft.semantic-kernel</groupId>
+        <artifactId>semantickernel-core</artifactId>
+      </dependency>
+      <dependency>
+        <groupId>com.microsoft.semantic-kernel</groupId>
+        <artifactId>semantickernel-settings-loader</artifactId>
+      </dependency>
+      <dependency>
+        <groupId>com.microsoft.semantic-kernel</groupId>
+        <artifactId>semantickernel-connectors-ai-openai</artifactId>
+      </dependency>
+    </dependencies>
+----
+
+https://learn.microsoft.com/en-gb/semantic-kernel/overview/[Semantic Kernel] is an SDK that integrates Large Language Models (LLMs) like for example OpenAI with conventional programming languages. Semantic Kernel achieves this by allowing you to define https://learn.microsoft.com/en-us/semantic-kernel/agents/plugins/[plugins]. The documentation still doesn’t support Java, however, you can read more and find other examples in their https://github.com/microsoft/semantic-kernel/blob/main/java/README.md[repository].
+
+We're going to use OpenAI, and we have to configure a client. Only two things are necessary: organization ID and API key. After you create an account on https://platform.openai.com/ you can find the organization ID  https://platform.openai.com/account/organization[here] and create the API key https://platform.openai.com/api-keys[here]. It is important to mention that to use the API you must have credits in your account.
+
+Well, lets add these values to `application.properties` file
+
+[source,bash]
+----
+openai.config.client.openai.key=YOUR_KEY
+openai.config.client.openai.organizationid=YOUR_ORGANIZATIONID
+----
+
+Then create a configuration mapping interface:
+
+[source,java]
+----
+package com.example.config;
+
+import io.smallrye.config.ConfigMapping;
+
+import java.util.Map;
+
+@ConfigMapping(prefix = "openai")
+public interface OpenAIClientConfig {
+
+    Map<String, String> config();
+}
+----
+
+Next we need to create an OpenAI client using provided configuration.
+
+[source,java]
+----
+package com.example.config;
+
+import com.azure.ai.openai.OpenAIAsyncClient;
+import com.microsoft.semantickernel.connectors.ai.openai.util.OpenAIClientProvider;
+import com.microsoft.semantickernel.exceptions.ConfigurationException;
+import jakarta.enterprise.inject.Produces;
+
+public class OpenAIClientFactory {
+    private final OpenAIClientConfig openAIClientConfig;
+
+    public OpenAIClientFactory(OpenAIClientConfig openAIClientConfig) {
+        this.openAIClientConfig = openAIClientConfig;
+    }
+
+    @Produces
+    public OpenAIAsyncClient getClient() throws ConfigurationException {
+        return new OpenAIClientProvider(openAIClientConfig.config(), null).getAsyncClient();
+    }
+}
+----
+
+Before continuing, we have to define the template of our request. The request itself is nothing more than the same thing that we are texting to ChatGPT for instance. In our case, It will have two main parts. First is defining `from` and `to` we are going to send this text, and what `type` of message it is. The second is `additional features`. For instance, you are a Software Engineer, and you are going to send a direct message to the Engineering Manager. The message should be concise and not official. Let's create a file `skprompt.txt` in the `src/main/resources/TextReviewSkill/TextReview` with the following content
+
+[source,bash]
+----
+Act like you are a {{$from}} and writing a {{$messageType}} to a {{$to}}.
+
+Your goal is to proofread text, make it sound smooth and polite, and correct grammatical and punctuation errors.
+
+Additional requirements for the text:
++++++
+Be brief, use short phrases, conciseness is very important: {{$isConcise}}
+Be creative, use more beautiful and elegant, upper-level English literary words, but keep the meaning the same: {{$isCreative}}
+Be official, the next text will be stored as an official document or part of the documentation: {{$isOfficial}}
++++++
+
+{{$input}}
+----
+
+In the same directory, we also have to create a `config.json` file with https://learn.microsoft.com/en-us/semantic-kernel/prompts/configure-prompts?#execution-settings-used-by-ai-models[execution setting]:
+[source,json]
+----
+{
+  "schema": 1,
+  "description": "Corrects the message according to the specified parameters",
+  "type": "completion",
+  "completion": {
+    "max_tokens": 3000,
+    "temperature": 0.0,
+    "top_p": 0.0,
+    "presence_penalty": 0.0,
+    "frequency_penalty": 0.0
+  }
+}
+
+----
+
+The most important part is to create a Semantic function for text completion using our OpenAI client and specific model id. Also, specify the skill and function name which will refer to the name of corresponding directories where we put `config.json` and `skprompt.txt` files.
+
+[source,java]
+----
+package com.example.config;
+
+import com.microsoft.semantickernel.SKBuilders;
+import com.microsoft.semantickernel.exceptions.ConfigurationException;
+import com.microsoft.semantickernel.textcompletion.CompletionSKFunction;
+import jakarta.enterprise.inject.Produces;
+
+public class CompletionFunctionFactory {
+
+    private static final String GPT_3_5_TURBO = "gpt-3.5-turbo";
+    private static final String FUNCTION_NAME = "TextReview";
+    private static final String SKILL_NAME = "TextReviewSkill";
+
+    private final OpenAIClientFactory openAIClientFactory;
+
+    public CompletionFunctionFactory(OpenAIClientFactory openAIClientFactory) {
+        this.openAIClientFactory = openAIClientFactory;
+    }
+
+    @Produces
+    public CompletionSKFunction getFunction() throws ConfigurationException {
+        var textCompletion = SKBuilders.chatCompletion()
+                .withOpenAIClient(openAIClientFactory.getClient())
+                .withModelId(GPT_3_5_TURBO)
+                .build();
+
+        var kernel = SKBuilders.kernel()
+                .withDefaultAIService(textCompletion)
+                .build();
+
+        return kernel.importSkillFromResources("", SKILL_NAME, FUNCTION_NAME)
+                .getFunction(FUNCTION_NAME, CompletionSKFunction.class);
+    }
+}
+
+----
+
+TextCompletionService uses a Semantic Kernel context to populate the request prompt by data provided and get the answer synchronously by calling the block() method.
+
+[source,java]
+----
+package com.example.service;
+
+import com.example.model.Text;
+import com.microsoft.semantickernel.SKBuilders;
+import com.microsoft.semantickernel.orchestration.SKContext;
+import com.microsoft.semantickernel.textcompletion.CompletionSKFunction;
+import jakarta.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
+public class TextCompletionService {
+
+    private final CompletionSKFunction completionSKFunction;
+
+    public TextCompletionService(CompletionSKFunction completionSKFunction) {
+        this.completionSKFunction = completionSKFunction;
+    }
+
+    public String review(Text text) {
+        SKContext reviewerContext = SKBuilders.context().build();
+        reviewerContext.setVariable("input", text.input());
+        reviewerContext.setVariable("messageType", text.messageType().getMessageTypeName());
+        reviewerContext.setVariable("from", text.from().getTittleName());
+        reviewerContext.setVariable("to", text.to().getTittleName());
+        reviewerContext.setVariable("isConcise", String.valueOf(text.optionalFeatures().isConcise()));
+        reviewerContext.setVariable("isCreative", String.valueOf(text.optionalFeatures().isCreative()));
+        reviewerContext.setVariable("isOfficial", String.valueOf(text.optionalFeatures().isOfficial()));
+
+        return completionSKFunction.invokeAsync(reviewerContext)
+                .block().getResult();
+    }
+}
+
+----
+
+The last thing, we have to define the controller that has only one method that will be called by our frontend application for propagating the data to our OpenAI request prompt:
+
+[source,java]
+----
+package com.example.controller;
+
+import com.example.model.Text;
+import com.example.service.TextCompletionService;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+
+@Path("/api/v1/text-review")
+public class TextReviewerResource {
+
+    private final TextCompletionService textCompletionService;
+
+    public TextReviewerResource(TextCompletionService textCompletionService) {
+        this.textCompletionService = textCompletionService;
+    }
+
+    @POST
+    @Produces(MediaType.TEXT_PLAIN)
+    public String review(Text text) {
+        return textCompletionService.review(text);
+    }
+}
+----
+
+The dto itself has the following fields:
+
+[source,java]
+----
+package com.example.model;
+
+public record Text(String input, Tittle from, Tittle to, MessageType messageType,
+                   OptionalFeatures optionalFeatures) {
+
+    public enum Tittle {
+        SE("Software Engineer"),
+        EM("Engineering Manager");
+
+        private final String tittleName;
+
+        Tittle(String tittleName) {
+            this.tittleName = tittleName;
+        }
+
+        public String getTittleName() {
+            return tittleName;
+        }
+    }
+
+    public enum MessageType {
+        EMAIL("email"),
+        DM("direct message");
+
+        private final String messageTypeName;
+
+        MessageType(String messageTypeName) {
+            this.messageTypeName = messageTypeName;
+        }
+
+        public String getMessageTypeName() {
+            return messageTypeName;
+        }
+    }
+
+    public record OptionalFeatures(boolean isConcise, boolean isCreative, boolean isOfficial) {
+    }
+}
+----
+
+To run our application navigate to the root directory and execute:
+[source,bash]
+----
+quarkus dev
+----
+
+== Frontend
+Prior to developing the new frontend application, it is necessary to delete the entire directory `src/main/webui` to eliminate the default implementation. Afterward, navigate to `file-sharing-bot/src/main` and execute:
+
+[source,bash]
+----
+npx create-react-app webui --template typescript
+----
+
+Additionally, include `bootstrap`. While in `/frontend/src/main/webui`, execute:
+[source,bash]
+----
+npm install bootstrap
+----
+
+All needful changes will be in `src/main/webui/src/App.tsx`. We need to design an interface that includes a single input field, two radio buttons for selecting "from" and "to" options, three checkboxes for additional features, an output field, and a submit button. Upon pressing the submit button, the filled information will be sent to our backend. After receiving the response, the result will be displayed in the output field.
+
+[source,javascript]
+----
+import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
+import logo from './logo.svg';
+
+
+interface FormData {
+  messageType: string;
+  from: string;
+  to: string;
+  optionalFeatures: Record<string, boolean>;
+  input: string;
+  responseText: string;
+}
+
+const initialFormData: FormData = {
+  messageType: 'DM',
+  from: 'SE',
+  to: 'SE',
+  optionalFeatures: {
+      isConcise: false,
+      isCreative: false,
+      isOfficial: false,
+    },
+  input: '',
+  responseText: '',
+};
+
+const App: React.FC = () => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [formData, setFormData] = useState<FormData>(initialFormData);
+
+  const handleRadioChange = (field: string, value: string) => {
+    setFormData({ ...formData, [field]: value });
+  };
+
+  const handleCheckboxChange = (checkbox: string) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      optionalFeatures: {
+        ...prevFormData.optionalFeatures,
+        [checkbox]: !prevFormData.optionalFeatures[checkbox],
+      },
+    }));
+  };
+
+  const handleTextFieldChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, input: event.target.value });
+  };
+
+  const handleSubmit = () => {
+    if (!formData.input.trim()) {
+      console.error('Input cannot be empty');
+      setFormData({ ...formData, responseText: 'Input cannot be empty' });
+      return;
+    }
+
+    setLoading(true);
+
+    const apiUrl = 'http://localhost:8080/api/v1/text-review';
+    const requestOptions: RequestInit = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    };
+
+    fetch(apiUrl, requestOptions)
+      .then((response) => response.text())
+      .then((data) => {
+        console.log('Form submitted successfully:', data);
+        setFormData({ ...formData, responseText: data });
+      })
+      .catch((error) => {
+        console.error('Error submitting form:', error);
+        setFormData({ ...formData, responseText: 'Error submitting form' });
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  return (
+    <div className="container mt-5">
+      <h1>Text reviewer</h1>
+      <form>
+        <div className="mb-3">
+          <label className="form-label">
+            Message type:
+            <div className="form-check">
+              <input
+                type="radio"
+                className="form-check-input"
+                value="EMAIL"
+                checked={formData.messageType === 'EMAIL'}
+                onChange={() => handleRadioChange('messageType', 'EMAIL')}
+              />
+              <label className="form-check-label">Email</label>
+            </div>
+            <div className="form-check">
+              <input
+                type="radio"
+                className="form-check-input"
+                value="DM"
+                checked={formData.messageType === 'DM'}
+                onChange={() => handleRadioChange('messageType', 'DM')}
+              />
+              <label className="form-check-label">Direct message</label>
+            </div>
+          </label>
+        </div>
+        <div className="mb-3">
+          <label className="form-label">
+            From:
+            <div className="form-check">
+              <input
+                type="radio"
+                className="form-check-input"
+                value="SE"
+                checked={formData.from === 'SE'}
+                onChange={() => handleRadioChange('from', 'SE')}
+              />
+              <label className="form-check-label">Software Engineer</label>
+            </div>
+            <div className="form-check">
+              <input
+                type="radio"
+                className="form-check-input"
+                value="EM"
+                checked={formData.from === 'EM'}
+                onChange={() => handleRadioChange('from', 'EM')}
+              />
+              <label className="form-check-label">Engineering Manager</label>
+            </div>
+          </label>
+        </div>
+        <div className="mb-3">
+          <label className="form-label">
+            To:
+            <div className="form-check">
+              <input
+                type="radio"
+                className="form-check-input"
+                value="SE"
+                checked={formData.to === 'SE'}
+                onChange={() => handleRadioChange('to', 'SE')}
+              />
+              <label className="form-check-label">Software Engineer</label>
+            </div>
+            <div className="form-check">
+              <input
+                type="radio"
+                className="form-check-input"
+                value="EM"
+                checked={formData.to === 'EM'}
+                onChange={() => handleRadioChange('to', 'EM')}
+              />
+              <label className="form-check-label">Engineering Manager</label>
+            </div>
+          </label>
+        </div>
+        <div className="mb-3">
+          <label className="form-label">
+            Optional features:
+            <div className="form-check">
+              <input
+                type="checkbox"
+                className="form-check-input"
+                value="isConcise"
+                checked={formData.optionalFeatures.isConcise}
+                onChange={() => handleCheckboxChange('isConcise')}
+              />
+              <label className="form-check-label">Concise</label>
+            </div>
+            <div className="form-check">
+              <input
+                type="checkbox"
+                className="form-check-input"
+                value="isCreative"
+                checked={formData.optionalFeatures.isCreative}
+                onChange={() => handleCheckboxChange('isCreative')}
+              />
+              <label className="form-check-label">Creative</label>
+            </div>
+            <div className="form-check">
+              <input
+                type="checkbox"
+                className="form-check-input"
+                value="isOfficial"
+                checked={formData.optionalFeatures.isOfficial}
+                onChange={() => handleCheckboxChange('isOfficial')}
+              />
+              <label className="form-check-label">Official</label>
+            </div>
+          </label>
+        </div>
+        <div className="mb-3">
+            Text:
+            <input
+                type="text"
+                className="form-control"
+                value={formData.input}
+                onChange={handleTextFieldChange}
+            />
+        </div>
+        <div className="mb-3">
+          <button type="button" className="btn btn-primary" onClick={handleSubmit} disabled={loading}>
+            {loading && (
+              <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+            )}
+            Review
+          </button>
+
+        </div>
+        <div className="mb-3">
+            Response Text:
+                <textarea
+                    value={formData.responseText}
+                    rows={8}
+                    readOnly
+                    style={{ width: '100%', resize: 'both' }}
+                    className="form-control"
+                />
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default App;
+----
+
+Let's restart our application
+[source,bash]
+----
+quarkus dev
+----
+
+Now we can open http://localhost:8080 and check what we have in the result.
+
+== User case
+1) Open the frontend application.
+
+image::step1.png[,600]
+
+2) Fill the `Text` field, select needful options and press `Review` button.
+
+image::step2.png[,600]
+
+3) Also, you can play around with optional features.
+
+image::step3.png[,600]
+
+== Conclusion
+As a result, we have a simple example of using Semantic Kernel API in the Quarkus backend and frontend applications. Please pay attention to additional features of Semantic Kernel due to the combination and chaining with different https://learn.microsoft.com/en-us/semantic-kernel/agents/plugins/[plugins].
