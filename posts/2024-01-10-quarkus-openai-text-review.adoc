@@ -132,7 +132,7 @@ Be official, the next text will be stored as an official document or part of the
 {{$input}}
 ----
 
-In the same directory, we also have to create a `config.json` file with https://learn.microsoft.com/en-us/semantic-kernel/prompts/configure-prompts?#execution-settings-used-by-ai-models[execution setting]:
+In the same directory, we also have to create a `config.json` file with an https://learn.microsoft.com/en-us/semantic-kernel/prompts/configure-prompts?#execution-settings-used-by-ai-models[execution setting]:
 [source,json]
 ----
 {
