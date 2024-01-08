@@ -6,7 +6,7 @@ v1.0, 2024-01-10
 :lang: en
 :tags: [java, quarkus, semantic kernel, openai]
 
-== About what is it?
+== What is it about?
 The goal is to create a simple microservice that uses the Semantic Kernel API to correct grammatical, punctuation, and logical mistakes in the input text by invoking OpenAI. We need the frontend application with an input field, checkboxes, and radio buttons for configuring additional features, and an output field. And the backend application for using invoking OpenAI.
 
 The entire source code for this project is available on https://github.com/iarmush/text-reviewer[GitHub].
