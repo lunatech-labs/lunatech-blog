@@ -114,7 +114,7 @@ public class OpenAIClientFactory {
 }
 ----
 
-Before continuing, we have to define the template of our request. The request itself is nothing more than the same thing that we are texting to ChatGPT for instance. In our case, It will have two main parts. First is defining `from` and `to` we are going to send this text, and what `type` of message it is. The second is `additional features`. For instance, you are a Software Engineer, and you are going to send a direct message to the Engineering Manager. The message should be concise and not official. Let's create a file `skprompt.txt` in the `src/main/resources/TextReviewSkill/TextReview` with the following content
+Before continuing, we have to define a template for our request. The request itself is similar to the type of content manually provided to ChatGPT. In our case, the message will have two main parts. First, we define a `from` and `to`, and the `type` of message. Secondly, we add `additional features`. For instance, you are a Software Engineer, and you are going to send a direct message to the Engineering Manager. The message should be concise and not official. Let's create a file `skprompt.txt` in the `src/main/resources/TextReviewSkill/TextReview` with the following content
 
 [source,bash]
 ----
