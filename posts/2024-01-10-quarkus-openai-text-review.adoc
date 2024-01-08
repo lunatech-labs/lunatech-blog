@@ -150,7 +150,7 @@ In the same directory, we also have to create a `config.json` file with https://
 
 ----
 
-The most important part is to create a Semantic function for text completion using our OpenAI client and specific model id. Also, specify the skill and function name which will refer to the name of corresponding directories where we put `config.json` and `skprompt.txt` files.
+The most important part is to create a Semantic function for text completion using our OpenAI client and specific model id. Also, specify the skill and function name by referring the name of the corresponding directories where we put `config.json` and `skprompt.txt` files.
 
 [source,java]
 ----
