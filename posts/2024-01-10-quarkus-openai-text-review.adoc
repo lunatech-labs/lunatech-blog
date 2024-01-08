@@ -89,7 +89,7 @@ public interface OpenAIClientConfig {
 }
 ----
 
-Next we need to create an OpenAI client using provided configuration.
+Next we need to create an OpenAI client using the provided configuration.
 
 [source,java]
 ----
