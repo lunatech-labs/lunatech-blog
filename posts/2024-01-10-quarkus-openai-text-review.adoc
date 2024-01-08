@@ -568,7 +568,7 @@ quarkus dev
 
 Now we can open http://localhost:8080 and check what we have in the result.
 
-== User case
+== Use case
 1) Open the frontend application.
 
 image::step1.png[,600]
