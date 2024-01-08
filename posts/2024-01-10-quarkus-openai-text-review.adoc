@@ -191,7 +191,7 @@ public class CompletionFunctionFactory {
 
 ----
 
-TextCompletionService uses a Semantic Kernel context to populate the request prompt by data provided and get the answer synchronously by calling the block() method.
+The TextCompletionService uses a Semantic Kernel context to populate the request prompt using the data provided and fetches the answer synchronously by calling the block() method.
 
 [source,java]
 ----
