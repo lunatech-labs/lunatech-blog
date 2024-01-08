@@ -62,7 +62,7 @@ We also need to add the Semantic Kernel dependencies. Add the following XML in t
 
 https://learn.microsoft.com/en-gb/semantic-kernel/overview/[Semantic Kernel] is an SDK that integrates Large Language Models (LLMs) like for example OpenAI with conventional programming languages. Semantic Kernel achieves this by allowing you to define https://learn.microsoft.com/en-us/semantic-kernel/agents/plugins/[plugins]. The documentation still doesn’t support Java, however, you can read more and find other examples in their https://github.com/microsoft/semantic-kernel/blob/main/java/README.md[repository].
 
-We're going to use OpenAI, and we have to configure a client. Only two things are necessary: organization ID and API key. After you create an account on https://platform.openai.com/ you can find the organization ID  https://platform.openai.com/account/organization[here] and create the API key https://platform.openai.com/api-keys[here]. It is important to mention that to use the API you must have credits in your account.
+In order to use OpenAI, first we need to create an account on https://platform.openai.com/. Once the account is created, you can find the organization ID https://platform.openai.com/account/organization[here] and create the API key https://platform.openai.com/api-keys[here]. It is important to mention that to use the API you must have credits in your account.
 
 Well, lets add these values to `application.properties` file
 
