@@ -12,7 +12,7 @@ The goal of this blogpost is to create a simple service that uses the Semantic K
 The entire source code for this project is available on https://github.com/iarmush/text-reviewer[GitHub].
 
 == Backend
-You can read more about the Quarkus CLI capabilities in the https://blog.lunatech.com/posts/2023-11-05-telegram-bot-for-file-sharing-using-quarkus[previous post]. Now we're going to create the Quarkus application, while in the root directory of our new project, run the following command
+Let's move forward with creating our Quarkus application. While in the root directory of your new project, run the following command:
 
 [source,bash]
 ----
@@ -20,8 +20,10 @@ quarkus create app com.example:text-reviewer \
     --extension=resteasy-reactive-jackson,quarkus-quinoa
 ----
 
-`resteasy-reactive-jackson` - extension for developing REST applications with Quarkus. It also includes importing resteasy-reactive.
-`quarkus-quinoa` - extension for developing single page applications.
+`resteasy-reactive-jackson` is an extension designed for developing REST applications with Quarkus, including the import of resteasy-reactive.
+`quarkus-quinoa` is an extension tailored for building single-page applications.
+
+If you have specific requirements or additional extensions to include, explore further options provided by the https://quarkus.io/guides/cli-tooling#using-the-cli[Quarkus CLI], or take a look at the https://blog.lunatech.com/posts/2023-11-05-telegram-bot-for-file-sharing-using-quarkus[previous post].
 
 We also need to add the Semantic Kernel dependencies. Add the following XML in the pom.xml:
 
