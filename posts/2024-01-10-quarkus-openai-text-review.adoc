@@ -229,7 +229,7 @@ public class TextCompletionService {
 
 ----
 
-The last thing, we have to define the controller that has only one method that will be called by our frontend application for propagating the data to our OpenAI request prompt:
+Lastly, we have to define the controller that has only one method that will be called by our frontend application for propagating the data to our OpenAI request prompt:
 
 [source,java]
 ----
