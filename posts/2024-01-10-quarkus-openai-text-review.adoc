@@ -323,7 +323,7 @@ Additionally, include `bootstrap`. While in `/frontend/src/main/webui`, execute:
 npm install bootstrap
 ----
 
-All needful changes will be in `src/main/webui/src/App.tsx`. We need to design an interface that includes a single input field, two radio buttons for selecting "from" and "to" options, three checkboxes for additional features, an output field, and a submit button. Upon pressing the submit button, the filled information will be sent to our backend. After receiving the response, the result will be displayed in the output field.
+All the needful changes will be done in `src/main/webui/src/App.tsx`. We need to design an interface that includes a single input field, two radio buttons for selecting "from" and "to" options, three checkboxes for additional features, an output field, and a submit button. Upon pressing the submit button, the filled information will be sent to our backend. After receiving the response, the result will be displayed in the output field.
 
 [source,javascript]
 ----
