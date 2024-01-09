@@ -1,13 +1,13 @@
-= Semantic Kernel API and Quarkus
+= Semantic Kernel SDK and Quarkus
 iarmush
 v1.0, 2024-01-10
-:title: Semantic Kernel API and Quarkus
+:title: Semantic Kernel SDK and Quarkus
 :imagesdir: ../media/2024-01-10-quarkus-openai-text-review
 :lang: en
-:tags: [java, quarkus, semantic kernel, openai]
+:tags: [java, quarkus, semantic-kernel, openai]
 
 == What is it about?
-The goal of this blogpost is to create a simple service that uses the Semantic Kernel API to rectify grammatical, punctuation, and logical mistakes in the input text by invoking OpenAI. 
+The goal of this blogpost is to create a simple service that uses the Semantic Kernel SDK to rectify grammatical, punctuation, and logical mistakes in the input text by invoking OpenAI.
 
 The entire source code for this project is available on https://github.com/iarmush/text-reviewer[GitHub].
 
@@ -584,4 +584,4 @@ image::step2.png[,600]
 image::step3.png[,600]
 
 == Conclusion
-As a result, we have a simple example of using Semantic Kernel API in the Quarkus backend and frontend applications. Please pay attention to additional features of Semantic Kernel due to the combination and chaining with different https://learn.microsoft.com/en-us/semantic-kernel/agents/plugins/[plugins].
+As a result, we have a simple example of using Semantic Kernel SDK with Quarkus. Please pay attention to additional features due to the combination and chaining with different https://learn.microsoft.com/en-us/semantic-kernel/agents/plugins/[plugins].
