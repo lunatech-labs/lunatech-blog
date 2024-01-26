@@ -1,0 +1,510 @@
+= Basic concepts of Kotlin
+zafie
+v1.0, 2024-01-22
+:title: Basic concepts of Kotlin
+:imagesdir: ../media/2024-01-22-basic-concepts-of-kotlin
+:lang: en
+:tags: [Kotlin, JVM, Kotlin Basics, Learn Kotlin]
+
+This post aims to provide to the audience a quick introduction to basic concepts of the Kotlin programming language.
+The audience is required to have knowledge of Software Development, preferably with a JVM language (eg. Java or Scala) but no previous experience with Kotlin is required.
+
+== About Kotlin
+
+According to https://kotlinlang.org/docs/faq.html["Kotlin's documentation"]:
+Kotlin is an open-source statically typed programming language that targets the JVM, Android, JavaScript, Wasm, and Native having both object-oriented and functional constructs.
+Developed by JetBrains, the project started in 2010 and was open source from very early on. The first official 1.0 release was in February 2016.
+Developers can use it in both OO and FP styles, or mix elements of the two as it is providing first-class support for features such as higher-order functions, function types and lambdas.
+
+== Variables
+
+Kotlin is a statically-typed language and defining the type of a variable or value is achieved by putting a colon `_:_` after the variable's name along with type specification.
+The keyword `_val_` defines local read-only values that can be assigned only once, whereas `_var_` defines variables and can have their value reassigned.
+
+[source,kotlin]
+----
+var someString: String = "Some string"    // Immediate assignement
+val someInteger: Int = 1                  // Read-only value
+var someOtherString = "Some other string" // String type is inferred
+----
+
+== Data Types
+
+In the following code, examples of the data types of Kotlin can be seen.
+* `_ANY_` represents the super type of all NON-NULLABLE types and differs from Java Object as `_ANY_` is the super type of all types
+whereas in Java, primitives are not part of the hierarchy.
+* Kotlin does not have primitives.
+* The type `_Nothing_` has no instances and is used to represent a value that does not exist. If a function has type `_Nothing_` it means it never returns and always throws an exception.
+* If a variable does not have a type specification, when assigning a integer literal,
+the compiler will try to assign a type according to range of the value, starting from `_Int_`. If the `_Int_` value range is exceeded, then it tries to infer it as Long.
+
+[source,kotlin]
+----
+// Numbers 
+
+// Byte, Short, Int & Long
+val validByte: Byte = 8
+val validShort: Short = 12345
+val validInteger: Int = -2147483648 // Int => [-2,147,483,648, 2,147,483,647]
+val validLong: Long = 5L            // The tag L is used to define Long literals.
+
+// Unsinged counterparts
+val validByteUnsigned: UByte = 8u            // The tags u or U are used to define usigned literals.
+val validShortUnsigned: UShort = 12345u
+val validIntegerUnsigned: UInt = 4294967295u // Int => [0, 4,294,967,295]
+val validLongUnsigned: ULong = 5uL
+
+// Float & Double
+val validDouble: Double = 2.888
+val validFloat: Float = 1.55f
+
+// Boolean
+val myTrue: Boolean = true
+val myFalse: Boolean = false
+
+// Char
+val aChar: Char = 'a' // Always enclosed in single quotes
+
+// Strings and String interpolation
+val someString: String = "Some string"
+val multiLineString: String = """
+		Some line
+		Some other line
+	"""
+println("The phrase $someString has a length of: ${someString.length}") // If only the value needs to be used, we the dollar sign '$' before the name of the variable
+																		// If we need to use an expression, we add the dollar sign '$' and curly brackets '{}'
+
+// Arrays
+val arrays = arrayOf("1", "2", "3")
+println("Access only one value ${arrays[0]}")
+val arraysWithConstructor = Array(5) {it + 1} // Array with size 5 and intializer adding 1 to each element starting from 0 -> [1, 2, 3, 4, 5]
+
+----
+
+== Type check
+
+Type checking is achieved with the keyword `_is_`. After checking the type of a variable, Kotlin automatically casts that variable to the detected type.
+
+[source,kotlin]
+----
+// String check
+fun checkIsString(someValue: Any) {
+	if (someValue is String) {
+		// Smart cast to String
+		println("This a string with length: ${someValue.length}")
+	} else {
+		println("Unknown type")
+	}
+}
+
+// Int check
+fun checkIsInt(someValue: Any) {
+	if (someValue !is Int) return
+	println("The parameter is of type ${someValue::class.simpleName} and its value plus 1 is ${someValue + 1}" )
+}
+----
+
+== Functions
+
+Functions are defined with the keyword `_fun_`. Entry point of a Kotlin application is a `_main_` function.
+Parameters are defined for the functions inside their brackets after defining the function's name.
+
+[source,kotlin]
+----
+fun main(args: Array<String>) {     // Has a paramenter of an array of strings.
+	print("Hello World")            // Prints to the standard output the passed parameter
+    println(args.contentToString()) // Prints to the standard output and changes line
+}
+----
+
+== Nullability
+
+All data types in Kotlin cannot be `_null_` by default. That way applications built with Kotlin are less prone to NullPointerExceptions (NPEs).
+If we want to allow a value to be `_null_`, we need to do so by explicitly specifying that with the questionmark `_?_` sign after the type.
+Kotlin provides us with some handy operators and functions to deal with null values:
+
+* Checking for a null value before accesing a property, with the `_?._` operator.
+* Cast a value to a specific type and return null if the type is not matched, with the `_as?_` operator.
+* In cases where we would like to get the value from a nullable variable and want to throw a NPE if the value is null, Kotlin does that with
+the not-null assertion operator `_!!_`.
+* The `_let_` function that allows the execution of a lambda expression if the value is not null, making it easy to null-check and use the value if it not null.
+* The Elvis operator `_?:_` allowing to provide a different default value other than null if variable in question is null.
+
+
+[source,kotlin]
+----
+var nullableVariable: String? = "Can be null"
+println(value: $nullableVariable) // value: Can be null
+nullableVariable = null
+println(value: $nullableVariable) // value: null
+
+// Accesing null
+var nullableVariable: String? = "Can be null"
+println("The length is: ${nullableVariable?.length}") // The length is: 11
+
+nullableVariable = null
+println("The length is: ${nullableVariable?.length}") // The length is: null
+
+// Type casting
+fun castValue(value: Any) {
+    val someNullableString: String? = value as? String // If value can be cast to a String, someNullableString gets the value, otherwise someNullableString is null
+    println("Value: $someNullableString")
+}
+
+// Not-null assertion operator
+val notNullableString: String = nullableString!! // Gets the value if nullableString is not null, throws NPE otherwise
+
+// let function
+val nullableString: String? = "Some string"
+value?.let { println(it) }                      // println will be called if the value is not null passing the value to the lamba with the default name `_it_`.
+
+// Elvis operator
+val nullableInteger: Int? = 5
+val notNullInteger: Int = nullableInteger ?: 0 // If nullableInteger is not null, the value is returned, otherwise returns 0.
+----
+
+== Equality
+
+Kotlin has two ways for checking equality.
+Structural equality `_==_` which makes use of the equals() method and Referential equality `_===_` which checks if two variables point to the same object,
+excluding data types that during runtime are represented by primitive types (eg. Int). In such case, `_===_` is the same as `_==_`.
+
+[source,kotlin]
+----
+val a: Int = 1
+val b: Int = 1
+println("Equal: ${a == b}")  // Equal: true
+println("Equal: ${a === b}") // Equal: true
+
+data class DataClass(val name: String) // Defines a data class with one property. Kotlin provides equals(), hashcode() and toString() automatically for data classes.
+
+val dataOne = DataClass("someName")
+val dataTwo = DataClass("someName")
+println("Equal: ${dataOne == dataTwo}")  // Equal: true
+println("Equal: ${dataOne === dataTwo}") // Equal: false
+----
+
+== Mutability
+
+As discussed already, mutability is specified with the `_val_` and `_var_` keywords. We have not seen how mutability works with objects though.
+Using these keywords, we define the mutability of the reference, meaning that in case of a `_val_` for example, a new object cannot be assinged to that reference.
+The values of the object though can still change.
+
+[source,kotlin]
+----
+val someList = arrayListOf(1, 2, 3, 4, 5)
+someList.add(6)           // This is valid as it is changing the values on the current object.
+someList = arrayListOf(6) // This is invalid as a new object is reassigned to the reference.
+----
+
+== Collections
+
+Collections though are by default immutable. Kotlin provides special implementations for mutable Collections.
+That way we have full control over the mutability of the reference as well as the actual structure.
+
+[source,kotlin]
+----
+// Immutable List reference and immutable List.
+val someList = listOf(1, 2, 3, 4, 5)
+// someList.add(6) // Invalid
+
+// Mutable Set with an immutable Set reference
+val someSet = mutableSetOf(1, 2, 3, 4, 5)
+someList.add(6) // Valid
+
+// Finally, a mutable Map with a mutable Map reference 
+var someMap = mutableMapOf("foo" to "bar")
+someMap = mutableMapOf("John" to "Doe") // Valid
+someMap.remove("John")                  // Valid
+----
+
+== Conditionals
+
+Conditionals in Kotlin are expressions, meaning they return a value, as opposed to Java where they are statements. 
+There are two such expressions in Kotlin: `_if_` and `_when_`, with the `_when_` expression to work similarily to the `_switch_` 
+statement in Java, defining a conditional with multiple branches. A few differences though, to its Java counterpart, are that it does not need
+a `_break_` statement, as it stops matching against its branches when one is satisfied, and that the `_else_` statement, which is the Kotlin counterpart
+to Java's `_default_`, is always required, unless all possible cases are already covered (eg. with enums).
+
+[source,kotlin]
+----
+// If expression
+val someString = if (someOtherValue > 10) "The other value is greater than 10" else "The other value has a maximum of 10"
+
+// If can also be used as a statement
+val someString: String? = null
+if (someOtherValue > 10) {
+	someString = "The other value is greater than 10"
+} else {
+	someString = "The other value has a maximum of 10"
+}
+
+// When expression
+val outcome = when(someBooleanValue) {
+	true -> "true"
+	false -> "false"
+	// 'else' is not required because all cases are covered
+}
+
+// When expression with 'is' to check type
+val outcome = when(value) {
+	is String -> println("String")
+	is Int -> println("Int")
+	else -> println("Something else")
+}
+----
+
+== Loops
+
+Loops in Kotlin can be created with the statements `_do - while_`, `_while_`, `_for_` and `_forEach_`. `_do - while_` and `_while_` have the same syntax
+and functionality as Java. The difference is in the `_for_` statement where the traditional syntax of Java is removed and it is used instead to iterate
+over any structure that provides an iterator (eg. Ranges, Arrays, Maps). The `_forEach_` function, finally, works in the same way as Java's `_forEach_` 
+in the Collections API.
+
+[source,kotlin]
+----
+// For statement
+for (item in items) println("Item: $item") // Curly brackets can be ommited in case we have only one statement
+
+// Imitating Java's syntax with a range
+for (index in items.indices) {             // indices can be used instead of 0..items.size - 1 to create the range
+	println("Indexed Loop $index -> ${items[index]}")
+}
+
+// forEach function
+val items = listOf(1, 2, 3)
+items.forEach { println ("$it") }
+----
+
+== Classes
+
+When it comes to defining classes, boilerplate is much reduced in Kotlin.
+* For classes without a body, curly brackets `_{}_` can be ommited.
+* By default, classes are public unless defined otherwise.
+* Constructors are defined with the keyword `_constructor_`.
+* The primary constructor is part of the header of the class and the keyword `_constructor_` can be ommited if it is public.
+* Constructor paramenters, if defined as `_val_` or `_var_` become properties of the class with a getter or getter and setter methods accordingly.
+* Since the primary constructor does not contain code on the header of the class, code blocks with the `_init_` word are utilized for any initialization code.
+* Init blocks become part of the primary constructor and are executed in the order that they are defined.
+* Secondary constructors must always call the primary constructor.
+
+[source,kotlin]
+----
+class Student(var name: String? = "John Doe") { // public class with a nullable (for the shake of the example) "name" field and a default value
+                                    			// of "John Doe", a getter, a setter and a public primary constructor
+
+    constructor(name: String?, grade: Int): this(name) { // Secondary constructor, calling the primary constructor and printing the "grade" parameter
+        println("Grade: $grade")
+    }
+
+    init {                           // Init block of the primary constructor
+        println(this.stringRepresentation)
+    }
+	
+    private fun fillName(): String { // Private method filling the name property if null is passed to the constructor as name
+        name = name?: "John Doe"
+        return name!!
+    }
+
+	val stringRepresentation: String // Public property with custom getter
+        get() {
+            return "Student: ${this.fillName()}"
+        }
+}
+
+fun createStudents() {
+	Student(null)        // Student: John Doe
+    Student(null, 8)     // Student: John Doe
+					     // Grade: 8
+    Student()            // Student: John Doe
+    Student("Nick")      // Student: Nick 
+    Student("George", 9) // Student: George
+						 // Grade: 9
+}
+----
+
+== Inheritance
+
+Kotlin is much different than Java regarding inheritance.
+* All classes have a common superclass: `_ANY_` (with 3 methods, equals(), hashCode() & toString()).
+* By default, all classes are final and in order to allow inheritance, the keyword `_open_` must be used when defining the superclass.
+* To inherit from an open class, a colon `_:_` must be used after the sub-class' definition, and a call to the superclass' constructor.
+* Much like classes, methods and properties of classes are not overridable when inherited unless explicitly specified with the `_open_` keyword.
+* On the other hand, since `_abstract_` classes cannot be instantiated and are meant to be extended, they are by default `_open_`. Though, only their abstract
+methods are by default `_open_`.
+* By marking an abstract class as `_open_`, we allow inheritance from a class out of its package. To restrict that, `_sealed_` classes (which are always abstract classes)
+allow for inheritance of abstract classes only inside their package.
+
+[source,kotlin]
+----
+sealed class School(val grades: Int = 3, open val buildings: Int = 1, open val rooms: Int = 10) {
+
+    fun schoolTripsPerYear(): String = "3 trips per year"
+
+    open fun museumVisitsPerYear(): String = "3 museum visits per year"
+
+    abstract fun otherActivities(): String // Must be implemented
+}
+
+class HighSchool: School() {
+
+    // override val grades = 6 // Compiler complains
+
+    override val buildings: Int = 2
+
+    override val rooms: Int = 15
+
+    // override fun schoolTripsPerYear(): String = "4 trips per year" // Compiler complains
+
+    override fun museumVisitsPerYear(): String = "4 museum visits per year"
+
+    override fun otherActivities(): String = "Dance Lessons"
+}
+----
+
+== Inner Classes
+
+Kotlin distinguishes the types on inner classes, unlike Java. In the same way of thinking,  inner classes have access to the outer class, only when explicitly specified.
+When defining an inner class, the keyword `_inner_` is used to give access to the outer class.
+
+[source,kotlin]
+----
+class SomeClass(private val someInt: Int = 1) {
+
+    class SomeNestedClass                                          // No access to the outer class
+
+    inner class SomeInnerClass {                                   // Has access to the outer class
+        fun printOuterProperty() = println(this@SomeClass.someInt) // Access the outer class by using 'this' followed by '@' and the name of the class
+    }
+}
+----
+
+== Data Classes
+
+Data classes are classes meant to hold data. Therefore, it is strongly recommended to use `_val_` for its properties to provide immutability.
+Kotlin provides Data classes with implementations of `_equals()_`, `_hashcode()_` and `_toString()_` automatically as already mentioned.
+They are not the only methods provided though, as it also provides the `_componentN_` methods corresponding to the properties in their order of declaration,
+as well as the `_copy_` method in order to get a new copy instance of the class while changing some values in the process. As already mentioned, they are meant to
+hold data, so their primary constructor needs to have at least one parameter. Finally, Data classes cannot be inherited, they are final and cannot be open and therefore, since they always should
+be able to be instantiated, they cannot be abstract, sealed, or inner.
+
+[source,kotlin]
+----
+data class Student(val name: String, val grade: Int)
+
+fun main() {
+    val student: Student = Student("Nick", 4)
+    println("I'm ${student.name} and I am on the ${student.grade} grade")
+
+    val nextYearStudent = student.copy(grade = student.grade + 1)
+    println("Next year I am going to be on the ${nextYearStudent.grade} grade")
+}
+----
+
+== Interfaces
+
+Interfaces contain only definitions of abstract methods and implementations of non-abstract methods.
+* To implement and interface, the colon `_:_` sign is used just like when inheriting a class.
+* Since, when inheriting a class, a call to its constructor is required, the compiler can tell the superclass apart from the interfaces.
+* Interfaces are always either `_open_` or `_sealed_`.
+
+[source,kotlin]
+----
+interface SomeInterface {              // It is always open or sealed
+    fun someAbstractFunction(): String // Needs to be implemented. If we do not specify a return type here, Unit will be expected
+    fun someFunction() = "Do something"
+}
+
+sealed class SomeAbstractClass(open val someInteger: Int = 1)
+
+class SomeClass: SomeAbstractClass(), SomeInterface {
+    override fun someAbstractFunction(): String = "Implementing the abstract function"
+
+    override fun someFunction(): String = "Doing something else instead"
+}
+----
+
+== Visibility
+
+In Kotlin, the default visibility modifier is `_public_` and can be ommited. Apart from that, Kotlin provides all the traditional visibility modifiers
+of Java and adds to them a new one, `_internal_`. `_internal_` works in the same way as having no visibility modifier for a member in Java, it makes the member
+visible inside its package.
+
+== Objects
+
+The keyword `_object_` can be used in multiple ways in Kotlin. Objects can create instances of anonymous classes (objects meant for one-time use), declare Singletons (classes that can be instantiated only once)
+and declare companion objects (objects that hold class members that do not require the class to be instantiated in order to use them, like Java's static members, but offering more flexibility as they can extend from
+other classes and implement interfaces).
+
+[source,kotlin]
+----
+
+// Declaring an anonymous object
+val someAnonObject = object {
+	val someProp: String = "Some String"
+}
+
+println ("Anonymous object property: ${someAnonObject.someProp}") // Anonymous object property: Some String
+
+// Declaring a Singleton
+object SingleInstanceObject {
+	val singletonProp: String = "Singleton property"
+}
+
+println ("Singleton object property: ${someAnonObject.someProp}") // Singleton object property: Singleton property
+
+// Declaring a companion object (Factory Pattern)
+interface HumanSkills {
+    fun study() = "study"
+}
+
+class Student(val name: String, val favouriteCourse: String): HumanSkills {
+
+    companion object: HumanSkills {
+
+        override fun study(): String = "study hard"
+
+        fun createScienceStudent(name: String): Student {
+            return Student(name, "Science")
+        }
+    }
+}
+
+val student = Student.createScienceStudent("Nick")
+println("My name is ${student.name}, my favourite course is ${student.favouriteCourse} and I just ${student.study()}") // My name is Nick, my favourite course is Science and I just study
+println("People say that students \"${Student.Companion.study()}\"")                                                   // People say that students "study hard"
+
+----
+
+== Destructuring
+
+Destructuring as the name suggests, allows for the destructuring of an object into multiple variables at once, instead of assigning its properties one by one to each variable.
+In order to achieve that, the class of that object in question must have declared the _componentN_ functions base on the according to number of the properties of the class and be marked
+with the `_operator_` keyword. Remember that Data Classes provide these functions automatically.
+
+[source,kotlin]
+----
+
+data class Student(val name: String, val grade: Int)
+
+fun destructureStudent() {
+    val student: Student = Student("Nick", 4)
+    val (name, grade) = student
+    println("Some student's name was $name his grade was $grade") // Some student's name was Nick his grade was 4
+}
+
+// Declaring the functions manually in case Student was not a Data class
+class Student(val name: String, val grade: Int) {
+
+    operator fun component1(): Any  = name
+    operator fun component2(): Any  = grade
+
+}
+
+----
+
+== Conclusion
+
+Personally, I found Kotlin to be a powerful, declarative and concise language with a gentle learning curve, when coming from Java and providing a well-written and clear documentation.
+It adds a lot of unique features and enhances existing ones, making it a modern high-level language. Whether you are interested in it as your first JVM language or coming from another one,
+it is definitely one worth adding to your arsenal of skills.
