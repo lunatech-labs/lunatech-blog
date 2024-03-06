@@ -15,7 +15,7 @@ Unless you live in a cave you're probably well aware that Neural Networks have b
 
 === What else is out there?
 
-With almost the entire corpus of computer science knowledge encoded in LLMs, why can't we just ask an LLM for a list of good candidates? Well, I tried that, the results are... suboptimal... and while from proponents of Generative AI may be "You're just not using it right" I say to them (and you), it's much more fun to look through the literature yourself and let the neural network between your ears do the work of finding connections (after all it has _many_ more connections).
+With almost the entire corpus of computer science knowledge encoded in LLMs, why can't we just ask an LLM for a list of good candidates? Well, I tried that, the results are... suboptimal... and while the response from proponents of Generative AI may be "You're just not using it right" I say to them (and you), it's much more fun to look through the literature yourself and let the neural network between your ears do the work (after all it has _many_ more connections).
 
 I don't propose we should scour the literature for the next paradigm shift - the next link:https://en.wikipedia.org/wiki/Dynabook[DynaBook] or link:https://en.wikipedia.org/wiki/Project_Xanadu[Xanadu]. I wouldn't ignore it if I were to stumble across it, of course, but there is a huge amount of utility in looking for the clever techniques which have solved difficult problems on a less grand scale. You never know what you'll find, and you never know what will prove useful.
 
