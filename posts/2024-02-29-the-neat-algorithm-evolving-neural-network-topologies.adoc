@@ -5,7 +5,6 @@ v1.0, 2024-02-29
 :imagesdir: ../media/2024-02-29-the-neat-algorithm-evolving-neural-network-topologies
 :lang: en
 :tags: [artifical intelligence, machine learning, algorithm]
-:icons: font
 
 == Preface: On Searching the Archives
 
@@ -135,7 +134,7 @@ If we want to take some of the genes (the structure) from each parent and combin
 image::parent-genomes-comparison.svg[]
 
 [NOTE]
-.Disjoint and Excess genes
+.**Disjoint and Excess genes**
 ====
 Genes which exist only in one parent in the middle of the genome (6 & 7 in this case) are referred to as `disjoint` genes.
 
@@ -197,7 +196,7 @@ Again, the historical marking of topological structures with innovation numbers 
 
 We've covered how NEAT works, and it's cool and everything, but why would you use it rather than just copy/pasting some PyTorch code from ChatGPT? What's the trade-off for the extra complexity involved? Is it better than anything else for solving any particular class of problem?
 
-.This is the conclusion from the original NEAT paper:
+_This is the conclusion from the original NEAT paper:_
 [quote,Efficient Reinforcement Learning through Evolving Neural Network Topologies,Stanley & Miikkulainen 2002]
 ...evolving structure and connection weights in the style of NEAT leads to significant performance gains in reinforcement learning. NEAT exploits
 properties of both structure and history that have not been
@@ -210,6 +209,7 @@ The stated aim of the paper was to prove that, when 'done right' (sic) an approa
 
 So, rather than a solution to some subset of problems where you'd use, say Reinforcement Learning, the paper contends that using NEAT will, most of the time, result in a more performant network. Furthermore, NEAT may well provide you with a _more_ sophisticated solution than a static-topology approach can provide...
 
+_Again, from the original NEAT paper:_
 [quote]
 Strategies evolved with NEAT not only reached a higher level of sophistication than those evolved with fixed topologies, but also continued to improve for significantly more generations.
 
@@ -273,17 +273,14 @@ Now, our CPPN has 4-dimensions (x~1~, y~1~, x~2~, y~2~) so rather than a plane w
 
 Besides solving all the problems I listed above, HyperNEAT's CPPN encoding provides another interesting side effect. If we have 100 nodes in our substrate, and we evolve a solution, and then we realise we need more nodes - for instance in the visual discrimination task we decide we need to increase the size and/or resolution of the input image - we can do so _without further evolution_! We can just query the encoding CPPN at the necessary points that represent the (normalised) locations of our new nodes on the substrate and Kablammo!, we get a more complex substrate from the same CPPN. Interesting.
 
-.Further Reading on CPPNs
-[sidebar]
-****
+[quote]
 For more detail on Compositional Pattern Producing Networks, especially their ability to encode different activation functions for network nodes (rather than just the usual sigmoid/guassian) take a look at Ken Stanley's 2007 paper link:http://eplex.cs.ucf.edu/papers/stanley_gpem07.pdf[Compositional Pattern Producing Networks: A Novel Abstraction of Development]
-****
 
 === Evolvable Substrate HyperNEAT (ES-HyperNEAT)
 
 ES-HyperNEAT was inevitable, really. I mean, we have an algorithm which can evolve neural network topologies, and we have an extension which evolves weights... how long was it going to be before someone got the chocolate mixed up with the peanut butter?
 
-.From the link:http://eplex.cs.ucf.edu/ESHyperNEAT/[EPLEX ES-HyperNEAT page]:
+_From the link:http://eplex.cs.ucf.edu/ESHyperNEAT/[EPLEX ES-HyperNEAT page]:_
 [quote]
 ...the philosophy is that density should follow information: Where there is more information in the CPPN-encoded pattern, there should be higher density within the substrate to capture it. By following this approach, there is no need for the user to decide anything about hidden nodes placement or density. Furthermore, ES-HyperNEAT can represent clusters of neurons with arbitrarily high density, even varying in density by region.
 
@@ -301,11 +298,8 @@ Next, the quadtree is traversed, depth first, until a quadtree node's level of i
 
 This is referred to as the _Pruning and Extraction_ phase.
 
-.Further reading on ES-HyperNEAT
-[sidebar]
-****
+[quote]
 If you're interested in diving deeper into the details of ES-HyperNEAT you can do no better than the original 2012 paper link:https://direct.mit.edu/artl/article/18/4/331/2720/An-Enhanced-Hypercube-Based-Encoding-for-Evolving[An Enhanced Hypercube-Based Encoding for Evolving the Placement, Density, and Connectivity of Neurons]
-****
 
 === Novelty Search
 
