@@ -4,18 +4,18 @@ v1.0, 2024-02-29
 :title: The NEAT Algorithm: Evolving Neural Networks
 :imagesdir: ../media/2024-02-29-the-neat-algorithm-evolving-neural-network-topologies
 :lang: en
-:tags: [ai, ml, algorithm, python]
+:tags: [artifical intelligence, machine learning, algorithm, machine learning]
 
 == Preface: On Searching the Archives
 
-.live footage of the author doing exactly what he's talking about in this section
+.Live footage of the author doing exactly what he's talking about in this section
 image::wizard.compressed.png["An ancient wizard sits amongst a huge stack of books, papers and other documents, he smokes a pipe whilst studying the knowledge laid out in the document in his lap and the smoke winds and twists its way up in to the stacks of books around him. This image was created by MidJourney which seems to struggle with hands, so his right hand is all weird."]
 
 Unless you live in a cave you're probably well aware that Neural Networks have been experiencing something of a renaissance of late. Abandoned as interesting-but-a-dead-end not too long ago, the relentless march of Moore's Law means now we have the computing power required to exploit these statistical automata. As marketing departments jump up and down with delight at being given a means of generating seemingly endless streams of hyperbole, it's worth asking what other ideas are out there that have yet to have their day?
 
-=== What else is out there?
+=== What Else Is Out There?
 
-With almost the entire corpus of computer science knowledge encoded in LLMs, why can't we just ask an LLM for a list of good candidates? Well, I tried that, the results are... suboptimal... and while the response from proponents of Generative AI may be "You're just not using it right" I say to them (and you), it's much more fun to look through the literature yourself and train the neural network between your ears to do the work (after all it has _many_ more connections).
+With almost the entire corpus of computer science knowledge encoded in LLMs, why can't we just ask a Large Language Model (LLM) for a list of good candidates? Well, I tried that, the results are... suboptimal... and while the response from proponents of Generative AI may be "You're just not using it right" I say to them (and you), it's much more fun to look through the literature yourself and train the neural network between your ears to do the work (after all it has _many_ more connections).
 
 I don't propose we should scour the literature for the next paradigm shift - the next link:https://en.wikipedia.org/wiki/Dynabook[DynaBook] or link:https://en.wikipedia.org/wiki/Project_Xanadu[Xanadu]. I wouldn't ignore it if I were to stumble across it, of course, but there is a huge amount of utility in looking for the clever techniques which have solved difficult problems on a less grand scale. You never know what you'll find, and you never know what will prove useful.
 
@@ -32,11 +32,11 @@ I'll cover:
 - Some examples of implementations of NEAT so you can get hands-on with it.
 - Some extensions/adaptations to the NEAT that improve its ability to solve different classes of problems.
 
-== What does NEAT do?
+== What Does NEAT Do?
 
 Imagine pointing a software program that knows nothing, about anything, at Super Mario World. You walk away to make something to eat and when you come back it's playing the game so skillfully that you assume a human must be playing remotely.
 
-This is what NEAT does, it is an algorithm which creates a neural network that solves whatever problem you define.
+This is what NEAT does, it is **an algorithm which creates a neural network that solves whatever problem you define**.
 
 To be more precise, NEAT is a link:https://en.wikipedia.org/wiki/Genetic_algorithm[Genetic Algorithm] which evolves the least complex network topology capable of approximating a target function. The neural networks NEAT outputs are capable of displaying extremely complex behaviours.
 
@@ -46,7 +46,7 @@ And if you don't believe me about the Mario thing, here's a video.
 
 video::qv6UVOQ0F44[youtube,width=960,height=540]
 
-== How does NEAT do it?
+== How Does NEAT Do It?
 
 The original NEAT paper, link:https://nn.cs.utexas.edu/downloads/papers/stanley.ec02.pdf[Efficient Reinforcement Learning through Evolving Neural Network Topologies], published in 2002, was co-authored by Kenneth Stanley and Risko Miikkulainen. In this paper the authors outline the details of the techniques, unique to the NEAT algorithm, which allow an evolutionary approach to not only efficiently encode a neural network topology as a set of virtual genes but also to allow for the preservation of structural innovation necessary to avoid evolution stalling in local minima.
 
@@ -54,15 +54,15 @@ Before we dig in to the specifics of NEAT, here's some background on Genetic Alg
 
 === Genetic Algorithms
 
-Genetic Algorithms are a type of metaheuristic, meaning they are a means of finding a 'good enough' solution to a problem  so complex it would be inefficient to find the optimal solution. Metaheuristics are often employed when trying to find feasible solutions to NP-Hard problems such as link:https://en.wikipedia.org/wiki/Travelling_salesman_problem[Travelling Salesman] or link:https://en.wikipedia.org/wiki/Job-shop_scheduling[Job Shop Scheduling]. They are sometimes referred to as _Partial Search_ solutions, indicating that they're focussed on finding and evaluating a subset of the possible solutions, rather than all possible solutions.
+Genetic Algorithms (GAs) are a type of metaheuristic, meaning they are a means of finding a 'good enough' solution to a problem  so complex it would be inefficient to find the optimal solution. Metaheuristics are often employed when trying to find feasible solutions to link:https://en.wikipedia.org/wiki/NP-hardness[NP-Hard] problems such as link:https://en.wikipedia.org/wiki/Travelling_salesman_problem[Travelling Salesman] or link:https://en.wikipedia.org/wiki/Job-shop_scheduling[Job Shop Scheduling]. They are sometimes referred to as _Partial Search_ solutions, indicating that they're focussed on finding and evaluating a subset of the possible solutions, rather than all possible solutions.
 
-Think of it this way, do you want to find a feasible solution which is good enough in a minute or two, or do you want to wait, possibly until the heat death of the universe, for the best possible solution?
+Think about it this way: do you want to find a feasible solution which is good enough in a minute or two, or do you want to wait, possibly until the heat death of the universe, for the best possible solution?
 
 ==== Evolving Solutions
 
 GAs are a biologically-inspired class of algorithm, perhaps the ultimate biologically-inspired class of algorithm in that, unlike algorithms that mimic the behaviour of flocking/schooling/swarming animals such as birds or social insects, they mimic the evolution of living things themselves.
 
-I'm sure you're familiar with the process of evolution (even if you don't believe in it (after all it's link:https://answersingenesis.org/theory-of-evolution/evolution-not-even-theory/[just a theory], right?)), but let's review the process in a way that will make it easier to see the comparison between the process and NEAT's implementation of it.
+I'm sure you're familiar with the process of evolution (even if you don't believe in it - after all it's link:https://answersingenesis.org/theory-of-evolution/evolution-not-even-theory/[just a theory], right?), but let's review the process in a way that will make it easier to see the comparison between the process and NEAT's implementation of it.
 
 ==== Requirements
 
@@ -75,8 +75,9 @@ Implementing a Genetic Algorithm requires two things:
 
 In the same way that the genetic information of living things is encoded in a Genome, we need to encode the problem we wish to evolve a solution for in a way a software program can understand. Generally, an array of numbers is sufficient. When we try and encode a neural network topology, however, that's more of a challenge - not the encoding of the information about the nodes itself, it's not too hard to come up with a few viable options for this - but how do we produce an encoding which lets us easily compare the difference between one node and another?
 
-Think about it this way, consider the two network topologies in the image below. How can we select genes from one parent and genes from another which will be _guaranteed_ to produce a viable child network? How do we know that all the nodes in the resulting child will be connected to other nodes? That all input nodes will be connected to either an output node or a hidden node? and, conversely, that all output nodes will have an incoming connection?
+Think about it this way, consider the two network topologies in _Figure 2_. How can we select genes from one parent and genes from another which will be _guaranteed_ to produce a viable child network? How do we know that all the nodes in the resulting child will be connected to other nodes? That all input nodes will be connected to either an output node or a hidden node? And, conversely, that all output nodes will have an incoming connection?
 
+.Two neural network topologies which will be used to create an offspring network via crossover.
 image::parent-networks.svg[]
 
 ===== Fitness
@@ -102,7 +103,7 @@ Just as in nature, our Genetic Algorithm follows a fairly simple process (there 
 7. Calculate the fitness of the members of the new `Population`
 8. Repeat from Step 3 using the new `Population`
 
-Each time we create a new `Population` we have a new `Generation` of `Genomes` with which we are gradually exploring the solution space to our problem. Theoretically, by selecting the fittest members (those closest to our target objective) for breeding the offspring should have a higher likelihood of being closer to the objective than their parents in the previous `Generation`.
+Each time we create a new `Population` we have a new `Generation` of `Genomes` with which we are gradually exploring the solution space to our problem. Theoretically, selecting the fittest members (those closest to our target objective) for breeding the offspring should have a higher likelihood of being closer to the objective than their parents in the previous `Generation`.
 
 By optionally mutating the genes in some of the offspring we add some perturbation to the process, helping to prevent the process from getting trapped in local minima. Again, this mimics biological evolution in that these mutations can either increase or decrease the fitness of the individual but they are useful in helping a species escape a local minima.
 
@@ -114,16 +115,14 @@ Above, I alluded to the idea that encoding a neural network is a tricky problem 
 
 ==== Innovation Numbers
 
-If we consider two trivial neural network topologies like these as candidates for breeding:
+If we consider the two trivial neural network topologies from _Figure 2_. _Figure 3_ shows how we can assign an integer to each node in the topology.
 
-image::parent-networks.svg[]
-
-We can assign an integer to each node in the topology
-
+.Assigning a unique number to each node in the networks.
 image::parent-networks-with-node-ids.svg[]
 
-Now, we can define every connection in the network as a pair of nodes (the _from_ node and the _to_ node, if you like). This gives us a unique identifier for every structure in the network and allows us to define the encoding of a network as a list of innovation numbers.
+Now, we can define every connection in the network as a pair of nodes (the _from_ node and the _to_ node, if you like). This gives us a unique identifier for every structure in the network and allows us to define the encoding of a network as a list of innovation numbers (_Figure 4_).
 
+.Identifying each connection between nodes (each input/output node pair) with a unique identifier.
 image::parent-networks-with-genomes.svg[]
 
 From now on, any network evolved by the algorithm from this network topology which connects the first input node (#1) to the first hidden node (#5) will have Innovation Number 8. All the candidate topologies which are evolved from this network will retain all the innovation numbers associated with the structure that lead to their current topology. Innovation Numbers, then, are 'historical markings' - they provide a means of tracking the history of a particular piece of structure within a Genome through the generations of evolution. Innovation Numbers enable a couple of elegant solutions to problems in this space.
@@ -132,8 +131,9 @@ From now on, any network evolved by the algorithm from this network topology whi
 
 The first problem Innovation Numbers solve is described above - how to tell if the offspring of two parent topologies will be a valid network itself. Let me show you how.
 
-If we want to take some of the genes (the structure) from each parent and combine them together to create a bouncing little baby network we can stack one on top of the other and line up those innovation numbers. We can see that some innovation numbers are shared by both parents and some only exist in one parent or the other.
+If we want to take some of the genes (the structure) from each parent and combine them together to create a bouncing little baby network we can stack one on top of the other and line up those innovation numbers, as in _Figure 5_. We can see that some innovation numbers are shared by both parents and some only exist in one parent or the other.
 
+.Comparing two genomes by pairwise comparison, matching on the unique identifiers for each connection gene.
 image::parent-genomes-comparison.svg[]
 
 [sidebar]
@@ -151,19 +151,21 @@ Creating a valid offspring is now simply a matter of walking along that list fro
 1. If the innovation number exists in only one parent, take it.
 2. If the innovation number exists in both parents, take it from the fittest parent.
 
-That leaves us with an offspring Genome which is _at least as complex_ as the most complex parent and with genes that err on the side of increased fitness. More importantly it means we can be sure that the offspring will be a valid network, because all the structure required to support each innovation from both parents is present and correct.
+That leaves us with an offspring Genome which is _at least as complex_ as the most complex parent and with genes that err on the side of increased fitness. More importantly it means we can be sure that the offspring will be a valid network, because all the structure required to support each innovation from both parents is present and correct (_Figure 6_).
 
+.Demonstrating how the result of selecting genes from the parent results in a valid, fully-connected network as offspring.
 image::parent-genome-crossover.svg[]
 
 The result of the breeding is a new network which looks like Parent 2 but with the extra connection between nodes #1 and #5, which is represented by innovation number 8.
 
+.The proud parent networks and their bouncing little baby.
 image::parent-offspring-networks.svg[]
 
 This feels like a really elegant solution to a seemingly difficult problem. It's like having a magic trick explained or when Sherlock Holmes explains the chain of deductions that lead to some startling conclusion... it's easy once you know how.
 
 ==== Speciation
 
-This encoding mechanism is not enough to allow NEAT to efficiently explore the solution space. Specifically, the problem is local minima. If you've maintained interest enough read this far into this post then it's a good bet you're already familiar with local minima, but here's a diagram to make it more clear if you're not.
+This encoding mechanism is not enough to allow NEAT to efficiently explore the solution space. Specifically, the problem is local minima. If you've maintained interest enough to read this far into this post then it's a good bet you're already familiar with local minima, _Figure 8_ should help make things clear if not.
 
 .Demonstrating how local minima can appear to be global minima when you are unable to view the entire landscape.
 image::global-minima-local-minima.png[]
@@ -178,13 +180,14 @@ Organisms compete only with individuals within their species, not with the entir
 
 ===== Compatibility
 
-Categorizing organisms into groups which share similar topologies is another problem for which innovation numbers provide an elegant solution.
+Categorising organisms into groups which share similar topologies is another problem for which innovation numbers provide an elegant solution.
 
 When we compare the genomes of two organisms the more disjoint and excess genes there are the less evolutionary history they share, meaning they're less compatible. In practice, it's not just disjoint and excess genes which are counted but also a measure of the average weight differences between matching genes.
 
 The NEAT paper encodes the formula for compatibility in this magical spell:
 
-image:compatibility-function.png[]
+.The formula for genome compatibility from the original NEAT paper
+image::compatibility-function.png[]
 
 Where _E_ is the number of excess genes, _D_ is the number of disjoint Genes, _W_ is the average weight difference of the matching genes, c~1~, c~2~ and c~3~ are coefficients that allow to adjust the relative importance of the three factors and _N_ is the number of genes in the larger genome (allowing us to normalise for genome size).
 
@@ -228,7 +231,7 @@ Well, in 2005 Stanley et al. did exactly this. And, helpfully, link:https://nn.c
 
 video::H2qSjyJ_0-4[youtube,width=960,height=540]
 
-Combined with the fact that NEAT seems to perform well at evolving gaits for robots this presents some interesting avenues for further exploration. Imagine, for instance, a robot exploring a remote area (deep ocean, perhaps, or an exo-planet) which becomes damaged in some way (a robot with jointed legs loses one of its legs or a leg becomes otherwise disabled), NEAT allows it to evolve the most efficient gait possible with the remaining limbs. Yes, you could evolve networks for multiple scenarios beforehand, but it might not be feasible to explore all possible scenarios. Also, this way you can take into account any unexpected environmental factors that weren't known beforehand.
+Combined with the fact that NEAT seems to perform well at evolving gaits for robots, this presents some interesting avenues for further exploration. Imagine, for instance, that a robot exploring a remote area (deep ocean, perhaps, or an exo-planet) which becomes damaged in some way (a robot with jointed legs loses one of its legs or a leg becomes otherwise disabled), NEAT allows it to evolve the most efficient gait possible with the remaining limbs. Yes, you could evolve networks for multiple scenarios beforehand, but it might not be feasible to explore all possible scenarios. Also, this way you can take into account any unexpected environmental factors that weren't known beforehand.
 
 === Hyper-Cube Encoding NEAT (HyperNEAT)
 
@@ -255,7 +258,7 @@ Another example is the visual discrimination tasks that is described in the Hype
 
 ==== Painting Hypercubes
 
-Once we've defined the substrate HyperNEAT evolves a CPPN. If you imagine the CPPN as a flat plane of bounded size, each point on the plane represents a node in the substrate. If we query the CPPN for two points (x~1~, y~1~), (x~2~, y~2~) the CPPN will return us the weight of the connection between the two nodes represented by the two points.
+Once we've defined the substrate, HyperNEAT evolves a CPPN. If you imagine the CPPN as a flat plane of bounded size, each point on the plane represents a node in the substrate. If we query the CPPN for two points (x~1~, y~1~), (x~2~, y~2~) the CPPN will return us the weight of the connection between the two nodes represented by the two points.
 
 .This figure from the HyperNEAT paper describes the process: (1) Every potential connection in the substrate is queried to determine its presence and weight; the dark directed lines shown in the substrate represent a sample of connections that are queried. (2) For each query, the CPPN takes as input the positions of the two endpoints and (3) outputs the weight of the connection between them. After all connections are determined, a pattern of connections and connection-weights results that is a function of the geometry of the substrate. In this way, connective CPPNs produce regular patterns of connections in space.
 image::querying-cppn.png[]
@@ -266,7 +269,7 @@ image::perlin-noise.png[]
 
 Then we have a field of pixels each of which has a colour value between 0 (black) and 1 (white). If we pick two points on the plane (representing two nodes in the substrate) and draw a line between them and sum all the values of the pixels on that line, we have the weight of connection between the two nodes/points.
 
-Now, our CPPN has 4-dimensions (x~1~, y~1~, x~2~, y~2~) so rather than a plane we're dealing with a 4-dimensional hypercube (hence the name _Hyper_ NEAT). What HyperNEAT is doing is 'painting' the inside of this 4-dimensional hypercube, the thickness of the paint defines the connection weights between the nodes in the substrate.
+Now, our CPPN has 4-dimensions (x~1~, y~1~, x~2~, y~2~) so rather than a plane we're dealing with a 4-dimensional link:https://en.wikipedia.org/wiki/Hypercube[hypercube] (hence the name _Hyper_ NEAT). What HyperNEAT is doing is 'painting' the inside of this 4-dimensional hypercube, the thickness of the paint defines the connection weights between the nodes in the substrate.
 
 ==== Dynamic Dimensionality
 
@@ -328,13 +331,13 @@ Novelty Search is disarmingly simple - reward the network which does something n
 
 That's it.
 
-What he found by doing this was that networks generated by novelty search were able to solve problems which 'normal' fitness function weren't able to solve.
+What he found by doing this was that **networks which had their evolution guided by novelty search were able to solve problems which 'normal' fitness function weren't able to solve**. Novelty Search was also able to **find solution to complex problems which were superior to those found through 'normal' fitness functions**.
 
 Here's a video that gives a lot more detail and isn't too long.
 
 video::-mxpn95uxS4[youtube,width=960,height=540]
 
-And here's Ken Stanley delivering a longer presentation about the whole concept, It's more conceptual, but well worth a watch. I've scrubbed forward through the preamble for you. (you're welcome).
+And here's Ken Stanley delivering a longer presentation about the whole concept. It's more conceptual, but well worth a watch. I've scrubbed forward through the preamble for you. (you're welcome).
 
 video::JlSLJ8ciHDE[youtube,width=960,height=540,start=212]
 
@@ -345,12 +348,12 @@ image::hard-maze-example.png[]
 
 A naive fitness function would just look at the distance between the position of an agent and the 'end' marker and reward the network that produces the smallest distance. This results in a poor result as all the agents get caught in the local minima, unable to do what's necessary and move away from the target in order to get around to the end.
 
-.a 'naive' fitness function which looks only at the agent's ultimate straight-line distance to the target results in 'bunching' in a local optima.
+.A 'naive' fitness function which looks only at the agent's ultimate straight-line distance to the target results in 'bunching' in a local optima.
 image::hard-map-fitness.png[]
 
 An approach which rewards novelty does much better, it explores more of the map and finds the global optimum.
 
-.a fitness function which rewards novelty search the solution space more thoroughly and finds the target more quickly.
+.A fitness function which rewards novelty search the solution space more thoroughly and finds the target more quickly.
 image::hard-map-novelty.png[]
 
 Dr. Stanley points out how novelty search is far more capable of finding a feasible solution. This may be true, but it requires a more compelling comparison, for sure. That being said, there are many compelling examples out there of novelty search outperforming the traditional fitness function. For instance, this example of the evolution of a biped gait.
@@ -375,9 +378,9 @@ There are lots of implementations of NEAT out there. However, the nature of open
 
 The 'Implementations' section of the Wikipedia page for NEAT provides a good list. Rather than repeat them here I'll just provide a little advice:
 
-- The original C++ version linked to the original paper doesn't seem to be available anymore. There are a couple of Github projects that appear to contain that original code, though, I think the one that leaves the original code most-untouched is https://github.com/janhohenheim/stanley_neat
+- The original C++ version linked to the original paper doesn't seem to be available anymore. There are a couple of GitHub projects that appear to contain that original code, though, I think the one that leaves the original code most-untouched is https://github.com/janhohenheim/stanley_neat
 - Take a deep breath before you look through the Java implementations, it's 'academic code' which is a euphemistic way of saying... well... you'll see for yourself.
-- link:https://github.com/colgreen/sharpneat[SharpNEAT] is AWESOME! there's documentation (which is huge in and of itself), some YouTube videos from the author, there are a lot of examples and a lot of options and extensions to explore. If only it built on Mono (I'm assuming it doesn't because it wasn't around when Colin Green started the project way back in the mists of time,) so we could use it to create controllers for game entities in Unity :(
+- link:https://github.com/colgreen/sharpneat[SharpNEAT] is AWESOME! There's documentation (which is huge in and of itself), some YouTube videos from the author, there are a lot of examples and a lot of options and extensions to explore. If only it built on Mono (I'm assuming it doesn't because it wasn't around when Colin Green started the project way back in the mists of time,) so we could use it to create controllers for game entities in Unity :(
 
 [sidebar]
 .What to look for in a NEAT implementation
