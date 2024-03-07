@@ -8,9 +8,6 @@ v1.0, 2024-02-29
 
 == Preface: On Searching the Archives
 
-.Live footage of the author doing exactly what he's talking about in this section
-image::wizard.compressed.png["An ancient wizard sits amongst a huge stack of books, papers and other documents, he smokes a pipe whilst studying the knowledge laid out in the document in his lap and the smoke winds and twists its way up in to the stacks of books around him. This image was created by MidJourney which seems to struggle with hands, so his right hand is all weird."]
-
 Unless you live in a cave you're probably well aware that Neural Networks have been experiencing something of a renaissance of late. Abandoned as interesting-but-a-dead-end not too long ago, the relentless march of Moore's Law means now we have the computing power required to exploit these statistical automata. As marketing departments jump up and down with delight at being given a means of generating seemingly endless streams of hyperbole, it's worth asking what other ideas are out there that have yet to have their day?
 
 === What Else Is Out There?
