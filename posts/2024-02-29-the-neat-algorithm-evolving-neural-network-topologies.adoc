@@ -5,6 +5,7 @@ v1.0, 2024-02-29
 :imagesdir: ../media/2024-02-29-the-neat-algorithm-evolving-neural-network-topologies
 :lang: en
 :tags: [artifical intelligence, machine learning, algorithm]
+:icons: font
 
 == Preface: On Searching the Archives
 
@@ -130,18 +131,18 @@ The first problem Innovation Numbers solve is described above - how to tell if t
 
 If we want to take some of the genes (the structure) from each parent and combine them together to create a bouncing little baby network we can stack one on top of the other and line up those innovation numbers, as in _Figure 5_. We can see that some innovation numbers are shared by both parents and some only exist in one parent or the other.
 
-.Comparing two genomes by pairwise comparison, matching on the unique identifiers for each connection gene.
+.Comparing two genomes by pairwise comparison, matching on the unique identifiers for each connection gene. #6 & #7 are disjoint genes, #9 & #10 are excess genes.
 image::parent-genomes-comparison.svg[]
 
-[sidebar]
+[NOTE]
 .Disjoint and Excess genes
-****
+====
 Genes which exist only in one parent in the middle of the genome (6 & 7 in this case) are referred to as `disjoint` genes.
 
 Genes which exist at only at the end of the list (they're only a part of the parent with the longest genome, 9 & 10 in this case) are referred to as `excess` genes.
 
 Genes can also be 'disabled' meaning the structure they represent isn't materialised in the network but the structure is passed along in the Genome. The state of the gene can be flipped as a mutation after an offspring is created and, in this way, structure that lies dormant within the genome can be reactivated in subsequent generations (and vice-versa).
-****
+====
 
 Creating a valid offspring is now simply a matter of walking along that list from left to right and applying simple rules:
 
