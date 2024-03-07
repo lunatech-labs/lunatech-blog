@@ -4,7 +4,7 @@ v1.0, 2024-02-29
 :title: The NEAT Algorithm: Evolving Neural Networks
 :imagesdir: ../media/2024-02-29-the-neat-algorithm-evolving-neural-network-topologies
 :lang: en
-:tags: [artifical intelligence, machine learning, algorithm, machine learning]
+:tags: [artifical intelligence, machine learning, algorithm]
 
 == Preface: On Searching the Archives
 
