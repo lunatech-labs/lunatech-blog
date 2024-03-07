@@ -353,7 +353,7 @@ image::hard-map-fitness.png[]
 
 An approach which rewards novelty does much better, it explores more of the map and finds the global optimum.
 
-.A fitness function which rewards novelty search the solution space more thoroughly and finds the target more quickly.
+.A fitness function which rewards novelty searches the solution space more thoroughly and finds the target more quickly.
 image::hard-map-novelty.png[]
 
 Dr. Stanley points out how novelty search is far more capable of finding a feasible solution. This may be true, but it requires a more compelling comparison, for sure. That being said, there are many compelling examples out there of novelty search outperforming the traditional fitness function. For instance, this example of the evolution of a biped gait.
