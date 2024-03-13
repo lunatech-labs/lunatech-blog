@@ -20,7 +20,7 @@ I would like to compliment the organizers and volunteers on the quality of the e
 
 Content wise a broad range of subjects is covered with a focus on java, the JVM, and the surrounding ecosystem.
 This year there were also a good number of talks discussing AI, both how to use it within your projects and how to use to it in your own coding process.
-With over 70 talks scheduled attending all the talks that look interesting is an impossible assignment!
+With over 70 talks scheduled, attending all the talks that look interesting is an impossible assignment!
 Luckily all the talks are recorded and published on YouTube. 
 The first recordings were already online within a few days after the conference in some cases.
 
