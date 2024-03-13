@@ -52,7 +52,7 @@ So much so that apparently this hack is part of some University curriculums in S
 After this we moved on to the subject of prevention of hacks.
 Espen is a big proponent of Capture The Flag (CTF) exercises.
 In CTF exercises the participants have to hunt for a "flag" in software that has vulnerabilities on purpose.
-This type of exercise developers look at software from the other side and gives them the opportunity to become familiar with "the tools of the trade" of the hacker.
+This type of exercise lets developers look at software from the other side and gives them the opportunity to become familiar with "the tools of the trade" of the hacker.
 
 .The tools of the trade
 image::tools-of-the-trade.jpg[Hacking tools slide]
