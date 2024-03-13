@@ -26,7 +26,7 @@ The first recordings were already online within a few days after the conference 
 
 == Talk: Tame Microservices with Contract Testing by Holly Cummins
 
-Personally I had never worked with contract tests before and I was curious how they could work.
+Personally I have never worked with contract tests before and I was curious how they work.
 In the talk Holly gave a great explanation of why and when contract tests can be useful. 
 A picture says more than a thousand words, and I think this graphic from her slides illustrates it perfectly.
 
