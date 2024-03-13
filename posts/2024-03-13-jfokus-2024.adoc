@@ -34,6 +34,7 @@ A picture says more than a thousand words, and I think this graphic from her sli
 image::contract-testing.png[Contract testing slide excerpt]
 
 After this explanation she discussed Pact, a polyglot framework for contract testing.
+Pact helps with creating the contracts & sharing them between teams so that everyone always uses the latest version of the contract in their tests.
 This was accompanied by a very well done demo involving several Quarkus based Microservices 
 and a frontend that showcased exactly at what service things started going wrong.
 
@@ -43,19 +44,20 @@ You can see the full talk yourself on youtube: https://youtu.be/Eu4V4PkZly0
 
 == Talk: How hacking works by Espen Sande-Larsen,
 Espen gave a presentation on what hacking is, and is not.
-The talk started with some hollywood examples of what hacking is not, we are probably all familiar with some movie examples of "hacking".
-And of course a discussion of what the word "hacking" typically refers to these days: "Exploiting systems trough vulnerabilities"
-Including a story of how software he had written himself got hacked in the past.
+The talk started with some hollywood examples of what hacking is not; we are probably all familiar with some movie examples of "hacking".
+This was followed by a discussion of what the word "hacking" typically refers to these days: "Exploiting systems trough vulnerabilities".
+He even included a story of how he himself got hacked in quite an epic fashion in the past. 
+So much so that apparently this hack is part of some University curriculums in Sweden to this day.
 
 After this we moved on to the subject of prevention of hacks.
 Espen is a big proponent of Capture The Flag (CTF) exercises.
 In CTF exercises the participants have to hunt for a "flag" in software that has vulnerabilities on purpose.
-This lets developers look at their software from the other side and gives them the opportunity to become familiar with "the tools of the trade" of the hacker.
+This type of exercise developers look at software from the other side and gives them the opportunity to become familiar with "the tools of the trade" of the hacker.
 
 .The tools of the trade
 image::tools-of-the-trade.jpg[Hacking tools slide]
 
-And he also demonstrated that they can be great fun:
+Espen also demonstrated that CTFs can be great fun:
 During the talk he guided us through few exercises and it really made me want to try solving some similar exercises myself!
 
 You can see his full talk at JFokus on youtube: https://youtu.be/LUsmpwt5czY
