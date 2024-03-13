@@ -1,0 +1,66 @@
+= JFokus 2024
+jdijt
+v1.0, 2024-03-13
+:title: JFokus 2024
+:imagesdir: ../media/2024-03-13-jfokus-2024
+:lang: en
+:tags: [conference, stockholm, sweden, java, jfokus]
+
+Recently myself and two other Lunatech colleagues had the opportunity to visit JFokus.
+JFokus is a conference that is held annually in the first week of February in Stockholm, Sweden. 
+
+In this post I will discuss my general experience of the conference, 
+followed by short discussions of two talks that I attended.
+
+== The Conference
+JFokus is held at the Waterfront Conference Center in Stockholm, located almost on top of the Stockholm Central Station.
+Catering wise the quality is excellent and the supply of coffee appears to be infinite which is always a good thing.
+Overall attending the conference was a very smooth and comfortable experience.
+I would like to compliment the organizers and volunteers on the quality of the event!
+
+Content wise a broad range of subjects is covered with a focus on java, the JVM, and the surrounding ecosystem.
+This year there were also a good number of talks discussing AI, both how to use it within your projects and how to use to it in your own coding process.
+With over 70 talks scheduled attending all the talks that look interesting is an impossible assignment!
+Luckily all the talks are recorded and published on YouTube. 
+The first recordings were already online within a few days after the conference in some cases.
+
+== Talk: Tame Microservices with Contract Testing by Holly Cummins
+
+Personally I had never worked with contract tests before and I was curious how they could work.
+In the talk Holly gave a great explanation of why and when contract tests can be useful. 
+A picture says more than a thousand words, and I think this graphic from her slides illustrates it perfectly.
+
+.Where contract tests fit
+image::contract-testing.png[Contract testing slide excerpt]
+
+After this explanation she discussed Pact, a polyglot framework for contract testing.
+This was accompanied by a very well done demo involving several Quarkus based Microservices 
+and a frontend that showcased exactly at what service things started going wrong.
+
+For me this talk gave me a good idea of where and how contract testing can be useful.
+You can see the full talk yourself on youtube: https://youtu.be/Eu4V4PkZly0
+ 
+
+== Talk: How hacking works by Espen Sande-Larsen,
+Espen gave a presentation on what hacking is, and is not.
+The talk started with some hollywood examples of what hacking is not, we are probably all familiar with some movie examples of "hacking".
+And of course a discussion of what the word "hacking" typically refers to these days: "Exploiting systems trough vulnerabilities"
+Including a story of how software he had written himself got hacked in the past.
+
+After this we moved on to the subject of prevention of hacks.
+Espen is a big proponent of Capture The Flag (CTF) exercises.
+In CTF exercises the participants have to hunt for a "flag" in software that has vulnerabilities on purpose.
+This lets developers look at their software from the other side and gives them the opportunity to become familiar with "the tools of the trade" of the hacker.
+
+.The tools of the trade
+image::tools-of-the-trade.jpg[Hacking tools slide]
+
+And he also demonstrated that they can be great fun:
+During the talk he guided us through few exercises and it really made me want to try solving some similar exercises myself!
+
+You can see his full talk at JFokus on youtube: https://youtu.be/LUsmpwt5czY
+
+== Check out other talks:
+
+You can check out the other talks of the conference at https://www.youtube.com/playlist?list=PLUQORQEatnJezysGP4J-EZm34u-OyILC2[the JFokus 2024 playlist] on youtube.
+Also for most of the talks the slides have been made available on https://www.jfokus.se/schedule[the JFokus website]. 
