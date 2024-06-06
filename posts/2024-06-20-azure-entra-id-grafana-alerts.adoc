@@ -8,12 +8,12 @@ v.0, 2024-06-20
 
 Microsoft Entra ID is a key component of every cloud deployment. It allows, among other things, for
 "App Registrations" to authenticate users and other applications. +
-This is usually done by authenticating the App Registration itself with`client-id` and `client-secret`,
+This is usually done by authenticating the App Registration itself with a `client-id` and a `client-secret`,
 as is common with other IAM solutions.
 
 Entra ID has a peculiarity though, it assigns an expiration date to `client-secrets` in order to force
 frequent rotation of those. This is very good from a security perspective, but caught my team and I by
-surprise on more than one occasion as suddenly our applications stop to work because of such secrets
+surprise on more than one occasion as suddenly our applications stopped working because of such secrets
 being expired.
 
 Unfortunately Azure doesn't seem to provide a built-in alert system for the expiring secrets, and the
@@ -26,7 +26,8 @@ we finally arrived to the solution I'm sharing here!
 
 === Overview
 The basic idea is to allow Grafana to use Microsoft's Graph API as a Datasource for its metrics and
-alerts. To do that we'll do the following:
+alerts. This means that Grafana itself will need to be authenticated as a Microsoft Entra ID
+Service Principal. To do that we'll do the following:
 
 * Azure
 ** Create an App Registration
@@ -74,6 +75,8 @@ image::registration_secret.png[Registration Secret, 600]
 image::registration_secret_form.png[Registration Secret Form, 300]
 
 ==== Grant permission to call Graph API
+Now we'll grant our newly created App Registration the permission to query the "Applications" stored
+in Entra ID. We'll use this query in order to fetch the expiring secrets.
 
 . Open the App Registration (you should _still_ be there)
 . From the menu on the left, select the "API Permissions" blade. You should see that the base
@@ -86,6 +89,10 @@ image::registration_secret_form.png[Registration Secret Form, 300]
 image::registration_permission.png[Registration Permission, 600]
 
 === Grafana
+It is now the time to connect Grafana to the Graph API. In order to do this, we'll make use of a
+special plugin we recently discovered: https://grafana.com/grafana/plugins/yesoreyeram-infinity-datasource/[Infinity]
+
+This plugin allows to use web endpoint as a Data source, which fits our needs perfectly.
 
 ==== Install "Infinity Data Source" plugin
 https://grafana.com/docs/grafana/latest/administration/plugin-management/#install-a-plugin[Using the official guide as a reference]
@@ -133,7 +140,7 @@ image::infinity_plugin.png[Infinity Plugin, 600]
 |===
 
 [start=5]
-. (Optional) Configure the "Health Check" section
+. (Optional, but recommended) Configure the "Health Check" section
 
 |===
 |Property |Value
@@ -142,7 +149,7 @@ image::infinity_plugin.png[Infinity Plugin, 600]
 |Enabled
 
 |Health check URL
-|https://graph.microsoft.com/v.0/applications
+|https://graph.microsoft.com/v1.0/applications
 |===
 
 [start=6]
@@ -153,6 +160,13 @@ image::graph_api_data_source.png[Graph Api Data Source, 600]
 image::graph_api_health_check.png[Graph Api Health Check, 600]
 
 ==== Create an alert for expiring secrets
+Now it's time to piece it all together. The idea of this alert will be the following:
+
+. Query the `https://graph.microsoft.com/v1.0/applications` endpoint
+. Extract get all the secrets expiration dates
+. Filter based on the number of days you need to be notified
+
+To do so:
 
 . In Grafana, click Alerting > Alert Rules
 . Click "New alert rule" from the top right corner
@@ -161,46 +175,65 @@ image::graph_api_health_check.png[Graph Api Health Check, 600]
     * In the Query `A` fill as follows
 
 |===
-|Property |Value
+|Property |Value |Explanation
 
 |Datasource (top left corner)
 |The newly created Graph API datasource
+|
 
 |Type
 |JSON
+|
 
 |Parser
 |Backend
+|We need to use this parser because it's the
+https://github.com/grafana/grafana-infinity-datasource/discussions/189[only one that supports alerts]
 
 |Source
 |URL
+|
 
 |Format
 |Table
+|
 
 |Method
 |GET
+|
 
 |URL
 |https://graph.microsoft.com/v1.0/applications
+|This will return _all_ the applications in the tenant. If you want to perform some filtering consider
+using the https://learn.microsoft.com/en-us/graph/filter-query-parameter?tabs=http[$filter query parameter]
+or add extra conditions to the "Filter" section down below
 
 |Parsing options & Result fields
+|
 |
 
 |Rows/Root
 |value.passwordCredentials
+|This will return all the credentials for all the app registrations. If your team sticks to one secret
+per App Registration, consider using only `value` as that could provide more information to the alert.
+(We won't be providing the configuration for `value`)
 
 |Computed columns, Filter, Group by
+|
 |
 
 |Computed Columns - Expression
 |tomillis(totime(endDateTime))
+|Takes the `endDateTime` field which is represented as "yyyy-MM-ddThh:mm:ssZ" and converts it to Unix milliseconds
 
 |Computed Columns - As
 |Value
+|
 
 |Filter
 |Value < ${__to} + <num-of-days> * 86400000
+|Compares the `endDateTime` to the `${__to}` value (the current time) plus how many days in advance
+you want to be notified. The days need to be converted to millis, hence the `* 86400000`
 |===
 
 [start=4]
