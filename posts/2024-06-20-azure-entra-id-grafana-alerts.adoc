@@ -1,6 +1,6 @@
 = Create a Grafana Alert for expiring Microsoft Entra ID secrets
 vanny96
-v.0, 2024-06-20
+v1.0, 2024-06-20
 :title: Create a Grafana Alert for expiring Microsoft Entra ID secrets
 :lang: en
 :imagesdir: ../media/2024-06-20-azure-entra-id-grafana-alerts
@@ -14,7 +14,7 @@ similar to other IAM solutions.
 Entra ID has a peculiarity though, it assigns an expiration date to `client-secrets` in order to force
 frequent rotation of those. This is very good from a security perspective, but caught my team and I by
 surprise on more than one occasion as suddenly our applications stopped working because of such secrets
-being expired.
+expiring.
 
 Unfortunately Azure doesn't seem to provide a built-in alert system for the expiring secrets, and the
 solutions we found online were not quite to our liking (https://www.thelazyadministrator.com/2023/12/16/automated-alerts-on-azure-entra-id-application-secret-expirations/[this excellent guide suggests a solution making
