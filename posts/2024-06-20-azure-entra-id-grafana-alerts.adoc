@@ -21,8 +21,8 @@ solutions we found online were not quite to our liking (https://www.thelazyadmin
 use of powershell scripts] ) as we were hoping to fire the alerts from our Grafana instance since all
 the contact points were already configured.
 
-After a long investigation and some open source contributions, we finally arrived to the solution I'm
-sharing here!
+After a long investigation and some https://github.com/yesoreyeram/grafana-plugins/pull/13[open source contributions],
+we finally arrived to the solution I'm sharing here!
 
 === Overview
 The basic idea is to allow Grafana to use Microsoft's Graph API as a Datasource for its metrics and
@@ -49,12 +49,14 @@ and `<client-secret>`
 . Access the Microsoft Entra ID service
 . From the menu on the left, select the "App Registrations" blade
 . From the top, click "New Registration"
-. Fill the form (no rediraction URL is needed)
+. Fill the form (no redirection URL is needed)
 . Click "Register"
 
 image::new_registrations.png[New Registration,600]
 
 ==== Create an App Registration Secret
+On this step, we'll create the `<client-secret>` needed for Grafana to authenticate itself as the
+AppRegistration. Worry not, it will be possible for Grafana to report on this secret as well!
 
 . Open the App Registration object you just created (you should be automatically redirected there)
 . From the overview page, write down your `<client-id>` (Application (client) ID) and `<tenant-id>`
