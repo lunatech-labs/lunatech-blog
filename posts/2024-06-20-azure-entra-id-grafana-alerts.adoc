@@ -9,7 +9,7 @@ v.0, 2024-06-20
 Microsoft Entra ID is a key component of every cloud deployment. It allows, among other things, for
 "App Registrations" to authenticate users and other applications. +
 This is usually done by authenticating the App Registration itself with a `client-id` and a `client-secret`,
-as is common with other IAM solutions.
+similar to other IAM solutions.
 
 Entra ID has a peculiarity though, it assigns an expiration date to `client-secrets` in order to force
 frequent rotation of those. This is very good from a security perspective, but caught my team and I by
