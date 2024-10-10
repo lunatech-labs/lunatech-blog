@@ -1,0 +1,44 @@
+= LunaConf 2024
+Sylke Sauerwald
+v1.0, 2024-10-10
+:title: LunaConf 2024: A Memorable Gathering
+:imagesdir: ../media/2024-10-10-lunaconf-2024
+:lang: en
+:tags: [conference, event, lunatech]
+
+After 2 years of waiting (the celebration of our 30 years of LT fell in between 😊), we held our Lunatech conference this year on the 4th of October in our wonderful office in Rotterdam on the 22nd and 23rd floor. We welcomed our colleagues from France, who arrived the evening before when we entertained them with food, wine and music; we had speakers from various countries and expertise, clients, guests and ex-employees from Lunatech. 
+
+image::welcome.jpg[Welcome by Nicolas Leroux, Lunatech's CEO, 600]
+
+### The Start of the Day
+
+Our day started with welcoming everyone and handing out our new Lunatech t-shirts to all the attending employees as well as the t-shirts for our speakers and our conference bracelets and keychain goodies. Our CEO Nicolas Leroux opened the conference with some welcome words and then we kicked off the talks with two speakers from Lunatech (Willem Jan Glerum, who talked about SSO made easy with Quarkus OIDC and Gustavo De Micheli, who talked about Typeclass Derivation on Scala 3), our experts in acquisition Erwin Merkx & Paul Denis and a 2,5-hour presentation about AI/ML in Software Development from our employees Radek Kargul and Ji Darwish. 
+
+After that, we continued with Julien Enoch, who talked about "SDV/Zenoh", Nicolas Thuilliez who talked about "Lean Management" and Konstantin with his presentation about "Building desktop apps in Kotlin". A special segment featured a presentation on our Lunatech push-up challenge, with Giovanni Barbaro and Nicolas Leroux, followed by Evgenii Frank’s session on "How to Do Effective Push-ups".
+
+image::ryan-knight-talk.jpeg[Ryan Knight's talk, 600]
+
+
+### Lunch Break and Refueling
+
+As in the last conference, we had the Caterer De keuken van Hemels providing us with an excellent lunch. After we all refuelled with food, it was Nicolas Leroux’s turn to talk about Why the right amount of project structure is important and Michael Strauss's question about How to take a good picture in any situation.
+
+image::lunch-break.jpg[Lunch break, 600]
+
+### More Expert Sessions
+
+We continued with Ryan Knight’s presentation about Structured Concurrency, Martin Kok’s talk about Building trust in open source, Rajendra Maniyal’s AI with Scala - An intro to LangChain4J and Nicolas Leroux' other talk about Unleashing Organizational Potential.
+
+After a short break with coffee and cake, Thomas Segismont talked about Vert.x 5 news and roadmap and Stéphane Épardaud Under the hood: tricks, hacks and techniques that make Quarkus so enjoyable and fast. Our colleague Michael Strauss had another presentation, this time about How not to benchmark and Erik Bakker talked about the hot topic Infosec At Lunatech: Doctrine, policy and toolings. Besides all these talks, Sylke Sauerwald also provided a workshop on Tai Chi.
+
+And last but not least we had three great closing external speakers, we had Quentin Adam’s talk about Rediscovering Simplicity in Software Development, Sebastien Blanc presented How Platform Engineering is Driving the Evolution of Developer Self-Service and Horacio Gonzales talked about Demystifying Kubernetes operator creation. At the same time, our colleagues Tanguy Serrand and Titouan Guiochet introduced everyone on a DJ set to How to mix? Tips to impress your friends.
+
+image::quentin-adam-talk.jpeg[Quentin Adam's talk, 600]
+
+### Bringing the Day to a Close
+
+We then reached the end of the conference, our CEO Nicolas Leroux said some closing words and our caterer started serving dinner. With excellent food and wine, we started the evening and ended the day with some dancing to music from our in-house DJs Tanguy and Titouan. 
+
+All in all, it was a fabulous day, ending in a great night and everyone left having learnt something new, has met interesting people and hopefully will join us at our next conference again.
+
+image::end.jpeg[End of the day, 600]
