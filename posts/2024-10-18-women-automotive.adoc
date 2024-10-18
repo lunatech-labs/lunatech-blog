@@ -4,7 +4,7 @@ v1.0, 2024-10-18
 :title: Why the Women Automotive Network Summit Should Be on Your Radar: Diversity, Inclusion and Networking
 :imagesdir: ../media/2024-10-18-women-automotive
 :lang: en
-:tags: [eclipse foundation, automotive industry, networking, conference, en]
+:tags: [eclipse foundation, automotive industry, networking, conference]
 
 *The Women Automotive Network (WAN) Summit Europe* kicked off on October 8, 2024, in Stuttgart, Germany, focusing on the importance of diversity and inclusion in the automotive industry. Veronika Shamova and I, Kateryna Olenkovska, proudly represented Lunatech’s automotive expertise at the summit 😄 Veronika is a Site Reliability Engineer, and I am a Quality Assurance Specialist. Together, we are working with CARIAD to develop a Software Labeling Stack for creating and processing ground truth data. This summit was a great opportunity to connect business and software, reminding us that teamwork is just as important as coding.
 
@@ -14,7 +14,7 @@ Let’s take a closer look at the summit's purpose. The summit aimed to unite le
 
 A key focus of the summit is mentorship, which is essential for career growth. Members can choose to be mentors or mentees, helping each other navigate their professional journeys.
 
-So, what happened at the conference? In the morning, we were welcomed at the *Forum am Schlosspark* in Ludwigsburg, a lovely venue that accommodated all 500 attendees. An additional 500 participants joined the summit online. After registering and enjoying some coffee, we were invited into a spacious conference hall filled with round tables.
+So, what happened at the conference? In the morning, we were welcomed at the Forum am Schlosspark in Ludwigsburg, a lovely venue that accommodated all 500 attendees. An additional 500 participants joined the summit online. After registering and enjoying some coffee, we were invited into a spacious conference hall filled with round tables.
 
 image::main-hall.jpg[Photo of the main hall, 600]
 
@@ -50,10 +50,10 @@ During the panel discussion, we learned that the industry is evolving, with wome
 
 After a day packed with insights, we wrapped it up with a fun after-party, where networking flowed just as smoothly as the Aperol Spritz! While networking can be tough and sometimes intimidating, it’s definitely rewarding when you find those genuine connections that help you grow personally and professionally. We left feeling energized, with several connections in LinkedIn and excited for what’s to come.
 
-All in all, as for someone with a software engineering background, this summit was a unique experience for me, it was different from typical software conferences. Instead of focusing on technical skills, it emphasized sharing career stories, taking on new challenges, and never giving up. Seeing so many successful women in the automotive industry was inspiring. The focus on building a strong community made the event even better. I enjoyed the talks and gained valuable insights and I’m looking forward to coming back next year!
+All in all, as for someone with a software engineering background, this summit was a unique experience, it was different from typical software conferences. Instead of focusing on technical skills, it emphasized sharing career stories, taking on new challenges, and never giving up. Seeing so many successful women in the automotive industry was inspiring. The focus on building a strong community made the event even better. I enjoyed the talks and gained valuable insights and I’m looking forward to coming back next year!
 
 image::end.jpg[End of the event, 600]
 
-P.S. If you're interested in learning more and want to experience a bit of the conference atmosphere, check out the recorded talks through this https://www.youtube.com/playlist?list=PLBvCIWq03PgrNYd_ASN_LWvJ8oq12Ub_-[link]!
+P.S. If you want to experience a bit of the conference atmosphere, check out the recorded talks through this https://www.youtube.com/playlist?list=PLBvCIWq03PgrNYd_ASN_LWvJ8oq12Ub_-[link]!
 
-And https://www.eclipse.org/[here] you can read more about the Eclipse Foundation.
+Also, you can learn more about https://womenautomotivenetwork.com/en-eu[Women Automotive Network] and https://www.eclipse.org/[Eclipse Foundation] here.
