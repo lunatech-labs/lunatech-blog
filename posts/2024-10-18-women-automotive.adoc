@@ -4,7 +4,7 @@ v1.0, 2024-10-18
 :title: Why the Women Automotive Network Summit Should Be on Your Radar: Diversity, Inclusion and Networking
 :imagesdir: ../media/2024-10-18-women-automotive
 :lang: en
-:tags: [conference, event, women, automotive]
+:tags: [eclipse foundation, automotive industry, networking, conference, en]
 
 *The Women Automotive Network (WAN) Summit Europe* kicked off on October 8, 2024, in Stuttgart, Germany, focusing on the importance of diversity and inclusion in the automotive industry. Veronika Shamova and I, Kateryna Olenkovska, proudly represented Lunatech’s automotive expertise at the summit 😄 Veronika is a Site Reliability Engineer, and I am a Quality Assurance Specialist. Together, we are working with CARIAD to develop a Software Labeling Stack for creating and processing ground truth data. This summit was a great opportunity to connect business and software, reminding us that teamwork is just as important as coding.
 
