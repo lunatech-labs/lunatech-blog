@@ -16,9 +16,7 @@ A key focus of the summit is mentorship, which is essential for career growth. M
 
 So, what happened at the conference? In the morning, we were welcomed at the *Forum am Schlosspark* in Ludwigsburg, a lovely venue that accommodated all 500 attendees. An additional 500 participants joined the summit online. After registering and enjoying some coffee, we were invited into a spacious conference hall filled with round tables.
 
-image::main-hall-1.jpg[Photo of the main hall, 600]
-
-image::main-hall-2.jpg[Second photo of the main hall, 600]
+image::main-hall.jpg[Photo of the main hall, 600]
 
 The event began with a welcome speech from *Micha Goebig*, CEO and Founder of Go Big Coaching and Communication LLC. She shared insights about the community and stressed the importance of networking. "Don’t be shy to say hello to the woman next to you!" Micha encouraged us. With that, the summit officially began!
 
@@ -32,7 +30,7 @@ image::linda-jackson.jpg[Talk from Linda Jackson, 600]
 
 *Barbara Frenkel*, Member of the Executive Board for Procurement at Porsche AG, delivered an inspiring talk titled “Follow Your Dream – My Path to the Porsche Executive Board.” The key takeaways from her presentation were to work hard, trust the process, and let your colleagues be your references. And who knows? One day, you might get a call from Porsche and be invited to become one of the nine board members!
 
-image::background.jpg[Talk from Barbara Frenkel, 600]
+image::barbara-frenkel.jpg[Talk from Barbara Frenkel, 600]
 
 *FLEX* panel group initiated a discussion on how we make our business decisions. It turns out that these choices are rarely based solely on facts; instead, they often involve a mix of intuition and facts. It's essential to trust your gut feeling and be willing to take risks to explore uncharted territories.
 
