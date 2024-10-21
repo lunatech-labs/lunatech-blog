@@ -62,6 +62,6 @@ image::end.jpg[End of the event, 600]
 
 ### Link
 
-P.S. If you're interested in learning more and want to experience a bit of the conference atmosphere, check out the recorded talks through this https://www.youtube.com/playlist?list=PLBvCIWq03PgrNYd_ASN_LWvJ8oq12Ub_-[link]!
+If you're interested in learning more and want to experience a bit of the conference atmosphere, check out the recorded talks through this https://www.youtube.com/playlist?list=PLBvCIWq03PgrNYd_ASN_LWvJ8oq12Ub_-[link]!
 
-Also, you can learn more about https://womenautomotivenetwork.com/en-eu[Women Automotive Network] and https://www.eclipse.org/[Eclipse Foundation] here.
+And https://www.eclipse.org/[here] you can read more about the Eclipse Foundation.
