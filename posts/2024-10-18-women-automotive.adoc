@@ -10,11 +10,15 @@ v1.0, 2024-10-18
 
 image::nika-kata.jpg[Photo of Veronika and Kateryna, 600]
 
-Let’s take a closer look at the summit's purpose. The summit aimed to unite leading women in the automotive sector from companies like Porsche, Volkswagen, Volvo, and Jaguar, and more. The big goal is to build a strong network and share experiences that helped these women succeed. The WAN community has grown to 40,000 members worldwide and is continuing to expand.
+### Let’s take a closer look at the summit's purpose
+
+The summit aimed to unite leading women in the automotive sector from companies like Porsche, Volkswagen, Volvo, and Jaguar, and more. The big goal is to build a strong network and share experiences that helped these women succeed. The WAN community has grown to 40,000 members worldwide and is continuing to expand.
 
 A key focus of the summit is mentorship, which is essential for career growth. Members can choose to be mentors or mentees, helping each other navigate their professional journeys.
 
-So, what happened at the conference? In the morning, we were welcomed at the Forum am Schlosspark in Ludwigsburg, a lovely venue that accommodated all 500 attendees. An additional 500 participants joined the summit online. After registering and enjoying some coffee, we were invited into a spacious conference hall filled with round tables.
+### So, what happened at the conference?
+
+In the morning, we were welcomed at the Forum am Schlosspark in Ludwigsburg, a lovely venue that accommodated all 500 attendees. An additional 500 participants joined the summit online. After registering and enjoying some coffee, we were invited into a spacious conference hall filled with round tables.
 
 image::main-hall.jpg[Photo of the main hall, 600]
 
@@ -22,7 +26,7 @@ The event began with a welcome speech from *Micha Goebig*, CEO and Founder of Go
 
 image::micha-goebig.jpg[Welcome speech from Micha Goebig, 600]
 
-### Let’s look at some highlights from the talks.
+### Let’s look at some highlights from the talks
 
 From *Linda Jackson*, CEO of Peugeot, we gained firsthand insight into what it takes to climb the corporate ladder. With 45 years of experience in the automotive industry, Linda emphasized the importance of confidence, perseverance, learning from mistakes, and growing alongside a trusted team. She also reminded us that on this long journey to the top, it’s crucial to pause and appreciate the view.
 
@@ -48,12 +52,16 @@ So, how can we enhance diversity in open source? We need to be more mindful and 
 
 During the panel discussion, we learned that the industry is evolving, with women’s presence steadily growing and strong allies supporting diversity and inclusion at every turn. Looking ahead, there’s even more growth planned, with a goal to increase the representation of women in leadership positions from 20% to 25% by 2030. This goal is set to be achieved by enhancing mentorship and sponsorship networks within the industry, and WAN serves exactly that purpose.
 
+### Conclusion
+
 After a day packed with insights, we wrapped it up with a fun after-party, where networking flowed just as smoothly as the Aperol Spritz! While networking can be tough and sometimes intimidating, it’s definitely rewarding when you find those genuine connections that help you grow personally and professionally. We left feeling energized, with several connections in LinkedIn and excited for what’s to come.
 
 All in all, as for someone with a software engineering background, this summit was a unique experience, it was different from typical software conferences. Instead of focusing on technical skills, it emphasized sharing career stories, taking on new challenges, and never giving up. Seeing so many successful women in the automotive industry was inspiring. The focus on building a strong community made the event even better. I enjoyed the talks and gained valuable insights and I’m looking forward to coming back next year!
 
 image::end.jpg[End of the event, 600]
 
-P.S. If you want to experience a bit of the conference atmosphere, check out the recorded talks through this https://www.youtube.com/playlist?list=PLBvCIWq03PgrNYd_ASN_LWvJ8oq12Ub_-[link]!
+### Link
+
+P.S. If you're interested in learning more and want to experience a bit of the conference atmosphere, check out the recorded talks through this https://www.youtube.com/playlist?list=PLBvCIWq03PgrNYd_ASN_LWvJ8oq12Ub_-[link]!
 
 Also, you can learn more about https://womenautomotivenetwork.com/en-eu[Women Automotive Network] and https://www.eclipse.org/[Eclipse Foundation] here.
