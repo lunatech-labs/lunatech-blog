@@ -1,0 +1,516 @@
+= Maven vs Gradle Navigating the World of Java Build Tools
+Giovanni Barbaro
+v1.0, 2024-11-01
+:title: Maven vs Gradle Navigating the World of Java Build Tools
+:imagesdir: ../media/2024-11-01-maven-vs-gradle
+:lang: en
+:tags: [java, maven, gradle, java-vs-world, java-over-java]
+
+This is the first of a series of articles for Lunatech's *Java over Java* series. A seasonal occurrence
+where we pick a topic for a month and hold a series of presentations and articles about it. This season's topic
+will be https://blog.lunatech.com/tags/java-vs-world["Java vs the world"], follow the link to see other
+articles from this series.
+
+== Introduction
+Building tools have become part of our daily life as software engineers. There is almost no project that doesn't
+make use of one, and there is no Java developer that hasn't been exposed to Maven at least once.
+With it being such a commonly used tool one would assume that every Java developer knows their building tool of choice
+inside-out, but usually the exact opposite is true! (or at least it was for me!)
+
+In today's article we'll take a look at the 2 most prominent building tools of recent years, Maven and Gradle,
+and try to understand how both of them works, their differences and how to customize your build in each system!
+
+****
+Disclaimer: We'll be using Kotlin for our examples in Gradle
+****
+
+== Tools overview
+
+First of all, let's take a quick look at both tools
+
+|===
+| |Maven |Gradle
+
+| Popularity
+| Most popular Java building tool by far
+| Popular in Android ecosystem and with Kotlin projects
+
+| Language
+| XML
+| Groovy/Kotlin
+
+| Philosophy
+| Convention over Configuration
+| Configuration over Convention
+
+| Build Definition
+| All in one file (pom.xml)
+| Defined in multiple files (settings, build, properties)
+|===
+
+Already at glance one can notice how different the two tools are. The most glaring difference is of course
+the language used to describe the build process, but there is a lot more going on here that we'll see today.
+
+Going over the points one by one:
+
+* *Popularity:* Maven is by far the most popular building tool for Java out there. This makes finding
+guides, tools and online support much easier compared to the alternatives. With that said, Gradle is still quite
+popular and its community is very dedicated, making all of these advantages less pronounced as they would otherwise be.
+
+* *Language:* Most people are not huge fans of XML, so working with Maven's build definitions isn't everyone's
+favorite pastime and most would prefer used a full-fledged programming language as what happens in Gradle. While
+IDEs do their best to improve Maven's development experience, the reality is that it is way more structured, and XML
+is part of the reason.
+
+* *Philosophy:* The second reason that makes Maven way more "structured" comes down to the difference in
+philosophy compared to Gradle. +
+Maven is extremely opinionated and can be defined as "Convention over Configuration". There is usually
+only one way to do something, and if you can't find a plugin that satisfies your needs it can be
+quite tricky to customize your build. +
+Gradle on the other hand is extremely flexible, as one would expect from a building tool using a
+programming language for its definitions.
+It can be defined as "Configuration over Convention", as there are multiple ways to achieve the same goal
+(there is a certain amount of convention, but it is not strongly enforced). This can sometimes lead to
+confusion in beginners, as guides online tend to offer different approaches for the same problem.
+
+* *Build Definition:* The Maven build definition happens entirely in its `pom.xml` file. This makes it
+quite easy to work with. +
+Gradle instead makes use of a variety of files, namely `build.gradle.kts`,`setting.gradle.kts` and `gradle.properties`.
+This allows for greater "separation of concern", but adds some more complexity to it as well.
+
+==== Build? Settings? Properties?
+As discussed in the previous chapter, there are quite a few files that can be used to define a gradle
+build process. Here's a quick overview for each one of them:
+
+* `settings.gradle.kts`: Script that takes place before any build script. It is required when working
+with multiple modules/projects, as it is responsible for setting up their hierarchy.
+* `build.gradle.kts`: Describes the build for a single gradle project. It holds its dependencies, plugins and
+available tasks
+* `gradle.properties`: It's a normal `.properties` file, its values can be easily used in the
+`build.gradle.kts` script and, to a lesser extent, in the `setting.gradle.kts`. It is entirely optional.
+
+To give a little example of the three files at work, we could have the current setup:
+
+Our `gradle.properties`
+[source,properties]
+----
+whoToGreet=Lunatech
+----
+
+Bottom of `build.gradle.kts`
+[source,kotlin]
+----
+val whoToGreet: String by project // Will get the value from the gradle.properties
+println("Hello $whoToGreet from Build")
+----
+
+Bottom of `settings.gradle.kts`
+[source,kotlin]
+----
+val whoToGreet: String by settings // Will get the value from the gradle.properties
+println("Hello $whoToGreet from Settings")
+----
+
+When running `gradle tasks` you'll see something like this:
+[source,text]
+----
+Hello Lunatech from Settings
+
+> Configure project :
+Hello Lunatech from Build
+
+> Task :tasks
+...
+----
+
+This shows us that the value `whoToGreet` was fetched by the `gradle.properties` file,
+and that the `settings.gradle.kts` file was executed before the `gradle.build.kts` file.
+
+== Tools Lifecycle
+Besides syntactical differences, the two tools have very different approaches to their lifecycles as well.
+Their documentation is very well-made, and as such we will make use of it in the following paragraphs where we try
+to point out their differences.
+
+=== Maven
+Maven has what I like to call a "fixed lifecycle". It has a predefined list of phases that have to be executed in order.
+Here are the most popular phases, but there are quite a few more:
+
+. validate
+. compile
+. test
+. package
+. verify
+. install
+. deploy
+
+When running a maven build you can target a specific phase, for example `mvn package` will target the
+`package` phase. When a phase is targetted, all the phases before it will also be executed, so in our example
+`validate`, `compile` and `test` would also be executed before `package`.
+
+What happens in a specific phase is defined by `plugins`. A plugin in Maven is a piece of configuration
+that allows to tie some script execution to a specific phase. Every time a `phase` is being processed
+maven will check which plugins have mapped their executions to that specific `phase` and will execute them.
+
+image::maven-lifecylce.png[Maven lifecycle, 600]
+
+To demonstrate this behaviour we can use an extremely simple plugin, `echo-maven-plugin`. This plugin
+allows us to print any `message` we want during the build process.
+
+We can add the following block to our `pom.xml`
+[source,xml]
+----
+<build>
+    <!-- Maven Build Lifecycle -->
+    <plugins>
+        <plugin>
+            <groupId>com.github.ekryd.echo-maven-plugin</groupId>
+            <artifactId>echo-maven-plugin</artifactId>
+            <version>1.3.2</version>
+            <executions>
+                <execution>
+                    <id>echo-test</id>
+                    <phase>test</phase>
+                    <goals>
+                        <goal>echo</goal>
+                    </goals>
+                    <configuration>
+                        <message>Hello world at test</message>
+                    </configuration>
+                </execution>
+                <execution>
+                    <id>echo-compile</id>
+                    <phase>compile</phase>
+                    <goals>
+                        <goal>echo</goal>
+                    </goals>
+                    <configuration>
+                        <message>Hello world at compile</message>
+                    </configuration>
+                </execution>
+                <execution>
+                    <id>echo-validate</id>
+                    <phase>validate</phase>
+                    <goals>
+                        <goal>echo</goal>
+                    </goals>
+                    <configuration>
+                        <message>Hello world at validate</message>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+----
+
+For this plugin, we're defining 3 different executions that will occur at 3 different phases: `validate`, `compile` and `test`.
+Running `mvn test` should return something like this:
+[source,text]
+----
+[INFO] --- echo:1.3.2:echo (echo-validate) @ maven_demo ---
+[INFO] Hello world at validate
+[INFO]
+[INFO] --- resources:3.3.1:resources (default-resources) @ maven_demo ---
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO]
+[INFO] --- compiler:3.13.0:compile (default-compile) @ maven_demo ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 2 source files with javac [debug target 17] to target/classes
+[INFO]
+[INFO] --- echo:1.3.2:echo (echo-compile) @ maven_demo ---
+[INFO] Hello world at compile
+[INFO]
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ maven_demo ---
+[INFO] skip non existing resourceDirectory /Users/giovannibarbaro/Desktop/Personal/maven_gradle_demo/maven_demo/src/test/resources
+[INFO]
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ maven_demo ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO]
+[INFO] --- surefire:3.2.5:test (default-test) @ maven_demo ---
+[INFO]
+[INFO] --- echo:1.3.2:echo (echo-test) @ maven_demo ---
+[INFO] Hello world at test
+----
+
+We can see how the three plugin executions were processed not in the order that they were defined, but
+in the lifecycle pre-determined order. It's also possible to see how some default plugins will run even
+if not defined in our `pom.xml`, as they're pre-configured by maven itself.
+
+=== Gradle
+In Gradle, there is no strict "fixed lifecycle" as in Maven. Instead, Gradle relies on a task-based
+model where tasks can be defined with custom actions and dependencies. Each task has a specific
+purpose, and you can control the order and execution of tasks through dependencies or by explicitly
+defining task relationships.
+
+image::gradle-lifecycle.png[Gradle Lifecycle, 600]
+
+Gradle by default doesn't come with any useful task, but thanks to the `Java` plugin a few key tasks are
+added to our arsenal:
+
+* assemble
+* build
+* check
+* clean
+* compileJava
+* test
+
+When you run a Gradle build, you can specify a particular task, for example, `gradle build`. Gradle
+will run all necessary dependent tasks, so in this example, compileJava, test, and assemble would
+also execute as dependencies of build.
+
+To experiment once again with this workflow, we can try to print some "Hellos". Let's start by adding the
+following script at the bottom of our `build.gradle.kts`
+[source,kotlin]
+----
+val compileJava = tasks.named("compileJava")
+val assemble = tasks.named("assemble")
+val test = tasks.named("test")
+
+val helloWorldCompile = tasks.register("helloCompile") {
+    doFirst { println("Hello from compile") }
+    dependsOn(compileJava)
+}
+
+tasks.register("helloAssemble") {
+    doFirst { println("Hello from assemble") }
+    dependsOn(assemble)
+}
+
+tasks.register("helloTest") {
+    doFirst { println("Hello from test") }
+    dependsOn(test)
+}
+----
+
+Now we have registered 3 new tasks to our Gradle configuration: `helloCompile`, `helloAssemble`, `helloTest`
+When executing any of these tasks, Gradle will first resolve their dependencies and then execute them.
+
+As an example, this should be the output of `gradle helloAssemble --info`
+[source,text]
+----
+> Task :compileJava UP-TO-DATE
+:pluginDescriptors (Thread[Execution worker Thread 4,5,main]) started.
+
+> Task :pluginDescriptors
+:processResources (Thread[Execution worker Thread 4,5,main]) started.
+
+> Task :processResources NO-SOURCE
+:classes (Thread[Execution worker Thread 4,5,main]) started.
+
+> Task :classes UP-TO-DATE
+:jar (Thread[Execution worker Thread 4,5,main]) started.
+
+> Task :jar
+:assemble (Thread[Execution worker Thread 4,5,main]) started.
+
+> Task :assemble
+:helloAssemble (Thread[Execution worker Thread 3,5,main]) started.
+
+> Task :helloAssemble
+Hello from assemble
+----
+
+We can see how `:assemble` and all of its dependencies had to be executed before `:helloAssemble` itself
+is processed.
+
+One important thing to note is that by defining the tasks as we did, they will only ever be processed when
+called. If we want to define a task `A` that runs before/after another task `B` does, then we need change
+task `B` as in the following example
+
+[source,kotlin]
+----
+// :helloWorldCompile -> task A
+// :compileJava -> task B
+compileJava {
+    // If you want for task A to run first
+    dependsOn(helloWorldCompile)
+    // If you want for task A to run last
+    finalizedBy(helloWorldCompile)
+}
+----
+
+==== Gradle plugin
+Gradle also has the concept of plugin. We won't be exploring it too much in this article, but it is important
+to know that it differs quite substantially from Maven's plugin.
+
+A Gradle plugin is highly flexible and allows dynamic changes in the build file. It adds tasks,
+configurations, or custom logic directly to the build.gradle file, which can modify the build's
+behavior at different stages.
+
+[source,java]
+----
+// Not functional code, only here to show general structure
+abstract public class GradlePluginExample implements Plugin<Project> {
+
+    @Override
+    public void apply(Project project) {
+        project.getPlugin().apply(JavaPlugin.class);
+        project.getDependencies().add("implementation", "plugin:lunatech:1.9.93");
+
+        var helloWorld = project.getTasks().register("helloWorld", (task) -> {
+            System.out.println("Hello World!");
+        });
+
+        var compileJava = project.getTasks().getByName("compileJava");
+        compileJava.finalizedBy(helloWorld);
+    }
+}
+----
+
+We can see how from the plugin's `apply` method we can configure everything we could normally
+access from the `build.gradle.kts`. So, while we could limit ourselves to just define a set of tasks
+(which would make it similar to a Maven plugin), it has the full capabilities that are normally reserved
+to a build file.
+
+== Customizing the build cycle
+As we've seen, customizing the build lifecycle can easily be done with both tools. But while Gradle
+tasks allow for custom code to be executed at any point of the build pipeline, maven relies on pre-packaged
+scripts in the form of plugins that will then be executed at specific phases.
+
+=== Scenario
+
+We have a very small Java application at `app.Test` that reads a file from its `resources` and prints
+it out. It looks something like this:
+
+[source,java]
+----
+public class Test {
+    public static void main(String[] args) {
+        System.out.println("Hello world");
+
+        var inputStream = Test.class.getResourceAsStream("/java_vs_java.txt");
+        var bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        var result = bufferedReader.lines().collect(Collectors.joining("\n"));
+        System.out.println(result);
+    }
+}
+----
+
+The kicker is, the file `java_vs_java.txt` does _not_ exist, and we want to generate it during the build
+lifecycle.
+
+=== Maven
+Which options do we have if we're working with Maven, and we can't find the plugin that satisfies our needs?
+
+There are 2 routes that we con follow in this scenario:
+
+* Create our own plugin
+* Leverage `exec-maven-plugin`, https://www.mojohaus.org/exec-maven-plugin/index.html[a plugin] that allows to run custom code during the build lifecycle
+
+Today we'll explore the second option as it is the one that requires the least setup
+
+The `exec-maven-plugin` plugin can run either Java classes or external programs. We'll use it with
+a Java class defined in our project to further minimize the needed setup.
+
+We can create a simple Java application at `build.GenerateFile` that will take care of generating
+the file that we need:
+
+[source,java]
+----
+public class GenerateFile {
+
+    public static void main(String[] args) throws IOException {
+        String destFile = args[0];
+        String content = args[1];
+
+        System.out.println("Creating file " + destFile);
+        System.out.println("Content is " + content);
+
+        var file = new File(destFile);
+        file.getParentFile().mkdirs();
+        file.createNewFile();
+
+        var fileWriter = new FileWriter(file);
+        fileWriter.write(content);
+        fileWriter.close();
+        System.out.println("File created: " + file.getAbsolutePath());
+    }
+}
+----
+
+Since we want to make this application reusable, we parametrized the destination file and its content.
+Now that we've defined the application, we can call it as follows in our `pom.xml`
+
+[source,xml]
+----
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.4.1</version>
+            <executions>
+                <execution>
+                    <id>generate-custom-resource</id>
+                    <phase>compile</phase>
+                    <goals>
+                        <goal>java</goal>
+                    </goals>
+                    <configuration>
+                        <mainClass>build.GenerateFile</mainClass>
+                        <arguments>
+                            <argument>
+                                ${project.build.outputDirectory}/java_vs_java.txt
+                            </argument>
+                            <argument>Maven was able to create me!!</argument>
+                        </arguments>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+----
+
+Let's take a closer look at some of the configurations here:
+
+* `phase=compile`: This means that the code will run during the `compile` phase of the fixed lifecycle
+* `goal=java`: This will specify that we're running a Java application - https://www.mojohaus.org/exec-maven-plugin/java-mojo.html[More info here]
+* `mainClass=build.GenerateFile`: This points the plugin to the application that we want to run
+* `arguments`: Here we pass the destination file and its content
+
+Lastly, to see if the application is working, let's run `java -cp ./target/maven_demo-1.0-SNAPSHOT.jar app.Test`.
+We should see this:
+
+[source,text]
+----
+Hello world
+Maven was able to create me!!
+----
+
+One thing that is important to notice is that we ran the application after the `compile` phase.
+If we tried to use an earlier phase like `validate` we would have been met with a `java.lang.ClassNotFoundException: build.GenerateFile`. +
+This happens because the `GenerateFile` itself hasn't been compiled yet, so the `maven-exec-plugin`
+won't be able to execute it.
+
+If you need to execute an application before the `compile` phase, consider moving the `GenerateFile`
+application to another module or, at that point, consider investing the time to create a custom plugin.
+
+=== Gradle
+Since gradle is intrinsically more configurable, creating custom executions is more straight forward.
+Given the same `app.Test`, we can achieve the file generation by adding this to our `build.gradle.kts`:
+
+[source,kotlin]
+----
+val generateFile = tasks.register("generateFile") {
+    doFirst{
+        val file = layout.buildDirectory.file("resources/main/java_vs_java.txt").get().asFile
+        val content = "Gradle was able to create me!!"
+
+        file.parentFile.mkdirs()
+        file.createNewFile()
+        file.writeText(content)
+    }
+}
+
+assemble {
+    dependsOn(generateFile)
+}
+----
+
+== Conclusion
+Today we took a deep dive into Maven's and Gradle's build lifecycles, how they differ and how to leverage
+both to achieve your ideal build pipeline. +
+There is a lot of room to go even deeper into these topics,
+like understanding how to better use the multi-module/project capabilities of both tools or how to create
+custom plugins, but that will be the topic for another article!
