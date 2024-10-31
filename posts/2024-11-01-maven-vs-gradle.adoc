@@ -78,7 +78,7 @@ quite easy to work with. +
 Gradle instead makes use of a variety of files, namely `build.gradle.kts`,`setting.gradle.kts` and `gradle.properties`.
 This allows for greater "separation of concern", but adds some more complexity to it as well.
 
-=== Build? Settings? Properties?
+==== Build? Settings? Properties?
 As discussed in the previous chapter, there are quite a few files that can be used to define a gradle
 build process. Here's a quick overview for each one of them:
 
@@ -285,7 +285,7 @@ tasks.register("helloTest") {
 Now we have registered 3 new tasks to our Gradle configuration: `helloCompile`, `helloAssemble`, `helloTest`
 When executing any of these tasks, Gradle will first resolve their dependencies and then execute them.
 
-As an example, this should be the output of `gradle helloAssemble --into`
+As an example, this should be the output of `gradle helloAssemble --info`
 [source,text]
 ----
 > Task :compileJava UP-TO-DATE
@@ -329,11 +329,11 @@ compileJava {
 }
 ----
 
-=== Maven plugin vs Gradle plugin
+==== Gradle plugin
 Gradle also has the concept of plugin. We won't be exploring it too much in this article, but it is important
 to know that it differs quite substantially from Maven's plugin.
 
-A Gradle plugin is highly flexible and allows for dynamic changes in the build file. It adds tasks,
+A Gradle plugin is highly flexible and allows dynamic changes in the build file. It adds tasks,
 configurations, or custom logic directly to the build.gradle file, which can modify the build's
 behavior at different stages.
 
@@ -357,7 +357,7 @@ abstract public class GradlePluginExample implements Plugin<Project> {
 }
 ----
 
-We can see how from within the plugin's `apply` method we can configure everything we could normally
+We can see how from the plugin's `apply` method we can configure everything we could normally
 access from the `build.gradle.kts`. So, while we could limit ourselves to just define a set of tasks
 (which would make it similar to a Maven plugin), it has the full capabilities that are normally reserved
 to a build file.
@@ -366,15 +366,6 @@ to a build file.
 As we've seen, customizing the build lifecycle can easily be done with both tools. But while Gradle
 tasks allow for custom code to be executed at any point of the build pipeline, maven relies on pre-packaged
 scripts in the form of plugins that will then be executed at specific phases.
-
-But which options do we have if we're working with Maven, and we can't find the plugin that we desperately need?
-
-There are 2 routes that we con follow in this scenario:
-
-* Create our own plugin
-* Leverage `exec-maven-plugin`, https://www.mojohaus.org/exec-maven-plugin/index.html[a plugin] that allows to run custom code during the build lifecycle
-
-Today we'll explore the second option as it is the one that requires the least setup
 
 === Scenario
 
@@ -395,12 +386,21 @@ public class Test {
 }
 ----
 
-The kicker is, the file `java_vs_java.txt` does _not_ exist and we want to generate it during the build
+The kicker is, the file `java_vs_java.txt` does _not_ exist, and we want to generate it during the build
 lifecycle.
 
-=== Solution
-The `exec-maven-plugin` plugin can run either Java classes or external programs. Today we'll explore
-how to use it with a Java class defined in our project.
+=== Maven
+Which options do we have if we're working with Maven, and we can't find the plugin that satisfies our needs?
+
+There are 2 routes that we con follow in this scenario:
+
+* Create our own plugin
+* Leverage `exec-maven-plugin`, https://www.mojohaus.org/exec-maven-plugin/index.html[a plugin] that allows to run custom code during the build lifecycle
+
+Today we'll explore the second option as it is the one that requires the least setup
+
+The `exec-maven-plugin` plugin can run either Java classes or external programs. We'll use it with
+a Java class defined in our project to further minimize the needed setup.
 
 We can create a simple Java application at `build.GenerateFile` that will take care of generating
 the file that we need:
@@ -478,7 +478,7 @@ Hello world
 Maven was able to create me!!
 ----
 
-One thing that is important to notice is that we ran the application after at the compile `phase`.
+One thing that is important to notice is that we ran the application after the `compile` phase.
 If we tried to use an earlier phase like `validate` we would have been met with a `java.lang.ClassNotFoundException: build.GenerateFile`. +
 This happens because the `GenerateFile` itself hasn't been compiled yet, so the `maven-exec-plugin`
 won't be able to execute it.
@@ -486,9 +486,9 @@ won't be able to execute it.
 If you need to execute an application before the `compile` phase, consider moving the `GenerateFile`
 application to another module or, at that point, consider investing the time to create a custom plugin.
 
-=== How would this be done in Gradle?
+=== Gradle
 Since gradle is intrinsically more configurable, creating custom executions is more straight forward.
-Given the same `app.Test` as before we can achieve the file generation by adding this to our `build.gradle.kts`:
+Given the same `app.Test`, we can achieve the file generation by adding this to our `build.gradle.kts`:
 
 [source,kotlin]
 ----
