@@ -1,5 +1,5 @@
 = Maven vs Gradle Navigating the World of Java Build Tools
-Giovanni Barbaro
+vanny96
 v1.0, 2024-11-01
 :title: Maven vs Gradle Navigating the World of Java Build Tools
 :imagesdir: ../media/2024-11-01-maven-vs-gradle
@@ -242,7 +242,7 @@ model where tasks can be defined with custom actions and dependencies. Each task
 purpose, and you can control the order and execution of tasks through dependencies or by explicitly
 defining task relationships.
 
-image::gradle-lifecycle.png[Gradle Lifecycle, 600]
+image::gradle-lifecycle.png[Gradle Lifecycle, 400]
 
 Gradle by default doesn't come with any useful task, but thanks to the `Java` plugin a few key tasks are
 added to our arsenal:
