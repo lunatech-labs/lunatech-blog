@@ -2,6 +2,7 @@
 eamelink
 v1.0, 2024-11-15
 :title: The Unit of a test
+:imagesdir: ../media/2024-11-15-the-unit-of-a-test
 :lang: en
 :tags: [java, testing, quality, java-vs-world, java-over-java]
 
