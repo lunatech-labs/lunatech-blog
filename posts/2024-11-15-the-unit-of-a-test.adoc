@@ -3,7 +3,7 @@ eamelink
 v1.0, 2024-11-15
 :title: The Unit of a test
 :lang: en
-:tags: [java, testing, quality]
+:tags: [java, testing, quality, java-vs-world, java-over-java]
 
 Have you ever heard someone about writing a test for a class or for a method? I bet you have. Yet this may be an indication of something being wrong. In this post, we'll discuss a common misconception about unit testing, what the impact of that misconception can be, and what to do instead.
 
@@ -21,7 +21,7 @@ public class UserService {
 		this.peopleRepository = peopleRepository;
 	}
 
-	public getUserById(String id) {
+	public User getUserById(String id) {
 		Person person = peopleRepository.getPersonById();
 		return UserMapper.fromPerson(person);
 	}
@@ -51,7 +51,7 @@ public class UserService {
 		this.userMapper = userMapper;
 	}
 
-	public getUserById(String id) {
+	public User getUserById(String id) {
 		Person person = peopleRepository.getPersonById();
 		return userMapper.fromPerson(person);
 	}
@@ -80,7 +80,7 @@ class UserServiceTest {
 	PeopleRepository peopleRepository;
 
 	@Test
-	testGetById() {
+	void testGetById() {
 		UserService userService = new UserService(peopleRepository, userMapper);
 		Person testPerson = new Person();
 		when(peopleRepository.getPerson("123")).thenReturn(testPerson);
