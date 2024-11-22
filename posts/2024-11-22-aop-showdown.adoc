@@ -1,0 +1,209 @@
+= AspectJ vs Spring AOP vs Quarkus: Aop Showdown
+tesfayenati
+v1.0, 2024-11-15
+:title:  AspectJ vs Spring AOP vs Quarkus: Aop Showdown
+:imagesdir: ../media/2024-11-15-the-unit-of-a-test
+:lang: en
+:tags: [java, aop, aspectj,spring-aop  java-vs-world, java-over-java]
+
+###  Overview
+
+
+Aspect Oriented programming is a programming technique that helps you separate "Cross Cutting concerns" from your main business logic.
+This can be logging, or error handling.
+
+
+In simple terms imaging you're developing a simple program, and you want to log every time the method is called. One option to do that is calling
+the logger method in every method. But that is inefficient, and repetitive. Instead, We can use logging aspect  to handle all the logging when methods
+are called.
+
+
+[source, java]
+----
+
+// Without AOP
+public class UserService {
+    public void createUser(String name) {
+        System.out.println("Logging: createUser method called with name: " + name); // Logging logic
+        System.out.println("User created: " + name);
+    }
+}
+
+public class ProductService {
+    public void addProduct(String product) {
+        System.out.println("Logging: addProduct method called with product: " + product); // Logging logic
+        System.out.println("Product added: " + product);
+    }
+}
+
+----
+[source, java]
+----
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+
+@Aspect
+public class LoggingAspect {
+
+    // Pointcut: Matches all methods in UserService and ProductService classes
+    @Pointcut("execution(* UserService.createUser(..))")
+    public void userServiceMethods() {}
+
+    @Pointcut("execution(* ProductService.addProduct(..))")
+    public void productServiceMethods() {}
+
+    // Logging logic before the method execution
+    @Before("userServiceMethods()")
+    public void logUserService() {
+        System.out.println("Logging: createUser method called.");
+    }
+
+    @Before("productServiceMethods()")
+    public void logProductService() {
+        System.out.println("Logging: addProduct method called.");
+    }
+}
+
+public class UserService {
+    public void createUser(String name) {
+        System.out.println("User created: " + name); // Core business logic
+    }
+}
+
+public class ProductService {
+    public void addProduct(String product) {
+        System.out.println("Product added: " + product); // Core business logic
+    }
+}
+
+
+
+
+
+----
+
+
+#### what are we trying to solve?
+
+1. Code Tangling
+
+[source, java]
+----
+
+public class SomeClass{
+    public void processOrder(Order order) {
+    // Security concern
+    if (!userHasPermission()) {
+        throw new SecurityException("User not authorized");
+    }
+
+    // Logging concern
+    System.out.println("Processing order: " + order.getId());
+
+    // Core business logic
+    saveOrderToDatabase(order);
+
+    // Performance monitoring concern
+    long processingTime = calculateProcessingTime();
+    System.out.println("Order processed in: " + processingTime + " ms");
+    }
+}
+
+
+----
+
+2. Code Scattering
+
+[source, java]
+----
+
+public class SomeClass{
+    public void processOrder(Order order) {
+    // Scattered Security concern
+    if (!userHasPermission()) {
+        throw new SecurityException("User not authorized");
+    }
+
+    saveOrderToDatabase(order); // Core business logic
+    }
+
+    public void updateOrder(Order order) {
+        // Scattered Security concern
+        if (!userHasPermission()) {
+            throw new SecurityException("User not authorized");
+        }
+
+        updateOrderInDatabase(order); // Core business logic
+    }
+
+    public void cancelOrder(Order order) {
+        // Scattered Security concern
+        if (!userHasPermission()) {
+            throw new SecurityException("User not authorized");
+        }
+
+        cancelOrderInDatabase(order); // Core business logic
+    }
+
+}
+
+
+
+----
+
+Before seeing each Java aop frameworks, lets introduce a few keywords.
+
+Join Point: A point during the execution of a script
+Pointcut: A regular expression that matches join points
+Advice: Action Taken by an aspect at a join point
+Aspect: A modularization of concerns that cuts across multiple objects
+
+
+### AspectJ
+
+AspectJ is an aspect-oriented extension to java. It is the original, and maybe the best AOP implementation. AspectJ consists
+of two parts, the language specification, and the weaver. It has its own language, with some new keywords. But now it also
+offers annotation based syntax.
+
+
+
+----
+
+----
+
+Weaving: The process of applying the aspect to the main program, which involves inserting
+additional code into the program's flow at specified join points (like method calls or field accesses).
+
+Three types of weaving
+
+1. Compile Time Weaving
+
+
+2. Post Compile
+
+
+3. Load-Time
+
+
+### Spring AOP
+
+Spring AOP is another pure Java implementation of AOP. Spring AOP is used with SPRING IOC.
+
+Spring AOP does weaving at compile time.
+
+### Quarkus
+
+
+
+
+### Conclusion
+
+
+
+== Source
+. https://www.spiceworks.com/tech/devops/articles/what-is-aop/
+. https://docs.spring.io/spring-framework/reference/core/aop.html/
+. https://www.baeldung.com/aspectj
+. https://www.manning.com/books/aspectj-in-action-second-edition
+
