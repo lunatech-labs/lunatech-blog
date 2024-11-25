@@ -77,7 +77,16 @@ public class ProductService {
 
 ----
 
-When developing an application, you often encounter situations where certain functionality needs to be applied across various parts of the system—such as logging, error handling, or security. These are known as **cross-cutting concerns**, and traditionally, you'd end up repeating code across multiple classes or methods, leading to poor maintainability and scattered logic. This is where **Aspect-Oriented Programming (AOP)** comes in, allowing you to modularize these concerns separately from your business logic, making your code cleaner and easier to manage.  So, purpose of Aspsect Oriented Programming is so, decreasing both Code scattering, and Code Tangling.
+When developing an application, you often encounter situations where certain functionality needs to be applied across various parts of the system—such as logging, error handling, or security. These are known as **cross-cutting concerns**, and traditionally, you'd end up repeating code across multiple classes or methods, leading to poor maintainability and scattered logic. This is where **Aspect-Oriented Programming (AOP)** comes in, allowing you to modularize these concerns separately from your business logic, making your code cleaner and easier to manage.
+
+
+
+So, The purpose of Aspect-Oriented Programming (AOP) is to reduce code scattering and code tangling, improving the overall organization and maintainability of your code.
+
+**Code Scattering**: This occurs when the same functionality (like logging or security) is implemented repeatedly in multiple places across the codebase. AOP reduces scattering by centralizing such functionalities into modular components (aspects), so they only need to be defined once and can be applied wherever necessary.
+
+**Code Tangling**: This happens when multiple concerns (e.g., business logic, logging, error handling) are intertwined within the same code, making it difficult to understand or modify. AOP resolves this by separating concerns into distinct modules, allowing the business logic to remain clean and focused.
+By addressing these issues, AOP enhances code modularity, making the codebase easier to manage, extend, and test.
 
 
 **Key Concepts in AOP**
@@ -87,7 +96,7 @@ Pointcut: A regular expression that matches join points
 Advice: Action Taken by an aspect at a join point
 Aspect: A modularization of concerns that cuts across multiple objects
 Weaving: process of integrating aspects (modularized cross-cutting concerns) into the main application code
-at specified points(Join Points)
+at Join Points.
 
 
 ### AspectJ
@@ -127,9 +136,7 @@ public class UserService {
 
 AspectJ offers flexibility with annotations or an XML-based configuration for managing aspects, making it highly versatile in various Java projects. AspectJ is framework-independent. It works directly with raw Java classes, making it suitable for standalone applications or projects not tied to any ecosystem.
 
-AspectJ provides an extensive and fine-grained join point model, allowing developers to intercept and manipulate almost any point in a program's execution. This includes Method calls, executions, Constructor calls, etc.
-
-
+AspectJ provides an extensive and fine-grained join point model, allowing developers to intercept and manipulate almost any point in a program's execution. This includes Method executions, Constructor calls, etc.
 
 
 ### Spring AOP
@@ -163,9 +170,9 @@ public class LoggingAspect {
 
 @Component
 public class UserService {
-public void createUser(String name) {
-System.out.println("User created: " + name);
-}
+    public void createUser(String name) {
+        System.out.println("User created: " + name);
+    }
 }
 
 
