@@ -2,21 +2,15 @@
 tesfayenati
 v1.0, 2024-11-15
 :title:  AspectJ vs Spring AOP vs Quarkus: Aop Showdown
-:imagesdir: ../media/2024-11-15-the-unit-of-a-test
+:imagesdir: ../media/2024-11-22-aop-showdown
 :lang: en
 :tags: [java, aop, aspectj,spring-aop  java-vs-world, java-over-java]
 
 ###  Overview
 
 
-Aspect Oriented programming is a programming technique that helps you separate "Cross Cutting concerns" from your main business logic.
-This can be logging, or error handling.
-
-
-In simple terms imaging you're developing a simple program, and you want to log every time the method is called. One option to do that is calling
-the logger method in every method. But that is inefficient, and repetitive. Instead, We can use logging aspect  to handle all the logging when methods
-are called.
-
+Imaging you're developing a simple program, and you want to log every time a method is called. One option to do that is calling
+the logger in every method.
 
 [source, java]
 ----
@@ -37,6 +31,9 @@ public class ProductService {
 }
 
 ----
+
+But that is inefficient, and repetitive. Instead, We can use logging aspect  to handle all the logging when methods
+are called.
 [source, java]
 ----
 import org.aspectj.lang.annotation.Aspect;
@@ -47,11 +44,8 @@ import org.aspectj.lang.annotation.Pointcut;
 public class LoggingAspect {
 
     // Pointcut: Matches all methods in UserService and ProductService classes
-    @Pointcut("execution(* UserService.createUser(..))")
+    @Pointcut("execution(* *Service.*(..))")
     public void userServiceMethods() {}
-
-    @Pointcut("execution(* ProductService.addProduct(..))")
-    public void productServiceMethods() {}
 
     // Logging logic before the method execution
     @Before("userServiceMethods()")
@@ -83,127 +77,163 @@ public class ProductService {
 
 ----
 
-
-#### what are we trying to solve?
-
-1. Code Tangling
-
-[source, java]
-----
-
-public class SomeClass{
-    public void processOrder(Order order) {
-    // Security concern
-    if (!userHasPermission()) {
-        throw new SecurityException("User not authorized");
-    }
-
-    // Logging concern
-    System.out.println("Processing order: " + order.getId());
-
-    // Core business logic
-    saveOrderToDatabase(order);
-
-    // Performance monitoring concern
-    long processingTime = calculateProcessingTime();
-    System.out.println("Order processed in: " + processingTime + " ms");
-    }
-}
+When developing an application, you often encounter situations where certain functionality needs to be applied across various parts of the system—such as logging, error handling, or security. These are known as **cross-cutting concerns**, and traditionally, you'd end up repeating code across multiple classes or methods, leading to poor maintainability and scattered logic. This is where **Aspect-Oriented Programming (AOP)** comes in, allowing you to modularize these concerns separately from your business logic, making your code cleaner and easier to manage.  So, purpose of Aspsect Oriented Programming is so, decreasing both Code scattering, and Code Tangling.
 
 
-----
-
-2. Code Scattering
-
-[source, java]
-----
-
-public class SomeClass{
-    public void processOrder(Order order) {
-    // Scattered Security concern
-    if (!userHasPermission()) {
-        throw new SecurityException("User not authorized");
-    }
-
-    saveOrderToDatabase(order); // Core business logic
-    }
-
-    public void updateOrder(Order order) {
-        // Scattered Security concern
-        if (!userHasPermission()) {
-            throw new SecurityException("User not authorized");
-        }
-
-        updateOrderInDatabase(order); // Core business logic
-    }
-
-    public void cancelOrder(Order order) {
-        // Scattered Security concern
-        if (!userHasPermission()) {
-            throw new SecurityException("User not authorized");
-        }
-
-        cancelOrderInDatabase(order); // Core business logic
-    }
-
-}
-
-
-
-----
-
-Before seeing each Java aop frameworks, lets introduce a few keywords.
+**Key Concepts in AOP**
 
 Join Point: A point during the execution of a script
 Pointcut: A regular expression that matches join points
 Advice: Action Taken by an aspect at a join point
 Aspect: A modularization of concerns that cuts across multiple objects
+Weaving: process of integrating aspects (modularized cross-cutting concerns) into the main application code
+at specified points(Join Points)
 
 
 ### AspectJ
 
-AspectJ is an aspect-oriented extension to java. It is the original, and maybe the best AOP implementation. AspectJ consists
-of two parts, the language specification, and the weaver. It has its own language, with some new keywords. But now it also
-offers annotation based syntax.
+AspectJ is an aspect-oriented extension to Java and one of the most robust implementations of AOP. It allows developers to modularize cross-cutting concerns and works seamlessly with any Java class. AspectJ supports compile-time, post-compile-time, and load-time weaving.
 
+Example: Logging with AspectJ
+[source, java]
+----
+
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+
+@Aspect
+public class LoggingAspect {
+
+    // Pointcut: Matches methods in classes under the package 'service'
+    @Pointcut("execution(* service..*(..))")
+    public void serviceMethods() {}
+
+    // Logging logic applied before method execution
+    @Before("serviceMethods()")
+    public void logMethodExecution() {
+        System.out.println("Logging: A service method was called.");
+    }
+}
+
+public class UserService {
+    public void createUser(String name) {
+        System.out.println("User created: " + name); // Core business logic
+    }
+}
 
 
 ----
 
-----
+AspectJ offers flexibility with annotations or an XML-based configuration for managing aspects, making it highly versatile in various Java projects. AspectJ is framework-independent. It works directly with raw Java classes, making it suitable for standalone applications or projects not tied to any ecosystem.
 
-Weaving: The process of applying the aspect to the main program, which involves inserting
-additional code into the program's flow at specified join points (like method calls or field accesses).
-
-Three types of weaving
-
-1. Compile Time Weaving
+AspectJ provides an extensive and fine-grained join point model, allowing developers to intercept and manipulate almost any point in a program's execution. This includes Method calls, executions, Constructor calls, etc.
 
 
-2. Post Compile
-
-
-3. Load-Time
 
 
 ### Spring AOP
 
-Spring AOP is another pure Java implementation of AOP. Spring AOP is used with SPRING IOC.
+Spring AOP is a lightweight implementation of AOP, designed specifically for use with Spring's IoC (Inversion of Control) container. It supports runtime weaving and is particularly well-suited for managing cross-cutting concerns in Spring-based applications.
 
-Spring AOP does weaving at compile time.
+Example: Logging with Spring AOP
+
+[source, java]
+----
+
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.stereotype.Component;
+
+@Aspect
+@Component
+public class LoggingAspect {
+
+    // Pointcut to match all methods in the service package
+    @Pointcut("execution(* com.example.service..*(..))")
+    public void serviceMethods() {}
+
+    // Before advice to log method execution
+    @Before("serviceMethods()")
+    public void logBeforeMethod() {
+        System.out.println("Logging: Service method invoked.");
+    }
+}
+
+@Component
+public class UserService {
+public void createUser(String name) {
+System.out.println("User created: " + name);
+}
+}
+
+
+----
+
+Spring AOP integrates easily into Spring projects and relies on proxies for weaving, offering developers a clean and Spring-friendly approach to AOP.
 
 ### Quarkus
 
+Quarkus, known for its Kubernetes-native Java stack, also supports AOP but in a simplified and efficient way compared to traditional implementations.
+
+Example: Logging with Quarkus AOP
+
+[source, java]
+----
+
+import io.quarkus.arc.Arc;
+import javax.annotation.Priority;
+import javax.interceptor.AroundInvoke;
+import javax.interceptor.Interceptor;
+import javax.interceptor.InvocationContext;
+
+@Interceptor
+@Priority(1)
+@Logging
+public class LoggingInterceptor {
+
+    @AroundInvoke
+    public Object logInvocation(InvocationContext context) throws Exception {
+        System.out.println("Logging: Method called - " + context.getMethod().getName());
+        return context.proceed();
+    }
+}
+
+// Custom annotation to apply the interceptor
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.TYPE, ElementType.METHOD})
+@InterceptorBinding
+public @interface Logging {}
+
+@Logging
+public class UserService {
+    public void createUser(String name) {
+        System.out.println("User created: " + name);
+    }
+}
+
+
+----
+
+Quarkus brings AOP into the modern world of cloud-native, containerized Java applications. It uses **build-time weaving** to reduce the runtime overhead and optimize performance, which is crucial for microservices running in environments like Kubernetes. By leveraging **CDI** (Contexts and Dependency Injection), Quarkus simplifies the use of AOP, making it an excellent choice for developers building lightweight, fast, and highly performant Java applications in the cloud.
 
 
 
-### Conclusion
+
+### Final Note
+
+- **AspectJ**: Best suited for complex, large-scale enterprise applications where flexibility and deep integration into the application’s lifecycle are required. The learning curve is steeper, and performance may be a consideration, but its capabilities in fine-grained join points and weaving techniques make it ideal for scenarios where AOP is deeply integrated into the system's architecture.
+
+- **Spring AOP**: Excellent for Spring-based applications where developers are looking for a lightweight, simple solution to apply cross-cutting concerns. It’s great for common needs such as logging and transaction management, but it’s limited to Spring-managed beans and doesn’t support all the advanced weaving options that AspectJ offers.
+
+- **Quarkus AOP**: A perfect choice for cloud-native, containerized applications. If you’re building microservices or applications with performance-critical requirements, Quarkus is optimized for minimal runtime overhead and integrates well with modern development workflows like Kubernetes.
+
+
 
 
 
 == Source
-. https://www.spiceworks.com/tech/devops/articles/what-is-aop/
-. https://docs.spring.io/spring-framework/reference/core/aop.html/
-. https://www.baeldung.com/aspectj
-. https://www.manning.com/books/aspectj-in-action-second-edition
-
+- [What is AOP? ](https://www.spiceworks.com/tech/devops/articles/what-is-aop/)
+- [Spring AOP Documentation](https://docs.spring.io/spring-framework/reference/core/aop.html/)
+- [AspectJ in Action - Manning](https://www.baeldung.com/aspectj)
