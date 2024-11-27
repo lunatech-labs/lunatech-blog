@@ -1,0 +1,157 @@
+= JVM vs JVM
+nikashamova
+:title: JVM vs JVM
+:imagesdir: ../media/2024-11-29-jvm-vs-jvm
+:lang: en
+:tags: [java, jvm, java-vs-world, java-over-java]
+== Introduction
+
+You’ve probably heard people talk about different JVMs, each claiming to be the best. It made me wonder: why are there so many? What makes one JVM better than another? In this article, we’ll try to break down what the JVM is, how it works, and why there are so many different implementations.
+
+== Basic Concepts
+
+=== Java Abbreviation Overload: JDK, JRE, JVM
+
+If you’re working with Java, you’ve likely encountered terms like JVM, JRE, and JDK. But what do they mean, and how are they connected? Let’s break it down:
+
+==== JDK (Java Development Kit)
+
+This is a toolkit designed for Java developers. It includes everything you need to write and build Java applications:
+- A compiler (`javac`) to turn Java source code into bytecode.
+- Development libraries such as tools for debugging, monitoring, and packaging Java programs.
+- The JRE (our next guest, see below).
+
+==== JRE (Java Runtime Environment)
+
+This is the software environment required to run Java applications:
+- Runtime libraries: Core Java libraries (e.g., `java.lang`, `java.util`) and APIs for features like file I/O, networking, and concurrency.
+- The JVM (another guest, which is described below), which executes the bytecode.
+
+==== JVM (Java Virtual Machine)
+
+At the core of the Java runtime, it is responsible for:
+- Loading and executing Java bytecode, a platform-independent instruction set generated when Java code is compiled.
+- Optimizing performance with features like JIT (Just-In-Time) Compilation, which translates bytecode into machine-specific code during execution.
+
+=== Java bytecode
+
+Bytecode is an intermediate, low-level language into which Java source code is compiled. It allows Java applications to run on any platform with a JVM, enabling the "write once, run anywhere" promise.
+
+=== JIT (Just-In-Time) Compilation
+
+To improve speed, the JVM uses JIT to dynamically translate bytecode into native machine code at runtime. This reduces interpretation overhead, making applications faster.
+
+=== AOT (Ahead-Of-Time) Compilation
+
+While JIT improves performance during execution, some environments benefit from Ahead-Of-Time (AOT) Compilation, which compiles bytecode into native code before runtime. This approach is often used in resource-constrained environments, where startup speed and memory efficiency are critical.
+
+=== How Do They Fit Together?
+
+- JDK: Developers use it to create Java applications.
+- JRE: Users rely on it to run Java applications.
+- JVM: This is the part of the JRE that runs Java bytecode.
+
+During execution, the JVM can:
+
+- Use the JIT compiler to boost performance by translating bytecode to machine code on the fly.
+- Optionally benefit from AOT compilation to further improve startup times and efficiency in specific scenarios.
+
+==== TLDR
+
+The JDK includes the JRE, and the JRE contains the JVM. Together, they enable Java programs to be developed, executed, and optimized for a wide variety of platforms and use cases.
+
+=== Write Once, Run Anywhere
+
+The JVM is an abstract computing machine that enables Java applications to run on any hardware or operating system. It translates platform-independent bytecode into machine-specific instructions, ensuring seamless compatibility across environments.
+
+In simpler terms, JVM developers handle the heavy lifting. Their job is to build a robust, cross-platform JVM that works on all environments. This allows Java developers to focus on writing code without worrying too much about the specifics of different platforms. (Though, let’s be real—sometimes they still have to consider it, but that’s a story for another day.)
+
+== JVM History
+
+=== The Beginning of JVM
+
+==== First Implementation of the JVM
+
+The first implementation of the JVM was part of JDK 1.0, released in January 1996. Sun Microsystems developed this initial JVM in C. It was bundled with the early versions of the Java Development Kit (JDK), which included tools such as `javac` (the Java compiler) and runtime libraries.
+
+==== Other Early Implementations
+
+After the initial Sun JVM, several other JVM implementations were developed:
+
+- *Kaffe*: An independent, open-source implementation of the JVM. It aimed to provide a lightweight alternative to Sun's JVM, which is well-suited for embedded systems.
+- *IBM J9 (later OpenJ9)*: IBM's implementation focused on enterprise environments, emphasizing performance and tuning capabilities.
+- *Oracle JRockit*: A JVM optimized for server-side performance, especially in low-latency environments. Oracle acquired it and later merged features with the HotSpot JVM.
+- *HotSpot JVM*: Originally developed by Longview Technologies, HotSpot was acquired by Sun Microsystems. It introduced Just-In-Time (JIT) compilation and adaptive optimization techniques. HotSpot eventually became the default JVM in the Java SE platform.
+
+=== What is the Deal with OpenJDK and Oracle JDK?
+
+OpenJDK and Oracle JDK are closely related, especially since Java 11. OpenJDK is the open-source implementation of the Java SE Platform, while Oracle JDK is a commercial build based on OpenJDK. Both share the same codebase, meaning their functionality is nearly identical from Java 11 onward.
+
+- *Oracle JDK historically*: included exclusive "commercial features" like Flight Recorder, Java Mission Control, and Application Class-Data Sharing. However, these features were added to OpenJDK starting with Java 11, eliminating most differences between the two.
+- The main distinction now lies in licensing and support. OpenJDK is free under the GNU General Public License (GPL) with a linking exception, while Oracle JDK requires a commercial license for production use and comes with additional long-term support options for businesses. Essentially, OpenJDK is the foundation for Oracle JDK, and they are almost identical in technical terms for modern Java versions.
+
+== JVM vs JVM
+
+=== So Many JVMs, What is the Difference?
+
+There are so many JDKs and JVMs available these days. Let’s explore a few of them to see how they differ and what unique features they offer!
+
+==== OpenJDK
+
+The Open Java Development Kit (OpenJDK) is an open-source implementation of the Java Platform, Standard Edition (Java SE).
+
+- *Reference Implementation*: OpenJDK is the official reference implementation of Java SE, ensuring compliance with the Java SE specifications. Many other distributions use it as a core.
+- *Regular Release Cycle*: OpenJDK follows a six-month release cycle, with Long-Term Support (LTS) versions every three years.
+- *Community-Driven*: Features like improved garbage collectors, API updates, and performance optimizations are developed as an open-source.
+- *Cross-Platform*: OpenJDK supports major operating systems like Linux, macOS, and Windows, as well as architectures like x86, ARM, and RISC-V.
+- *Licensing*: OpenJDK is distributed under a GPL license, allowing it to be used freely for all purposes, including commercial applications.
+
+==== Oracle JDK
+
+The Oracle JDK is Oracle’s distribution of the Java Development Kit. It shares the same codebase as the open-source OpenJDK but comes with some proprietary features and licensing.
+
+- *Proprietary Features*: Includes tools like Java Flight Recorder (for profiling) and Mission Control (for monitoring).
+- *Base and Maintenance*: Oracle JDK is based on OpenJDK but includes additional optimizations and patches.
+- *Support*: Oracle ensures backward compatibility and long-term support for enterprise users.
+
+==== GraalVM
+
+GraalVM is a powerful version of the JDK that offers AOT native image compilation. It also enables seamless integration between multiple programming languages using the Truffle framework. With Truffle, programs written in different supported languages can work together easily. For instance, a JavaScript program can call Ruby methods and share data without duplicating it.
+
+- Compiler: GraalVM introduces the Graal JIT Compiler, a replacement for the traditional HotSpot C2 compiler.
+*   Written in Java, the compiler is highly modular and easier to maintain and extend than older compilers written in C++.
+* Implements advanced optimizations like speculative optimizations, partial escape analysis, and inlining across multiple languages.
+- Polyglot Support: GraalVM uses the Truffle language implementation framework, a platform for building interpreters for various languages. Each language runtime is implemented as a Truffle interpreter. Truffle is a framework for building language interpreters. When combined with the Graal compiler, these interpreters are automatically optimized with just-in-time (JIT) compilation, enabling programs running on them to achieve performance comparable to standard Java.
+- Native Image: Provides an AOT compilation feature called native image. Transforms JVM-based applications into standalone executables with reduced startup times and memory footprints.
+- Implementation Base: GraalVM builds on top of the OpenJDK HotSpot JVM. It replaces components like the compiler while retaining others, such as the garbage collector, class loader, and bytecode interpreter.
+
+==== Azul JDK
+
+Azul Systems provides multiple JDK distributions: Zulu and Zing.
+
+*Zulu*:
+
+- A fully open-source JDK based on OpenJDK, claimed to be the world’s most secure and stable build of OpenJDK.
+- Delivers stabilized security builds.
+- Legacy Production Support for Java versions that are end of life by OpenJDK and Oracle including Java 6 & 7 (but it has to be paid).
+
+*Zing (Azul Platform Prime)*:
+
+- A commercial JDK designed for extreme performance and low-latency requirements.
+- The Falcon JIT compiler enhances performance through advanced speculative optimizations. Built on LLVM, it executes Java code 20–50% faster.
+- ReadyNow! Technology: It allows the JVM to be restored from a snapshot of another JVM, enabling faster startup times and optimized performance.
+- The C4 Garbage Collector: A pauseless, generational GC. It eliminates most stop-the-world pauses, allowing applications to run smoothly during garbage collection.
+
+=== Use-Cases
+
+Okay, and now let’s try to summarize when to use each of the JDKs described above!
+
+- *OpenJDK*: General-purpose Java development without advanced requirements. Ideal for developers and organizations looking for a free, open-source, and community-supported Java runtime.
+- *Oracle JDK*: Best suited for enterprises requiring high-level support and access to tools like Java Mission Control to enhance performance.
+- *GraalVM*: Performance-critical applications, polyglot development, or cloud-native microservices.
+- *Azul Zulu*: Cost-effective Java runtime with support options for enterprises.
+- *Azul Zing*: Suitable for low-latency, high-throughput, or serverless applications.
+
+== Conclusion
+
+The JVM has evolved significantly since its debut with JDK 1.0, expanding from a single implementation to a diverse ecosystem of high-performance, specialized VMs. Building your own JVM or JDK requires deep knowledge of the Java specifications, low-level programming expertise, and a commitment to testing and optimization. If you're genuinely considering this challenge, I must admit, I'm impressed! Best of luck! It's a journey that will require immense dedication and effort!
