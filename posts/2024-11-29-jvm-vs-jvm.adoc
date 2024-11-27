@@ -110,7 +110,6 @@ The Open Java Development Kit (OpenJDK) is an open-source implementation of the 
 
 The Oracle JDK is Oracle’s distribution of the Java Development Kit. It shares the same codebase as the open-source OpenJDK but comes with some proprietary features and licensing.
 
-- *Proprietary Features*: Includes tools like Java Flight Recorder (for profiling) and Mission Control (for monitoring).
 - *Base and Maintenance*: Oracle JDK is based on OpenJDK but includes additional optimizations and patches.
 - *Support*: Oracle ensures backward compatibility and long-term support for enterprise users.
 
@@ -147,7 +146,7 @@ Azul Systems provides multiple JDK distributions: Zulu and Zing.
 Okay, and now let’s try to summarize when to use each of the JDKs described above!
 
 - *OpenJDK*: General-purpose Java development without advanced requirements. Ideal for developers and organizations looking for a free, open-source, and community-supported Java runtime.
-- *Oracle JDK*: Best suited for enterprises requiring high-level support and access to tools like Java Mission Control to enhance performance.
+- *Oracle JDK*: Best suited for enterprises requiring high-level support.
 - *GraalVM*: Performance-critical applications, polyglot development, or cloud-native microservices.
 - *Azul Zulu*: Cost-effective Java runtime with support options for enterprises.
 - *Azul Zing*: Suitable for low-latency, high-throughput, or serverless applications.
