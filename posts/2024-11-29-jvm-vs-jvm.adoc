@@ -152,6 +152,10 @@ Choosing a JVM doesn’t have to be a grand philosophical debate—it really dep
 - Not an Oracle fan? Don’t need fancy bells and whistles? Enter *Zulu*, the practical, no-nonsense choice for developers who just want a solid, affordable JVM alternative. It’s reliable, efficient, and does the job without any drama—perfect for those who like to keep things simple.
 - And for those working with massive, memory-hungry applications that demand peak performance, *Zing* is the way to go. It’s designed for situations where every ounce of garbage collection optimization matters. Yes, it’s a premium option, but when your application has to run fast and smooth, the investment can make all the difference.
 
+And here you can see the algorithm, but don't take it too seriously!
+
+image::jvm-vs-jvm.png[How to choose the right JVM, 400]
+
 === Final Thoughts
 The JVM you choose should align with your project’s size, complexity, and budget. For small projects, OpenJDK or Zulu are often more than enough. For larger enterprises or performance-focused teams, investing in solutions like Oracle JDK, GraalVM, or Zing can pay off. Explore your options, and pick what works best for your needs!
 
