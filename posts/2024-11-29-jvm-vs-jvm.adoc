@@ -4,6 +4,7 @@ nikashamova
 :imagesdir: ../media/2024-11-29-jvm-vs-jvm
 :lang: en
 :tags: [java, jvm, java-vs-world, java-over-java]
+
 == Introduction
 
 You’ve probably heard people talk about different JVMs, each claiming to be the best. It made me wonder: why are there so many? What makes one JVM better than another? In this article, we’ll try to break down what the JVM is, how it works, and why there are so many different implementations.
