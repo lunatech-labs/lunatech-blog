@@ -1,5 +1,6 @@
 = JVM vs JVM
 nikashamova
+v1.0, 2024-11-29
 :title: JVM vs JVM
 :imagesdir: ../media/2024-11-29-jvm-vs-jvm
 :lang: en
