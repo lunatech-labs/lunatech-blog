@@ -51,6 +51,8 @@ While JIT improves performance during execution, some environments benefit from 
 - JRE: Users rely on it to run Java applications.
 - JVM: This is the part of the JRE that runs Java bytecode.
 
+image::jdk-jre-jvm.png[JDK < JRE < JVM, 200]
+
 During execution, the JVM can:
 
 - Use the JIT compiler to boost performance by translating bytecode to machine code on the fly.
