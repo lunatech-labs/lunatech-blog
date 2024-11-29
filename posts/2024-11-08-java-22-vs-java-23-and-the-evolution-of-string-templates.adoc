@@ -1,9 +1,10 @@
 = Java 22 vs Java 23 and the Evolution of String Templates
 FrancescoScala
-v1.0, 2024-11-27
+v1.0, 2024-11-08
 :title: Java 22 vs Java 23 and the Evolution of String Templates
 :lang: en
-:tags: [tag1, tag2, en]
+:imagesdir: ../media/2024-11-08-java-22-vs-java-23-and-the-evolution-of-string-templates
+:tags: [java, java-22, java-23, java-vs-world, java-over-java]
 
 With Java 22 and Java 23, our favorite JVM language got elevated to a higher level. Many features were included in these two releases, some of which are Pattern Matching for primitive types, Unnamed variables, and Markdown language support. Let's dive deeper into these features by looking at the bigger picture.
 
