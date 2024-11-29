@@ -1,0 +1,215 @@
+= Java 22 vs Java 23 and the Evolution of String Templates
+FrancescoScala
+v1.0, 2024-11-27
+:title: Java 22 vs Java 23 and the Evolution of String Templates
+:lang: en
+:tags: [tag1, tag2, en]
+
+With Java 22 and Java 23, our favorite JVM language got elevated to a higher level. Many features were included in these two releases, some of which are Pattern Matching for primitive types, Unnamed variables, and Markdown language support. Let's dive deeper into these features by looking at the bigger picture.
+
+== Pattern Matching
+
+=== JEP 456: Unnamed Variables
+
+With JEP 456 from Java 22, developers can now make use of unnamed variables in their Java code. Simply put, unnamed variables are the variables required syntactically by the language but whose values don't add anything to the code logic.
+
+[source,java]
+----
+String result = switch (expression) {
+    case Integer _ -> "Integer";
+    case String _ -> "String";
+    default -> "Unknown";
+};
+----
+
+Unnamed variables come in particularly handy when dealing with pattern matching in switch expressions, or inside try-catch blocks to define an exception that the developer won't use.
+
+=== JEP 455: Pattern Matching for Primitive Types
+
+This preview feature of Java 23 enables pattern matching for primitive types. Thanks to it, developers can directly compare primitive types in pattern matching, without having to use their wrapper classes (Integer, Double, etc.).
+
+[source,java]
+----
+int x = 55;
+switch (x) {
+    case 200 -> System.out.println("OK");
+    case 404 -> System.out.println("Resource Not Found");
+    case 500 -> System.out.println("Internal Server Error");
+    case int k -> System.out.println("Unknown status: " + k);
+}
+----
+
+== Module Import Declarations and Simplified Main Method
+
+=== JEP 476: Simplified Main Method
+
+Reducing boilerplate code is one of the main focuses for Java 21, 22, and 23. Thanks to JEP 476, it's now possible to import all of the packages exported by a module inside a Java file. The syntax resembles the one for importing packages:
+
+[source,java]
+----
+import module java.base;
+----
+
+When multiple modules are imported, and a class is defined in more than one package, the developer can import the desired package to resolve the conflict:
+
+[source,java]
+----
+import module java.base;
+import module java.desktop;
+
+import java.util.List;
+----
+
+=== JEP 463: Simplified Main Method Declaration
+
+With this feature, Java enables developers to implicitly declare classes around a main method. Beginners will now struggle less to write an executable Java file, and the more experienced developers will benefit from the reduced boilerplate code.
+
+[source,java]
+----
+void main() {
+    System.out.println("Hello, World!");
+}
+----
+
+=== JEP 477: Enhanced Main Method
+
+JEP 477 also contributes to the simplification of the main method. Implicitly declared classes now implicitly import the `java.base` module and `java.io.IO` package. This new package includes the methods:
+
+[source,java]
+----
+public static void print(Object obj);
+public static void println(Object obj);
+public static void readln(String prompt);
+----
+
+Therefore, a simple Java file with a main method will now look like:
+
+[source,java]
+----
+void main() {
+    String city = readln("Please enter a city: ");
+    print("City: ");
+    println(city);
+}
+----
+
+== Flexible Subclass Constructor
+
+=== JEP 447: Flexible Superclass Constructors
+
+As of before Java 22, subclass constructors should always include the call to the superclass constructor as the first statement. Any validation or initialization before the call to the superclass constructor would throw a compilation error.
+
+JEP 447 is the first attempt of Java to change this constraint. Developers can now add logic in subclass constructors before the `super()` call. However, class fields cannot be initialized.
+
+[source,java]
+----
+public class SubClass extends SuperClass {
+
+    public SubClass(List<String> data) {
+        String element;
+        if (data != null && !data.isEmpty()) {
+            element = data.get(0).toLowerCase();
+        } else {
+            element = "<n/a>";
+        }
+
+        super(element);
+    }
+}
+----
+
+Records can also benefit from this feature:
+
+[source,java]
+----
+public record Email(String local, String domain) {
+
+    public Email(String fqda) {
+        Objects.requireNonNull(fqda);
+        var parts = fqda.split("@");
+        if (parts.length != 2) {
+            throw new IllegalArgumentException("Invalid email format");
+        }
+
+        this(parts[0], parts[1]);
+    }
+}
+----
+
+=== JEP 482: Enhanced Subclass Constructors
+
+JEP 482 extends the possibilities of JEP 447 by allowing developers to initialize class fields inside the subclass constructor before the superclass constructor call.
+
+[source,java]
+----
+class Super {
+
+    Super() {
+        overriddenMethod();
+    }
+
+    void overriddenMethod() {
+        System.out.println("hello");
+    }
+}
+
+class Sub extends Super {
+    final int x;
+
+    Sub(int x) {
+        this.x = x;
+        super();
+    }
+
+    @Override
+    void overriddenMethod() {
+        System.out.println(x);
+    }
+}
+----
+
+== String Templates... What happened?
+
+String Templates were supposed to be included in Java 23. However, that didn't happen, and the only way to use those in Java is by switching back to Java 22 with Preview Features enabled. Let's have a look at what String Templates are, the issues that were raised by the community, and what's going to happen next.
+
+=== Introduction
+
+String Templates are Java's solution to string interpolation. They couple literal text with embedded expressions and template processors to produce specialized results.
+
+[source,java]
+----
+String customerName = "Java Duke";
+String phone = "555-123-4567";
+String address = "1 Maple Drive, Anytown";
+String json = STR."""
+{
+    "name": "\{customerName}",
+    "phone": "\{phone}",
+    "address": "\{address}"
+}
+""";
+----
+
+In order to define a template, the developers need to specify the abstract processor they want to use. Java provides three of them: STR, FMT, and RAW.
+
+- **STR**: Processes the template and returns a String.
+- **FMT**: Processes the template, together with the formatting rules specified, and returns a String.
+- **RAW**: Returns an instance of `StringTemplate`. Especially useful when creating a custom String Template Processor.
+
+=== Design Issues
+
+Several design issues were raised a few weeks before the Java 23 release:
+
+- **Coupling**: Template capture and processing are now tightly coupled when the two things should be separated and composable.
+- **$ vs \{}**: Some developers complained about the choice of the character for string interpolation. Some would have preferred the dollar sign, as it is used in other programming languages like JavaScript. However, this complaint felt more like syntactic sugar than an actual issue. Future versions of String Templates will most likely stick with \{}.
+- **Explicit processor abstraction**: Java already has a way of abstracting the implementation of a behavior given a desired input and output: methods. The whole setting of the abstract processors to process String Templates felt unnecessary. Eventually, `String.format()` could be extended to accept a parameter with type `StringTemplate`, and produce the desired output.
+
+=== Future of String Templates
+As of today, there is no clear news on when String Templates will be back again.
+
+== Other (cool) features
+Java 22 and 23 bring several other exciting features to the table, enhancing the language's capabilities and improving developer productivity. Some of them are listed below:
+
+- **JEP 467**: JavaDoc using Markdown language.
+- **JEP 462**: API for structured concurrency.
+- **JEP 464**: Scoped Values.
