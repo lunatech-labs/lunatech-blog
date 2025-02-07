@@ -1,0 +1,106 @@
+= ZGC vs G1GC for Scala
+utkuaydn
+v1.0, 2025-02-07
+:title: ZGC vs G1GC for Scala
+:imagesdir: ../media/2025-02-07-zgc-vs-g1gc-for-scala
+:lang: en
+:tags: [zgc, gen-zgc, g1, g1gc, scala, jvm, we-know-scala, scala-lujah]
+
+== Introduction
+
+When it comes to high-performance Scala applications, memory management plays a crucial role in maintaining efficiency and stability. The JVM's Garbage Collection (GC) mechanisms help developers avoid memory leaks and memory management while balancing latency and throughput. Two prominent GC strategies—Garbage First (G1GC) and Z Garbage Collector (ZGC)—offer different benefits depending on application needs. In this post, we'll explore these two GC approaches, their configurations, benchmarks, and best-use scenarios for Scala applications.
+
+== Garbage First GC (G1GC)
+
+=== What is G1GC?
+G1GC was introduced in JDK 7 and became the default GC in JDK 9. It's designed to optimize both latency and throughput by dividing the heap into regions and prioritizing the collection of those with the most garbage. Unlike traditional GC methods, G1GC performs concurrent marking to reduce stop-the-world pauses, enhancing application performance.
+
+=== When to Use G1GC
+
+* G1GC should be used in applications that require predictable pause times.
+
+* It is suitable for systems where throughput is more critical than achieving ultra-low latency.
+
+=== When Not to Use G1GC
+
+* G1GC is not ideal for applications with very large heaps that exceed a few hundred gigabytes.
+
+* It should be avoided in workloads with extreme garbage generation, as pause times may increase in edge cases.
+
+== Z Garbage Collector (ZGC)
+
+=== What is ZGC?
+ZGC, introduced in JDK 11, is a low-latency garbage collector designed to maintain sub-millisecond pause times regardless of heap size. It performs most of its work concurrently, including marking and compaction, ensuring minimal disruption to application performance. It ZGC can handle heap sizes up to 16 terabytes, making it an excellent choice for large-scale applications.
+
+=== When to Use ZGC
+
+* ZGC is recommended for real-time systems that have strict latency requirements.
+
+* It is well-suited for applications that require efficient scalability with very large heaps.
+
+=== When Not to Use ZGC
+
+* ZGC should not be used in applications that are constrained by CPU resources.
+
+* It is not ideal for workloads where high throughput is more critical than maintaining low latency.
+
+=== Generational ZGC: The Cherry on Top
+Generational ZGC introduces separate young and old generations, optimizing memory reclamation by focusing on short-lived objects more frequently. This approach reduces the overhead associated with managing short-lived objects, which are common in most workloads. Additionally, it further minimizes CPU and memory bandwidth usage compared to the non-generational ZGC. Despite these optimizations, Generational ZGC retains its ultra-low pause times, remaining in the sub-millisecond range. It continues to efficiently handle large heaps, with multi-terabyte support still intact. Like its predecessor, Generational ZGC performs marking, relocation, and compaction concurrently, making sure there are no disruptions in application performance.
+
+== Configuring Scala Applications for GC
+To configure GC in Scala applications, appropriate Java options should be set in build.sbt.
+[source,scala]
+javaOpts += "-XX:+UseZGC -XX:+ZGenerational"
+
+In container environments, the configuration can be achieved by including the required flags in the java options environment variable (may vary between JDK distributions).
+[source,console]
+JAVA_OPTS = "-XX:+UseZGC -XX:+ZGenerational …"
+
+Both garbage collectors also have additional flags that can be included to further fine tune their behavior depending on the use case. These are available in their respective documentation.
+
+== Benchmarking G1GC vs ZGC
+
+=== Setup
+
+* The benchmarking tests were conducted in a Kubernetes cluster with 2 CPUs and 4GB of memory allocated.
+
+* Java options were pre-configured specifically for G1GC and Generational ZGC to ensure accurate comparisons.
+
+* The test workload consisted of a streaming application that processed messages at varying rates of 300, 600, and 900 messages per second.
+
+* Each test run included a warm-up phase lasting 10 minutes to allow the system to reach a stable state.
+
+* Following the warm-up, data recording was conducted for 20 minutes to capture performance metrics.
+
+=== Observations
+
+==== 300 messages per second G1
+image::300-g1.png[300 G1, 600]
+==== 300 messages per second ZGC
+image::300-zgc.png[300 ZGC, 600]
+
+==== 600 messages per second G1
+image::600-g1.png[600 G1, 600]
+==== 600 messages per second ZGC
+image::600-zgc.png[600 ZGC, 600]
+
+==== 900 messages per second G1
+image::900-g1.png[900 G1, 600]
+==== 900 messages per second ZGC
+image::900-zgc.png[900 ZGC, 600]
+
+* ZGC maintained ultra-low latency across all sample sizes.
+
+* G1GC delivered predictable pause times but showed increased latency under heavy load.
+
+* Generational ZGC improved short-lived object management, enhancing overall efficiency.
+
+== Conclusion
+ZGC and G1GC both offer unique advantages for Scala applications:
+
+* ZGC is the best choice for ultra-low latency and massive heap scalability.
+* G1GC is ideal for general-purpose applications requiring predictable performance tuning.
+
+Ultimately, selecting the right GC strategy depends on workload characteristics and performance requirements. Benchmarking under real-world conditions remains the key to making an informed decision.
+
+SCALA-LUJAH! Happy coding!
