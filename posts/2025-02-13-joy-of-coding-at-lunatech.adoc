@@ -1,0 +1,44 @@
+= Recap of the Joy of Coding Meetup at Lunatech
+Ana Rapanych
+v1.0, 2025-02-13
+:title: Recap of the Joy of Coding Meetup at Lunatech
+:imagesdir: ../media/2025-02-13-joy-of-coding-at-lunatech
+:lang: en
+:tags: [documentation, automation, opentelemetry, monitoring, grafana, performance]
+
+== Introduction
+On February 12th, Lunatech had the privilege of hosting the Joy of Coding meetup at our office in Rotterdam.
+
+We were excited to bring developers from across the city together to reconnect and share knowledge in an open and welcoming environment.
+
+The evening began with a warm welcome, giving attendees the opportunity to mingle over delicious pizza. With the room buzzing with conversation, it was clear that everyone was eager to dive into the evening’s insightful sessions.
+
+.Introduction over pizza
+image::networking.png[Introduction over pizza, 600]
+
+== Coding Your Documentation
+The first session of the evening, "Coding Your Documentation" by Hubert Klein Ikkink, explored how developers can take a structured and automated approach to documentation.
+
+Writing documentation is often seen as a tedious task, but Hubert demonstrated how code-driven techniques can make the process more efficient, maintainable, and even enjoyable.
+
+Through practical examples, the session covered strategies such as using markup languages, automation tools, and integrating documentation directly into the development workflow. Hubert showcased how well-documented projects not only improve collaboration within teams but also enhance the onboarding process for new developers and contribute to overall software quality.
+
+Attendees walked away with actionable insights on how to streamline documentation efforts, ensuring that code remains well-documented without slowing down development. The talk was a great reminder that good documentation is just as important as the code itself.
+
+.Coding Your Documentation
+image::documentation.png[Coding Your Documentation, 600]
+
+== Reaching Operational Excellence Using OpenTelemetry
+Riccardo Lippolis took the stage to talk about OpenTelemetry and its critical role in ensuring operational excellence. His session, "Reaching Operational Excellence Using OpenTelemetry," focused on how developers can easily implement standardized APIs for logging and metrics across distributed services.
+
+Through practical demonstrations, attendees learned how OpenTelemetry allows for seamless service monitoring, making it easier to identify and solve issues in a production environment. This session provided valuable insights that our community can apply directly to their own work.
+
+.Reaching Operational Excellence Using OpenTelemetry
+image::telemetry.png[Reaching Operational Excellence Using OpenTelemetry, 600]
+
+== Networking and Drinks
+As the talks concluded, the evening wrapped up with drinks and a networking session, giving everyone the opportunity to continue their conversations, exchange ideas, and make new connections.
+
+The atmosphere was energizing, and it was clear that the local developer community is eager to keep pushing the boundaries of tech.
+
+See you at the next meetup!
