@@ -4,7 +4,7 @@ v1.0, 2024-11-15
 :title:  AspectJ vs Spring AOP vs Quarkus: Aop Showdown
 :imagesdir: ../media/2024-11-22-aop-showdown
 :lang: en
-:tags: [java, aop, aspectj,spring-aop  java-vs-world, java-over-java]
+:tags: [java, aop, aspectj,spring-aop, java-vs-world, java-over-java]
 
 ###  Overview
 
