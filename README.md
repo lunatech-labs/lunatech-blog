@@ -49,13 +49,19 @@ For very large images the command may take a long time to complete.
 
 
 # How to deploy your post
-Merging your PR will update the `main` branch only. Besides `main` there's also a `production` branch.
+Merging your PR will update the `main` branch only. Besides `main` there are also an `acceptance` & `production` branch.
 
 ### Getting your post to the acceptance environment
 
 The [acceptance blog post environment](https://blog.acceptance.lunatech.com/) will allow you to see how your post looks like.
 
-Simply get your PR merged to the main branch. Afterwards the blog engine needs to be manually restarted in clever cloud as well. Please ask your colleagues if you don't know how to do that.
+You can add it to the acceptance content like so:
+```
+git fetch
+git checkout acceptance
+git rebase main
+git push origin acceptance
+```
 
 ### Getting your post to the production environment
 
@@ -64,8 +70,9 @@ Simply get your PR merged to the main branch. Afterwards the blog engine needs t
 Applying your changes in the acceptance environment to the production environment:
 
 ```
+git fetch
 git checkout production
-git rebase main
+git rebase acceptance
 git push origin production
 ```
 The blog engine needs to be manually restarted in clever cloud as well. Please ask your colleagues if you don't know how to do that.
