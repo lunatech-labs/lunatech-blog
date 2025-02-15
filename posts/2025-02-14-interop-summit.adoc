@@ -1,0 +1,161 @@
+= Interop summit. Why do we only import Java libraries?
+kolmar
+v1.0, 2025-02-14
+:title: Interop summit. Why do we only import Java libraries?
+:imagesdir: ../media/2025-02-14-interop-summit
+:lang: en
+:tags: [jvm, scala, scala3, kotlin, groovy, gradle, interop, en, we-know-scala, scala-lujah]
+
+== Short history of the Java platform
+
+The Java platform—including the Java language and Java Virtual Machine (JVM)—was first released around 1995. At that time, Java was the only language running on the JVM. Soon, however, other languages followed which addressed some of Java’s shortcomings, while still leveraging its runtime and the vast collection of standard and third-party libraries and allowing to integrate with the large amount of existing Java code.
+
+Scala was one of the first such languages. Its development began in 2001, and the first release came out in 2004. Its main goal was to mix functional and object-oriented programming and to allow writing more concise code than Java.
+
+Groovy was released in 2007 and it presented dynamic typing and improved scripting capabilities.
+
+Clojure also came out in 2007. As a Lisp dialect, its strengths lie in functional programming and metaprogramming.
+
+Kotlin was one of the later major languages that appeared on the scene. Its implementation started in 2010, and the first stable release was in 2016. Kotlin was designed to be a nicer Java with seamless interoperability. Later, it became oficially supported for Android development.
+
+It is interesting to note that no new major languages have appeared in about 15 years now. This is probably because existing languages already cover most important niches. Moreover, Java now includes quality-of-life features like lambdas, closures, lazy streams, records, and virtual threads, which had previously motivated the creation of new languages. Nowadays you would also need a huge amount of tooling and libraries to support a new language, and probably some killer application or support and promotion from a large company.
+
+Still, there is a large variety of other smaller languages on the JVM, including even some internal company languages. Many originally non-JVM languages have compilers that target JVM: Jython for Python, jgo for Go and so on.
+
+But why do we only import libraries implemented in Java or in the language we are using? It's probably not a huge mystery. I bet you can name several important reasons yourself. Let's consider some of them.
+
+== 1. Utility libraries are implemented in each language
+
+Simple or utility libraries are simply implemented natively in each language to provide idiomatic APIs. Such implementations might be a part of the standard library or provided by third parties. For example, there is a ton of third-party libraries for JSON in Scala, often using typeclasses and other special Scala features. In contrast, in Kotlin JSON is supported by an oficial library in https://github.com/Kotlin/kotlinx.serialization[kotlinx.serialization]. There is a similar situation with idiomatic libraries for dependency injection, web frameworks and so on.
+
+== 2. Few large unique libraries
+
+There is a lack of genuine need to import anything large from outside. What libraries unique to Kotlin, let alone other less prominent languages, would you want to use in Scala code? Jetpack Compose is an example of Kotlin library occupying a unique niche. It is the de facto default GUI framework on Android. However, since it's a GUI framework you wouldn’t normally import it as a library, and you rarely see Scala code on Android anyway.
+
+As for Scala, there are unique libraries that could be useful in Java or Kotlin code: Akka or Pekko, Spark, Gatling, or Flink. But they usually already provide bindings or APIs for Java, so you don't need their Scala APIs.
+
+== 3. Focus on using Java code
+
+Java is one of the most popular languages ever created, so over its long history a lot of libraries for all kinds of purposes have been produced. This means that language authors of every JVM language make a special effort to provide an easy way to interact with Java dependencies.
+
+The end result is that using Java code from Scala or Kotlin is fairly simple. You can normally call methods normally and give them arguments, extend classes and interfaces, and so on. Scala standard library supplies a `+scala.jdk+` package, that contains many facilities to assist with interoperability.
+
+Of course, this is still not always completely straightforward. One obvious point of contention is nullability. When using Java libraries from Scala you usually need to wrap nearly everything in an `+Option+` to avoid null pointer exceptions. You may say that using Java libraries is not idiomatic, but even in the standard library there are packages you may want to use occasionally: `+java.nio.file+`, `+java.time+`, Unicode support and so on.
+
+Here is a example of a Scala 3 extension to wrap the result of one Java method:
+
+[source,scala]
+----
+extension (p: Path)
+  def parent: Option[Path] = Option(p.getParent)
+----
+
+This approach is not ideal, because if you miss any wrappers, you'll get a `+NullPointerException+` at runtime.
+
+Scala 3 has added the `+-Yexplicit-nulls+` flag to reduce boilerplate in code like that. Scala 3 supports But it creates the opposite issue when every Java call has to be checked for nulls, even if you are certain it will never be null.
+
+To alleviate this the recently released Scala 3.5 has introduced https://docs.scala-lang.org/scala3/reference/experimental/explicit-nulls.html#java-interoperability-and-flexible-types-1[flexible types] inspired by Kotlin https://kotlinlang.org/docs/java-interop.html#null-safety-and-platform-types[platform types]. This feature is enabled by default and it means that types coming from Java can be treated as either nullable or non-nullable. This offers the same safety guarantees as Java, so again it's possible to treat a
+
+This shows both how much attention forward interop receives when developing a JVM language and how hard it is to provide a good solution for some issues. Well, nulls wouldn't have been a billion dollar mistake otherwise.
+
+// TODO: add explicit nulls and platform types examples
+
+== 4. Reverse interoperability is complicated
+
+Reverse interoperability - facilities to write code to be used from Java — sometimes feels like an afterthought. There is often no way to cleanly and transparently convert APIs that use language's special features, such as implicits or typeclasses in Scala.
+
+Even in simpler cases reverse interoperability may require carefully marking your code with annotations. For example:
+
+[source,scala]
+----
+case class MountainRange(mountains: List[Mountain])
+object MountainRange:
+  @varargs
+  @targetName("of3")
+  @throws[IllegalArgumentException]
+  def ^^^(mountains: Mountain*): MountainRange = {
+    if (mountains.size != 3) throw IllegalArgumentException("Incorrect number of mountains")
+    MountainRange(mountains.toList)
+  }
+----
+
+Here we declare a method that can use Java varargs, has information about thrown exception in its Java signature and provides a nice name to use instead of the symbolic name, which Scala compiler mangles.
+
+Another interesting example is defining an enumeration that extends `+java.lang.Enum+`. In Scala 3 it's straightforward:
+
+[,scala]
+----
+enum Mountains extends Enum[Mountains]:
+  case Everest, Kilimanjaro, MontBlanc, Fujiyama
+----
+
+However, I am not sure if this is possible at all in Scala 2.
+
+In the interoperability layer, library authors need to support all aforementioned features, but also optional arguments and default values, different visibility models and so on. Concurrency primitives also present a major challenge, because every language has something unique. Scala uses Futures, but also often various IO libraries, Kotlin has coroutines, and Java has also recently introduced virtual threads. Imagine having to support this menagerie for multiple languages, each with its own assumptions and idioms. If every language provided bindings or APIs for every other language, the complexity would explode.
+
+// evolution in time
+
+// Interchange formats: .class, TASTy, KClass
+
+== 5. Concerns about runtime dependencies
+
+Using libraries from another language usually requires including that language's standard library as a runtime dependency. This slows down the build and increases distribution sizes. The effect may be not large in absolute terms, but still provides enough incentive for library authors to design their libraries to avoid having to depend on the entire standard library of a whole language.
+
+As a consequence of those reasons Java naturally serves as the largest common denominator to mediate between JVM languages.
+
+== Case study
+
+Situations where you need to interact between non-Java languages do happen, but are fairly unusual. One interesting example from our team involved configuring access to intranet repositories (without internet access) in our Gradle builds.
+
+Let's have the following assumptions:
+
+. We are using Kotlin for our Gradle builds, because Kotlin is statically typed and its tooling and IDE support are better than Groovy’s.
+
+. Our goal is to give developers a simple way to add new repositories with the artifacts from specific other teams. We want to have an extension method on the `+RepositoryHandler+`, similar to idiomatic Gradle methods like `+mavenCentral()+` or `+gradlePluginPortal()+`:
++
+[source,kotlin]
+----
+repositories { // this: RepositoryHandler =>
+    mavenInternal("maven-releases")
+    mavenInternal("gradle-plugins")
+    mavenInternal("other-team-artifacts")
+}
+----
+
+. We have a local plugin to set the repository URL and configure a way to obtain a login token from the environment:
+
+[source,groovy]
+----
+def extendRepositories(RepositoryHandler repositories) {
+    if (repositories !instanceof ExtensionAware) return
+
+    repositories.ext.set("mavenInternal") { repoName ->
+        repositories.maven {
+            name = repoName
+            url = "https://artifactory.example.com/$repoName"
+            credentials {
+                token = providers.environmentVariable("ARTIFACTORY_TOKEN")
+                        .orElse(providers.systemProperty("gradle.wrapperPassword"))
+                        .orNull
+            }
+        }
+    }
+}
+----
+
+The problem here is that Gradle can automatically execute Groovy builds, but for Kotlin builds it needs to download a special plugin, and to download the plugin without internet access, it needs the internal repository already configured, creating a Catch-22 type of problem.
+
+This means the repository configuration plugin has to be implemented in Groovy. The extension method is defined in a Gradle extension, which Groovy flavour can use directly as extension methods. But Kotlin doesn't understand that approach. It can't interact with standard Groovy extension methods either. Groovy implements them by modifying Groovy metaclasses, but in Kotlin extension methods are just syntax sugar, and at runtime are implemented as normal methods with the receiver as the first argument.
+
+In the end the solution was to create an intermediate plugin in Kotlin, that provides a Kotlin-style extension method that extracts Groovy `+Closure+` from the extension, casts it to the appropriate type and calls it using Groovy API:
+
+[source,kotlin]
+----
+fun RepositoryHandler.mavenInternal(path: String) {
+    ((this as ExtensionAware).extra["mavenInternal"] as Closure<*>).call(path)
+}
+----
+
+This is still not ideal, because this helper method can't be shared before the intermedaite plugin build and implementation, so it has to be pasted into several places. Nevertheless, this achieves the goal of having nice repository declarations in the user-level Kotlin build.
+
+This is an example of how convoluted interoperability can look when assumptions and idioms from very different languages and libraries come in conflict with each other.
