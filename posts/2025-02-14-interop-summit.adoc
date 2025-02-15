@@ -1,10 +1,10 @@
 = Interop summit. Why do we only import Java libraries?
 
-== Short history of Java platform
+== Short history of the Java platform
 
-The Java platform—including the Java language and Java Virtual Machine (JVM)—was first released around 1995. At that time, Java was the only language running on the JVM. Soon, however, other languages followed which addressed some of Java’s shortcomings, while still leveraging its runtime and the vast collection of standard and third-party libraries and allowing to integrate with the large amount of existing Java code.
+The Java platform including the Java language and Java Virtual Machine (JVM) was first released around 1995. At that time, Java was the only language running on the JVM. Soon, however, other languages followed which addressed some of Java’s shortcomings, while still leveraging its runtime and the vast collection of standard and third-party libraries and allowing to integrate with the large amount of existing Java code.
 
-Scala was one of the first such languages. Its development began in 2001, and the first release came out in 2004. Its main goal was to mix functional and object-oriented programming and to allow writing more concise code than Java.
+Scala was one of the first such languages. Its development started in 2001, and the first release came out in 2004. Its main goal was to mix functional and object-oriented programming and to allow writing more concise code than Java.
 
 Groovy was released in 2007 and it presented dynamic typing and improved scripting capabilities.
 
