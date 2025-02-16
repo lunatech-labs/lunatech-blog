@@ -75,6 +75,23 @@ Built-in support for major Scala testing frameworks means you can run tests dire
 
 ==== Interactive Scala REPL
 Launch a Scala REPL session with your project's classes and dependencies already loaded, perfect for exploring and testing code interactively.
+[source,scala]
+// In your project
+case class User(name: String, age: Int)
+class UserService {
+  def greet(user: User) = s"Hello, ${user.name}!"
+}
+
+// In the REPL (after running 'sbt console')
+scala> val user = User("Alice", 25)
+user: User = User(Alice,25)
+
+scala> val service = new UserService
+service: UserService = UserService@1234abcd
+
+scala> service.greet(user)
+res0: String = Hello, Alice!
+
 
 ==== Project Modularization
 Break down complex projects into manageable sub-projects, each with its own dependencies and configurations, while maintaining build coordination across the entire project.
@@ -83,7 +100,7 @@ Break down complex projects into manageable sub-projects, each with its own depe
 Reference other Git repositories directly as dependencies, enabling seamless integration with external projects and custom forks of libraries.
 
 ==== Parallel Execution
-Speed up builds and tests by running independent tasks in parallel, taking advantage of multiple CPU cores for faster build times.
+Speed up builds and tests by running independent tasks in parallel, taking advantage of multiple CPU cores for faster build times. BY default SBT runs tasks in parallel and tests in sequence. You can change this behavior by configuring the build.sbt file by either enablig test parallelism and adjusting the parallel execution settings, such as limiting the number of cores used for example.
 
 === Beyond Build Tool Features
 
@@ -142,7 +159,7 @@ flywayConfigFiles := Seq("flyway-e2e.conf")
 SBT can act as a development server, supporting hot reloading for web applications. Popular frameworks like Play Framework use this capability to provide seamless development experiences.
 
 ==== Documentation Generation
-Beyond API docs, SBT can generate various types of documentation, from project websites to technical specifications, using plugins like sbt-site or mdoc.
+Beyond API docs, SBT can generate various types of documentation, from project websites to technical specifications, using plugins like sbt-site, ScalaDoc or mdoc.
 
 A common example using ScalaDoc:
 [source,scala]
@@ -168,7 +185,6 @@ addSbtPlugin("org.scoverage" % "sbt-scoverage" % "2.0.9")
 
 Then you can run coverage analysis:
 [source,console]
-> clean             // Recommended to start fresh
 > coverage         // Enable code coverage tracking
 > test            // Run your tests - this collects coverage data
 > coverageReport  // Generate coverage report showing which code was tested
@@ -178,9 +194,6 @@ The report will be generated in `target/scala-2.13/scoverage-report/` and includ
 * Overall coverage statistics
 * Highlighted source code showing covered/uncovered lines
 
-You can also combine these commands in a single line:
-[source,console]
-> ;clean ;coverage ;test ;coverageReport   // Run all coverage steps in sequence
 
 == Conclusion
 SBT is a powerful tool that transcends its role as a build tool, offering developers a versatile platform for managing, automating, and enhancing their development workflows. Whether you’re working on a small library or a large-scale application, SBT’s features and extensibility make it a valuable addition to the Scala ecosystem. SBT acts more as a development platform than a build tool and by understanding its capabilities and limitations, teams can leverage SBT to streamline their processes and focus on building great software.
