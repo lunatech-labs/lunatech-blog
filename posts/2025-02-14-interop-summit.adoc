@@ -1,4 +1,10 @@
 = Interop summit. Why do we only import Java libraries?
+kolmar
+v1.0, 2025-02-14
+:title: Interop Summit. Why do we only import Java libraries?
+:imagesdir: ../media/2025-02-14-interop-summit
+:lang: en
+:tags: [jvm, interop, scala, scala3, kotlin, gradle, groovy, we-know-scala, scala-lujah]
 
 == Short history of the Java platform
 
@@ -30,7 +36,7 @@ As for Scala, there are unique libraries that could be useful in Java or Kotlin 
 
 Java is one of the most popular languages ever created, so over its long history a lot of libraries for all kinds of purposes have been produced. This means that language authors of every JVM language make a special effort to provide an easy way to interact with Java dependencies.
 
-The end result is that using Java code from Scala or Kotlin is fairly simple. You can normally call methods normally and give them arguments, extend classes and interfaces, and so on. Scala standard library supplies a `+scala.jdk+` package, that contains many facilities to assist with interoperability.
+The end result is that using Java code from Scala or Kotlin is fairly simple. You can call methods normally and give them arguments, extend classes and interfaces, and so on. Scala standard library supplies a `+scala.jdk+` package, that contains many facilities to assist with interoperability.
 
 Of course, this is still not always completely straightforward. One obvious point of contention is nullability. When using Java libraries from Scala you usually need to wrap nearly everything in an `+Option+` to avoid null pointer exceptions. You may say that using Java libraries is not idiomatic, but even in the standard library, there are packages you may want to use occasionally: `+java.nio.file+`, `+java.time+`, Unicode support, and so on.
 
@@ -44,9 +50,9 @@ extension (p: Path)
 
 This approach is not ideal, because if you miss any wrappers, you'll get a `+NullPointerException+` at runtime.
 
-Scala 3 has added union types, so now you can declare nullable types directly: `+MyType | Null+`. It also has the https://docs.scala-lang.org/scala3/reference/experimental/explicit-nulls.html[explicit nulls] feature enabled by the `+-Yexplicit-nulls+` flag. This means that all values that can have a `+null+` value, including all values coming from Java, must have a nullable type. This reduces the `+Option+` boilerplate when dealing with Java code, but introduces boilerplate for null-checking results of functions that can never return null.
+Scala 3 has added union types, so now you can declare nullable types directly: `+MyType | Null+`. It also has the https://docs.scala-lang.org/scala3/reference/experimental/explicit-nulls.html[explicit nulls] feature enabled by the `+-Yexplicit-nulls+` flag. This means that all values that can have a `+null+` value, including all values coming from Java, must have a nullable type. This reduces the `+Option+` boilerplate when dealing with Java code, but introduces a different kind of boilerplate: null-checking the results of functions that can never return null.
 
-To reduce that boilerplate the recently released Scala 3.5 has introduced https://docs.scala-lang.org/scala3/reference/experimental/explicit-nulls.html#java-interoperability-and-flexible-types-1[flexible types] inspired by Kotlin's https://kotlinlang.org/docs/java-interop.html#null-safety-and-platform-types[platform types]. This feature is enabled by default but can be turned off with the `+-Yno-flexible-types+` flag. It means that values coming from Java can now be treated as either nullable or non-nullable. This offers the same safety guarantees as Java, so again it has reverted to the `+Option+` wrapper situation, and it's possible to get null pointer exceptions again.
+To improve this the recently released Scala 3.5 has introduced https://docs.scala-lang.org/scala3/reference/experimental/explicit-nulls.html#java-interoperability-and-flexible-types-1[flexible types] inspired by Kotlin's https://kotlinlang.org/docs/java-interop.html#null-safety-and-platform-types[platform types]. This feature is enabled by default but can be turned off with the `+-Yno-flexible-types+` flag. It means that values coming from Java can now be treated as either nullable or non-nullable. This offers the same safety guarantees as Java, so again it has reverted to the `+Option+` wrapper situation, and it's possible to get null pointer exceptions again.
 
 This development process demonstrates both how much effort forward interop receives and how hard it is to provide a good solution for some issues. Well, nulls wouldn't have been a billion-dollar mistake otherwise.
 
