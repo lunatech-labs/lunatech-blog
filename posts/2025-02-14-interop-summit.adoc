@@ -107,11 +107,11 @@ As a consequence of those reasons Java naturally serves as the common denominato
 
 Situations where you need to interact between non-Java languages do happen but are fairly unusual. One interesting example from our team involved configuring access to intranet repositories (without internet access) in our Gradle builds.
 
-Let's have the following assumptions:
+Let's adopt the following assumptions:
 
 . We are using Kotlin for our Gradle builds, because Kotlin is statically typed and its tooling and IDE support are better than Groovy’s.
 
-. Our goal is to give developers a simple way to add new repositories with the artifacts from specific other teams. We want to have an extension method on the `+RepositoryHandler+`, similar to idiomatic Gradle methods such as `+mavenCentral()+` or `+gradlePluginPortal()+`:
+. Multiple teams publish their artifacts into their own repositories on the shared Artifactory. Different projects need different dependencies, so our goal is to give the project maintainers a simple way to add the repositories with the artifacts they need. We want to have an extension method on the `+RepositoryHandler+`, similar to the idiomatic Gradle methods such as `+mavenCentral()+` or `+gradlePluginPortal()+`:
 +
 [source,kotlin]
 ----
