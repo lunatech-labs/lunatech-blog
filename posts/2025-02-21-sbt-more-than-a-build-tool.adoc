@@ -123,6 +123,7 @@ startDb := {
 
 lazy val runMigrations = taskKey[Unit]("Runs database migrations")
 runMigrations := Def.sequential(
+  startDb,                // Start database first 
   flywayClean,           // Clean database schema
   flywayMigrate          // Run Flyway migrations
 ).value
@@ -135,7 +136,6 @@ Use SBT as a complete development environment orchestrator. Create custom comman
 // Combine previously defined tasks into a workflow
 lazy val startLocalEnv = taskKey[Unit]("Start local development environment")
 startLocalEnv := Def.sequential(
-  startDb,                // Start database first
   runMigrations,         // Run database migrations
   (Compile / run)        // Finally start the application
 ).value
@@ -144,7 +144,7 @@ startLocalEnv := Def.sequential(
 // Use it with:
 [source,console]
 ----
-> startLocalEnv  // Executes all tasks in sequence
+> sbt startLocalEnv  // Executes all tasks in sequence
 ----
 
 ==== Code Generation
@@ -166,11 +166,8 @@ flywayConfigFiles := Seq("flyway-e2e.conf")
 // Run migrations with:
 [source,console]
 ----
-> flywayMigrate    // Using the SBT plugin
+> sbt flywayMigrate    // Using the SBT plugin
 ----
-
-==== Development Server
-SBT can act as a development server, supporting hot reloading for web applications. Popular frameworks like Play Framework use this capability to provide seamless development experiences.
 
 ==== Documentation Generation
 Beyond API docs, SBT can generate various types of documentation, from project websites to technical specifications, using plugins like sbt-site, ScalaDoc or mdoc.
@@ -187,7 +184,7 @@ Compile / doc / scalacOptions ++= Seq(
 [source,console]
 ----
 // Generate documentation with:
-> doc  // Creates ScalaDoc in target/scala-2.13/api/
+> sbt doc  // Creates ScalaDoc in target/scala-2.13/api/
 ----
 
 ==== Release Management
@@ -205,9 +202,9 @@ addSbtPlugin("org.scoverage" % "sbt-scoverage" % "2.0.9")
 Then you can run coverage analysis:
 [source,console]
 ----
-> coverage         // Enable code coverage tracking
-> test            // Run your tests - this collects coverage data
-> coverageReport  // Generate coverage report showing which code was tested
+> sbt coverage         // Enable code coverage tracking
+> sbt test            // Run your tests - this collects coverage data
+> sbt coverageReport  // Generate coverage report showing which code was tested
 ----
 
 The report will be generated in `target/scala-2.13/scoverage-report/` and includes:
