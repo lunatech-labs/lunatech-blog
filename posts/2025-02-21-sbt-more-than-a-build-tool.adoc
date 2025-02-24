@@ -1,0 +1,222 @@
+= SBT: More than a Build Tool
+George Jakubovskis
+v1.0, 2025-02-21
+:title: SBT: More than a Build Tool
+:imagesdir: ../media/2025-02-21-sbt-more-than-a-build-tool
+:lang: en
+:tags: [sbt, build-tool, scala, jvm, we-know-scala, scala-lujah]
+
+== Introduction
+
+Scala Build Tool (SBT) is widely known for compiling, testing, and packaging Scala projects. However, its design as an extensible, programmable tool opens doors to uses beyond traditional build automation. Let's explore SBT's additional functionalities and practical applications.
+
+== SBT: A Brief Overview
+
+=== What is SBT?
+
+SBT (Scala Build Tool) is the de facto build tool for Scala projects. It's an open-source build tool written in Scala that provides a Domain-Specific Language (DSL) for describing build configurations. SBT offers interactive capabilities, incremental compilation, and continuous compilation features. It uses Scala code for build definitions, allowing developers to leverage the full power of the Scala language in their build processes.
+
+=== SBT vs Traditional Build Tools
+
+SBT is specifically designed for Scala projects, with deep integration into the Scala ecosystem. While it can handle Java code within Scala projects, it's not typically used for pure Java projects where tools like Maven and Gradle are more appropriate.
+
+
+== Practical Applications of SBT
+
+==== Simple Configuration
+SBT follows "convention over configuration" principles. For basic Scala projects, you might only need a few lines in your `build.sbt` file.
+
+[source,scala]
+----
+name := "my-project"
+version := "1.0"
+scalaVersion := "2.13.10"
+----
+
+==== Scala-Based Build Definition
+Unlike XML-based build tools, SBT lets you write your build configuration in Scala. This means you can use variables, functions, and even complex logic in your build definitions, making them more maintainable and powerful.
+[source,scala]
+----
+val commonSettings = Seq(
+  organization := "com.example",
+  version := "1.0",
+  scalaVersion := "2.13.10"
+)
+
+lazy val core = (project in file("core"))
+  .settings(commonSettings)
+  .settings(
+    name := "my-core-project",
+    libraryDependencies += "org.typelevel" %% "cats-core" % "2.9.0"
+  )
+----
+
+==== Incremental Compilation
+SBT tracks dependencies between your source files and only recompiles what's necessary. When you change a file, SBT analyzes its dependencies and recompiles only affected files, significantly reducing build times.
+
+==== Library Management
+Using Coursier as its dependency resolver, SBT efficiently handles library dependencies, resolving and downloading them from repositories. It manages transitive dependencies and version conflicts automatically.
+
+==== Continuous Compilation
+With the `~` command prefix, SBT watches your source files and automatically recompiles when changes are detected. This creates a rapid development cycle, perfect for interactive development.
+
+[source,console]
+----
+// Watch and recompile
+$ sbt "~compile"
+
+// Watch and run tests
+$ sbt "~test"
+
+// Watch specific test
+$ sbt "~testOnly com.example.MySpec"
+----
+
+==== Mixed Scala/Java Support
+SBT seamlessly handles projects containing both Scala and Java code, automatically detecting and compiling both languages while maintaining proper dependency ordering.
+
+==== Testing Framework Integration
+Built-in support for major Scala testing frameworks means you can run tests directly from SBT. It integrates with ScalaTest, specs2, and ScalaCheck out of the box, with plugin support for JUnit.
+
+==== Interactive Scala REPL
+Launch a Scala REPL session with your project's classes and dependencies already loaded, perfect for exploring and testing code interactively.
+[source,scala]
+----
+// In your project
+case class User(name: String, age: Int)
+class UserService {
+  def greet(user: User) = s"Hello, ${user.name}!"
+}
+
+// In the REPL (after running 'sbt console')
+scala> val user = User("Alice", 25)
+user: User = User(Alice,25)
+
+scala> val service = new UserService
+service: UserService = UserService@1234abcd
+
+scala> service.greet(user)
+res0: String = Hello, Alice!
+----
+
+
+==== Project Modularization
+Break down complex projects into manageable sub-projects, each with its own dependencies and configurations, while maintaining build coordination across the entire project.
+
+==== External Project Dependencies
+Reference other Git repositories directly as dependencies, enabling seamless integration with external projects and custom forks of libraries.
+
+==== Parallel Execution
+Speed up builds and tests by running independent tasks in parallel, taking advantage of multiple CPU cores for faster build times. By default SBT runs tasks in parallel and tests in sequence. You can change this behavior by configuring the build.sbt file by either enablig test parallelism and adjusting the parallel execution settings, such as limiting the number of cores used for example.
+
+=== Beyond Build Tool Features
+
+==== Custom Task Creation
+SBT allows you to define custom tasks for any purpose - from deploying applications to generating documentation. You can create tasks that integrate with external services, process data, or automate any development workflow.
+
+[source,scala]
+----
+// Define individual tasks
+lazy val startDb = taskKey[Unit]("Starts the database")
+startDb := {
+  "docker-compose up -d postgres".!
+}
+
+lazy val runMigrations = taskKey[Unit]("Runs database migrations")
+runMigrations := Def.sequential(
+  startDb,                // Start database first 
+  flywayClean,           // Clean database schema
+  flywayMigrate          // Run Flyway migrations
+).value
+----
+
+==== Development Workflow Automation
+Use SBT as a complete development environment orchestrator. Create custom commands to start databases, mock services, or set up entire development environments with a single command.
+
+[source,scala]
+----
+// Combine previously defined tasks into a workflow
+lazy val startLocalEnv = taskKey[Unit]("Start local development environment")
+startLocalEnv := Def.sequential(
+  runMigrations,         // Run database migrations
+  (Compile / run)        // Finally start the application
+).value
+----
+
+[source,console]
+----
+// Use it with:
+> sbt startLocalEnv  // Executes all tasks in sequence
+----
+
+==== Code Generation
+Leverage SBT's source generators to automatically create code, such as generating case classes from database schemas, creating TypeScript definitions from Scala classes, or producing API documentation.
+
+==== Database Migration
+Through plugins like Flyway or Slick-migration, SBT can manage database schemas and migrations, making it a powerful tool for database version control and deployment.
+
+Using the SBT Flyway plugin:
+[source,scala]
+----
+// In plugins.sbt
+addSbtPlugin("io.github.davidmweber" % "flyway-sbt" % "7.4.0")
+
+// In build.sbt
+flywayConfigFiles := Seq("flyway-e2e.conf")
+----
+
+// Run migrations with:
+[source,console]
+----
+> sbt flywayMigrate    // Using the SBT plugin
+----
+
+==== Documentation Generation
+Beyond API docs, SBT can generate various types of documentation, from project websites to technical specifications, using plugins like sbt-site, ScalaDoc or mdoc.
+
+A common example using ScalaDoc:
+[source,scala]
+----
+// In build.sbt
+Compile / doc / scalacOptions ++= Seq(
+  "-groups",
+  "-doc-title", "My Project Documentation"
+)
+----
+[source,console]
+----
+// Generate documentation with:
+> sbt doc  // Creates ScalaDoc in target/scala-2.13/api/
+----
+
+==== Release Management
+SBT can handle the entire release process, including version bumping, changelog generation, Git tagging, and publishing to various repositories or platforms.
+
+==== Quality Analysis
+Integrate with code quality tools to analyze source code, check coverage, enforce styling rules, and generate quality reports as part of your development workflow.
+
+For example, to check code coverage in your project, first add the scoverage plugin to your `project/plugins.sbt`:
+[source,scala]
+----
+addSbtPlugin("org.scoverage" % "sbt-scoverage" % "2.0.9")
+----
+
+Then you can run coverage analysis:
+[source,console]
+----
+> sbt coverage         // Enable code coverage tracking
+> sbt test            // Run your tests - this collects coverage data
+> sbt coverageReport  // Generate coverage report showing which code was tested
+----
+
+The report will be generated in `target/scala-2.13/scoverage-report/` and includes:
+
+* HTML reports showing line-by-line coverage
+
+* Overall coverage statistics
+
+* Highlighted source code showing covered/uncovered lines
+
+
+== Conclusion
+SBT is a powerful tool that transcends its role as a build tool, offering developers a versatile platform for managing, automating, and enhancing their development workflows. Whether you’re working on a small library or a large-scale application, SBT’s features and extensibility make it a valuable addition to the Scala ecosystem. SBT acts more as a development platform than a build tool and by understanding its capabilities and limitations, teams can leverage SBT to streamline their processes and focus on building great software.
