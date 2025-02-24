@@ -1,0 +1,12 @@
+name: Deploy Acceptance
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  deploy_acceptance:
+    uses: ./.github/workflows/deploy_template.yaml
+    with:
+      target_branch: 'acceptance'
+      source_branch: 'main'
+    secrets: inherit
