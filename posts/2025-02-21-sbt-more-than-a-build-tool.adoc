@@ -1,5 +1,5 @@
 = SBT: More than a Build Tool
-George Jakubovskis
+DockerIsBAd
 v1.0, 2025-02-21
 :title: SBT: More than a Build Tool
 :imagesdir: ../media/2025-02-21-sbt-more-than-a-build-tool
