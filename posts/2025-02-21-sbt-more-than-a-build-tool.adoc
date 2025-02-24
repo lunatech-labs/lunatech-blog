@@ -18,7 +18,7 @@ SBT (Scala Build Tool) is the de facto build tool for Scala projects. It's an op
 
 === SBT vs Traditional Build Tools
 
-SBT’s Scala-based DSL, incremental compilation, and interactive features make it a superior choice for Scala projects compared to Maven and Gradle. While Gradle is a strong competitor, especially for Java/Kotlin projects, SBT’s deep integration with Scala and its ecosystem gives it a unique edge, which is why it is the default build tool for Scala projects. Maven, while reliable, lacks the flexibility and advanced features of both SBT and Gradle.
+SBT is specifically designed for Scala projects, with deep integration into the Scala ecosystem. While it can handle Java code within Scala projects, it's not typically used for pure Java projects where tools like Maven and Gradle are more appropriate.
 
 
 == Practical Applications of SBT
@@ -107,7 +107,7 @@ Break down complex projects into manageable sub-projects, each with its own depe
 Reference other Git repositories directly as dependencies, enabling seamless integration with external projects and custom forks of libraries.
 
 ==== Parallel Execution
-Speed up builds and tests by running independent tasks in parallel, taking advantage of multiple CPU cores for faster build times. BY default SBT runs tasks in parallel and tests in sequence. You can change this behavior by configuring the build.sbt file by either enablig test parallelism and adjusting the parallel execution settings, such as limiting the number of cores used for example.
+Speed up builds and tests by running independent tasks in parallel, taking advantage of multiple CPU cores for faster build times. By default SBT runs tasks in parallel and tests in sequence. You can change this behavior by configuring the build.sbt file by either enablig test parallelism and adjusting the parallel execution settings, such as limiting the number of cores used for example.
 
 === Beyond Build Tool Features
 
@@ -210,8 +210,11 @@ Then you can run coverage analysis:
 ----
 
 The report will be generated in `target/scala-2.13/scoverage-report/` and includes:
+
 * HTML reports showing line-by-line coverage
+
 * Overall coverage statistics
+
 * Highlighted source code showing covered/uncovered lines
 
 
