@@ -1,3 +1,5 @@
+name: Deploy Template
+
 on:
   workflow_call:
     inputs:
@@ -30,7 +32,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
-          git fetch
+          git fetch origin
           git checkout ${{ inputs.target_branch }}
           git rebase origin/${{ inputs.source_branch }}
           git push origin ${{ inputs.target_branch }}
