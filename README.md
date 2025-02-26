@@ -23,15 +23,15 @@ cs install giter8
 
 If you see this error :
 
-  Error: giter8 has been disabled because it fetches unversioned dependencies at runtime!
-  
+Error: giter8 has been disabled because it fetches unversioned dependencies at runtime!
+
 Then you can bypass the warning message by doing the following:
 
-  brew edit giter8
-  
+brew edit giter8
+
 and delete this line:
 
-  disable! because: "fetches unversioned dependencies at runtime"
+disable! because: "fetches unversioned dependencies at runtime"
 
 then run brew install giter8 again.
 
@@ -47,33 +47,15 @@ pngcrush -rem allb -brute -reduce in.png out.png
 ```
 For very large images the command may take a long time to complete.
 
-
 # How to deploy your post
-Merging your PR will update the `main` branch only. Besides `main` there are also an `acceptance` & `production` branch.
 
-### Getting your post to the acceptance environment
+Merging your PR will update the `main` branch only. In order to share your blog post with the world,
+you'll need to deploy it first in [Acceptance](https://blog.acceptance.lunatech.com/), and then
+in [Production](https://blog.lunatech.com/).
 
-The [acceptance blog post environment](https://blog.acceptance.lunatech.com/) will allow you to see how your post looks like.
+You can do both with the help of GitHub Actions:
+* [Deploy Acceptance](https://github.com/lunatech-labs/lunatech-blog/actions/workflows/deploy_acceptance.yaml)
+* [Deploy Production](https://github.com/lunatech-labs/lunatech-blog/actions/workflows/deploy_production.yaml)
 
-You can add it to the acceptance content like so:
-```
-git fetch
-git checkout acceptance
-git rebase main
-git push origin acceptance
-```
-
-### Getting your post to the production environment
-
-`production` will allow you to finally share your post with the world.
-
-Applying your changes in the acceptance environment to the production environment:
-
-```
-git fetch
-git checkout production
-git rebase acceptance
-git push origin production
-```
-The blog engine needs to be manually restarted in clever cloud as well. Please ask your colleagues if you don't know how to do that.
-
+For the time being, the blog engine needs to be manually restarted in clever cloud as well. Please ask your colleagues
+if you don't know how to do that.
