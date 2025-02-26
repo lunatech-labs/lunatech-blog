@@ -1,0 +1,12 @@
+name: Deploy Production
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  deploy_acceptance:
+    uses: ./.github/workflows/deploy_template.yaml
+    with:
+      target_branch: 'production'
+      source_branch: 'acceptance'
+    secrets: inherit
