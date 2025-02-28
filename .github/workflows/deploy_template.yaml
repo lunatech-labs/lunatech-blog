@@ -3,6 +3,10 @@ name: Deploy Template
 on:
   workflow_call:
     inputs:
+      clever_cloud_application:
+        type: string
+        required: true
+        description: Alias of Clever Cloud APP
       source_branch:
         type: string
         required: true
@@ -29,10 +33,17 @@ jobs:
           fetch-depth: '0'
 
       - name: Merge from ${{ inputs.source_branch }} to ${{ inputs.target_branch }}
-        env:
-          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
           git fetch origin
           git checkout ${{ inputs.target_branch }}
           git rebase origin/${{ inputs.source_branch }}
           git push origin ${{ inputs.target_branch }}
+
+      - name: Restart server
+        env:
+          CLEVER_TOKEN: ${{ secrets.CLEVER_TOKEN }}
+          CLEVER_SECRET: ${{ secrets.CLEVER_SECRET }}
+        run: |
+          clever login --token $CLEVER_TOKEN --secret $CLEVER_SECRET
+          clever restart --alias ${{ inputs.clever_cloud_application }}
+          clever logout
