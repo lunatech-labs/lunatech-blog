@@ -56,6 +56,3 @@ in [Production](https://blog.lunatech.com/).
 You can do both with the help of GitHub Actions:
 * [Deploy Acceptance](https://github.com/lunatech-labs/lunatech-blog/actions/workflows/deploy_acceptance.yaml)
 * [Deploy Production](https://github.com/lunatech-labs/lunatech-blog/actions/workflows/deploy_production.yaml)
-
-For the time being, the blog engine needs to be manually restarted in clever cloud as well. Please ask your colleagues
-if you don't know how to do that.
