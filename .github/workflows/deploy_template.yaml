@@ -39,6 +39,10 @@ jobs:
           git rebase origin/${{ inputs.source_branch }}
           git push origin ${{ inputs.target_branch }}
 
+      - name: Install Clever Tools
+        run: |
+          npm install -g clever-tools
+
       - name: Restart server
         env:
           CLEVER_TOKEN: ${{ secrets.CLEVER_TOKEN }}
