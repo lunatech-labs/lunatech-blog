@@ -30,6 +30,9 @@ Exploring those paradigms could use a talk in itself, so the below example is ra
 from a developer experience perspective how easy it is to do multiple, small operations on a collection,
 with the new API compered to the old way.
 
+[.scrollable]
+--
+
 [cols="a,a,a", options="header"]
 |===
 | Scala
@@ -74,6 +77,8 @@ private List<String> getNamesOfMammals(List<Animal> animals) {
 ----
 |===
 
+--
+
 It is worth to note, that the above example is nice, and already a huge step in the right direction,
 when it comes to streaming data processing, java still lacks support for a lot of major operations (fold, sliding windows).
 
@@ -84,6 +89,9 @@ Java intends to implement some of that functionality with the `Optional` class. 
 scala still offers more flexibility and more defined developer options, when it comes to potentially missing data (e.g.: `exists`, `forall`).
 The example illustrates the boilerplate needed to handle nested nullable structures,
 and the positive steps java already took in the right direction.
+
+[.scrollable]
+--
 
 [cols="a,a,a", options="header"]
 |===
@@ -141,12 +149,17 @@ private void printSafeInterestingWingFacts(List<Animal> animals) {
 ----
 |===
 
+--
+
 === Functional interfaces (lambdas)
 One of the key prerequisites of having support for all these functional paradigms, is to be able to pass functions as arguments.
 Java implements this concept via so-called functional interfaces. A functional interface, is an interface,
 with only one method declared. Java 8 also makes it easier to use these interfaces with the lambda syntax.
 With the lambda syntax you can pass lambda functions as arguments, and the compiler will be able to interpret it,
 as the needed interface.
+
+[.scrollable]
+--
 
 [cols="a,a,a", options="header"]
 |===
@@ -210,6 +223,8 @@ String chainEvenNumbers(List<Integer> numbers) {
 ----
 |===
 
+--
+
 == Java 11
 Java 11's main features fall outside of this article's scope, since they are not directly influenced by Scala,
 nor resemble existing Scala features. I would like to mention however a couple small additions,
@@ -223,6 +238,9 @@ but one thing is not arguable: Scala was always ahead in these topics, and with 
 === `_<Collection>_::of` factory method (Java 9)
 No more dubious initialization, and element adding after, with Java 11 now most of the commonly used collections receive
 the `::of` factory method, where you can quickly create a new immutable instance, with a number of initial elements.
+
+[.scrollable]
+--
 
 [cols="a,a,a", options="header"]
 |===
@@ -254,6 +272,8 @@ l.add(5);
 List<Integer> l = List.of(1, 2, 3, 4, 5);
 ----
 |===
+
+--
 
 === Introduction of `_jshell_` (java REPL) (Java 9)
 Huge step towards scripting, but also really important for bigger projects. The presence of the jshell
@@ -315,6 +335,9 @@ Switch expressions' functionality is still limited to the same restrictions as b
 (we are going to talk about these restrictions later), but it got a nice facelift,
 where you can leave a lot of boilerplate code behind!
 
+[.scrollable]
+--
+
 [cols="a,a,a", options="header"]
 |===
 | Scala
@@ -365,9 +388,14 @@ private String kindergartenToString(Integer number) {
 ----
 |===
 
+--
+
 === Text blocks (Java 15)
 
 Another long overdue feature, where you wonder, why exactly did we need to wait until Java 15 for that?
+
+[.scrollable]
+--
 
 [cols="a,a,a", options="header"]
 |===
@@ -438,10 +466,15 @@ String sql = """
 ----
 |===
 
+--
+
 === Pattern matching instanceof (Java 16)
 You can argue if this in itself is a huge step or not, but this definitely set the table, for what's to come with Java 21.
 And not having to cast (although it is 100% safe, already from context) by hand every time,
 and having to have either multiple casts, or nested branches is already a big step, but let the code speak for itself.
+
+[.scrollable]
+--
 
 [cols="a,a,a", options="header"]
 |===
@@ -490,6 +523,8 @@ void callIfPositiveInt(Object object) {
 ----
 |===
 
+--
+
 === Record classes (Java 16)
 
 Record classes are a new type declaration, that allows you to compactly define immutable data classes.
@@ -502,6 +537,9 @@ but from a developer experience perspective, being able to write compact code th
 is the same for both.
 
 Records are going to be even more powerful in Java 21, paired with pattern matching concepts.
+
+[.scrollable]
+--
 
 [cols="a,a,a", options="header"]
 |===
@@ -594,6 +632,8 @@ assert !point.equals(new Point(2, 2));
 ----
 |===
 
+--
+
 === Sealed interfaces/classes (Java 17)
 
 With Scala's language focus not just leverages, but was built on _pattern matching_,
@@ -628,6 +668,9 @@ And even the ones having methods, had separate means of calling those. In short:
 
 With Java 21, the collections implementing sequential elements have to implement the `SequentialCollection` interface,
 making the existence of these methods obvious, and unified.
+
+[.scrollable]
+--
 
 [cols="a,a,a", options="header"]
 |===
@@ -705,6 +748,8 @@ void doStuff2(
 ----
 |===
 
+--
+
 === Pattern matching switch
 
 Switch expressions were a nice syntactic sugar, but functionality wise they didn't come with anything new.
@@ -735,6 +780,9 @@ because with this new addition the compiler will force you to.
 
 There is no point of bringing an old example for this, since it is so different from the core,
 you would simply look for another approach in previous java versions.
+
+[.scrollable]
+--
 
 [cols="a,a", options="header"]
 |===
@@ -790,6 +838,8 @@ private String getWingStatus(Animal animal) {
 ----
 |===
 
+--
+
 You can see, how it is pretty similar now in that exact case. However one must note,
 that while this is the new best thing in java, that is just the tip of the iceberg in Scala.
 
@@ -830,6 +880,9 @@ With previous versions already enabling running java as a single file, or even a
 the need for defining an exact main class is fading. This new feature leverages that thought,
 and lets the user create java files without extra boilerplate.
 
+[.scrollable]
+--
+
 [cols="a,a", options="header"]
 |===
 | Java (old)
@@ -853,6 +906,8 @@ void main() {
 }
 ----
 |===
+
+--
 
 This makes the learning curve much easier for a newcomer, but also opens the door to even easier scripting in the future.
 
