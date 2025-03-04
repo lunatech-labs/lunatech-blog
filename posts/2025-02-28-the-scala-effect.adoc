@@ -1,0 +1,879 @@
+= The Scala effect: Java’s Evolution Inspired by Scala
+alex-molnar
+v1.0, 2025-02-14
+:title: The Scala effect: Java’s Evolution Inspired by Scala
+:imagesdir: ../media/2025-02-28-the-scala-effect
+:lang: en
+:tags: [jvm, scala, java, java8, java11, java17, java21, we-know-scala, scala-lujah]
+
+== Contents
+Since its inception, Java has been one of the most widely used programming languages,
+known for its stability and enterprise adoption.
+However, as modern software development demands more expressive and concise code,
+Java has often looked to other languages for inspiration.
+One of its biggest influences has been Scala—a language that brought functional programming,
+immutability, and expressive syntax to the JVM.
+
+Over the years, Java has steadily incorporated many features that were first introduced in Scala,
+from lambda expressions and pattern matching to records and data-oriented programming.
+In this article, we’ll explore how Java has evolved by adopting concepts from Scala,
+breaking down the changes version by version. We'll also see some examples,
+to see each language's unique approach, while pointing out some key differences.
+
+== Java 8
+=== Stream API
+I don't think I need to introduce many of the readers to the Stream API, born in Java 8.
+It is also well known, how it basically changed the game on how you approach operations on collections.
+What might be a bit less known is the fact, that this feature is a big step towards functional programming,
+since the API promotes functional paradigms, such as immutability, pure functions, higher level functions.
+Exploring those paradigms could use a talk in itself, so the below example is rather to show,
+from a developer experience perspective how easy it is to do multiple, small operations on a collection,
+with the new API compered to the old way.
+
+[cols="a,a,a", options="header"]
+|===
+| Scala
+| Java (old)
+| Java (new)
+
+|
+[source, scala]
+----
+def getNamesOfMammals(animals: List[Animal]): List[String] =
+  animals
+    .filter(_.classification == "mammal")
+    .map(_.name)
+----
+
+|
+[source, java]
+----
+private List<String> getNamesOfMammals(List<Animal> animals) {
+    List<String> names = new ArrayList<>();
+
+    for (Animal animal: animals) {
+        if (animal.classification.equals("mammal")) {
+            names.add(animal.name);
+        }
+    }
+
+    return names;
+}
+----
+
+|
+[source, java]
+----
+private List<String> getNamesOfMammals(List<Animal> animals) {
+    return animals
+        .stream()
+        .filter(animal -> animal.classification.equals("mammal"))
+        .map(animal -> animal.name)
+        .toList();
+}
+----
+|===
+
+It is worth to note, that the above example is nice, and already a huge step in the right direction,
+when it comes to streaming data processing, java still lacks support for a lot of major operations (fold, sliding windows).
+
+=== Optional
+Safety first! Especially when it comes to nulls, and java. `Option` is a core part of the Scala language,
+making nullable data a breeze to work with, through great support for operations, and branchless behaviour definition.
+Java intends to implement some of that functionality with the `Optional` class. Just like in the streams' case,
+scala still offers more flexibility and more defined developer options, when it comes to potentially missing data (e.g.: `exists`, `forall`).
+The example illustrates the boilerplate needed to handle nested nullable structures,
+and the positive steps java already took in the right direction.
+
+[cols="a,a,a", options="header"]
+|===
+| Scala
+| Java (old)
+| Java (new)
+
+|
+[source, scala]
+----
+case class Wing(length: Int, fact: Option[String])
+case class Animal(name: String, wing: Option[Wing])
+
+def printSafeInterestingWingFacts(animals: List[Animal]) =
+  animals.foreach { animal => println(s"""${animal.name}: ${
+    animal.wing
+      .flatMap(_.fact)
+      .getOrElse("no interesting wing fact :(")}""")}
+----
+
+|
+[source, java]
+----
+class Wing{public Integer length; public String fact;}
+class Animal{public String name; public Wing wing;}
+
+private void printInterestingWingFacts(List<Animal> animals) {
+    for (Animal animal: animals) {
+        if (animal.wing != null) {
+            if (animal.wing.fact != null) {
+                System.out.printf("%s: %s%n", animal.name, animal.wing.fact);
+            } else {
+                System.out.printf("%s: no interesting wing fact :(%n", animal.name);
+            }
+        } else {
+            System.out.printf("%s: no interesting wing fact :(%n", animal.name);
+        }
+    }
+}
+----
+
+|
+[source, java]
+----
+class Wing{public Integer length; public Optional<String> fact;}
+class Animal{public String name; public Optional<Wing> wing;}
+
+private void printSafeInterestingWingFacts(List<Animal> animals) {
+    animals.forEach(animal -> {
+        System.out.printf("%s: %s%n", animal.name, animal.wing
+            .flatMap(wing -> wing.fact)
+            .orElse("no interesting wing fact :(%n"));
+    });
+}
+----
+|===
+
+=== Functional interfaces (lambdas)
+One of the key prerequisites of having support for all these functional paradigms, is to be able to pass functions as arguments.
+Java implements this concept via so-called functional interfaces. A functional interface, is an interface,
+with only one method declared. Java 8 also makes it easier to use these interfaces with the lambda syntax.
+With the lambda syntax you can pass lambda functions as arguments, and the compiler will be able to interpret it,
+as the needed interface.
+
+[cols="a,a,a", options="header"]
+|===
+| Scala
+| Java (old)
+| Java (new)
+
+|
+[source, scala]
+----
+def chainEvenNumbers(numbers: List[Int]): String =
+  numbers
+  .filter(n => n % 2 == 0)
+  .map(n => n.toString)
+  .reduce{case (n1, n2) => n1 + n2}
+----
+
+|
+[source, java]
+----
+String chainEvenNumbers(List<Integer> numbers) {
+    Predicate<Integer> predicate = new Predicate<>() {
+        @Override
+        public boolean test(Integer integer) {
+            return integer % 2 == 0;
+        }
+    };
+
+    Function<Integer, String> mapper = new Function<>() {
+        @Override
+        public String apply(Integer integer) {
+            return integer.toString();
+        }
+    };
+
+    BinaryOperator<String> accumulator = new BinaryOperator<>() {
+        @Override
+        public String apply(String s, String s2) {
+            return s + s2;
+        }
+    };
+
+    return numbers
+        .stream()
+        .filter(predicate)
+        .map(mapper)
+        .reduce("", accumulator);
+}
+----
+
+|
+[source, java]
+----
+String chainEvenNumbers(List<Integer> numbers) {
+    return numbers
+        .stream()
+        .filter(i -> i % 2 == 0)
+        .map(Object::toString)
+        .reduce("", (s, s2) -> s + s2);
+}
+----
+|===
+
+== Java 11
+Java 11's main features fall outside of this article's scope, since they are not directly influenced by Scala,
+nor resemble existing Scala features. I would like to mention however a couple small additions,
+mainly in the area of scripting, and writing / running fast, without overhead.
+OVer the years a good argument for learning Scala (or against learning java, really) was that for a beginner,
+the learning curve might be steep, and writing small code snippets is not really possible.
+On top of that, while it scales up excellent, it is not really ideal for small projects.
+The following additions you can argue how much they were inspired by Scala actually (I wouldn't argue against it either),
+but one thing is not arguable: Scala was always ahead in these topics, and with 11, Java is now one step closer.
+
+=== `_<Collection>_::of` factory method (Java 9)
+No more dubious initialization, and element adding after, with Java 11 now most of the commonly used collections receive
+the `::of` factory method, where you can quickly create a new immutable instance, with a number of initial elements.
+
+[cols="a,a,a", options="header"]
+|===
+| Scala
+| Java (old)
+| Java (new)
+
+|
+[source, scala]
+----
+val l: List[Int] = List(1, 2, 3, 4, 5)
+----
+
+|
+[source,java]
+----
+List<Integer> l = new ArrayList<>();
+
+l.add(1);
+l.add(2);
+l.add(3);
+l.add(4);
+l.add(5);
+----
+
+|
+[source, java]
+----
+List<Integer> l = List.of(1, 2, 3, 4, 5);
+----
+|===
+
+=== Introduction of `_jshell_` (java REPL) (Java 9)
+Huge step towards scripting, but also really important for bigger projects. The presence of the jshell
+is equally amazing for absolute beginners, as well as seasoned developers. It could be used in various ways,
+from writing quick _"hello world"_ code to quickly test out more serious code in a bigger production environment.
+The java REPL is not yet that advanced as the Scala counterpart, but this long overdue feature
+is again making the language a bit more consumable.
+
+=== Addition of var keyword (Java 11)
+
+If it was not a 100% clear what does it mean, when we talk about steep learning curve for beginners,
+or challenges to test out code segment quickly in a bigger environment,
+having to quickly write a code like this (in both cases) hopefully explains it:
+[source, java]
+----
+void testStateAndTranslator() {
+    InternalFrameInternalFrameTitlePaneInternalFrameTitlePaneMaximizeButtonWindowNotFocusedState state = nimbus.getState();
+    assert state == expectedState;
+    RefreshAuthorizationPolicyProtocolServerSideTranslatorPB translator = hadoop.getTranslator();
+    assert translator == expectedTranslator;
+}
+----
+
+Now this is a test, where you would most likely get some autocorrection, but imagine the nightmare typing these in the REPL!
+Luckily if you want to quicly test out something like this, sice java 11 it would only look like something like this:
+
+[source, java]
+----
+jshell> var state = nimbus.getState()
+state ==> InternalFrameInternalFrameTitlePaneInternalFrameT ... owNotFocusedState@1a86f2f1
+
+jshell> state.testStuff()
+Stuff works!
+----
+
+=== Launch single file (Java 11)
+
+This is all great so far, but what if you want to write some code quickly to generate input, or want to process a file?
+You wouldn't want to include that file in your project, and definitely don't want to recompile every time you tweak that
+`println` statement. With Java 11, you get another benefit which points java in the scripting direction.
+You can run single java files, without associating it to a project, or even without precompiling it.
+In fact you can include a `she-bang` line, and run it as a shell script!
+
+[source, java]
+----
+❯ javac HelloWorldJava8.java
+❯ java HelloWorldJava8
+Hello World!
+❯ java HelloWorldJava11.java
+Hello World!
+❯ ./HelloWorldJava11Shell.java
+Hello World!
+----
+
+== Java 17
+
+=== Switch expressions (Java 14)
+Switch expressions' functionality is still limited to the same restrictions as before
+(we are going to talk about these restrictions later), but it got a nice facelift,
+where you can leave a lot of boilerplate code behind!
+
+[cols="a,a,a", options="header"]
+|===
+| Scala
+| Java (old)
+| Java (new)
+
+|
+[source, scala]
+----
+def kindergartenToString(number: Int): String =
+  number match {
+  case 1 => "1"
+  case 2 => "2"
+  case _ => "cannot count until that"
+}
+----
+
+|
+[source, java]
+----
+private String kindergartenToString(Integer number) {
+    String result;
+    switch (number) {
+        case 1:
+            result = "1";
+            break;
+        case 2:
+            result = "2";
+            break;
+        default:
+            result = "cannot count until that";
+    };
+
+    return result;
+}
+----
+
+|
+[source, java]
+----
+private String kindergartenToString(Integer number) {
+    return switch (number) {
+        case 1 -> "1";
+        case 2 -> "2";
+        default -> "cannot count until that";
+    };
+}
+----
+|===
+
+=== Text blocks (Java 15)
+
+Another long overdue feature, where you wonder, why exactly did we need to wait until Java 15 for that?
+
+[cols="a,a,a", options="header"]
+|===
+| Scala
+| Java (old)
+| Java (new)
+
+|
+[source, scala]
+----
+var sql =
+  """
+    \|SELECT
+    \|  name,
+    \|  salary,
+    \|  title
+    \|FROM
+    \|  employees
+    \|WHERE
+    \|  age < 25
+    \|  AND title in (
+    \|    SELECT
+    \|      summary
+    \|    FROM
+    \|      jobs
+    \|  )
+    \|""".stripMarging
+
+----
+
+|
+[source, java]
+----
+String sql = "SELECT\n" +
+            "  name,\n" +
+            "  salary,\n" +
+            "  title\n" +
+            "FROM\n" +
+            "  employees\n" +
+            "WHERE\n" +
+            "  age < 25\n" +
+            "  AND title in (\n" +
+            "    SELECT\n" +
+            "      summary\n" +
+            "    FROM\n" +
+            "      jobs\n" +
+            "  )";
+----
+
+|
+[source, java]
+----
+String sql = """
+            SELECT
+              name,
+              salary,
+              title
+            FROM
+              employees
+            WHERE
+              age < 25
+              AND title in (
+                SELECT
+                  summary
+                FROM
+                  jobs
+              )""";
+----
+|===
+
+=== Pattern matching instanceof (Java 16)
+You can argue if this in itself is a huge step or not, but this definitely set the table, for what's to come with Java 21.
+And not having to cast (although it is 100% safe, already from context) by hand every time,
+and having to have either multiple casts, or nested branches is already a big step, but let the code speak for itself.
+
+[cols="a,a,a", options="header"]
+|===
+| Scala
+| Java (old)
+| Java (new)
+
+|
+[source, scala]
+----
+def callIfPositiveInt(any: Any): Unit =
+  any match {
+    case i: Int => i.someMethodOnInt()
+  }
+----
+
+|
+[source, java]
+----
+void callIfPositiveIntImpl1(Object object) {
+    if (object instanceof Integer) {
+        Integer i = (Integer) object;
+
+        if (i > 0) {
+            i.someMethodOnInteger();
+        }
+    }
+}
+
+void callIfPositiveIntImpl2(Object object) {
+    if (object instanceof Integer && ((Integer) object) > 0) {
+        Integer i = (Integer) object;
+        i.someMethodOnInteger();
+    }
+}
+----
+
+|
+[source, java]
+----
+void callIfPositiveInt(Object object) {
+    if (object instanceof Integer i && i > 0) {
+        i.someMethodOnInteger();
+    }
+}
+----
+|===
+
+=== Record classes (Java 16)
+
+Record classes are a new type declaration, that allows you to compactly define immutable data classes.
+They are intended to be transparent carriers of their shallowly immutable data.
+
+They resemble the well known `case class` in Scala. There's no such thing as "same" between two languages,
+so it goes without saying that they have (on top of the many similarities) some differences.
+Exactly discovering all the similarities and differences is outside of the scope of this article,
+but from a developer experience perspective, being able to write compact code that speaks for itself
+is the same for both.
+
+Records are going to be even more powerful in Java 21, paired with pattern matching concepts.
+
+[cols="a,a,a", options="header"]
+|===
+| Scala
+| Java (old)
+| Java (new)
+
+|
+[source, scala]
+----
+case class Point(x: Int, y: Int)
+
+// ...
+
+val point = Point(1, 2)
+val x = point.x
+val y = point.y
+val hashCode = point.hashCode
+val s = point.toString // "Point[x=1, y=2]"
+
+assert(point == Point(1, 2))
+assert(!(point == Point(2, 2)))
+
+----
+
+|
+[source, java]
+----
+
+class Point {
+    private final Integer x;
+    private final Integer y;
+
+    public Point(Integer x, Integer y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public Integer x() {
+        return x;
+    }
+
+    public Integer y() {
+        return y;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Point[x=%d, y=%d]", x, y);
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (!(object instanceof Point point)) return false;
+        return Objects.equals(x, point.x) && Objects.equals(y, point.y);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
+    }
+}
+
+// ...
+
+Point point = new Point(1, 2);
+Integer x = point.x();
+Integer y = point.y();
+int hashCode = point.hashCode();
+String s = point.toString(); // "Point[x=1, y=2]"
+assert point.equals(new Point(1, 2));
+assert !point.equals(new Point(2, 2));
+----
+
+|
+[source, java]
+----
+record Point(Integer x, Integer y) {}
+
+// ...
+
+Point point = new Point(1, 2);
+Integer x = point.x();
+Integer y = point.y();
+int hashCode = point.hashCode();
+String s = point.toString(); // "Point[x=1, y=2]"
+assert point.equals(new Point(1, 2));
+assert !point.equals(new Point(2, 2));
+----
+|===
+
+=== Sealed interfaces/classes (Java 17)
+
+With Scala's language focus not just leverages, but was built on _pattern matching_,
+having an option to control your class hierarchy is essential. Hence sealed traits (interfaces)
+are essential part of scala. With it you can have fine grained control of the class hierarchy,
+and have guarantees for all possible subclasses, making pattern matching even more powerful.
+With the power of such features catching java's attention, it had to adapt some of the concepts as well.
+
+With sealed interfaces it is possible to have exact control over your class subclasses that can implement your class / interface.
+With having switch expression coming only in java 21, with java 17 most of the gains is
+having all the control over your class hierarchy, enabling you to enforce design principles,
+and prevent unauthorized extensions.
+
+[source, java]
+----
+sealed interface Animal permits Dog, Cat {}
+final class Dog implements Animal {}
+final class Cat implements Animal {}
+final class Bird implements Animal {}
+
+"‘Bird' is not allowed in the sealed hierarchy"
+----
+
+== Java 21
+
+=== `SequencedCollection` interface
+
+Before Java 21 accessing elements in order was not just not straight forward, but some brave people might call it chaos.
+With some of the types not having any method to access sequential elements (like `getFirst`, `getLast`, `reversed`),
+while others having the same, on top of some these' supertypes / subtypes having methods for that, while others did not.
+And even the ones having methods, had separate means of calling those. In short: chaos.
+
+With Java 21, the collections implementing sequential elements have to implement the `SequentialCollection` interface,
+making the existence of these methods obvious, and unified.
+
+[cols="a,a,a", options="header"]
+|===
+| Scala
+| Java (old)
+| Java (new)
+
+|
+[source, scala]
+----
+def doStuff(
+  list: List[Int],
+  deque: ArrayDeque[Int],
+  sortedSet: SortedSet[Int],
+  linkedHashSet: LinkedHashSet[Int]
+) = {
+  var i = 0
+  // get first
+  i = list.head
+  i = deque.head
+  i = sortedSet.head
+  i = linkedHashSet.head
+  // get last
+  i = list.last
+  i = deque.last
+  i = sortedSet.last
+  i = linkedHashSet.last
+}
+----
+
+|
+[source, java]
+----
+void doStuff(
+    List<Integer> list,
+    Deque<Integer> deque,
+    SortedSet<Integer> sortedSet,
+    LinkedHashSet<Integer> linkedHashSet
+) {
+    Integer i;
+    // get first
+    i = list.get(0);
+    i = deque.getFirst();
+    i = sortedSet.first();
+    i = linkedHashSet.iterator().next();
+    // get last
+    i = list.get(list.size() - 1);
+    i = deque.getLast();
+    i = sortedSet.last();
+    // i = linkedHashSet.? missing
+}
+----
+
+|
+[source, java]
+----
+void doStuff2(
+    List<Integer> list,
+    Deque<Integer> deque,
+    SortedSet<Integer> sortedSet,
+    LinkedHashSet<Integer> linkedHashSet
+) {
+    Integer i;
+    // get first
+    i = list.getFirst();
+    i = deque.getFirst();
+    i = sortedSet.getFirst();
+    i = linkedHashSet.getFirst();
+    // get last
+    i = list.getLast();
+    i = deque.getLast();
+    i = sortedSet.getLast();
+    i = linkedHashSet.getLast();
+}
+----
+|===
+
+=== Pattern matching switch
+
+Switch expressions were a nice syntactic sugar, but functionality wise they didn't come with anything new.
+You could still only use primitive types, Strings, or enums, and were only able to match on the concrete value of the input.
+With java 21 all that changed, and you can use switch expressions with any types.
+In order to actually take advantage of this of course, a lot of new patterns were introduced on top of the value match.
+
+* null pattern +
+In previous versions if the value was `null` inside the `switch`, it would always throw  `NullPointerException`.
+With the new null pattern these exceptions can be caught.
+* type pattern +
+You can now pattern match for the types. Just like with the pattern matching `instanceof`,
+you can use the new type without any casting necessary.
+* guarded patterns +
+You can define additional conditions for you patterns. This very well corresponds with the syntax,
+previously seen with `instanceof`, where the matched arguments can already be used as a concrete type in the guards.
+* record deconstruction +
+You can not only match on `records` similarly to the type pattern, but it is now possible to deconstruct nested structures,
+and match on nested types as well. You can also use the concrete types of these nested values.
+That is very powerful with deeply nested structures, where you don't need to access a very deep value by hand. +
+Note, that this new record deconstruction also works with the `instanceof` operator.
+* sealed class exhaustion +
+Pattern matching switch is, where the most powerful feature of sealed classes / interfaces come to light.
+Because the compiler knows exactly which classes can implement a sealed class, if the input of the switch is a sealed class,
+you don't need to define a `default` case, since the compiler is able to tell if the switch is exhaustive or not.
+That way, previously existing bugs, of not updating a switch, when e.g. the domain changes are a thing in the past,
+because with this new addition the compiler will force you to.
+
+There is no point of bringing an old example for this, since it is so different from the core,
+you would simply look for another approach in previous java versions.
+
+[cols="a,a", options="header"]
+|===
+| Scala
+| Java (new)
+
+|
+[source, scala]
+----
+case class Wing(length: Int, fact: Option[String])
+
+sealed trait Animal
+
+case class Dog() extends Animal
+case class Cat() extends Animal
+case class Bird(birdType: String, wing: Wing) extends Animal
+
+def getWingStatus(animal: Animal): String = animal match {
+  case null => "no animal provided"
+  case Dog() => "dogs don't have wings"
+  case Cat() => "cats don't have wings"
+  case Bird(_, Wing(_, fact)) if fact.isDefined => s"interesting fact: ${fact.get}"
+  case Bird(_, Wing(_, Some(fact))) =>
+    s"interesting fact: ${fact}"
+  case Bird(birdType, Wing(length, _)) =>
+    s"$birdType has $length long wings"
+}
+----
+
+|
+
+[source, java]
+----
+record Wing(Integer length, Optional<String> fact) {}
+
+sealed interface Animal permits Dog, Cat, Bird {}
+
+final class Dog implements Animal {}
+final class Cat implements Animal {}
+record Bird(String birdType, Wing wing) implements Animal {}
+
+private String getWingStatus(Animal animal) {
+    return switch (animal) {
+        case null -> "no animal provided";
+        case Dog ignored -> "dogs don't have wings";
+        case Cat ignored -> "cats don't have wings";
+        case Bird(String birdType, Wing(Integer length, Optional<String> fact))
+            when fact.isPresent() -> "interesting fact: " + fact.get();
+        case Bird(String birdType, Wing(Integer length, Optional<String> fact)) ->
+            String.format("%s has %d long wings", birdType, length);
+    };
+}
+----
+|===
+
+You can see, how it is pretty similar now in that exact case. However one must note,
+that while this is the new best thing in java, that is just the tip of the iceberg in Scala.
+
+You can already see an example for that above, where (right before the guard pattern) the type pattern,
+and the literal value pattern is mixed. First the the type `Bird` is matched,
+then the record deconstructed, in a way that it will only match, if the wingfact is present.
+
+== Beyond
+
+=== Unnamed variables (Java 22)
+
+A minor improvement in developer experience is introducing unnamed variables.
+If you take a look at the previous example for pattern matching, you would notice,
+that although the example now looks pretty similar, in case of java you still had to give some name to the variables,
+even if you are not using them later on. With the introduction of unnamed variables you can use `_` as the identifier,
+and you can reuse it as many times as you'd like, and not be able to reference it later.
+So it does not clutter up your scope, nor can it overshadow an outside variable by accident.
+In short it doesn't just signals the implementor's intention, but enforces it as well,
+making the code safer, and more obvious to read in the future.
+
+[source, java]
+----
+private String getWingStatus(Animal animal) {
+    return switch (animal) {
+        case null -> "no animal provided";
+        case Dog _ -> "dogs don't have wings";
+        case Cat _ -> "cats don't have wings";
+        case Bird(String _, Wing(Integer _, Optional<String> fact))
+            when fact.isPresent() -> "interesting fact: " + fact.get();
+        case Bird(String birdType, Wing(Integer length, Optional<String> _)) ->
+            String.format("%s has %d long wings", birdType, length);
+    };
+}
+----
+
+=== Unnamed classes (Java 22)
+With previous versions already enabling running java as a single file, or even as a script,
+the need for defining an exact main class is fading. This new feature leverages that thought,
+and lets the user create java files without extra boilerplate.
+
+[cols="a,a", options="header"]
+|===
+| Java (old)
+| Java (new)
+
+|
+[source, java]
+----
+public class HelloWorldJava8 {
+    public static void main(String[] args) {
+	    System.out.println("Hello World");
+    }
+}
+----
+
+|
+[source, java]
+----
+void main() {
+    System.out.println("Hello World");
+}
+----
+|===
+
+This makes the learning curve much easier for a newcomer, but also opens the door to even easier scripting in the future.
+
+== Closing thoughts
+
+If now, you feel like Scala is bad, because Java adopted its best features I failed.
+If you feel like Java is bad, because it lacks a lot of features Scala has, I also failed.
+If you feel like Java is excellent, because it can adopt in an environment, it's maybe not that familiar,
+and you feel like Scala is excellent, because it can leverage a familiar environment to the fullest,
+only then I have truly succeeded.
+
+What we need to understand, is the goal of Scala, and Java are two very different things.
+Scala is a functional programming language, so the language and its whole ecosystem is designed around that fact,
+while java's main focus lies rather elsewhere.
+
+The fact, that Java recognizes the value in a lot of functional paradigms shows the modern thinking of its maintainers,
+and projects a bright future ahead.
+
+The fact, that these paradigms are existing, and also well implemented
+(even well enough for the _old bigbrother_ java) shows great design from the creators of Scala.
+
+Java and Scala, while distinct in their philosophies, have carved out a shared space within the JVM ecosystem,
+proving that innovation and tradition can coexist, complement,
+and even elevate each other, hence elevate modern software development.
