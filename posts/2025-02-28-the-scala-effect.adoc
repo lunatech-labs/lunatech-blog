@@ -5,6 +5,7 @@ v1.0, 2025-03-04
 :imagesdir: ../media/2025-02-28-the-scala-effect
 :lang: en
 :tags: [jvm, scala, java, java8, java11, java17, java21, we-know-scala, scala-lujah]
+:docinfo: shared
 
 == Contents
 Since its inception, Java has been one of the most widely used programming languages,
