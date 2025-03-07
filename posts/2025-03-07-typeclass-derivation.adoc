@@ -1,0 +1,192 @@
+= Mastering Typeclass Derivation with Scala 3
+nMoncho
+2025-03-07
+:title: Mastering Typeclass Derivation with Scala 3
+:imagesdir: ../media/2025-03-07-typeclass-derivation
+:tags: [scala, typeclass, metaprogramming, we-know-scala, scala-lujah]
+
+
+== Polymorphism
+
+When learning about programming we stumble upon the concept of Polymorphism, and
+when learning something new I always wonder, why should we care? Besides getting
+a new tool on our tool belt I think it's important to understand what are we
+getting from this new programming trick.
+
+Polymorphism, from the Greek "having multiple forms", allows us to define and
+implement a set of different algorithms using the same interface. This has the
+benefit of lowering the complexity of our system from our client's point of view.
+By switching to another implementation, they don't need to understand what changed
+underneath, they just need to know that the interface is honored by another
+implementation. And by lowering this complexity we lower the cognitive-load developers
+need to have while using our API, making their code easier to maintain.
+
+As far as I'm aware, there are at least 3 types of polymorphism:
+
+- Ad-Hoc
+- Parametric, and
+- Sub-type
+
+If you come from a Object Oriented programming background you'll recognize the last
+one. Sub-type polymorphism is implemented by defining a parent class that
+defines an API, and child classes implementing it. Then using a mechanism like
+double-dispatch, a implementation is chosen based on the actual subclass being
+instantiated:
+
+[source,scala]
+----
+trait Shape:
+    def area: Double
+
+class Square(width: Double) extends Shape:
+    override def area: Double = width * width
+
+class Rectangle(width: Double, height: Double) extends Shape:
+    override def area: Double = width * height
+
+class Circle(radius: Double) extends Shape:
+    override def area: Double = Math.pow(radius, 2) * Math.PI
+
+val s1: Shape = new Circle(4)
+val s2: Shape = new Rectangle(4, 2)
+
+s1.area
+s2.area
+----
+
+Another type of polymorphism we can find in both Functional and Object Oriented
+programming languages is Parametric polymorphism where we don't necessarily
+provide different implementations based on different types, but rather abstract
+over some types:
+
+[source,scala]
+----
+def identity[A](a: A): A = a
+
+enum List[+A]:
+    case Cons(head: A, tail: List[A]) extends List[A]
+    case Nil extends List[Nothing]
+
+    def map[B](fn: A => B): List[B] = this match
+        case Cons(head, tail) => Cons(fn(head), tail.map(fn))
+        case Nil => Nil
+----
+
+The `List` doesn't care what's containing, but its `map` method can easily work
+for `Int`s, `String`s, and so on.
+
+The last type of polymorphism we mentioned was _Ad-Hoc_ polymorphism, which can
+be defined as a "A system where functions or expressions are defined for specific
+types". Let's see how this gets implemented using Typeclasses.
+
+== Typeclasses
+
+Typeclasses are a way to implement Ad-Hoc polymorphism with 2 significant properties:
+
+- Separate Definitions: For each relevant class, we define a separate instance of
+  a function or method (like `Show`, `Eq`, etc.) This similar to defining a
+  separate function for specific types.
+- Context-Dependent Selection: An implementation will be selected based on where
+  the typeclass is used.
+
+In Scala, a Typeclass is implemented by defining 3 parts:
+
+- Interface: What functionality is the Typeclass offering.
+- Instances: How is that functionality implemented.
+- Usage: Where and how is that functionality used.
+
+Let's see a simple implementation of the `Show` Typeclass:
+
+[source,scala]
+----
+// Interface
+trait Show[A]:
+    def show(a: A): String
+
+// Instances
+object Show:
+    given Show[Int]     = (i: Int) => i.toString
+    given Show[String]  = (s: String) => "'" + s + "'"
+    given Show[Boolean] = (b: Boolean) => i.toString
+
+// Usage
+def log[A](a: A)(using s: Show[A]): Unit =
+    println(s.show(a))
+----
+
+An important detail of the Typeclass definition is that we use a Type Parameter
+on it's interface, instances, and usage.
+
+== Typeclass Derivation
+
+An interesting feature of Scala is that we can automatically generate the
+instances of a Typeclass by implementing Typeclass Derivation code. This will
+make the compiler generate instances at compile-time, making our Typeclass more
+usable as we'll shift the burden of implementation to our code instead of our
+client's code.
+
+To derive instances for a Typeclass we need:
+
+- Tools to decompose complex types, such as case classes.
+- Tools to compose complex types from more simpler types.
+
+And one way we can approach implementing Derivation code is:
+
+- Think Recursively (Base vs. Iterative Case)
+- Implementing one Typeclass by implementing a simpler version first.
+
+On Scala 2 we'd use a library like https://github.com/milessabin/shapeless[Shapeless] or
+https://github.com/softwaremill/magnolia[Magnolia] to compose and decompose complex
+types. In Scala 3 these features are backed in the language.
+
+https://docs.scala-lang.org/scala3/reference/contextual/derivation.html#mirror-1[Mirrors] provide
+typelevel information about types being derived, with similar features as _HList_ and
+_Coproduct_ in a single abstraction.
+
+[source,scala]
+----
+import scala.collection.AbstractIterable
+import scala.compiletime.{erasedValue, error, summonInline}
+import scala.deriving.*
+
+// Interface
+trait Show[A]:
+    def show(a: A): String
+
+// Instances
+object Show:
+    given Show[Int]     = (i: Int) => i.toString
+    given Show[String]  = (s: String) => "'" + s + "'"
+    given Show[Boolean] = (b: Boolean) => i.toString
+
+    def iterable[T](p: T): Iterable[Any] = new AbstractIterable[Any]:
+        def iterator: Iterator[Any] = p.asInstanceOf[Product].productIterator
+
+    def showProduct[T](p: Mirror.ProductOf[T], elems: => List[Show[?]]): Show[T] =
+        new Show[T]:
+            def show(a: A): String =
+                iterable(x).lazyZip(elems).map { case (i, s) => s.show(i) }.mkString(",")
+
+    inline def derived[A](using m: Mirror.ProductOf[A]): Show[A] =
+        lazy val elemInstances = summonInstances[T, m.MirroredElemTypes]
+        showProduct(m, elemInstances)
+
+    inline def summonInstances[T, Elems <: Tuple]: List[Show[?]] =
+        inline erasedValue[Elems] match
+            case _: (elem *: elems) => deriveOrSummon[T, elem] :: summonInstances[T, elems]
+            case _: EmptyTuple => Nil
+
+    inline def deriveOrSummon[T, Elem]: Show[Elem] =
+        inline erasedValue[Elem] match
+            case _: T => deriveRec[T, Elem]
+            case _    => summonInline[Show[Elem]]
+
+    inline def deriveRec[T, Elem]: Show[Elem] =
+        inline erasedValue[T] match
+            case _: Elem => error("infinite recursive derivation")
+            case _       => Show.derived[Elem](using summonInline[Mirror.Of[Elem]]) // recursive derivation
+----
+
+This is a simplified example of a Typeclass Derivation for the `Show` Typeclass.
+For a more thorough example with a more detailed explanation, I cannot recommend
+https://docs.scala-lang.org/scala3/reference/contextual/derivation.html[Type Class Derivation] enough.
