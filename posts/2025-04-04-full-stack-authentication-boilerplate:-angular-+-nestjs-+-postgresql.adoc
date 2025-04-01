@@ -1,0 +1,49 @@
+= Full-Stack Authentication Boilerplate: Angular + NestJS + PostgreSQL
+jakeortega
+v1.0, 2025-04-04
+:title: Full-Stack Authentication Boilerplate: Angular + NestJS + PostgreSQL
+:lang: en
+:tags: [angular, nestjs, postgresql, typeorm, jwt, authentication, frontend, typescript, nodejs]
+
+*A practical series for backend developers building secure full-stack apps*
+
+If you’re strong on the backend but want to level up your frontend skills—or
+just want a reusable, production-grade auth stack—this series is for you.
+
+We’re building a modern, full-stack authentication boilerplate using:
+
+* *Angular 19* for the frontend, featuring Signals, `@if`/`@for` control
+flow, and streamlined component architecture.
+* *NestJS* for the backend, powered by *PostgreSQL*, *TypeORM*, and
+*JWT-based authentication*.
+* A clean, modular codebase you can clone, adapt, and ship.
+
+'''''
+
+== 🛠️ Why This Series?
+
+This isn’t just another tutorial.
+It’s a hands-on guide for backend-focused developers who want to:
+
+* Understand Angular without drowning in frontend complexity.
+* Build secure authentication flows from scratch.
+* Learn by doing—no fluff, no filler.
+
+'''''
+
+== 🗺️ What’s in the Series?
+
+Here’s the roadmap 👇
+image::../media/2025-04-04-full-stack-authentication-boilerplate:-angular-+-nestjs-+-postgresql/background.png[]
+
+You’ll go from initial setup to a fully functional, deployable stack with:
+
+* ✅ JWT login and registration
+* ✅ Protected routes and role-based access
+* ✅ Angular 19 Signals and new control flow syntax
+* ✅ Full PostgreSQL integration with TypeORM
+* ✅ CI/CD pipeline, E2E testing with Playwright, and Docker deployment
+
+Each part builds on the last.
+No prior Angular or NestJS experience required—just TypeScript and backend
+fundamentals.
