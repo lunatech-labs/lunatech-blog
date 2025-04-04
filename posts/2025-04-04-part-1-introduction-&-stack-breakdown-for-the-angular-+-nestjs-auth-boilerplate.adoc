@@ -7,8 +7,6 @@ v1.0, 2019-05-01
 
 image::../media/2025-04-04-part-1-introduction-&-stack-breakdown-for-the-angular-+-nestjs-auth-boilerplate/background.png[Project Introduction & Stack Justification]
 
-= Part 1: Project Introduction & Stack Justification
-
 Welcome to the first post in this series on building a full-stack
 authentication boilerplate with *Angular*, *NestJS*, and *PostgreSQL*.
 
