@@ -27,11 +27,23 @@ By the end of this part, you’ll have:
 Once set up, your backend folder will look like this:
 
 ....
-src/ ├── app.module.ts ├── main.ts ├── auth/ │   ├── auth.controller.ts │
-├── auth.module.ts │   ├── auth.service.ts │   ├── dto/ │   │   ├──
-login.dto.ts │   │   └── register.dto.ts │   └── jwt/ │       └──
-jwt.strategy.ts ├── users/ │   ├── user.entity.ts │   ├──
-users.controller.ts │   ├── users.module.ts │   └── users.service.ts
+src/
+├── app.module.ts
+├── main.ts
+├── auth/
+│   ├── auth.controller.ts
+│   ├── auth.module.ts
+│   ├── auth.service.ts
+│   ├── dto/
+│   │   ├── login.dto.ts
+│   │   └── register.dto.ts
+│   └── jwt/
+│       └── jwt.strategy.ts
+├── users/
+│   ├── user.entity.ts
+│   ├── users.controller.ts
+│   ├── users.module.ts
+│   └── users.service.ts
 .env
 ....
 
@@ -146,7 +158,7 @@ import { AuthModule } from "./auth/auth.module";
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       entities: [__dirname + "/**/*.entity{.ts,.js}"],
-      synchronize: true, // ⚠️ Use only in development
+      synchronize: true, // ⚠️ Don't use this in production — it'll drop/recreate tables
     }),
     UsersModule,
     AuthModule,
