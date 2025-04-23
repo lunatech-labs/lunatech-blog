@@ -565,11 +565,6 @@ You now have:
 * DTO validation and global pipes
 * Environment config and CORS enabled for the frontend
 
-Here’s a cleaner, more accurate line to close out *Part 2*, with a casual
-tone and clearer handoff to frontend development:
-
-'''''
-
 👉 *Next up (Part 3): We’ll switch gears and start building the Angular
 frontend — hooking it up to this backend, wiring in JWT auth, and securing
 client-side routes.*
