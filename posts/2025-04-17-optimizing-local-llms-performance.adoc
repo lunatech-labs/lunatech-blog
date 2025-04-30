@@ -194,6 +194,18 @@ ollama run qwen2.5:14b-instruct-q2_K
 ollama run qwen2.5:14b-instruct-fp16
 ----
 
+For example, let's start with Q4_0:
+[source,shell]
+----
+ollama run qwen2.5:14b-instruct-q4_0
+----
+Now that the model is loaded, we can run the prompt:
+[source,shell]
+----
+"Explain recursion to a 10-year-old in one paragraph."
+----
+Pay attention to the response time and the memory usage. Compare it with the other models.
+
 You may have noticed there is not much difference in quality between the Q4_0 and Q8_0 models, but the Q2_K model is much faster and smaller.
 Perfect for showing the quality/speed trade-off in action, and how to adjust for your needs.
 This does not necessarily mean that the behavior is the same for other prompts or tasks.
