@@ -5,7 +5,7 @@ v1.0, 2025-04-22
 :lang: en
 :tags: [nestjs, backend, typescript, postgresql, jwt, authentication, typeorm, bcrypt, cors]
 
-=== *Introduction*
+image::../media/2025-04-04-part-1-introduction-&-stack-breakdown-for-the-angular-+-nestjs-auth-boilerplate/background.png[Backend Setup with NestJS]
 
 With our project vision and stack laid out in Part 1, it’s time to build the
 backend.
@@ -60,7 +60,7 @@ src/
 
 '''''
 
-=== ✅ *Step 1: Run PostgreSQL and Set Environment Variables*
+=== *Step 1: Run PostgreSQL and Set Environment Variables*
 
 You can use either Docker or Podman.
 Run *one* of the following commands in your terminal:
@@ -98,7 +98,7 @@ DB_NAME=nestdb JWT_SECRET=dev_secret BCRYPT_SALT_ROUNDS=10
 
 '''''
 
-=== ✅ *Step 2: Scaffold the Project and Install Dependencies*
+=== *Step 2: Scaffold the Project and Install Dependencies*
 
 [source,bash]
 ----
