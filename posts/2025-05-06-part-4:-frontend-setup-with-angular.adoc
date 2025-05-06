@@ -1,0 +1,854 @@
+= Part 4: Frontend Setup with Angular
+jakeortega
+v1.0, 2025-05-06
+:title: Part 4: Frontend Setup with Angular
+:lang: en
+:tags: [frontend, angular, boilerplate, login, register, jwt]
+
+image::../media/2025-05-06-part-4:-frontend-setup-with-angular/background.png[Frontend Setup with Angular]
+
+Now that we’ve built our NestJS backend with secure JWT auth, it’s time
+to wire up the frontend. In this part, we’ll scaffold an *Angular* app,
+integrate it with our backend, and secure it with *JWT-based route
+protection*.
+
+By the end of this part, you’ll have:
+
+* A basic Angular app styled with Bootstrap
+* Auth service for login/register with JWT handling
+* Login and Register components using reactive forms
+* A protected Welcome page
+* Route guard to lock down private views
+
+'''''
+
+=== *Step 1: Initialize the Angular Frontend*
+
+Let’s get your frontend up and running. Open your terminal and run:
+
+[source,bash]
+----
+ng new frontend
+cd frontend
+----
+
+Pick SCSS (or your favorite style option) when prompted. +
+This gives you a fresh Angular workspace to play with.
+
+With Angular v19, all components, services, and other features are
+created as standalone by default. This makes your app more modular and
+reduces unnecessary dependencies.
+
+'''''
+
+=== *Step 2: Install Dependencies*
+
+We’ll need a few extras to make our app functional and visually
+appealing:
+
+* *Bootstrap*: For responsive and professional styling.
+* *jwt-decode*: To decode JWTs and extract user information.
+
+Install them with:
+
+[source,bash]
+----
+npm install bootstrap jwt-decode
+----
+
+'''''
+
+=== *Step 3: Set Up Bootstrap*
+
+Let’s make things look good with minimal effort.
+
+[arabic]
+. Open `angular.json`
+. Find the `"styles"` array and add Bootstrap’s CSS:
++
+[source,json]
+----
+"styles": [
+  "node_modules/bootstrap/dist/css/bootstrap.min.css",
+  "src/styles.scss"
+]
+----
+. Start your development server if it’s not already running:
++
+[source,bash]
+----
+ng serve
+----
+
+Test it by adding a Bootstrap class (like `btn btn-primary`) to a button
+in `app.component.html`. If it’s blue, you’re golden.
+
+'''''
+
+=== *Step 4: Setting Up Environments*
+
+Angular provides a built-in way to manage environment-specific
+configurations, such as API URLs for development and production. Let’s
+configure them.
+
+[arabic]
+. Run the following command to generate the environment files for
+development and production:
++
+[source,bash]
+----
+ng generate environments
+----
++
+This will create two files in the `src/environments/` folder:
++
+....
+src/
+├── environments/
+│   ├── environment.development.ts # Development environment
+│   └── environment.ts             # Production environment
+....
+. Open both `environment.ts` and `environment.development.ts` and add
+the `apiUrl` property. `environment.development.ts`
++
+[source,typescript]
+----
+export const environment = {
+  production: false,
+  apiUrl: "http://localhost:3000", // Replace with your backend's dev URL
+};
+----
++
+`environment.ts`
++
+[source,typescript]
+----
+export const environment = {
+  production: true,
+  apiUrl: "https://your-production-api.com", // Replace with your backend's prod URL
+};
+----
+. The `environment` files are automatically selected based on the build
+configuration:
+* *Development*: When running `ng serve`, Angular replaces
+`environment.ts` with `environment.development.ts`.
+* *Production*: when running `ng build --prod`, Angular uses
+`environment.ts`.
++
+You can now use `environment.apiUrl` in your services to dynamically
+switch between development and production APIs.
+
+'''''
+
+=== *Step 5: Generate Guards, Services, and Components*
+
+Let Angular CLI do the heavy lifting for you. Run the following commands
+to generate the necessary files:
+
+[source,bash]
+----
+ng generate service services/auth
+ng generate guard auth/auth
+ng generate component pages/login
+ng generate component pages/register
+ng generate component pages/welcome
+----
+
+What These Commands Do:
+
+[arabic]
+. *Auth Service*: Handles API calls for login, registration, and token
+management.
+. *Auth Guard*: Protects routes by checking if the user is
+authenticated.
+. *Login Component*: Provides a form for users to log in.
+. *Register Component*: Provides a form for users to register.
+. *Welcome Component*: Displays a personalized welcome message for
+logged-in users.
+
+This sets up your folders and boilerplate files, keeping things
+organized and modular.
+
+==== Project Structure Overview
+
+Here’s how your Angular app should look after generating the files:
+
+....
+src/
+├── app/
+│   ├── auth/                     # Guards, interceptors, maybe a module
+│   │   └── auth.guard.ts
+│   ├── pages/                    # Feature components
+│   │   ├── login/
+│   │   │   ├── login.component.html
+│   │   │   ├── login.component.scss
+│   │   │   └── login.component.ts
+│   │   ├── register/
+│   │   │   ├── register.component.html
+│   │   │   ├── register.component.scss
+│   │   │   └── register.component.ts
+│   │   └── welcome/
+│   │       ├── welcome.component.html
+│   │       ├── welcome.component.scss
+│   │       └── welcome.component.ts
+│   ├── services/                 # API communication
+│   │   └── auth.service.ts
+│   ├── shared/                   # Models, utilities, etc. (optional)
+│   ├── app.component.html
+│   ├── app.component.scss
+│   ├── app.component.ts
+│   ├── app.config.ts
+│   └── app.routes.ts
+├── environments/
+│   ├── environment.development.ts # Development environment
+│   └── environment.ts             # Production environment
+├── index.html
+├── main.ts
+└── style.scss
+....
+
+'''''
+
+=== *Step 6: The Auth Service – Your API Bridge*
+
+The `AuthService` is the backbone of your authentication flow. It
+communicates with your backend’s `/auth/login` and `/auth/register`
+endpoints, manages the JWT in localStorage, and provides utility methods
+for token handling.
+
+Here’s the complete implementation:
+
+[source,typescript]
+----
+// src/app/services/auth.service.ts
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { catchError, Observable, tap, throwError } from "rxjs";
+import { environment } from "../../environments/environment";
+
+@Injectable({
+  providedIn: "root",
+})
+export class AuthService {
+  constructor(private http: HttpClient) {}
+
+  /**
+   * Logs in the user by sending their credentials to the backend.
+   * Stores the access token in localStorage upon success.
+   * @param data - The user's email and password.
+   * @returns An observable containing the access token.
+   */
+  login(data: {
+    email: string;
+    password: string;
+  }): Observable<{ access_token: string }> {
+    return this.http
+      .post<{ access_token: string }>(`${environment.apiUrl}/auth/login`, data)
+      .pipe(
+        tap((res) => localStorage.setItem("access_token", res.access_token)),
+        catchError((error) => {
+          const errorMessage =
+            error.status === 401
+              ? "Invalid email or password. Please try again."
+              : "An unexpected error occurred. Please try again later.";
+          return throwError(() => new Error(errorMessage));
+        })
+      );
+  }
+
+  /**
+   * Registers a new user by sending their details to the backend.
+   * @param data - The user's name, email, password, and role.
+   * @returns An observable for the registration process.
+   */
+  register(data: {
+    email: string;
+    password: string;
+    name: string;
+    role: string;
+  }): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/auth/register`, data).pipe(
+      catchError((error) => {
+        const errorMessage =
+          error.status === 400
+            ? "Registration failed. Please check your input."
+            : "An unexpected error occurred. Please try again later.";
+        return throwError(() => new Error(errorMessage));
+      })
+    );
+  }
+
+  /**
+   * Logs out the user by removing the access token from localStorage.
+   */
+  logout(): void {
+    localStorage.removeItem("access_token");
+  }
+
+  /**
+   * Retrieves the stored access token from localStorage.
+   * @returns The access token or null if not found.
+   */
+  getToken(): string | null {
+    return localStorage.getItem("access_token");
+  }
+
+  /**
+   * Checks if the user is authenticated by verifying the presence of a token.
+   * @returns A boolean indicating whether the user is authenticated.
+   */
+  isAuthenticated(): boolean {
+    const token = this.getToken();
+    return !!token;
+  }
+}
+----
+
+'''''
+
+=== *Step 7: Protecting Routes with a Guard*
+
+Angular’s `CanActivate` guard is like a backend middleware for your
+routes. Here’s how we check for a valid JWT:
+
+[source,typescript]
+----
+// src/app/auth/auth.guard.ts
+import { Injectable } from "@angular/core";
+import { CanActivate, Router } from "@angular/router";
+import { AuthService } from "../services/auth.service";
+import { jwtDecode } from "jwt-decode";
+
+@Injectable({ providedIn: "root" })
+export class AuthGuard implements CanActivate {
+  constructor(private authService: AuthService, private router: Router) {}
+
+  canActivate(): boolean {
+    const token = this.authService.getToken();
+    if (!token) {
+      this.redirectToLogin();
+      return false;
+    }
+
+    if (this.isTokenExpired(token)) {
+      this.authService.logout();
+      this.redirectToLogin();
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   * Checks if the token is expired.
+   * @param token - The JWT token to validate.
+   * @returns A boolean indicating whether the token is expired.
+   */
+  private isTokenExpired(token: string): boolean {
+    try {
+      const decoded: any = jwtDecode(token);
+      return Date.now() > decoded.exp * 1000;
+    } catch {
+      return true; // Treat invalid tokens as expired
+    }
+  }
+
+  /**
+   * Redirects the user to the login page.
+   */
+  private redirectToLogin(): void {
+    this.router.navigate(["/login"]);
+  }
+}
+----
+
+'''''
+
+=== *Step 8: Login & Register Components*
+
+The `LoginComponent` and `RegisterComponent` are the core components for
+user authentication in the application. Both components use Angular’s
+reactive forms to manage user input and validations. They interact with
+the `AuthService` to send requests to the backend for login and
+registration functionality. Upon successful operations, they navigate
+the user to the appropriate page (`/welcome` for login and `/login` for
+registration).
+
+Key Features
+
+* *Reactive Forms*: Both components use Angular’s reactive forms to
+handle user input and validations.
+* *Validation Rules*: Fields like `email`, `password`, and `name` (for
+registration) have validation rules to ensure proper input.
+* *Error Handling*: User-friendly error messages are displayed when
+login or registration fails.
+* *Loading State*: Prevents duplicate submissions by disabling the
+submit button while the request is in progress.
+* *Navigation*: Redirects users to the appropriate page upon successful
+login or registration.
+
+'''''
+
+[arabic]
+. *Login Component*
++
+[source,typescript]
+----
+// src/app/pages/login/login.component.ts
+import { Component } from "@angular/core";
+import { Router } from "@angular/router";
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from "@angular/forms";
+import { AuthService } from "../../services/auth.service";
+import { CommonModule } from "@angular/common";
+
+@Component({
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.scss"],
+  imports: [ReactiveFormsModule, CommonModule],
+})
+export class LoginComponent {
+  form: FormGroup;
+  isLoading = false;
+  errorMessage: string | null = null;
+
+  constructor(
+    private fb: FormBuilder,
+    private auth: AuthService,
+    private router: Router
+  ) {
+    this.form = this.fb.group({
+      email: ["", [Validators.required, Validators.email]],
+      password: ["", [Validators.required, Validators.minLength(6)]],
+    });
+  }
+
+  onSubmit() {
+    if (this.form.invalid) return;
+
+    this.isLoading = true;
+    this.errorMessage = null;
+
+    this.auth.login(this.form.value).subscribe({
+      next: () => {
+        this.isLoading = false;
+        this.router.navigate(["/welcome"]);
+      },
+      error: (err) => {
+        this.isLoading = false;
+        this.errorMessage =
+          err.error?.message || "Login failed. Please try again.";
+      },
+    });
+  }
+}
+----
+. *Login HTML*
++
+[source,html]
+----
+<!-- src/app/pages/login/login.component.html -->
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  class="mt-4 p-4 border rounded shadow-sm bg-white"
+  style="max-width: 400px; margin: auto"
+>
+  <h2 class="text-center mb-4">Login</h2>
+
+  <div class="mb-3">
+    <input
+      formControlName="email"
+      type="email"
+      class="form-control"
+      placeholder="Email"
+      [class.is-invalid]="
+        form.get('email')?.invalid && form.get('email')?.touched
+      "
+      aria-label="Email"
+    />
+    <div
+      *ngIf="form.get('email')?.invalid && form.get('email')?.touched"
+      class="invalid-feedback"
+    >
+      Please enter a valid email.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <input
+      formControlName="password"
+      type="password"
+      class="form-control"
+      placeholder="Password"
+      [class.is-invalid]="
+        form.get('password')?.invalid && form.get('password')?.touched
+      "
+      aria-label="Password"
+    />
+    <div
+      *ngIf="form.get('password')?.invalid && form.get('password')?.touched"
+      class="invalid-feedback"
+    >
+      Password must be at least 6 characters long.
+    </div>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <button type="submit" class="btn btn-primary w-100" [disabled]="isLoading">
+    <span
+      *ngIf="isLoading"
+      class="spinner-border spinner-border-sm me-2"
+    ></span>
+    Login
+  </button>
+</form>
+----
+. *Register Component*
++
+[source,typescript]
+----
+// src/app/pages/register/register.component.ts
+import { Component } from "@angular/core";
+import { Router } from "@angular/router";
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from "@angular/forms";
+import { AuthService } from "../../services/auth.service";
+import { CommonModule } from "@angular/common";
+
+@Component({
+  selector: "app-register",
+  templateUrl: "./register.component.html",
+  styleUrls: ["./register.component.scss"],
+  imports: [ReactiveFormsModule, CommonModule],
+})
+export class RegisterComponent {
+  form: FormGroup;
+  isLoading = false;
+  errorMessage: string | null = null;
+
+  constructor(
+    private fb: FormBuilder,
+    private auth: AuthService,
+    private router: Router
+  ) {
+    this.form = this.fb.group({
+      name: ["", [Validators.required]],
+      email: ["", [Validators.required, Validators.email]],
+      password: ["", [Validators.required, Validators.minLength(6)]],
+      role: ["user", [Validators.required]],
+    });
+  }
+
+  onSubmit() {
+    if (this.form.invalid) return;
+
+    this.isLoading = true;
+    this.errorMessage = null;
+
+    this.auth.register(this.form.value).subscribe({
+      next: () => {
+        this.isLoading = false;
+        this.router.navigate(["/login"]);
+      },
+      error: (err) => {
+        this.isLoading = false;
+        this.errorMessage =
+          err.error?.message || "Registration failed. Please try again.";
+      },
+    });
+  }
+}
+----
+. *Register HTML*
++
+[source,html]
+----
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  class="mt-4 p-4 border rounded shadow-sm bg-white"
+  style="max-width: 400px; margin: auto"
+>
+  <h2 class="text-center mb-4">Register</h2>
+
+  <div class="mb-3">
+    <input
+      formControlName="name"
+      type="text"
+      class="form-control"
+      placeholder="Name"
+      [class.is-invalid]="
+         form.get('name')?.invalid && form.get('name')?.touched
+       "
+      aria-label="Name"
+    />
+    <div
+      *ngIf="form.get('name')?.invalid && form.get('name')?.touched"
+      class="invalid-feedback"
+    >
+      Name is required.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <input
+      formControlName="email"
+      type="email"
+      class="form-control"
+      placeholder="Email"
+      [class.is-invalid]="
+         form.get('email')?.invalid && form.get('email')?.touched
+       "
+      aria-label="Email"
+    />
+    <div
+      *ngIf="form.get('email')?.invalid && form.get('email')?.touched"
+      class="invalid-feedback"
+    >
+      Please enter a valid email.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <input
+      formControlName="password"
+      type="password"
+      class="form-control"
+      placeholder="Password"
+      [class.is-invalid]="
+         form.get('password')?.invalid && form.get('password')?.touched
+       "
+      aria-label="Password"
+    />
+    <div
+      *ngIf="form.get('password')?.invalid && form.get('password')?.touched"
+      class="invalid-feedback"
+    >
+      Password must be at least 6 characters long.
+    </div>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <button type="submit" class="btn btn-success w-100" [disabled]="isLoading">
+    <span
+      *ngIf="isLoading"
+      class="spinner-border spinner-border-sm me-2"
+    ></span>
+    Register
+  </button>
+</form>
+----
+
+'''''
+
+=== *Step 9: Welcome Page – Static Greeting and Logout*
+
+The `WelcomeComponent` provides a user-friendly page that welcomes the
+user after a successful login. It integrates with the existing
+AuthService to manage logout functionality but does not attempt to
+decode or extract any user-specific data from the access token.
+
+Key Features
+
+* *Static Greeting*: Display a generic welcome message for all users.
+* *Logout Functionality*: Allow users to log out and clear their
+session.
+
+'''''
+
+[arabic]
+. *Welcome Component*
++
+[source,typescript]
+----
+// src/app/pages/welcome/welcome.component.ts
+import { Component } from "@angular/core";
+import { AuthService } from "../../services/auth.service";
+import { Router } from "@angular/router";
+
+@Component({
+  selector: "app-welcome",
+  templateUrl: "./welcome.component.html",
+  styleUrls: ["./welcome.component.scss"],
+})
+export class WelcomeComponent {
+  constructor(private authService: AuthService, private router: Router) {}
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(["/login"]);
+  }
+}
+----
+. *Welcome HTML*
++
+[source,html]
+----
+<!-- src/app/pages/welcome/welcome.component.html -->
+<div class="welcome-container text-center mt-5">
+  <h1 class="display-4">Welcome!</h1>
+  <p class="lead">We're glad to have you here.</p>
+  <button class="btn btn-primary mt-3" (click)="logout()">Logout</button>
+</div>
+----
+. *Welcome Component SCSS*
++
+[source,scss]
+----
+/* /src/app/pages/welcome/welcome.component.scss */
+.welcome-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: #343a40;
+}
+
+p {
+  color: #6c757d;
+}
+----
+
+'''''
+
+=== *Step 10: Routing: Lock Down Protected Pages*
+
+Alright, now that we’ve got our login, registration, and welcome pages
+ready, it’s time to lock things down. We don’t want just anyone
+accessing the protected parts of our app, right? That’s where Angular’s
+routing and guards come into play. Let’s set up our routes and ensure
+only authenticated users can access the welcome page.
+
+==== Setting Up Routes
+
+In Angular, routes define how users navigate through your app. Here’s
+how we’ll structure our routes:
+
+* `/login`: For users to log in.
+* `/register`: For new users to sign up.
+* `/welcome`: A protected page that greets logged-in users.
+* `/`: Redirects to `/welcome` by default.
+
+Here’s the code:
+
+[source,typescript]
+----
+// src/app/app.routes.ts
+import { Routes } from "@angular/router";
+import { LoginComponent } from "./pages/login/login.component";
+import { RegisterComponent } from "./pages/register/register.component";
+import { WelcomeComponent } from "./pages/welcome/welcome.component";
+import { AuthGuard } from "./auth/auth.guard";
+
+export const routes: Routes = [
+  { path: "", redirectTo: "welcome", pathMatch: "full" },
+  { path: "login", component: LoginComponent },
+  { path: "register", component: RegisterComponent },
+  { path: "welcome", component: WelcomeComponent, canActivate: [AuthGuard] },
+];
+----
+
+This is a simple and clean way to define your app’s navigation. Notice
+how we’ve added `canActivate: [AuthGuard]` to the `/welcome` route?
+That’s the magic that protects it.
+
+==== Protecting Routes with a Guard
+
+The `AuthGuard` is like a bouncer for your routes. It checks if the user
+is authenticated before letting them in. If they’re not, it redirects
+them to the login page.
+
+==== Wiring It All Together
+
+Now that we’ve defined our routes and guard, let’s hook everything up in
+`main.ts`. Angular v19 makes this super simple with the `provideRouter`
+function:
+
+[source,typescript]
+----
+// src/main.ts
+import { bootstrapApplication } from "@angular/platform-browser";
+import { AppComponent } from "./app/app.component";
+import { provideRouter } from "@angular/router";
+import { routes } from "./app/app.routes";
+import { provideHttpClient } from "@angular/common/http";
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideRouter(routes), // Provide the routes
+    provideHttpClient(), // Provide the HTTP client
+  ],
+}).catch((err) => console.error(err));
+----
+
+No need for a separate `AppRoutingModule`. Just provide the routes
+directly in `main.ts`, and you’re good to go.
+
+==== Testing It Out
+
+[arabic]
+. *Try Accessing `/welcome` Without Logging In*:
+* You should be redirected to `/login`.
+. *Log In and Access `/welcome`*:
+* After logging in, navigate to `/welcome`. You should see the
+personalized greeting.
+. *Log Out and Try Again*:
+* After logging out, try accessing `/welcome` again. You should be
+redirected to `/login`.
+
+==== Why This Matters
+
+For backend developers, this should feel familiar. Think of the
+`AuthGuard` as middleware for your routes. It ensures that only
+authenticated users can access certain parts of your app, just like how
+you’d protect API endpoints on the server side.
+
+By combining Angular’s routing with guards, you’ve got a solid
+foundation for building secure, user-friendly apps. And the best part?
+It’s modular and easy to extend. Want to add role-based access? Just
+tweak the guard. Need to protect more routes? Add `canActivate` to them.
+
+'''''
+
+=== *What’s Next?*
+
+You’ve got a working Angular app wired to your backend, protected with
+route guards and powered by JWT auth. Next up, we’ll level things up
+with some Angular 19 enhancements and best practices.
+
+👉 *Part 4: Angular 19 Deep Dive*
+
+We’ll cover:
+
+* 🧠 *Signals vs Observables* — When to use which and why
+* 🔁 `@if`, `@for`, and `defer` blocks — Smarter templates with better
+control
+* ⚡ *Change detection and performance tuning*
+* ✅ Real-world use in login/register forms
+
+This part’s optional, but worth it if you want your Angular app to be
+leaner, faster, and future-ready.
+
+For now, pat yourself on the back—you’ve just implemented a secure,
+modern routing system in Angular. 🚀
