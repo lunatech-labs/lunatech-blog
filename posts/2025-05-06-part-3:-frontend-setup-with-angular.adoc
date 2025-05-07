@@ -1,11 +1,11 @@
-= Part 4: Frontend Setup with Angular
+= Part 3: Frontend Setup with Angular
 jakeortega
 v1.0, 2025-05-06
-:title: Part 4: Frontend Setup with Angular
+:title: Part 3: Frontend Setup with Angular
 :lang: en
 :tags: [frontend, angular, boilerplate, login, register, jwt]
 
-image::../media/2025-05-06-part-4:-frontend-setup-with-angular/background.png[Frontend Setup with Angular]
+image::../media/2025-05-06-part-3:-frontend-setup-with-angular/background.png[Frontend Setup with Angular]
 
 Now that we’ve built our NestJS backend with secure JWT auth, it’s time
 to wire up the frontend. In this part, we’ll scaffold an *Angular* app,
@@ -35,9 +35,41 @@ cd frontend
 Pick SCSS (or your favorite style option) when prompted. +
 This gives you a fresh Angular workspace to play with.
 
-With Angular v19, all components, services, and other features are
-created as standalone by default. This makes your app more modular and
-reduces unnecessary dependencies.
+==== What is `ng` in Angular CLI?
+
+The `ng` command is the core of the Angular CLI (Command Line Interface)
+— a powerful toolkit that streamlines Angular development from start to
+finish. It acts as a shortcut to perform a wide range of tasks without
+manually setting up files or configurations.
+
+With `ng`, you can quickly scaffold new projects, generate application
+features, and manage your build and development workflow with ease. Here
+are some common `ng` commands and what they do:
+
+* `ng new`: Creates a new Angular project with a complete directory
+structure, TypeScript configuration, and ready-to-run setup.
+* `ng generate` (or `ng g`): Automatically creates Angular building
+blocks such as components, services, directives, pipes, and more —
+following Angular’s style guide and best practices.
+* `ng serve`: Launches a local development server with live reload. As
+you make changes, the app updates instantly in the browser.
+* `ng build`: Compiles your application into optimized static files for
+production deployment.
+
+The real power of `ng` lies in automation. It eliminates repetitive
+boilerplate and helps you stick to Angular conventions, leading to
+cleaner, more maintainable codebases.
+
+____
+💡 *Tip:* With Angular v19, components and services are created as
+*standalone* by default. This means they no longer need to be declared
+in NgModules, which promotes better modularity and reduces coupling in
+your app architecture.
+____
+
+By mastering the `ng` CLI, you’re not just saving time — you’re building
+apps the Angular way, with a foundation rooted in scalability and
+consistency.
 
 '''''
 
