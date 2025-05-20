@@ -1,0 +1,644 @@
+= Part 4: Angular 19 Deep Dive – Smarter Forms with Signals and Control Flow
+jakeortega
+v1.0, 2025-05-20
+:title: Part 4: Angular 19 Deep Dive – Smarter Forms with Signals and Control Flow
+:lang: en
+:tags: [angular v19, signals, control flow, reactive forms, frontend]
+
+image::../media/2025-05-20-part-4:-angular-19-deep-dive-–-smarter-forms-with-signals-and-control-flow/background.png[Angular 19 Deep Dive – Smarter Forms with Signals and Control Flow]
+
+Welcome back to the Full-Stack Authentication Boilerplate (Angular +
+NestJS + PostgreSQL) series. So far, we’ve wired up the backend and
+built a working Angular frontend. Now it’s time to modernize our forms
+using the latest Angular 19 features—specifically *Signals*, *control
+flow syntax*, and *defer blocks*.
+
+Angular 19 isn’t a total rewrite—it’s a refinement. It tightens up
+template logic, improves reactivity, and lets us write cleaner, more
+performant UI code. In this part, we’ll refactor the login and register
+forms to take full advantage of these improvements.
+
+'''''
+
+=== Angular 19 Recap (and What Actually Matters for Devs)
+
+Here’s what we’ll use in this part:
+
+* ✅ *Signals*: Angular’s native reactive primitive, lets you track
+state like `useState()` in React—but fully integrated into Angular’s
+change detection.
+* ✅ *Control Flow Syntax* (`@if`, `@for`, `@switch`): Cleaner
+alternatives to structural directives like `*ngIf` and `*ngFor`.
+* ✅ *Defer Blocks*: Lazy-load parts of the UI, just like backend routes
+or feature modules.
+* ✅ *@let Directive*: Declare local variables directly in templates.
+* ✅ *Smarter Change Detection*: Updates only the DOM parts that
+actually changed, for faster UIs.
+
+____
+*For backend devs:* Think of `signal()` like a reactive field or an
+in-memory tracked variable; `@if`/`@for` in your templates is like
+having expressive, inline logic with instant UI updates—no more verbose
+boilerplate.
+____
+
+'''''
+
+=== Signals or Reactive Forms?
+
+____
+*When to Use Each (for Backend Devs):*
+
+* *Signals* are perfect for local/component UI state and simple forms.
+* *Reactive Forms* (`FormBuilder`, etc.) are the gold standard for
+complex, validation-heavy, or dynamic forms—especially if you need
+granular error handling or will scale up forms later.
+* *Pro Tip:* You can use both! Track form state with Reactive Forms,
+then reflect with signals using Angular’s `toSignal()` utility for the
+best DX.
+
+[source,ts]
+----
+// Example: Bridge form values to signals
+formValue = toSignal(form.valueChanges, { initialValue: form.value });
+----
+____
+
+'''''
+
+=== Migration Sidebar: NgModules → Standalone Components
+
+____
+==== 🚚 *Migration: NgModules to Standalone Components*
+
+*Old way:*
+
+[source,ts]
+----
+@NgModule({
+  declarations: [LoginComponent],
+  imports: [ReactiveFormsModule],
+})
+export class AuthModule {}
+----
+
+*New way (Angular 15+):*
+
+[source,ts]
+----
+@Component({
+  standalone: true,
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  imports: [ReactiveFormsModule],
+})
+export class LoginComponent {}
+----
+
+* No more `@NgModule` needed.
+* Use `standalone: true` and import dependencies directly in the
+component.
+* Both patterns can coexist during migration.
+____
+
+'''''
+
+=== Refactoring the Login Form
+
+Here’s how to use Reactive Forms as the foundation, enhanced with
+signals and modern control flow blocks.
+
+==== `login.component.ts`
+
+[source,ts]
+----
+import {
+  Component,
+  computed,
+  signal,
+  inject,
+  ChangeDetectionStrategy,
+} from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { take } from 'rxjs/operators';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
+  standalone: true,
+  imports: [ReactiveFormsModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class LoginComponent {
+  private readonly fb = inject(FormBuilder);
+  readonly form = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+  });
+
+  readonly isLoading = signal(false);
+  readonly errorMessage = signal<string | null>(null);
+
+  readonly formValue = toSignal(this.form.valueChanges, {
+    initialValue: this.form.value,
+  });
+  readonly formStatus = toSignal(this.form.statusChanges, {
+    initialValue: this.form.status,
+  });
+  readonly isFormValid = computed(() => this.formStatus() === 'VALID');
+
+  constructor(
+    private readonly auth: AuthService,
+    private readonly router: Router
+  ) {}
+
+  onSubmit() {
+    if (!this.isFormValid()) return;
+
+    const { email, password } = this.form.getRawValue();
+    if (!email || !password) return;
+
+    this.isLoading.set(true);
+    this.errorMessage.set(null);
+
+    this.auth
+      .login({ email, password })
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.isLoading.set(false);
+          this.router.navigate(['/welcome']);
+        },
+        error: (err) => {
+          this.isLoading.set(false);
+          const message =
+            err?.error?.message ||
+            err?.message ||
+            'Login failed. Please try again.';
+          this.errorMessage.set(message);
+        },
+      });
+  }
+}
+----
+
+'''''
+
+==== Migration Sidebar: Control Flow Syntax
+
+____
+==== 🔄 *Migration: `*ngIf`/`*ngFor` → `@if`/`@for`*
+
+*Before (classic Angular):*
+
+[source,html]
+----
+<div *ngIf="loading">Loading...</div>
+<ul>
+  <li *ngFor="let user of users">{{ user.name }}</li>
+</ul>
+----
+
+*After (Angular 17+):*
+
+[source,html]
+----
+@if (loading) {
+  <div>Loading...</div>
+}
+<ul>
+  @for (user of users) {
+    <li>{{ user.name }}</li>
+  }
+</ul>
+----
+
+* The new syntax is cleaner and more readable.
+* You can use both during your migration to Angular 17+.
+____
+
+'''''
+
+==== `login.component.html`
+
+[source,html]
+----
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  class="mt-4 p-4 border rounded shadow-sm bg-white"
+  style="max-width: 400px; margin: auto"
+>
+  <h2 class="text-center mb-4">Login</h2>
+
+  <div class="mb-3">
+    @let isInvalidEmail = form.get('email')?.invalid && form.get('email')?.touched;
+    <input
+      formControlName="email"
+      type="email"
+      class="form-control"
+      placeholder="Email"
+      [class.is-invalid]="isInvalidEmail"
+      aria-label="Email"
+    />
+    @if (isInvalidEmail) {
+      <div class="invalid-feedback">Please enter a valid email.</div>
+    }
+  </div>
+
+  <div class="mb-3">
+    @let isInvalidPassword = form.get('password')?.invalid && form.get('password')?.touched;
+    <input
+      formControlName="password"
+      type="password"
+      class="form-control"
+      placeholder="Password"
+      [class.is-invalid]="isInvalidPassword"
+      aria-label="Password"
+    />
+    @if (isInvalidPassword) {
+      <div class="invalid-feedback">
+        Password must be at least 6 characters long.
+      </div>
+    }
+  </div>
+
+  @if (errorMessage()) {
+    <div class="alert alert-danger">{{ errorMessage() }}</div>
+  }
+
+  <button
+    type="submit"
+    class="btn btn-primary w-100"
+    [disabled]="isLoading() || !isFormValid()"
+  >
+    @if (isLoading()) {
+      <span class="spinner-border spinner-border-sm me-2"></span>
+    }
+    Login
+  </button>
+</form>
+----
+
+'''''
+
+=== Refactoring the Register Form
+
+==== `register.component.ts`
+
+[source,ts]
+----
+import {
+  Component,
+  computed,
+  signal,
+  inject,
+  ChangeDetectionStrategy,
+} from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { take } from 'rxjs/operators';
+
+@Component({
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss'],
+  standalone: true,
+  imports: [ReactiveFormsModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class RegisterComponent {
+  private readonly fb = inject(FormBuilder);
+  readonly form = this.fb.group({
+    name: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+    role: ['user', [Validators.required]],
+  });
+
+  readonly isLoading = signal(false);
+  readonly errorMessage = signal<string | null>(null);
+
+  readonly formValue = toSignal(this.form.valueChanges, {
+    initialValue: this.form.value,
+  });
+  readonly formStatus = toSignal(this.form.statusChanges, {
+    initialValue: this.form.status,
+  });
+  readonly isFormValid = computed(() => this.formStatus() === 'VALID');
+
+  constructor(
+    private readonly auth: AuthService,
+    private readonly router: Router
+  ) {}
+
+  onSubmit() {
+    if (!this.isFormValid()) return;
+
+    const { name, email, password, role } = this.form.getRawValue();
+    if (!name || !email || !password || !role) return;
+
+    this.isLoading.set(true);
+    this.errorMessage.set(null);
+
+    this.auth
+      .register({ name, email, password, role })
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.isLoading.set(false);
+          this.router.navigate(['/login']);
+        },
+        error: (err) => {
+          this.isLoading.set(false);
+          const message =
+            err?.error?.message ||
+            err?.message ||
+            'Registration failed. Please try again.';
+          this.errorMessage.set(message);
+        },
+      });
+  }
+}
+----
+
+'''''
+
+==== `register.component.html`
+
+[source,html]
+----
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  class="mt-4 p-4 border rounded shadow-sm bg-white"
+  style="max-width: 400px; margin: auto"
+>
+  <h2 class="text-center mb-4">Register</h2>
+
+  <div class="mb-3">
+    @let isInvalidName = form.get('name')?.invalid && form.get('name')?.touched;
+    <input
+      formControlName="name"
+      type="text"
+      class="form-control"
+      placeholder="Name"
+      [class.is-invalid]="isInvalidName"
+      aria-label="Name"
+    />
+    @if (isInvalidName) {
+      <div class="invalid-feedback">Name is required.</div>
+    }
+  </div>
+
+  <div class="mb-3">
+    @let isInvalidEmail = form.get('email')?.invalid && form.get('email')?.touched;
+    <input
+      formControlName="email"
+      type="email"
+      class="form-control"
+      placeholder="Email"
+      [class.is-invalid]="isInvalidEmail"
+      aria-label="Email"
+    />
+    @if (isInvalidEmail) {
+      <div class="invalid-feedback">Please enter a valid email.</div>
+    }
+  </div>
+
+  <div class="mb-3">
+    @let isInvalidPassword = form.get('password')?.invalid && form.get('password')?.touched;
+    <input
+      formControlName="password"
+      type="password"
+      class="form-control"
+      placeholder="Password"
+      [class.is-invalid]="isInvalidPassword"
+      aria-label="Password"
+    />
+    @if (isInvalidPassword) {
+      <div class="invalid-feedback">
+        Password must be at least 6 characters long.
+      </div>
+    }
+  </div>
+
+  @if (errorMessage()) {
+    <div class="alert alert-danger">{{ errorMessage() }}</div>
+  }
+
+  <button
+    type="submit"
+    class="btn btn-success w-100"
+    [disabled]="isLoading() || !isFormValid()"
+  >
+    @if (isLoading()) {
+      <span class="spinner-border spinner-border-sm me-2"></span>
+    }
+    Register
+  </button>
+</form>
+----
+
+'''''
+
+=== Real-World Patterns for Backend Devs
+
+==== ✅ Signals vs Observables
+
+____
+*Rule of Thumb:* Use signals for local, component-level UI state. Use
+observables for async or backend-driven data.
+____
+
+*Signals (local state):*
+
+[source,ts]
+----
+isModalOpen = signal(false);
+
+openModal() { this.isModalOpen.set(true); }
+closeModal() { this.isModalOpen.set(false); }
+----
+
+[source,html]
+----
+@if (isModalOpen()) {
+  <app-modal (close)="closeModal()"></app-modal>
+}
+----
+
+*Observables (async state):*
+
+[source,ts]
+----
+private modalSubject = new BehaviorSubject(false);
+isModalOpen$ = this.modalSubject.asObservable();
+
+openModal() { this.modalSubject.next(true); }
+closeModal() { this.modalSubject.next(false); }
+----
+
+[source,html]
+----
+@let isOpen = (isModalOpen$ | async); 
+@if (isOpen) {
+  <app-modal (close)="closeModal()"></app-modal>
+}
+----
+
+'''''
+
+==== ✅ Control Flow in Action
+
+*Using `@for` instead of `*ngFor`:*
+
+[source,html]
+----
+<ul>
+  @for (user of users; track user.id) {
+    <li>{{ user.name }}</li>
+  }
+</ul>
+----
+
+*Using `@switch` vs `*ngSwitch`:*
+
+[source,html]
+----
+@switch (status) {
+  @case ('loading') {
+    <p>Loading...</p>
+  } @case ('error') {
+    <p>Error!</p>
+  } @default {
+    <p>All good.</p>
+  } 
+}
+----
+
+____
+*Backend parallel:* `@if`, `@for`, and `@switch` are like inline logic
+in your backend template engines (e.g., EJS, Razor, Thymeleaf)—but here
+they’re fully reactive and type-safe.
+____
+
+'''''
+
+==== ✅ Lazy Loading and UX Patterns with @defer
+
+Angular’s `@defer` block is great for loading UI only when needed.
+
+*Basic Usage:*
+
+[source,html]
+----
+@defer (when isHeavyComponentVisible) {
+  <app-heavy-widget></app-heavy-widget>
+} @placeholder {
+  <p>Loading widget...</p>
+}
+----
+
+*Loading feedback:*
+
+[source,html]
+----
+@defer (when dataReady; loading minimum 300ms) {
+  <app-dashboard></app-dashboard>
+} @loading {
+  <p>Loading dashboard...</p>
+} @placeholder {
+  <p>Initializing view...</p>
+}
+----
+
+*Viewport entry:*
+
+[source,html]
+----
+@defer (on viewport) {
+  <app-news-feed></app-news-feed>
+} @placeholder {
+  <p>Loading news feed when visible...</p>
+}
+----
+
+*Idle trigger:*
+
+[source,html]
+----
+@defer (on idle) {
+  <app-recommendations></app-recommendations>
+}
+----
+
+____
+⏳ *Why care?* Optimizes TTI (time to interactive) on heavy or mobile
+pages.
+____
+
+'''''
+
+==== ✅ Smart Change Detection in a Dashboard
+
+[source,ts]
+----
+userCount = signal(0);
+orderTotal = signal(0);
+
+ngOnInit() {
+  this.api.getUsers().subscribe(users => this.userCount.set(users.length));
+  this.api.getOrders().subscribe(orders => this.orderTotal.set(orders.length));
+}
+----
+
+[source,html]
+----
+<div>Users: {{ userCount() }}</div>
+<div>Orders: {{ orderTotal() }}</div>
+----
+
+____
+*Signals update just what changed—no wasted DOM re-renders.*
+____
+
+'''''
+
+=== SSR & Hydration (Bonus Note)
+
+💡 _SSR & Hydration_: Angular 19’s hydration improvements are especially
+useful if you’re rendering Angular on the server (Angular Universal).
+Most projects won’t need this—but it’s a great step for future-proofing.
+
+'''''
+
+=== Final Thoughts
+
+If you’re a backend developer dipping your toes into Angular, Angular 19
+makes things less intimidating. Signals simplify state, `@if` and `@for`
+make templates feel more like readable conditionals, and `@defer` gives
+you fine control over performance.
+
+*You just:*
+
+* Replaced legacy form logic with clean Signals-based state.
+* Simplified templates using Angular’s new control flow.
+* Learned how to delay rendering and optimize performance with `@defer`.
+
+*Next:* We’ll bring everything together in Part 5 with route guards,
+token parsing, and role-based access control.
+
+'''''
+
+==== Further Reading
+
+* https://angular.dev[Angular 19 Signals Guide (angular.dev)]
+* https://angular.dev/reference/forms/using-signals[Reactive Forms
+vs. Signals—How to Choose]
