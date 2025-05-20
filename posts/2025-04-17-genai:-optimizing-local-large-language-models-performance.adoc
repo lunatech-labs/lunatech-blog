@@ -4,7 +4,7 @@ v1.0, 2025-04-17
 :title: GenAI: Optimizing Local Large Language Models Performance
 :imagesdir: ../media/2025-04-17-genai:-optimizing-local-large-language-models-performance
 :lang: en
-:tags: [gen-ai, llm, generative-ai, local-llm, ollama, quantization, model-optimization, neural-networks, model-inference, open-source, en]
+:tags: [gen-ai, llm, generative-ai, local-llm, ollama, quantization, model-optimization, neural-networks, model-inference, open-source]
 
 Local large language models (LLMs) are becoming more capable and accessible than ever — but to truly unlock their power, you need to know how to optimize them.
 Whether you're running AI on an M-series MacBook or a 2019 Intel machine, there are tricks to get better speed, quality, and control.
