@@ -1,9 +1,9 @@
-= Optimizing Local LLMs Performance
+= GenAI: Optimizing Local Large Language Models Performance
 rkargul
 v1.0, 2025-04-17
 :title: GenAI: Optimizing Local Large Language Models Performance
+:imagesdir: ../media/2025-04-17-genai:-optimizing-local-large-language-models-performance
 :lang: en
-:imagesdir: ../media/2025-04-17-optimizing-local-llms-performance
 :tags: [gen-ai, llm, generative-ai, local-llm, ollama, quantization, model-optimization, neural-networks, model-inference, open-source, en]
 
 Local large language models (LLMs) are becoming more capable and accessible than ever — but to truly unlock their power, you need to know how to optimize them.
@@ -196,16 +196,21 @@ ollama run qwen2.5:14b-instruct-fp16
 ----
 
 For example, let's start with Q4_0:
+
 [source,shell]
 ----
 ollama run qwen2.5:14b-instruct-q4_0
 ----
+
 Now that the model is loaded, we can run the prompt:
+
 [source,shell]
 ----
 "Explain recursion to a 10-year-old in one paragraph."
 ----
-Pay attention to the response time and the memory usage. Compare it with the other models.
+
+Pay attention to the response time and the memory usage.
+Compare it with the other models.
 
 You may have noticed there is not much difference in quality between the Q4_0 and Q8_0 models, but the Q2_K model is much faster and smaller.
 Perfect for showing the quality/speed trade-off in action, and how to adjust for your needs.
