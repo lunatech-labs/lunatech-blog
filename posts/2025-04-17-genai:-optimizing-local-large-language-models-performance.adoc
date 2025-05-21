@@ -1,0 +1,282 @@
+= GenAI: Optimizing Local Large Language Models Performance
+rkargul
+v1.0, 2025-04-17
+:title: GenAI: Optimizing Local Large Language Models Performance
+:imagesdir: ../media/2025-04-17-genai:-optimizing-local-large-language-models-performance
+:lang: en
+:tags: [gen-ai, llm, generative-ai, local-llm, ollama, quantization, model-optimization, neural-networks, model-inference, open-source]
+
+Local large language models (LLMs) are becoming more capable and accessible than ever — but to truly unlock their power, you need to know how to optimize them.
+Whether you're running AI on an M-series MacBook or a 2019 Intel machine, there are tricks to get better speed, quality, and control.
+
+In the final session of our GenAI series (after covering Local Dev, RAG, and Agents), we explored the real-world performance tuning of local LLMs.
+Here's what we covered 👇
+
+== 1. Running LLMs on Your Laptop
+
+=== Apple Silicon vs Intel Macs
+
+[cols="3,2,2",options="header"]
+|===
+| Feature | Apple Silicon (M1/M2/M3/M4) | Intel Mac (e.g. 2019 MBP)
+
+| CPU & GPU
+| Unified on one chip (SoC)
+| Separate chips for CPU and GPU
+
+| Memory
+| Shared Unified Memory Architecture
+| RAM for CPU, VRAM for GPU
+
+| Model performance
+| Fast, efficient, great for LLMs
+| Slower, GPU mostly unused
+|===
+
+[NOTE]
+====
+M-series chips shine for local AI workloads thanks to unified memory.
+
+Intel Macs can still work well but rely entirely on CPUs and may struggle with larger models.
+====
+
+=== What Can You Run?
+
+Models are measured by *parameters*, typically in billions (e.g., 3B, 7B, 13B).
+More parameters = more "intelligence" — but also more memory use.
+
+Use quantization (more below!) to fit larger models, even on machines with 8–16 GB RAM.
+
+== 2. Quantization: Making LLMs Lighter
+
+=== What is Quantization?
+
+Quantization reduces the *precision of the numbers* in a model — trading a little accuracy for huge gains in size and speed.
+
+[cols="1,2,2",options="header"]
+|===
+| Format | Description | Typical Use
+| FP32 | Full precision | Training
+| FP16 | Half precision | Deployment
+| INT8 | Quantized | Light inference (some loss)
+| INT4 | Heavily quantized | Fast local inference
+| INT2–3 | Experimental | Ultra-lightweight, niche
+|===
+
+[example]
+====
+LLaMA2-70B goes from *138GB (FP16)* to *42GB (INT4)* — a huge saving!
+====
+
+=== What is GGUF?
+
+`GGUF` stands for *GPT-Generated Unified Format*.
+It’s a modern, standardized file format designed for running **quantized large language models (LLMs) locally**.
+
+==== Why GGUF?
+
+GGUF makes loading and using models in tools like `llama.cpp`, `Ollama`, or `LM Studio`.
+
+[cols="1,3",options="header"]
+|===
+| Feature | Benefit
+
+| 🧳 Compact | Stores quantized models in a smaller, efficient format
+| 🧠 Self-contained | Includes weights, tokenizer, metadata, and vocab in one file
+| ⚡ Fast | Optimized for quick loading and inference
+| 🔧 Flexible | Supports various quantization formats like `Q4_K_M`, `Q5_K_S`, etc.
+|===
+
+==== Tools that Support GGUF
+
+* `llama.cpp` – Core backend for CPU/GPU inference
+* `Ollama` – CLI + API for local models
+* `LM Studio` – Desktop GUI for Mac/Windows/Linux
+* `text-generation-webui` – Powerful browser-based frontend
+
+==== Example GGUF Model Filename
+
+[source,text]
+----
+mistral-7b-instruct-v0.1.Q4_K_M.gguf
+----
+
+[cols="1,3",options="header"]
+|===
+| Part | Description
+
+| `mistral-7b-instruct` | Model type and size
+| `v0.1` | Model version
+| `Q4_K_M` | Quantization type (4-bit, medium group)
+| `.gguf` | File format extension
+|===
+
+[quote]
+____
+Think of a `.gguf` file as an *AI-in-a-box* — it includes everything the model needs to run locally, compressed and ready to go.
+____
+
+=== K-Quant Types (for GGUF Models)
+
+When downloading quantized models (especially in GGUF format), you'll often see suffixes like `Q4_K_S`, `Q5_K_M`, or `Q6_K_L`.
+These aren't just random labels — they define **how the quantization is applied**, and they directly affect **model quality vs. performance**.
+
+The `K` in these names refers to the **quantization group size and method**, which influences:
+
+* how much precision is preserved;
+* how fast the model can run;
+* how much RAM is required.
+
+[cols="1,3",options="header"]
+|===
+| Suffix | Description
+
+| `K_S` | **Small group quantization**
+Fastest and most memory-efficient. It compresses more aggressively, which means it's ideal when you're on a tight memory budget or running on weaker hardware — but output quality might noticeably degrade on complex tasks.
+
+| `K_M` | **Medium group quantization**
+A great balance of speed, memory use, and output quality. It's the "safe middle ground" for most users running 4–7B models locally. If you're unsure where to start, this is a solid default.
+
+| `K_L` | **Large group quantization**
+More conservative compression — keeps more precision, giving higher-quality outputs. Slower and uses more RAM, but closer to non-quantized behavior. Ideal for tasks requiring accurate and nuanced responses.
+|===
+
+The difference isn't *just* in speed — it's also in how much subtle detail the model retains in its responses.
+// ====
+
+[quote]
+____
+“Think of `K_S`, `K_M`, and `K_L` as image compression presets:
+*Small* is low-res JPEG, *Medium* is standard HD, *Large* is almost RAW quality.”
+____
+
+=== What is Quantization used for?
+
+Quantization is a trade-off between size, speed, and accuracy.
+For some perspective, here’s a rough guide on how quantization is used in the LLM world:
+
+[cols="1,2",options="header"]
+|===
+| Task | Quantization
+| Model training | FP32 (that's why it is so expensive to train models, to get that knowledge accurate)
+| For deployment | Usually FP16 (for speed)
+| Local models | Unused INT4 (for speed and accuracy)
+|===
+
+=== Why Not Just Use a Smaller Model?
+
+* Models under 3B can run easily — but often lack reasoning or language nuance.
+* Quantization gives you *the best of both worlds*: keep a 7B+ model’s brain but shrink the size.
+
+[quote]
+____
+“It’s like watching a 4K movie compressed to 1080p — smaller, still looks good.”
+____
+
+=== Quantized Models In Action (Example)
+
+In this example, we consider https://ollama.com/library/qwen2.5/tags[qwen2.5], a 14B model with quantized versions available in `Ollama`.
+We will focus on different quantization levels of the 14B model.
+
+Let's have a look at how different models deal with the following prompt:
+
+[source,text]
+----
+Explain recursion to a 10-year-old in one paragraph.
+----
+
+To run the models, execute one of the following prompts, starting with Q4_0:
+
+[source,shell]
+----
+ollama run qwen2.5:14b-instruct-q4_0
+ollama run qwen2.5:14b-instruct-q8_0
+ollama run qwen2.5:14b-instruct-q2_K
+ollama run qwen2.5:14b-instruct-fp16
+----
+
+For example, let's start with Q4_0:
+
+[source,shell]
+----
+ollama run qwen2.5:14b-instruct-q4_0
+----
+
+Now that the model is loaded, we can run the prompt:
+
+[source,shell]
+----
+"Explain recursion to a 10-year-old in one paragraph."
+----
+
+Pay attention to the response time and the memory usage.
+Compare it with the other models.
+
+You may have noticed there is not much difference in quality between the Q4_0 and Q8_0 models, but the Q2_K model is much faster and smaller.
+Perfect for showing the quality/speed trade-off in action, and how to adjust for your needs.
+This does not necessarily mean that the behavior is the same for other prompts or tasks.
+You have to try this for yourself and see what works best for you on your machine.
+
+== 3. Tuning Parameters in Ollama
+
+Using *Ollama*?
+You can change some parameter settings of the local models based on your preference, for example, a more deterministic response, or a more creative one.
+
+Let us consider the `llama3` model, we can run it with the following command:
+
+[source,shell]
+----
+ollama run llama3
+----
+
+You can set these parameters after the model is loaded:
+
+----
+/set parameter <parameter> <value>
+----
+
+So, for example, to set `temperature` to 1.0:
+
+----
+/set parameter temperature 1.0
+----
+
+And then we set `top_p` to 0.9:
+
+----
+/set parameter top_p 0.9
+----
+
+In the example above, we set the `temperature` to 1.0, a more creative response, and `top_p` to 0.9, a more deterministic response.
+Parameter `temperature` adds randomness.
+The lower the value, the more focused and deterministic the model response.
+The higher the value, the more creative and varied the response.
+Parameter `top_p` picks from the smallest possible set of words whose cumulative probability adds up to `p`.
+It controls diversity — higher values mean more diverse and creative responses, and lower values make responses more focused.
+
+Here are some more common parameters you can tune:
+
+[cols="1,2,1",options="header"]
+|===
+| Param | What it Does | Typical Values
+
+| num_ctx | Context size (how much it remembers) | 2048–4096
+| top_k | Limits top options for output | 40–100
+| top_p | Controls diversity | 0.8–0.95
+| temperature | Controls creativity | 0.6–0.8 (chat), 0.3–0.6 (code)
+| repeat_penalty | Avoids repeating phrases | 1.1–1.3
+| threads | Number of CPU threads (config only) | Match to physical cores
+|===
+
+If you want to learn more about the parameters, you can find some extra information https://learnprompting.org/blog/llm-parameters?srsltid=AfmBOoorA2XSH8rxtzvLZcSstK1mp8Hzrj-o5uJRIXKOHVUhAmvcsW5u[here].
+
+== Resources
+
+* https://www.tensorops.ai/post/what-are-quantized-llms[What Are Quantized LLMs – TensorOps]
+* https://www.youtube.com/watch?v=K75j8MkwgJ0[Quantization Explained – YouTube]
+* https://pieces.app/blog/llm-parameters[LLM Parameters – Pieces Blog]
+
+== Final Thoughts
+
+Running LLMs locally is no longer science fiction — it's practical, efficient, and private.
+With just a bit of tuning and the right model format, your laptop becomes an AI powerhouse.
