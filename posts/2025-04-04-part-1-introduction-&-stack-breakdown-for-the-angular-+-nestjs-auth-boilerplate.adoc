@@ -1,47 +1,45 @@
-= Part 1: Introduction & Stack Breakdown for the Angular + NestJS Auth Boilerplate
+= Part 1: Introduction and Stack Breakdown for the Angular + NestJS Auth Boilerplate
 jakeortega
 v1.0, 2019-05-01
-:title: Part 1: Introduction & Stack Breakdown for the Angular + NestJS Auth Boilerplate
+:title: Part 1: Introduction and Stack Breakdown for the Angular + NestJS Auth Boilerplate
 :lang: en
-:tags: [tag1, tag2, en]
+:tags: [angular, nestjs, postgresql, typeorm, jwt, authentication, frontend, typescript, nodejs]
 
-image::../media/2025-04-04-part-1-introduction-&-stack-breakdown-for-the-angular-+-nestjs-auth-boilerplate/background.png[Project Introduction & Stack Justification]
-
-Welcome to the first post in this series on building a full-stack
+Welcome to the first part in this series on building a full-stack
 authentication boilerplate with *Angular*, *NestJS*, and *PostgreSQL*.
 
-If you’re a backend developer comfortable with APIs, databases, and
-business logic—but frontend frameworks feel like foreign territory—this
-series is for you. We’ll walk through the full stack, showing you how to
-build real authentication flows while picking up modern Angular features
-along the way.
+If you’re a backend developer comfortable with APIs, databases, and business
+logic—but frontend frameworks feel like foreign territory—this series is for
+you.
+We’ll walk through the full stack, showing you how to build real
+authentication flows while picking up modern Angular features along the way.
 
-By the end, you’ll have a production-ready authentication boilerplate
-you can reuse in your own projects—or hand off confidently to frontend
+By the end, you’ll have a production-ready authentication boilerplate you
+can reuse in your own projects—or hand off confidently to frontend
 collaborators.
 
-==== Why Angular + NestJS?
+=== Why Angular + NestJS?
 
-We’re using *Angular* on the frontend and *NestJS* on the backend. Both
-are built in *TypeScript*, so you get a unified development experience
+We’re using *Angular* on the frontend and *NestJS* on the backend.
+Both are built in *TypeScript*, so you get a unified development experience
 without switching mental models.
 
 Here’s why this stack works well together:
 
-* *Angular* is opinionated, scalable, and modular—perfect for building
-real apps, not just prototypes. Angular 19 introduces useful features
-like Signals and new control flow syntax that cut boilerplate and
-improve performance.
-* *NestJS* is a structured backend framework with decorators, guards,
-and strong support for things like JWTs and PostgreSQL—ideal for secure
+* *Angular* is opinionated, scalable, and modular—perfect for building real
+apps, not just prototypes.
+Angular 19 introduces useful features like Signals and new control flow
+syntax that cut boilerplate and improve performance.
+* *NestJS* is a structured backend framework with decorators, guards, and
+strong support for things like JWTs and PostgreSQL—ideal for secure
 authentication systems.
-* *PostgreSQL* is a reliable, battle-tested relational database with
-great tooling and support for user/session management.
+* *PostgreSQL* is a reliable, battle-tested relational database with great
+tooling and support for user/session management.
 
 Together, this stack gives you a clean, testable, and scalable
 foundation—without gluing together a bunch of libraries yourself.
 
-==== What You’ll Build
+=== What You’ll Build
 
 Over this series, you’ll create a modular, full-stack authentication
 boilerplate with:
@@ -53,39 +51,38 @@ boilerplate with:
 
 This isn’t a toy app—it’s a starting point for real projects.
 
-==== What’s New in Angular 19
+=== What’s New in Angular 19
 
-Angular 19 introduces major improvements that simplify frontend
-development and reduce complexity:
+Angular 19 introduces major improvements that simplify frontend development
+and reduce complexity:
 
-* *Signals* – A new reactive state primitive. Think of it like
-`+useState+`, but built into Angular. Great for managing form state and
-authentication status.
-* *Control Flow Syntax* – `+@if+`, `+@for+`, and `+@switch+` clean up
-your templates and reduce the need for verbose structural directives.
-* *Defer Blocks* – Lazily load components based on app state, perfect
-for gating authenticated vs. public views.
+* *Signals* – A new reactive state primitive.
+Think of it like `+useState+`, but built into Angular.
+Great for managing form state and authentication status.
+* *Control Flow Syntax* – `+@if+`, `+@for+`, and `+@switch+` clean up your
+templates and reduce the need for verbose structural directives.
+* *Defer Blocks* – Lazily load components based on app state, perfect for
+gating authenticated vs. public views.
 * *Improved Change Detection* – Smarter re-rendering out of the box for
 better performance.
 
-We’ll use these features where they make sense—especially in the login
-and registration flows—so you learn by doing.
+We’ll use these features where they make sense—especially in the login and
+registration flows—so you learn by doing.
 
-==== Who This Is For
+=== Who This Is For
 
 This series is for backend developers who want to:
 
-* Understand modern Angular concepts without getting lost in frontend
-jargon
+* Understand modern Angular concepts without getting lost in frontend jargon
 * Build secure, token-based authentication flows using best practices
 * Deploy real full-stack apps with confidence
 
-You don’t need Angular experience. If you know TypeScript, you’ll feel
-at home.
+You don’t need Angular experience.
+If you know TypeScript, you’ll feel at home.
 
-==== Tools You’ll Need
+=== Tools You’ll Need
 
-===== Required
+==== Required
 
 * *Node.js* – Backend + Angular CLI
 * *NestJS CLI* – Backend scaffolding
@@ -93,13 +90,13 @@ at home.
 * *PostgreSQL* – Local dev database
 * *Git* – Version control
 
-===== Optional (but helpful)
+==== Optional (but helpful)
 
 * *Postman* – For testing APIs
 * *pgAdmin* – For inspecting the database
 * *VS Code* – With TypeScript extensions
 
-==== Getting Set Up
+=== Getting Set Up
 
 . *Install Node.js* +
 https://nodejs.org
@@ -129,15 +126,15 @@ CREATE DATABASE auth_boilerplate;
 git init
 ----
 
-==== Coming Up Next (Part 2)
+=== Coming Up Next (Part 2)
 
-In Part 2, we’ll scaffold the NestJS backend, hook it up to PostgreSQL
-with TypeORM, and implement JWT-based login and registration logic you
-can actually ship.
+In Part 2, we’ll scaffold the NestJS backend, hook it up to PostgreSQL with
+TypeORM, and implement JWT-based login and registration logic you can
+actually ship.
 
-==== Final Thoughts
+=== Final Thoughts
 
-This series is about building something real—not another tutorial app
-you toss out after reading. Whether it’s for a SaaS product, side
-project, or production tool, having a solid authentication foundation
-makes every other feature easier to build.
+This series is about building something real—not another tutorial app you
+toss out after reading.
+Whether it’s for a SaaS product, side project, or production tool, having a
+solid authentication foundation makes every other feature easier to build.
