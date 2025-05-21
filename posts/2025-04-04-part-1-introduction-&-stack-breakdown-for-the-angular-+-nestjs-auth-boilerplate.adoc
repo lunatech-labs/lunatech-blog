@@ -1,6 +1,6 @@
 = Part 1: Introduction and Stack Breakdown for the Angular + NestJS Auth Boilerplate
 jakeortega
-v1.0, 2019-05-01
+v1.0, 2025-04-04
 :title: Part 1: Introduction and Stack Breakdown for the Angular + NestJS Auth Boilerplate
 :lang: en
 :tags: [angular, nestjs, postgresql, typeorm, jwt, authentication, frontend, typescript, nodejs]
