@@ -3,9 +3,7 @@ jakeortega
 v1.0, 2025-05-06
 :title: Part 3: Frontend Setup with Angular
 :lang: en
-:tags: [frontend, angular, boilerplate, login, register, jwt]
-
-image::../media/2025-05-06-part-3:-frontend-setup-with-angular/background.png[Frontend Setup with Angular]
+:tags: [angular, nestjs, postgresql, typeorm, jwt, authentication, frontend, typescript, nodejs]
 
 Now that we’ve built our NestJS backend with secure JWT auth, it’s time
 to wire up the frontend. In this part, we’ll scaffold an *Angular* app,
@@ -877,7 +875,6 @@ We’ll cover:
 * 🔁 `@if`, `@for`, and `defer` blocks — Smarter templates with better
 control
 * ⚡ *Change detection and performance tuning*
-* ✅ Real-world use in login/register forms
 
 This part’s optional, but worth it if you want your Angular app to be
 leaner, faster, and future-ready.

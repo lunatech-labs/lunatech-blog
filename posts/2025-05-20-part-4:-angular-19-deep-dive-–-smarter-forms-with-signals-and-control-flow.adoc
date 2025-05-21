@@ -3,9 +3,7 @@ jakeortega
 v1.0, 2025-05-20
 :title: Part 4: Angular 19 Deep Dive – Smarter Forms with Signals and Control Flow
 :lang: en
-:tags: [angular v19, signals, control flow, reactive forms, frontend]
-
-image::../media/2025-05-20-part-4:-angular-19-deep-dive-–-smarter-forms-with-signals-and-control-flow/background.png[Angular 19 Deep Dive – Smarter Forms with Signals and Control Flow]
+:tags: [angular, nestjs, postgresql, typeorm, jwt, authentication, frontend, typescript, nodejs]
 
 Welcome back to the Full-Stack Authentication Boilerplate (Angular +
 NestJS + PostgreSQL) series. So far, we’ve wired up the backend and
@@ -66,10 +64,9 @@ ____
 
 '''''
 
-=== Migration Sidebar: NgModules → Standalone Components
+=== Migration: NgModules → Standalone Components
 
 ____
-==== 🚚 *Migration: NgModules to Standalone Components*
 
 *Old way:*
 
@@ -188,10 +185,9 @@ export class LoginComponent {
 
 '''''
 
-==== Migration Sidebar: Control Flow Syntax
+==== Migration: Control Flow Syntax
 
 ____
-==== 🔄 *Migration: `*ngIf`/`*ngFor` → `@if`/`@for`*
 
 *Before (classic Angular):*
 
@@ -621,10 +617,7 @@ Most projects won’t need this—but it’s a great step for future-proofing.
 
 === Final Thoughts
 
-If you’re a backend developer dipping your toes into Angular, Angular 19
-makes things less intimidating. Signals simplify state, `@if` and `@for`
-make templates feel more like readable conditionals, and `@defer` gives
-you fine control over performance.
+Angular 19 brings a more approachable and modern developer experience: signals simplify state, `@if` and `@for` make templates more readable, and `@defer` gives you fine control over performance.
 
 *You just:*
 

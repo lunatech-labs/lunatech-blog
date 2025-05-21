@@ -11,7 +11,7 @@ For backend developers who want to ship full-stack projects—without wrestling 
 
 We’re building a **full-stack authentication boilerplate**—a reusable, modular codebase that gives you login, registration, route protection, token handling, and database integration out of the box. Clone it, customize it, and start building faster.
 
-==== 🧱 Why This Stack?
+=== Why This Stack?
 
 We chose **Angular 19** and **NestJS** for a reason:
 
@@ -22,11 +22,11 @@ We chose **Angular 19** and **NestJS** for a reason:
 
 You *could* build this with React, Express, or MongoDB. But we picked this stack for its structure and scalability—great for teams or solo developers who want a solid foundation, not just flexibility.
 
-==== 🗺️ What’s in the Series?
+=== What’s in the Series?
 
 Here’s the roadmap 👇
 
-image::../media/2025-04-04-full-stack-authentication-boilerplate:-angular-+-nestjs-+-postgresql/background.png[Roadmap overview]
+image::../media/2025-04-04-full-stack-authentication-boilerplate:-angular-+-nestjs-+-postgresql/roadmap.png[Roadmap overview]
 
 Each post builds on the last, walking you through:
 
@@ -38,7 +38,7 @@ Each post builds on the last, walking you through:
 
 You don’t need prior Angular or NestJS experience—just TypeScript and backend fundamentals.
 
-==== 🧭 Why This Series Exists
+=== Why This Series Exists
 
 You don’t need another to-do app.
 
