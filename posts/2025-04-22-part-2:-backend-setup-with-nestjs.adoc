@@ -1,0 +1,570 @@
+= Part 2: Backend Setup with NestJS
+jakeortega
+v1.0, 2025-04-22
+:title: Part 2: Backend Setup with NestJS
+:lang: en
+:tags: [nestjs, backend, typescript, postgresql, jwt, authentication, typeorm, bcrypt, cors]
+
+image::../media/2025-04-04-part-1-introduction-&-stack-breakdown-for-the-angular-+-nestjs-auth-boilerplate/background.png[Backend Setup with NestJS]
+
+With our project vision and stack laid out in Part 1, it’s time to build the
+backend.
+In this part, we’ll scaffold a *NestJS* project, connect it to *PostgreSQL*
+via *TypeORM*, and implement secure *JWT-based authentication*.
+
+By the end of this part, you’ll have:
+
+* A working NestJS app connected to PostgreSQL
+* A `User` entity with hashed passwords
+* Endpoints for registration and login
+* JWT authentication using guards and strategies
+* CORS enabled to allow Angular frontend communication
+
+'''''
+
+=== *Project Structure Overview*
+
+Once set up, your backend folder will look like this:
+
+....
+src/
+├── app.module.ts
+├── main.ts
+├── auth/
+│   ├── auth.controller.ts
+│   ├── auth.module.ts
+│   ├── auth.service.ts
+│   ├── dto/
+│   │   ├── login.dto.ts
+│   │   └── register.dto.ts
+│   └── jwt/
+│       └── jwt.strategy.ts
+├── users/
+│   ├── user.entity.ts
+│   ├── users.controller.ts
+│   ├── users.module.ts
+│   └── users.service.ts
+.env
+....
+
+'''''
+
+=== *Goals for Part 2*
+
+[arabic]
+. Scaffold a NestJS project with PostgreSQL and TypeORM
+. Create a `User` entity, DTOs with validation, and an Auth module
+. Implement registration and login with password hashing
+. Add JWT authentication with guards and strategy
+. Enable CORS for frontend connectivity
+
+'''''
+
+=== *Step 1: Run PostgreSQL and Set Environment Variables*
+
+You can use either Docker or Podman.
+Run *one* of the following commands in your terminal:
+
+*Docker:*
+
+[source,bash]
+----
+docker run --name pg-nest \
+  -e POSTGRES_USER=nestuser \
+  -e POSTGRES_PASSWORD=nestpass \
+  -e POSTGRES_DB=nestdb \
+  -p 5432:5432 \
+  -d postgres
+----
+
+*Podman:*
+
+[source,bash]
+----
+podman run --name pg-nest \
+  -e POSTGRES_USER=nestuser \
+  -e POSTGRES_PASSWORD=nestpass \
+  -e POSTGRES_DB=nestdb \
+  -p 5432:5432 \
+  -d postgres
+----
+
+Once the project is created in Step 2, add a `.env` file to your root:
+
+....
+DB_HOST=localhost DB_PORT=5432 DB_USERNAME=nestuser DB_PASSWORD=nestpass
+DB_NAME=nestdb JWT_SECRET=dev_secret BCRYPT_SALT_ROUNDS=10
+....
+
+'''''
+
+=== *Step 2: Scaffold the Project and Install Dependencies*
+
+[source,bash]
+----
+nest new backend
+cd backend
+----
+
+Install project dependencies:
+
+[source,bash]
+----
+npm install @nestjs/typeorm typeorm pg @nestjs/jwt passport-jwt @nestjs/passport bcrypt class-validator class-transformer dotenv
+----
+
+At the top of `main.ts`, import environment variables:
+
+[source,ts]
+----
+import "dotenv/config";
+----
+
+Enable CORS:
+
+[source,ts]
+----
+app.enableCors({
+  origin: "http://localhost:4200",
+  credentials: true,
+});
+----
+
+____
+✅ *Tip*: For production, consider using `@nestjs/config` for cleaner
+environment management.
+____
+
+'''''
+
+=== *Step 3: Configure TypeORM*
+
+In `app.module.ts`:
+
+[source,ts]
+----
+import { Module } from "@nestjs/common";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { UsersModule } from "./users/users.module";
+import { AuthModule } from "./auth/auth.module";
+
+@Module({
+  imports: [
+    TypeOrmModule.forRoot({
+      type: "postgres",
+      host: process.env.DB_HOST,
+      port: parseInt(process.env.DB_PORT, 10),
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+      entities: [__dirname + "/**/*.entity{.ts,.js}"],
+      synchronize: true, // ⚠️ Don't use this in production — it'll drop/recreate tables
+    }),
+    UsersModule,
+    AuthModule,
+  ],
+})
+export class AppModule {}
+----
+
+'''''
+
+=== *Step 4: Create the User Module and Entity*
+
+Generate boilerplate:
+
+[source,bash]
+----
+nest g module users
+nest g service users
+nest g controller users
+----
+
+In `users/user.entity.ts`:
+
+[source,ts]
+----
+import { Exclude } from "class-transformer";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+
+@Entity()
+export class User {
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column({ unique: true })
+  email: string;
+
+  @Column()
+  name: string;
+
+  @Column()
+  @Exclude()
+  password: string;
+
+  @Column()
+  role: string;
+}
+----
+
+'''''
+
+=== *Step 5: Set Up the Auth Module*
+
+Generate files:
+
+[source,bash]
+----
+nest g module auth
+nest g service auth
+nest g controller auth
+----
+
+==== Step 5a: Create DTOs with Validation
+
+In `auth/dto/register.dto.ts`:
+
+[source,ts]
+----
+import { IsEmail, IsNotEmpty, MinLength } from "class-validator";
+
+export class RegisterDto {
+  @IsEmail()
+  email: string;
+
+  @MinLength(6)
+  password: string;
+
+  @IsNotEmpty()
+  name: string;
+
+  @IsNotEmpty()
+  role: string;
+}
+----
+
+These are like your request payload models with annotations.
+Think `@NotEmpty`, `@Email`, etc.
+The validation logic is handled globally (we’ll wire that up in `main.ts`
+using `ValidationPipe`).
+
+In `auth/dto/login.dto.ts`:
+
+[source,ts]
+----
+import { IsEmail, MinLength } from "class-validator";
+
+export class LoginDto {
+  @IsEmail()
+  email: string;
+
+  @MinLength(6)
+  password: string;
+}
+----
+
+Enable validation globally in `main.ts`:
+
+[source,ts]
+----
+import { ValidationPipe } from "@nestjs/common";
+
+app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
+----
+
+'''''
+
+=== *Step 6: Implement UsersService*
+
+This service handles persistence logic using TypeORM’s repository pattern.
+In `users.service.ts`:
+
+[source,ts]
+----
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { User } from "./user.entity";
+
+@Injectable()
+export class UsersService {
+  constructor(
+    @InjectRepository(User)
+    private repo: Repository<User>
+  ) {}
+
+  create(data: Partial<User>) {
+    const user = this.repo.create(data);
+    return this.repo.save(user);
+  }
+
+  findByEmail(email: string) {
+    return this.repo.findOne({ where: { email } });
+  }
+}
+----
+
+Again, if you’re used to JPA, this is just standard repository stuff.
+
+In `users.module.ts`:
+
+[source,ts]
+----
+import { Module } from "@nestjs/common";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { User } from "./user.entity";
+import { UsersService } from "./users.service";
+import { UsersController } from "./users.controller";
+
+@Module({
+  imports: [TypeOrmModule.forFeature([User])],
+  providers: [UsersService],
+  controllers: [UsersController],
+  exports: [UsersService],
+})
+export class UsersModule {}
+----
+
+'''''
+
+=== *Step 7: Build AuthService*
+
+This is where registration and login happens.
+We hash passwords with `bcrypt`, and return a JWT if login succeeds.
+
+You’ll notice:
+
+[source,ts]
+----
+delete user.password;
+----
+
+It manually removes the password before returning the user — feels a bit
+hacky, but we’ve also used `@Exclude()` in the entity, so this is just being
+extra cautious.
+
+____
+⚠️ We’re using both `@Exclude()` (to hide the password when transforming
+entities) and `delete user.password` as a backup.
+Depending on how Nest returns the object — directly vs. through a
+serialization step — the password field might still leak through without
+this extra guard.
+____
+
+In `auth.service.ts`:
+
+[source,ts]
+----
+import { Injectable, UnauthorizedException } from "@nestjs/common";
+import * as bcrypt from "bcrypt";
+import { JwtService } from "@nestjs/jwt";
+import { UsersService } from "../users/users.service";
+import { RegisterDto } from "./dto/register.dto";
+import { LoginDto } from "./dto/login.dto";
+
+@Injectable()
+export class AuthService {
+  constructor(
+    private usersService: UsersService,
+    private jwtService: JwtService
+  ) {}
+
+  async register(dto: RegisterDto) {
+    const existing = await this.usersService.findByEmail(dto.email);
+    if (existing) throw new UnauthorizedException("Email already in use");
+
+    const hashed = await bcrypt.hash(dto.password, 10);
+    const user = await this.usersService.create({
+      ...dto,
+      password: hashed,
+    });
+    delete user.password;
+    return user;
+  }
+
+  async login(dto: LoginDto) {
+    const user = await this.usersService.findByEmail(dto.email);
+    const valid = user && (await bcrypt.compare(dto.password, user.password));
+    if (!valid) throw new UnauthorizedException("Invalid credentials");
+
+    const payload = { sub: user.id, role: user.role };
+    return { access_token: this.jwtService.sign(payload) };
+  }
+}
+----
+
+In `auth.module.ts`:
+
+[source,ts]
+----
+import { Module } from "@nestjs/common";
+import { JwtModule } from "@nestjs/jwt";
+import { AuthService } from "./auth.service";
+import { AuthController } from "./auth.controller";
+import { UsersModule } from "../users/users.module";
+import { JwtStrategy } from "./jwt/jwt.strategy";
+
+@Module({
+  imports: [
+    UsersModule,
+    JwtModule.register({
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: "1d" },
+    }),
+  ],
+  providers: [AuthService, JwtStrategy],
+  controllers: [AuthController],
+})
+export class AuthModule {}
+----
+
+'''''
+
+=== *Step 8: JWT Strategy and Guards*
+
+Here we set up Passport’s JWT strategy.
+If you’re new to Passport: it’s just NestJS’s way of plugging in different
+auth strategies.
+
+Create the strategy file:
+
+[source,bash]
+----
+touch src/auth/jwt/jwt.strategy.ts
+----
+
+In `jwt.strategy.ts`:
+
+[source,ts]
+----
+import { Injectable } from "@nestjs/common";
+import { PassportStrategy } from "@nestjs/passport";
+import { ExtractJwt, Strategy } from "passport-jwt";
+
+@Injectable()
+export class JwtStrategy extends PassportStrategy(Strategy) {
+  constructor() {
+    super({
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      secretOrKey: process.env.JWT_SECRET,
+    });
+  }
+
+  validate(payload: any) {
+    return { id: payload.sub, role: payload.role };
+  }
+}
+----
+
+This function runs once the JWT is verified.
+It attaches the returned object to `req.user`.
+
+So if you hit a route with a valid JWT, this is what gets injected.
+
+'''''
+
+=== *Step 9: Connect Auth Routes*
+
+In `auth.controller.ts`:
+
+[source,ts]
+----
+import { Controller, Post, Body } from "@nestjs/common";
+import { AuthService } from "./auth.service";
+import { RegisterDto } from "./dto/register.dto";
+import { LoginDto } from "./dto/login.dto";
+
+@Controller("auth")
+export class AuthController {
+  constructor(private authService: AuthService) {}
+
+  @Post("register")
+  register(@Body() dto: RegisterDto) {
+    return this.authService.register(dto);
+  }
+
+  @Post("login")
+  login(@Body() dto: LoginDto) {
+    return this.authService.login(dto);
+  }
+}
+----
+
+Two routes here:
+
+* `POST /auth/register` → Creates a user
+* `POST /auth/login` → Validates user and returns a token
+
+Nice and clean.
+
+'''''
+
+=== *Step 10: Test It*
+
+Start your server:
+
+[source,bash]
+----
+npm run start:dev
+----
+
+Use Postman or Insomnia:
+
+==== Register
+
+[source,http]
+----
+POST /auth/register
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "123456",
+  "name": "Test User",
+  "role": "user"
+}
+----
+
+==== Login
+
+[source,http]
+----
+POST /auth/login
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "123456"
+}
+----
+
+Response:
+
+[source,json]
+----
+{
+  "access_token": "<JWT_TOKEN>"
+}
+----
+
+Use this token to access protected routes with:
+
+....
+Authorization: Bearer <JWT_TOKEN>
+....
+
+'''''
+
+=== *Recap*
+
+You now have:
+
+* A functional NestJS backend with PostgreSQL
+* User registration and login with secure hashed passwords
+* JWT-based authentication strategy and guards
+* DTO validation and global pipes
+* Environment config and CORS enabled for the frontend
+
+👉 *Next up (Part 3): We’ll switch gears and start building the Angular
+frontend — hooking it up to this backend, wiring in JWT auth, and securing
+client-side routes.*
