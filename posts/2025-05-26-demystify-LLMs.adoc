@@ -20,7 +20,7 @@ If new to the language of LLMs, this guide aims to demystify some of the "magic"
 
 == 1. The Foundation: Probabilistic Text Generation
 
-image::../media/2025-05-26-demystify-LLMs/cotton-probability-machine-simple-compose.png[A caption, 900]
+image::cotton-probability-machine-simple-compose.png[Embroidered probability machine, 900]
 
 Large Language Models operate as sophisticated probability machines. At their core, they analyze patterns in text data to predict the most likely next token given a specific context. While they incorporate stochastic elements through temperature controls, pedantically, their underlying mechanisms are fundamentally deterministic—the same prompt with identical parameters will consistently produce the same output. In pratice, however, they are far from determinisitic—the stochastic elements and numerous other caveats render that statement for "illustration purposes only".
 
@@ -35,7 +35,7 @@ A <<bigram model>> represents the simplest form of statistical language modeling
 Consider this example corpus:
 _"The cat sat on the mat. The mat was soft and warm."_
 
-image::../media/2025-05-26-demystify-LLMs/cat_on_warm_mat_simple_compose.png[A caption, 900]
+image::cat_on_warm_mat_simple_compose.png[Embroidered cat on an embroidered mat, 900]
 
 The resulting bi-gram frequency table would contain:
 
@@ -157,7 +157,7 @@ An algorithm for creating efficient tokenization by:
 4. Iteratively building tokens from frequent patterns
 
 === context
-The surrounding words or sequences that inform next-word prediction. Context length varies by model type—<<bigram-models>> use 1 word, trigram models use 2 words, and <<n-gram-models>> use n-1 words of context.
+The surrounding words or sequences that inform next-word prediction. Context length varies by model type—<<_bigram_model,bigram models>> use 1 word, trigram models use 2 words, and <<_n_gram_model,ngram models>> use n-1 words of context.
 
 === corpus
 The comprehensive dataset of texts used for model training, typically including diverse sources such as books, articles, websites, and other written materials. Corpus quality and diversity directly impact model performance.
