@@ -20,7 +20,7 @@ If new to the language of LLMs, this guide aims to demystify some of the "magic"
 
 == 1. The Foundation: Probabilistic Text Generation
 
-image::cotton-probability-machine-simple-compose.png[Embroidered probability machine, 900]
+image::cotton-probability-machine-simple-compose.jpg[Embroidered probability machine, 900]
 
 Large Language Models operate as sophisticated probability machines. At their core, they analyze patterns in text data to predict the most likely next token given a specific context. While they incorporate stochastic elements through temperature controls, pedantically, their underlying mechanisms are fundamentally deterministic—the same prompt with identical parameters will consistently produce the same output. In pratice, however, they are far from determinisitic—the stochastic elements and numerous other caveats render that statement for "illustration purposes only".
 
@@ -35,7 +35,7 @@ A <<bigram model>> represents the simplest form of statistical language modeling
 Consider this example corpus:
 _"The cat sat on the mat. The mat was soft and warm."_
 
-image::cat_on_warm_mat_simple_compose.png[Embroidered cat on an embroidered mat, 900]
+image::cat_on_warm_mat_simple_compose.jpg[Embroidered cat on an embroidered mat, 900]
 
 The resulting bi-gram frequency table would contain:
 
