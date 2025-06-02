@@ -1,0 +1,222 @@
+:toc: left
+:toc-title: Table of Contents
+:toclevels: 3
+
+= A Quest to Tame Large Language Models
+v1.0
+:title: A Quest to Tame Large Language Models
+:imagesdir: ../media/2025-05-26-demystify-LLMs
+:lang: en
+:tags: [LLM, natural language processing, transformers, machine learning, AI, language models, probabilistic text generation, statistical language models, n-gram, bigram, attention mechanisms, vector embeddings, tokenization, context windows, self-attention, neural networks, NLP fundamentals, AI architecture, language understanding, transformer architecture]
+
+[#introduction]
+== Introduction
+
+Large Language Models represent one of the most significant advances in artificial intelligence, fundamentally transforming how we interact with natural language processing systems. Understanding their architecture and mechanisms is essential for anyone working with modern AI systems.
+
+This guide examines the core concepts underlying LLMs, from foundational statistical models to sophisticated attention mechanisms, providing practical insights for implementation and deployment. We'll explore how these systems generate coherent text, the role of context in language understanding, and the architectural innovations that enable modern capabilities.
+
+If new to the language of LLMs, this guide aims to demystify some of the "magic" surrounding them. If already versed in the language of LLMs, this guide hopes to be a refresher.
+
+== 1. The Foundation: Probabilistic Text Generation
+
+image::cotton-probability-machine-simple-compose.jpg[Embroidered probability machine, 900]
+
+Large Language Models operate as sophisticated probability machines. At their core, they analyze patterns in text data to predict the most likely next token given a specific context. While they incorporate stochastic elements through temperature controls, pedantically, their underlying mechanisms are fundamentally deterministic—the same prompt with identical parameters will consistently produce the same output. In pratice, however, they are far from determinisitic—the stochastic elements and numerous other caveats render that statement for "illustration purposes only".
+
+=== Statistical Language Models
+
+Statistical language models form the conceptual foundation for understanding modern LLMs. These models process a <<_corpus>> of text and use statistical patterns to predict subsequent words or <<_tokenization, tokens>>. While contemporary LLMs have evolved far beyond these simple approaches, understanding statistical models illuminates the core challenges that advanced architectures address.
+
+=== Bi-gram Models
+
+A <<bigram model>> represents the simplest form of statistical language modeling. It analyzes pairs of consecutive words to build frequency tables that inform predictions.
+
+Consider this example corpus:
+_"The cat sat on the mat. The mat was soft and warm."_
+
+image::cat_on_warm_mat_simple_compose.jpg[Embroidered cat on an embroidered mat, 900]
+
+The resulting bi-gram frequency table would contain:
+
+|===
+|Bigram |Count
+
+|The cat |1
+|cat sat |1
+|sat on |1
+|on the |1
+|the mat |2
+|mat The |1
+|was soft |1
+|soft and |1
+|and warm |1
+|===
+
+When processing the input "The," the model examines all bi-grams beginning with "The":
+
+* "The cat" (1 occurrence)
+* "The mat" (2 occurrences)
+
+The model predicts "mat" as the most probable next word based on frequency.
+
+While effective for demonstration, <<_bigram_model, bigram models>> suffer from severe contextual limitations, because the consider only one preceding word for their predictions.
+
+=== N-gram Models
+
+The <<n-gram model>> extends the bi-gram concept by incorporating longer <<_context,contextual windows>>. A trigram model, for example, considers two preceding words, while an n-gram model employs n-1 words of context.
+
+Let's look at the sentence: _"Thank you very much for your cooperation. I very much appreciated it. We very much made progress."_
+
+A trigram model encountering "you very" would leverage both "you" and "very" to predict "much," using conditional probability *_P("much" | "you", "very")_.*
+
+The relationship between context length and model performance involves critical trade-offs:
+
+*Longer Context (Higher n):*
+
+* Captures richer contextual dependencies
+* Enables more coherent text generation
+* Increases model complexity and <<_parameter_space>>
+* Higher risk of <<data sparsity>>
+
+*Shorter Context (Lower n):*
+
+* Simpler models with fewer parameters
+* More robust probability estimates
+* Limited contextual understanding
+* Reduced coherence in generated text
+
+<<_data_sparsity, Data sparsity>> becomes increasingly problematic as n increases—many <<_n_gram_model, n-grams>> may not appear frequently enough in training data to provide reliable probability estimates.
+
+== 2. The Transformer Revolution: "Attention is All You Need"
+
+The transformer architecture, introduced by Google researchers, revolutionized natural language processing by solving the contextual limitations of <<_n_gram_model, n-gram models>> through sophisticated <<_attention_mechanism, attention mechanisms>>.
+
+=== Vector Representations
+
+<<_transformer,Transformers>> convert words and <<_token,tokens>> into high-dimensional <<_vector,vectors>> (<<_embedding,embeddings>>) that capture semantic and syntactic relationships. Unlike sequential models that process text word-by-word, transformers can analyze relationships between all words in a passage simultaneously.
+
+*Vector Dimensionality:*
+
+* 2D vectors contain 2 numbers (analogous to map coordinates)
+* 3D vectors contain 3 numbers (spatial coordinates)
+* LLM vectors are high-dimensional with hundreds or thousands of dimensions
+
+Each dimension in an <<_vector,vector>> space captures different aspects of meaning, enabling the model to represent complex relationships between words and concepts. Vectors occupying similar positions in this space represent semantically related concepts.
+
+=== Attention Mechanisms
+
+An <<_attention_mechanism,attention mechanism>> functions as a dynamic spotlight, highlighting relevant information during text processing. For each <<_token,token>>, the model calculates attention weights determining how much focus to allocate to every other token in the context.
+
+*Key Advantages:*
+
+* *Long-range Dependencies:* Links related information across distant text portions
+* *Context-Aware Processing:* Resolves ambiguous words based on surrounding context
+* *Parallel Processing:* Analyzes all relationships simultaneously rather than sequentially
+
+=== Attention Architecture
+
+<<_attention_mechanism,Attention mechanisms>> operate through three primary components for each <<_token,token>>:
+
+1. *Query Vector:* Represents what the current token is "looking for"
+2. *Key Vector:* Represents what each token "offers" as context
+3. *Value Vector:* Contains the actual information to be combined
+
+*Processing Steps:*
+
+1. Generate query, key, and value vectors for each token
+2. Compare the current token's query with all tokens' keys
+3. Calculate attention scores indicating relevance strength
+4. Use scores to weight value vectors
+5. Combine weighted values to produce final token representation
+
+*Attention Weight Properties:*
+
+* Higher weights indicate stronger relevance
+* Weights are normalized to form probability distributions (sum to 1)
+* Enable the model to focus on the most contextually relevant information
+
+*Self-Attention:*
+
+Every token in a sequence attends to all others, including itself, capturing comprehensive contextual relationships across the entire sequence.
+
+== Technical Glossary
+
+=== attention mechanism
+Mechanisms that enable models to weigh the importance of different input portions relative to each other, focusing on the most relevant information for accurate and coherent output generation.
+
+=== bigram model
+Statistical models that predict the next word based on the immediately preceding word, analyzing word pair frequencies to determine probability distributions.
+
+=== byte-pair encoding
+An algorithm for creating efficient tokenization by:
+
+1. Counting character frequencies in the corpus
+2. Identifying the most common character pairs
+3. Adding common pairs to the vocabulary
+4. Iteratively building tokens from frequent patterns
+
+=== context
+The surrounding words or sequences that inform next-word prediction. Context length varies by model type—<<_bigram_model,bigram models>> use 1 word, trigram models use 2 words, and <<_n_gram_model,ngram models>> use n-1 words of context.
+
+=== corpus
+The comprehensive dataset of texts used for model training, typically including diverse sources such as books, articles, websites, and other written materials. Corpus quality and diversity directly impact model performance.
+
+=== data sparsity
+Insufficient coverage of possible inputs or features in training data, where certain patterns may not appear frequently enough to provide reliable probability estimates.
+
+=== embedding
+
+Embeddings transform symbolic language into mathematical forms (the vector) that neural networks can process, with similar concepts positioned closer together in the vector space.
+
+The terms "embedding" and "vector" are often used interchangeably in machine learning contexts, though "embedding" specifically speaks to the process of transforming data into the vector form, whereas "an embedding" likely speaks to a vector—unless a new model is invented that doesn't use vectors.
+
+=== epoch
+One complete pass through the entire training dataset, during which the model processes all examples and updates parameters based on prediction errors.
+
+=== hyperparameter
+A configuration setting that influences model behavior but is not learned during training. Examples include learning rate, batch size, and temperature. Hyperparameters are typically set before training begins and can significantly impact model performance.
+
+=== long range dependencies
+Relationships between words or phrases separated by significant distances in text, such as pronouns referring to entities in different paragraphs.
+
+=== loss
+A metric measuring prediction accuracy by quantifying the difference between model outputs and correct answers. Training progressively reduces loss through parameter optimization.
+
+=== n-gram model
+Describes the general version of a bigram model. It is a statistical language modeling approach that predicts words based on n-1 previous words in sequence. Common variants include bigrams (n=2), trigrams (n=3).
+
+=== over-fitting
+A condition where models perform exceptionally on training data but fail to generalize to new, unseen inputs—analogous to memorizing without understanding.
+
+=== parameter
+The individual weights and biases within a model that are adjusted during training to minimize prediction error. Parameters are learned from the training data and define the model's behavior.
+
+=== parameter space
+The multidimensional mathematical domain that encompasses all the weights and biases that the model can learn, which can number in the millions or billions for modern language models.
+
+=== preprocessing
+Data preparation steps including cleaning, transformation, and structuring to optimize datasets for machine learning, such as lowercasing text or removing stop words.
+
+=== temperature
+A hyperparameter controlling output randomness:
+
+* *Lower Temperature:* More deterministic, focused responses with higher probability words
+* *Higher Temperature:* Increased randomness and creativity, selecting less probable words
+
+Not to be confused with the parameter space.
+
+=== token
+The fundamental unit of text processed by language models, representing a piece of text produced through tokenization. Tokens can be words, subwords, characters, or other linguistic units depending on the tokenization method used.
+
+=== tokenization
+The process of segmenting text into smaller units (tokens) such as words, subwords, or characters. Effective tokenization increases training examples and enables models to learn morphological patterns.
+
+=== training
+The process of optimizing the model's parameter space to maximize prediction accuracy, expressed as f(x|params) where x represents input and params represents learned weights.
+
+=== transformer
+A neural network architecture that consists of encoders (for understanding input) and decoders (for generating output), or decoder-only (for generative tasks). Transformers process all tokens in parallel rather than sequentially and better capture long range context.
+
+=== vector
+High-dimensional numerical representations of text or data, capturing semantic and syntactic relationships in mathematical space suitable for computational processing.
