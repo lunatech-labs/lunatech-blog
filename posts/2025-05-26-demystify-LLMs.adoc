@@ -140,7 +140,7 @@ An <<_attention_mechanism,attention mechanism>> functions as a dynamic spotlight
 
 Every token in a sequence attends to all others, including itself, capturing comprehensive contextual relationships across the entire sequence.
 
-== Technical Lexicon
+== Technical Glossary
 
 === attention mechanism
 Mechanisms that enable models to weigh the importance of different input portions relative to each other, focusing on the most relevant information for accurate and coherent output generation.
