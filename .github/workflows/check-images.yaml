@@ -10,10 +10,21 @@ jobs:
           fetch-depth: 0
       - shell: bash
         run: |
-          files=$(git diff --name-only origin/${{ github.base_ref }} | grep -E '.+\.png$' | xargs du -h --threshold=1M | cut -f2)
-          for file in $files; do
-            echo "::warning title=Big image,file=$file::The image '$file' is bigger than 1MB. Consider reducing its pixel size to match the actual size on the website, or use pngcrush or similar to maximize the compression"
-          done
-          if ! [[ -z "$files" ]]; then
-            exit 1
+          changed_files=$(git diff --name-only origin/${{ github.base_ref }})
+          echo "Changed files: $changed_files"
+          files=$(echo "$changed_files" | grep -E '.+\.png$' || true)
+          
+          if [ -n "$files" ]; then
+            big_files=$(echo "$files" | xargs -I{} du -h --threshold=1M {} 2>/dev/null | cut -f2)
+        
+            if [ -n "$big_files" ]; then
+              for file in $big_files; do
+                echo "::warning title=Big image,file=$file::The image '$file' is bigger than 1MB. Consider reducing its pixel size to match the actual size on the website, or use pngcrush or similar to maximize the compression"
+              done
+              exit 1
+            else
+              echo "No image files larger than 1MB found."
+            fi
+          else
+            echo "No image files changed in this PR."
           fi
