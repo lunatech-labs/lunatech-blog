@@ -1,9 +1,9 @@
+= A Quest to Tame Large Language Models
+lukewoodcock
+v1.0, 2025-06-03
 :toc: left
 :toc-title: Table of Contents
 :toclevels: 3
-
-= A Quest to Tame Large Language Models
-v1.0
 :title: A Quest to Tame Large Language Models
 :imagesdir: ../media/2025-05-26-demystify-LLMs
 :lang: en
