@@ -1,0 +1,238 @@
+= SAFe vs LeSS: understanding and choosing the right Agile framework
+laurie-coquillat
+v1.0, 2025-05-07
+:title: SAFe vs LeSS: understanding and choosing the right Agile framework
+:lang: en
+:tags: [SAFe, LaSS, Scaled Agile Framework]
+
+== Introduction: What is Scaled Agile?
+Scaled Agile aims to apply Agile principles not just to a single team, but to a group of teams working together on the same product or project. It seeks to maintain the flexibility, speed, and adaptability of Agile while ensuring the coordination and strategic alignment necessary for large organizations. It’s therefore a methodology that is added on top of frameworks applied to a specific team or project (such as Scrum or Kanban, for example).  
+
+In the world of Scaled Agile, two frameworks stand out in particular: SAFe (Scaled Agile Framework) and LeSS (Large Scale Scrum). Each has its own principles, methodologies, and areas of application. This article provides a detailed analysis of their operation, core principles, implementation, and a comparison to help you choose the one that best suits your organization.  
+
+== SAFe: Scaled Agile Framework
+SAFe was created by Dean Leffingwell in 2011 to address the needs of large companies seeking to adopt Agile on a large scale. Today, SAFe is one of the most widely used frameworks in the world: according to a survey by VersionOne, more than 37% of organizations practicing Scaled Agile say they use SAFe.
+
+=== Principles of SAFe
+SAFe is based on several principles inspired by Lean, Agile, and DevOps:
+
+* *Alignment*: Coordination between teams for a common vision
+* *Built-in Quality*: Consideration of quality at each stage of development
+* *Program Execution*: Structured delivery rhythm (PI Planning)
+* *Lean-Agile Leadership*: Adoption of an Agile mindset by managers
+
+=== How does SAFe work?
+SAFe is structured in several levels:
+
+1. *Team Level*: Scrum/Kanban teams operating in short cycles
+2. *Program Level*: An *Agile Release Train (ART)* coordinates multiple teams
+3. *Large Solution Level*: Synchronization of several ARTs
+4. *Portfolio Level*: Strategy and alignment with business objectives
+
+=== Key SAFe Ceremonies
+SAFe is based on several collaborative events for team synchronization:
+
+* *PI Planning (Program Increment Planning)*: A central event where all teams in the Agile Release Train (ART) plan the next iterations together  
+* *Scrum of Scrums*: Meeting between Scrum Masters to align teams  
+* *System Demo*: Regular presentation of product progress 
+* *Inspect & Adapt*: Large-scale retrospective to continuously improve the process
+
+=== SAFe Implementation (Key Steps)
+1. Training and adoption of a Lean-Agile culture  
+2. Definition of ARTs and implementation of PI Planning  
+3. Creation of interconnected Agile teams  
+4. Monitoring and continuous improvement via Inspect & Adapt  
+
+=== When to use SAFe?
+* Large organizations (more than 50 developers)  
+* Complex environments requiring coordination and alignment  
+* Sectors subject to strict regulations requiring rigorous management and increased traceability 
+
+== LeSS: Large Scale Scrum
+LeSS was developed by Craig Larman and Bas Vodde in the early 2000s to address the challenges of scaling Agile while remaining true to Scrum principles. Unlike SAFe, LeSS focuses on simplifying processes and reducing roles to promote team self-organization. Today, it is mainly used by companies seeking to scale Scrum while maintaining a minimalist and flexible approach.
+
+=== Principles of LeSS
+LeSS is based on Scrum implemented for several teams in parallel, with a few fundamental principles:
+
+* *Less Process, More Agility*: Reduction of unnecessary roles and artifacts  
+* *Autonomous and Self-Organizing Teams* 
+* *One Product Backlog* for multiple teams 
+* *Continuous Transparency and Feedback*
+
+=== How does LeSS work?
+LeSS offers two levels of scaling:
+1. *Standard LeSS* (2 to 8 Scrum teams working on the same product).  
+2. *LeSS Huge* (more than 8 teams, with Area Product Owners for coordination).
+
+=== LeSS-Specific Ceremonies
+LeSS retains the fundamental Scrum events while adapting them to scale. Key ceremonies include:
+
+* *Overall Sprint Planning*: Initial alignment of all teams on sprint priorities  
+* *Daily Scrum*: Each team holds its own daily stand-up 
+* *Overall Sprint Review*: Joint demonstration of product progress to all stakeholders  
+* *Overall Retrospective*: Analysis of lessons learned and collective adjustments to improve the process at scale  
+* *Overall Backlog Refinement*: Collaborative sessions involving all teams to clarify and refine backlog items
+
+These ceremonies ensure smooth synchronization between teams while maintaining transparency and strategic alignment.
+
+=== LeSS Implementation (Key Steps)
+1. Develop a consistent and harmonized Agile approach at scale, applying Scrum principles while ensuring effective coordination between teams  
+2. Define a single Product Backlog  
+3. Organize autonomous Scrum teams  
+4. Synchronize teams with Scrum-of-Scrums and joint reviews  
+5. Implement a continuous improvement process
+
+=== When to use LeSS?
+
+* Medium-sized organizations (less than 100 developers)  
+* Already established Agile culture 
+* Projects requiring flexibility and simplicity
+
+== SAFe vs LeSS Comparison
+
+[.scrollable]
+--
+
+[cols="a,a,a", options="header"]
+|===
+| Criteria
+| SAFe
+| LeSS
+
+|
+
+----
+Complexity
+----
+
+|
+
+----
+High (multiple levels)
+----
+
+|
+
+----
+Medium (simplified organization)
+----
+
+|
+
+----
+Implementation Cost
+----
+
+|
+
+----
+High (training and tools required)
+----
+
+|
+
+----
+Lower (fewer roles and processes)
+----
+
+|
+
+----
+Flexibility
+----
+
+|
+
+----
+Medium (structured framework)
+----
+
+|
+
+----
+High (more flexible approach)
+----
+
+|
+
+----
+Best for
+----
+
+|
+
+----
+Large enterprises and complex organizations
+----
+
+|
+
+----
+Medium-sized companies wanting to scale Scrum
+----
+
+|
+
+----
+Global Adoption
+----
+
+|
+
+----
+Very widespread in large enterprises
+----
+
+|
+
+----
+More limited but appreciated by Agile purists
+----
+
+|
+
+----
+Governance Level
+----
+
+|
+
+----
+Highly structured
+----
+
+|
+
+----
+Minimal governance
+----
+
+|
+
+----
+Required Company Culture
+----
+
+|
+
+----
+Need for strong strategic alignment
+----
+
+|
+
+----
+Strong focus on self-organization
+----
+
+|===
+
+--
+
+== Conclusion: Which Framework to Choose?
+
+* If your company is large, requires strong strategic alignment and operates in a complex environment → SAFe is a good choice.  
+* If your company is medium-sized, favors self-organization and wants to maintain a pure Agile approach → LeSS is preferable.  
+
+Each framework has its advantages and disadvantages, and the best choice will depend on your specific needs and organizational context. It will also depend on the level of control your organization wishes to obtain over processes, a factor which, undoubtedly, has convinced more than one management team to implement SAFe rather than LeSS, even in the presence of a relatively modest number of teams.  
+
