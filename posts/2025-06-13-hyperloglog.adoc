@@ -1,0 +1,182 @@
+= HyperLogLog++
+albertoandeliero
+v1.0, 2025-06-13
+:toc: left
+:toc-title: Table of Contents
+:toclevels: 3
+:title: A brief introduction to HyperLogLog++
+:imagesdir: ../media/2025-06-13-hyperloglog
+:lang: en
+:tags: [hyperloglog, algorithm, randomized-algorithm, beyond-the-code, bash-to-the-feature]
+
+This document demonstrates a fascinating technique that tackles a complex computational problem using an elegant probabilistic strategy.
+
+[#introduction]
+== The Problem
+
+The *count-distinct problem* (also known as the _cardinality estimation problem_) involves finding the number of distinct elements in a data stream containing repeated elements.
+
+Traditionally, solving this problem requires Θ(D) space complexity, where D represents the number of unique elements. This is because we need to store each unique element to determine whether a new element has been previously encountered.
+
+Unfortunately, this approach doesn't scale for massive cardinalities found in real-world applications such as:
+
+* *Unique Query Counting*: Tracking the number of unique searches in a search engine
+* *Network Monitoring*: Counting unique source IP addresses
+* *Unique Visitor Tracking*: Monitoring distinct users across web platforms
+
+NOTE: In the original paper and related literature, "cardinality" refers to the number of distinct elements.
+
+== The Algorithm
+
+When you only need an estimation, or when the number of unique elements makes it impractical to store them all in memory, *HyperLogLog++* provides an excellent solution.
+
+This technique estimates the number of unique elements with a relative percentage error between -4% and 6%, using only 16 KB of memory (though this depends on the number of registers configured).
+
+== Example
+
+Let me illustrate the core concept with a simple analogy.
+
+Imagine someone spends an entire day rolling a die and tells you the maximum number of consecutive 1s they rolled was 3. While you can't determine the exact number of rolls, you can estimate it by calculating the probability of this event occurring.
+
+The probability of rolling three consecutive 1s is:
+
+....
+1/6 * 1/6 * 1/6 = 1/(6^3)
+....
+
+Therefore, the expected number of trials needed to observe this event is:
+
+....
+1 / (1/6^3) = 6^3 = 216
+....
+
+Translating this concept into an algorithm:
+
+* The *Dice game* becomes a Hash function that hashes the element in input and yields bits. These bits represent the outcome of the game run, like if the dice had only two faces, 1 and 0.
+* The event taken into account was that the longest sequence of 1's (that the die returns 1) at the start of the game, but in this case, since hashing returns a binary output, the algorithm will calculate the event of longest run of leading bits set to 0. Technically, it's also possible to count leading ones, but counting leading zeros is a common convention.
+* *Probability of rolling a 1 (1/6)* → Probability of a bit being 0 (1/2)
+* *Number of plays* → Cardinality
+
+This represents the fundamental idea behind the Flajolet–Martin algorithm, which HyperLogLog++ improves upon through three key enhancements.
+*Correction Factor* is applied to mitigate the overestimation bias inherent in the standard HLL algorithm.
+*Grouped Averaging* specifically the harmonic mean across multiple registers (or buckets), to significantly improve the accuracy of its cardinality estimates.
+HLL++ for small cardinalities suffers from the Overestimation Bias, for that reason *Linear Counting* is used, which is another probabilistic counting algorithm simple and highly accurate for that scale.
+
+
+== Implementation
+
+=== Data Structure
+
+[source,java]
+----
+class HyperLogLog {
+    //Number of registers. Must be a power of 2. `buckets = 2^p`
+    private final int buckets = 16384;
+
+    // Correction factor
+    private final double alpha = 0.7213 / (1 + 1.079 / buckets); //0.72125250052
+
+    //Initialize the array of 16 383 (2^14-1) elements
+    private final byte[] registers = new byte[buckets];
+----
+
+The hash function outputs 64 bits, the first 14 are used to address the registers while the last 50 are used for calculating the ranking.
+That's why the size of the register array is `16384` and the type is `byte` sufficient to count up to 50 leading zeros.
+
+=== Add Operation
+
+The `add` operation is how you feed individual elements into the HyperLogLog structure. The goal is to update the internal state of the HLL to reflect the presence of this new element.
+
+[source,java]
+----
+    public void add(String element) {
+        // Calculate hash
+        long hash = hashElement(element);
+        // Take the first 14 bits to address the register
+        short registerIndex = getIndex(hash);
+        // Take the last 50 bits
+        long value = getValue(hash);
+        // Calculate the rank value for the target register
+        byte rank = (byte) (leadingZeros(value) + 1);
+        // Keep the biggest rank between rank and registers[registerIndex]
+        if (rank > registers[registerIndex]) {
+            registers[registerIndex] = rank;
+        }
+    }
+----
+
+. *Calculate* a 64-bit hash of the input
+. *Extract* the first 14 bits of the hash to index the register
+. *Use* the remaining 50 bits to calculate the number of leading zeros
+. *Compare* with the existing register value and store the biggest rank
+
+=== Count Operation
+
+The `count` operation provides an approximation of the number of distinct elements that have been added to the HyperLogLog.
+
+[source,java]
+----
+    public long count() {
+        double sum = 0;
+        int zeroRegisters = 0;
+        // Calculate the harmonic mean of the register values
+        for (byte register: registers) {
+            sum += Math.pow(2, -register);
+            if (register == 0) {
+                zeroRegisters++;
+            }
+        }
+        // Raw estimate
+        double estimate = alpha * buckets * buckets / sum;
+        // Apply corrections for small cardinalities
+        if (estimate <= 2.5 * m && zeroRegisters > 0) {
+            // Linear counting
+            estimate = buckets * Math.log((double) buckets / zeroRegisters);
+        }
+        return Math.round(estimate);
+    }
+----
+
+. *Calculate* the harmonic mean of all register values
+. *Apply* a correction factor
+. *Count* the number of empty registers
+. *Fall back* to linear counting for small cardinalities
+
+=== Merge Operation
+
+The `merge` operation allows you to combine two or more HyperLogLog structures into a new HLL structure (or update one with another). This is a powerful feature for distributed systems where distinct counts might be computed on subsets of data in parallel and then combined.
+
+[source,java]
+----
+    public void merge(HyperLogLog that) {
+        for (int i = 0; i < buckets; i++) {
+            if (this.registers[i] < that.registers[i])
+                this.registers[i] = that.registers[i];
+        }
+    }
+----
+
+. *Compare* each register pair at the same index
+. *Retain* the register with the larger value
+
+== Relative Percentage Error
+
+image::error_plot.svg[Error Plot]
+
+In this graph x-axis represents the expected cardinality, and it goes from 0 to 100k elements.
+While the y-axis represents the relative error in percentage.
+We can observe that in the first part that linear counting is used for cardinalities up to approximately 40,000, after which HyperLogLog++ takes over, the error is quite high, but it starts to converge around 0 the more elements come in.
+The next graph shows what would happen without linear counting, the Overestimation Bias.
+
+image::no_linear_counting.svg[No Linear Counting]
+
+== Conclusion
+
+HyperLogLog++ is a good solution for counting unique elements in those use case where storing them in memory is not practical.
+It provides O(1) complexity both in terms of time and space, and the relative error is in the range of -4% to 6%.
+
+
+image::flajolet_philippe_small.jpg[Philippe Flajolet]
+
+_Philippe Flajolet - First author of "HyperLogLog: the analysis of a near-optimal
+cardinality estimation algorithm"_
