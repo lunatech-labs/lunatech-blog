@@ -1,3 +1,10 @@
+= Graveyard of technologies
+peretarrida
+v1.0, 2025-06-20
+:title: Graveyard of technologies
+:imagesdir: ../media/2025-6-20-graveyard-of-technologies
+:lang: en
+:tags: [beyond-the-code, ALGOL, Japronto, Apache Ant, Windows Phone, Google Glass, Microsoft Zune, Netscape Navigator, Adobe Flash, Visual Basic, Fortran, Smalltalk, Technology Adoption, Market Failure, Software History, Hardware History, Ecosystem Strategy, Innovation vs. Viability, Legacy Technology, Product Lifecycle, Developer Experience, User Adoption]
 == Software: When Technical Excellence Isn't Enough
 
 ALGOL, Japronto, and Apache Ant represent fascinating case studies of software that, despite their technical merits, faced significant challenges in achieving lasting market success. Each offers valuable lessons about the complex relationship between technical excellence and commercial viability.
