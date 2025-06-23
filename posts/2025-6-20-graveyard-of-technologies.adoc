@@ -4,7 +4,7 @@ v1.0, 2025-06-20
 :title: Graveyard of technologies
 :imagesdir: ../media/2025-6-20-graveyard-of-technologies
 :lang: en
-:tags: [beyond-the-code, ALGOL, Japronto, Apache Ant, Windows Phone, Google Glass, Microsoft Zune, Netscape Navigator, Adobe Flash, Visual Basic, Fortran, Smalltalk, Technology Adoption, Market Failure, Software History, Hardware History, Ecosystem Strategy, Innovation vs. Viability, Legacy Technology, Product Lifecycle, Developer Experience, User Adoption]
+:tags: [beyond-the-code, bash-to-the-feature, ALGOL, Japronto, Apache Ant, Windows Phone, Google Glass, Microsoft Zune, Netscape Navigator, Adobe Flash, Visual Basic, Fortran, Smalltalk, Technology Adoption, Market Failure, Software History, Hardware History, Ecosystem Strategy, Innovation vs. Viability, Legacy Technology, Product Lifecycle, Developer Experience, User Adoption]
 == Software: When Technical Excellence Isn't Enough
 
 ALGOL, Japronto, and Apache Ant represent fascinating case studies of software that, despite their technical merits, faced significant challenges in achieving lasting market success. Each offers valuable lessons about the complex relationship between technical excellence and commercial viability.
@@ -174,6 +174,6 @@ However, the Zune suffered from classic late-mover disadvantages. By 2006, the i
 
 = Conclusion: Lessons in Technology Adoption
 
-The histories of these varied technologies illustrate a critical lesson: technical merit alone is insufficient to guarantee market success. Whether it's a programming language like ALGOL that lacked commercial focus, a framework like Japronto whose benchmark performance was impractical for real-world use, or hardware like the Zune and Windows Phone that couldn't overcome established ecosystems, the pattern is consistent[1].
+The histories of these varied technologies illustrate a critical lesson: technical merit alone is insufficient to guarantee market success. Whether it's a programming language like ALGOL that lacked commercial focus, a framework like Japronto whose benchmark performance was impractical for real-world use, or hardware like the Zune and Windows Phone that couldn't overcome established ecosystems, the pattern is consistent.
 
-Sustainable adoption requires a delicate balance of innovation with practical usability, strong industry support, and the ability to evolve alongside changing user needs and market dynamics. The failure to address real-world problems, build a supportive ecosystem, or adapt to new industry standards ultimately led to the decline of these once-promising technologies[1].
+Sustainable adoption requires a delicate balance of innovation with practical usability, strong industry support, and the ability to evolve alongside changing user needs and market dynamics. The failure to address real-world problems, build a supportive ecosystem, or adapt to new industry standards ultimately led to the decline of these once-promising technologies.
