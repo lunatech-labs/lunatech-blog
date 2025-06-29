@@ -1,0 +1,106 @@
+= Ctrl+Alt+Defeat: Noob vs. Neural Net
+
+For decades, competitive games have served as milestones in artificial intelligence research. From IBM’s Deep Blue beating Garry Kasparov at chess in 1997, to AlphaGo’s victory over Lee Sedol in 2016, games have offered a clear stage for AI to measure itself against the best human minds.
+
+But as games have grown more complex, so too has the challenge. Turn-based board games like chess and Go, while difficult, offer complete information and relatively limited options per move. Real-time strategy games like StarCraft II and Dota 2, however, introduce chaos: thousands of actions per minute, imperfect information, shifting alliances, and the need for long-term planning — all in real time.
+
+So the question arises: Can AI beat humans in these games, fairly, without relying on superhuman speed or godlike awareness? Let’s take a deeper look into how two landmark systems, OpenAI Five and AlphaStar, set out to do just that. +
+
+
+== The Complexity of Real-Time Strategy Games
+
+To appreciate the achievements of AI in games like Dota 2 and StarCraft II, it's essential to understand what makes these games hard:
+
+* Partial information: Players don’t see the whole map due to fog of war. +
+* High action complexity: At any moment, there are thousands of possible moves. +
+* Real-time dynamics: No turns, decisions must be made continuously. +
+* Coordination: Especially in team games, success hinges on synergy and communication. +
+* Long-term planning: Decisions made in the early game can determine the late-game outcome. +
+
+Unlike games with set openings and established endgames, these environments are closer to the messiness of the real world and that’s exactly why they interest AI researchers.
+
+
+== OpenAI Five: Dota 2 Without Superpowers
+
+In 2019, OpenAI introduced OpenAI Five, a team of five neural networks trained to play Dota 2, a popular and highly complex team-based multiplayer game. Unlike previous AIs, OpenAI Five didn’t rely on hardcoded rules. Instead, it learned by playing itself millions of times in a massive distributed training setup.
+
+What made OpenAI Five especially impressive was the effort to simulate human-like constraints:
+
+* Reaction time was capped at 200 milliseconds, close to average human reflexes. +
+
+* Actions per minute (APM) were restricted to human levels, avoiding the inhuman speed advantage. +
+
+* It had no access to information unavailable to humans, like opponent positions under fog of war. +
+
+
+Despite these constraints, OpenAI Five steadily improved and eventually beat top human teams culminating in a 2–0 victory over the reigning world champion team OG at The International in 2019.
+
+Yet, Five was not without flaws. It was:
+
+* Weaker in novel situations it hadn’t seen during training. +
+
+* Sometimes inflexible, making odd decisions when opponents deviated from expected tactics. +
+
+* Emotionally agnostic, meaning while it would never play emotionally, it also doesn’t have the ability to read human psychology or use momentum the way humans do. +
+
+
+Still, the fact that an AI could beat the world’s best without using non-human like reactions speeds speaks for itself.
+
+== AlphaStar: Outmaneuvering Pros in StarCraft II
+
+DeepMind’s AlphaStar tackled StarCraft II, another legendary RTS known for its brutal learning curve and mechanical demands. It used a combination of imitation learning (watching human games) and self-play reinforcement learning to master the game.
+
+Like OpenAI Five, AlphaStar imposed human-like limitations:
+
+* Capped APM and reaction delays (averaging around 350 milliseconds). +
+
+* Camera view limitations, meaning it had to "look" around the map like a human player. +
+
+* Trained against a diversity of opponents and strategies. +
+
+
+AlphaStar climbed the European ladder to Grandmaster, ranking in the top 0.2% of players. It beat professional players like TLO and MaNa convincingly, sometimes using unexpected and creative strategies.
+
+However, it too had its shortcomings:
+
+* Predictability: Once players had time to study it, some human pros found exploitable patterns. +
+
+* Lack of intuitive game sense: Humans often make intuitive calls based on experience, psychology, or a “feel” for the flow of the game — AlphaStar relied solely on data and outcomes. +
+
+* Difficulty adapting to “meta shifts”, since it lacked the kind of quick generalization humans can make from limited examples. +
+
+
+Even so, AlphaStar showed that AI could compete — and win — not by outclicking, but by outthinking.
+
+== Summary of the restrictions imposed on the AI's
+
+[cols=",,,",options="header",]
+|===
+|Metric |Pro Human Player |OpenAI Five |AlphaStar
+|Average Reaction Time |~200 ms |200 ms |350 ms
+|Max APM |~300 |~180 |~150
+|Map Vision |Partial |Partial |Limited camera view
+|Strategy Adaptation |High |Medium |Medium-High
+|===
+
+== Where AI Still Falls Short
+
+Even with these victories, AI is not yet a complete replacement for human intelligence in games. Some weaknesses include:
+
+* Lack of common sense or intuition: AIs still struggle with decisions that require real-world reasoning or emotional awareness. +
+
+* Context blindness: Without extensive training, AIs can’t generalize well to new game versions or unexpected strategies. +
+
+* Communication and deception: While CICERO made strides, most game AIs can’t read or manipulate human opponents the way expert players do. +
+
+* Creativity with purpose: AIs can discover new tactics, but they don’t “understand” them in a human sense, nor can they justify them conceptually. +
+
+In essence, AI can win — but it doesn't always know why it wins.
+
+== Conclusion: A New Era of Competitive Play
+
+So, can AI truly outplay humans at complex games? The answer, remarkably, is yes — even under constraints that mimic human limitations. OpenAI Five and AlphaStar both demonstrated that intelligent agents can excel in games long thought too complex for machines.
+
+But while the victories are real, the limitations are too. These AIs don’t think or feel like us. They win through scale, training, and narrow focus — not general intelligence or intuition.
+
+Still, each success in these arenas nudges us closer to AI that can not only perform, but reason, adapt, and collaborate — skills that matter far beyond the game board.
