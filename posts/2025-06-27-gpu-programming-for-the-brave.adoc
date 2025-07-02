@@ -21,12 +21,12 @@ If you have tried to build your own PC, you will probably call the big gas-stove
 [.left]
 [[card]]
 .My Nvidia RTX 3080.
-image::my_graphics_card_2.png[A,400,180]
+image::my_graphics_card_2.png[A,800,180]
 
 [.right]
 [[disassembled-card]]
 .My Nvidia RTX 3080 (disassemble).
-image::my_graphics_card_1.png[B,400,180]
+image::my_graphics_card_1.png[B,800,180]
 --
 
 == The small exercise
@@ -147,11 +147,11 @@ So what happens when we run it? Besides allocating memory on the device, which i
 --
 [.left]
 .The Grid, The Block and The Thread.
-image::gpu_architecture_1.png[A,240,180]
+image::gpu_architecture_1.png[A,480,180]
 
 [.right]
 .Nvidia's interpretation.
-image::gpu_architecture_2.png[B,400,180]
+image::gpu_architecture_2.png[B,800,180]
 --
 
 If we leave out the `main()` function, the actual implementation is only 6 lines and there is no loop being used at all. But how much faster it really is? When running with the matrix shape of 32768 * 32768, our CUDA implementation can finish it within 0.3 seconds while the C implementation needs 1.9 seconds.
@@ -160,7 +160,7 @@ If we leave out the `main()` function, the actual implementation is only 6 lines
 --
 [.text-center]
 .Speed showcase.
-image::speed_result.png[Speed showcase.,400,180]
+image::speed_result.png[Speed showcase.,800,180]
 --
 
 Impressive, isn't it? But trust me, everything seems reasonable when you actually see the difference of thread numbers:
@@ -197,7 +197,7 @@ To put it simply: *most of the popular AIs are made of neural networks.* A neura
 --
 [.text-center]
 .A neural network.
-image::neural_network.png[Speed showcase.,400,180]
+image::neural_network.png[Speed showcase.,800,180]
 --
 
 === We can let GPU run this
@@ -208,12 +208,12 @@ If we try to write a simple implementation, or even pseudo code, of how things a
 [.left]
 [[c-implementation]]
 .C implementation of a neural network layer.
-image::neural_network_layer_c.png[Speed showcase.,300,180]
+image::neural_network_layer_c.png[Speed showcase.,600,180]
 
 [.right]
 [[cuda-implementation]]
 .CUDA implementation of a neural network layer.
-image::neural_network_layer_cuda.png[Speed showcase.,450,180]
+image::neural_network_layer_cuda.png[Speed showcase.,900,180]
 --
 
 Both <<c-implementation, Figure 7>> and <<cuda-implementation, Figure 8>> are taken from a research article by Ricardo Brito et al[<<1>>]. The authors managed to utilize the high-throughput of GPU to accelerate the training process of a neural network in the year of 2016. Except for the countless open-source repositories that implement CUDA-based neural networks, Nvidia offers https://developer.nvidia.com/cudnn#[cuDNN] as a GPU-accelerated library of primitives for deep neural networks. Popular neural network frameworks like https://pytorch.org/get-started/locally/[PyTorch] and https://www.tensorflow.org/guide/gpu[TenhsorFlow] can operate on GPU devices without any extra effort.
