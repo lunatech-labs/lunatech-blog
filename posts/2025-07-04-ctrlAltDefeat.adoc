@@ -97,7 +97,7 @@ Even with these victories, AI is not yet a complete replacement for human intell
 
 * Context blindness: Without extensive training, AIs can’t generalize well to new game versions or unexpected strategies. +
 
-* Communication and deception: While CICERO made strides, most game AIs can’t read or manipulate human opponents the way expert players do. +
+* Communication and deception: While some advanced AIs, like Meta's "CICERO", have made progress in games that involve negotiation and persuasion — such as the board game Diplomacy — most game-playing AIs still struggle to understand or influence human opponents the way skilled players can. They can't read body language, sense bluffing, or adapt their strategy based on trust or psychology — key elements of human gameplay. +
 
 * Creativity with purpose: AIs can discover new tactics, but they don’t “understand” them in a human sense, nor can they justify them conceptually. +
 
