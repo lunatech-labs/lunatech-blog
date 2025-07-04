@@ -1,4 +1,10 @@
 = Ctrl+Alt+Defeat: Noob vs. Neural Net
+GlenODonovan
+v1.0, 2025-07-04
+:title: Ctrl+Alt+Defeat: Noob vs. Neural Net
+:imagesdir: ../media/2025-07-04-CtrlAltDefeat
+:lang: en
+:tags: [beyond-the-code, bash-to-the-feature, AI, neural network]
 
 For decades, competitive games have served as milestones in artificial intelligence research. From IBM’s Deep Blue beating Garry Kasparov at chess in 1997, to AlphaGo’s victory over Lee Sedol in 2016, games have offered a clear stage for AI to measure itself against the best human minds.
 
