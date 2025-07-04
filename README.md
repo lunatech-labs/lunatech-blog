@@ -1,5 +1,6 @@
 # lunatech-blog
-Contains our blog in [Asciidoctor](https://asciidoc.org/) format.
+## How It All Comes Together
+lunatech-blog contains our blog in [Asciidoctor](https://asciidoc.org/) format. We write blog posts in this repository. We then point a separate asciidoctor project (in our case currently [lunatech-blog-engine](https://github.com/lunatech-labs/lunatech-blog-engine)) to this project. That project then runs Asciidoctor on these files to convert and serve them as HTML.
 
 Each post is located in the `posts` directory with the following format: `yyyy-MM-dd-title.adoc`
 
@@ -7,7 +8,7 @@ In the `media` directory there should be a matching image named `yyyy-MM-dd-titl
 
 All media used in the posts should be located in the `media` directory under a `yyyy-MM-dd-title` directory ie `media/yyy-MM-dd-title`
 
-To add you blog post:
+To add your blog post:
 * Install giter8, via coursier
 ```commandline
 brew install coursier/formulas/coursier
