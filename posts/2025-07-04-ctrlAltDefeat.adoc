@@ -2,7 +2,7 @@
 GlenODonovan
 v1.0, 2025-07-04
 :title: Ctrl+Alt+Defeat: Noob vs. Neural Net
-:imagesdir: ../media/2025-07-04-CtrlAltDefeat
+:imagesdir: ../media/2025-07-04-ctrlaltdefeat
 :lang: en
 :tags: [beyond-the-code, bash-to-the-feature, AI, neural network]
 
