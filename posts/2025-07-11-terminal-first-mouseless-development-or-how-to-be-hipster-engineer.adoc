@@ -1,0 +1,254 @@
+= Terminal-first Mouseless Development Or How To Be Hipster Engineer
+vitos-exe
+v1.0, 2025-07-11
+:title: Terminal-first Mouseless Development Or How To Be Hipster Engineer
+:imagesdir: ../media/2025-07-11-terminal-first-mouseless-development-or-how-to-be-hipster-engineer
+:lang: en
+:tags: [vim, tmux, cli, terminal, en]
+
+In this article I’m trying to give you a slightly different view on
+something you do on a daily basis. A philosophy that encourages you to
+only use what you really need, keeps you away from being distracted,
+lets you think about what your problem really involves, and trust what
+your fingers have learned instead of relying on visual representation.
+And that is what I call terminal-first mouseless development, which I’ll
+try to sell you by giving an overview of how you can benefit from it in
+real life by also giving real examples and pointing out methods or
+rather real applications that you can start using right now, which are
+"`tmux`" and "`neovim`" — industry standards for becoming the real
+hipster developer.
+
+== Hipster development?
+
+We are all used to using our IDEs together with other tools for
+something like database management (DBeaver), testing API (Postman),
+container management (Docker Desktop). And even though they provide
+extensive GUI, they are also quite rich in distractive elements.
+Additionally, using multiple such tools and navigating between them
+means a lot of context switching as well as having quite a loaded
+environment. And if you say that your favorite IDE has everything
+built-in, then it violates the philosophy of Unix, which says that it is
+more idiomatic to use small tools that do one thing well rather than the
+opposite. Kind of single responsibility principle.
+
+And here comes what I call "`**Terminal-first development**`" but can be
+called any other similar terms. Its core principle is that your terminal
+should be your central hub for development tasks. So instead of
+installing new GUI application that will help you with your problem,
+better think of how you can decompose it, choose single small CLI
+program for each of subproblems, combine their logic/output and solve
+the initial problem.
+
+image::crazy-terminal.gif[]
+
+Practical example: you want to select arbitrary table from your
+database, get all of the data within it and pretty-print it as JSON.
+
+[arabic]
+. Option 1. Install and use couple hundred megabytes "`pgAdmin`" that
+will create another distractive window in your workflow and eat your
+memory, blasting your brain with all the buttons and menus around its
+GUI.
+. Option 2. Create a simple script that uses "`psql`" to get list of all
+tables in your database, pass them to "`fzf`" so you could interactively
+select them, pass table name again to "`psql`" to output data from it in
+JSON and finally pass it to "`jq`" to pretty print the result.
+
+Even though I have already intentionally hated on option 1, there could
+be a point like: "`Why would I do everything said in the point 2 if I
+can just go to pgAdmin and press single button or two?`". And that is
+valid. And here we come to one of the most important points here:
+approach described in option 2 is just an example of philosophy that you
+can follow or *not*. And that is your choice. And it would not be
+incorrect or make you bad developer. It is all about what you prefer
+(and how lazy you are :P). But if you selected option 2, then you
+probably prioritize:
+
+[arabic]
+. Modularity & Portability
+. Better resource usage
+. Minimalistic & distraction-free workflow
+. Scriptability & Automation
+. Customisation
+
+Another interesting thing to think about the second approach is that if
+you look closely, what it is all about is piping, or basically passing
+data from one function to another. And with this approach it gives you a
+grounded look on something fundamental regarding software engineering in
+general — it is quite a lot if not completely about viewing,
+manipulating, creating data. Actually pretty much what our brains do.
+
+And the last but not least — such approach really encourages learning,
+deeper understanding and mastering of general software engineering
+skills which eventually raises the level of craftsmanship. And for me
+personally it keeps the spark burning for what I do everyday and adds
+joy.
+
+Another philosophy that usually goes back to back with terminal-first
+one is mouseless or keyboard-centric development, which literally means
+what it says — it encourages you to prioritize the usage of keyboard
+over a mouse or trackpad for writing or navigating through your code.
+Important to say here is that it doesn’t mean that you should never use
+those. Sometimes it is quite inefficient to avoid using your trackpad,
+but for the most cases the theory is that mostly using your keyboard
+makes your development faster, more efficient and less tiring.
+
+image::monkey-smashing-mouse.gif[]
+
+Why? Well, you keep your hands on the keyboard and avoid switching
+between it and a mouse. Additionally you rely on muscle memory in the
+form of keybindings and not on visual navigation to perform actions.
+This way you reduce mental overhead, keep the flow and perform basic
+actions much faster. For example,
+https://blog.superhuman.com/keyboard-vs-mouse/?utm_source=chatgpt.com[the
+research by the SuperHuman] showed, that some basic operations that we
+perform everyday can be done from 2 to 5 seconds faster if performed
+with keyboard rather than mouse. And we perform those actions a lot, so
+think about it.
+
+In the end it is also important to emphasize the downsides of those
+philosophies. Basically there is a single one, which someone could also
+call specialty rather than downside, which is long learning curve. See,
+from my experience, following those philosophies really makes you
+rethink the way you approach software development. I struggle to point
+out the exact points, but it just feels quite different and you really
+need time to get used to that new reality and that basically means a
+long learning curve. Like the basic parts of it are memorizing all the
+keybinds or switching mindset to use CLIs or graphical applications. But
+hey, learning all the buttons in your IDE also took time, so it is more
+about whether you are ready to commit that.
+
+== Core In Practice
+
+So now let’s finally go from something totally metaphorical to something
+more practical. There must be lots of ways to implement philosophy, that
+I described higher, but, while finding my own way there, I could
+distinguish two core elements or, in fact, pieces of software, that will
+help you to create foundation, that you will use to follow the
+philosophy.
+
+=== tmux
+
+I mentioned, that terminal-first development means, that your terminal
+is the "`central hub`" for development. And the main goal of the hub is
+to provide you with some nice infrastructure, that you can effectively
+perform your tasks on top of. And the industry standard for that is
+called "`tmux`", which is terminal multiplexer by its definition.
+
+It allows you to conveniently create terminal windows, splits or even
+sessions for grouping. That makes it easy to organise your work between
+multiple projects, for example, and have it all on the plate in the
+centralized place.
+
+You can say yeah, but my terminal emulator can do the same. Sure, but
+what if keybinds change? What if you switch to another emulator? What if
+now you have to use different system? You basically need to adapt and
+configure new tool for yourself. So how using "`tmux`" helps you? Well
+everything you need is to create your own configuration for it and then,
+whatever changes about the way you utilize your terminal, you just put
+your config in the root folder, launch "`tmux`" and here you are, your
+setup is ready to use.
+
+image::tmux.png[]
+
+Another thing is that, at its core, "`tmux`" is a server, having all
+your terminal sessions working in background. So this can at least save
+you from accidentally pressing Command + Q in your terminal and crashing
+out again, but also what you can do is to basically have your whole
+terminal session setup running, that you can SSH from any other machine
+and have it all there, as "`tmux`" itself is just a command line tool.
+Combining configuration basis and server nature you basically become
+independent of a machine and/or terminal emulation tools, if you have
+your "`tmux`" server hosted somewhere.
+
+Regarding the config, worth mentioning that you can do quite a lot,
+starting from setting basic keybinds, finishing with writing custom
+scripts for your workflow or modifying UI. There is even whole ecosystem
+of plugins!
+
+And if we talk about downsides, there are not that many actually, except
+that you need to spend some time learning it, but trust me, the outcome
+is worth it.
+
+=== neovim
+
+I think most of you know "`vi`" — thing impossible to exit. One of the
+first text editors in existence, that in fact completely defined in
+keybindings, embracing mouseless development. Theoretically, you can use
+it to perform any tasks related to text editing and so code writing. But
+the problem with the original "`vi`" is that it is as plain as possible
+and when it comes to modern development, not really efficient. Like for
+example not having ability to autocomplete code or quickly navigate to
+class definition doesn’t sound like a lot of productivity.
+
+To solve this issue "`vim`" was created — a feature rich version of
+original "`vi`" with things like syntax highlighting, ability to split
+windows, etc. And most importantly — it provides ability for extensive
+configuration even featuring its own language — "`vimscript`". That
+basically created the possibility to write plugins, that allow you to
+modify original editor behaviour however you want. As the result,
+"`vim`" plugin ecosystem is probably one of the biggest plugin
+ecosystems in the world.
+
+But this was not enough for people that considered themselves as extra
+hipsters so the "`neovim`" was created — the fork, partly rewritten in
+lua with better extensibility, architecture, documentation and big
+community that actively contribute to the maintenance and development.
+
+And with everything that said, you can actually think of "`neovim`" (or
+"`vim`") as of a constructor, that you can use to create development
+tool to satisfy any needs of yours: from the most plain text editor to
+ultra-feature-rich IDE to completely replace whatever you are using now.
+Just treat the latest wisely so as not to violate Unix philosophy :)))
+
+So how does switching to "`neovim`" feel and what it brings to your
+life? First of all, text editing starts to feel so much smoother and the
+whole navigation process around the code feels really fluent. Using
+"`vim`" really proves benefits of trusting your muscle memory via
+keybinds instead of visual navigating. The overall overhead goes down
+and you can also feel it when you have to work with couple
+projects/directories. Opening a project, quickly looking for something
+and editing it feels so light and easy. Using "`vim`" is like dropping
+huge backpack when going uphill and changing it for something small,
+compact, accessible but extendable at the same time. And last but not
+least, making the editor behave literally however way you want it to in
+a programmatic way is another amazing part.
+
+image::nvim.png[]
+
+But let’s not forget about struggles you may face: "`vim`" really makes
+you rethink the way you write your code (and using keybinds is not the
+only a part of it), which will take quite some time. Another thing is
+configuring the thing to meet your needs. Yeah, that takes time.
+Initially it took me maybe like 20+ hours and it is also non-stop
+process but that is fair trade-off for the extensibility you get. There
+is a joke going around about people spending more time on customizing
+their "`vim`" config than on actually using it. And another thing is
+that as it is community driven, you may face things that don’t work
+properly. For example, in order to have all the IDE features for java,
+you need to run Eclipse’s "`jdtls`", which is honestly total crap and
+makes it painful to work with big java projects. But something like this
+really depends on your exact case.
+
+== Conclusions
+
+So what I was trying to do in this article is to provide you with new
+perspective on how you can do things you do everyday. An approach that
+makes you think more about what and why you use tools you have,
+encourages you to find new effective ways to perform tasks, reduces
+distraction and lets you focus on solving the problem. Additionally it
+encourages you to learn more and create your own unique environment,
+that also brings a lot of joy to your routine. We even looked at some
+practical applications that you can give a shot and pick up even right
+now. And what is important here, that I didn’t mention earlier, is that
+while all the command line stuff may look outdated, it is actually not.
+Brand new AI tools like OpenAI codex, for example, are fully CLI-based.
+And it is perfectly fine if it is not your way to do stuff, as apart
+from all the technical aspects like efficiency, distraction, etc., it is
+also a lot about taste and what you prefer. And I really encourage you
+to find your way to perform the best, while here I just wanted to share
+what makes me better professional and also love what I do even more.
+Thanks for your attention.
+
+image::dancing-puppy.gif[]
+
