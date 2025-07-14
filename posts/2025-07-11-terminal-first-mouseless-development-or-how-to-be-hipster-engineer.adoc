@@ -1,17 +1,17 @@
-= Terminal-first Mouseless Development Or How To Be Hipster Engineer
+= Terminal-first Mouseless Development Or How To A Be Hipster Engineer
 vitos-exe
 v1.0, 2025-07-11
 :title: Terminal-first Mouseless Development Or How To Be Hipster Engineer
 :imagesdir: ../media/2025-07-11-terminal-first-mouseless-development-or-how-to-be-hipster-engineer
 :lang: en
-:tags: [vim, tmux, cli, terminal, en]
+:tags: [beyond-the-code, bash-to-the-feature, vim, tmux, cli, terminal, en]
 
 In this article I’m trying to give you a slightly different view on
 something you do on a daily basis. A philosophy that encourages you to
 only use what you really need, keeps you away from being distracted,
 lets you think about what your problem really involves, and trust what
 your fingers have learned instead of relying on visual representation.
-And that is what I call terminal-first mouseless development, which I’ll
+That is what I call terminal-first mouseless development, which I’ll
 try to sell you by giving an overview of how you can benefit from it in
 real life by also giving real examples and pointing out methods or
 rather real applications that you can start using right now, which are
@@ -20,16 +20,16 @@ hipster developer.
 
 == Hipster development?
 
-We are all used to using our IDEs together with other tools for
-something like database management (DBeaver), testing API (Postman),
-container management (Docker Desktop). And even though they provide
-extensive GUI, they are also quite rich in distractive elements.
-Additionally, using multiple such tools and navigating between them
+We are all familiar with our IDEs, coupled with other tools for
+tasks like database management (DBeaver), testing API (Postman),
+container management (Docker Desktop). Even though they provide
+extensive GUI, they are also quite rich in distracting elements.
+Additionally, using multiple tools and navigating between them
 means a lot of context switching as well as having quite a loaded
-environment. And if you say that your favorite IDE has everything
+environment. If you say that your favorite IDE has everything
 built-in, then it violates the philosophy of Unix, which says that it is
 more idiomatic to use small tools that do one thing well rather than the
-opposite. Kind of single responsibility principle.
+opposite. Sort of single responsibility principle.
 
 And here comes what I call "`**Terminal-first development**`" but can be
 called any other similar terms. Its core principle is that your terminal
@@ -76,15 +76,15 @@ you look closely, what it is all about is piping, or basically passing
 data from one function to another. And with this approach it gives you a
 grounded look on something fundamental regarding software engineering in
 general — it is quite a lot if not completely about viewing,
-manipulating, creating data. Actually pretty much what our brains do.
+manipulating and creating data. Actually pretty much what our brains do.
 
-And the last but not least — such approach really encourages learning,
+Last but not least — such approach really encourages learning,
 deeper understanding and mastering of general software engineering
-skills which eventually raises the level of craftsmanship. And for me
+skills which eventually raises the level of craftsmanship and for me
 personally it keeps the spark burning for what I do everyday and adds
 joy.
 
-Another philosophy that usually goes back to back with terminal-first
+Another philosophy that usually goes hand in hand with terminal-first
 one is mouseless or keyboard-centric development, which literally means
 what it says — it encourages you to prioritize the usage of keyboard
 over a mouse or trackpad for writing or navigating through your code.
@@ -98,11 +98,11 @@ image::monkey-smashing-mouse.gif[]
 Why? Well, you keep your hands on the keyboard and avoid switching
 between it and a mouse. Additionally you rely on muscle memory in the
 form of keybindings and not on visual navigation to perform actions.
-This way you reduce mental overhead, keep the flow and perform basic
+This way you reduce mental overhead, stay in the flow state and perform basic
 actions much faster. For example,
 https://blog.superhuman.com/keyboard-vs-mouse/?utm_source=chatgpt.com[the
 research by the SuperHuman] showed, that some basic operations that we
-perform everyday can be done from 2 to 5 seconds faster if performed
+perform every day can be done from 2 to 5 seconds faster if performed
 with keyboard rather than mouse. And we perform those actions a lot, so
 think about it.
 
@@ -116,16 +116,15 @@ need time to get used to that new reality and that basically means a
 long learning curve. Like the basic parts of it are memorizing all the
 keybinds or switching mindset to use CLIs or graphical applications. But
 hey, learning all the buttons in your IDE also took time, so it is more
-about whether you are ready to commit that.
+about whether you are ready to commit to that.
 
 == Core In Practice
 
 So now let’s finally go from something totally metaphorical to something
 more practical. There must be lots of ways to implement philosophy, that
-I described higher, but, while finding my own way there, I could
+I described higher. But, while finding my own way there, I could
 distinguish two core elements or, in fact, pieces of software, that will
-help you to create foundation, that you will use to follow the
-philosophy.
+help you to build up foundation.
 
 === tmux
 
@@ -141,9 +140,9 @@ multiple projects, for example, and have it all on the plate in the
 centralized place.
 
 You can say yeah, but my terminal emulator can do the same. Sure, but
-what if keybinds change? What if you switch to another emulator? What if
-now you have to use different system? You basically need to adapt and
-configure new tool for yourself. So how using "`tmux`" helps you? Well
+what if the keybinds change? What if you switch to another emulator? What if
+now you have to use a different system? You basically need to adapt and
+configure this new tool for yourself. So how using "`tmux`" helps you? Well
 everything you need is to create your own configuration for it and then,
 whatever changes about the way you utilize your terminal, you just put
 your config in the root folder, launch "`tmux`" and here you are, your
@@ -161,10 +160,9 @@ Combining configuration basis and server nature you basically become
 independent of a machine and/or terminal emulation tools, if you have
 your "`tmux`" server hosted somewhere.
 
-Regarding the config, worth mentioning that you can do quite a lot,
-starting from setting basic keybinds, finishing with writing custom
-scripts for your workflow or modifying UI. There is even whole ecosystem
-of plugins!
+Regarding the config, you can do quite a lot, starting from setting basic keybinds, 
+finishing with writing custom scripts for your workflow or modifying UI. 
+There is even a whole ecosystemof plugins!
 
 And if we talk about downsides, there are not that many actually, except
 that you need to spend some time learning it, but trust me, the outcome
@@ -172,10 +170,10 @@ is worth it.
 
 === neovim
 
-I think most of you know "`vi`" — thing impossible to exit. One of the
+I think most of you know "`vi`" — the editor that's impossible to exit. One of the
 first text editors in existence, that in fact completely defined in
 keybindings, embracing mouseless development. Theoretically, you can use
-it to perform any tasks related to text editing and so code writing. But
+it to perform any tasks related to text editing and code writing. But
 the problem with the original "`vi`" is that it is as plain as possible
 and when it comes to modern development, not really efficient. Like for
 example not having ability to autocomplete code or quickly navigate to
@@ -186,7 +184,7 @@ original "`vi`" with things like syntax highlighting, ability to split
 windows, etc. And most importantly — it provides ability for extensive
 configuration even featuring its own language — "`vimscript`". That
 basically created the possibility to write plugins, that allow you to
-modify original editor behaviour however you want. As the result,
+customize your experience in vim however you want. As the result,
 "`vim`" plugin ecosystem is probably one of the biggest plugin
 ecosystems in the world.
 
@@ -204,25 +202,25 @@ Just treat the latest wisely so as not to violate Unix philosophy :)))
 So how does switching to "`neovim`" feel and what it brings to your
 life? First of all, text editing starts to feel so much smoother and the
 whole navigation process around the code feels really fluent. Using
-"`vim`" really proves benefits of trusting your muscle memory via
+"`*vim`" really proves benefits of trusting your muscle memory via
 keybinds instead of visual navigating. The overall overhead goes down
 and you can also feel it when you have to work with couple
 projects/directories. Opening a project, quickly looking for something
 and editing it feels so light and easy. Using "`vim`" is like dropping
-huge backpack when going uphill and changing it for something small,
+a huge backpack when going uphill and changing it for something small,
 compact, accessible but extendable at the same time. And last but not
 least, making the editor behave literally however way you want it to in
 a programmatic way is another amazing part.
 
 image::nvim.png[]
 
-But let’s not forget about struggles you may face: "`vim`" really makes
+But let’s not forget about the struggles you may face: "`vim`" really makes
 you rethink the way you write your code (and using keybinds is not the
 only a part of it), which will take quite some time. Another thing is
 configuring the thing to meet your needs. Yeah, that takes time.
 Initially it took me maybe like 20+ hours and it is also non-stop
 process but that is fair trade-off for the extensibility you get. There
-is a joke going around about people spending more time on customizing
+is a joke in the vim community about people spending more time on customizing
 their "`vim`" config than on actually using it. And another thing is
 that as it is community driven, you may face things that don’t work
 properly. For example, in order to have all the IDE features for java,
@@ -233,7 +231,7 @@ really depends on your exact case.
 == Conclusions
 
 So what I was trying to do in this article is to provide you with new
-perspective on how you can do things you do everyday. An approach that
+perspective on how you can do things you do every day. An approach that
 makes you think more about what and why you use tools you have,
 encourages you to find new effective ways to perform tasks, reduces
 distraction and lets you focus on solving the problem. Additionally it
@@ -247,7 +245,7 @@ And it is perfectly fine if it is not your way to do stuff, as apart
 from all the technical aspects like efficiency, distraction, etc., it is
 also a lot about taste and what you prefer. And I really encourage you
 to find your way to perform the best, while here I just wanted to share
-what makes me better professional and also love what I do even more.
+what makes me a better professional and also love what I do even more.
 Thanks for your attention.
 
 image::dancing-puppy.gif[]
