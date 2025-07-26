@@ -151,4 +151,4 @@ entityManager.find(...)
 
 In order to make a clean solution you will need to think about the way to generate unique IDs on the Java side. One more thing to keep in mind is that row ID is not a reliable identifier, so it's not recommended to use it for your unique ID.
 
-_thanks Willem-Jan Glerum for introducing me to this interesting behaviour_
+_thanks Willem Jan Glerum for introducing me to this interesting behaviour_

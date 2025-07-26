@@ -20,22 +20,22 @@ Willem Jan, a software engineer at Lunatech, gave an insightful and informative 
 He began by familiarizing the audience with Java’s evolution in
 terms of release cadence and the varying maturity levels of the features available in each Java release.
 
-For the rest of the talk, Willem focused on the fully delivered features from https://ambr.top/en[Project Amber] and https://openjdk.org/projects/loom/[Project Loom]:
+For the rest of the talk, Willem Jan focused on the fully delivered features from https://ambr.top/en[Project Amber] and https://openjdk.org/projects/loom/[Project Loom]:
 
 - https://openjdk.org/jeps/440[Record Patterns]
 - https://openjdk.org/jeps/441[Pattern Matching for switch]
 - https://openjdk.org/jeps/444[Virtual Threads]
 
 We examined both simple and complex examples of how `Record Patterns` and
-`Pattern Matching for switch` can be utilized. Willem guided us through the different _flavours_ of threads like `OS thread`, `Platform thread`,
-`Virtual Thread`, `Carrier Thread`. It may sound like a lot of information, but Willem’s clear diagrams made the talk easy to follow.
+`Pattern Matching for switch` can be utilized. Willem Jan guided us through the different _flavours_ of threads like `OS thread`, `Platform thread`,
+`Virtual Thread`, `Carrier Thread`. It may sound like a lot of information, but Willem Jan’s clear diagrams made the talk easy to follow.
 
 We also explored how `Quarkus` enables the writing of concurrent applications in a blocking, reactive, or virtual threads manner.
 Switching between these styles of concurrent application development is as simple as using annotations!
 However, these annotations should not be used indiscriminately. As the saying goes, ‘With great power comes great responsibility.’
 Both reactive and virtual threads coding styles have their strengths and weaknesses which is why they should be chosen carefully based on the specific use case.
 
-In the final segment of his talk, Willem guided us through the potential issues that can arise from improper use of virtual threads. These include:
+In the final segment of his talk, Willem Jan guided us through the potential issues that can arise from improper use of virtual threads. These include:
 
 - Pinning
 - Monopolization
@@ -43,7 +43,7 @@ In the final segment of his talk, Willem guided us through the potential issues 
 - Object pooling
 - Thread safety
 
-We gained insights on how to better identify these issues. Willem also demonstrated how `Quarkus` facilitates the writing of tests
+We gained insights on how to better identify these issues. Willem Jan also demonstrated how `Quarkus` facilitates the writing of tests
 that specifically detect thread pinning issues using just a single, simple annotation.
 
 
