@@ -1,0 +1,314 @@
+= Angular Signals for State Management
+:author: Jake Ortega
+:revdate: 2025-10-12
+
+Signals have matured into a first-class primitive in Angular’s reactivity model. If you’ve been using services with subjects or a store library for state management, signals give you a simpler and more precise way to model state, derive values, and update the UI with excellent performance. In this post, I’ll walk through a lean, real-world pattern for building feature-scoped stores with signals, plus interop with HTTP and RxJS.
+
+== Why signals for state management?
+
+Signals bring fine-grained reactivity to Angular. Instead of triggering a whole component tree, signals update only the consumers that actually read a value. That means fewer change detection passes and better performance—especially in complex UIs.
+
+Key wins I’ve seen on teams:
+
+- Simpler mental model: state is a signal; derived values are computed; side-effects are effects.
+- Granular updates: reactivity flows along dependency edges, not through global events.
+- Testability: pure updaters and computed selectors are easy to unit test.
+- Locality: feature-scoped state lives next to the component that needs it, while still being shareable.
+
+The goal isn’t to replace every RxJS use. It’s to manage in-memory UI state with signals and use RxJS where it shines: streams, composition, and async boundaries. When you keep that separation, the resulting codebase is clearer and easier to evolve.
+
+== A small, practical Signal Store
+
+Let’s implement a feature-scoped store for a Todo list. It demonstrates core primitives: signal, computed, effect, and a few patterns for safe updates.
+
+[source,typescript]
+----
+import { Injectable, computed, effect, inject, Injector, signal, untracked } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { firstValueFrom } from 'rxjs';
+
+type Filter = 'all' | 'open' | 'done';
+
+export interface Todo {
+  id: string;
+  title: string;
+  done: boolean;
+}
+
+function createTodo(title: string): Todo {
+  return { id: crypto.randomUUID(), title, done: false };
+}
+
+@Injectable()
+export class TodosStore {
+  private readonly http = inject(HttpClient);
+  private readonly injector = inject(Injector);
+
+  // Core state signals
+  private readonly _todos = signal<Todo[]>([], { equals: (a, b) => a === b }); // rely on immutable updates
+  private readonly _filter = signal<Filter>('all');
+
+  // Derived read-only signals
+  readonly todos = computed(() => this._todos());
+  readonly remainingCount = computed(
+    () => this._todos().reduce((acc, t) => acc + (t.done ? 0 : 1), 0)
+  );
+  readonly filtered = computed(() => {
+    const f = this._filter();
+    const list = this._todos();
+    if (f === 'open') return list.filter(t => !t.done);
+    if (f === 'done') return list.filter(t => t.done);
+    return list;
+  });
+
+  // Updaters (pure, immutable)
+  add(title: string) {
+    if (!title.trim()) return;
+    this._todos.update(list => [...list, createTodo(title.trim())]);
+  }
+
+  toggle(id: string) {
+    this._todos.update(list =>
+      list.map(t => (t.id === id ? { ...t, done: !t.done } : t))
+    );
+  }
+
+  remove(id: string) {
+    this._todos.update(list => list.filter(t => t.id !== id));
+  }
+
+  clearCompleted() {
+    this._todos.update(list => list.filter(t => !t.done));
+  }
+
+  setFilter(filter: Filter) {
+    this._filter.set(filter);
+  }
+
+  // Side-effect: load initial data
+  async load() {
+    const todos = await firstValueFrom(this.http.get<Todo[]>('/api/todos'));
+    this._todos.set(Array.isArray(todos) ? todos : []);
+  }
+
+  // Example effect: persist on change (avoid feedback loops with untracked)
+  readonly persistEffect = effect(
+    () => {
+      const data = this._todos();
+      // write side-effect outside dependency tracking
+      untracked(() => {
+        // intentionally fire-and-forget; production code should handle errors/retries/backoff
+        this.http.post('/api/todos/save', data).subscribe();
+      });
+    },
+    { allowSignalWrites: false }
+  );
+}
+----
+
+Notes:
+
+- We keep “writeable” signals private and expose read-only computed signals.
+- Updaters are pure and immutable. That matters for predictable reactivity and easier testing.
+- Signals compare by reference (Object.is) by default; by creating new arrays/objects, computed signals and templates re-run only when necessary.
+- Effects are for side-effects only. If you write to signals inside an effect, prefer untracked or guard carefully to prevent loops.
+
+== Consuming the store in a standalone component
+
+We’ll scope the store to the feature component so we can have multiple independent instances of the feature on a page and keep state lifecycles aligned with the UI.
+
+[source,typescript]
+----
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { TodosStore } from './todos.store'; // path as appropriate
+import { FormsModule } from '@angular/forms';
+
+@Component({
+  standalone: true,
+  selector: 'todos-feature',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [TodosStore],
+  imports: [FormsModule],
+  templateUrl: './todos-feature.html'
+})
+export class TodosFeatureComponent {
+  private readonly store = inject(TodosStore);
+
+  // expose selected read signals for template convenience
+  todos = this.store.filtered;
+  remaining = this.store.remainingCount;
+
+  newTitle = '';
+
+  ngOnInit() {
+    // load initial state; could also be triggered by router or parent
+    this.store.load();
+  }
+
+  add() {
+    this.store.add(this.newTitle);
+    this.newTitle = '';
+  }
+
+  toggle(id: string) {
+    this.store.toggle(id);
+  }
+
+  remove(id: string) {
+    this.store.remove(id);
+  }
+
+  setFilter(f: 'all' | 'open' | 'done') {
+    this.store.setFilter(f);
+  }
+
+  clearCompleted() {
+    this.store.clearCompleted();
+  }
+}
+----
+
+And the template, using Angular’s modern control flow and signal reads:
+
+[source,html]
+----
+<section class="todos">
+  <header>
+    <h2>Todos</h2>
+    <input
+      name="newTitle"
+      [(ngModel)]="newTitle"
+      placeholder="Add a todo..."
+      (keyup.enter)="add()"
+      aria-label="New todo"
+    />
+    <button (click)="add()">Add</button>
+  </header>
+
+  <nav class="filters">
+    <button (click)="setFilter('all')">All</button>
+    <button (click)="setFilter('open')">Open</button>
+    <button (click)="setFilter('done')">Done</button>
+  </nav>
+
+  @if (todos().length === 0) {
+    <p class="empty">No items</p>
+  } @else {
+    <ul>
+      @for (todo of todos(); track todo.id) {
+        <li>
+          <label>
+            <input
+              type="checkbox"
+              [checked]="todo.done"
+              (change)="toggle(todo.id)"
+            />
+            <span [class.done]="todo.done">{{ todo.title }}</span>
+          </label>
+          <button (click)="remove(todo.id)" aria-label="Remove">✕</button>
+        </li>
+      }
+    </ul>
+
+    <footer>
+      <small>{{ remaining() }} items left</small>
+      <button (click)="clearCompleted()">Clear completed</button>
+    </footer>
+  }
+</section>
+----
+
+This demonstrates a small but complete state management flow driven by signals: state, derived selectors, and immutable updates, with the template reading signals via function calls (todos(), remaining()).
+
+== Async data, RxJS interop, and resources
+
+Signals and Observables complement each other:
+
+- Use Observables for time-based streams, websockets, and cross-cutting async pipelines.
+- Convert at the edges for UI state. Keep UI state in signals for easier memoization and change tracking.
+
+Two helpful interop strategies:
+
+1) One-time loads or command-style calls: use async/await like in store.load() above.
+
+2) Continuous streams: convert to a signal with toSignal so templates can read synchronously.
+
+[source,typescript]
+----
+import { Injectable, Injector, inject, computed } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { HttpClient } from '@angular/common/http';
+import { interval, startWith, switchMap } from 'rxjs';
+
+@Injectable()
+export class LiveUsersStore {
+  private readonly http = inject(HttpClient);
+  private readonly injector = inject(Injector);
+
+  // Polling stream of users (replace with your own stream source as needed)
+  private readonly users$ = interval(30000).pipe(
+    startWith(0),
+    switchMap(() => this.http.get<User[]>('/api/users'))
+  );
+
+  // Convert to signal for easy template consumption and derived computed values
+  readonly users = toSignal(this.users$, {
+    initialValue: [],
+    injector: this.injector // ensures proper teardown when the store is destroyed
+  });
+
+  readonly count = computed(() => this.users().length);
+}
+----
+
+Using toSignal means we can read users() in the template without async pipes. This improves performance and reduces template noise, especially when pairing with fine-grained computed signals.
+
+== Performance and reactivity tips from the field
+
+- Keep writeable state private. Expose read-only selectors (computed) and methods for updates. This avoids accidental writes from templates or parent components.
+- Prefer immutable updates. Signals compare by reference by default; creating new arrays/objects ensures downstream computations only re-run when data really changes.
+- Split state. Instead of one giant object signal, split into smaller signals for independent reactivity. For example, _todos and _filter are separate; changing filter doesn’t trigger expensive recomputation of sums over unrelated data.
+- Use computed for derived values. They memoize automatically and recompute only when dependencies change.
+- Use effect only for side-effects. Don’t do heavy computation there; prefer computed and read those values wherever needed.
+- Prevent feedback loops. If an effect both reads and writes a signal, wrap the write in untracked or use guards (e.g., compare with previous values) to avoid infinite re-triggers.
+- Template control flow. Use @if/@for with track to minimize DOM churn and improve performance on large lists: @for (item of items(); track item.id) { ... }.
+- Equality strategies. For large objects where you patch nested props, consider using a custom equals to short-circuit recomputation, or normalize updates to maintain stable references for unchanged items.
+- Testing. Test updaters and computed selectors as pure functions: set initial state, call updater, assert signal snapshots. Effects can be tested by mocking collaborators (e.g., HttpClient).
+
+== When to reach for a library?
+
+For many features, a simple signal store like the one above is enough. If you need:
+
+- Devtools time-travel or action logging
+- Entity adapters and cache normalization
+- Complex undo/redo, router-based preloading, or sophisticated effects orchestration
+
+Then a dedicated library can add value. The good news: signals reduce boilerplate even in library ecosystems, and interop with RxJS remains straightforward. Start simple with signals; you can always layer in tooling as requirements grow.
+
+== Migration notes
+
+From services with BehaviorSubject:
+
+- Replace BehaviorSubject<T> with signal<T>.
+- Replace select$ streams with computed selectors.
+- Replace next/pipe/update logic with signal.set or signal.update and pure updaters.
+- At component boundaries, convert remaining Observables with toSignal or expose signals directly.
+
+From global stores:
+
+- Keep global cross-feature state where it belongs.
+- Move ephemeral UI state (filters, dialogs, form drafts) into feature-scoped signal stores for better locality and reusability.
+
+In both cases, you’ll notice improved clarity and less glue code. The reactivity stays close to the data that changes, and templates read synchronous values, which is great for developer experience.
+
+== Conclusion
+
+Signals give Angular a precise, ergonomic foundation for state management. By modeling state with signals, deriving with computed, and isolating side-effects with effect, we get predictable reactivity, less boilerplate, and measurable performance gains. Feature-scoped stores keep state local and maintainable, while RxJS remains an excellent partner for async boundaries and complex streams. The end result is code that’s easier to reason about and a UI that updates exactly where it should.
+
+== Next Steps
+
+- Try the TodosStore pattern in one feature of your app and measure template change detection with Angular DevTools.
+- Convert one Observable-backed UI slice to a signal via toSignal and replace async pipe usage in that component.
+- Audit state shape: split oversized object signals into smaller, purpose-driven signals.
+- Add unit tests for your updaters and computed selectors to lock in behavior as your app evolves.
+- Explore zoneless change detection with signals in a sandbox app to assess end-to-end performance in your environment.
