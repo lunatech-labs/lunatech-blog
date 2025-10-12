@@ -1,0 +1,384 @@
+= Angular: Advanced Directives & Pipes
+:author: Jake Ortega
+:revdate: 2025-10-12
+
+Advanced directives and pipes are where Angular’s templates become expressive, resilient, and ergonomic. In Angular 19+, with signals and standalone APIs, we can build structural directives, attribute directives, and custom pipes that are both powerful and maintainable. This post shares patterns I use in real projects—focused on developer experience, testability, and clarity.
+
+== Why directives and pipes still matter
+
+Angular’s modern control flow (@if, @for, @switch) is great, but directives and pipes remain the sharpest tools for composing behavior and shaping data in templates. The trick is to keep them small, single-purpose, and signal-friendly. Done right, they reduce component complexity, encode design system rules, and eliminate duplication across features.
+
+In this post:
+- Attribute directive: class management with signals (hover/focus behavior).
+- Structural directive: lazy render content when it enters the viewport (IntersectionObserver).
+- Custom pipe: referentially-stable groupBy with memoization, designed for immutable collections and @for.
+
+All examples are standalone and use modern Angular APIs like inject(), input(), and effect().
+
+== Attribute directives: model behavior, not features
+
+Attribute directives should be laser-focused. They shouldn’t know your feature—just how to behave. They’re perfect for visual or interactive affordances (classes, ARIA, focus rings) that cross-cut components.
+
+Below is a hover/focus class toggle directive. It:
+- Uses signal inputs for configuration.
+- Uses a signal to represent “is hovered/focused.”
+- Applies classes with Renderer2 for platform safety.
+- Handles both mouse and keyboard focus for accessibility.
+
+[source,typescript]
+----
+import { Directive, Renderer2, ElementRef, effect, inject, input, signal } from '@angular/core';
+
+@Directive({
+  selector: '[hoverClass]',
+  standalone: true,
+  host: {
+    '(mouseenter)': 'onEnter()',
+    '(mouseleave)': 'onLeave()',
+    '(focusin)': 'onEnter()',
+    '(focusout)': 'onLeave()',
+    'tabindex': '0' // ensure focusable if not naturally
+  }
+})
+export class HoverClassDirective {
+  private readonly el = inject(ElementRef<HTMLElement>);
+  private readonly r2 = inject(Renderer2);
+
+  // Accept a single class or a list of classes
+  readonly hoverClass = input<string | string[]>('is-hovered');
+  private readonly active = signal(false);
+
+  private previous: string[] = [];
+
+  constructor() {
+    effect(() => {
+      const classes = this.normalize(this.hoverClass());
+      // remove previously applied
+      for (const c of this.previous) {
+        this.r2.removeClass(this.el.nativeElement, c);
+      }
+      if (this.active()) {
+        for (const c of classes) {
+          this.r2.addClass(this.el.nativeElement, c);
+        }
+        this.previous = classes;
+      } else {
+        this.previous = [];
+      }
+    });
+  }
+
+  onEnter() { this.active.set(true); }
+  onLeave() { this.active.set(false); }
+
+  private normalize(v: string | string[]): string[] {
+    return Array.isArray(v) ? v : (v ?? '').split(/\s+/).filter(Boolean);
+  }
+}
+----
+
+Usage:
+
+[source,html]
+----
+<button
+  hoverClass="btn--hover shadow-lg"
+  class="btn">
+  Save
+</button>
+
+<!-- Compose with a design-system button -->
+<a
+  hoverClass="link--hover"
+  class="link"
+  href="#">
+  Learn more
+</a>
+----
+
+Notes from the field:
+- Keep inputs simple. The directive owns how to apply classes; callers just describe which ones.
+- Prefer host event bindings in the host metadata for clarity and fewer decorators.
+- Avoid coupling to specific components. This makes it reusable across your design system.
+
+== Structural directives: compose rendering, not state
+
+Structural directives should control view structure, not business logic. They’re ideal for “render this if…” or “render this when…”. Even with Angular’s new control flow, custom structural directives still shine for cross-cutting rendering policies.
+
+Here’s a structural directive that defers rendering until an element enters the viewport. It supports an else template for placeholders (e.g., skeletons). It renders once, then disconnects, and renders eagerly on the server for SEO.
+
+[source,typescript]
+----
+import {
+  Directive, TemplateRef, ViewContainerRef, inject, input, DestroyRef, PLATFORM_ID
+} from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+
+@Directive({
+  selector: '[appInViewport]',
+  standalone: true
+})
+export class InViewportDirective {
+  private readonly tpl = inject(TemplateRef<unknown>);
+  private readonly vcr = inject(ViewContainerRef);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly platformId = inject(PLATFORM_ID);
+
+  readonly options = input<IntersectionObserverInit | null>(null, { alias: 'appInViewport' });
+  readonly elseTpl = input<TemplateRef<unknown> | null>(null, { alias: 'appInViewportElse' });
+
+  private sentinel?: HTMLElement;
+  private observer?: IntersectionObserver;
+  private rendered = false;
+
+  ngOnInit() {
+    // On the server, render eagerly for SEO and simplicity
+    if (!isPlatformBrowser(this.platformId)) {
+      this.vcr.createEmbeddedView(this.tpl);
+      return;
+    }
+
+    // If we have an else template, render it while waiting
+    const standby = this.elseTpl();
+    if (standby) {
+      this.vcr.createEmbeddedView(standby);
+    }
+
+    this.createSentinelAndObserve();
+  }
+
+  private createSentinelAndObserve() {
+    const anchor = this.vcr.element.nativeElement as Comment;
+    const parent = anchor.parentNode as HTMLElement | null;
+    if (!parent) return;
+
+    // Create a tiny sentinel element just before Angular's anchor comment
+    const sentinel = document.createElement('span');
+    sentinel.style.cssText = 'display:block; width:1px; height:1px;';
+    parent.insertBefore(sentinel, anchor);
+    this.sentinel = sentinel;
+
+    this.observer = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting && !this.rendered) {
+          this.rendered = true;
+          this.vcr.clear();            // remove else view if any
+          this.vcr.createEmbeddedView(this.tpl);
+          this.cleanup();
+          break;
+        }
+      }
+    }, this.options() ?? { rootMargin: '200px 0px' });
+
+    this.observer.observe(sentinel);
+
+    this.destroyRef.onDestroy(() => this.cleanup());
+  }
+
+  private cleanup() {
+    if (this.observer && this.sentinel) {
+      this.observer.unobserve(this.sentinel);
+      this.observer.disconnect();
+    }
+    this.observer = undefined;
+    if (this.sentinel?.parentNode) {
+      this.sentinel.parentNode.removeChild(this.sentinel);
+    }
+    this.sentinel = undefined;
+  }
+}
+----
+
+Usage with an else placeholder:
+
+[source,html]
+----
+<card *appInViewport="{ rootMargin: '300px 0px' }; else skeleton">
+  <!-- Heavy content only renders once visible -->
+  <chart [data]="data"></chart>
+</card>
+
+<ng-template #skeleton>
+  <card>
+    <div class="skeleton h-40"></div>
+  </card>
+</ng-template>
+----
+
+Practical guidance:
+- This directive only renders once; it’s ideal for expensive subtrees. If you need toggling, support a mode input (e.g., once: boolean) and rework the cleanup logic.
+- Use else templates for shimmering placeholders instead of sprinkling conditional content across components.
+- Keep structural directives pure in purpose: they decide “when” to render, not “what” to render.
+
+== Custom pipes: shape data without side effects
+
+Pipes should be deterministic and side-effect free. They’re great for presentation transforms and composition with @for. Below is a pure, referentially-memoized groupBy pipe designed for immutable arrays.
+
+[source,typescript]
+----
+import { Pipe, PipeTransform } from '@angular/core';
+
+type Group<T> = Readonly<{ key: string; items: readonly T[] }>;
+
+@Pipe({
+  name: 'groupBy',
+  standalone: true,
+  pure: true
+})
+export class GroupByPipe implements PipeTransform {
+  // Cache by array reference and keySelector reference
+  private cache = new WeakMap<readonly unknown[], Map<Function, readonly Group<unknown>[]>>();
+
+  transform<T>(
+    items: readonly T[] | null | undefined,
+    keySelector: (item: T) => string | number | symbol
+  ): readonly Group<T>[] {
+    if (!items || items.length === 0) return [];
+
+    const keyFn = keySelector as unknown as Function;
+
+    let byFn = this.cache.get(items);
+    if (!byFn) {
+      byFn = new Map();
+      this.cache.set(items, byFn);
+    }
+    const cached = byFn.get(keyFn) as readonly Group<T>[] | undefined;
+    if (cached) return cached;
+
+    const map = new Map<string, T[]>();
+    for (const item of items) {
+      const k = String(keySelector(item));
+      const bucket = map.get(k);
+      if (bucket) bucket.push(item);
+      else map.set(k, [item]);
+    }
+
+    const result: readonly Group<T>[] =
+      Array.from(map.entries(), ([key, vals]) => ({ key, items: vals }));
+
+    byFn.set(keyFn, result as readonly Group<unknown>[]);
+    return result;
+  }
+}
+----
+
+Usage with @for and clean architecture in mind: keep key selection in the component, avoid inline lambdas to maintain readability and caching.
+
+[source,typescript]
+----
+import { Component, computed, signal } from '@angular/core';
+import { GroupByPipe } from './group-by.pipe';
+
+type Product = { id: string; name: string; category: string; price: number };
+
+@Component({
+  standalone: true,
+  selector: 'product-list',
+  imports: [GroupByPipe],
+  template: `
+    @for (g of products() | groupBy: byCategory; track g.key) {
+      <section class="stack gap-2">
+        <h3>{{ g.key }}</h3>
+        <ul>
+          @for (p of g.items; track p.id) {
+            <li>{{ p.name }} — {{ p.price | number:'1.2-2' }}</li>
+          }
+        </ul>
+      </section>
+    }
+  `
+})
+export class ProductListComponent {
+  private readonly all = signal<Product[]>([
+    { id: '1', name: 'Shirt', category: 'Apparel', price: 24.5 },
+    { id: '2', name: 'Pants', category: 'Apparel', price: 44.0 },
+    { id: '3', name: 'Brush', category: 'Household', price: 6.2 },
+  ]);
+
+  readonly products = computed(() => this.all()); // could filter/sort upstream
+
+  readonly byCategory = (p: Product) => p.category;
+}
+----
+
+Why this design:
+- Referential caching plays well with immutable arrays (common in signal-based state).
+- Returning an array of groups instead of a Map makes it easy to render with @for and track by key.
+- Keep pipes pure. If you need impure behavior, move it to a directive or component logic; it’s easier to reason about and test.
+
+== Composition tip: host directives for reusable behavior
+
+When behavior is a precondition for a family of components (e.g., focus ring management), prefer a directive and compose it with hostDirectives in your component. It keeps features independent and enforces consistency.
+
+[source,typescript]
+----
+import { Component } from '@angular/core';
+import { HoverClassDirective } from './hover-class.directive';
+
+@Component({
+  standalone: true,
+  selector: 'ds-button',
+  template: `<button class="btn"><ng-content/></button>`,
+  hostDirectives: [
+    {
+      directive: HoverClassDirective,
+      inputs: ['hoverClass'], // consumers can still configure it
+    }
+  ]
+})
+export class DsButton {}
+----
+
+This keeps your design system honest: the “how” of hover/focus is a directive, the “what” is the button.
+
+== Testing and DX
+
+- Attribute directives: test DOM mutations, not internal signals. Set inputs, dispatch events, assert classList.
+- Structural directives: use TestBed to render host templates with ng-template for else. Assert when content appears as you simulate IntersectionObserver; for unit tests, abstract the observer behind a token or make it injectable to fake triggers.
+- Pipes: stick to pure functions. Provide deterministic inputs and assert outputs. Verify memoization by ensuring repeated calls with the same array reference are fast (you can spy on keySelector to ensure it’s not called again).
+
+Example of a tiny directive test shape:
+
+[source,typescript]
+----
+import { Component } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
+import { HoverClassDirective } from './hover-class.directive';
+
+@Component({
+  standalone: true,
+  imports: [HoverClassDirective],
+  template: `<div hoverClass="x y" data-testid="host">Hi</div>`
+})
+class Host {}
+
+it('applies classes on hover', () => {
+  TestBed.configureTestingModule({ imports: [Host] });
+  const fixture = TestBed.createComponent(Host);
+  fixture.detectChanges();
+  const el: HTMLElement = fixture.nativeElement.querySelector('[data-testid="host"]')!;
+  el.dispatchEvent(new Event('mouseenter'));
+  fixture.detectChanges();
+  expect(el.classList.contains('x')).toBeTrue();
+  expect(el.classList.contains('y')).toBeTrue();
+});
+----
+
+== Tradeoffs and guardrails
+
+- Attribute directives should not fetch data or manage business state. Keep them fit-for-purpose.
+- Structural directives should own rendering policy, not domain logic. Keep conditions opaque from the outside.
+- Custom pipes should be pure and deterministic. If you feel tempted to use impure: true, pause and ask if it belongs as a computed signal or a component method instead.
+- With signals, prefer upstream transformations (computed()) and let pipes handle last-mile presentation. It keeps templates readable and performant.
+
+== Conclusion
+
+Directives and pipes are still foundational in Angular 19+. With signals, inject(), and standalone APIs, we can build structural directives, attribute directives, and custom pipes that are small, composable, and maintainable. When we separate responsibilities clearly—behavior in directives, data shaping in pipes, and orchestration in components—our apps evolve cleanly, migrations are calmer, and the developer experience is better.
+
+== Next Steps
+
+- Extract a recurring visual behavior in your app into an attribute directive using signal inputs.
+- Introduce the appInViewport structural directive for one expensive section and measure the improvement.
+- Replace ad-hoc grouping/sorting logic in templates with a pure custom pipe (or computed signals) and @for.
+- Audit your directives and pipes for single responsibility, test coverage, and naming clarity.
+- If you’re mid-migration, wrap legacy behaviors into directives first; it lowers the risk while you refactor components.
