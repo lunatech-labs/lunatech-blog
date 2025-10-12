@@ -1,0 +1,286 @@
+= Getting Started with Angular 19: Your First Signals-Powered App
+:author: Jake Ortega
+:revdate: 2025-10-12
+
+Angular 19 makes signals a first-class, ergonomic way to manage reactive state—without the ceremony many of us associate with using RxJS for every problem. In this guide, you’ll build a small, production-quality feature using signals, computed values, and effects, sticking to Angular basics while practicing patterns you’ll reuse in real apps. Think of it as your “hello world” for signals, with enough structure to scale.
+
+== Why signals for your first Angular 19 app
+
+Signals shine when:
+- You want local or feature-level state that’s easy to understand and test.
+- You prefer declarative data flow with minimal boilerplate.
+- You care about performance and predictable change detection.
+
+Signals give you:
+- signal(): a mutable value you set and read like a variable.
+- computed(): a derived value that automatically recalculates when dependencies change.
+- effect(): a side effect that runs when its dependent signals change (think persistence, logging, analytics).
+
+With the built-in control flow (@if, @for, @switch), Angular templates read signals naturally and concisely—no async pipe or manual subscriptions required.
+
+== What we’re building
+
+A tiny yet complete “Tasks” feature:
+- Add tasks, toggle done, filter by status.
+- Persist to localStorage.
+- Derive stats via computed signals.
+
+We’ll use:
+- Standalone components.
+- inject() for dependency injection.
+- Signals for reactive state.
+- New template control flow.
+
+If you’re comfortable with Angular basics (components, templates, DI), you’re good to go.
+
+== App structure
+
+- TaskStore: a signals-powered service for state and business logic.
+- AppComponent: a standalone component that renders the UI and interacts with the store.
+- main.ts: bootstraps the app.
+
+=== TaskStore: reactive state with signals
+
+We’ll keep domain logic, mutations, and persistence here—a clean separation from the component.
+
+[source,typescript]
+----
+import { Injectable, computed, effect, signal } from '@angular/core';
+
+export type TaskFilter = 'all' | 'open' | 'done';
+
+export interface Task {
+  id: string;
+  title: string;
+  done: boolean;
+}
+
+function loadTasks(): Task[] {
+  try {
+    const raw = localStorage.getItem('tasks.v1');
+    return raw ? JSON.parse(raw) as Task[] : [];
+  } catch {
+    return [];
+  }
+}
+
+@Injectable({ providedIn: 'root' })
+export class TaskStore {
+  // Source signals
+  private readonly tasks = signal<Task[]>(loadTasks());
+  readonly filter = signal<TaskFilter>('all');
+
+  // Derived reactive state
+  readonly stats = computed(() => {
+    const list = this.tasks();
+    const done = list.filter(t => t.done).length;
+    const open = list.length - done;
+    return { total: list.length, open, done };
+  });
+
+  readonly filtered = computed(() => {
+    const f = this.filter();
+    const list = this.tasks();
+    if (f === 'open') return list.filter(t => !t.done);
+    if (f === 'done') return list.filter(t => t.done);
+    return list;
+  });
+
+  // Persist tasks whenever they change
+  private readonly persist = effect(() => {
+    const current = this.tasks();
+    localStorage.setItem('tasks.v1', JSON.stringify(current));
+  });
+
+  add(title: string) {
+    const clean = title.trim();
+    if (!clean) return;
+    const newTask: Task = { id: crypto.randomUUID(), title: clean, done: false };
+    this.tasks.update(list => [newTask, ...list]);
+  }
+
+  toggle(id: string) {
+    this.tasks.update(list =>
+      list.map(t => (t.id === id ? { ...t, done: !t.done } : t))
+    );
+  }
+
+  remove(id: string) {
+    this.tasks.update(list => list.filter(t => t.id !== id));
+  }
+
+  clearDone() {
+    this.tasks.update(list => list.filter(t => !t.done));
+  }
+
+  // Expose readonly getters where helpful
+  get all() { return this.tasks.asReadonly(); }
+}
+----
+
+Notes:
+- Keep tasks private, expose asReadonly() if needed, and route all mutations through methods. That protects invariants and makes tests straightforward.
+- computed() caches until dependencies change, so stats and filtered are cheap to read in templates.
+- effect() is for side effects only. Don’t derive data there.
+
+=== AppComponent: template-first with control flow
+
+The component stays lean: read signals, call store methods, and keep the markup honest. No subscriptions and no manual change detection.
+
+[source,typescript]
+----
+import { Component, inject } from '@angular/core';
+import { TaskStore, TaskFilter } from './task.store';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  templateUrl: './app.component.html',
+})
+export class AppComponent {
+  readonly store = inject(TaskStore);
+
+  setFilter(f: TaskFilter) {
+    this.store.filter.set(f);
+  }
+
+  add(input: HTMLInputElement) {
+    this.store.add(input.value);
+    input.value = '';
+    input.focus();
+  }
+}
+----
+
+[source,html]
+----
+<header class="app-header">
+  <h1>Tasks (Signals)</h1>
+  <p>
+    Total: {{ store.stats().total }}
+    • Open: {{ store.stats().open }}
+    • Done: {{ store.stats().done }}
+  </p>
+</header>
+
+<section class="task-create">
+  <input
+    #title
+    type="text"
+    placeholder="Add a task and press Enter"
+    (keyup.enter)="add(title)"
+    aria-label="New task title" />
+  <button (click)="add(title)">Add</button>
+</section>
+
+<nav class="filters">
+  <button (click)="setFilter('all')" [class.active]="store.filter() === 'all'">All</button>
+  <button (click)="setFilter('open')" [class.active]="store.filter() === 'open'">Open</button>
+  <button (click)="setFilter('done')" [class.active]="store.filter() === 'done'">Done</button>
+</nav>
+
+<section class="task-list">
+  @if (store.filtered().length === 0) {
+    <p class="empty">No tasks to show.</p>
+  } @else {
+    <ul>
+      @for (task of store.filtered(); track task.id) {
+        <li>
+          <label>
+            <input type="checkbox" [checked]="task.done" (change)="store.toggle(task.id)" />
+            <span [class.done]="task.done">{{ task.title }}</span>
+          </label>
+          <button class="remove" (click)="store.remove(task.id)" aria-label="Remove task">✕</button>
+        </li>
+      }
+    </ul>
+  }
+</section>
+
+<footer class="actions">
+  <button (click)="store.clearDone()" [disabled]="store.stats().done === 0">
+    Clear completed
+  </button>
+</footer>
+----
+
+A few things to notice:
+- Reading a signal in a template uses function-call syntax: store.stats().
+- The new @if and @for syntax is concise and fast; track by a stable id to minimize DOM churn.
+- We avoid ngModel here to keep the example lean; use reactive forms if you need validation and composition.
+
+=== Bootstrap
+
+With standalone components, the bootstrap is pleasantly thin.
+
+[source,typescript]
+----
+import { bootstrapApplication } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
+
+bootstrapApplication(AppComponent).catch(err => console.error(err));
+----
+
+That’s it. No NgModule, no extra ceremony. In a larger app, you’d layer in provideRouter, HTTP, and other providers here.
+
+== Developer experience and design notes
+
+From real projects migrating to signals and the new control flow, a few principles keep teams productive:
+
+- Keep mutations small and intention-revealing.
+  - add, toggle, remove, clearDone communicate behavior explicitly.
+  - Encapsulate shape and invariants in your store; keep the component mostly declarative.
+
+- Use computed for any value you want to “feel like” state in the template.
+  - stats and filtered are cheap to read and always consistent.
+  - Avoid doing ad-hoc filtering in templates; it’s harder to optimize and test.
+
+- Reserve effect for I/O and cross-cutting behavior.
+  - Persistence, analytics, message bus publishing—great uses of effect.
+  - Don’t compute UI data inside effect; that’s what computed is for.
+
+- Prefer signals for local/feature reactive state, embrace RxJS where it fits.
+  - Signals are excellent for UI state and domain mutations.
+  - Streams still shine for event composition, websockets, and complex async flows.
+  - Interop utilities exist if you need to bridge; start simple.
+
+- Track by stable ids in @for.
+  - You’ll avoid unnecessary re-renders and improve perceived performance.
+
+- Keep templates dumb.
+  - Let the store manage logic; your templates will stay readable, and testing gets easier.
+
+== Testing the store
+
+Signals play nicely with unit tests because there’s no hidden subscription machinery to manage.
+
+- Instantiate TaskStore directly, call methods, and assert on taskStore.filtered(), taskStore.stats(), etc.
+- If an effect writes to localStorage, consider injecting a light persistence adapter so you can stub it in tests. For this article’s simplicity, we wrote to localStorage directly; in production, prefer an injected storage port.
+
+== Where this scales
+
+This pattern scales surprisingly far:
+- Add tags or due dates? Extend Task and update computed accordingly.
+- Need a multi-page app? Provide routes and lazy-load feature components while keeping a small, focused store per feature.
+- Want undo/redo? Wrap mutations to capture patches and provide intent-level commands.
+
+Signals help you move faster because the mental model is simple: read values, change values, derive values. It’s the right default for many UI flows.
+
+== Common pitfalls to avoid
+
+- Overusing effect for data derivation. If you find yourself setting signals inside an effect just to compute something, reach for computed instead.
+- Mixing many mutable signals in components. Prefer a single cohesive store per feature or sub-feature.
+- Forgetting to track by id in @for. It’s a small habit with big performance wins.
+
+== Conclusion
+
+Getting started with Angular 19 and signals doesn’t require a framework rewrite. By leaning on a simple TaskStore and a lean component using the new control flow, we built a small but complete feature with clear reactive state and minimal boilerplate. This is the kind of foundation that keeps teams sane as apps grow—explicit mutations, derived state where it belongs, and templates that read like a story.
+
+== Next Steps
+
+- Add a search signal and a computed that combines filter + search.
+- Extract persistence into an injected storage service and mock it in unit tests.
+- Introduce provideRouter and split the UI into feature routes.
+- Integrate reactive forms for validation on create/edit flows.
+- Explore interop with RxJS for server events or HTTP polling, using signals at the edges.
+- Measure with Angular DevTools and keep track-by rules tight as lists grow.
