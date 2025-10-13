@@ -1,0 +1,352 @@
+= Understanding Angular Modules and Standalone Components
+:author: Jake Ortega
+:revdate: 2025-10-13
+
+For years, Angular's mental model was: define features in NgModules, declare components there, and wire up providers at the module level. Since v15, standalone components have shifted that center of gravity. In Angular 19+, standalone is the default. This post offers a clear mental model for how modules and standalone coexist, practical guidance for modular design, and migration patterns that respect real-world constraints. We'll focus on developer experience, dependency injection, and the boundaries that keep large apps maintainable.
+
+== Why This Change Matters
+
+Standalone components reduce ceremony and make composition explicit. In practice, that means:
+
+- Clearer ownership of dependencies: each component imports what it needs.
+- Simpler bootstrapping: providers are configured where they're used (application, route, or component).
+- Fewer "hidden" behaviors tied to NgModule scoping.
+
+You can still use NgModules, but they’re no longer required for new code. The key is knowing when each tool fits—and how to keep your architecture coherent while you migrate.
+
+== A Mental Model: Modules vs Standalone
+
+- NgModules are containers. They aggregate declarations, imports, and providers. They’re still supported and useful for interop with legacy or third-party code.
+- Standalone components are building blocks. Each component, directive, or pipe can opt into standalone: true and declare its own imports.
+- The router becomes your composition root. Routes assemble features via loadComponent and can own providers for feature-scoped dependency injection.
+- Providers are explicit and layered. Scopes now feel natural: application (environment), route, and component.
+
+Practically, you design boundaries using routes and feature directories—not module files.
+
+== Bootstrapping the Standalone Way
+
+A typical Angular 19 application bootstraps with application-level providers and a standalone root component.
+
+[source,typescript]
+----
+// main.ts
+import { bootstrapApplication } from '@angular/platform-browser';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
+import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideZoneChangeDetection } from '@angular/core';
+import { appRoutes } from './app.routes';
+import { AppComponent } from './app.component';
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideRouter(appRoutes, withComponentInputBinding()),
+    provideHttpClient(withFetch()),
+    provideAnimations(),
+    provideZoneChangeDetection({ eventCoalescing: true }),
+  ],
+});
+----
+
+[source,typescript]
+----
+// app.component.ts
+import { Component } from '@angular/core';
+import { RouterOutlet, RouterLink } from '@angular/router';
+
+@Component({
+  standalone: true,
+  selector: 'app-root',
+  imports: [RouterOutlet, RouterLink],
+  template: `
+    <header class="shell">
+      <a routerLink="/">Home</a> | <a routerLink="/todos">Todos</a>
+    </header>
+    <main class="container">
+      <router-outlet />
+    </main>
+  `,
+})
+export class AppComponent {}
+----
+
+[source,typescript]
+----
+// app.routes.ts
+import { Routes } from '@angular/router';
+import { InjectionToken } from '@angular/core';
+
+export const TODO_API = new InjectionToken<string>('TODO_API');
+
+export const appRoutes: Routes = [
+  {
+    path: '',
+    loadComponent: () =>
+      import('./home/home.page').then((m) => m.HomePage),
+  },
+  {
+    path: 'todos',
+    // Route-level provider overrides for feature-scoped DI
+    providers: [{ provide: TODO_API, useValue: 'https://api.example.com' }],
+    loadComponent: () =>
+      import('./todos/todos.page').then((m) => m.TodosPage),
+  },
+];
+----
+
+Notice how the router owns feature boundaries and dependency injection scopes. This keeps providers close to the feature while preventing global sprawl.
+
+== Standalone in Practice: Feature-Oriented Design
+
+Let’s build a feature page that fetches data via HttpClient, using signals for a simple, reactive UI.
+
+[source,typescript]
+----
+// todos.service.ts
+import { inject, Injectable, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { TODO_API } from '../app.routes';
+import { firstValueFrom } from 'rxjs';
+
+export interface Todo {
+  id: number;
+  title: string;
+  completed: boolean;
+}
+
+@Injectable({ providedIn: 'root' })
+export class TodosService {
+  private http = inject(HttpClient);
+  private api = inject(TODO_API, { optional: true }) ?? '/api';
+
+  private _items = signal<Todo[]>([]);
+  readonly items = this._items.asReadonly();
+
+  async refresh(): Promise<void> {
+    const data = await firstValueFrom(
+      this.http.get<Todo[]>(`${this.api}/todos`),
+    );
+    this._items.set(data ?? []);
+  }
+
+  toggle(id: number) {
+    this._items.update((list) =>
+      list.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t)),
+    );
+  }
+}
+----
+
+[source,typescript]
+----
+// todos.page.ts
+import { Component, effect, inject } from '@angular/core';
+import { NgClass } from '@angular/common';
+import { TodosService } from './todos.service';
+
+@Component({
+  standalone: true,
+  selector: 'app-todos',
+  imports: [NgClass],
+  template: `
+    <section>
+      <h2>Todos</h2>
+      <button (click)="reload()">Reload</button>
+
+      <ul>
+        @for (t of todos(); track t.id) {
+          <li (click)="toggle(t.id)"
+              [ngClass]="{ done: t.completed }">
+            {{ t.title }}
+          </li>
+        } @empty {
+          <li>No items</li>
+        }
+      </ul>
+    </section>
+  `,
+  styles: [`
+    .done { text-decoration: line-through; opacity: .7; }
+    li { cursor: pointer; }
+  `],
+})
+export class TodosPage {
+  private svc = inject(TodosService);
+  readonly todos = this.svc.items;
+
+  constructor() {
+    effect(() => {
+      // Initial load; could listen to other signals here
+      void this.svc.refresh();
+    });
+  }
+
+  reload() { void this.svc.refresh(); }
+  toggle(id: number) { this.svc.toggle(id); }
+}
+----
+
+Key points:
+
+- The component is standalone and imports only what it needs.
+- Feature-specific providers live at the route level (TODO_API).
+- We use signals for local state derived from network results. This keeps the UI reactive without external state management unless needed.
+
+== Dependency Injection: Scopes and Overrides
+
+Standalone emphasizes explicit scopes:
+
+- Application/environment providers: configured in bootstrapApplication. Good for cross-cutting concerns (HttpClient, router, animations).
+- Route-level providers: colocate feature-specific services and tokens with the route. Excellent for multi-tenant configs, feature toggles, and testing.
+- Component providers: for view-level services or overriding dependencies within a subtree.
+
+Overriding is straightforward—route providers shadow root-level ones for that subtree.
+
+[source,typescript]
+----
+// global config (fallback)
+import { provideAppConfig, APP_CONFIG } from './tokens';
+
+// main.ts
+bootstrapApplication(AppComponent, {
+  providers: [
+    { provide: APP_CONFIG, useValue: { theme: 'light', api: '/api' } },
+  ],
+});
+
+// feature override (route-level)
+export const featureRoutes = [
+  {
+    path: 'reports',
+    providers: [
+      { provide: APP_CONFIG, useValue: { theme: 'dark', api: 'https://reports.api' } },
+    ],
+    loadComponent: () => import('./reports/reports.page').then(m => m.ReportsPage),
+  },
+];
+----
+
+In tests, you can override providers at the TestBed level or provide them per route/component. This locality reduces unintended coupling.
+
+== Modular Design Without NgModules
+
+You still want modular design—just with different building blocks:
+
+- Feature folder per route: pages, child components, services, and route-specific providers.
+- Shared UI library: a set of standalone components/pipes you import directly.
+- Composition through the router and design tokens (injection tokens) rather than module imports.
+
+A small shared component:
+
+[source,typescript]
+----
+// ui/button/button.component.ts
+import { Component, Input } from '@angular/core';
+
+@Component({
+  standalone: true,
+  selector: 'ui-button',
+  template: `<button [attr.data-variant]="variant"><ng-content /></button>`,
+})
+export class ButtonComponent {
+  @Input() variant: 'primary' | 'secondary' = 'primary';
+}
+----
+
+Use it by importing directly in the consumer component’s imports array—no shared NgModule required.
+
+== Interop and Migration from NgModules
+
+Most teams don’t flip a switch; they migrate. A patient, low-risk path:
+
+1) Convert leaf components first.
+- Add standalone: true and list their imports explicitly.
+- Replace module declarations with per-component imports.
+
+2) Move routing to loadComponent.
+- Update routes from loadChildren to loadComponent where suitable.
+- Keep your existing FeatureModule while routing directly to a standalone component.
+
+3) Lift providers to routes.
+- Move FeatureModule providers into the route’s providers.
+- Use InjectionTokens for configuration instead of module-level constants.
+
+4) Collapse NgModules.
+- Once declarations/providers are relocated, delete the FeatureModule.
+- If you must keep it temporarily, import its providers via importProvidersFrom.
+
+[source,typescript]
+----
+// Temporary interop for legacy modules
+import { importProvidersFrom } from '@angular/core';
+import { LegacyFeatureModule } from './legacy/feature.module';
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    importProvidersFrom(LegacyFeatureModule),
+  ],
+});
+----
+
+A classic before/after:
+
+[source,typescript]
+----
+// BEFORE: feature.module.ts
+@NgModule({
+  declarations: [LegacyListComponent],
+  imports: [CommonModule],
+  providers: [{ provide: FEATURE_FLAG, useValue: true }],
+})
+export class FeatureModule {}
+----
+
+[source,typescript]
+----
+// AFTER: legacy-list.component.ts
+@Component({
+  standalone: true,
+  selector: 'legacy-list',
+  imports: [CommonModule],
+  template: `...`,
+})
+export class LegacyListComponent {}
+
+// app.routes.ts
+{
+  path: 'legacy',
+  providers: [{ provide: FEATURE_FLAG, useValue: true }],
+  loadComponent: () => import('./legacy/legacy-list.component').then(m => m.LegacyListComponent),
+}
+----
+
+This migration keeps behavior identical while removing NgModule coupling gradually.
+
+== When an NgModule Still Makes Sense
+
+- Third-party libraries that haven’t moved to standalone and expose only NgModules.
+- Very large libraries where a module still acts as a compatibility facade for older consumers.
+- Specialized bootstrapping in hybrid applications. Even then, prefer importProvidersFrom as a bridge, not a destination.
+
+For application code, prefer standalone by default.
+
+== Common Pitfalls and How to Avoid Them
+
+- Forgetting imports in a standalone component: there is no declarations array. Import every dependency (RouterLink, NgClass, etc.) explicitly in imports.
+- Accidental global providers: a service marked providedIn: 'root' is app-wide. If you need per-feature instances, provide at the route or component level instead.
+- Oversized root component: keep AppComponent thin; let routes own real features and route-level providers.
+- Hidden cross-feature coupling: resist “shared” everything. Keep shared UI truly generic; push domain logic to features with clear boundaries.
+
+== Conclusion
+
+Standalone components simplify how we build Angular apps. They don’t erase NgModules—they reduce our dependency on them. The router becomes the composition root, providers become explicit and local, and modular design emerges from clear feature boundaries rather than indirection. The result is code that’s easier to reason about, test, and evolve—especially in large teams.
+
+As you migrate, be kind to future you: move in small steps, keep behavior stable, and let your architecture breathe through explicit dependencies and thoughtful dependency injection scopes.
+
+== Next Steps
+
+- Identify one leaf feature and convert its page/component to standalone. Measure the change in test setup and build complexity.
+- Move one feature’s providers to route-level and verify scoping works as expected.
+- Create a small shared standalone UI library (buttons, form controls) and adopt it in two features.
+- Audit your routes for loadChildren that can become loadComponent to reduce NgModule usage.
+- If you maintain a library, provide standalone entry points so app teams can import components directly.
