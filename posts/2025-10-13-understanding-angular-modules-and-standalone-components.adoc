@@ -1,6 +1,6 @@
 = Understanding Angular Modules and Standalone Components
 :author: jakeortega
-v1.0, 2025-10-13
+:revdate: v1.0, 2025-10-13
 :title: Understanding Angular Modules and Standalone Components
 :lang: en
 :tags: [standalone components, modular design, dependency injection]
