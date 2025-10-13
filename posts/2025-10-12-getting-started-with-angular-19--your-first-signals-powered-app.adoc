@@ -1,5 +1,5 @@
 = Getting Started with Angular 19: Your First Signals-Powered App
-Jake Ortega
+:author: Jake Ortega
 v1.0, 2025-10-12
 :title: Getting Started with Angular 19: Your First Signals-Powered App
 :lang: en
