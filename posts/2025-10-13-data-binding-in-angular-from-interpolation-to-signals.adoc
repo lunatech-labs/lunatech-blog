@@ -1,0 +1,73 @@
+= Data Binding in Angular: From Interpolation to Signals
+:author: jakeortega
+:revdate: v1, 2025-10-13
+:title: Data Binding in Angular: From Interpolation to Signals
+:lang: en
+:tags: [property binding, event binding, signals]
+
+Data binding plays a vital role in Angular by enabling seamless communication between components and the view layer. Let's delve into the evolution of data binding in Angular, starting from the classic interpolation technique to more advanced methods like property binding, event binding, and signals.
+
+== Evolution of Data Binding in Angular
+
+Data binding in Angular simplifies the synchronization of data between components and the DOM, streamlining the development process and reducing errors.
+
+=== Interpolation: The Classic Approach to Data Binding
+
+Interpolation is the simplest form of data binding in Angular, allowing the insertion of expressions within double curly braces `{{ }}` directly into the HTML template.
+
+[source,html]
+----
+<button>{{ buttonLabel }}</button>
+----
+
+In the above example, the `buttonLabel` property in the component class dynamically populates the button element.
+
+=== Property Binding: Linking Data from Component to View
+
+Property binding is a robust data binding technique in Angular that enables setting an element property to a value from a component property.
+
+[source,html]
+----
+<img [src]="imageUrl" alt="Image">
+----
+
+Here, the `imageUrl` property from the component class is linked to the `src` attribute of the `img` element.
+
+=== Event Binding: Reacting to User Actions
+
+Event binding in Angular allows the detection of DOM events like clicks, keypresses, and mouse movements, triggering corresponding actions in the component class.
+
+[source,html]
+----
+<button (click)="onButtonClicked()">Click Me</button>
+----
+
+In this scenario, the `onButtonClicked()` method in the component class executes upon clicking the button.
+
+=== Signals: Elevating Data Binding Capabilities
+
+While interpolation, property binding, and event binding are potent, there are instances where you require more advanced data binding features. This is where signals step in.
+
+Signals in Angular establish communication channels between components, enabling flexible and intricate data flow within the application.
+
+[source,typescript]
+----
+@Input() data: Observable<any>;
+@Output() action: EventEmitter<any> = new EventEmitter();
+
+ngOnInit() {
+  this.data.subscribe(result => {
+    this.action.emit(result);
+  });
+}
+----
+
+In the code snippet above, we declare an input property `data` as an observable and an output property `action` as an event emitter. Subsequently, we subscribe to changes in the `data` property and emit these changes through the `action` emitter.
+
+== Wrapping Up
+
+Data binding stands as a pivotal concept in Angular development, fostering seamless communication between components and the view layer. By mastering techniques like interpolation, property binding, event binding, and signals, developers can craft responsive and interactive applications effortlessly.
+
+== What's Next?
+
+Delve deeper into advanced data binding methods in Angular, such as two-way binding and content projection, to elevate interactivity and user experience in your applications. Keep exploring and learning to evolve into a proficient Angular developer.
