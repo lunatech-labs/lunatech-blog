@@ -1,0 +1,47 @@
+= Full-Stack Authentication Boilerplate: Angular + NestJS + PostgreSQL
+jakeortega
+v1.0, 2025-04-04
+:title: Full-Stack Authentication Boilerplate: Angular + NestJS + PostgreSQL
+:lang: en
+:tags: [angular, nestjs, postgresql, typeorm, jwt, authentication, frontend, typescript, nodejs]
+
+= A practical series for backend developers building secure full-stack apps
+
+For backend developers who want to ship full-stack projects—without wrestling with frontend complexity.
+
+We’re building a **full-stack authentication boilerplate**—a reusable, modular codebase that gives you login, registration, route protection, token handling, and database integration out of the box. Clone it, customize it, and start building faster.
+
+=== Why This Stack?
+
+We chose **Angular 19** and **NestJS** for a reason:
+
+- **TypeScript end-to-end**: Write frontend and backend in the same language with consistent tooling.
+- **Angular 19** introduces Signals and control flow syntax (`@if`, `@for`), simplifying state and UI logic.
+- **NestJS** is structured, modular, and test-friendly—ideal for developers coming from Spring or .NET.
+- **PostgreSQL** + **TypeORM** provide a robust relational layer with strong typing and migrations.
+
+You *could* build this with React, Express, or MongoDB. But we picked this stack for its structure and scalability—great for teams or solo developers who want a solid foundation, not just flexibility.
+
+=== What’s in the Series?
+
+Here’s the roadmap 👇
+
+image::../media/2025-04-04-full-stack-authentication-boilerplate:-angular-+-nestjs-+-postgresql/roadmap.png[Roadmap overview]
+
+Each post builds on the last, walking you through:
+
+- ✅ JWT login & registration
+- ✅ Angular route guards & auth state
+- ✅ NestJS modules, guards, and services
+- ✅ PostgreSQL setup with TypeORM
+- ✅ CI/CD, E2E tests with Playwright, and Docker deployment
+
+You don’t need prior Angular or NestJS experience—just TypeScript and backend fundamentals.
+
+=== Why This Series Exists
+
+You don’t need another to-do app.
+
+You need a **working authentication foundation**—something you can reuse, extend, and deploy. That’s what this series delivers, while helping you build real frontend + backend skills along the way.
+
+Let’s build something you can actually ship.

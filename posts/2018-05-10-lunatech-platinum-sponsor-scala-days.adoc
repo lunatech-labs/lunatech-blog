@@ -14,7 +14,7 @@ Besides attending presentation on stage, there is a possibility to meet people o
 image:../media/2018-05-10-lunatech-platinum-sponsor-scala-days/logos.png[]
 
 
-In a demo at our booth, Willem Jan-Glerum will show us a working IoT pipeline with real hardware. Multiple Raspberry Pi Zero's will be collecting sensor data around the booth. These real-time measurements will be processed with Scala services running on a local Kubernetes cluster. Come check it out at the Lunatech booth to get to know more!
+In a demo at our booth, Willem Jan Glerum will show us a working IoT pipeline with real hardware. Multiple Raspberry Pi Zero's will be collecting sensor data around the booth. These real-time measurements will be processed with Scala services running on a local Kubernetes cluster. Come check it out at the Lunatech booth to get to know more!
 
 Come and chat with us and of course leave with goodies and gifts. To pay tribute to the beautiful city of Berlin we even rented a beer tap (with moderation and after the conference). This event is already sold-out but we are sponsor of many other conferences. So if you do not get the chance to meet us at the Scala Days, we are happy to see you on another event! Stay tuned ;) https://twitter.com/LunatechLabs[@LunatechLabs] on Twitter.
 
