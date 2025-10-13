@@ -1,0 +1,326 @@
+= Data Binding in Angular: From Interpolation to Signals
+:author: jakeortega
+:revdate: v1, 2025-10-13
+:title: Data Binding in Angular: From Interpolation to Signals
+:lang: en
+:tags: [property binding,event binding,signals]
+
+Data binding is the connective tissue between your UI and your application state. In Angular today, that spectrum runs from basic interpolation to signal-driven state that updates predictably and efficiently. In this post, we’ll walk through the essentials and then apply them with modern patterns that scale in real-world apps.
+
+== The binding spectrum at a glance
+
+- Interpolation: Render a value in the template.
+- Property binding: Push values from component state to DOM element or child component properties.
+- Event binding: Listen to user actions and update state.
+- Two-way binding: Pair property binding with event binding for convenience.
+- Signals: A composable, ergonomic reactivity model for state, derived values, and side effects.
+
+This set of tools covers almost every interaction you’ll model in a component. Let’s quickly ground each concept, then build something reusable with signals.
+
+=== Interpolation
+
+[source,html]
+----
+<h2>Welcome, {{ userName }}</h2>
+----
+
+Interpolation is great for simple text content. Avoid heavy logic here—keep templates readable and testable.
+
+=== Property binding
+
+[source,html]
+----
+<input [value]="query" [disabled]="isLoading" [attr.aria-busy]="isLoading" />
+<button [class.warn]="items.length === 0">Refresh</button>
+----
+
+- [value] updates the DOM input’s value.
+- [disabled] toggles the element’s disabled property.
+- [attr.aria-busy] manages accessibility attributes.
+- [class.warn] shows a style-based condition.
+
+Property binding is unidirectional and predictable—perfect for performance and mental model clarity.
+
+=== Event binding
+
+[source,html]
+----
+<input (input)="onQueryChange(($event.target as HTMLInputElement).value)" />
+<button (click)="reload()">Refresh</button>
+<form (ngSubmit)="save()"> ... </form>
+----
+
+Event binding is how user actions flow back to your component. Keep handlers small and delegate to services for complex logic.
+
+== A practical counter: property binding, event binding, and signals
+
+Let’s implement a reusable counter component that supports:
+- property binding for configuration,
+- event binding for user interactions,
+- two-way binding for state sync,
+- and signals for internal state and derived values.
+
+This example shows how the pieces fit together without hiding control flow.
+
+=== Counter component (signal inputs/outputs)
+
+[source,typescript]
+----
+import { Component, computed, input, output, signal } from '@angular/core';
+
+@Component({
+  selector: 'app-counter',
+  standalone: true,
+  templateUrl: './counter.component.html',
+})
+export class CounterComponent {
+  // Signal inputs: modern, explicit, and template-friendly.
+  // Consumers can provide [count] and [max].
+  count = input<number>(0);
+  max = input<number>(10);
+
+  // Conventional paired output to enable [(count)] banana-in-a-box.
+  countChange = output<number>();
+
+  // Derived state from signals
+  isMin = computed(() => this.count() <= 0);
+  isMax = computed(() => this.count() >= this.max());
+
+  // Local transient state (e.g., focusing, pending state)
+  pending = signal(false);
+
+  decrement() {
+    const next = Math.max(0, this.count() - 1);
+    this.countChange.emit(next);
+  }
+
+  increment() {
+    const next = Math.min(this.max(), this.count() + 1);
+    this.countChange.emit(next);
+  }
+
+  setCountFromInput(raw: string) {
+    const parsed = Number(raw);
+    if (Number.isFinite(parsed)) {
+      const clamped = Math.max(0, Math.min(this.max(), parsed));
+      this.countChange.emit(clamped);
+    }
+  }
+}
+----
+
+[source,html]
+----
+<div class="counter" [attr.aria-valuemin]="0" [attr.aria-valuemax]="max()" [attr.aria-valuenow]="count()">
+  <button type="button" (click)="decrement()" [disabled]="isMin()" aria-label="Decrease">−</button>
+
+  <input
+    type="number"
+    [value]="count()"
+    (input)="setCountFromInput(($event.target as HTMLInputElement).value)"
+    [attr.aria-label]="'Count (max ' + max() + ')'"
+    [class.limit]="isMax()"
+  />
+
+  <button type="button" (click)="increment()" [disabled]="isMax()" aria-label="Increase">+</button>
+</div>
+----
+
+Notes:
+- We’re reading signals in the template via function calls like count() and isMax().
+- property binding is everywhere: [value], [disabled], [class.limit], [attr.*].
+- event binding translates clicks and input events into clean state updates.
+
+=== Using the counter with two-way binding
+
+Two-way binding in Angular pairs [prop] with (propChange). Because our CounterComponent exposes count and countChange, we can bind them as a pair from the parent. When the parent stores state in a signal, wire it up explicitly so updates stay type-safe and obvious.
+
+[source,typescript]
+----
+import { Component, effect, signal } from '@angular/core';
+import { CounterComponent } from './counter.component';
+
+@Component({
+  selector: 'app-cart-line',
+  standalone: true,
+  imports: [CounterComponent],
+  templateUrl: './cart-line.component.html',
+})
+export class CartLineComponent {
+  quantity = signal(2);
+
+  // Persist quantity as a side effect (e.g., to localStorage)
+  constructor() {
+    effect(() => {
+      localStorage.setItem('cart.qty', String(this.quantity()));
+    });
+  }
+
+  onQuantityChange(qty: number) {
+    this.quantity.set(qty);
+  }
+}
+----
+
+[source,html]
+----
+<h3>Quantity</h3>
+<app-counter [count]="quantity()" (countChange)="onQuantityChange($event)" [max]="10"></app-counter>
+<p [class.warn]="quantity() === 0">You must select at least one item.</p>
+----
+
+Tip: Signals are functions in templates, so you can’t use banana-in-a-box with a call expression like quantity(). Prefer the explicit pair [prop] and (propChange) with quantity.set($event) in the handler. If you’re binding to a plain class field (not a signal), you can use [(prop)]. Alternatively, consider model() on the child to create a two-way “model input” that plays nicely with [(...)].
+
+== Derived state with computed, and side effects with effect
+
+Signals make derived state declarative.
+
+[source,typescript]
+----
+import { Component, computed, signal } from '@angular/core';
+
+@Component({
+  selector: 'app-pricing',
+  standalone: true,
+  templateUrl: './pricing.component.html',
+})
+export class PricingComponent {
+  unitPrice = signal(19.99);
+  quantity = signal(3);
+  discountRate = signal(0.1); // 10%
+
+  subtotal = computed(() => this.unitPrice() * this.quantity());
+  discount = computed(() => this.subtotal() * this.discountRate());
+  total = computed(() => this.subtotal() - this.discount());
+}
+----
+
+[source,html]
+----
+<div>
+  <p>Subtotal: {{ subtotal() | number:'1.2-2' }}</p>
+  <p>Discount: {{ discount() | number:'1.2-2' }}</p>
+  <p><strong>Total: {{ total() | number:'1.2-2' }}</strong></p>
+</div>
+----
+
+- computed caches results and recalculates only when dependencies change.
+- Keep templates free from heavy calculations; push logic into computed for readability and performance.
+
+== Async binding: from RxJS to signals
+
+You’ll often start with an Observable from HttpClient or a service. The rxjs-interop helpers bridge RxJS and signals so your template can stay synchronous and fast.
+
+[source,typescript]
+----
+import { Component, computed, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { catchError, finalize, map, of, shareReplay } from 'rxjs';
+
+type Product = { id: number; name: string; price: number };
+
+@Component({
+  selector: 'app-product-search',
+  standalone: true,
+  templateUrl: './product-search.component.html',
+})
+export class ProductSearchComponent {
+  private products$ = this.http.get<Product[]>('/api/products').pipe(
+    map(list => list ?? []),
+    catchError(() => of([])),  // keep the signal safe in the template
+    finalize(() => this.isLoading.set(false)),
+    shareReplay({ bufferSize: 1, refCount: true })
+  );
+
+  // Signals for view-model
+  query = signal('');
+  products = toSignal(this.products$, { initialValue: [] as Product[] });
+  isLoading = signal(true);
+
+  // Derived list based on query
+  filtered = computed(() => {
+    const q = this.query().trim().toLowerCase();
+    const items = this.products();
+    return q ? items.filter(p => p.name.toLowerCase().includes(q)) : items;
+  });
+
+  constructor(private http: HttpClient) {}
+
+  onQueryChange(value: string) {
+    this.query.set(value);
+  }
+
+  trackById = (_: number, p: Product) => p.id;
+}
+----
+
+[source,html]
+----
+<section [attr.aria-busy]="isLoading()">
+  <label>
+    Search:
+    <input
+      type="search"
+      [value]="query()"
+      (input)="onQueryChange(($event.target as HTMLInputElement).value)"
+      placeholder="Find a product"
+      autocomplete="off"
+    />
+  </label>
+
+  @if (isLoading()) {
+    <p>Loading products…</p>
+  } @else {
+    @if (filtered().length === 0) {
+      <p>No products found.</p>
+    } @else {
+      <ul>
+        @for (p of filtered(); track trackById) {
+          <li>
+            <span [textContent]="p.name"></span>
+            <span> — ${{ p.price.toFixed(2) }}</span>
+          </li>
+        }
+      </ul>
+    }
+  }
+</section>
+----
+
+Highlights:
+- property binding drives [value] and [attr.aria-busy].
+- event binding captures (input) for a tight feedback loop.
+- Built-in control flow (@if, @for) keeps templates concise and fast.
+- toSignal simplifies async binding without scattering async pipes.
+
+== When to pick which binding
+
+- Interpolation: Text nodes only—simple, declarative.
+- property binding: Any dynamic element or component property. Prefer this over attribute binding except for true attributes (like ARIA).
+- event binding: For all user interactions. Keep handlers focused; delegate to services for side effects.
+- Two-way binding: Use sparingly. It’s great for form-like components but can hide complexity in domain flows. Make changes explicit when in doubt.
+- signals: Default to signals for component-local state. Use computed for derivations and effect for side effects. Bridge RxJS with toSignal for UI state.
+
+== Maintainability and performance tips
+
+- Centralize derived logic in computed, not in the template.
+- Track lists with @for (...; track byFn) to avoid DOM churn.
+- Prefer signal inputs/outputs for components; they compose naturally in templates and are easy to test.
+- Keep event handlers small; pure, synchronous functions are easiest to reason about.
+- Co-locate view-model signals with the component, and move business logic into services.
+- When you need two-way binding, standardize on a single property name pattern (prop/propChange) for consistency.
+- Use accessibility bindings ([attr.aria-*]) to reflect async and loading states.
+- Avoid mutating objects in place when they’re part of derived computations; reassign to trigger clear updates.
+
+== Conclusion
+
+Angular’s binding story has matured into a cohesive, ergonomic model. Interpolation, property binding, and event binding remain the bedrock for clarity and performance. Signals build on top of that foundation with a predictable state model—computed for derivations and effect for side effects—so your UI stays honest and fast. The result is a codebase that’s easier to read, test, and evolve.
+
+== Next Steps
+
+- Convert one stateful component in your app from RxJS subjects to signals; use computed for derived values.
+- Replace complex ngIf/ngFor nests with the built-in @if/@for control flow.
+- Introduce signal inputs/outputs in a reusable widget and document the API with prop/propChange naming.
+- Audit templates for heavy expressions and move them into computed.
+- Create a small design system demo: a few form controls using property binding, event binding, and signals for state.
