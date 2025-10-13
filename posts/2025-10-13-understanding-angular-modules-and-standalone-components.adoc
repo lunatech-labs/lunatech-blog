@@ -1,11 +1,9 @@
 = Understanding Angular Modules and Standalone Components
 Jake Ortega
-2025-10-13
-:title Understanding Angular Modules and Standalone Components
-:lang en
+v1.0, 2025-10-13
+:title: Understanding Angular Modules and Standalone Components
+:lang: en
 :tags: [standalone components, modular design, dependency injection]
-
-image::../media/2025-10-13-understanding-angular-modules-and-standalone-components/background.png[Understanding Angular Modules and Standalone Components]
 
 For years, Angular's mental model was: define features in NgModules, declare components there, and wire up providers at the module level. Since v15, standalone components have shifted that center of gravity. In Angular 19+, standalone is the default. This post offers a clear mental model for how modules and standalone coexist, practical guidance for modular design, and migration patterns that respect real-world constraints. We'll focus on developer experience, dependency injection, and the boundaries that keep large apps maintainable.
 
