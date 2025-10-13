@@ -1,6 +1,11 @@
 = Getting Started with Angular 19: Your First Signals-Powered App
-:author: Jake Ortega
-:revdate: 2025-10-12
+Jake Ortega
+2025-10-12
+:title Getting Started with Angular 19: Your First Signals-Powered App
+:lang en
+:tags: [angular basics, signals, reactive state]
+
+image::../media/2025-10-12-getting-started-with-angular-19--your-first-signals-powered-app/background.png[Getting Started with Angular 19: Your First Signals-Powered App]
 
 Angular 19 makes signals a first-class, ergonomic way to manage reactive state—without the ceremony many of us associate with using RxJS for every problem. In this guide, you’ll build a small, production-quality feature using signals, computed values, and effects, sticking to Angular basics while practicing patterns you’ll reuse in real apps. Think of it as your “hello world” for signals, with enough structure to scale.
 
