@@ -1,5 +1,5 @@
 = Understanding Angular Modules and Standalone Components
-Jake Ortega
+:author: Jake Ortega
 v1.0, 2025-10-13
 :title: Understanding Angular Modules and Standalone Components
 :lang: en
