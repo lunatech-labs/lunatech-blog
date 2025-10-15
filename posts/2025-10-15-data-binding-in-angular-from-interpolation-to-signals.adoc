@@ -1,0 +1,393 @@
+= Data Binding in Angular: From Interpolation to Signals
+:author: jakeortega
+:revdate: v1, 2025-10-15
+:title: Data Binding in Angular: From Interpolation to Signals
+:lang: en
+:tags: [property binding,event binding,signals]
+
+Data binding is the connective tissue of an Angular app. It turns user intent into state changes, and state changes into UI. Over the last few releases, Angular’s binding model has grown from simple interpolation into a first-class reactive story with signals. In this post, I’ll walk through the spectrum—from classic interpolation and property/event binding to signal-based inputs, outputs, and two-way binding—so you can pick the simplest tool that stays maintainable at scale.
+
+== The core bindings you still use every day
+
+You don’t need a new paradigm for every problem. The fundamentals remain solid and fast.
+
+=== Interpolation: when you just need to show a value
+
+[source,html]
+----
+<h2>Welcome, {{ userName }}!</h2>
+<p>Items in cart: {{ cartCount }}</p>
+----
+
+Great for strings and numbers. Keep it simple and readable.
+
+=== Property binding: talk to the DOM and child components
+
+Property binding sets DOM properties and component inputs. Prefer it over setting attributes unless you specifically need an attribute.
+
+[source,html]
+----
+<!-- DOM properties -->
+<button [disabled]="isSaving">Save</button>
+<img [src]="avatarUrl" [alt]="userName + ' avatar'">
+
+<!-- Component inputs -->
+<app-profile [userId]="selectedUserId"></app-profile>
+----
+
+Tip: Attributes are static text; properties are live values. In Angular, property binding is the norm.
+
+=== Event binding: handle interactions
+
+Event binding wires DOM or component events into your component logic.
+
+[source,html]
+----
+<button (click)="save()">Save</button>
+<input (keyup.enter)="search(termInput.value)" #termInput>
+----
+
+Keep handlers small and intention-revealing. Delegate heavier work to services where it belongs.
+
+=== Two-way binding: banana-in-a-box (when appropriate)
+
+Forms still benefit from two-way binding. With template-driven forms:
+
+[source,html]
+----
+<input [(ngModel)]="profile.displayName">
+----
+
+For component-to-component two-way binding, Angular now offers a signal-first alternative via model() (we’ll cover that shortly). You can still do the classic pair:
+
+[source,html]
+----
+<!-- Classic pair -->
+<child [value]="value" (valueChange)="value = $event"></child>
+----
+
+That explicit pair is often clearer in complex flows because it makes data direction unambiguous.
+
+== Enter signals: state you can reason about
+
+Signals give you explicit, synchronous, dependency-tracked state. They pair naturally with templates and reduce the guesswork in change detection.
+
+At a glance:
+
+- signal<T>(initial): a writable value
+- computed<T>(fn): a derived value
+- effect(fn): run side effects when dependencies change
+- input<T>(), output<T>(), model<T>(): signal-based component inputs/outputs and two-way binding
+
+=== Signals in a component
+
+[source,typescript]
+----
+import { Component, computed, effect, signal } from '@angular/core';
+
+@Component({
+  selector: 'app-counter',
+  standalone: true,
+  template: `
+    <p>Count: {{ count() }}</p>
+    <p>Is even? {{ isEven() }}</p>
+
+    <button (click)="decrement()" [disabled]="isEven()">-</button>
+    <button (click)="increment()">+</button>
+  `,
+})
+export class CounterComponent {
+  count = signal(0);
+  isEven = computed(() => this.count() % 2 === 0);
+
+  private log = effect(() => {
+    console.debug('Count changed:', this.count());
+  });
+
+  increment() { this.count.update(c => c + 1); }
+  decrement() { this.count.update(c => c - 1); }
+}
+----
+
+Note the template calls count() and isEven() because signals are functions. The ergonomics are intentional—reads are explicit and trackable.
+
+=== property binding and event binding with signals
+
+Signals fit right into property binding and event binding. When binding a signal to an input or DOM property, read it with ():
+
+[source,html]
+----
+<button [disabled]="isSaving()">Save</button>
+<app-profile [userId]="selectedUserId()"></app-profile>
+----
+
+In handlers, update signals directly:
+
+[source,html]
+----
+<button (click)="selectedUserId.set(42)">Pick #42</button>
+----
+
+=== Derived values keep templates simple
+
+Push computation into computed() so your templates read like a story instead of a novel.
+
+[source,typescript]
+----
+total = signal(0);
+taxRate = signal(0.08);
+totalWithTax = computed(() => Math.round(this.total() * (1 + this.taxRate()) * 100) / 100);
+----
+
+[source,html]
+----
+<p>Total: {{ total() }} | With tax: {{ totalWithTax() }}</p>
+----
+
+== Signal inputs, outputs, and two-way binding with model()
+
+Signals aren’t just for local state—you can use them at component boundaries.
+
+=== input(): inputs as signals
+
+input() returns a signal that reflects an input’s current value. You can make it required or provide a default.
+
+[source,typescript]
+----
+import { Component, computed, input } from '@angular/core';
+
+@Component({
+  selector: 'app-price',
+  standalone: true,
+  template: `
+    <p>
+      Base: {{ amount() }} | Currency: {{ currency() }} |
+      Display: {{ formatted() }}
+    </p>
+  `,
+})
+export class PriceComponent {
+  amount = input.required<number>();
+  currency = input('USD'); // default
+
+  formatted = computed(() =>
+    new Intl.NumberFormat('en', { style: 'currency', currency: this.currency() })
+      .format(this.amount())
+  );
+}
+----
+
+Usage:
+
+[source,html]
+----
+<app-price [amount]="cartTotal()" [currency]="'EUR'"></app-price>
+----
+
+=== output(): custom events without EventEmitter
+
+output() exposes an emit() API and is typed.
+
+[source,typescript]
+----
+import { Component, output } from '@angular/core';
+
+@Component({
+  selector: 'app-file-uploader',
+  standalone: true,
+  template: `
+    <input type="file" (change)="onSelect($event)">
+  `,
+})
+export class FileUploaderComponent {
+  selected = output<File>();
+
+  onSelect(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+    if (file) this.selected.emit(file);
+  }
+}
+----
+
+Usage:
+
+[source,html]
+----
+<app-file-uploader (selected)="handleFile($event)"></app-file-uploader>
+----
+
+=== model(): ergonomic two-way binding
+
+model() enables idiomatic [(...)] binding with signals on the child side.
+
+[source,typescript]
+----
+import { Component, model, computed, signal, output } from '@angular/core';
+
+@Component({
+  selector: 'app-rating',
+  standalone: true,
+  template: `
+    <div class="stars" role="slider" [attr.aria-valuenow]="value()">
+      @for (star of stars(); track star) {
+        <button
+          type="button"
+          [class.on]="star <= (hover() || value())"
+          (mouseenter)="hover.set(star)"
+          (mouseleave)="hover.set(0)"
+          (click)="set(star)">
+          ★
+        </button>
+      }
+    </div>
+  `,
+  styles: [`
+    .stars { display: inline-flex; gap: .25rem; font-size: 1.5rem; cursor: pointer; }
+    .on { color: gold; }
+  `],
+})
+export class RatingComponent {
+  // Two-way bindable from parent: [(value)]
+  value = model(0);
+
+  // Optional extra signal output, separate from the model change stream
+  rated = output<number>();
+
+  hover = signal(0);
+  stars = signal([1, 2, 3, 4, 5]);
+
+  set(n: number) {
+    this.value.set(n);   // updates the model
+    this.rated.emit(n);  // fire a semantic event
+  }
+}
+----
+
+Parent usage with plain class property:
+
+[source,typescript]
+----
+import { Component, signal } from '@angular/core';
+import { RatingComponent } from './rating.component';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RatingComponent],
+  template: `
+    <h2>Product rating: {{ rating }}</h2>
+    <app-rating [(value)]="rating" (rated)="onRated($event)"></app-rating>
+
+    <h3>Signal-backed rating</h3>
+    <app-rating
+      [value]="ratingSig()"
+      (valueChange)="ratingSig.set($event)">
+    </app-rating>
+  `,
+})
+export class AppComponent {
+  // Classic property works with banana-in-a-box
+  rating = 3;
+
+  // Or keep rating as a signal and wire pairwise bindings explicitly
+  ratingSig = signal(4);
+
+  onRated(n: number) {
+    console.log('User rated:', n);
+  }
+}
+----
+
+Two patterns, both valid:
+- Simple parent property: use [(value)] with model().
+- Parent signal: bind [value]="ratingSig()" and (valueChange)="ratingSig.set($event)".
+
+Choose the one that keeps the direction of data obvious to your team.
+
+== RxJS interop: when streams make sense
+
+Signals shine for UI state. RxJS still excels for async workflows like search typeahead or WebSocket streams. Use interop utilities to bridge them.
+
+- toSignal(observable): makes an Observable readable in templates
+- toObservable(signal): makes a Signal consumable by RxJS
+
+[source,typescript]
+----
+import { Component, signal } from '@angular/core';
+import { toSignal, toObservable } from '@angular/core/rxjs-interop';
+import { debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
+
+@Component({
+  selector: 'app-search',
+  standalone: true,
+  template: `
+    <input #box type="search" placeholder="Search..." (input)="query.set(box.value)" />
+    <p>@if (loading()) { Loading... } @else { {{ results().length }} results }</p>
+    <ul>
+      @for (item of results(); track item.id) {
+        <li>{{ item.name }}</li>
+      }
+    </ul>
+  `,
+})
+export class SearchComponent {
+  // Local UI state
+  loading = signal(false);
+
+  // User query as a Signal
+  query = signal('');
+
+  // Stream orchestration in RxJS, then bridged back to a Signal
+  private query$ = toObservable(this.query).pipe(
+    debounceTime(250),
+    distinctUntilChanged(),
+    tap(() => this.loading.set(true)),
+    switchMap(q => fakeSearchApi(q)),
+    tap(() => this.loading.set(false)),
+  );
+
+  results = toSignal(this.query$, { initialValue: [] as { id: number; name: string }[] });
+}
+
+// Mock API
+function fakeSearchApi(q: string) {
+  const data = [{ id: 1, name: 'Angular' }, { id: 2, name: 'Signals' }];
+  return new Promise<{ id: number; name: string }[]>(resolve =>
+    setTimeout(() => resolve(q ? data.filter(d => d.name.toLowerCase().includes(q.toLowerCase())) : []), 300)
+  );
+}
+----
+
+The key is separation: use RxJS for async orchestration, signals for template-friendly state. Convert at the edges.
+
+== Practical guidelines that scale
+
+- Prefer property binding for dynamic values; use attributes only when you truly need attributes.
+- Keep event binding handlers tiny. Let services own business logic.
+- Use computed() to pull complexity out of templates.
+- Use input() to make inputs reactive in the child without extra boilerplate.
+- Use output() instead of EventEmitter for consistent, typed custom events.
+- Reach for model() to enable ergonomic two-way binding in reusable controls.
+- Keep state close to where it’s used. Promote to a service when multiple components need it.
+- Interop with RxJS via toSignal/toObservable at clear boundaries. Don’t mix paradigms in the same function.
+- Name signals with nouns (count, user) and actions with verbs (save, increment) to keep intent crisp.
+
+== Common pitfalls
+
+- Forgetting to call a signal in the template: use value() not value. If you see a function printed in the DOM or bindings not updating, check your reads.
+- Overusing two-way binding. It’s convenient, but in complex flows explicit [x]/(xChange) pairs are easier to trace.
+- Doing heavy computation inside templates. Move it into computed() to keep change detection efficient.
+- Emitting multiple custom events where a single semantic one would do. Favor a small, intention-revealing API.
+
+== Conclusion
+
+Data binding in Angular has grown up. Interpolation, property binding, and event binding remain the backbone. Signals add precision and composability without magic. Combined with input(), output(), and model(), you can design components that are easier to reason about, test, and reuse. The best part: you can adopt signals incrementally—start local, then move them across component boundaries when it helps clarity.
+
+== Next Steps
+
+- Refactor one component’s local state to signals (signal/computed/effect). Measure template clarity.
+- Convert a child component’s @Input to input() and remove manual change detection code it made obsolete.
+- Replace one EventEmitter with output() and a model() property; wire up [(...)] in the parent.
+- Add an RxJS integration point using toSignal/toObservable for one async workflow (e.g., search).
+- Write a brief README for your team: when to prefer signals vs RxJS and how to name things consistently.
