@@ -22,11 +22,12 @@ Interpolation renders values into text nodes using template syntax like {{ ... }
 [source,html]
 ----
 <h2>{{ title }}</h2>
-<p>Welcome, {{ user?.name ? user.name : 'Guest' }}.</p>
-<p>Subtotal: {{ price | currency:'USD' }}</p>
+<p>Welcome, {{ user?.name ?? 'Guest' }}.</p>
+<p>Subtotal: {{ price | currency: 'USD' }}</p>
 ----
 
 Guidelines:
+
 - Keep expressions simple. Avoid calling methods that do non-trivial work.
 - Use pipes for presentation logic (formatting, slicing, etc.).
 - Use the safe-navigation operator (?.) to avoid null/undefined errors at render time.
@@ -41,7 +42,7 @@ Angular 20 enables JavaScript-style template literals inside template expression
 <button [attr.aria-label]="`Open details for ${item.title}`">Open</button>
 ----
 
-Use them for readable, localized strings or ARIA attributes. Keep them concise—if you’re building complex messages, consider a dedicated formatter or i18n.
+Use them for readable, localized strings or ARIA attributes. Keep them concise. If you’re building complex messages, consider a dedicated formatter or i18n.
 
 == Property binding: write to DOM and component inputs
 
@@ -71,12 +72,10 @@ Signals provide push-based reactivity. Call them in templates to read their curr
 [source,typescript]
 ----
 import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <label>
@@ -110,6 +109,7 @@ export class SearchComponent {
 ----
 
 Note:
+
 - Property binding [value]="query()" reads the signal.
 - Event binding (input)="..." updates the signal.
 - Built-in control flow (@if and @for) keeps the template declarative and fast.
@@ -158,13 +158,12 @@ This is convenient in simple forms. Import FormsModule in standalone components.
 [source,typescript]
 ----
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-preferences',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   template: `
     <label>Nickname: <input [(ngModel)]="nickname" /></label>
     <label>
@@ -194,10 +193,12 @@ Define a pair of Input and Output with the Change suffix. Angular will recognize
 [source,typescript]
 ----
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-rating',
   standalone: true,
+  imports: [CommonModule],
   template: `
     <div class="stars">
       <button *ngFor="let s of [1,2,3,4,5]"
@@ -336,6 +337,7 @@ function fakeHttpPost(payload: unknown) {
 ----
 
 What you see:
+
 - Interpolation renders human-readable fields.
 - Property binding controls input state and disabled state.
 - Event binding processes clicks and model changes.
