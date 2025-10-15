@@ -1,0 +1,355 @@
+= Data Binding in Angular: Templates, Interpolation, and Property/Event Binding
+:author: jakeortega
+:revdate: v1, 2025-10-15
+:title: Data Binding in Angular: Templates, Interpolation, and Property/Event Binding
+:lang: en
+:tags: [Beginner,property binding,event binding,interpolation,template syntax]
+
+Data binding is the heartbeat of Angular templates. Learn how data flows between components and templates using interpolation, property binding, event binding, and two-way binding. This topic also introduces new Angular 20 template features like template literals. We’ll keep the focus practical: clear patterns, minimal surprises, and maintainable code that scales.
+
+== The mental model: unidirectional data flow, well-timed feedback
+
+- From component to view: interpolation and property binding render state.
+- From view to component: event binding captures user intent.
+- Two-way binding is a convenience that composes the two, not a separate mechanism.
+
+Favor predictable one-way flows; reach for two-way when it improves clarity without hiding complexity.
+
+== Interpolation: simple, readable, one-way display
+
+Interpolation renders values into text nodes using template syntax like {{ ... }}. It’s ideal for human-readable content.
+
+[source,html]
+----
+<h2>{{ title }}</h2>
+<p>Welcome, {{ user?.name ? user.name : 'Guest' }}.</p>
+<p>Subtotal: {{ price | currency:'USD' }}</p>
+----
+
+Guidelines:
+- Keep expressions simple. Avoid calling methods that do non-trivial work.
+- Use pipes for presentation logic (formatting, slicing, etc.).
+- Use the safe-navigation operator (?.) to avoid null/undefined errors at render time.
+
+=== Angular 20 template literals in expressions
+
+Angular 20 enables JavaScript-style template literals inside template expressions for more expressive string composition.
+
+[source,html]
+----
+<h2>{{ `${greeting}, ${user?.firstName || 'friend'}!` }}</h2>
+<button [attr.aria-label]="`Open details for ${item.title}`">Open</button>
+----
+
+Use them for readable, localized strings or ARIA attributes. Keep them concise—if you’re building complex messages, consider a dedicated formatter or i18n.
+
+== Property binding: write to DOM and component inputs
+
+Property binding uses square brackets to set DOM properties, ARIA attributes, styles, classes, and child component inputs.
+
+[source,html]
+----
+<!-- DOM properties -->
+<input [value]="query()" [disabled]="isSubmitting()" />
+
+<!-- Attributes and accessibility -->
+<button [attr.aria-pressed]="isActive" [attr.data-id]="item.id">Toggle</button>
+
+<!-- Classes and styles -->
+<div [class.active]="isActive" [style.width.px]="panelWidth"></div>
+
+<!-- Child component inputs -->
+<app-avatar [src]="user.photoUrl" [alt]="user.name" [size]="64"></app-avatar>
+----
+
+Under the hood, Angular binds to the actual property when available (safer and more correct than raw attributes). Use [attr.*] only when there is no matching property.
+
+=== Signals play nicely with bindings
+
+Signals provide push-based reactivity. Call them in templates to read their current value.
+
+[source,typescript]
+----
+import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-search',
+  standalone: true,
+  imports: [CommonModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
+    <label>
+      Query:
+      <input [value]="query()" (input)="onInput($event)" placeholder="Type to search..." />
+    </label>
+
+    @if (filtered().length === 0) {
+      <p>No results</p>
+    } @else {
+      <ul>
+        @for (item of filtered(); track item) {
+          <li>{{ item }}</li>
+        }
+      </ul>
+    }
+  `
+})
+export class SearchComponent {
+  readonly items = signal(['apple', 'banana', 'citrus', 'date', 'elderberry']);
+  readonly query = signal('');
+  readonly filtered = computed(() =>
+    this.items().filter(v => v.toLowerCase().includes(this.query().toLowerCase()))
+  );
+
+  onInput(event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.query.set(input.value);
+  }
+}
+----
+
+Note:
+- Property binding [value]="query()" reads the signal.
+- Event binding (input)="..." updates the signal.
+- Built-in control flow (@if and @for) keeps the template declarative and fast.
+
+== Event binding: user intent back to the component
+
+Event binding uses parentheses to listen to DOM or component events.
+
+[source,html]
+----
+<button (click)="toggle()">{{ isOpen ? 'Close' : 'Open' }}</button>
+<input (keydown.enter)="submit()" />
+<input (input)="onInput($event)" />
+----
+
+Type your handlers for safety and clarity.
+
+[source,typescript]
+----
+toggle(): void {
+  this.isOpen = !this.isOpen;
+}
+
+submit(): void {
+  if (!this.formValid) return;
+  this.save();
+}
+
+onInput(event: Event): void {
+  const target = event.target as HTMLInputElement;
+  this.value = target.value;
+}
+----
+
+- Prefer specific event names like keydown.enter for intent-revealing handlers.
+- Avoid expensive work inside template expressions; do it in component methods or computed signals.
+
+== Two-way binding: when it helps, use it intentionally
+
+Two-way binding composes property binding and event binding into a single banana-in-a-box syntax.
+
+=== With forms (ngModel)
+
+This is convenient in simple forms. Import FormsModule in standalone components.
+
+[source,typescript]
+----
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-preferences',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  template: `
+    <label>Nickname: <input [(ngModel)]="nickname" /></label>
+    <label>
+      <input type="checkbox" [(ngModel)]="emailOptIn" />
+      Email me updates
+    </label>
+    <p>Preview: {{ nickname }} (opt-in: {{ emailOptIn }})</p>
+  `
+})
+export class PreferencesComponent {
+  nickname = '';
+  emailOptIn = true;
+}
+----
+
+With signals, bridge two-way binding by pairing [ngModel] and (ngModelChange):
+
+[source,html]
+----
+<input [ngModel]="query()" (ngModelChange)="query.set($event)" />
+----
+
+=== Custom two-way binding for child components
+
+Define a pair of Input and Output with the Change suffix. Angular will recognize [(value)].
+
+[source,typescript]
+----
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+
+@Component({
+  selector: 'app-rating',
+  standalone: true,
+  template: `
+    <div class="stars">
+      <button *ngFor="let s of [1,2,3,4,5]"
+              type="button"
+              [class.filled]="s <= value"
+              (click)="setValue(s)"
+              [attr.aria-label]="'Set rating to ' + s">
+        ★
+      </button>
+    </div>
+  `,
+  styles: [`.filled { color: #f59e0b; } button { background:none; border:none; font-size:1.25rem; cursor:pointer; }`]
+})
+export class RatingComponent {
+  @Input() value = 0;
+  @Output() valueChange = new EventEmitter<number>();
+
+  setValue(v: number) {
+    this.value = v;
+    this.valueChange.emit(v);
+  }
+}
+----
+
+Parent usage:
+
+[source,html]
+----
+<app-rating [(value)]="product.rating"></app-rating>
+<p>Current rating: {{ product.rating }}</p>
+----
+
+Tip: If your project uses the signal-based inputs API, the model() helper can reduce boilerplate. The classic pair above remains broadly compatible and explicit.
+
+== Template syntax patterns that scale
+
+- Keep expressions pure and cheap. Avoid calling functions that allocate arrays or perform filtering on each change detection; use computed signals or memoized selectors.
+- Bind to properties, not attributes. Prefer [value], [disabled], [checked] over [attr.value], except when no property exists.
+- Use track with @for to avoid re-rendering stable items:
+  @for (item of items; track item.id) { ... }
+- For [innerHTML], sanitize or trust only safe content. Angular’s DomSanitizer exists for exceptional cases—prefer plain text whenever possible.
+
+== Angular 20 template literal examples in context
+
+Use template literals where they improve clarity, especially for ARIA and labeling.
+
+[source,html]
+----
+<!-- Readable, localized-friendly labels -->
+<button
+  type="button"
+  [attr.aria-label]="`${isPlaying ? 'Pause' : 'Play'} ${track.title}`"
+  (click)="togglePlay()">
+  {{ isPlaying ? 'Pause' : 'Play' }}
+</button>
+
+<!-- Combining with pipes -->
+<p>{{ `Hello, ${user?.name || 'Guest'}` | titlecase }}</p>
+
+<!-- Attributes that aren’t DOM properties -->
+<a [attr.data-test-id]="`link-${link.id}`" [href]="link.url">{{ link.title }}</a>
+----
+
+Keep logic minimal; push complex decisions into the component or computed signals for testability.
+
+== A cohesive example: binding the pieces
+
+[source,typescript]
+----
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RatingComponent } from './rating.component';
+
+@Component({
+  selector: 'app-product-card',
+  standalone: true,
+  imports: [CommonModule, FormsModule, RatingComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
+    <article class="card">
+      <header>
+        <h3>{{ product().name }}</h3>
+        <p class="price">{{ product().price | currency:'USD' }}</p>
+      </header>
+
+      <label [attr.aria-label]="`Quantity for ${product().name}`">
+        Qty:
+        <input type="number"
+               min="1"
+               [ngModel]="qty()"
+               (ngModelChange)="qty.set($event)" />
+      </label>
+
+      <app-rating [(value)]="rating"></app-rating>
+
+      <p>{{ description }}</p>
+
+      <button type="button"
+              class="add"
+              [disabled]="isSubmitting()"
+              (click)="addToCart()">
+        {{ isSubmitting() ? 'Adding…' : 'Add to cart' }}
+      </button>
+    </article>
+  `,
+  styles: [`.card{border:1px solid #e5e7eb;border-radius:.5rem;padding:1rem}.price{color:#374151}.add{margin-top:.75rem}`]
+})
+export class ProductCardComponent {
+  readonly product = signal({ id: 1, name: 'Noise-canceling Headphones', price: 199.99 });
+  readonly qty = signal(1);
+  rating = 4; // two-way bound to child
+  readonly isSubmitting = signal(false);
+
+  get description(): string {
+    return `${this.product().name} — rated ${this.rating}/5 by our customers.`;
+  }
+
+  async addToCart() {
+    this.isSubmitting.set(true);
+    try {
+      await fakeHttpPost({
+        id: this.product().id,
+        qty: this.qty(),
+        rating: this.rating
+      });
+    } finally {
+      this.isSubmitting.set(false);
+    }
+  }
+}
+
+function fakeHttpPost(payload: unknown) {
+  return new Promise<void>(r => setTimeout(r, 500));
+}
+----
+
+What you see:
+- Interpolation renders human-readable fields.
+- Property binding controls input state and disabled state.
+- Event binding processes clicks and model changes.
+- Two-way binding streamlines rating updates.
+- Template literals keep labels clear and accessible.
+
+== Conclusion
+
+Data binding is how intent flows through your Angular app. Interpolation and property binding project state. Event binding captures change. Two-way binding composes both when it reduces friction. With Angular 20’s template literal support, you can craft clearer strings and ARIA labels without sacrificing readability. Keep expressions simple, push complexity into components or computed signals, and lean on built-in control flow for performance.
+
+== Next Steps
+
+- Audit a component for heavy template expressions. Move logic into computed signals or pure methods.
+- Add ARIA attributes with property binding and template literals to improve accessibility.
+- Refactor a custom control to support [(value)] using the input/output pair.
+- Explore Angular’s built-in control flow (@if, @for, @switch) to reduce directive boilerplate.
+- If your team uses signals broadly, standardize patterns for bridging with forms: [ngModel] + (ngModelChange) for crisp two-way behavior.
