@@ -10,11 +10,13 @@ Angular 19 makes signals a first-class, ergonomic way to manage reactive state�
 == Why signals for your first Angular 19 app
 
 Signals shine when:
+
 - You want local or feature-level state that’s easy to understand and test.
 - You prefer declarative data flow with minimal boilerplate.
 - You care about performance and predictable change detection.
 
 Signals give you:
+
 - signal(): a mutable value you set and read like a variable.
 - computed(): a derived value that automatically recalculates when dependencies change.
 - effect(): a side effect that runs when its dependent signals change (think persistence, logging, analytics).
@@ -24,11 +26,13 @@ With the built-in control flow (@if, @for, @switch), Angular templates read sign
 == What we’re building
 
 A tiny yet complete “Tasks” feature:
+
 - Add tasks, toggle done, filter by status.
 - Persist to localStorage.
 - Derive stats via computed signals.
 
 We’ll use:
+
 - Standalone components.
 - inject() for dependency injection.
 - Signals for reactive state.
@@ -122,6 +126,7 @@ export class TaskStore {
 ----
 
 Notes:
+
 - Keep tasks private, expose asReadonly() if needed, and route all mutations through methods. That protects invariants and makes tests straightforward.
 - computed() caches until dependencies change, so stats and filtered are cheap to read in templates.
 - effect() is for side effects only. Don’t derive data there.
@@ -208,6 +213,7 @@ export class AppComponent {
 ----
 
 A few things to notice:
+
 - Reading a signal in a template uses function-call syntax: store.stats().
 - The new @if and @for syntax is concise and fast; track by a stable id to minimize DOM churn.
 - We avoid ngModel here to keep the example lean; use reactive forms if you need validation and composition.
@@ -263,6 +269,7 @@ Signals play nicely with unit tests because there’s no hidden subscription mac
 == Where this scales
 
 This pattern scales surprisingly far:
+
 - Add tags or due dates? Extend Task and update computed accordingly.
 - Need a multi-page app? Provide routes and lazy-load feature components while keeping a small, focused store per feature.
 - Want undo/redo? Wrap mutations to capture patches and provide intent-level commands.
