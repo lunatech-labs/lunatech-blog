@@ -1,0 +1,344 @@
+= Building Your First Angular Form with the Reactive Forms API
+:author: jakeortega
+:revdate: v1, 2025-10-20
+:title: Building Your First Angular Form with the Reactive Forms API
+:lang: en
+:tags: [Beginner,reactive forms,form control,validation,FormBuilder]
+
+Create powerful reactive forms using FormControl, FormGroup, and FormArray. Understand validation, error handling, and how Angular 20 enhances form management. In this guide, we’ll build a small but production-grade form using Angular’s Reactive Forms API, focusing on maintainability, type safety, and user experience.
+
+== Why Reactive Forms
+
+Reactive forms give you:
+- Predictable state: validation and form state are driven by an explicit model.
+- Strong typing: with Angular’s typed forms, your form control values are no longer `any`.
+- Testability: validators and form logic are pure functions.
+- Extensibility: compose `FormControl`, `FormGroup`, and `FormArray` to match real-world data models.
+
+Angular 20 keeps refining typed forms and template type-checking. The modern control flow syntax and standalone components streamline development and improve performance.
+
+== What We’re Building
+
+We’ll create a “Sign Up” form with:
+- Name, Email, Password, Agree to Terms (FormGroup with FormControls)
+- Dynamic list of phone numbers (FormArray)
+- Synchronous and asynchronous validation
+- Inline errors, pending states, and server-side error handling
+- Strong typing using `FormBuilder.nonNullable`
+
+== The Component (Standalone + Typed Forms)
+
+[source,typescript]
+----
+import { Component, inject, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  Validators,
+  FormGroup,
+  FormControl,
+  FormArray,
+  ValidationErrors,
+  ValidatorFn,
+  AsyncValidatorFn,
+} from '@angular/forms';
+import { of, throwError } from 'rxjs';
+import { delay, finalize } from 'rxjs/operators';
+
+type SignUpForm = FormGroup<{
+  name: FormControl<string>;
+  email: FormControl<string>;
+  password: FormControl<string>;
+  agreeToTerms: FormControl<boolean>;
+  phones: FormArray<FormControl<string>>;
+}>;
+
+@Component({
+  selector: 'app-sign-up-form',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
+  templateUrl: './sign-up-form.component.html',
+})
+export class SignUpFormComponent {
+  private readonly fb = inject(FormBuilder);
+  private readonly takenEmails = new Set(['taken@example.com', 'demo@acme.io']);
+
+  // Simple UI state with signals (Angular 17+)
+  submitting = signal(false);
+
+  form: SignUpForm = this.fb.nonNullable.group(
+    {
+      name: this.fb.nonNullable.control('', {
+        validators: [Validators.required, Validators.minLength(2)],
+      }),
+      email: this.fb.nonNullable.control('', {
+        validators: [Validators.required, Validators.email],
+        asyncValidators: [this.uniqueEmail()],
+        updateOn: 'blur', // validate email on blur to reduce noise
+      }),
+      password: this.fb.nonNullable.control('', {
+        validators: [Validators.required, Validators.minLength(8), this.strongPassword()],
+      }),
+      agreeToTerms: this.fb.nonNullable.control(false, {
+        validators: [Validators.requiredTrue],
+      }),
+      phones: this.fb.nonNullable.array([this.fb.nonNullable.control('')], {
+        validators: [this.atLeastOnePhone()],
+      }),
+    },
+    {
+      validators: [this.nameNotInPassword()],
+    }
+  );
+
+  // Convenience accessors for template
+  get f() {
+    return this.form.controls;
+  }
+  get phones(): FormArray<FormControl<string>> {
+    return this.form.controls.phones;
+  }
+
+  addPhone() {
+    this.phones.push(this.fb.nonNullable.control(''));
+  }
+
+  removePhone(index: number) {
+    this.phones.removeAt(index);
+    this.phones.updateValueAndValidity();
+  }
+
+  // Validators
+  private strongPassword(): ValidatorFn {
+    return (control): ValidationErrors | null => {
+      const value = control.value?.trim() ?? '';
+      if (!value) return null;
+      const hasUpper = /[A-Z]/.test(value);
+      const hasLower = /[a-z]/.test(value);
+      const hasNumber = /[0-9]/.test(value);
+      const hasSymbol = /[^A-Za-z0-9]/.test(value);
+      return hasUpper && hasLower && hasNumber && hasSymbol
+        ? null
+        : {
+            weakPassword: {
+              message: 'Use upper, lower, number, and a symbol.',
+            },
+          };
+    };
+  }
+
+  private nameNotInPassword(): ValidatorFn {
+    return (group): ValidationErrors | null => {
+      const name = (group as SignUpForm).controls.name.value.toLowerCase().trim();
+      const pw = (group as SignUpForm).controls.password.value.toLowerCase();
+      if (!name || !pw) return null;
+      return pw.includes(name)
+        ? { nameInPassword: { message: 'Password should not contain your name.' } }
+        : null;
+    };
+  }
+
+  private atLeastOnePhone(): ValidatorFn {
+    return (control): ValidationErrors | null => {
+      const array = control as FormArray<FormControl<string>>;
+      const anyFilled = array.controls.some(c => (c.value ?? '').trim().length > 0);
+      return anyFilled ? null : { atLeastOnePhone: { message: 'Add at least one phone number.' } };
+    };
+  }
+
+  private uniqueEmail(): AsyncValidatorFn {
+    return (control) => {
+      const value = (control.value ?? '').toLowerCase().trim();
+      if (!value) return of(null);
+      // Simulate HTTP latency and uniqueness check
+      const isTaken = this.takenEmails.has(value);
+      return of(isTaken ? { emailTaken: true } : null).pipe(delay(600));
+    };
+  }
+
+  // Submit with simulated server interaction + error mapping
+  onSubmit() {
+    this.form.markAllAsTouched();
+
+    // Avoid submitting invalid or still-validating forms
+    if (this.form.invalid || this.form.pending) return;
+
+    this.submitting.set(true);
+
+    this.fakeSave(this.form.getRawValue())
+      .pipe(finalize(() => this.submitting.set(false)))
+      .subscribe({
+        next: () => {
+          // Success UX: clear server errors, optionally reset phones to one empty control
+          this.form.setErrors(null);
+          // Keep values to let the user continue; in real apps you may navigate
+        },
+        error: (err) => {
+          // Map server errors to field and form errors
+          if (err?.errors?.email) {
+            this.f.email.setErrors({ server: err.errors.email });
+          }
+          if (err?.errors?.form) {
+            this.form.setErrors({ server: err.errors.form });
+          }
+        },
+      });
+  }
+
+  private fakeSave(payload: {
+    name: string;
+    email: string;
+    password: string;
+    agreeToTerms: boolean;
+    phones: string[];
+  }) {
+    const domain = payload.email.split('@')[1] ?? '';
+    if (domain === 'bounced.test') {
+      return throwError(() => ({
+        status: 400,
+        errors: {
+          email: 'This domain frequently bounces. Use a different email.',
+          form: 'We could not complete your sign up. Please review the errors.',
+        },
+      })).pipe(delay(700));
+    }
+    return of(payload).pipe(delay(900));
+  }
+}
+----
+
+== The Template (Modern Control Flow + Clear Errors)
+
+We’ll use Angular’s modern control flow (`@if`, `@for`) for concise, readable templates alongside the standard reactive forms directives.
+
+[source,html]
+----
+<form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+  @if (form.errors?.server) {
+    <div class="error-banner" role="alert">
+      {{ form.errors.server }}
+    </div>
+  }
+
+  <!-- Name -->
+  <label>
+    <span>Name</span>
+    <input type="text" formControlName="name" autocomplete="name" />
+  </label>
+  @if (f.name.touched && f.name.invalid) {
+    <ul class="errors">
+      @if (f.name.errors?.required) { <li>Name is required.</li> }
+      @if (f.name.errors?.minlength) { <li>Use at least 2 characters.</li> }
+    </ul>
+  }
+
+  <!-- Email -->
+  <label>
+    <span>Email</span>
+    <input type="email" formControlName="email" autocomplete="email" />
+  </label>
+  @if (f.email.pending) {
+    <div class="hint">Checking email availability…</div>
+  }
+  @if (f.email.touched && f.email.invalid) {
+    <ul class="errors">
+      @if (f.email.errors?.required) { <li>Email is required.</li> }
+      @if (f.email.errors?.email) { <li>Enter a valid email.</li> }
+      @if (f.email.errors?.emailTaken) { <li>This email is already registered.</li> }
+      @if (f.email.errors?.server) { <li>{{ f.email.errors.server }}</li> }
+    </ul>
+  }
+
+  <!-- Password -->
+  <label>
+    <span>Password</span>
+    <input type="password" formControlName="password" autocomplete="new-password" />
+  </label>
+  @if (f.password.touched && f.password.invalid) {
+    <ul class="errors">
+      @if (f.password.errors?.required) { <li>Password is required.</li> }
+      @if (f.password.errors?.minlength) { <li>Use at least 8 characters.</li> }
+      @if (f.password.errors?.weakPassword) { <li>{{ f.password.errors.weakPassword.message }}</li> }
+    </ul>
+  }
+
+  <!-- Group-level error -->
+  @if (form.touched && form.errors?.nameInPassword) {
+    <div class="errors" role="alert">
+      {{ form.errors.nameInPassword.message }}
+    </div>
+  }
+
+  <!-- Phones -->
+  <fieldset formArrayName="phones">
+    <legend>Phone numbers</legend>
+    @for (ctrl of phones.controls; track $index; let i = $index) {
+      <div class="phone-row">
+        <input type="tel" [formControlName]="i" inputmode="tel" placeholder="+1 555 123 4567" />
+        <button type="button" (click)="removePhone(i)" aria-label="Remove phone">Remove</button>
+      </div>
+    }
+    @if (phones.touched && phones.errors?.atLeastOnePhone) {
+      <div class="errors" role="alert">{{ phones.errors.atLeastOnePhone.message }}</div>
+    }
+    <button type="button" (click)="addPhone()">Add phone</button>
+  </fieldset>
+
+  <!-- Terms -->
+  <label class="checkbox">
+    <input type="checkbox" formControlName="agreeToTerms" />
+    <span>I agree to the terms</span>
+  </label>
+  @if (f.agreeToTerms.touched && f.agreeToTerms.invalid) {
+    <div class="errors" role="alert">You must accept the terms.</div>
+  }
+
+  <button type="submit" [disabled]="submitting() || form.pending">Create Account</button>
+</form>
+----
+
+== Key Practices Explained
+
+- Start with FormBuilder.nonNullable: Avoids `null` creeping into your form control types, simplifies code, and strengthens type safety.
+- Typed access to controls: Use `form.controls` and helper getters like `phones` to avoid string keys and unsafe casts.
+- updateOn strategy: For email we used `updateOn: 'blur'` to cut down on async validation noise. For large forms, `updateOn: 'submit'` at the group level can further optimize performance and UX, including zone-less apps.
+- Layered validation:
+  - Field-level: `required`, `email`, `minLength`, and a `strongPassword` validator.
+  - Group-level: `nameNotInPassword` to enforce cross-field constraints.
+  - Async: `uniqueEmail` simulates a server check; show a pending state to set expectations.
+- FormArray for dynamic fields: Real data often has variable-length lists. Keep the array validator (`atLeastOnePhone`) at the array level and keep individual phone inputs simple.
+- Error mapping from server: Convert server responses into `setErrors` on both controls and the group. This keeps the UI consistent with client-side errors.
+- Accessibility: Use role="alert" for important error regions, associate labels with inputs, and ensure the submit button’s disabled state reflects pending/submit state accurately.
+
+== How Angular 20 Helps
+
+- Typed forms, end-to-end: Strong typing across `FormControl`, `FormGroup`, and `FormArray` reduces runtime surprises and improves IDE assistance.
+- Standalone components and modern control flow: Less module boilerplate and clearer templates using `@if`/`@for` improve maintainability and readability.
+- Better DX and performance at build time: Stricter template checking and ongoing compiler/runtime improvements make form templates safer and faster to iterate on.
+
+None of these change how you think about forms; they remove friction so you can focus on your model, your validation, and your users.
+
+== Testing Tips
+
+- Unit test validators as pure functions: pass mock controls and assert on returned errors or null.
+- Test async validators with marble tests or fakeAsync/tick to verify pending states and outcomes.
+- Integration test the component: set values, trigger `markAllAsTouched()`, and expect specific error messages in the DOM. Ensure server errors show up when `setErrors` is applied.
+
+== Troubleshooting
+
+- Form never becomes valid: Check group-level validators—they can keep the form invalid even when all fields look valid.
+- Async validator never completes: Ensure you’re returning an Observable and not subscribing inside the validator.
+- Errors not showing: Validation messages usually depend on `touched`/`dirty`. To show on submit, call `markAllAsTouched()`.
+
+== Conclusion
+
+Reactive forms give you a clear, typed, and testable way to manage complex input. By combining `FormControl`, `FormGroup`, and `FormArray` with focused validation and mindful UX (pending states, clear errors), you create forms that feel reliable and maintainable. Angular 20’s refinements—typed forms, standalone components, and modern control flow—let you ship with less boilerplate and more confidence.
+
+== Next Steps
+
+- Add a Confirm Password control with a group-level “match” validator.
+- Persist the form to local storage to support “resume later.”
+- Introduce an async validator that actually calls your API via HttpClient.
+- Explore `updateOn: 'submit'` for long forms to reduce change detection churn.
+- Wrap common error rendering into a reusable component for consistent UX across your app.
