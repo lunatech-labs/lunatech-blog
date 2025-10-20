@@ -10,6 +10,7 @@ Create powerful reactive forms using FormControl, FormGroup, and FormArray. Unde
 == Why Reactive Forms
 
 Reactive forms give you:
+
 - Predictable state: validation and form state are driven by an explicit model.
 - Strong typing: with Angular’s typed forms, your form control values are no longer `any`.
 - Testability: validators and form logic are pure functions.
@@ -20,6 +21,7 @@ Angular 20 keeps refining typed forms and template type-checking. The modern con
 == What We’re Building
 
 We’ll create a “Sign Up” form with:
+
 - Name, Email, Password, Agree to Terms (FormGroup with FormControls)
 - Dynamic list of phone numbers (FormArray)
 - Synchronous and asynchronous validation
