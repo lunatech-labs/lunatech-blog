@@ -329,13 +329,13 @@ None of these change how you think about forms; they remove friction so you can 
 
 == Troubleshooting
 
-- Form never becomes valid: Check group-level validators—they can keep the form invalid even when all fields look valid.
+- Form never becomes valid: Check group-level validators as they can keep the form invalid even when all fields look valid.
 - Async validator never completes: Ensure you’re returning an Observable and not subscribing inside the validator.
 - Errors not showing: Validation messages usually depend on `touched`/`dirty`. To show on submit, call `markAllAsTouched()`.
 
 == Conclusion
 
-Reactive forms give you a clear, typed, and testable way to manage complex input. By combining `FormControl`, `FormGroup`, and `FormArray` with focused validation and mindful UX (pending states, clear errors), you create forms that feel reliable and maintainable. Angular 20’s refinements—typed forms, standalone components, and modern control flow—let you ship with less boilerplate and more confidence.
+Reactive forms give you a clear, typed, and testable way to manage complex input. By combining `FormControl`, `FormGroup`, and `FormArray` with focused validation and mindful UX (pending states, clear errors), you create forms that feel reliable and maintainable. Angular 20’s refinements like typed forms, standalone components, and modern control flow let you ship with less boilerplate and more confidence.
 
 == Next Steps
 
