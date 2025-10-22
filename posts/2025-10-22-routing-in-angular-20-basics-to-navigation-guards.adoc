@@ -141,11 +141,12 @@ import { ProjectService } from '../data/project.service';
   standalone: true,
   selector: 'app-project-details',
   template: `
-    <ng-container *ngIf="project(); else notfound">
-      <h2>{{ project()?.name }}</h2>
+    @if (project(); as data) {
+      <h2>{{ data.name }}</h2>
       <button (click)="goBack()">Back</button>
-    </ng-container>
-    <ng-template #notfound>Project not found.</ng-template>
+    } @else {
+      <p>Project not found.</p>
+    }
   `,
 })
 export class ProjectDetailsComponent {
@@ -165,6 +166,7 @@ export class ProjectDetailsComponent {
 ----
 
 Notes:
+
 - Use toSignal when a component benefits from reactive values in the template.
 - Keep navigation relative to avoid hardcoding URLs.
 
@@ -335,7 +337,7 @@ This balances UX and performance while keeping the routing layer the single sour
 
 == Conclusion
 
-A well-structured router is more than a URL switchboard—it’s an agreement about flow, access, and intent. Angular’s modern APIs make routing readable and testable: standalone routes, functional route guards, lazy-loading, and async redirects that keep decisions close to configuration. When your code communicates clearly, your team moves faster and makes fewer mistakes.
+A well-structured router is more than a URL switchboard, it’s an agreement about flow, access, and intent. Angular’s modern APIs make routing readable and testable: standalone routes, functional route guards, lazy-loading, and async redirects that keep decisions close to configuration. When your code communicates clearly, your team moves faster and makes fewer mistakes.
 
 == Next Steps
 
