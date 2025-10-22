@@ -1,0 +1,346 @@
+= Routing in Angular 20: Basics to Navigation Guards
+:author: jakeortega
+:revdate: v1, 2025-10-22
+:title: Routing in Angular 20: Basics to Navigation Guards
+:lang: en
+:tags: [Beginner,angular router,navigation,route guards,async redirects]
+
+Master client-side routing with Angular’s Router. Learn route configuration, navigation, guards, and Angular 20’s asynchronous redirect improvements.
+
+== Why the Router still matters
+
+Routing is the backbone of user flow. It defines how screens load, what data they need, and how access is enforced. A reliable setup pays off when your app scales and your team grows. In Angular 20, the Angular Router keeps moving in the right direction: clearer configuration, better async flows, and ergonomics that prioritize maintainability.
+
+This guide walks through a practical baseline: route configuration, links, programmatic navigation, route guards, and async redirects, all with standalone components and functional APIs.
+
+== A minimal, modern router setup
+
+Use standalone APIs and provideRouter for a clean bootstrap.
+
+[source,typescript]
+----
+// main.ts
+import { bootstrapApplication } from '@angular/platform-browser';
+import { provideRouter, withPreloading, PreloadAllModules } from '@angular/router';
+import { AppComponent } from './app/app.component';
+import { routes } from './app/app.routes';
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideRouter(
+      routes,
+      withPreloading(PreloadAllModules),
+    ),
+  ],
+});
+----
+
+Define your routes in a dedicated file. Prefer lazy-loading to keep initial bundles lean.
+
+[source,typescript]
+----
+// app/app.routes.ts
+import { Routes } from '@angular/router';
+import { authCanActivate, authCanMatch, unsavedCanDeactivate } from './auth/guards';
+
+export const routes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+
+  {
+    path: 'home',
+    title: 'Home',
+    loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent),
+  },
+  {
+    path: 'dashboard',
+    title: 'Dashboard',
+    canActivate: [authCanActivate],
+    loadComponent: () => import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent),
+  },
+  {
+    path: 'projects',
+    canMatch: [authCanMatch],
+    loadChildren: () => import('./features/projects/projects.routes').then(m => m.PROJECTS_ROUTES),
+  },
+  {
+    path: 'settings',
+    title: 'Settings',
+    canDeactivate: [unsavedCanDeactivate],
+    loadComponent: () => import('./features/settings/settings.component').then(m => m.SettingsComponent),
+  },
+  {
+    path: 'login',
+    title: 'Sign in',
+    loadComponent: () => import('./features/auth/login.component').then(m => m.LoginComponent),
+  },
+  {
+    path: '**',
+    title: 'Not Found',
+    loadComponent: () => import('./shared/not-found/not-found.component').then(m => m.NotFoundComponent),
+  },
+];
+----
+
+== The application shell: links and outlet
+
+Make navigation obvious and accessible. Use RouterLink and RouterLinkActive for feedback.
+
+[source,html]
+----
+<!-- app/app.component.html -->
+<header class="app-header">
+  <nav>
+    <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+    <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+    <a routerLink="/projects" routerLinkActive="active">Projects</a>
+    <a routerLink="/settings" routerLinkActive="active">Settings</a>
+  </nav>
+</header>
+
+<main>
+  <router-outlet></router-outlet>
+</main>
+----
+
+RouterLink keeps your templates declarative; RouterOutlet hosts the matched view. For accessibility and UX, the active class communicates where the user is during navigation.
+
+== A realistic feature route with params and lazy-loading
+
+For features like Projects, lazy load the route definition and child screens.
+
+[source,typescript]
+----
+// features/projects/projects.routes.ts
+import { Routes } from '@angular/router';
+
+export const PROJECTS_ROUTES: Routes = [
+  {
+    path: '',
+    title: 'Projects',
+    loadComponent: () => import('./list/projects-list.component').then(m => m.ProjectsListComponent),
+  },
+  {
+    path: ':id',
+    title: 'Project Details',
+    loadComponent: () => import('./details/project-details.component').then(m => m.ProjectDetailsComponent),
+  },
+];
+----
+
+In a details component, read route params. Use clean, testable patterns.
+
+[source,typescript]
+----
+// features/projects/details/project-details.component.ts
+import { Component, computed, inject } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { ProjectService } from '../data/project.service';
+
+@Component({
+  standalone: true,
+  selector: 'app-project-details',
+  template: `
+    <ng-container *ngIf="project(); else notfound">
+      <h2>{{ project()?.name }}</h2>
+      <button (click)="goBack()">Back</button>
+    </ng-container>
+    <ng-template #notfound>Project not found.</ng-template>
+  `,
+})
+export class ProjectDetailsComponent {
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private service = inject(ProjectService);
+
+  private paramMap = toSignal(this.route.paramMap, { initialValue: this.route.snapshot.paramMap });
+  id = computed(() => this.paramMap()?.get('id') ?? null);
+
+  project = toSignal(this.service.getProjectStream(this.route.paramMap), { initialValue: null });
+
+  goBack() {
+    this.router.navigate(['../'], { relativeTo: this.route });
+  }
+}
+----
+
+Notes:
+- Use toSignal when a component benefits from reactive values in the template.
+- Keep navigation relative to avoid hardcoding URLs.
+
+== Programmatic navigation that reads well
+
+When you need to route from code, favor clarity and explicitness.
+
+[source,typescript]
+----
+// features/auth/login.component.ts (snippet)
+import { Component, inject } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from './auth.service';
+
+@Component({
+  standalone: true,
+  template: `
+    <form (ngSubmit)="login()">
+      <!-- form fields -->
+      <button type="submit">Sign in</button>
+    </form>
+  `,
+})
+export class LoginComponent {
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  private auth = inject(AuthService);
+
+  async login() {
+    await this.auth.signIn();
+    const redirect = this.route.snapshot.queryParamMap.get('redirect') || '/dashboard';
+    this.router.navigateByUrl(redirect, { replaceUrl: true, state: { from: 'login' } });
+  }
+}
+----
+
+- navigate and navigateByUrl are both fine; navigate works with command arrays and relative routes.
+- replaceUrl avoids filling history with transient steps like login.
+
+== Route guards: protect, match, and confirm
+
+Functional guards are terse, testable, and DI-friendly. Use canActivate for already-loaded routes and canMatch to gate access before lazy-loading. Use canDeactivate to protect against losing changes.
+
+[source,typescript]
+----
+// app/auth/guards.ts
+import { inject } from '@angular/core';
+import { CanActivateFn, CanDeactivateFn, CanMatchFn, Router, UrlSegment, Route } from '@angular/router';
+import { AuthService } from './auth.service';
+
+export const authCanActivate: CanActivateFn = (_route, state) => {
+  const auth = inject(AuthService);
+  const router = inject(Router);
+  if (auth.isLoggedIn()) return true;
+  // Return a UrlTree to redirect without throwing
+  return router.createUrlTree(['/login'], { queryParams: { redirect: state.url } });
+};
+
+export const authCanMatch: CanMatchFn = (route: Route, segments: UrlSegment[]) => {
+  const auth = inject(AuthService);
+  const router = inject(Router);
+  if (auth.isLoggedIn()) return true;
+
+  const attempted = '/' + segments.map(s => s.path).join('/');
+  return router.createUrlTree(['/login'], { queryParams: { redirect: attempted } });
+};
+
+export const unsavedCanDeactivate: CanDeactivateFn<{ hasUnsavedChanges(): boolean }> = (component) => {
+  return component.hasUnsavedChanges()
+    ? confirm('You have unsaved changes. Leave this page?')
+    : true;
+};
+----
+
+Notes:
+- Returning a UrlTree is the most ergonomic way to redirect from guards.
+- Prefer canMatch for lazy-loaded feature entries. It prevents loading code the user can’t access.
+
+== Async redirects in Angular 20
+
+Redirects are often conditional and data-driven. Angular 20 refines ergonomics for async redirects by allowing redirect functions to return a Promise or Observable of a UrlTree, keeping logic declarative in the route table. When you need DI, the function executes in a proper injection context.
+
+[source,typescript]
+----
+// app/app.routes.ts (excerpt showing async redirect)
+import { Router, Routes } from '@angular/router';
+import { inject } from '@angular/core';
+import { AuthService } from './auth/auth.service';
+
+export const routes: Routes = [
+  // ...
+  {
+    path: 'start',
+    // Async redirect based on login status
+    redirectTo: async () => {
+      const auth = inject(AuthService);
+      const router = inject(Router);
+      const isLoggedIn = await auth.isLoggedInOnce(); // e.g., resolves after token refresh
+      return isLoggedIn
+        ? router.createUrlTree(['/dashboard'])
+        : router.createUrlTree(['/login'], { queryParams: { redirect: '/start' } });
+    },
+    pathMatch: 'full',
+  },
+  // ...
+];
+----
+
+If your team prefers explicit control (or for compatibility), use canMatch to perform the same async decision and return a UrlTree. Both approaches keep “redirect intent” within the routing layer, preserving a clear separation from UI.
+
+== Handling 404s and fallbacks
+
+Keep a final catch-all route at the end. Make the not-found component tiny and isolated.
+
+[source,typescript]
+----
+// shared/not-found/not-found.component.ts
+import { Component } from '@angular/core';
+
+@Component({
+  standalone: true,
+  template: `
+    <h2>Page not found</h2>
+    <p>The page you’re looking for doesn’t exist.</p>
+    <a routerLink="/home">Go to Home</a>
+  `,
+})
+export class NotFoundComponent {}
+----
+
+== Developer experience tips that scale
+
+- Title and data: Use the route title for sensible defaults. Keep route data small and serializable.
+- Preloading: withPreloading(PreloadAllModules) improves perceived speed after the first screen.
+- Guard reuse: Share a single predicate behind multiple guard types (e.g., canActivate and canMatch) to avoid drift.
+- UrlTree over side effects: Prefer returning UrlTree over imperative router.navigate inside guards.
+- Relative navigation: Favor relativeTo where possible to avoid brittle absolute paths.
+- Observability: Listen to router.events for tracing NavigationStart, NavigationEnd, NavigationCancel when debugging.
+
+[source,typescript]
+----
+// Simple router event logging helper (dev only)
+import { filter } from 'rxjs';
+import { Router, NavigationStart, NavigationEnd, NavigationCancel } from '@angular/router';
+
+export function logNavigation(router: Router) {
+  router.events
+    .pipe(filter(e => e instanceof NavigationStart || e instanceof NavigationEnd || e instanceof NavigationCancel))
+    .subscribe(e => console.debug('[router]', e));
+}
+----
+
+== Common pitfalls and guardrails
+
+- Infinite redirect loops: Always check target vs current URL when redirecting conditionally. Returning the same UrlTree repeatedly will stall navigation.
+- Missing pathMatch: For empty-path redirects, pathMatch: 'full' prevents partial matches from hijacking nested routes.
+- Eager vs lazy: Use canMatch for feature entries to avoid loading code for unauthorized users.
+- Query params and state: Preserve user intent via redirect query params. Clear them after successful navigation if they’re transient.
+
+== Putting it together: a cohesive flow
+
+- Users hitting /start are asynchronously redirected based on auth state using async redirects.
+- Unauthenticated users attempting /projects are intercepted by canMatch and sent to /login with a redirect back.
+- Settings protects against accidental loss via canDeactivate.
+- Dashboard and Projects load lazily, preloaded after the first screen.
+
+This balances UX and performance while keeping the routing layer the single source of truth for navigation logic.
+
+== Conclusion
+
+A well-structured router is more than a URL switchboard—it’s an agreement about flow, access, and intent. Angular’s modern APIs make routing readable and testable: standalone routes, functional route guards, lazy-loading, and async redirects that keep decisions close to configuration. When your code communicates clearly, your team moves faster and makes fewer mistakes.
+
+== Next Steps
+
+- Extract guard predicates into pure functions and unit test them with dependency mocks.
+- Add a data resolver where you need the route to wait for critical data before rendering.
+- Introduce a prefetch strategy for specific features, or preload on hover using quicklink-style heuristics.
+- Explore view transitions with router integration to smooth screen changes.
+- Audit routes for consistent titles, data contracts, and error handling paths.
