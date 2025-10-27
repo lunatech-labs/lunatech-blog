@@ -21,8 +21,8 @@ The Angular CLI scaffolds a production-grade baseline with sensible defaults. St
 ----
 // Terminal
 // Create a new app with routing and SCSS. Use --ssr to scaffold server-side rendering.
-ng new acme-dashboard --routing --style=scss
-cd acme-dashboard
+ng new lt-dashboard --routing --style=scss
+cd lt-dashboard
 ng serve
 ----
 
@@ -158,14 +158,12 @@ Use reactive forms and the modern control flow syntax (@if, @for) to keep templa
 ----
 // src/app/features/home/home.component.ts
 import { Component, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 
 type Project = { id: number; name: string };
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   styles: [`
     form { display: flex; gap: 0.5rem; margin: 1rem 0; }
     input { min-width: 240px; }
@@ -229,11 +227,8 @@ Keep feature components focused and stateless by default.
 ----
 // src/app/features/projects/projects.component.ts
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule],
   template: `
     <h2>Projects</h2>
     <p>This is a lazy-loaded page. Add tables, filters, or charts here.</p>
@@ -294,7 +289,7 @@ import { environment } from '../environments/environment';
 
 == CLI commands you’ll use daily
 
-- Generate features: ng g component app/features/activity --standalone
+- Generate features: ng g component app/features/activity
 - Add utilities: ng g interceptor core/logging
 - Run locally: ng serve
 - Build for production: ng build --configuration production
@@ -321,7 +316,7 @@ If you create your project with --ssr, the CLI scaffolds an SSR server and hydra
 
 == Conclusion
 
-Angular 20’s defaults—standalone components, functional providers, and a lean bootstrap—remove a lot of ceremony from project setup. With a clear routes file and features organized by responsibility, you can scale without accumulating incidental complexity. The Angular CLI does the heavy lifting so you can focus on domain logic and developer experience.
+Angular 20 cuts the ceremony: standalone components by default, functional providers, and minimal bootstrapping. Organize by feature, keep routes clear, and scale without the bloat. The CLI does the grunt work, you build features.
 
 == Next Steps
 
