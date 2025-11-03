@@ -5,13 +5,14 @@
 :lang: en
 :tags: [Intermediate,dependency injection,providers,services,inject function]
 
-Angular’s dependency injection (DI) is both powerful and approachable—once you lock into its mental model. In this deep dive, we’ll unpack providers, hierarchical injectors, and how the inject() function streamlines DI in Angular 20 so you can build systems that are testable, maintainable, and fast.
+Angular’s dependency injection (DI) is both powerful and approachable once you understand its mental model. In this deep dive, we’ll unpack providers, hierarchical injectors, and how the inject() function streamlines DI in Angular 20, helping you build systems that are testable, maintainable, and fast.
 
 == Why dependency injection matters (and how Angular does it)
 
-Dependency injection decouples construction from use. Your components and services describe what they need—not how to build it. Angular’s injector resolves those needs at runtime, wiring up a graph of dependencies.
+Dependency injection decouples construction from use. Your components and services describe what they need, not how to build it. Angular’s injector resolves those needs at runtime, wiring up a graph of dependencies.
 
 Angular 20 embraces:
+
 - Standalone components and environment providers (no NgModules required).
 - Functional APIs (interceptors, guards, resolvers) that pair naturally with inject().
 - Clear scoping via hierarchical injectors: platform, root, environment, and component.
@@ -25,6 +26,7 @@ You can register providers in three primary ways: with providedIn on services, a
 Use providedIn for app-wide singletons. It’s tree-shakable and fast.
 
 [source,typescript]
+----
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -40,14 +42,18 @@ export class ApiClient {
     return this.http.post<T>(url, body);
   }
 }
+----
 
-Use providedIn: 'platform' for platform-wide singletons (across multiple Angular apps on the same page), and providedIn: 'any' when you want a new instance per environment injector boundary (for example, per lazy route). It’s less common—use intentionally.
+
+Use providedIn: 'platform' for platform-wide singletons (across multiple Angular apps on the same page), and providedIn: 'any' when you want a new instance per environment injector boundary (for example, per lazy route). It’s less common, so apply it with intent.
+
 
 === Registering providers at bootstrap
 
 With standalone apps, register environment-wide providers using bootstrapApplication.
 
 [source,typescript]
+----
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter, Routes, CanActivateFn, Router } from '@angular/router';
 import { provideHttpClient, withInterceptors, HttpInterceptorFn } from '@angular/common/http';
@@ -81,6 +87,7 @@ bootstrapApplication(AppComponent, {
     provideRouter(routes),
   ],
 });
+----
 
 withInterceptors returns EnvironmentProviders, which compose efficiently and avoid manual multi-provider plumbing.
 
@@ -89,6 +96,7 @@ withInterceptors returns EnvironmentProviders, which compose efficiently and avo
 Route-level providers are a sweet spot for scoping feature dependencies. They’re created when you enter the route and destroyed when you leave, saving memory and avoiding global singletons.
 
 [source,typescript]
+----
 import { Routes } from '@angular/router';
 import { EnvironmentProviders, makeEnvironmentProviders } from '@angular/core';
 
@@ -107,10 +115,12 @@ export const routes: Routes = [
     loadComponent: () => import('./admin/admin.component').then(m => m.AdminComponent),
   },
 ];
+----
 
 Component-scoped providers create an instance per component instance. Great for facades and local state.
 
 [source,typescript]
+----
 import { Component, inject, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { UserService } from './user.service';
@@ -136,12 +146,14 @@ export class UserPanelComponent {
       .subscribe(data => this.users = data);
   }
 }
+----
 
 === Multi providers and tokens
 
 Multi providers let you gather multiple implementations into a single InjectionToken.
 
 [source,typescript]
+----
 import { InjectionToken, Inject, Injectable } from '@angular/core';
 
 export interface Logger {
@@ -175,16 +187,19 @@ export class AuditService {
     this.loggers.forEach(l => l.log(event));
   }
 }
+----
 
 == Hierarchical injectors explained
 
 Angular’s DI is hierarchical:
+
 - Platform injector: shared across apps on a page.
 - Root injector: application-wide singletons (providedIn: 'root').
 - Environment injectors: created by bootstrap, routes, and lazy boundaries.
 - Element injectors: component/directive-level instances via providers/viewProviders.
 
-Resolution walks up the tree until it finds a provider. This is powerful—and easy to misuse.
+Resolution walks up the tree until it finds a provider. This approach is powerful but easy to misuse.
+
 
 === Root, environment, and component boundaries
 
@@ -197,6 +212,7 @@ Resolution walks up the tree until it finds a provider. This is powerful—and e
 providers are visible to the component, its view, and projected content. viewProviders are visible only to the component’s view (not to content projected via ng-content).
 
 [source,typescript]
+----
 import { Component, InjectionToken } from '@angular/core';
 
 export const THEME = new InjectionToken<string>('THEME');
@@ -213,6 +229,7 @@ export const THEME = new InjectionToken<string>('THEME');
   viewProviders: [{ provide: THEME, useValue: 'dark' }],
 })
 export class CardComponent {}
+----
  
 === Common scoping pitfalls
 
@@ -225,6 +242,7 @@ export class CardComponent {}
 The inject function removes constructor ceremony and works in functional APIs. It can also express resolution modifiers like optional and self.
 
 [source,typescript]
+----
 import { inject } from '@angular/core';
 import { InjectionToken } from '@angular/core';
 
@@ -244,12 +262,14 @@ export function buildResourceUrl(path: string): string {
   const base = cfg?.apiBase ?? '/api';
   return `${base}/${path}`;
 }
+----
 
 === Outside constructors: interceptors, guards, resolvers
 
 Functional guards and interceptors run in an injection context. inject works reliably here and keeps code terse.
 
 [source,typescript]
+----
 import { CanActivateFn, Router } from '@angular/router';
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
@@ -268,6 +288,7 @@ export const timingInterceptor: HttpInterceptorFn = (req, next) => {
     finalize(() => logger.audit(`HTTP ${req.method} ${req.url} in ${performance.now() - start}ms`))
   );
 };
+----
 
 Note: Use the RxJS finalize operator as shown above (import { finalize } from 'rxjs').
 
@@ -276,15 +297,19 @@ Note: Use the RxJS finalize operator as shown above (import { finalize } from 'r
 Inject inside class fields or constructors, not inside arbitrary callbacks. For teardown, pair inject with DestroyRef and takeUntilDestroyed.
 
 [source,typescript]
-import { Component, DestroyRef, inject, signal } from '@angular/core';
+----
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'user-list',
-  standalone: true,
-  template: `<li *ngFor="let u of users()">{{ u.name }}</li>`,
+  template: `
+  	@for (u of users(); track u) {
+  	  <li>{{ u.name }}</li>
+  	}
+  `,
 })
-export class UserListComponent {
+export class UserListComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
   private readonly usersSvc = inject(UserService);
 
@@ -296,12 +321,14 @@ export class UserListComponent {
       .subscribe(this.users.set);
   }
 }
+----
 
 === Factory providers using inject()
 
 Use factory providers to compose instances with dependencies.
 
 [source,typescript]
+----
 import { EnvironmentProviders, inject, makeEnvironmentProviders } from '@angular/core';
 
 export class FeatureClient {
@@ -320,12 +347,14 @@ export function provideFeature(): EnvironmentProviders {
     },
   ]);
 }
+----
 
 == Configuration with InjectionToken
 
 InjectionToken is ideal for configuration and abstractions.
 
 [source,typescript]
+----
 import { InjectionToken } from '@angular/core';
 
 export interface Clock { now(): number; }
@@ -333,6 +362,7 @@ export const CLOCK = new InjectionToken<Clock>('CLOCK', {
   providedIn: 'root',
   factory: () => ({ now: () => Date.now() }),
 });
+----
 
 // Swap in tests: TestBed.overrideProvider(CLOCK, { useValue: { now: () => 123 } });
 
@@ -346,6 +376,7 @@ DI makes testing straightforward:
 - Use tokens for browser APIs and time.
 
 [source,typescript]
+----
 import { TestBed } from '@angular/core/testing';
 
 TestBed.configureTestingModule({
@@ -357,6 +388,7 @@ TestBed.configureTestingModule({
 TestBed.overrideProvider(APP_CONFIG, { useValue: { apiBase: '/mock', enableDebug: true } });
 
 const client = TestBed.inject(ApiClient);
+----
 
 == Performance and DX tips
 
@@ -372,7 +404,8 @@ const client = TestBed.inject(ApiClient);
 
 == Conclusion
 
-Angular’s dependency injection is a quiet superpower. With the right provider strategies, clear scoping, and the inject function, you can build systems that are easier to test, reason about, and evolve. Think in boundaries: root for shared infrastructure, routes for feature lifecycles, and components for instance-local state. Keep providers intentional and discoverable, and your future self—and your teammates—will thank you.
+Angular’s dependency injection is a quiet superpower. With the right provider strategies, clear scoping, and the inject function, you can build systems that are easier to test, reason about, and evolve. Think in boundaries: root for shared infrastructure, routes for feature lifecycles, and components for instance-local state. Keep providers intentional and discoverable, and your future self and teammates will thank you.
+
 
 == Next Steps
 
