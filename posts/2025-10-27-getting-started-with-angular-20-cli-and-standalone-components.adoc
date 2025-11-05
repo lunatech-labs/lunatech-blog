@@ -7,13 +7,13 @@
 
 Learn how to initialize and structure a new Angular 20 project using the Angular CLI. Understand standalone components and the simplified bootstrapping process. This guide focuses on a clean project setup, modern routing, and practical patterns you can reuse in real projects.
 
-== Prerequisites
+=== Prerequisites
 
 - Node.js 20+ (LTS recommended) and npm or pnpm
 - Angular CLI 20 installed globally: npm i -g @angular/cli@20
 - Familiarity with TypeScript and Angular fundamentals
 
-== Create a new project with the Angular CLI
+=== Create a new project with the Angular CLI
 
 The Angular CLI scaffolds a production-grade baseline with sensible defaults. Standalone components are the default in Angular 20, which means no NgModules are required for most apps.
 
@@ -28,7 +28,7 @@ ng serve
 
 Open http://localhost:4200 and confirm the app runs. The CLI gives you fast dev server reloads, TypeScript checks, and a ready-to-extend project.
 
-== Project structure that scales
+=== Project structure that scales
 
 A small, predictable layout keeps cognitive load low as features grow.
 
@@ -56,7 +56,7 @@ src/
 - Each feature gets its own folder with a standalone component.
 - environments holds build-time configuration.
 
-== Simplified bootstrapping with bootstrapApplication
+=== Simplified bootstrapping with bootstrapApplication
 
 Standalone components and functional providers eliminate boilerplate. The entry point is lean and explicit.
 
@@ -90,7 +90,7 @@ bootstrapApplication(AppComponent, {
 - provideAnimations enables Angular animations globally.
 - withComponentInputBinding lets you bind route params/data directly to component inputs.
 
-== Routing with lazy standalone components
+=== Routing with lazy standalone components
 
 Define routes in a single place and lazy-load components with loadComponent.
 
@@ -118,7 +118,7 @@ export const routes: Routes = [
 
 This setup is fast to read and easy to evolve. Each path points directly at a standalone component without an intermediate NgModule.
 
-== A minimal root component
+=== A minimal root component
 
 Keep your root component focused on layout and navigation.
 
@@ -150,7 +150,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 export class AppComponent {}
 ----
 
-== Build a real feature: Home with forms and new control flow
+=== Build a real feature: Home with forms and new control flow
 
 Use reactive forms and the modern control flow syntax (@if, @for) to keep templates expressive and predictable.
 
@@ -219,7 +219,7 @@ export class HomeComponent {
 - signal gives you ergonomic local state without services when you don’t need them.
 - The new control flow removes structural directive noise while remaining explicit.
 
-== A lazy projects page
+=== A lazy projects page
 
 Keep feature components focused and stateless by default.
 
@@ -239,7 +239,7 @@ export class ProjectsComponent {}
 
 The route configuration we defined earlier will load this component on demand.
 
-== HTTP setup with functional interceptors
+=== HTTP setup with functional interceptors
 
 You already provided HttpClient in main.ts. Add domain-specific concerns via functional interceptors as your app grows (auth tokens, correlation IDs, error normalization). They compose with withInterceptors and stay tree-shakable.
 
@@ -259,7 +259,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
 Keep cross-cutting code small, testable, and colocated in core/.
 
-== Environment-driven configuration
+=== Environment-driven configuration
 
 Use build-time environments for API base URLs and toggles. The CLI swaps files based on configuration.
 
@@ -287,7 +287,7 @@ import { environment } from '../environments/environment';
 // http.get(`${environment.apiUrl}/projects`)
 ----
 
-== CLI commands you’ll use daily
+=== CLI commands you’ll use daily
 
 - Generate features: ng g component app/features/activity
 - Add utilities: ng g interceptor core/logging
@@ -297,28 +297,28 @@ import { environment } from '../environments/environment';
 
 The Angular CLI keeps project setup consistent while remaining flexible.
 
-== Optional: Server-side rendering (SSR)
+=== Optional: Server-side rendering (SSR)
 
 If you create your project with --ssr, the CLI scaffolds an SSR server and hydration for you. In main.ts, include provideClientHydration() so the browser picks up the server-rendered DOM without re-rendering. SSR improves Time to First Byte (TTFB), SEO, and perceived performance for content-heavy routes.
 
-== Why this structure works
+=== Why this structure works
 
 - Standalone components reduce indirection and speed up onboarding.
 - A single routes file gives you a map of the app at a glance.
 - Providers in main.ts make cross-cutting behavior explicit.
 - Feature-first folders keep implementation details close to their templates and styles.
 
-== Troubleshooting and tips
+=== Troubleshooting and tips
 
 - Type errors on control flow (@if/@for): ensure your component template uses the new Angular control flow (Angular 17+). No extra imports are needed.
 - RouterLinkActive not working on root: pass [routerLinkActiveOptions]="{ exact: true }" for the root link.
 - Interceptor order: interceptors run in the order provided for requests, and in reverse for responses. Put auth/correlation early; place global error handling last to see the final response state.
 
-== Conclusion
+=== Conclusion
 
 Angular 20 cuts the ceremony: standalone components by default, functional providers, and minimal bootstrapping. Organize by feature, keep routes clear, and scale without the bloat. The CLI does the grunt work, you build features.
 
-== Next Steps
+=== Next Steps
 
 - Add a core/ directory for cross-cutting concerns (interceptors, guards, tokens).
 - Introduce a shared/ library for reusable UI primitives.
