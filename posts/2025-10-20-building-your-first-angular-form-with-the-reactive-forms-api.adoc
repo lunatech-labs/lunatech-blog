@@ -7,7 +7,7 @@
 
 Create powerful reactive forms using FormControl, FormGroup, and FormArray. Understand validation, error handling, and how Angular 20 enhances form management. In this guide, we’ll build a small but production-grade form using Angular’s Reactive Forms API, focusing on maintainability, type safety, and user experience.
 
-== Why Reactive Forms
+=== Why Reactive Forms
 
 Reactive forms give you:
 
@@ -18,7 +18,7 @@ Reactive forms give you:
 
 Angular 20 keeps refining typed forms and template type-checking. The modern control flow syntax and standalone components streamline development and improve performance.
 
-== What We’re Building
+=== What We’re Building
 
 We’ll create a “Sign Up” form with:
 
@@ -28,7 +28,7 @@ We’ll create a “Sign Up” form with:
 - Inline errors, pending states, and server-side error handling
 - Strong typing using `FormBuilder.nonNullable`
 
-== The Component (Standalone + Typed Forms)
+=== The Component (Standalone + Typed Forms)
 
 [source,typescript]
 ----
@@ -210,7 +210,7 @@ export class SignUpFormComponent {
 }
 ----
 
-== The Template (Modern Control Flow + Clear Errors)
+=== The Template (Modern Control Flow + Clear Errors)
 
 We’ll use Angular’s modern control flow (`@if`, `@for`) for concise, readable templates alongside the standard reactive forms directives.
 
@@ -300,7 +300,7 @@ We’ll use Angular’s modern control flow (`@if`, `@for`) for concise, readabl
 </form>
 ----
 
-== Key Practices Explained
+=== Key Practices Explained
 
 - Start with FormBuilder.nonNullable: Avoids `null` creeping into your form control types, simplifies code, and strengthens type safety.
 - Typed access to controls: Use `form.controls` and helper getters like `phones` to avoid string keys and unsafe casts.
@@ -313,7 +313,7 @@ We’ll use Angular’s modern control flow (`@if`, `@for`) for concise, readabl
 - Error mapping from server: Convert server responses into `setErrors` on both controls and the group. This keeps the UI consistent with client-side errors.
 - Accessibility: Use role="alert" for important error regions, associate labels with inputs, and ensure the submit button’s disabled state reflects pending/submit state accurately.
 
-== How Angular 20 Helps
+=== How Angular 20 Helps
 
 - Typed forms, end-to-end: Strong typing across `FormControl`, `FormGroup`, and `FormArray` reduces runtime surprises and improves IDE assistance.
 - Standalone components and modern control flow: Less module boilerplate and clearer templates using `@if`/`@for` improve maintainability and readability.
@@ -321,23 +321,23 @@ We’ll use Angular’s modern control flow (`@if`, `@for`) for concise, readabl
 
 None of these change how you think about forms; they remove friction so you can focus on your model, your validation, and your users.
 
-== Testing Tips
+=== Testing Tips
 
 - Unit test validators as pure functions: pass mock controls and assert on returned errors or null.
 - Test async validators with marble tests or fakeAsync/tick to verify pending states and outcomes.
 - Integration test the component: set values, trigger `markAllAsTouched()`, and expect specific error messages in the DOM. Ensure server errors show up when `setErrors` is applied.
 
-== Troubleshooting
+=== Troubleshooting
 
 - Form never becomes valid: Check group-level validators as they can keep the form invalid even when all fields look valid.
 - Async validator never completes: Ensure you’re returning an Observable and not subscribing inside the validator.
 - Errors not showing: Validation messages usually depend on `touched`/`dirty`. To show on submit, call `markAllAsTouched()`.
 
-== Conclusion
+=== Conclusion
 
 Reactive forms give you a clear, typed, and testable way to manage complex input. By combining `FormControl`, `FormGroup`, and `FormArray` with focused validation and mindful UX (pending states, clear errors), you create forms that feel reliable and maintainable. Angular 20’s refinements like typed forms, standalone components, and modern control flow let you ship with less boilerplate and more confidence.
 
-== Next Steps
+=== Next Steps
 
 - Add a Confirm Password control with a group-level “match” validator.
 - Persist the form to local storage to support “resume later.”
