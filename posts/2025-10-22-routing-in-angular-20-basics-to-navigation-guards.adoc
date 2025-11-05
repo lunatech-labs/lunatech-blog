@@ -7,13 +7,13 @@
 
 Master client-side routing with Angular’s Router. Learn route configuration, navigation, guards, and Angular 20’s asynchronous redirect improvements.
 
-== Why the Router still matters
+=== Why the Router still matters
 
 Routing is the backbone of user flow. It defines how screens load, what data they need, and how access is enforced. A reliable setup pays off when your app scales and your team grows. In Angular 20, the Angular Router keeps moving in the right direction: clearer configuration, better async flows, and ergonomics that prioritize maintainability.
 
 This guide walks through a practical baseline: route configuration, links, programmatic navigation, route guards, and async redirects, all with standalone components and functional APIs.
 
-== A minimal, modern router setup
+=== A minimal, modern router setup
 
 Use standalone APIs and provideRouter for a clean bootstrap.
 
@@ -81,7 +81,7 @@ export const routes: Routes = [
 ];
 ----
 
-== The application shell: links and outlet
+=== The application shell: links and outlet
 
 Make navigation obvious and accessible. Use RouterLink and RouterLinkActive for feedback.
 
@@ -104,7 +104,7 @@ Make navigation obvious and accessible. Use RouterLink and RouterLinkActive for 
 
 RouterLink keeps your templates declarative; RouterOutlet hosts the matched view. For accessibility and UX, the active class communicates where the user is during navigation.
 
-== A realistic feature route with params and lazy-loading
+=== A realistic feature route with params and lazy-loading
 
 For features like Projects, lazy load the route definition and child screens.
 
@@ -170,7 +170,7 @@ Notes:
 - Use toSignal when a component benefits from reactive values in the template.
 - Keep navigation relative to avoid hardcoding URLs.
 
-== Programmatic navigation that reads well
+=== Programmatic navigation that reads well
 
 When you need to route from code, favor clarity and explicitness.
 
@@ -206,7 +206,7 @@ export class LoginComponent {
 - navigate and navigateByUrl are both fine; navigate works with command arrays and relative routes.
 - replaceUrl avoids filling history with transient steps like login.
 
-== Route guards: protect, match, and confirm
+=== Route guards: protect, match, and confirm
 
 Functional guards are terse, testable, and DI-friendly. Use canActivate for already-loaded routes and canMatch to gate access before lazy-loading. Use canDeactivate to protect against losing changes.
 
@@ -245,7 +245,7 @@ Notes:
 - Returning a UrlTree is the most ergonomic way to redirect from guards.
 - Prefer canMatch for lazy-loaded feature entries. It prevents loading code the user can’t access.
 
-== Async redirects in Angular 20
+=== Async redirects in Angular 20
 
 Redirects are often conditional and data-driven. Angular 20 refines ergonomics for async redirects by allowing redirect functions to return a Promise or Observable of a UrlTree, keeping logic declarative in the route table. When you need DI, the function executes in a proper injection context.
 
@@ -277,7 +277,7 @@ export const routes: Routes = [
 
 If your team prefers explicit control (or for compatibility), use canMatch to perform the same async decision and return a UrlTree. Both approaches keep “redirect intent” within the routing layer, preserving a clear separation from UI.
 
-== Handling 404s and fallbacks
+=== Handling 404s and fallbacks
 
 Keep a final catch-all route at the end. Make the not-found component tiny and isolated.
 
@@ -297,7 +297,7 @@ import { Component } from '@angular/core';
 export class NotFoundComponent {}
 ----
 
-== Developer experience tips that scale
+=== Developer experience tips that scale
 
 - Title and data: Use the route title for sensible defaults. Keep route data small and serializable.
 - Preloading: withPreloading(PreloadAllModules) improves perceived speed after the first screen.
@@ -319,14 +319,14 @@ export function logNavigation(router: Router) {
 }
 ----
 
-== Common pitfalls and guardrails
+=== Common pitfalls and guardrails
 
 - Infinite redirect loops: Always check target vs current URL when redirecting conditionally. Returning the same UrlTree repeatedly will stall navigation.
 - Missing pathMatch: For empty-path redirects, pathMatch: 'full' prevents partial matches from hijacking nested routes.
 - Eager vs lazy: Use canMatch for feature entries to avoid loading code for unauthorized users.
 - Query params and state: Preserve user intent via redirect query params. Clear them after successful navigation if they’re transient.
 
-== Putting it together: a cohesive flow
+=== Putting it together: a cohesive flow
 
 - Users hitting /start are asynchronously redirected based on auth state using async redirects.
 - Unauthenticated users attempting /projects are intercepted by canMatch and sent to /login with a redirect back.
