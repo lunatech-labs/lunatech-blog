@@ -5,19 +5,19 @@
 :lang: en
 :tags: [Intermediate,change detection,Zone.js,OnPush,signals (intro)]
 
-Understand Angular’s change detection mechanism and how to optimize performance using OnPush strategy. Get an introduction to using Signals for more granular reactivity. This article gives you a practical mental model, then shows how to apply it with Zone.js, OnPush, and signals—plus a path to zoneless apps when you’re ready.
+Understand Angular’s change detection mechanism and how to optimize performance using the OnPush strategy. Learn how to use Signals for more granular reactivity. This article provides a practical mental model and shows how to apply it with Zone.js, OnPush, and Signals, along with a clear path toward building zoneless applications when you’re ready.
 
-== The mental model: how Angular knows to update
+=== The mental model: how Angular knows to update
 
 At a high level, Angular renders your component tree into a graph of views. A change detection pass checks template bindings and updates the DOM where something changed. Something has to tell Angular when to do that pass:
 
 - With Zone.js (the default), Angular patches async APIs (Promises, setTimeout, DOM events, etc.) and schedules checks automatically after those tasks.
-- With signals, writes to a signal schedule the right components to re-render—even without Zone.js.
+- With signals, writes to a signal schedule the right components to re-render even without Zone.js.
 - With OnPush, Angular narrows when a component is checked: on input reference changes, events in that component, async pipe emissions, and signal writes.
 
 Once you see what triggers checks, you can guide Angular to do less work and update only when it matters.
 
-== Working with Zone.js (default)
+=== Working with Zone.js (default)
 
 Zone.js intercepts most async boundaries and calls into Angular to run change detection. It’s a safe default and reduces boilerplate, especially for teams migrating legacy code.
 
@@ -80,7 +80,7 @@ export class CpuHeavyComponent {
 }
 ----
 
-== Embracing OnPush for predictable performance
+=== Embracing OnPush for predictable performance
 
 OnPush reduces unnecessary checks and nudges you toward immutable data and explicit updates. Angular will check an OnPush component when:
 
@@ -181,9 +181,9 @@ export class WebSocketStatusComponent {
 }
 ----
 
-== Signals (intro): fine‑grained reactivity without heavy lifting
+=== Signals (intro): fine‑grained reactivity without heavy lifting
 
-Signals give you a declarative, dependency-tracked model for state. Reading a signal in a template links it to the view; writing to that signal schedules the right view to update. This makes change detection more targeted and pairs naturally with OnPush—or even zoneless.
+Signals give you a declarative, dependency-tracked model for state. Reading a signal in a template links it to the view; writing to that signal schedules the right view to update. This makes change detection more targeted and pairs naturally with OnPush or even zoneless.
 
 [source,typescript]
 ----
@@ -259,7 +259,7 @@ export class ClockComponent {
 
 Because writing to signals schedules view updates, you often don’t need ChangeDetectorRef calls. The result is simpler, more predictable change detection.
 
-== Zoneless change detection: when you’re ready to drop Zone.js
+=== Zoneless change detection: when you’re ready to drop Zone.js
 
 As of Angular 18+, you can run without Zone.js. This reduces global patching and gives you explicit control over reactivity. The recommendation: centralize UI state in signals or use async pipe; those sources schedule updates even without zones.
 
@@ -316,7 +316,7 @@ export class ZonelessDemoComponent {
 
 If you interact with non-Angular callbacks (e.g., third‑party SDKs), prefer to set signals inside the callback. That write will schedule the needed view updates.
 
-== Practical checklist
+=== Practical checklist
 
 - Prefer OnPush for all app components; combine with immutable data.
 - Use signal-based inputs (input()) in leaf components for ergonomic, fine-grained updates.
@@ -326,17 +326,17 @@ If you interact with non-Angular callbacks (e.g., third‑party SDKs), prefer to
 - Track list items by a stable key to avoid re-render churn.
 - Use provideZoneChangeDetection with coalescing in legacy/mixed environments; move toward provideZonelessChangeDetection when your reactive pathways are solid.
 
-== Troubleshooting gotchas
+=== Troubleshooting gotchas
 
-- “My OnPush child didn’t update.” Ensure the @Input reference changes (immutable update) or the child reads a signal that you wrote to.
+- “My OnPush child didn’t update.” Ensure the Input reference changes (immutable update) or the child reads a signal that you wrote to.
 - “Zoneless didn’t repaint after a callback.” Convert that callback’s data to a signal or trigger an async pipe emission; avoid manual detectChanges unless you know the implications.
 - “Perf regressions after refactor.” Check for unintended synchronous effects that write many signals in a loop; batch updates if needed, or compose a single state write.
 
-== Conclusion
+=== Conclusion
 
-Change detection in Angular is powerful because you can choose the right tool for the job. Zone.js gives you simplicity, OnPush gives you predictability and performance, and signals give you precise, maintainable reactivity. Together, they help you ship fast UIs without guesswork—and you can progressively adopt a zoneless model when your state is signal-driven.
+Change detection in Angular is powerful because you can choose the right tool for the job. Zone.js gives you simplicity, OnPush gives you predictability and performance, and signals give you precise, maintainable reactivity. Together, they help you ship fast UIs without guesswork, and you can progressively adopt a zoneless model when your state is signal-driven.
 
-== Next Steps
+=== Next Steps
 
 - Audit your components: enable OnPush and fix any mutable input flows.
 - Introduce signals for local state and derived values; replace ad‑hoc ChangeDetectorRef calls.
