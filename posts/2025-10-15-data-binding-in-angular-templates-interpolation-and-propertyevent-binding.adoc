@@ -7,7 +7,7 @@
 
 Data binding is the heartbeat of Angular templates. Learn how data flows between components and templates using interpolation, property binding, event binding, and two-way binding. This topic also introduces new Angular 20 template features like template literals. We’ll keep the focus practical: clear patterns, minimal surprises, and maintainable code that scales.
 
-== The mental model: unidirectional data flow, well-timed feedback
+=== The mental model: unidirectional data flow, well-timed feedback
 
 - From component to view: interpolation and property binding render state.
 - From view to component: event binding captures user intent.
@@ -15,7 +15,7 @@ Data binding is the heartbeat of Angular templates. Learn how data flows between
 
 Favor predictable one-way flows; reach for two-way when it improves clarity without hiding complexity.
 
-== Interpolation: simple, readable, one-way display
+=== Interpolation: simple, readable, one-way display
 
 Interpolation renders values into text nodes using template syntax like {{ ... }}. It’s ideal for human-readable content.
 
@@ -32,7 +32,7 @@ Guidelines:
 - Use pipes for presentation logic (formatting, slicing, etc.).
 - Use the safe-navigation operator (?.) to avoid null/undefined errors at render time.
 
-=== Angular 20 template literals in expressions
+==== Angular 20 template literals in expressions
 
 Angular 20 enables JavaScript-style template literals inside template expressions for more expressive string composition.
 
@@ -44,7 +44,7 @@ Angular 20 enables JavaScript-style template literals inside template expression
 
 Use them for readable, localized strings or ARIA attributes. Keep them concise. If you’re building complex messages, consider a dedicated formatter or i18n.
 
-== Property binding: write to DOM and component inputs
+=== Property binding: write to DOM and component inputs
 
 Property binding uses square brackets to set DOM properties, ARIA attributes, styles, classes, and child component inputs.
 
@@ -65,7 +65,7 @@ Property binding uses square brackets to set DOM properties, ARIA attributes, st
 
 Under the hood, Angular binds to the actual property when available (safer and more correct than raw attributes). Use [attr.*] only when there is no matching property.
 
-=== Signals play nicely with bindings
+==== Signals play nicely with bindings
 
 Signals provide push-based reactivity. Call them in templates to read their current value.
 
@@ -114,7 +114,7 @@ Note:
 - Event binding (input)="..." updates the signal.
 - Built-in control flow (@if and @for) keeps the template declarative and fast.
 
-== Event binding: user intent back to the component
+=== Event binding: user intent back to the component
 
 Event binding uses parentheses to listen to DOM or component events.
 
@@ -147,11 +147,11 @@ onInput(event: Event): void {
 - Prefer specific event names like keydown.enter for intent-revealing handlers.
 - Avoid expensive work inside template expressions; do it in component methods or computed signals.
 
-== Two-way binding: when it helps, use it intentionally
+=== Two-way binding: when it helps, use it intentionally
 
 Two-way binding composes property binding and event binding into a single banana-in-a-box syntax.
 
-=== With forms (ngModel)
+==== With forms (ngModel)
 
 This is convenient in simple forms. Import FormsModule in standalone components.
 
@@ -186,7 +186,7 @@ With signals, bridge two-way binding by pairing [ngModel] and (ngModelChange):
 <input [ngModel]="query()" (ngModelChange)="query.set($event)" />
 ----
 
-=== Custom two-way binding for child components
+==== Custom two-way binding for child components
 
 Define a pair of Input and Output with the Change suffix. Angular will recognize [(value)].
 
@@ -233,7 +233,7 @@ Parent usage:
 
 Tip: If your project uses the signal-based inputs API, the model() helper can reduce boilerplate. The classic pair above remains broadly compatible and explicit.
 
-== Template syntax patterns that scale
+=== Template syntax patterns that scale
 
 - Keep expressions pure and cheap. Avoid calling functions that allocate arrays or perform filtering on each change detection; use computed signals or memoized selectors.
 - Bind to properties, not attributes. Prefer [value], [disabled], [checked] over [attr.value], except when no property exists.
@@ -241,7 +241,7 @@ Tip: If your project uses the signal-based inputs API, the model() helper can re
   @for (item of items; track item.id) { ... }
 - For [innerHTML], sanitize or trust only safe content. Angular’s DomSanitizer exists for exceptional cases—prefer plain text whenever possible.
 
-== Angular 20 template literal examples in context
+=== Angular 20 template literal examples in context
 
 Use template literals where they improve clarity, especially for ARIA and labeling.
 
@@ -264,7 +264,7 @@ Use template literals where they improve clarity, especially for ARIA and labeli
 
 Keep logic minimal; push complex decisions into the component or computed signals for testability.
 
-== A cohesive example: binding the pieces
+=== A cohesive example: binding the pieces
 
 [source,typescript]
 ----
@@ -344,11 +344,11 @@ What you see:
 - Two-way binding streamlines rating updates.
 - Template literals keep labels clear and accessible.
 
-== Conclusion
+=== Conclusion
 
 Data binding is how intent flows through your Angular app. Interpolation and property binding project state. Event binding captures change. Two-way binding composes both when it reduces friction. With Angular 20’s template literal support, you can craft clearer strings and ARIA labels without sacrificing readability. Keep expressions simple, push complexity into components or computed signals, and lean on built-in control flow for performance.
 
-== Next Steps
+=== Next Steps
 
 - Audit a component for heavy template expressions. Move logic into computed signals or pure methods.
 - Add ARIA attributes with property binding and template literals to improve accessibility.
