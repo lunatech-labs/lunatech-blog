@@ -17,7 +17,7 @@ Learn how to initialize and structure a new Angular 20 project using the Angular
 
 The Angular CLI scaffolds a production-grade baseline with sensible defaults. Standalone components are the default in Angular 20, which means no NgModules are required for most apps.
 
-[source,typescript]
+[source,shell]
 ----
 // Terminal
 // Create a new app with routing and SCSS. Use --ssr to scaffold server-side rendering.
