@@ -52,7 +52,7 @@ src/
         projects.component.ts
 ----
 
-- app.routes.ts holds your route config.
+- *app.routes.ts* holds your route config.
 - Each feature gets its own folder with a standalone component.
 - environments holds build-time configuration.
 
