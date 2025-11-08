@@ -3,7 +3,7 @@
 :revdate: v1, 2025-10-27
 :title: Getting Started with Angular 20 CLI and Standalone Components
 :lang: en
-:tags: [Beginner,Angular CLI,standalone components,project setup]
+:tags: [Beginner,Angular CLI,standalone components]
 
 Learn how to initialize and structure a new Angular 20 project using the Angular CLI. Understand standalone components and the simplified bootstrapping process. This guide focuses on a clean project setup, modern routing, and practical patterns you can reuse in real projects.
 
