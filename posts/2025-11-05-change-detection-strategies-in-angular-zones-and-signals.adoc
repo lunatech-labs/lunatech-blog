@@ -159,7 +159,8 @@ export class ParentComponent {
 
   // Correct: immutable update changes the reference and triggers OnPush
   add() {
-    const nextId = Math.max(0, ...this.users().map(u => u.id)) + 1;
+    const currentIds = this.users().map(u => u.id);
+    const nextId = currentIds.length > 0 ? Math.max(...currentIds) + 1 : 1;
     this._users.update(arr => [...arr, { id: nextId, name: 'New User' }]);
   }
 
@@ -172,7 +173,29 @@ export class ParentComponent {
 }
 ----
 
-If you’re not using signals and you must update UI from a callback that Angular doesn’t know about, call markForCheck.
+If you're not using signals and you must update UI from a callback that Angular doesn't know about, call markForCheck.
+
+[source,typescript]
+----
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'ws-status',
+  standalone: true,
+  template: `Status: {{ status }}`,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class WebSocketStatusComponent implements OnInit {
+  status = 'disconnected';
+  constructor(private cdr: ChangeDetectorRef) {}
+
+  ngOnInit() {
+    const ws = new WebSocket('wss://example.org');
+    ws.onopen = () => { this.status = 'connected'; this.cdr.markForCheck(); };
+    ws.onclose = () => { this.status = 'disconnected'; this.cdr.markForCheck(); };
+  }
+}
+----
 
 [source,typescript]
 ----
@@ -274,19 +297,19 @@ export class ClockComponent {
 
 Because writing to signals schedules view updates, you often don’t need ChangeDetectorRef calls. The result is simpler, more predictable change detection.
 
-=== Zoneless change detection: when you’re ready to drop Zone.js
+=== Zoneless change detection: when you're ready to drop Zone.js
 
 As of Angular 18+, you can run without Zone.js. This reduces global patching and gives you explicit control over reactivity. The recommendation: centralize UI state in signals or use async pipe; those sources schedule updates even without zones.
 
 [source,typescript]
 ----
 // app.config.ts
-import { ApplicationConfig, provideZonelessChangeDetection } from '@angular/core';
+import { ApplicationConfig, provideExperimentalZonelessChangeDetection } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZonelessChangeDetection(),
+    provideExperimentalZonelessChangeDetection(),
     provideHttpClient(),
   ],
 };
@@ -339,7 +362,7 @@ If you interact with non-Angular callbacks (e.g., third‑party SDKs), prefer to
 - In Zone.js apps, isolate heavy loops with runOutsideAngular and re-enter only on state writes.
 - In zoneless apps, ensure all UI-affecting async work flows through signals or async pipe.
 - Track list items by a stable key to avoid re-render churn.
-- Use provideZoneChangeDetection with coalescing in legacy/mixed environments; move toward provideZonelessChangeDetection when your reactive pathways are solid.
+- Use provideZoneChangeDetection with coalescing in legacy/mixed environments; move toward provideExperimentalZonelessChangeDetection when your reactive pathways are solid.
 
 === Troubleshooting gotchas
 
@@ -356,5 +379,5 @@ Change detection in Angular is powerful because you can choose the right tool fo
 - Audit your components: enable OnPush and fix any mutable input flows.
 - Introduce signals for local state and derived values; replace ad‑hoc ChangeDetectorRef calls.
 - Wrap recurring async sources (timers, sockets) with toSignal or async pipe.
-- Experiment with provideZonelessChangeDetection in a feature slice to validate your reactive pathways.
+- Experiment with provideExperimentalZonelessChangeDetection in a feature slice to validate your reactive pathways.
 - Read the Angular guides on signals and zoneless change detection to deepen your understanding.
