@@ -50,7 +50,7 @@ export class ApiClient {
 ----
 - root: One instance for the app; tree-shakable if unused.
 - platform: Shared across co-hosted Angular apps (rare; e.g. shared analytics).
-- any: New instance per *environment injector boundary* (each lazy / route boundary). Useful for per-feature caches—avoid for true globals.
+- any: New instance per *environment injector boundary* (each lazy / route boundary). Useful for per-feature caches, avoid for true globals.
 - (no providedIn): Register manually (only when dynamic / conditional).
 
 ==== Bootstrap-Level Environment Providers
@@ -146,7 +146,7 @@ export const routes: Routes = [
 Per component instance; ideal for local, ephemeral state.
 [source,typescript]
 ----
-import { Component, inject, DestroyRef, OnInit } from '@angular/core';
+import { Component, inject, Injectable, DestroyRef, OnInit } from '@angular/core';
 import { JsonPipe } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -202,7 +202,7 @@ class RemoteLogger implements Logger {
 
 export const provideLoggers = () => ([
   { provide: LOGGER, useClass: ConsoleLogger, multi: true },
-  { provide: LOGGER, useExisting: RemoteLogger, multi: true },
+  { provide: LOGGER, useClass: RemoteLogger, multi: true },
 ]);
 
 @Injectable({ providedIn: 'root' })
@@ -300,12 +300,15 @@ const timingInterceptor: HttpInterceptorFn = (req, next) => {
 Signals integrate cleanly; use `takeUntilDestroyed` for Observable bridges.
 [source,typescript]
 ----
-import { Component, DestroyRef, inject, signal, OnInit } from '@angular/core';
+import { Component, inject, signal, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({ providedIn: 'root' })
 class UserService {
-  stream() { /* Observable<{ name: string }[]> */ return inject(ApiClient).get<{ name: string }[]>('/users'); }
+  stream() { 
+    /* Observable<{ name: string }[]> */ 
+    return inject(ApiClient).get<{ name: string }[]>('/users'); 
+  }
 }
 
 @Component({
@@ -318,14 +321,13 @@ class UserService {
   standalone: true,
 })
 class UserListComponent implements OnInit {
-  private readonly destroyRef = inject(DestroyRef);
   private readonly usersSvc = inject(UserService);
   readonly users = signal<{ name: string }[]>([]);
 
   ngOnInit() {
     this.usersSvc.stream()
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(this.users.set);
+      .pipe(takeUntilDestroyed())
+      .subscribe(data => this.users.set(data));
   }
 }
 ----
@@ -337,7 +339,10 @@ Bundle related dependencies explicitly.
 import { EnvironmentProviders, inject, makeEnvironmentProviders } from '@angular/core';
 
 class FeatureClient {
-  constructor(private readonly api: ApiClient, private readonly cfg: AppConfig) {}
+  constructor(
+    private readonly api: ApiClient, 
+    private readonly cfg: AppConfig
+  ) {}
 }
 
 export function provideFeature(): EnvironmentProviders {
@@ -377,6 +382,7 @@ export const CLOCK = new InjectionToken<Clock>('CLOCK', {
 [source,typescript]
 ----
 import { TestBed } from '@angular/core/testing';
+import { Injectable } from '@angular/core';
 
 class MockApiClient extends ApiClient {
   override get<T>(url: string) { return super.get<T>('mock-' + url); }
@@ -388,7 +394,9 @@ TestBed.configureTestingModule({
   ],
 });
 
-TestBed.overrideProvider(APP_CONFIG, { useValue: { apiBase: '/mock', enableDebug: true } });
+TestBed.overrideProvider(APP_CONFIG, { 
+  useValue: { apiBase: '/mock', enableDebug: true } 
+});
 
 const client = TestBed.inject(ApiClient);
 ----
