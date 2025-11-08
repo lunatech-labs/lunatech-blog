@@ -9,7 +9,7 @@ Learn how to initialize and structure a new Angular 20 project using the Angular
 
 === Prerequisites
 
-- Node.js 20+ (LTS recommended) and npm or pnpm
+- Node.js 24+ (LTS recommended) and npm or pnpm
 - Angular CLI 20 installed globally: npm i -g @angular/cli@20
 - Familiarity with TypeScript and Angular fundamentals
 
