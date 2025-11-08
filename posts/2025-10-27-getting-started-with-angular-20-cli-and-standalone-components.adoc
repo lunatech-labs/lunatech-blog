@@ -85,7 +85,7 @@ bootstrapApplication(AppComponent, {
 }).catch(err => console.error(err));
 ----
 
-- provideRouter wires your routing without a root NgModule.
+- *provideRouter* wires your routing without a root NgModule.
 - provideHttpClient configures HttpClient with tree-shakable features like withInterceptors.
 - provideAnimations enables Angular animations globally.
 - withComponentInputBinding lets you bind route params/data directly to component inputs.
