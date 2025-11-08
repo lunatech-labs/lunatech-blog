@@ -45,7 +45,15 @@ For performance-sensitive work (e.g., animations or polling), run it outside Ang
 
 [source,typescript]
 ----
-import { Component, NgZone, ChangeDetectorRef, ChangeDetectionStrategy, signal, inject } from '@angular/core';
+import { 
+  Component, 
+  NgZone, 
+  ChangeDetectionStrategy, 
+  signal, 
+  inject,
+  OnInit,
+  OnDestroy 
+} from '@angular/core';
 
 @Component({
   selector: 'cpu-heavy',
@@ -55,27 +63,34 @@ import { Component, NgZone, ChangeDetectorRef, ChangeDetectionStrategy, signal, 
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CpuHeavyComponent {
+export class CpuHeavyComponent implements OnInit, OnDestroy {
   private zone = inject(NgZone);
-  private cdr = inject(ChangeDetectorRef);
 
-  // Store state as a signal for granular updates
+  // Signal handles reactivity; no CDR needed
   private _frames = signal(0);
   frames = this._frames.asReadonly();
+
+  private intervalId?: ReturnType<typeof setInterval>;
 
   ngOnInit() {
     this.zone.runOutsideAngular(() => {
       let n = 0;
-      const id = setInterval(() => {
-        // Only re-enter Angular when UI needs to change.
-        this.zone.run(() => {
-          this._frames.set(++n);
-          // Signals schedule updates automatically. If not using signals, call:
-          // this.cdr.markForCheck();
-        });
-        if (n > 3000) { clearInterval(id); }
+      this.intervalId = setInterval(() => {
+        // Update signal outside Angular zone
+        // Signals batch updates automatically
+        this._frames.set(++n);
+        
+        if (n > 3000) {
+          clearInterval(this.intervalId);
+        }
       }, 16);
     });
+  }
+
+  ngOnDestroy() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
   }
 }
 ----
@@ -84,7 +99,7 @@ export class CpuHeavyComponent {
 
 OnPush reduces unnecessary checks and nudges you toward immutable data and explicit updates. Angular will check an OnPush component when:
 
-- An @Input reference changes (immutability shines here).
+- An Input reference changes (immutability shines here).
 - The component fires an event or an async pipe emits.
 - A bound signal writes (signals integrate with the scheduler).
 - You explicitly call markForCheck or detectChanges.
