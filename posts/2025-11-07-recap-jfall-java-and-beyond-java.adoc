@@ -62,7 +62,26 @@ Virtual Threads differs from the normal platform threads not only in that they a
 While using Mutiny in Quarkus for reactive, efficient I/O is certainly simple, the idea of enabling virtual threads with a single annotation is hard to resist. This becomes even more compelling when you’re not building a greenfield project, but refactoring an existing legacy system. The contrast in how much code you need to rewrite for each approach is striking.
 
 
-== Stop 2. Threat Modeling
+== Stop 2. A door with no locks? Let’s talk about threat modeling
+The OWASP (Open Worldwide Application Security Project) top 10 is a report that regularly outlines the 10 most critical security risks to web applications. In its latest version, a newly created category was added and listed at the 4th position. This category was - 🥁- Insecure Design (https://owasp.org/Top10/A04_2021-Insecure_Design/[A04:2021 - Insecure Design]).
+This leaves us with a question: How can we make sure to create web applications with a secure design?
+Bàrbara Teruggi, https://es.linkedin.com/in/barbara-teruggi[security architect @ Allianz technology], gave us an answer to this question during her talk. This answer was a concept named Threat Modeling.
+
+Threat modeling consists of a “proactive & structured analysis of a system or software design”. This implies that you should know your software to identify, prioritize and mitigate threats, in order to reduce their likelihood and impact. 
+This exercise can be done at different levels and steps of the development process, however, it makes more sense to do it during the design phase as it is the most efficient timing.
+We could think that threat modeling is reserved to cybersecurity experts and that developers can only follow what these experts recommend. In reality, multiple actors can be involved in this process, including developers.
+
+After depicting these key points of threat modeling, Bàrbara gave us some insight about the jargon so we can have a deeper understanding of what is implied here. Her main point was the STRIDE (Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, and Elevation of Privilege) methodology. STRIDE allows us to sort potential security threats into six different categories. 
+Another point she made was about the modeling approaches, she described three; the asset-centric, “What do we protect?”, the attacker-centric, “What does the attacker want?” and the software-centric, “Where is the problem?”.
+
+The final part of Bàrbara’s presentation was entitled “What could go wrong” and was based on Adam Shostack’s https://shostack.org/blog/four-question-frame/[Four-Question Framework]. The questions are the following:
+
+- What are we working on?
+- What can go wrong?
+- What are we going to do about it?
+- Did we do a good job?
+
+Bàrbara stressed out the fact that threat modeling is an iterative, continuous process. As software evolves through new features or redesigns, threat modeling must be revisited to address fresh risks. This ongoing process ensures security remains aligned with current realities rather than becoming obsolete documentation.
 
 
 
@@ -103,7 +122,46 @@ Finally in the third demo we saw the possibility of writing GPU kernels in pure 
 image::java_to_gpu_code.png[A,800]
 
 == Stop 5. 1brc: The Most Mind-opening Java Code Ever Seen
+Pushing Java to the Limits: Processing a Billion Rows in Under 2 Seconds
 
+Another talk we attended, and one that astonished us by its way of turning a simple problem into a performance engineering masterclass. This talk was about “The One Billion Row Challenge” and was given by https://www.linkedin.com/in/royvanrijn/?originalSubdomain=nl[Roy van Rijn], Java Champion, who participated in this challenge.
+
+Roy first explained what exactly was this competition about. Participants were given a file with a billion rows listing stations and their temperature values. They had to parse it (min, max, mean) and then print the results using only plain ‘vanilla’ java. The goal was obviously to come up with the fastest way of doing so.
+
+The baseline implementation participants were given was 5 minutes long and used ‘naïve’ techniques such as `Files.lines` to read (single threaded) and streams to collect the results. This implementation was quickly improved by Roy, who was the first person to submit a solution. Thanks to the use of `Files.lines` in parallel and https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ConcurrentHashMap.html[ConcurrentHashMap], he was able to reduce the runtime to 2 minutes.
+
+The next step to improve the runtime was switching to a hardware-aware implementation. CPU architecture highly influences the speed of rows treatment, and it didn’t last long until the competitors took advantage of it. These were the major breakthrough at this point:
+
+- Replacing BufferedReader with https://www.geeksforgeeks.org/operating-systems/memory-mapped-files-in-os/[memory-mapped files] to reduce I/O overhead
+- Gaining major speed-ups by reading raw bytes directly from mmap
+- Discovering that naive parallel streams worsen cache locality
+
+Then came the latest and trickiest tweaks: low-level, high-impact optimizations. First there was the switch from conventional parsing to https://en.algorithmica.org/hpc/pipelining/branchless/[branchless implementation] in order to prevent CPU pipeline stalls.
+
+```Java
+// Usual implementation
+int a = 5;
+int b = 10;
+int max;
+
+if (a > b) {
+    max = a;
+} else {
+    max = b;
+}
+
+// Branchless implementation
+int a = 5;
+int b = 10;
+int max;
+
+int mask = (a > b) -1;
+max = (a & mask) | (b & ~mask);
+```
+
+This was followed by replacing if-else logic with bitwise operations to make parsing faster and more predictable. https://en.wikipedia.org/wiki/SWAR[SWAR] techniques were brought in to process multiple bytes at once, significantly reducing CPU stalls and boosting overall throughput. As the parsing layer became leaner, it became clear that Java’s built-in HashMap couldn’t keep up under this workload, which led to the creation of a custom https://www.baeldung.com/cs/hashing-linear-probing[forward-probing] hash map with a tightly packed memory layout. This eliminated object overhead and pointer chasing, allowing station aggregation to remain just as efficient as the parsing layer feeding into it. Pushing things even further, the https://www.baeldung.com/java-unsafe[Unsafe API] was used to access raw memory directly, trading off some safety and readability for raw speed. By this point, the optimizations had left the realm of everyday Java and entered territory where competitors were pushing the language to its absolute limits in pursuit of every last microsecond.
+
+All along his talk, Roy stressed the importance and the huge place of collaboration and open source during this contest. Everybody was looking at each other’s code, learning and experimenting which he found really cool (and us too).
 
 
 == To sum up
