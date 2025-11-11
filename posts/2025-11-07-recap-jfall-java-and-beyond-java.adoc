@@ -1,0 +1,110 @@
+= Recap JFall 2025 - Java And Beyond Java
+boyuan-xiao-at-work; TanguySrd
+v1.0, 2025-11-07
+:title: Recap JFall 2025 - Java And Beyond Java
+:imagesdir: ../media/2025-11-07-recap-jfall
+:lang: en
+:tags: [JFall, Quarkus, reactive programming, virtual thread, threat modeling, risk management, xz, cyber security, social engineering, GPU programming, project babylon, 1brc, unsafe java]
+
+== Introduction
+It's the season of fall, which means it's time for JFall! As one of the biggest Java conferences in the Netherlands, JFall 2025 lived up to its reputation just as it did in previous years. Apart from the large number of exhibition booths, the quality and quantity of talks are also amazing. However, many talks were scheduled in the same time slots but in different rooms, since it's only a one-day conference. I'm sure many people also share my frustration at not being able to attend all the talks, especially after personally experiencing the brilliance of these talks. Meanwhile, this is also the reason why every person has a unique experience from JFall. In this blog post, we share our full day at JFall along with some reflections of the talks.
+
+== Stop 1. Reactive Programming and Virtual Threads in Quarkus
+The very first talk we attended was the "https://jfall.nl/timetable-2025/#:~:text=Concurrency%20Crossroads%3A%20Choosing%20between%20Reactive%20Programming%20and%20Virtual%20Threads%20in%20Quarkus[_Concurrency Crossroads: Choosing between Reactive Programming and Virtual Threads in Quarkus_]" by our fellow colleague Willem Jan Glerum. Quarkus has never been a stranger at Lunatech, as many of its features, like low resource consumption and live-reloading in dev mode, are favored by many people including me.
+
+[[willemjan]]
+.Willen Jan at the end of his talk
+image::willem_jan_talk.png[A,800]
+
+In the 50mins talk, Willem showed us how easy it is to refactor blocking IO with Quarkus in his  https://github.com/wjglerum/quarkus-virtual-threads/tree/main[well-structured demos]. Blocking IO can happen when the system is querying an external resource and waiting for the response. The reason why it's called blocking is that the CPU thread is blocked until the response is received and couldn't do anything meaningful other than waiting, thus limited throughput. Reactive Programming effectively resolves this by moving on to process the next request and *react* on the response of the first request when it's ready instead of just waiting. In Quarkus, this can be easily achieved via the `Uni` and `Multi` class in `io.smallrye.mutiny` package.
+
+```Java
+// blocking version
+@GET
+@Path("/simple")
+@Transactional
+@Produces(MediaType.APPLICATION_JSON)
+public BlockingBeverage getBeverage() {
+    var beverage = bartender.getFromDraft();
+    repository.save(beverage);
+    return beverage;
+}
+
+// reactive version
+@GET
+@Path("/simple")
+@WithTransaction
+@Produces(MediaType.APPLICATION_JSON)
+public Uni<ReactiveBeverage> getBeverage() {
+    return bartender.getFromDraft().onItem().call(beverage -> repository.save(beverage));
+}
+```
+
+Something else that can boost the throughput without leveraging Reactive Programming is multithreading, let the thread processing the first request block but have a different thread to process other requests. With https://openjdk.org/jeps/425[Virtual Threads coming into preview in JDK 19], this problem gets further addressed as Virtual Threads aims to scale the 'thread-per-request style' further. And all it takes to do this in Quarkus is as easy as adding one annotation:
+
+```Java
+import io.smallrye.common.annotation.RunOnVirtualThread;
+
+@GET
+@Path("/simple")
+@Transactional
+@RunOnVirtualThread   // <- here
+@Produces(MediaType.APPLICATION_JSON)
+public VirtualBeverage getBeverage() {
+    var beverage =  bartender.getFromDraft();
+    repository.save(beverage);
+    return beverage;
+}
+```
+
+Virtual Threads differs from the normal platform threads not only in that they are managed by JVM and reduce overheads in creation/destroy but also in the fact that Virtual Threads optimize the IO bound work running on one thread. https://www.baeldung.com/java-virtual-thread-vs-thread#virtual-thread-composition[This is achieved by adopting the reactive programming style under the hood]. Therefore, it makes sense that it's specifically mentioned that Virtual Threads should not be pinned in JEP-425.
+
+While using Mutiny in Quarkus for reactive, efficient I/O is certainly simple, the idea of enabling virtual threads with a single annotation is hard to resist. This becomes even more compelling when you’re not building a greenfield project, but refactoring an existing legacy system. The contrast in how much code you need to rewrite for each approach is striking.
+
+
+== Stop 2. Threat Modeling
+
+
+
+== Stop 3. XZ: A Story of How Internet Was (Almost) Killed
+Right after lunch time starts the last keynote of the day, which was unanimously deemed the best talk of the day by all of us. Reinier Zwitserloot, Roel Spilker and their team presented a thrilling yet gripping story of how the internet was almost killed.
+
+It all begins with Lasse Collin's ambition of creating his own linux distro in the early 2000s. While the dream didn't land, the XZ utils, which was developed to better compress the OS image to fit into a CD-ROM, became a big success. XZ supports outputting both `.xz` format and `.lzma` format. For its fast and significant volume decreasing compression feature, XZ became not only a built-in utils in many popular linux distros but also a build dependency of numerous well-known linux libraries.
+
+Just like many other open source projects, Lasse gradually shifted focus and became less active in maintaining the XZ. Meanwhile, Jia Tan stands out as a strong force of contributor by making several patches for the project in 2021. In the next three years, Jia built up his reputation and picked up the role of maintainer of XZ as Lasse was bothered by a long-term mental health issue. With such power and authority, Jia made multiple commits to culprit the sophisticated backdoor within XZ, including disabling the landlock, uploading malicious script encrypted and hidden in a tar file and finally replacing an authentication function used by OpenSSH using `IFUNC`. If Andres Freund, a PostgresSQL developer at Microsoft, didn't notice the weird performance regression when doing a micro-benchmarking for PostgresDB in 2024, the XZ backdoor would remain undiscovered and Jia Tan, or whoever it is behind that account, could gain access to the vast majority of the servers on the internet.
+
+[[andresfreund]]
+.The moment that the attack failed
+image::andres_freund.png[A,800]
+
+While we are in the relief of the dooms day is avoided, we need to ask ourselves what we can learn from this. Despite how technically sophisticated https://x.com/fr0gger_/status/1774342248437813525/photo/1[the whole attack process] is, we found the non-technical part, the social engineering part, highly essential as well. On the way from just a random contributor to a core maintainer, Jia received help from other suspicious users like Jigar Kumar and Dennis Ens who sent mail complaint to Lasse to push the merge of Jia's patches. There's no doubt that these pressure catalyzed the turn-over of project's control, which is fundamental to carry out the attack.
+
+We didn’t love this presentation just for its content, but for how Reinier and Roel told the story. With a bit of performance and acting, they brought everything to life as if we were witnessing it ourselves. It also reminded me of the movie https://www.imdb.com/title/tt3042408/[Who Am I], where I first encountered the concept of social engineering: characters compromising their targets through a mix of technical skills and psychological manipulation. That blend is exactly what we should stay mindful of in the real world, too.
+
+== Stop 4. Java's Answer to AI Model And GPU Programming
+https://blog.lunatech.com/posts/2025-06-27-gpu-programming-for-the-brave[I have been long interested in the topic of GPU Programming] and I had the pleasure to learn the basics of building simple Neural Network in Python during my university study. But little did I expect to see a talk about them in a Java conference. With strong curiosity, I listened to the talk given by Lize Raes and Ana Maria Mihalceanu, where I see Java's answer to AI modeling and GPU programming. AI models mainly consist of Neural Networks and it was remarkably easy to build Neural Networks using a deep learning framework like Tensorflow or PyTorch. And of course, they are limited to Python only. As for the GPU Programming, you will need to know CUDA or OpenCL first. But with the help of the https://openjdk.org/projects/babylon/[babylon project as part of the OpenJDK], this is now possible in Java.
+
+[[gpu_talk_slide]]
+.The slide that compare the three demos during the talk
+image::gpu_talk_slide.png[A,800]
+
+Lize and Ana showed us two ways to run a ML model on GPU using Java in their first two demos, both of them relied on https://onnx.ai/[ONNX (Open Neural Network Exchange)]. ONNX defines an open standard for save format of a ML model as well as runtimes to execute the model. In the first demo, Lize and Ana ran an emotion recognition model that is saved as `.onnx` format and then executed in a Java program that leverages https://openjdk.org/jeps/454[the new Foreign Function and Memory API in JDK 22]. As the replacement of the good old JNI (Java Native Interface), Foreign Function eliminates the necessity of C/C++ bridge (something like `JNIEXPORT void JNICALL Java_my_natives_MyNativeClass_myNativeFunc(JNIEnv *, jobject, jint);`) and provides a concise, readable, pure-Java API. 
+
+The second approach, which gives us more Tensorflow/PyTorch flavor of creating a model, heavily leverages the `@CodeReflection` annotation introduced by project babylon. By placing the `@CodeReflection` annotation on top of the method, java source code can be identified as code model (also known as Intermediate Representation, IR, in the realm of compilers), which then can be examined or transformed into other forms of interpretation. In project babylon, the developers build up a translation layer for the ONNX operators (Conv, Relu, etc...) using `@CodeReflection`. By doing so, developers can use pure Java code to **program** Neural Networks that can run on a actual GPU.
+
+[[java_ml_code]]
+.Rings a bell, doesn't it? Source: https://github.com/LizeRaes/babylon/blob/a43beadb9347f7ce03d3d7f9b27e83fef5b7cf3f/cr-examples/onnx/src/test/java/oracle/code/onnx/fer/FERModel.java#L116[here]
+image::java_ml_code.png[A,800]
+
+Finally in the third demo we saw the possibility of writing GPU kernels in pure Java. With the help of Heterogeneous Accelerator Toolkit (HAT), the kernel context and compute context, which contains the GPU grid shape and thread info, can be easily accessed from the Java code. Different from the previous two demos, where we heavily rely on native runtimes, our Java code can be translated into GPU code, thanks to the `@CodeReflection`. Even though HAT doesn't change the fundamental programming model, where you have to always consider the fact that your code will be run in parallel in thousands of GPU threads, it does provide multiple backend so that your Java GPU code can run on multiple providers. Except for CUDA and OpenCL, it's even possible to run on JDK itself, in other words, using Java backend to simulate the GPU execution. While we can benefit from the portability of JDK, it also enables us to debug the GPU kernel in an easier way.
+
+[[java_to_gpu_code]]
+.The slide that shows how our Java code becomes GPU code.
+image::java_to_gpu_code.png[A,800]
+
+== Stop 5. 1brc: The Most Mind-opening Java Code Ever Seen
+
+
+
+== To sum up
+Even though JFall 2025 was only a one-day conference, it still impressed us with the sheer quality and variety of its content. We saw how Java’s capabilities continue to evolve, and we were reminded why cybersecurity truly matters in the real world. While writing this blog post, our understanding of the talks deepened and shifted, which is why we also want to share our own reflections here—continuing the spirit at the heart of JFall itself: sharing knowledge.
