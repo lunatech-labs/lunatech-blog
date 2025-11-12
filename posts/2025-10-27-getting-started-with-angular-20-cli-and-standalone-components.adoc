@@ -1,0 +1,327 @@
+= Getting Started with Angular 20 CLI and Standalone Components
+:author: jakeortega
+:revdate: v1, 2025-10-27
+:title: Getting Started with Angular 20 CLI and Standalone Components
+:lang: en
+:tags: [Beginner,Angular CLI,standalone components]
+
+Learn how to initialize and structure a new Angular 20 project using the Angular CLI. Understand standalone components and the simplified bootstrapping process. This guide focuses on a clean project setup, modern routing, and practical patterns you can reuse in real projects.
+
+=== Prerequisites
+
+- Node.js 24+ (LTS recommended) and npm or pnpm
+- Angular CLI 20 installed globally: npm i -g @angular/cli@20
+- Familiarity with TypeScript and Angular fundamentals
+
+=== Create a new project with the Angular CLI
+
+The Angular CLI scaffolds a production-grade baseline with sensible defaults. Standalone components are the default in Angular 20, which means no NgModules are required for most apps.
+
+[source,shell]
+----
+// Terminal
+// Create a new app with routing and SCSS. Use --ssr to scaffold server-side rendering.
+ng new lt-dashboard --routing --style=scss
+cd lt-dashboard
+ng serve
+----
+
+Open http://localhost:4200 and confirm the app runs. The CLI gives you fast dev server reloads, TypeScript checks, and a ready-to-extend project.
+
+=== Project structure that scales
+
+A small, predictable layout keeps cognitive load low as features grow.
+
+[source,typescript]
+----
+// Suggested structure (simplified)
+src/
+  main.ts
+  index.html
+  styles.scss
+  environments/
+    environment.ts
+    environment.prod.ts
+  app/
+    app.component.ts
+    app.routes.ts
+    features/
+      home/
+        home.component.ts
+      projects/
+        projects.component.ts
+----
+
+- *app.routes.ts* holds your route config.
+- Each feature gets its own folder with a standalone component.
+- environments holds build-time configuration.
+
+=== Simplified bootstrapping with bootstrapApplication
+
+Standalone components and functional providers eliminate boilerplate. The entry point is lean and explicit.
+
+[source,typescript]
+----
+// src/main.ts
+import { bootstrapApplication } from '@angular/platform-browser';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
+import { provideHttpClient, HttpInterceptorFn, withInterceptors } from '@angular/common/http';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { AppComponent } from './app/app.component';
+import { routes } from './app/app.routes';
+
+// Example functional interceptor (adds a version header)
+const versionHeaderInterceptor: HttpInterceptorFn = (req, next) =>
+  next(req.clone({ setHeaders: { 'X-App-Version': '1.0.0' } }));
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideRouter(routes, withComponentInputBinding()),
+    provideHttpClient(withInterceptors([versionHeaderInterceptor])),
+    provideAnimations(),
+    // If you generated the project with --ssr, enable hydration:
+    // provideClientHydration(),
+  ],
+}).catch(err => console.error(err));
+----
+
+- *provideRouter* wires your routing without a root NgModule.
+- provideHttpClient configures HttpClient with tree-shakable features like withInterceptors.
+- provideAnimations enables Angular animations globally.
+- withComponentInputBinding lets you bind route params/data directly to component inputs.
+
+=== Routing with lazy standalone components
+
+Define routes in a single place and lazy-load components with loadComponent.
+
+[source,typescript]
+----
+// src/app/app.routes.ts
+import { Routes } from '@angular/router';
+
+export const routes: Routes = [
+  {
+    path: '',
+    loadComponent: () =>
+      import('./features/home/home.component').then(m => m.HomeComponent),
+    title: 'Home',
+  },
+  {
+    path: 'projects',
+    loadComponent: () =>
+      import('./features/projects/projects.component').then(m => m.ProjectsComponent),
+    title: 'Projects',
+  },
+  { path: '**', redirectTo: '' },
+];
+----
+
+This setup is fast to read and easy to evolve. Each path points directly at a standalone component without an intermediate NgModule.
+
+=== A minimal root component
+
+Keep your root component focused on layout and navigation.
+
+[source,typescript]
+----
+// src/app/app.component.ts
+import { Component } from '@angular/core';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
+  styles: [`
+    nav { display: flex; gap: 1rem; padding: 1rem; border-bottom: 1px solid #eee; }
+    a.active { font-weight: 600; text-decoration: underline; }
+    main { padding: 1rem; }
+  `],
+  template: `
+    <nav>
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+      <a routerLink="/projects" routerLinkActive="active">Projects</a>
+    </nav>
+    <main>
+      <router-outlet />
+    </main>
+  `,
+})
+export class AppComponent {}
+----
+
+=== Build a real feature: Home with forms and new control flow
+
+Use reactive forms and the modern control flow syntax (@if, @for) to keep templates expressive and predictable.
+
+[source,typescript]
+----
+// src/app/features/home/home.component.ts
+import { Component, signal } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+
+type Project = { id: number; name: string };
+
+@Component({
+  imports: [ReactiveFormsModule],
+  styles: [`
+    form { display: flex; gap: 0.5rem; margin: 1rem 0; }
+    input { min-width: 240px; }
+    ul { padding-left: 1.25rem; }
+  `],
+  template: `
+    <h2>Welcome</h2>
+
+    <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+      <input formControlName="q" type="text" placeholder="Search projects" />
+      <button type="submit">Search</button>
+      <button type="button" (click)="reset()">Reset</button>
+    </form>
+
+    @if (results().length === 0) {
+      <p>No results found.</p>
+    } @else {
+      <ul>
+        @for (p of results(); track p.id) {
+          <li>{{ p.name }}</li>
+        }
+      </ul>
+    }
+  `,
+})
+export class HomeComponent {
+  private readonly allProjects: Project[] = [
+    { id: 1, name: 'Roadmap' },
+    { id: 2, name: 'UI Kit' },
+    { id: 3, name: 'Infra' },
+  ];
+
+  results = signal<Project[]>(this.allProjects);
+
+  constructor(private fb: FormBuilder) {}
+
+  searchForm = this.fb.nonNullable.group({ q: '' });
+
+  onSearch(): void {
+    const q = this.searchForm.value.q?.toLowerCase() ?? '';
+    this.results.set(
+      this.allProjects.filter(p => p.name.toLowerCase().includes(q))
+    );
+  }
+
+  reset(): void {
+    this.searchForm.reset({ q: '' });
+    this.results.set(this.allProjects);
+  }
+}
+----
+
+- signal gives you ergonomic local state without services when you don’t need them.
+- The new control flow removes structural directive noise while remaining explicit.
+
+=== A lazy projects page
+
+Keep feature components focused and stateless by default.
+
+[source,typescript]
+----
+// src/app/features/projects/projects.component.ts
+import { Component } from '@angular/core';
+
+@Component({
+  template: `
+    <h2>Projects</h2>
+    <p>This is a lazy-loaded page. Add tables, filters, or charts here.</p>
+  `,
+})
+export class ProjectsComponent {}
+----
+
+The route configuration we defined earlier will load this component on demand.
+
+=== HTTP setup with functional interceptors
+
+You already provided HttpClient in main.ts. Add domain-specific concerns via functional interceptors as your app grows (auth tokens, correlation IDs, error normalization). They compose with withInterceptors and stay tree-shakable.
+
+[source,typescript]
+----
+// Example: src/app/core/auth.interceptor.ts (optional)
+import { HttpInterceptorFn } from '@angular/common/http';
+
+export const authInterceptor: HttpInterceptorFn = (req, next) => {
+  const token = localStorage.getItem('token');
+  return next(token ? req.clone({ setHeaders: { Authorization: `Bearer ${token}` } }) : req);
+};
+
+// Then in main.ts:
+// provideHttpClient(withInterceptors([authInterceptor, versionHeaderInterceptor]))
+----
+
+Keep cross-cutting code small, testable, and colocated in core/.
+
+=== Environment-driven configuration
+
+Use build-time environments for API base URLs and toggles. The CLI swaps files based on configuration.
+
+[source,typescript]
+----
+// src/environments/environment.ts
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:3000/api',
+};
+
+// src/environments/environment.prod.ts
+export const environment = {
+  production: true,
+  apiUrl: 'https://api.example.com',
+};
+----
+
+Access where needed:
+
+[source,typescript]
+----
+// Anywhere in app code
+import { environment } from '../environments/environment';
+// http.get(`${environment.apiUrl}/projects`)
+----
+
+=== CLI commands you’ll use daily
+
+- Generate features: ng g component app/features/activity
+- Add utilities: ng g interceptor core/logging
+- Run locally: ng serve
+- Build for production: ng build --configuration production
+- Run unit tests: ng test
+
+The Angular CLI keeps project setup consistent while remaining flexible.
+
+=== Optional: Server-side rendering (SSR)
+
+If you create your project with --ssr, the CLI scaffolds an SSR server and hydration for you. In main.ts, include provideClientHydration() so the browser picks up the server-rendered DOM without re-rendering. SSR improves Time to First Byte (TTFB), SEO, and perceived performance for content-heavy routes.
+
+=== Why this structure works
+
+- Standalone components reduce indirection and speed up onboarding.
+- A single routes file gives you a map of the app at a glance.
+- Providers in main.ts make cross-cutting behavior explicit.
+- Feature-first folders keep implementation details close to their templates and styles.
+
+=== Troubleshooting and tips
+
+- Type errors on control flow (@if/@for): ensure your component template uses the new Angular control flow (Angular 17+). No extra imports are needed.
+- RouterLinkActive not working on root: pass [routerLinkActiveOptions]="{ exact: true }" for the root link.
+- Interceptor order: interceptors run in the order provided for requests, and in reverse for responses. Put auth/correlation early; place global error handling last to see the final response state.
+
+=== Conclusion
+
+Angular 20 cuts the ceremony: standalone components by default, functional providers, and minimal bootstrapping. Organize by feature, keep routes clear, and scale without the bloat. The CLI does the grunt work, you build features.
+
+=== Next Steps
+
+- Add a core/ directory for cross-cutting concerns (interceptors, guards, tokens).
+- Introduce a shared/ library for reusable UI primitives.
+- Wire HttpClient to a real backend and centralize API calls behind a data-access service.
+- Enable SSR (--ssr) and hydration for content-rich pages.
+- Adopt signals in more places thoughtfully: state local to a component is a good fit; shared, cross-route state still belongs in services.
