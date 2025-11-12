@@ -242,6 +242,7 @@ export const unsavedCanDeactivate: CanDeactivateFn<{ hasUnsavedChanges(): boolea
 ----
 
 Notes:
+
 - Returning a UrlTree is the most ergonomic way to redirect from guards.
 - Prefer canMatch for lazy-loaded feature entries. It prevents loading code the user can’t access.
 
