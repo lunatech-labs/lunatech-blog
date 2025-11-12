@@ -299,29 +299,39 @@ Because writing to signals schedules view updates, you often don’t need Change
 
 === Zoneless change detection: when you're ready to drop Zone.js
 
-As of Angular 18+, you can run without Zone.js. This reduces global patching and gives you explicit control over reactivity. The recommendation: centralize UI state in signals or use async pipe; those sources schedule updates even without zones.
+Zoneless mode lets Angular skip patching browser APIs (no Zone.js) and rely purely on explicit reactive triggers (signals, template events, async pipe, router). By Angular 20, zoneless is mature enough for production in well-structured, signal‑driven apps.
+
+Use the stable provider if it exists; otherwise keep using the experimental one until your project confirms the upgrade path.
 
 [source,typescript]
 ----
 // app.config.ts
-import { ApplicationConfig, provideExperimentalZonelessChangeDetection } from '@angular/core';
-import { provideHttpClient } from '@angular/common/http';
+import { ApplicationConfig, provideHttpClient } from '@angular/common/http';
+import {
+  // Verify which one exists in your installed version:
+  // If Angular 20 exposes `provideZonelessChangeDetection`, prefer it.
+  provideZonelessChangeDetection,               // <-- Confirm availability
+  provideExperimentalZonelessChangeDetection,   // <-- Fallback if stable not present
+} from '@angular/core';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideExperimentalZonelessChangeDetection(),
+    // Use ONE of the following:
+    // provideZonelessChangeDetection(),
+    provideExperimentalZonelessChangeDetection(), // ← Remove when stable provider confirmed
     provideHttpClient(),
   ],
 };
 ----
 
-With zoneless, these still update the UI:
-- Template events (click, input).
-- Signal writes (set, update).
-- AsyncPipe emissions (it marks the view explicitly).
-- Router navigation.
+With zoneless, Angular still updates views when:
 
-For other async sources, use signals (or convert to signals) and bind them in the template.
+- Template events fire (click, input, etc.).
+- A signal is written (set/update).
+- AsyncPipe emits (it marks its view manually).
+- Router navigation completes.
+
+Other async sources (WebSocket, timers, SDK callbacks): funnel them through signals (or Observables bound via async pipe / toSignal). Avoid manual ChangeDetectorRef unless integrating with legacy patterns.
 
 [source,typescript]
 ----
@@ -340,15 +350,20 @@ import { interval, map, startWith } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ZonelessDemoComponent {
-  // RxJS -> Signal drives the template without Zone.js
   time = toSignal(
-    interval(1000).pipe(map(() => new Date().toLocaleTimeString()), startWith(new Date().toLocaleTimeString())),
-    { initialValue: new Date().toLocaleTimeString() }
+    interval(1000).pipe(
+      map(() => new Date().toLocaleTimeString()),
+      startWith(new Date().toLocaleTimeString()),
+    ),
+    { initialValue: new Date().toLocaleTimeString() },
   );
 
   private _clicks = signal(0);
   clicks = this._clicks.asReadonly();
-  inc() { this._clicks.update(n => n + 1); }
+
+  inc() {
+    this._clicks.update(n => n + 1);
+  }
 }
 ----
 
