@@ -248,7 +248,7 @@ Notes:
 
 === Async redirects in Angular 20
 
-Redirects are often conditional and data-driven. Angular 20 refines ergonomics for async redirects by allowing redirect functions to return a Promise or Observable of a UrlTree, keeping logic declarative in the route table. When you need DI, the function executes in a proper injection context.
+Redirects are often conditional and data-driven. Angular 20 refines ergonomics for async redirects by allowing redirect functions to return a Promise or Observable of a UrlTree, keeping logic declarative in the route table. When you need Dependency Injection, the function executes in a proper injection context.
 
 [source,typescript]
 ----
