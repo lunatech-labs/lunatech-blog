@@ -19,6 +19,7 @@ jobs:
   deploy:
     name: Deploy ${{ inputs.target_branch }}
     runs-on: ubuntu-latest
+    permissions: { }
     steps:
       - uses: actions/create-github-app-token@v2
         name: Generate GitHub Token
