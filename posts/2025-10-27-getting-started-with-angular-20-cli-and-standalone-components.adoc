@@ -1,6 +1,6 @@
 = Getting Started with Angular 20 CLI and Standalone Components
-:author: jakeortega
-:revdate: v1, 2025-10-27
+jakeortega
+v1, 2025-10-27
 :title: Getting Started with Angular 20 CLI and Standalone Components
 :lang: en
 :tags: [Beginner,Angular CLI,standalone components]
