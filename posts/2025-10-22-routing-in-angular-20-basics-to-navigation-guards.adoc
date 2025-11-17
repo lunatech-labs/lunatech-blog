@@ -1,6 +1,6 @@
 = Routing in Angular 20: Basics to Navigation Guards
-:author: jakeortega
-:revdate: v1, 2025-10-22
+jakeortega
+v1, 2025-10-22
 :title: Routing in Angular 20: Basics to Navigation Guards
 :lang: en
 :tags: [Beginner,angular router,navigation,route guards,async redirects]
