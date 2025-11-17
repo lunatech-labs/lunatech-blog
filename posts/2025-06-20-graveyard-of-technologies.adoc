@@ -2,7 +2,7 @@
 peretarrida
 v1.0, 2025-06-20
 :title: Graveyard of technologies
-:imagesdir: ../media/2025-6-20-graveyard-of-technologies
+:imagesdir: ../media/2025-06-20-graveyard-of-technologies
 :lang: en
 :tags: [beyond-the-code, bash-to-the-feature, ALGOL, Japronto, Apache Ant, Windows Phone, Google Glass, Microsoft Zune, Netscape Navigator, Adobe Flash, Visual Basic, Fortran, Smalltalk, Technology Adoption, Market Failure, Software History, Hardware History, Ecosystem Strategy, Innovation vs. Viability, Legacy Technology, Product Lifecycle, Developer Experience, User Adoption]
 == Software: When Technical Excellence Isn't Enough
@@ -59,11 +59,11 @@ Apache Ant dominated Java build automation for years with its XML-based configur
 <project name="MyFirstAntProject" default="compile" basedir=".">
     <property name="src.dir" location="src" />
     <property name="build.dir" location="bin" />
-    
+
     <target name="clean">
         <delete dir="${build.dir}" />
     </target>
-    
+
     <target name="compile" depends="clean">
         <javac srcdir="${src.dir}" destdir="${build.dir}" />
     </target>
