@@ -1,6 +1,6 @@
 = Data Binding in Angular: Templates, Interpolation, and Property/Event Binding
-:author: jakeortega
-:revdate: v1, 2025-10-15
+jakeortega
+v1, 2025-10-15
 :title: Data Binding in Angular: Templates, Interpolation, and Property/Event Binding
 :lang: en
 :tags: [Beginner,property binding,event binding,interpolation,template syntax]
