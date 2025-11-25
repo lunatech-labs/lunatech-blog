@@ -1,6 +1,6 @@
 = Change Detection Strategies in Angular: Zones and Signals
 jakeortega
-v1, 2025-11-05
+2025-11-05
 :title: Change Detection Strategies in Angular: Zones and Signals
 :lang: en
 :tags: [Intermediate,change detection,Zone.js,OnPush,signals (intro)]
