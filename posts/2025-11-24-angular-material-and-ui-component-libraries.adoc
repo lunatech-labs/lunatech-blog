@@ -1,6 +1,6 @@
 = Angular Material and UI Component Libraries  
-:author: jakeortega  
-:revdate: 2025-11-24  
+jakeortega  
+2025-11-24  
 :title: Angular Material and UI Component Libraries  
 :lang: en  
 :tags: [Intermediate, Angular Material, component library, UI design,theming]
