@@ -1,6 +1,6 @@
 = Mastering Angular Dependency Injection
-:author: jakeortega
-:revdate: v2, 2025-11-03
+jakeortega
+v1, 2025-11-03
 :title: Mastering Angular Dependency Injection
 :lang: en
 :keywords: angular dependency injection, inject function, providers, EnvironmentProviders, standalone
