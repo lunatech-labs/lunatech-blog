@@ -1,6 +1,6 @@
 = switchMap vs mergeMap vs concatMap: How I Decide Which One to Use in Angular
-:author: jakeortega
-:revdate: 2025-11-22
+jakeortega
+2025-11-22
 :title: switchMap vs mergeMap vs concatMap: How I Decide Which One to Use in Angular
 :lang: en
 :tags: [Intermediate,switchMap,mergeMap,concatMap,rxjs operators]
