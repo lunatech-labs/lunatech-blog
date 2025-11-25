@@ -1,0 +1,398 @@
+= Change Detection Strategies in Angular: Zones and Signals
+:author: jakeortega
+:revdate: v1, 2025-11-05
+:title: Change Detection Strategies in Angular: Zones and Signals
+:lang: en
+:tags: [Intermediate,change detection,Zone.js,OnPush,signals (intro)]
+
+Understand Angular’s change detection mechanism and how to optimize performance using the OnPush strategy. Learn how to use Signals for more granular reactivity. This article provides a practical mental model and shows how to apply it with Zone.js, OnPush, and Signals, along with a clear path toward building zoneless applications when you’re ready.
+
+=== The mental model: how Angular knows to update
+
+At a high level, Angular renders your component tree into a graph of views. A change detection pass checks template bindings and updates the DOM where something changed. Something has to tell Angular when to do that pass:
+
+- With Zone.js (the default), Angular patches async APIs (Promises, setTimeout, DOM events, etc.) and schedules checks automatically after those tasks.
+- With signals, writes to a signal schedule the right components to re-render even without Zone.js.
+- With OnPush, Angular narrows when a component is checked: on input reference changes, events in that component, async pipe emissions, and signal writes.
+
+Once you see what triggers checks, you can guide Angular to do less work and update only when it matters.
+
+=== Working with Zone.js (default)
+
+Zone.js intercepts most async boundaries and calls into Angular to run change detection. It’s a safe default and reduces boilerplate, especially for teams migrating legacy code.
+
+You can configure Zone.js coalescing to reduce redundant checks:
+
+[source,typescript]
+----
+// app.config.ts
+import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { provideHttpClient } from '@angular/common/http';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    // Collapses multiple events/microtasks into fewer change detection cycles.
+    provideZoneChangeDetection({
+      eventCoalescing: true,
+      runCoalescing: true,
+    }),
+    provideHttpClient(),
+  ],
+};
+----
+
+For performance-sensitive work (e.g., animations or polling), run it outside Angular to avoid thrashing, and re-enter only when UI state actually changes.
+
+[source,typescript]
+----
+import { 
+  Component, 
+  NgZone, 
+  ChangeDetectionStrategy, 
+  signal, 
+  inject,
+  OnInit,
+  OnDestroy 
+} from '@angular/core';
+
+@Component({
+  selector: 'cpu-heavy',
+  standalone: true,
+  template: `
+    <p>Frames: {{ frames() }}</p>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class CpuHeavyComponent implements OnInit, OnDestroy {
+  private zone = inject(NgZone);
+
+  // Signal handles reactivity; no CDR needed
+  private _frames = signal(0);
+  frames = this._frames.asReadonly();
+
+  private intervalId?: ReturnType<typeof setInterval>;
+
+  ngOnInit() {
+    this.zone.runOutsideAngular(() => {
+      let n = 0;
+      this.intervalId = setInterval(() => {
+        // Update signal outside Angular zone
+        // Signals batch updates automatically
+        this._frames.set(++n);
+        
+        if (n > 3000) {
+          clearInterval(this.intervalId);
+        }
+      }, 16);
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
+  }
+}
+----
+
+=== Embracing OnPush for predictable performance
+
+OnPush reduces unnecessary checks and nudges you toward immutable data and explicit updates. Angular will check an OnPush component when:
+
+- An Input reference changes (immutability shines here).
+- The component fires an event or an async pipe emits.
+- A bound signal writes (signals integrate with the scheduler).
+- You explicitly call markForCheck or detectChanges.
+
+Use immutable updates for inputs and track nodes for stable lists.
+
+[source,typescript]
+----
+import { Component, ChangeDetectionStrategy, input } from '@angular/core';
+
+type User = { id: number; name: string };
+
+@Component({
+  selector: 'user-list',
+  standalone: true,
+  template: `
+    <ul>
+      @for (u of users(); track u.id) {
+        <li>{{ u.name }}</li>
+      }
+    </ul>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class UserListComponent {
+  // Signal-based input (works great with OnPush)
+  users = input<ReadonlyArray<User>>([]);
+}
+----
+
+[source,typescript]
+----
+// parent.component.ts
+import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { UserListComponent } from './user-list.component';
+
+type User = { id: number; name: string };
+
+@Component({
+  selector: 'parent',
+  standalone: true,
+  imports: [UserListComponent],
+  template: `
+    <button (click)="add()">Add</button>
+    <button (click)="mutate()">Mutate (bad)</button>
+
+    <user-list [users]="users()"></user-list>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class ParentComponent {
+  private _users = signal<ReadonlyArray<User>>([
+    { id: 1, name: 'Maya' },
+    { id: 2, name: 'Dee' },
+  ]);
+  users = this._users.asReadonly();
+
+  // Correct: immutable update changes the reference and triggers OnPush
+  add() {
+    const currentIds = this.users().map(u => u.id);
+    const nextId = currentIds.length > 0 ? Math.max(...currentIds) + 1 : 1;
+    this._users.update(arr => [...arr, { id: nextId, name: 'New User' }]);
+  }
+
+  // Bad: mutates in place; OnPush children won't see a different reference
+  mutate() {
+    // as any to showcase the pitfall (avoid in real code)
+    (this.users() as any)[0].name = 'Mutated';
+    // The UI may not update; prefer immutable patterns.
+  }
+}
+----
+
+If you're not using signals and you must update UI from a callback that Angular doesn't know about, call markForCheck.
+
+[source,typescript]
+----
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'ws-status',
+  standalone: true,
+  template: `Status: {{ status }}`,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class WebSocketStatusComponent implements OnInit {
+  status = 'disconnected';
+  constructor(private cdr: ChangeDetectorRef) {}
+
+  ngOnInit() {
+    const ws = new WebSocket('wss://example.org');
+    ws.onopen = () => { this.status = 'connected'; this.cdr.markForCheck(); };
+    ws.onclose = () => { this.status = 'disconnected'; this.cdr.markForCheck(); };
+  }
+}
+----
+
+[source,typescript]
+----
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+
+@Component({
+  selector: 'ws-status',
+  standalone: true,
+  template: `Status: {{ status }}`,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class WebSocketStatusComponent {
+  status = 'disconnected';
+  constructor(private cdr: ChangeDetectorRef) {}
+
+  ngOnInit() {
+    const ws = new WebSocket('wss://example.org');
+    ws.onopen = () => { this.status = 'connected'; this.cdr.markForCheck(); };
+    ws.onclose = () => { this.status = 'disconnected'; this.cdr.markForCheck(); };
+  }
+}
+----
+
+=== Signals (intro): fine‑grained reactivity without heavy lifting
+
+Signals give you a declarative, dependency-tracked model for state. Reading a signal in a template links it to the view; writing to that signal schedules the right view to update. This makes change detection more targeted and pairs naturally with OnPush or even zoneless.
+
+[source,typescript]
+----
+import { Component, ChangeDetectionStrategy, signal, computed, effect } from '@angular/core';
+
+type Todo = { id: number; title: string; done: boolean };
+
+@Component({
+  selector: 'todo-panel',
+  standalone: true,
+  template: `
+    <input placeholder="Filter..." [value]="filter()" (input)="filter.set(($event.target as HTMLInputElement).value)" />
+
+    <p>Completed: {{ completedCount() }} / {{ todos().length }}</p>
+
+    <ul>
+      @for (t of filteredTodos(); track t.id) {
+        <li>
+          <label>
+            <input type="checkbox" [checked]="t.done" (change)="toggle(t.id)" />
+            {{ t.title }}
+          </label>
+        </li>
+      }
+    </ul>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class TodoPanelComponent {
+  private _todos = signal<Todo[]>([
+    { id: 1, title: 'Ship dashboard', done: false },
+    { id: 2, title: 'Write docs', done: true },
+  ]);
+  todos = this._todos.asReadonly();
+
+  filter = signal('');
+  filteredTodos = computed(() => {
+    const q = this.filter().toLowerCase();
+    return this.todos().filter(t => t.title.toLowerCase().includes(q));
+  });
+  completedCount = computed(() => this.todos().filter(t => t.done).length);
+
+  toggle(id: number) {
+    this._todos.update(ts => ts.map(t => (t.id === id ? { ...t, done: !t.done } : t)));
+  }
+
+  // Optional: side effects
+  log = effect(() => {
+    console.debug('Todos changed:', this.todos());
+  });
+}
+----
+
+Interop with RxJS is straightforward; toSignal turns an Observable into a signal that drives OnPush views.
+
+[source,typescript]
+----
+import { toSignal } from '@angular/core/rxjs-interop';
+import { Observable } from 'rxjs';
+
+@Component({ /* ... */ })
+export class ClockComponent {
+  now = toSignal(
+    // Emits a new Date every second
+    new Observable<Date>(sub => {
+      const id = setInterval(() => sub.next(new Date()), 1000);
+      return () => clearInterval(id);
+    }),
+    { initialValue: new Date() }
+  );
+}
+----
+
+Because writing to signals schedules view updates, you often don’t need ChangeDetectorRef calls. The result is simpler, more predictable change detection.
+
+=== Zoneless change detection: when you're ready to drop Zone.js
+
+Zoneless mode lets Angular skip patching browser APIs (no Zone.js) and rely purely on explicit reactive triggers (signals, template events, async pipe, router). By Angular 20, zoneless is mature enough for production in well-structured, signal‑driven apps.
+
+Use the stable provider if it exists; otherwise keep using the experimental one until your project confirms the upgrade path.
+
+[source,typescript]
+----
+// app.config.ts
+import { ApplicationConfig, provideHttpClient } from '@angular/common/http';
+import {
+  // Verify which one exists in your installed version:
+  // If Angular 20 exposes `provideZonelessChangeDetection`, prefer it.
+  provideZonelessChangeDetection,               // <-- Confirm availability
+  provideExperimentalZonelessChangeDetection,   // <-- Fallback if stable not present
+} from '@angular/core';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    // Use ONE of the following:
+    // provideZonelessChangeDetection(),
+    provideExperimentalZonelessChangeDetection(), // ← Remove when stable provider confirmed
+    provideHttpClient(),
+  ],
+};
+----
+
+With zoneless, Angular still updates views when:
+
+- Template events fire (click, input, etc.).
+- A signal is written (set/update).
+- AsyncPipe emits (it marks its view manually).
+- Router navigation completes.
+
+Other async sources (WebSocket, timers, SDK callbacks): funnel them through signals (or Observables bound via async pipe / toSignal). Avoid manual ChangeDetectorRef unless integrating with legacy patterns.
+
+[source,typescript]
+----
+import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { interval, map, startWith } from 'rxjs';
+
+@Component({
+  selector: 'zoneless-demo',
+  standalone: true,
+  template: `
+    <p>Server time: {{ time() }}</p>
+    <p>Clicks: {{ clicks() }}</p>
+    <button (click)="inc()">Click me</button>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class ZonelessDemoComponent {
+  time = toSignal(
+    interval(1000).pipe(
+      map(() => new Date().toLocaleTimeString()),
+      startWith(new Date().toLocaleTimeString()),
+    ),
+    { initialValue: new Date().toLocaleTimeString() },
+  );
+
+  private _clicks = signal(0);
+  clicks = this._clicks.asReadonly();
+
+  inc() {
+    this._clicks.update(n => n + 1);
+  }
+}
+----
+
+If you interact with non-Angular callbacks (e.g., third‑party SDKs), prefer to set signals inside the callback. That write will schedule the needed view updates.
+
+=== Practical checklist
+
+- Prefer OnPush for all app components; combine with immutable data.
+- Use signal-based inputs (input()) in leaf components for ergonomic, fine-grained updates.
+- Store local UI state as signals; use computed for derivations and effect for side effects.
+- In Zone.js apps, isolate heavy loops with runOutsideAngular and re-enter only on state writes.
+- In zoneless apps, ensure all UI-affecting async work flows through signals or async pipe.
+- Track list items by a stable key to avoid re-render churn.
+- Use provideZoneChangeDetection with coalescing in legacy/mixed environments; move toward provideExperimentalZonelessChangeDetection when your reactive pathways are solid.
+
+=== Troubleshooting gotchas
+
+- “My OnPush child didn’t update.” Ensure the Input reference changes (immutable update) or the child reads a signal that you wrote to.
+- “Zoneless didn’t repaint after a callback.” Convert that callback’s data to a signal or trigger an async pipe emission; avoid manual detectChanges unless you know the implications.
+- “Perf regressions after refactor.” Check for unintended synchronous effects that write many signals in a loop; batch updates if needed, or compose a single state write.
+
+=== Conclusion
+
+Change detection in Angular is powerful because you can choose the right tool for the job. Zone.js gives you simplicity, OnPush gives you predictability and performance, and signals give you precise, maintainable reactivity. Together, they help you ship fast UIs without guesswork, and you can progressively adopt a zoneless model when your state is signal-driven.
+
+=== Next Steps
+
+- Audit your components: enable OnPush and fix any mutable input flows.
+- Introduce signals for local state and derived values; replace ad‑hoc ChangeDetectorRef calls.
+- Wrap recurring async sources (timers, sockets) with toSignal or async pipe.
+- Experiment with provideExperimentalZonelessChangeDetection in a feature slice to validate your reactive pathways.
+- Read the Angular guides on signals and zoneless change detection to deepen your understanding.
