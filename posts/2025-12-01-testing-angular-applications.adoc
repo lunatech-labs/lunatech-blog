@@ -1,0 +1,248 @@
+= Testing Angular Applications  
+:author: jakeortega  
+:revdate: 2025-12-01  
+:title: Testing Angular Applications  
+:lang: en  
+:tags: [Intermediate,testing,unit tests,E2E,Playwright,Jasmine]
+
+Testing is one of the most durable investments you can make in an Angular application. As your codebase grows, tests become quiet guardrails—confirming features behave as expected and giving you the confidence to refactor without hesitation. In this guide, we’ll walk through a practical approach to testing Angular applications using unit, integration, and E2E strategies with Jasmine and Playwright. The focus is on clarity, maintainability, and everyday developer workflow.
+
+=== Why Testing Matters
+
+When I work with teams, I always emphasize that testing isn’t about hitting 100% coverage. It’s about trust—trust that the feature you shipped last month still behaves the way you intended today. Good tests:
+
+- Encourage modular, decoupled design  
+- Catch edge cases earlier  
+- Reduce mental overhead when debugging  
+- Support safe refactoring  
+- Help teams move faster with less guesswork  
+
+Angular provides a solid testing environment out of the box, and pairing it with Playwright for E2E coverage rounds out the full spectrum of application behavior.
+
+=== Unit Testing With Jasmine
+
+Unit tests offer fast, reliable feedback. Each test focuses on a small piece of logic—usually a service, function, or component—without spinning up the full app.
+
+Angular’s Jasmine + TestBed environment remains a dependable foundation, especially when kept lean and focused.
+
+==== Example: Testing a Service
+
+Here’s a simple `UserService` that retrieves user profile data:
+
+[source,typescript]
+----
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+export interface UserProfile {
+  id: number;
+  name: string;
+}
+
+@Injectable({ providedIn: 'root' })
+export class UserService {
+  constructor(private http: HttpClient) {}
+
+  loadProfile(id: number): Observable<UserProfile> {
+    return this.http.get<UserProfile>(`/api/users/${id}`);
+  }
+}
+----
+
+A corresponding Jasmine test might look like this:
+
+[source,typescript]
+----
+import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } 
+  from '@angular/common/http/testing';
+import { UserService } from './user.service';
+
+describe('UserService', () => {
+  let service: UserService;
+  let http: HttpTestingController;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+    });
+
+    service = TestBed.inject(UserService);
+    http = TestBed.inject(HttpTestingController);
+  });
+
+  it('loads a user profile', () => {
+    const mockProfile = { id: 1, name: 'Jake Ortega' };
+
+    service.loadProfile(1).subscribe(profile => {
+      expect(profile).toEqual(mockProfile);
+    });
+
+    const req = http.expectOne('/api/users/1');
+    expect(req.request.method).toBe('GET');
+    req.flush(mockProfile);
+
+    http.verify();
+  });
+});
+----
+
+This test validates a single behavior and ensures the service returns the expected result without hitting a real backend.
+
+=== Component Testing: A Leaner Approach
+
+Component testing has historically felt heavy, mostly because we recreated large feature modules. With Angular 20+ and standalone components, TestBed setups are simpler and produce more focused tests.
+
+==== Example: Testing a Standalone Component
+
+[source,typescript]
+----
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-greeting',
+  standalone: true,
+  template: `<h1>Hello {{ name }}</h1>`,
+})
+export class GreetingComponent {
+  name = 'Angular';
+}
+----
+
+A focused component test:
+
+[source,typescript]
+----
+import { TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { GreetingComponent } from './greeting.component';
+
+describe('GreetingComponent', () => {
+  it('renders the greeting', () => {
+    const fixture = TestBed.createComponent(GreetingComponent);
+    fixture.detectChanges();
+
+    const text = fixture.debugElement.query(By.css('h1')).nativeElement.textContent;
+    expect(text).toContain('Hello Angular');
+  });
+});
+----
+
+Keep TestBed setups minimal. Only include what the component needs for the test.
+
+=== Integration Testing: The Middle Ground
+
+Integration tests validate how multiple Angular pieces work together—often a component along with its service and template. The aim is to verify real interactions without bringing in a full browser.
+
+Common scenarios include:
+
+- A form component sending values to a service  
+- A list component that renders API data  
+- A container component coordinating multiple child components  
+
+These tests catch wiring issues early while staying fast.
+
+==== Example: Component With Real Service
+
+[source,typescript]
+----
+import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } 
+  from '@angular/common/http/testing';
+import { UserProfileComponent } from './user-profile.component';
+import { UserService } from '../services/user.service';
+
+describe('UserProfileComponent (integration)', () => {
+  let http: HttpTestingController;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [UserProfileComponent, HttpClientTestingModule],
+    });
+
+    http = TestBed.inject(HttpTestingController);
+  });
+
+  it('renders user name from the API', () => {
+    const fixture = TestBed.createComponent(UserProfileComponent);
+    fixture.detectChanges();
+
+    const req = http.expectOne('/api/users/1');
+    req.flush({ id: 1, name: 'Jake Ortega' });
+
+    fixture.detectChanges();
+
+    const text = fixture.nativeElement.querySelector('p').textContent;
+    expect(text).toContain('Jake Ortega');
+  });
+});
+----
+
+This test exercises several layers at once while staying inside Angular’s test environment.
+
+=== E2E Testing With Playwright
+
+Unit tests confirm logic. Integration tests confirm collaboration. E2E tests validate full user flows—routing, layout, real DOM behavior, and other things only a browser can fully capture.
+
+Playwright has become the preferred tool for Angular E2E testing. It’s fast, consistent, and fits naturally into CI workflows.
+
+==== Setting Up Playwright
+
+Install Playwright:
+
+[source,typescript]
+----
+npm install -D @playwright/test
+npx playwright install
+----
+
+Add a simple test:
+
+[source,typescript]
+----
+import { test, expect } from '@playwright/test';
+
+test('homepage loads', async ({ page }) => {
+  await page.goto('http://localhost:4200');
+  await expect(page.getByRole('heading', { name: 'Welcome' })).toBeVisible();
+});
+----
+
+This confirms the application loads correctly in a real browser. Since E2E tests run slower than unit tests, use them sparingly and focus on high‑value flows.
+
+==== Best Practices for Playwright Tests
+
+- Keep tests independent—each should reset state  
+- Use data-testid attributes for selectors that won’t break  
+- Prefer user-focused interactions over implementation details  
+- Group E2E tests around meaningful user tasks  
+
+A strong E2E suite feels intentional: enough to protect critical flows without slowing development.
+
+=== Bringing It All Together
+
+A healthy test strategy blends three layers:
+
+- Unit tests: fast, focused, and foundational  
+- Integration tests: realistic interactions with lightweight setup  
+- E2E tests: full browser validation using Playwright  
+
+Balance is essential. Too many E2E tests slow development; too few leave gaps. The best suites are purposeful and easy to maintain.
+
+=== Conclusion
+
+Testing Angular applications isn’t about the tools themselves—Jasmine, Playwright, TestBed—but about consistent habits. Clean boundaries, descriptive test names, and real-world scenarios create systems that are easier to evolve.
+
+Thoughtful testing empowers fearless refactoring and long-term confidence. For large or long-lived Angular applications, that confidence becomes invaluable.
+
+=== Next Steps
+
+If you want to deepen your testing skills:
+
+- Add integration tests for components with complex behavior  
+- Use Playwright to cover your primary user journeys  
+- Refactor brittle tests to focus on behavior, not implementation  
+- Explore Angular’s newer testing APIs to simplify TestBed configuration  
+
+Testing is an ongoing practice. Start small, stay consistent, and let your test suite become an asset your team relies on.
