@@ -1,0 +1,297 @@
+= tap vs map vs side effects: How I Keep My RxJS Streams Clean
+:author: jakeortega
+:revdate: 2025-12-03
+:title: tap vs map vs side effects: How I Keep My RxJS Streams Clean
+:lang: en
+:tags: [Intermediate,tap,map,rxjs purity]
+
+A practical guide on avoiding messy side effects in RxJS pipelines and how I keep transformation and effect operators clearly separated. These are the habits I’ve relied on for years to keep complex Angular data flows readable, predictable, and easy to maintain.
+
+=== Why This Matters
+
+In Angular apps, streams often serve as the connective tissue between components, services, and state. When they’re intentional and expressive, everything feels easier to work with. But when transformations and side effects get mixed together, the code becomes harder to follow.
+
+The good news: most problems disappear when you apply a simple separation of concerns.
+
+* `map` is for shaping data.
+* `tap` is for side effects.
+* Anything that *modifies the outside world* deserves extra attention.
+
+This mindset protects *rxjs purity* and helps you build pipelines your team can trust.
+
+=== The Core Principle: Keep Streams Pure
+
+RxJS doesn’t enforce purity, but your team can. Purity means:
+
+* Operators don’t modify external state.
+* Streams behave predictably: same input, same output.
+* Side effects happen only in intentional places.
+
+Once you adopt this, every operator’s purpose becomes clearer.
+
+Put simply:
+
+*“map transforms the value. tap observes it.”*
+
+Let’s walk through what that looks like.
+
+=== map: The Operator for Transformation
+
+`map` should always produce a new value — that’s its responsibility.
+
+Good uses of `map`:
+
+* Extracting fields
+* Reshaping API responses
+* Preparing values for templates
+* Computing derived data
+
+Example:
+
+[source,typescript]
+----
+loadUserProfile(): Observable<UserProfileVm> {
+  return this.http.get<UserResponse>('/api/user').pipe(
+    map(response => ({
+      id: response.id,
+      fullName: `${response.firstName} ${response.lastName}`,
+      roles: response.permissions.map(p => p.role)
+    }))
+  );
+}
+----
+
+Notice what it *doesn’t* do:
+
+* No logging
+* No assignments
+* No service calls
+* No component property writes
+
+`map` stays pure and focused on transformation.
+
+=== tap: A Safe Place for Side Effects
+
+`tap` lets you run logic *without changing the output value*. It’s a window into the stream.
+
+Good uses of `tap`:
+
+* Logging
+* Analytics
+* Updating in-memory stores
+* Triggering secondary processes
+
+Example:
+
+[source,typescript]
+----
+this.loadUserProfile().pipe(
+  tap(() => this.tracking.log('User profile loaded'))
+).subscribe();
+----
+
+The output stays untouched. The intent is obvious.
+
+I like to think of `tap` as “watching the river, not changing its path.”
+
+==== Avoid This: Using tap to Transform Data
+
+A common mistake:
+
+[source,typescript]
+----
+getData().pipe(
+  tap(response => response.total = response.items.length) // ❌ mutation
+);
+----
+
+This violates expectations. Readers assume `tap` doesn’t alter values.
+
+Instead, make the change in `map`:
+
+[source,typescript]
+----
+getData().pipe(
+  map(response => ({
+    ...response,
+    total: response.items.length
+  }))
+);
+----
+
+Clear and pure.
+
+=== Side Effects: When They Belong and When They Don’t
+
+Side effects aren’t bad — they’re necessary. But they need to live where readers expect them.
+
+A helpful rule:
+
+*“Side effects belong at the boundaries of your stream — not in the middle.”*
+
+In practice:
+
+* In components, side effects typically happen in `subscribe`.
+* In services, side effects go in `tap` when the service owns the responsibility.
+
+==== Example: Component-Level Side Effects
+
+Components are responsible for interacting with templates and user events. They’re a natural home for side effects.
+
+[source,typescript]
+----
+ngOnInit() {
+  this.userService.loadUserProfile().subscribe(profile => {
+    this.vm.set(profile); // safe side effect: component owns the VM
+  });
+}
+----
+
+Services stay pure; components orchestrate.
+
+==== Example: Service-Level Side Effects
+
+Sometimes a service needs to manage local caches or state updates.
+
+[source,typescript]
+----
+loadProducts(): Observable<Product[]> {
+  return this.http.get<Product[]>('/api/products').pipe(
+    tap(products => this.cache.set(products)), // acceptable: service owns cache
+  );
+}
+----
+
+The stream output stays unchanged.
+
+=== Common Anti-Patterns and How I Avoid Them
+
+After reviewing Angular codebases for years, a few patterns appear again and again. Here’s how I steer teams toward clarity.
+
+==== Anti-Pattern 1: Mixing Transforms and Effects
+
+[source,typescript]
+----
+pipe(
+  tap(res => this.loading = false),
+  map(res => {
+    this.logger.log('mapping!'); // ❌ side effect inside map
+    return res.data;
+  })
+);
+----
+
+Correct approach:
+
+[source,typescript]
+----
+pipe(
+  tap(() => this.loading = false),
+  tap(() => this.logger.log('mapping!')),
+  map(res => res.data)
+);
+----
+
+Each operator communicates a single intention.
+
+==== Anti-Pattern 2: Treating tap Like map
+
+[source,typescript]
+----
+pipe(
+  tap(res => res = transform(res)) // ❌ does nothing useful
+);
+----
+
+`tap` ignores returned values.
+
+Correct version:
+
+[source,typescript]
+----
+pipe(
+  map(res => transform(res))
+);
+----
+
+==== Anti-Pattern 3: Subscribing Too Early
+
+Imperative code often appears because developers subscribe inside services:
+
+[source,typescript]
+----
+this.http.get('/api/items').subscribe(items => {
+  this.store.update(items); // ❌ imperative + hard to test
+});
+----
+
+Instead, return streams:
+
+[source,typescript]
+----
+getItems(): Observable<Item[]> {
+  return this.http.get<Item[]>('/api/items').pipe(
+    tap(items => this.store.update(items))
+  );
+}
+----
+
+Components decide when and how to subscribe.
+
+=== Example: A Clean, Real-World Stream
+
+Here’s a typical Angular flow using `map`, `tap`, and pure streams:
+
+[source,typescript]
+----
+getDashboardData(): Observable<DashboardVm> {
+  return combineLatest([
+    this.userService.getUser(),
+    this.ordersService.getRecentOrders(),
+    this.settingsService.getSettings()
+  ]).pipe(
+    tap(() => this.tracking.log('dashboard_data_loaded')), // side effect
+    map(([user, orders, settings]) => ({
+      userName: user.fullName,
+      recentOrders: orders.slice(0, 5),
+      theme: settings.theme
+    })) // pure transformation
+  );
+}
+----
+
+The pattern stays consistent:
+
+* `tap` expresses side effects.
+* `map` shapes data.
+* Output stays predictable.
+
+This is the kind of stream future readers will appreciate.
+
+=== Making Purity a Habit
+
+These are the rules I follow day to day:
+
+* I never mutate external state inside `map`.
+* I never transform values inside `tap`.
+* I keep side effects in `tap` or in a component’s `subscribe`.
+* I treat streams as data pipelines — not places to hide behavior.
+
+These habits keep large Angular apps stable as they scale and reduce cognitive load when you’re shipping features quickly.
+
+=== Conclusion
+
+Clean RxJS streams aren’t about strict functional rules. They’re about writing code that communicates clearly. When `map` transforms, `tap` observes, and side effects stay in predictable places, your Angular data flows become easier for everyone — including future you.
+
+Keeping transformations and side effects separate is one of the simplest, highest-impact habits I’ve built. It’s central to maintaining *rxjs purity* and a big part of why teams can move fast without breaking things.
+
+=== Next Steps
+
+If you want to build this habit:
+
+* Review a few existing streams. Are transformations and side effects separated?
+* Refactor one messy stream using the principles above.
+* Add the simple team guideline: “map transforms; tap observes.”
+* Write a few focused unit tests around pure streams to reinforce the pattern.
+
+RxJS is powerful — and it rewards consistency. With a few deliberate choices, your streams can stay clean instead of becoming a source of hidden complexity.
