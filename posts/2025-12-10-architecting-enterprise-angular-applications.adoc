@@ -5,24 +5,24 @@
 :lang: en
 :tags: [Advanced,architecture,clean code,modular design,scalability]
 
-Building large Angular applications isn’t just about writing more components. It’s about designing an architecture that can evolve alongside your team and your product’s long‑term goals. In this article, we look at how to structure enterprise‑grade Angular applications using modular design, lazy loading, SOLID principles, and clean code practices that keep teams productive as complexity grows.
+Building large Angular applications involves more than just writing components. It requires designing an architecture that evolves alongside your team and the long-term goals of the product. In this article, we look at how to structure enterprise-grade Angular applications using domain-driven design, standalone APIs, Signals, and clean code practices. These patterns help keep teams productive as complexity grows.
 
 === Why Enterprise Architecture Matters
 
-Every Angular project starts simply: a couple of components, a shared module, and some basic services. But as features expand, teams grow, and release cycles speed up, architecture becomes either your biggest advantage or your biggest obstacle.
+Every Angular project starts simply. You have a few components and some basic services. But as features expand and release cycles speed up, architecture becomes either a strategic asset or a bottleneck.
 
 Enterprise Angular development is a balancing act:
 
-* Build for today while staying adaptable for tomorrow.  
-* Keep the codebase understandable for new contributors.  
-* Maintain flexibility without hurting performance.  
+* Build for today while staying adaptable for tomorrow.
+* Keep the codebase approachable for new contributors.
+* Maintain flexibility without hurting performance.
 * Support scalability in both runtime behavior and team workflows.
 
-A clear structure isn’t optional—it’s a long‑term strategic investment.
+A clear structure is not optional. It is a strategic investment.
 
 === Designing with Domain‑Driven Modular Architecture
 
-A strong enterprise Angular application begins with modular design rooted in domain thinking. Instead of grouping files by Angular type (components, services, pipes), structure your features around business capabilities.
+A strong enterprise Angular application begins with a directory structure rooted in domain thinking. Instead of grouping files by technical type (components, services, pipes), structure your features around business capabilities. With the advent of Standalone Components, we no longer need `NgModule` files to define these boundaries, but the logical separation remains vital.
 
 ==== Domain‑Based Folder Structure
 
@@ -40,46 +40,53 @@ src/
       customers/
 ----
 
-*core*: App‑wide services, configuration, interceptors, and route guards.  
-*shared*: Reusable UI components, pipes, and utility code.  
-*features*: Vertical domains that are self‑contained, cohesive, and easy to version independently.
+* *core*: App‑wide services, configuration, interceptors, and guards.  
+* *shared*: Reusable UI components, pipes, and utility code.  
+* *features*: Vertical domains that are self‑contained and cohesive.
 
 ==== Feature Module Example
 
+In a standalone world, a "module" is just a barrel file or a logical grouping in a folder.
+
 [source,typescript]
 ----
-@NgModule({
-  imports: [CommonModule, OrdersRoutingModule],
-  declarations: [OrderListComponent, OrderDetailsComponent],
-  providers: [OrderService]
-})
-export class OrdersModule {}
+// features/orders/order-list.component.ts 
+@Component({
+  selector: 'app-order-list',
+  imports: [OrderDetailsComponent, DatePipe], // Explicit imports
+  templateUrl: './order-list.component.html'
+}) export class OrderListComponent {
+  // Logic here
+}
 ----
 
 Each feature owns its routing, services, and UI pieces. This level of isolation improves maintainability and sets clear boundaries between domains.
 
 === Lazy Loading for Performance and Scalability
 
-Lazy loading is more than a performance tweak—it’s a structural tool. Loading feature modules only when needed reduces the initial bundle size and reinforces domain separation.
+Lazy loading is more than a performance tweak. It is a structural tool. Loading feature routes only when needed reduces the initial bundle size and reinforces domain separation.
 
 ==== Lazy‑Loaded Route Example
 
+With modern Angular, we load component files directly in the route definition.
+
 [source,typescript]
 ----
-const routes: Routes = [
+// app.routes.ts
+export const routes: Routes = [ 
   {
     path: 'orders',
-    loadChildren: () =>
-      import('./features/orders/orders.module').then(m => m.OrdersModule)
+    loadChildren: () => import('./features/orders/orders.routes')
+      .then(m => m.ORDER_ROUTES)
   }
 ];
 ----
 
-This approach keeps startup times fast and enables teams to build and deploy features independently without bloating the main bundle.
+This approach keeps startup times fast. It allows teams to build and deploy features independently without bloating the main bundle.
 
 === Applying SOLID Principles in Angular
 
-SOLID principles are foundational for maintainable enterprise systems. Angular encourages these patterns, but applying them deliberately is what keeps large projects healthy.
+SOLID principles are foundational for maintainable systems. Angular encourages these patterns, but deliberate application is what keeps large projects healthy.
 
 ==== Single Responsibility Example
 
@@ -92,13 +99,14 @@ A component should focus on presentation, not business logic. Yet components oft
   templateUrl: './order-list.component.html'
 })
 export class OrderListComponent  {
-  constructor(private ordersService: OrdersService) {}
+  private ordersService = inject(OrdersService);
 
-  orders$ = this.ordersService.getOrders();
+  // Expose a readonly signal for the template
+  orders = this.ordersService.orders;
 }
 ----
 
-By keeping business logic inside `OrdersService`, the component stays lean, predictable, and easy to test.
+By keeping business logic and state management inside `OrdersService`, the component stays lean. It becomes predictable and easy to test.
 
 ==== Dependency Inversion with Injection Tokens
 
@@ -108,87 +116,65 @@ Avoid tying your code to concrete implementations.
 ----
 export const PAYMENT_GATEWAY = new InjectionToken<PaymentGateway>('PaymentGateway');
 
-@NgModule({
-  providers: [
-    { provide: PAYMENT_GATEWAY, useClass: StripePaymentGateway }
-  ]
-})
-export class PaymentsModule {}
+// In app.config.ts or a specific provider array 
+providers: [
+  { 
+    provide: PAYMENT_GATEWAY,
+    useClass: StripePaymentGateway
+  }
+]
 ----
 
-This pattern keeps the system flexible and makes swapping implementations straightforward.
+This pattern keeps the system flexible. Swapping implementations becomes straightforward.
 
 === Clean Code as a Team Culture
 
-Clean code isn’t about rigid rules—it’s about making the codebase easier for your teammates (and your future self) to work with. In enterprise Angular projects, a shared mindset matters more than strict style enforcement.
+Clean code is not about rigid rules. It is about making the codebase easier for your teammates (and your future self) to understand. In enterprise Angular projects, a shared mindset matters more than strict style enforcement.
 
 ==== A Practical Clean Code Checklist
 
 * Keep components focused on one central responsibility.  
-* Give services a clear purpose; avoid “god services.”  
+* Use Signals for state synchronization to reduce RxJS complexity.
 * Use descriptive, domain‑specific names.  
 * Favor small, pure utility functions.  
 * Centralize reusable error handling.  
-* Choose state management tools only when the domain truly warrants them.
 
-State management deserves emphasis: whether you use NgRx, signal‑based stores, or Angular’s built‑in reactivity, pick the tool that fits the complexity—not the other way around.
+State management deserves emphasis. Whether you use NgRx, signal-based stores, or Angular’s built-in reactivity, pick the tool that fits the complexity. Do not force a complex tool on a simple problem.
 
-=== Cross‑Cutting Concerns Through Core Module Patterns
+=== Cross-Cutting Concerns Through Functional Patterns
 
-The Core module hosts concerns that span the entire application: authentication, global configuration, guards, interceptors, and shared infrastructure services.
+We used to put global concerns in a `CoreModule`. Now, we define them in `app.config.ts` using functional providers and interceptors.
 
 ==== Example: Global HTTP Error Interceptor
 
 [source,typescript]
 ----
-@Injectable()
-export class GlobalErrorInterceptor implements HttpInterceptor {
-  intercept(req: HttpRequest<any>, next: HttpHandler) {
-    return next.handle(req).pipe(
-      catchError(error => {
-        // central logging or user‑friendly toast
-        return throwError(() => error);
-      })
-    );
-  }
-}
+export const errorInterceptor: HttpInterceptorFn = (req, next) => {
+  return next(req).pipe(
+    catchError((error) => {
+      // Central logging logic here
+      console.error("API Error", error);
+      return throwError(() => error);
+    })
+  );
+};
 
-@NgModule({
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: GlobalErrorInterceptor, multi: true }
-  ]
-})
-export class CoreModule {}
+// app.config.ts
+export const appConfig: ApplicationConfig = {
+  providers: [provideHttpClient(withInterceptors([errorInterceptor]))],
+};
 ----
 
 This centralizes error handling so features don’t repeat the same logic.
 
-=== Shared UI Libraries for Consistency
-
-Shared UI modules promote consistency and prevent repeated markup. In enterprise systems, reusable UI components quickly become essential.
-
-==== Example: Shared Table Component
-
-[source,html]
-----
-<table *ngIf="data">
-  <tr *ngFor="let row of data">
-    <td>{{ row.label }}</td>
-    <td>{{ row.value }}</td>
-  </tr>
-</table>
-----
-
-Small, reusable pieces like this save time and keep the UI aligned across the app.
-
 === Team‑Centric Scalability
 
-Architecture isn’t just about code—it reflects how your team works.
+Architecture reflects how your team works.
 
 Some guiding principles:
 
 * Map domains to teams to reduce merge conflicts.  
-* Use feature modules to enable parallel development.  
+* Use feature grouping to enable parallel development.
 * Rely on lazy loading for incremental deployments.  
 * Keep layers clear to speed up onboarding.  
 * Standardize conventions to lower decision fatigue.
@@ -197,16 +183,6 @@ Scalability is as much about people as it is about performance.
 
 === Conclusion
 
-Enterprise Angular architecture isn’t about enforcing a single pattern. It’s about building clear, adaptable boundaries. With domain‑driven modules, lazy loading, SOLID patterns, and clean code practices, teams can maintain clarity even as the application grows to hundreds of components and many domains.
+Enterprise Angular architecture is not about enforcing a single pattern. It is about building clear, adaptable boundaries. With domain-driven design, lazy loading, and SOLID patterns, teams can maintain clarity even as the application grows.
 
 Good architecture feels natural. It provides structure without getting in the way and flexibility without creating chaos.
-
-=== Next Steps
-
-* Introduce domain‑based module boundaries into your existing app.  
-* Identify which features could benefit from lazy loading.  
-* Refactor one complex component to better follow SOLID principles.  
-* Build a shared UI module for repeated design patterns.  
-* Establish team conventions that support clean, maintainable code.
-
-Enterprise software is a long‑term investment. Build strong structure early, and your team will benefit from it for years to come.
