@@ -123,11 +123,11 @@ Clear and pure.
 
 === Side Effects: When They Belong and When They Don’t
 
-Side effects aren’t bad — they’re necessary. But they need to live where readers expect them.
+Side effects aren’t bad, they’re necessary. But they need to live where readers expect them.
 
 A helpful rule:
 
-*“Side effects belong at the boundaries of your stream — not in the middle.”*
+*“Side effects belong at the boundaries of your stream, not in the middle.”*
 
 In practice:
 
@@ -275,13 +275,13 @@ These are the rules I follow day to day:
 * I never mutate external state inside `map`.
 * I never transform values inside `tap`.
 * I keep side effects in `tap` or in a component’s `subscribe`.
-* I treat streams as data pipelines — not places to hide behavior.
+* I treat streams as data pipelines, not places to hide behavior.
 
 These habits keep large Angular apps stable as they scale and reduce cognitive load when you’re shipping features quickly.
 
 === Conclusion
 
-Clean RxJS streams aren’t about strict functional rules. They’re about writing code that communicates clearly. When `map` transforms, `tap` observes, and side effects stay in predictable places, your Angular data flows become easier for everyone — including future you.
+Clean RxJS streams aren’t about strict functional rules. They’re about writing code that communicates clearly. When `map` transforms, `tap` observes, and side effects stay in predictable places, your Angular data flows become easier for everyone.
 
 Keeping transformations and side effects separate is one of the simplest, highest-impact habits I’ve built. It’s central to maintaining *rxjs purity* and a big part of why teams can move fast without breaking things.
 
@@ -294,4 +294,4 @@ If you want to build this habit:
 * Add the simple team guideline: “map transforms; tap observes.”
 * Write a few focused unit tests around pure streams to reinforce the pattern.
 
-RxJS is powerful — and it rewards consistency. With a few deliberate choices, your streams can stay clean instead of becoming a source of hidden complexity.
+RxJS is powerful, and it rewards consistency. With a few deliberate choices, your streams can stay clean instead of becoming a source of hidden complexity.
