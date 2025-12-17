@@ -248,10 +248,10 @@ This confirms the application renders in a real browser. E2E tests are slower th
 
 ==== Best Practices for Playwright Tests
 
-- Isolation: Keep tests independent; each test should run as if it is the only one.
-- Locators: Prioritize user-visible selectors (like getByRole or getByText) over CSS classes. Use data-testid only when necessary.
-- Focus: Test user tasks (e.g., "User can checkout"), not implementation details.
-- Stability: Avoid hard waits (like waitForTimeout). rely on Playwright's auto-waiting assertions.
+- *Isolation:* Keep tests independent; each test should run as if it is the only one.
+- *Locators:* Prioritize user-visible selectors (like getByRole or getByText) over CSS classes. Use data-testid only when necessary.
+- *Focus:* Test user tasks (e.g., "User can checkout"), not implementation details.
+- *Stability:* Avoid hard waits (like waitForTimeout). rely on Playwright's auto-waiting assertions.
 
 A strong E2E suite feels intentional: enough to protect critical flows without slowing development.
 
@@ -259,9 +259,9 @@ A strong E2E suite feels intentional: enough to protect critical flows without s
 
 A reliable testing strategy operates on three levels:
 
-- Unit tests: Fast feedback on individual logic.
-- Integration tests: Verifies connections between components and services.
-- E2E tests: Validates complete user flows in a real browser.
+- *Unit tests:* Fast feedback on individual logic.
+- *Integration tests:* Verifies connections between components and services.
+- *E2E tests:* Validates complete user flows in a real browser.
 
 The goal is to balance speed and confidence. Too many E2E tests slow down the pipeline; too few unit tests make debugging difficult. The best suites are purposeful and easy to maintain.
 
