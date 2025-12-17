@@ -1,0 +1,228 @@
+= signalModel() vs input() + output(): Choosing the Right Pattern for Component Communication
+:author: jakeortega
+:revdate: 2025-12-17
+:title: signalModel() vs input() + output(): Choosing the Right Pattern for Component Communication
+:lang: en
+:tags: [Intermediate,signalModel,input,output,signals]
+
+When Angular introduced `signalModel()`, those of us who had spent years relying on `@Input()` and `@Output()` suddenly had a new choice to make. Component communication is at the core of how we structure Angular applications, and the pattern we pick can strengthen—or complicate—readability, testability, and long‑term maintainability.
+
+This article walks through how I decide between the new `signalModel()` API, classic `input()` / `output()`, and shared services, depending on the component’s behavior and how data flows. My goal is to make it clearer when each pattern adds clarity—and when it gets in the way.
+
+=== Why This Choice Matters
+
+Most teams don’t struggle with the mechanics of passing data around. We all know how to define an input or emit an event. The real challenge is choosing the right pattern early so the code scales naturally instead of piling up complexity over time.
+
+A few questions I always ask:
+
+* Is the data owned by the parent, the child, or both?
+* Is the flow strictly one-way, or does it need to loop back?
+* Will the component get more complex as the app grows?
+* How important is explicitness for future maintainers?
+
+Angular’s shift toward `signals` makes these questions even more important.
+
+=== Option 1: input() + output() — Still the Baseline
+
+The combination of `input()` and `output()` remains the most straightforward and readable way to pass data down and send events up. You get a very explicit one-directional flow—something I still prefer for many components.
+
+==== Example: A Simple Card Component
+
+[source,typescript]
+----
+import { Component, input, output } from '@angular/core';
+
+@Component({
+  selector: 'app-user-card',
+  template: `
+    <section>
+      <h2>{{ user().name }}</h2>
+      <button (click)="select.emit(user())">Select</button>
+    </section>
+  `,
+})
+export class UserCardComponent {
+  user = input.required<{ id: number; name: string }>();
+  select = output<{ id: number; name: string }>();
+}
+----
+
+This pattern works well because:
+
+* The parent clearly owns the data.
+* The child only renders data and emits events.
+* There’s no need for two-way binding.
+
+Even with signals underneath, this pattern stays direct and easy to follow.
+
+==== When I Prefer This Pattern
+
+* Components that read data and emit actions.
+* Reusable UI pieces like buttons, cards, or other primitives.
+* Situations where explicitness is more important than convenience.
+
+If the component doesn’t *own* the data, `input()` and `output()` keep things simple and predictable.
+
+=== Option 2: signalModel() — A More Expressive Two‑Way Contract
+
+When Angular added `signalModel()`, it finally gave us clean two-way binding without all the boilerplate. But the real value isn’t the convenience—it’s the ability to model shared ownership between parent and child.
+
+==== Example: A Form Control-like Component
+
+[source,typescript]
+----
+import { Component, signalModel } from '@angular/core';
+
+@Component({
+  selector: 'app-volume-slider',
+  template: `
+    <label>
+      Volume: {{ volume() }}
+      <input
+        type="range"
+        [value]="volume()"
+        (input)="volume.set(Number($any($event.target).value))"
+      />
+    </label>
+  `,
+})
+export class VolumeSliderComponent {
+  volume = signalModel<number>();
+}
+----
+
+The parent can bind like this:
+
+[source,html]
+----
+<app-volume-slider [(volume)]="settings.volume"></app-volume-slider>
+----
+
+This pattern shines when:
+
+* The child needs to update the value directly.
+* The user interacts heavily with the component (inputs, sliders, filters).
+* You want two-way binding that’s expressive instead of verbose.
+
+==== When signalModel() Creates Real Value
+
+* Complex or nested form components.
+* UI that mutates internal state and must sync with the parent.
+* Scenarios where removing event boilerplate improves clarity.
+
+I use `signalModel()` when it reflects the actual data relationship—not just when two-way binding feels convenient.
+
+=== Option 3: Shared Services with Signals — For Cross‑Component or Multi‑Layer State
+
+Sometimes the real issue isn’t parent–child communication at all. When multiple parts of the app need to read or update shared state, inputs and models won’t cut it.
+
+This is exactly where a small shared service built on signals works best.
+
+==== Example: App-Wide Filter State
+
+[source,typescript]
+----
+import { Injectable, signal } from '@angular/core';
+
+@Injectable({ providedIn: 'root' })
+export class ProductFilterStore {
+  category = signal<string | null>(null);
+  query = signal('');
+}
+----
+
+A component can read or update state:
+
+[source,typescript]
+----
+@Component({
+  selector: 'app-filter-panel',
+  template: `
+    <input
+      [value]="store.query()"
+      (input)="store.query.set($any($event.target).value)"
+    />
+  `,
+})
+export class FilterPanelComponent {
+  constructor(public store: ProductFilterStore) {}
+}
+----
+
+This avoids long chains of inputs and keeps your state in one place instead of scattering it across components.
+
+==== When Shared State Is the Better Option
+
+* Data is global or affects multiple, unrelated components.
+* There’s no clear parent–child relationship.
+* Multiple components need to mutate the same state.
+
+In these cases, forcing the data through inputs or models only adds friction.
+
+=== How I Choose Between Them
+
+After refactoring plenty of components over the years, I’ve settled into a practical decision order.
+
+==== 1. Does the parent clearly own the data?
+
+*Yes → Use `input()` and `output()`.*
+
+This keeps communication simple and predictable.
+
+==== 2. Does the child need to *mutate* the data?
+
+*Yes → Use `signalModel()`.*
+
+It gives you clear two-way flow with minimal overhead.
+
+==== 3. Is the state used outside the parent–child relationship?
+
+*Yes → Use a shared service with signals.*
+
+Anything else tends to create tight coupling.
+
+==== 4. Will two-way binding help or confuse?
+
+*If it confuses → Stick with inputs/outputs.*
+
+Two-way binding is helpful only when the ownership makes sense.
+
+=== Practical Examples: Choosing the Right Pattern
+
+These shortcuts help me pick the right tool quickly:
+
+* A button that emits a click → `output()`
+* A presentational component (card, list item) → `input()`
+* A form field with local validation → `signalModel()`
+* A filter area affecting several views → shared service
+* A dialog editing an existing model → `signalModel()`
+* A breadcrumb or route-driven display → `input()`
+
+Choose the pattern that most clearly reflects how the data should flow.
+
+=== Common Pitfalls to Avoid
+
+A few traps I see regularly:
+
+* Using `signalModel()` when the parent should clearly own the state.
+* Reaching for shared services because wiring inputs feels tedious.
+* Nesting `signalModel()` components so deeply that updates get hard to follow.
+* Emitting too many events for things that should be internal state.
+
+The best communication patterns are boring—simple and predictable.
+
+=== Conclusion
+
+Angular gives us several strong communication patterns, each with its own strengths. `input()` and `output()` remain the clearest option for one-way data flow. `signalModel()` makes two-way binding expressive and concise. Shared services give structure to distributed state.
+
+When we match the pattern to the real shape of the data, we get components that are easier to read, test, and maintain.
+
+=== Next Steps
+
+If you want to explore further:
+
+* Try refactoring an existing form to use `signalModel()` instead of manual event emitters.
+* Look through a module and identify places where shared state is pushed through inputs—consider moving it to a store.
+* Keep an eye on Angular’s upcoming improvements to `signals` and how they may streamline state flow even more.
+
+Choosing communication patterns intentionally helps components become not just functional, but expressive—and that’s where Angular really shines.
