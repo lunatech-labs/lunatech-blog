@@ -5,17 +5,17 @@
 :lang: en
 :tags: [Advanced,performance profiling,lazy loading,AOT,optimization,DevTools]
 
-Optimizing Angular applications is less about squeezing out micro‑benchmarks and more about understanding how the browser and framework behave under real user conditions. With Angular 20, we get sharper profiling tools, more predictable lazy loading, and stronger AOT guarantees. In this article, we’ll walk through how to profile effectively, apply lazy loading with purpose, and tune change detection in ways that keep your app fast and easy to maintain.
+Optimizing Angular applications is less about squeezing out micro-benchmarks and more about understanding how the browser and framework behave under real user conditions. In modern Angular, we have better profiling visibility, simpler lazy loading, and strong ahead-of-time (AOT) builds by default. In this article, we’ll walk through how to profile effectively, apply lazy loading with intent, and tune change detection in ways that keep your app fast and maintainable.
 
 === Why Performance Matters in Mature Angular Apps
 
-As Angular apps grow, performance issues usually build up slowly—feature by feature, component by component. They’re rarely the result of major architectural mistakes. More often, they’re the side effects of expensive templates, unnecessary data flows, oversized bundles, or components doing work they don’t need to.
+As Angular apps grow, performance issues usually build up slowly, feature by feature, component by component. They’re rarely the result of major architectural mistakes. More often, they’re side effects of expensive templates, unnecessary data flows, oversized bundles, or components doing work they don’t need to.
 
-Performance tuning starts by asking: *Where is the browser actually spending time, and why?* Structured profiling helps reveal those answers.
+Performance tuning starts with a simple question: *Where is the browser actually spending time, and why?* Structured profiling makes that answer obvious.
 
 === Profiling an Angular App with Modern DevTools
 
-The Chrome DevTools Performance panel is still the go-to tool for real-world profiling. Angular 20 adds clearer zone markers and improved change detection traces, making flame charts far easier to interpret.
+The Chrome DevTools Performance panel is still the tool I reach for first when I want real-world numbers. Angular also shows up in traces in more useful ways than it used to, which makes flame charts easier to interpret when you know what to look for.
 
 ==== What to Look For in Flame Charts
 
@@ -27,26 +27,26 @@ When recording performance, watch for:
 - Costly computation inside template bindings
 - Slow navigation or hydration (in SSR-enabled apps)
 
-It’s common to find one component on the critical path doing far more work than expected. Profiling makes these hidden hotspots visible.
+It’s common to find a single component on the critical path doing far more work than expected. Profiling makes those hotspots visible.
 
-==== Using Angular-Specific Markers
+==== Using Angular Markers
 
-Angular 20+ offers more granular trace markers around:
+Depending on your Angular version and tooling, you may see framework-related markers in the trace around:
 
-- Component render start/end
+- Component render start and end
 - Change detection cycles
-- Zone boundary transitions
-- Route activation steps
+- Router navigation and activation work
+- Zone-related transitions (in zone-based setups)
 
-These help you connect user actions—scrolling, typing, navigating—to how Angular updates the UI.
+These markers help connect user actions, like scrolling, typing, and navigating, to how Angular updates the UI.
 
 === Lazy Loading: Reducing the Initial Cost
 
-Lazy loading is still one of the most effective ways to improve early load time. Even experienced teams sometimes let too many features slip into the main bundle, which slows down startup, especially on mobile.
+Lazy loading is still one of the highest-impact moves you can make for early load time. On mature apps, it’s easy for “just one more feature” to sneak into the main bundle, and startup gets slower over time, especially on mobile.
 
 ==== Route-Based Lazy Loading
 
-This remains the most common pattern. Angular 20’s routing API keeps it simple:
+This remains the most common pattern. Standalone routing keeps it straightforward:
 
 [source,typescript]
 ----
@@ -59,69 +59,67 @@ export const routes: Routes = [
 ];
 ----
 
-The *loadComponent* API makes lazy loading lighter and avoids the need for feature modules.
+The `loadComponent` API keeps lazy loading lightweight and avoids feature modules when you don’t need them.
 
-Key guidelines:
+Guidelines that usually hold up:
 
 - Lazy load top-level features that aren’t needed immediately.
-- Avoid lazy loading tiny components—each async boundary has overhead.
-- Confirm via the DevTools Network panel that bundles load as expected.
+- Skip lazy loading tiny components. Each async boundary has overhead.
+- Validate in DevTools (Network tab) that bundles load when you expect.
 
 ==== Conditional Lazy Loading
 
-You can also lazy load conditionally based on permissions or state.
+You *can* lazy load conditionally based on permissions or state. If you do it at the route level, keep the example realistic by using DI inside the loader:
 
 [source,typescript]
 ----
+import { inject } from '@angular/core';
+import { AuthService } from './auth.service';
+
 loadComponent: async () => {
-  const canLoad = await authService.canAccessReports();
+  const auth = inject(AuthService);
+  const canLoad = await auth.canAccessReports();
+
   return canLoad
     ? import('./reports/reports.component').then(m => m.ReportsComponent)
     : import('./errors/unauthorized.component').then(m => m.UnauthorizedComponent);
 }
 ----
 
-This pattern aligns loading cost with real user flows.
+This aligns loading cost with real user flows.
+
+One note: many teams keep `loadComponent` deterministic and handle access with guards (`canMatch` or `canActivate`) plus redirects. That approach keeps route loading predictable and makes bundle behavior easier to reason about.
 
 === AOT and Build-Time Optimization
 
-AOT has been standard for years, but Angular 20+ brings stronger template diagnostics and clearer tree-shaking signals.
+AOT has been the norm for years, and Angular’s build pipeline keeps getting better at producing smaller, more tree-shakable output.
 
-AOT improves performance by:
+AOT helps performance because it:
 
-- Removing the JIT compiler from your production bundle
-- Producing smaller, more treeshakable output
-- Catching binding errors earlier
-- Speeding up template evaluation at runtime
+- Removes the JIT compiler from production bundles
+- Produces smaller, more tree-shakable output
+- Catches binding errors earlier
+- Reduces runtime template work
 
-To ensure AOT and optimizations are on:
+Rather than relying on a specific `angular.json` snippet (which varies across CLI versions and builders), focus on verifying your production build configuration:
 
-[source,typescript]
-----
-"configurations": {
-  "production": {
-    "buildOptimizer": true,
-    "optimization": true,
-    "aot": true,
-    "vendorChunk": false,
-    "extractLicenses": true
-  }
-}
-----
+- Build with your production configuration (for example, `ng build -c production`)
+- Confirm AOT and optimization are enabled for that configuration in `angular.json`
+- If you want a deeper view of what ships, generate build stats and inspect the bundle breakdown
 
-On large applications, AOT cuts script evaluation time noticeably—one of the biggest real-world performance wins.
+On large applications, AOT and production optimizations typically cut down script parsing and runtime work in a noticeable way.
 
 === Profiling Change Detection
 
-Angular’s change detection is predictable but can become costly if components rely on fast-changing data or do computation directly in templates.
+Angular’s change detection is predictable, which is a good thing. It also becomes expensive when components depend on fast-changing data, or when templates do more work than they should.
 
 ==== Marking Components as OnPush
 
-*ChangeDetectionStrategy.OnPush* tells Angular to skip unnecessary checks unless:
+`ChangeDetectionStrategy.OnPush` tells Angular to skip checks unless:
 
-- An input changes
-- An event handler runs
-- An observable emits through async pipe
+- An input reference changes
+- An event handler runs in the component
+- An observable emits through the `async` pipe
 
 [source,typescript]
 ----
@@ -135,7 +133,7 @@ export class UserListComponent {
 }
 ----
 
-Ensuring your data flows are immutable or observable-driven makes OnPush far more effective.
+OnPush shines when inputs are immutable, or when the template binds to observables rather than mutable objects.
 
 ==== Avoid Expensive Template Expressions
 
@@ -146,11 +144,17 @@ A common pitfall:
 <div>{{ calculateTotal() }}</div>
 ----
 
-Angular re-runs this function every change detection cycle. A better approach:
+Angular will re-run this during change detection. If `calculateTotal()` does real work, you pay that cost repeatedly.
+
+A better approach is to compute outside the template, but still keep it correct when inputs change. For example, if `total` depends on inputs:
 
 [source,typescript]
 ----
-total = this.calculateTotal();
+total = 0;
+
+ngOnChanges() {
+  this.total = this.calculateTotal();
+}
 ----
 
 [source,html]
@@ -158,11 +162,11 @@ total = this.calculateTotal();
 <div>{{ total }}</div>
 ----
 
-Moving work outside the template eliminates unnecessary computation.
+The key point is not just caching, but updating the cached value when the underlying data changes.
 
 ==== Tracking List Items
 
-Without *trackBy*, Angular removes and recreates DOM nodes whenever a list updates.
+Without `trackBy`, Angular may remove and recreate DOM nodes whenever a list updates.
 
 [source,html]
 ----
@@ -173,27 +177,20 @@ Without *trackBy*, Angular removes and recreates DOM nodes whenever a list updat
 
 [source,typescript]
 ----
-trackById(index: number, item: Item) {
+trackById(index: number, item: Item): Item['id'] {
   return item.id;
 }
 ----
 
-This small addition can save several milliseconds on large lists.
+This small addition can save milliseconds on larger lists and it reduces UI churn.
 
-=== Angular 20’s New Performance Tools
+=== Diagnostics and Tooling Notes
 
-Angular 20 introduces clearer diagnostics, improved template type-checking, and a refined internal model that generates more stable profiling output.
-
-Key improvements include:
-
-- More detailed change detection markers in DevTools
-- Smaller and more consistent AOT output
-
-These enhancements require no extra configuration but make profiling and tuning far easier.
+Performance work is easier when the tooling gives stable output and clear signals. Between DevTools, Angular’s router and change detection behavior, and modern build output, you can usually get from “it feels slow” to a concrete root cause quickly.
 
 === Diagnosing Real-World Performance Scenarios
 
-Performance tuning is almost always grounded in real usage patterns. Here are issues commonly found in production apps.
+Performance tuning is almost always tied to real usage patterns. Here are a few issues that show up often in production apps.
 
 ==== Symptom: Slow Initial Load
 
@@ -201,13 +198,13 @@ Look for:
 
 - A large main bundle
 - Missing lazy loading boundaries
-- Non-AOT builds in production
-- Too many third-party libraries loaded upfront
+- A non-production build being deployed
+- Too many third-party libraries loaded up front
 
 Fixes:
 
 - Lazy load secondary or infrequently used features
-- Inspect bundle composition with *ng build --stats-json*
+- Generate build stats (for example, `ng build --stats-json`) and inspect bundle composition
 - Replace heavy or unused libraries early
 
 ==== Symptom: Slow Interaction or Jank
@@ -215,16 +212,16 @@ Fixes:
 Look for:
 
 - Expensive template logic
-- Large lists without trackBy
+- Large lists without `trackBy`
 - Repeated change detection from uncontrolled events
 - Synchronous heavy work in event handlers
 
 Fixes:
 
-- Enable *OnPush*
-- Move data computations out of templates
+- Use OnPush where it fits the data flow
+- Move computations out of templates and keep them updated
 - Debounce or throttle high-frequency events
-- Shift heavy processing into Web Workers when useful
+- Offload heavy processing to Web Workers when it makes sense
 
 ==== Symptom: Slow Navigation
 
@@ -232,26 +229,26 @@ Look for:
 
 - Resolvers doing complex work
 - Guards fetching large datasets
-- Initializers blocking the app with sync tasks
+- Initializers blocking startup with synchronous tasks
 
 Fixes:
 
-- Move data loading into components where possible
+- Move data loading into components when blocking is not required
 - Add caching to reduce redundant fetches
-- Use resolvers only when a route truly requires blocking data
+- Use resolvers only when a route truly needs to wait on data
 
 === Conclusion
 
-Performance tuning isn’t a single technique—it’s an ongoing practice. It starts with profiling, continues with intentional lazy loading and AOT configuration, and matures with good change detection patterns. Angular 20 gives us better tools and clearer diagnostics, but meaningful improvements still come from our development habits.
+Performance tuning isn’t a single technique. It’s a practice. It starts with profiling, continues with intentional lazy loading and production builds, and gets easier with good change detection habits.
 
-By treating performance as part of everyday development—not a late-game fix—we build Angular apps that feel smoother, scale better, and stay easier to maintain.
+Angular gives us strong defaults, but meaningful improvements still come from development habits and a willingness to measure before changing things.
 
 === Next Steps
 
 - Profile startup time on a real device using Chrome DevTools.
-- Review your routing setup and add missing lazy loading boundaries.
-- Enable strict AOT and build optimizations in production.
-- Switch key components to *OnPush* and validate data flow.
+- Review routing and add lazy loading boundaries where they make sense.
+- Verify production builds use AOT and optimizations.
+- Switch key components to OnPush and confirm the data flow still behaves.
 - Revisit heavy templates and remove costly expressions.
 
-These changes add up. The result is an Angular application that feels lighter, responds faster, and grows with far less friction.
+These changes add up. The result is an Angular application that feels lighter, responds faster, and scales with less friction.
