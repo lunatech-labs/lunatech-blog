@@ -113,27 +113,24 @@ On large applications, AOT and production optimizations typically cut down scrip
 
 Angular’s change detection is predictable, which is a good thing. It also becomes expensive when components depend on fast-changing data, or when templates do more work than they should.
 
-==== Marking Components as OnPush
+==== Signals-First Change Detection
 
-`ChangeDetectionStrategy.OnPush` tells Angular to skip checks unless:
+In signal-based components, change detection tends to be calmer because state changes are explicit and derived state can be computed once, not re-derived in templates.
 
-- An input reference changes
-- An event handler runs in the component
-- An observable emits through the `async` pipe
+For example, prefer signal inputs over decorator inputs:
 
 [source,typescript]
 ----
+import { Component, input } from '@angular/core';
+
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserListComponent {
-  @Input() users!: User[];
+  users = input.required<User[]>();
 }
 ----
-
-OnPush shines when inputs are immutable, or when the template binds to observables rather than mutable objects.
 
 ==== Avoid Expensive Template Expressions
 
@@ -146,39 +143,35 @@ A common pitfall:
 
 Angular will re-run this during change detection. If `calculateTotal()` does real work, you pay that cost repeatedly.
 
-A better approach is to compute outside the template, but still keep it correct when inputs change. For example, if `total` depends on inputs:
+A better approach is to compute outside the template using derived state. With signals, that usually means `computed()`.
 
 [source,typescript]
 ----
-total = 0;
+import { computed, input } from '@angular/core';
 
-ngOnChanges() {
-  this.total = this.calculateTotal();
-}
+items = input.required<Item[]>();
+
+total = computed(() => {
+  const list = this.items();
+  return list.reduce((sum, item) => sum + item.amount, 0);
+});
 ----
 
 [source,html]
 ----
-<div>{{ total }}</div>
+<div>{{ total() }}</div>
 ----
 
-The key point is not just caching, but updating the cached value when the underlying data changes.
+The key point is that the value stays correct as inputs change, without doing extra work on every template refresh.
 
 ==== Tracking List Items
 
-Without `trackBy`, Angular may remove and recreate DOM nodes whenever a list updates.
+If Angular can’t track list identity, it may remove and recreate DOM nodes whenever a list updates.
 
 [source,html]
 ----
-<li *ngFor="let item of items; trackBy: trackById">
-  {{ item.name }}
-</li>
-----
-
-[source,typescript]
-----
-trackById(index: number, item: Item): Item['id'] {
-  return item.id;
+@for (item of items(); track item.id) {
+  <li>{{ item.name }}</li>
 }
 ----
 
@@ -218,8 +211,8 @@ Look for:
 
 Fixes:
 
-- Use OnPush where it fits the data flow
-- Move computations out of templates and keep them updated
+- Prefer signals for local state and derived values
+- Move computations out of templates and model them as derived state
 - Debounce or throttle high-frequency events
 - Offload heavy processing to Web Workers when it makes sense
 
@@ -248,7 +241,7 @@ Angular gives us strong defaults, but meaningful improvements still come from de
 - Profile startup time on a real device using Chrome DevTools.
 - Review routing and add lazy loading boundaries where they make sense.
 - Verify production builds use AOT and optimizations.
-- Switch key components to OnPush and confirm the data flow still behaves.
+- Convert key components to signal inputs and derived state.
 - Revisit heavy templates and remove costly expressions.
 
 These changes add up. The result is an Angular application that feels lighter, responds faster, and scales with less friction.
