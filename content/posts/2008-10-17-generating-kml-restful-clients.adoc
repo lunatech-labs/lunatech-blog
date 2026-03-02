@@ -22,7 +22,7 @@ Maps] and http://earth.google.com[Google
 Earth]. We then show how to integrate KML
 generation into our /2008/03/20/restful-web-sevices-resteasy-jax-rs[RESTful
 API] and how to create
-a mashup with those technologies. 
+a mashup with those technologies.
 
 == Introduction
 
@@ -127,7 +127,7 @@ JAXB-annotated classes from an XML Schema. We started by getting our
 hands on the latest http://schemas.opengis.net/kml/2.2.0/[KML Schema]
 (yes both the XML and Atom schemas) and tried our luck:
 
-....
+----
 $ xjc.sh -d src/ -extension schemas/ogckml22.xsd
 parsing a schema...
 compiling a schema...
@@ -144,7 +144,7 @@ compiling a schema...
   line 261 of file:/home/stephane/src/kml-jaxb/schemas/ogckml22.xsd
 
 Failed to produce code.
-....
+----
 
 This error and a solution are
 http://acuriousanimal.blogspot.com/2008/08/using-jaxb-to-generate-kml-java-classes.html[already
@@ -175,7 +175,7 @@ conflicts in question by renaming the Java factory method for the
 
 After that we can run `xjc` again:
 
-....
+----
 xjc.sh -d src -extension -b custom-bindings.xjb schemas/ogckml22.xsd
 parsing a schema...
 compiling a schema...
@@ -185,7 +185,7 @@ net/opengis/kml/_2/...
 ...
 oasis/names/tc/ciq/xsdschema/xal/_2/...
 ...
-....
+----
 
 At that point it did generate all the JAXB classes, but with package
 names we were not very happy with so we changed the customisation file:

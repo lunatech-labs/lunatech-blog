@@ -75,7 +75,7 @@ them in a browser.
 Snipped from the OpenSearch description (with line breaks inserted for
 legibility):
 
-....
+----
 ...
 <Url type="application/atom+xml"
 template="http://yourdomain/plugins/servlet/opensearch?
@@ -86,7 +86,7 @@ template="http://yourdomain/plugins/servlet/opensearch?
  searchfor={searchTerms}&startIndex={startIndex}&itemsPerPage={count}&
  un={custom:userName}&pw{custom:passWord}&format=rss"/>
 ...
-....
+----
 
 The 'searchfor' parameter in the URL behaves the same as Confluence's
 'dosearchsite' action, which is the simple one field search that appears
@@ -158,10 +158,10 @@ link:../media/2007-07-06-opensearch-plug-atlassian’s-confluence/opensearch-des
 . Select _Add at the end of Head_
 . Add
 +
-....
+----
 <link rel="search" type="application/opensearchdescription+xml"
 href="{/../os-description.xml}" title="My Confluence"/>
-....
+----
 +
 (Replace the value of href.)
 . When you now open the page in your browser the 'Search Engine List' or

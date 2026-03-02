@@ -91,9 +91,9 @@ because with git making repositories should be simple.
 
 And you know what? It is.
 
-....
+----
 $ git init --bare project.git
-....
+----
 
 Hell yeah, now *that's* what I'm talkin' about!
 

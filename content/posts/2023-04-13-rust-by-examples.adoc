@@ -304,7 +304,7 @@ A static item is a value which is valid for the entire duration of your program.
 [source,rust]
 ----
 fn return_match_borrow(pattern: &str, lines: &'static Vec<&str>) -> Option<&'static str> {
-....
+----
 ----
 
 To me, ownership and lifetimes are the most cumbersome part of Rust development, but this is the price to pay to avoid garbage collection.
@@ -496,7 +496,7 @@ let (a, b, c) = (2, true);
 // this will also fail, because the None option is not covered:
 fn foo(opt_value: Option<String>) {
     let Some(a) = opt_value;
-    ....
+    ----
 }
 ----
 

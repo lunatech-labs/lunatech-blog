@@ -149,12 +149,12 @@ ng generate environments
 +
 This will create two files in the `src/environments/` folder:
 +
-....
+----
 src/
 ├── environments/
 │   ├── environment.development.ts # Development environment
 │   └── environment.ts             # Production environment
-....
+----
 . Open both `environment.ts` and `environment.development.ts` and add
 the `apiUrl` property. `environment.development.ts`
 +
@@ -220,7 +220,7 @@ organized and modular.
 
 Here’s how your Angular app should look after generating the files:
 
-....
+----
 src/
 ├── app/
 │   ├── auth/                     # Guards, interceptors, maybe a module
@@ -252,7 +252,7 @@ src/
 ├── index.html
 ├── main.ts
 └── style.scss
-....
+----
 
 '''''
 

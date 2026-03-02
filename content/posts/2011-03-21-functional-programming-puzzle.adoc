@@ -318,9 +318,9 @@ assertEquals(2, e2("j", true));
 If you try to run this you’ll get the following error when you try to
 extend the environment:
 
-....
+----
 ReferenceError: i is not defined
-....
+----
 
 Why do we get this error? Because of recursion. The `i` variable is
 _bound_ in the lexical scope of the function in `e1`, but as soon as

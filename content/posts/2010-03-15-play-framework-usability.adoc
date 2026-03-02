@@ -64,7 +64,7 @@ and a single URL routing configuration. This configuration, like Grails'
 and Cake PHP's, reflects the structure of an HTTP request - HTTP method,
 URL path, and then the mapping:
 
-....
+----
 # Play! 'routes' configuration file…
 
 # Method   URL path         Controller
@@ -74,7 +74,7 @@ GET        /about           Application.about
 POST       /item            Item.addItem
 GET        /item/{id}       Item.getItem
 GET        /item/{id}.pdf   Item.getItemPdf
-....
+----
 
 In this example, there is more than one controller. We also see the use
 of an `id` URL parameter in the last two URLs.
@@ -130,18 +130,18 @@ similar lines, the server's console output avoids the pages full of
 irrelevant logging and pages of stack traces when there is an error,
 leaving more focused and more usable information for the web developer.
 
-....
+----
 $ play run phase
-~        _            _ 
+~        _            _
 ~  _ __ | | __ _ _  _| |
 ~ | '_ \| |/ _' | || |_|
 ~ |  __/|_|\____|\__ (_)
-~ |_|            |__/   
+~ |_|            |__/
 ~
 ~ play! 1.0, http://www.playframework.org
 ~
 ~ Ctrl+C to stop
-~ 
+~
 Listening for transport dt_socket at address: 8000
 10:15:58,629 INFO  ~ Starting /Users/peter/Documents/work/workspace/phase
 10:16:00,007 WARN  ~ You're running Play! in DEV mode
@@ -149,7 +149,7 @@ Listening for transport dt_socket at address: 8000
 10:16:11,847 INFO  ~ Connected to jdbc:hsqldb:mem:playembed
 10:16:13,448 INFO  ~ Application 'phase' is now started !
 10:16:14,825 INFO  ~ starting DispatcherThread
-10:16:48,168 ERROR ~ 
+10:16:48,168 ERROR ~
 
 @61lagcl6i
 Internal Server Error (500) for request GET /application/startprocess?account=x
@@ -165,7 +165,7 @@ Caused by: java.lang.IllegalArgumentException: Person not found for account x
     at play.utils.Java.invokeStatic(Java.java:129)
     at play.mvc.ActionInvoker.invoke(ActionInvoker.java:127)
     ... 1 more
-....
+----
 
 Try to imagine a JSF web application producing a stack trace this short.
 In fact, Play! goes further: instead of showing the stack trace, the web
@@ -192,5 +192,3 @@ usually results from fighting the framework.
 We recommend that you go to http://www.playframework.org/, download the
 latest binary release, and spend half an hour on the
 http://www.playframework.org/documentation/1.0.1/guide1[tutorial].
-
-

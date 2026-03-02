@@ -48,11 +48,11 @@ Here is a simple example to start with.
 
 image:../media/2007-04-27-uml-class-diagrams-confluence-using-graphviz-and-dot/graphviz01.png[Simple diagram]
 
-....
+----
 {flowchart}
 A -> B
 {flowchart}
-....
+----
 
 Technically this a directed graph, with nodes A and B, and on directed
 edge. The simplicity of the DOT language, if you are a programmer at
@@ -71,13 +71,13 @@ First, we simply remove the arrows.
 
 image:../media/2007-04-27-uml-class-diagrams-confluence-using-graphviz-and-dot/graphviz02.png[Arrows removed]
 
-....
+----
 {flowchart}
 edge [arrowhead="none"];
 Employee -> Cocktail
 Ingredient -> Cocktail
 {flowchart}
-....
+----
 
 This syntax uses the _edge_ keyword to set default attributes for all
 edges, where _arrowhead_ is one of the many
@@ -97,7 +97,7 @@ horizontally.
 
 image:../media/2007-04-27-uml-class-diagrams-confluence-using-graphviz-and-dot/graphviz03.png[Horizontal layout]
 
-....
+----
 {flowchart}
 edge [arrowhead="none"];
 Employee -> Cocktail
@@ -106,7 +106,7 @@ subgraph {
   Ingredient -> Cocktail
 }
 {flowchart}
-....
+----
 
 == Multiplicity
 
@@ -114,7 +114,7 @@ Use arrow labels to indicate multiplicity:
 
 image:../media/2007-04-27-uml-class-diagrams-confluence-using-graphviz-and-dot/graphviz04.png[Multiplicity]
 
-....
+----
 {flowchart}
 edge [arrowhead="none", fontname=Verdana, fontsize=8];
 subgraph {
@@ -123,7 +123,7 @@ subgraph {
 }
 
 {flowchart}
-....
+----
 
 == Relationship types
 
@@ -135,7 +135,7 @@ cocktail):
 
 image:../media/2007-04-27-uml-class-diagrams-confluence-using-graphviz-and-dot/graphviz05.png[Arrow types]
 
-....
+----
 {flowchart}
 edge [arrowhead="none", fontname=Verdana, fontsize=8];
 subgraph {
@@ -146,7 +146,7 @@ subgraph {
 }
 Cocktail -> Caipirinha [arrowtail="o"]
 {flowchart}
-....
+----
 
 This example uses more of the Graphviz
 http://graphviz.org/doc/info/arrows.html[Arrow Shapes], for the head or
@@ -159,12 +159,12 @@ Use 'record' shape types to make complex nodes:
 
 image:../media/2007-04-27-uml-class-diagrams-confluence-using-graphviz-and-dot/graphviz06.png[Record nodes]
 
-....
+----
 {flowchart}
   node [shape=record];
   Employee [label="{Employee|name\nrole\nfavouriteCocktails}"]
 {flowchart}
-....
+----
 
 This is not a complete tutorial, since UML syntax is like an onion
 (there is always another layer). However, this should be enough to get

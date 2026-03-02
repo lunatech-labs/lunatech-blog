@@ -44,7 +44,7 @@ It is not a good practice to have such a big json with many root variables. Neve
   "a22" : ...,
   "a23" : ...,
   "a24" : ...,
-  ....
+  ----
 }
 ----
 
@@ -78,7 +78,7 @@ we get a compiler error
                                                    ^
 ----
 
-Instead we can use https://www.playframework.com/documentation/2.5.x/ScalaJsonCombinators[Play-Json extensions](requires play-json >= 2.4) 
+Instead we can use https://www.playframework.com/documentation/2.5.x/ScalaJsonCombinators[Play-Json extensions](requires play-json >= 2.4)
 
 
 [source,scala]

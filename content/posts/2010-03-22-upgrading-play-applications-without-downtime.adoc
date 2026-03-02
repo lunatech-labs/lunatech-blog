@@ -37,9 +37,9 @@ the application.conf in the conf directory to change the port numbers.
 
 For each web application directory:
 
-....
+----
 play start mysuperwebapp
-....
+----
 
 Now, let's configure our Apache web server to have a load balancer.
 
@@ -83,16 +83,16 @@ I want.
 
 Every time I want to upgrade mysuperwebapp, here what I am doing:
 
-....
+----
 play stop mysuperwebapp1
-....
+----
 
 The load-balancer then forwards everything to mysuperwebapp2. In the
 meantime I update mysuperwebapp1. Once I am done:
 
-....
+----
 play start mysuperwebapp1
-....
+----
 
 And I can now safely update mysuperwebapp2 the same way.
 
@@ -105,5 +105,3 @@ between the two clusters. You can actually easily scale to more than two
 Play! instances. As we have seen, that is really easy to do.
 
 Happy Play!
-
-

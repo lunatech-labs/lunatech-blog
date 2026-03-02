@@ -138,13 +138,10 @@ object Pinger {
   }
 }
 ----
-
-Let's explain this step-by-step: to start, we extend the `Command` ADT by adding
-a new message that wraps the response (➊). Next, we use the `messageAdaptor`
-method on the `ActorContext` to create a message adapter (➋). The type of the
-latter is an `ActorRef[PingPong.Response]`. The message adapter is sent along to
-the `PingPong` actor as a field in the `Ping` message (➌). Finally, we receive
-the wrapped response (➍).
+<1> Let's explain this step-by-step: to start, we extend the `Command` ADT by adding a new message that wraps the response.
+<2> Next, we use the `messageAdaptor` method on the `ActorContext` to create a message adapter.
+<3> The type of the latter is an `ActorRef[PingPong.Response]`. The message adapter is sent along to the `PingPong` actor as a field in the `Ping` message.
+<4> Finally, we receive the wrapped response.
 
 I think it's fair to state that this feels a bit boilerplate-ish and it
 obfuscates the simple operation of receiving a message from another actor. We'll
@@ -185,7 +182,7 @@ lazy val root = project
        "com.typesafe.akka" %% "akka-actor-typed" % "2.6.1",
        "com.typesafe.akka" %% "akka-slf4j"       % "2.6.1",
        "org.scalatest"     %% "scalatest"        % "3.1.0" % "test",
-    ).map(_.withDottyCompat(scalaVersion.value))   <1>
+    ).map(_.withDottyCompat(scalaVersion.value))
   )
 ----
 
@@ -253,12 +250,9 @@ sealed trait Command
   }
 }
 ----
-
-We introduce a type alias for convenience (➊). It is a Union of the original
-`Command` ADT and the type of the responses we want to be able process. We use
-this Union type when we describe our `Behavior` (➋). With this in place, we can
-perform a pattern match of `PingPong.Response` (➌) (which, in essence is a
-`Pong` message).
+<1> We introduce a type alias for convenience.
+<2> It is a Union of the original `Command` ADT and the type of the responses we want to be able process. We use this Union type when we describe our `Behavior`.
+<3> With this in place, we can perform a pattern match of `PingPong.Response` (which, in essence is a`Pong` message).
 
 And that's it! It doesn't get more concise!
 

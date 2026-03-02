@@ -75,11 +75,11 @@ If you load a page in the application now, the Play console will show
 three warnings because you do not have any locale-specific message files
 yet:
 
-....
+----
 16:19:04,728 WARN  ~ Messages file missing for locale en
 16:19:04,729 WARN  ~ Messages file missing for locale nl
 16:19:04,729 WARN  ~ Messages file missing for locale fr
-....
+----
 
 [[utf8]]
 == UTF-8 message files
@@ -327,9 +327,9 @@ In `conf/messages.nl`
 crud.title = Beheer
 crud.home = Home
 crud.blank = Nieuw
-crud.index.title = Kies het te bewerken object 
+crud.index.title = Kies het te bewerken object
 crud.index.objectType = Type object
-crud.index.action = 
+crud.index.action =
 crud.index.add = Voeg toe
 crud.add = &{{ "{%s" }}} toevoegen
 crud.list.title = &{{ "{%s" }}}
@@ -380,7 +380,7 @@ In `conf/messages.fr`
 crud.title = Administration
 crud.home = Home
 crud.blank = Nouveau
-crud.index.title = Choisissez l'objet à modifier 
+crud.index.title = Choisissez l'objet à modifier
 crud.index.objectType = Type objet
 crud.index.action = XXX
 crud.index.add = Ajouter
@@ -520,5 +520,3 @@ The 'Yet Another Blog Engine' admin interface in Dutch (above) and
 French (below).
 
 image:../media/2010-04-12-how-localise-play-framework-web-application/yabe-administration.png[image]
-
-

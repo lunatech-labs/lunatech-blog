@@ -51,15 +51,15 @@ Imagine someone spends an entire day rolling a die and tells you the maximum num
 
 The probability of rolling three consecutive 1s is:
 
-....
+----
 1/6 * 1/6 * 1/6 = 1/(6^3)
-....
+----
 
 Therefore, the expected number of trials needed to observe this event is:
 
-....
+----
 1 / (1/6^3) = 6^3 = 216
-....
+----
 
 Translating this concept into an algorithm:
 

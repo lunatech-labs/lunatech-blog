@@ -40,10 +40,10 @@ println("We don't know about "+ there)
 If you put this in a file `example.scala` and run it using
 `scala example.scala` then it will print:
 
-....
+----
 We're here in The Netherlands.
 We don't know about [unknown country]
-....
+----
 
 Compare this with the java version:
 

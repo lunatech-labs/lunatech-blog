@@ -9,7 +9,7 @@ tags:
 ---
 = Lunatech blog retrospective - 2005
 
-Looking back nine years on this blog, there are a mix of articles that stand the test of time, ones that were good at the time, and 
+Looking back nine years on this blog, there are a mix of articles that stand the test of time, ones that were good at the time, and
     a few that… weren’t. Here is a small selection.
 
 Overall, there were 22 Lunatech blog posts in 2005 on a mixture of
@@ -25,16 +25,16 @@ describes a rare success in fighting wrong-headed J2EE web technology
 and managing to build a more HTTP-centric web application. While
 everyone else was building web applications with ugly URLs like:
 
-....
+----
 /customer.do?method=edit&id=42
-....
+----
 
 … or worse, we had worked out how to get Struts to work with something
 cleaner, like:
 
-....
+----
 /customer/edit/42
-....
+----
 
 In hindsight, this is a clear example of one reason why we would
 inevitably recognise the http://www.playframework.com[Play Framework] as

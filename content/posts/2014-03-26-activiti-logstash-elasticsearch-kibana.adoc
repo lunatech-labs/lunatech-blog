@@ -59,7 +59,7 @@ and insert process logging into ElasticSearch.
 You can use `sbt run` to run the example. The log file output uses
 `application` and `process` loggers, and produces the following output.
 
-....
+----
 2014-03-24 18:30:54,615 INFO application Main
 2014-03-24 18:30:56,935 INFO application Deploy business process
 2014-03-24 18:30:57,494 INFO application Execute business processes
@@ -73,7 +73,7 @@ You can use `sbt run` to run the example. The log file output uses
 2014-03-24 18:30:57,854 INFO process.logging-test:19:1903 execution=1918 number=951 country=MM currency='Testing Currency Code' activity=example-task
 2014-03-24 18:30:57,854 INFO process.logging-test:19:1903 execution=1918 number=951 country=MM currency='Testing Currency Code' activity=end
 2014-03-24 18:30:57,884 INFO application Done
-....
+----
 
 The `process` logger category includes the business process definition
 ID, which is useful if you have multiple business processes. Each
@@ -85,7 +85,7 @@ The logstash configuration ignores all but the `process` log statements,
 parses the key-value pairs into `facets' and inserts a `document' into
 Elasticsearch for each log statement. For example:
 
-....
+----
 {
        "message" => "2014-03-24 18:39:18,083 INFO process.logging-test:20:2003 execution=2011 number=213 country=GD currency='Turkish Lira' activity=example-task",
       "@version" => "1",
@@ -100,7 +100,7 @@ Elasticsearch for each log statement. For example:
       "currency" => "Turkish Lira",
       "activity" => "example-task"
 }
-....
+----
 
 You can then modify Kibana’s default logstash dashboard by adding panels
 that show values for the various facets.

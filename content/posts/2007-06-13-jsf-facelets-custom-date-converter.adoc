@@ -37,7 +37,7 @@ you were using JSF with JSP.
 The following code is the self-explanatory helper class that actually
 formats the date and time.
 
-....
+----
 public class DateUtil {
    final public static String DATE_FORMAT = "dd-MMM-yyyy";
    final public static String TIME_FORMAT = "HH:mm";
@@ -71,7 +71,7 @@ public class DateUtil {
       return dateFormat.format(date) + time;
    }
 }
-....
+----
 
 == Converter implementation class
 
@@ -83,7 +83,7 @@ The _CONVERTER_ID_ constant defines a logical name for the converter
 which you use to refer to this converter in configuration files and the
 view templates.
 
-....
+----
 /**
  * Converter for formatting dates as relative dates (yesterday, today, tomorrow)
  * with a time zone indicator.
@@ -106,7 +106,7 @@ public class RelativeDateTimeConverter implements Converter {
       this.showTime = showTime;
    }
 }
-....
+----
 
 Note that there are two unresolved issues in this version. First, it
 should be possible to specify the _showTime_ property’s default value in
@@ -118,7 +118,7 @@ property is currently a _String_ instead of a _Boolean_.
 The code above is all of the Java code you need. Now you need to declare
 the converter, by adding the following to _faces-config.xml_
 
-....
+----
 <converter>
    <description>Converter for formatting dates as relative dates
    (yesterday, today, tomorrow) with a time zone indicator.</description>
@@ -129,18 +129,18 @@ the converter, by adding the following to _faces-config.xml_
       <property-class>java.lang.String</property-class>
    </property>
 </converter>
-....
+----
 
 Once you have done this, you can now use the converter to format a
 _date_ object of type _java.util.Date_ in your view in two ways:
 
-....
+----
 <h:outputText value="#{date}" converter="RelativeDateTime"/>
 
 <h:outputText value="#{date}">
    <f:converter converterId="RelativeDateTime"/>
 </h:outputText>
-....
+----
 
 == Register the converter for _java.util.Date_
 
@@ -148,18 +148,18 @@ If you register the converter, you do not have to explicitly specify it
 in the view templates, as in the _h:outputText_ examples above. Add the
 following to _faces-config.xml_
 
-....
+----
 <converter>
    <converter-for-class>java.util.Date</converter-for-class>
    <converter-class>myproject.converters.RelativeDateTimeConverter</converter-class>
 </converter>
-....
+----
 
 The converter will now be used automatically when you do:
 
-....
+----
 <h:outputText value="#{date}"/>
-....
+----
 
 == Define the Facelets tag
 
@@ -169,7 +169,7 @@ Facelets does not require a tag handler class to define a tag. Instead,
 simply use a tag library description as follows, which Facelets will use
 to create a tag and auto-wire the converter’s properties.
 
-....
+----
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE facelet-taglib PUBLIC
    "-//Sun Microsystems, Inc.//DTD Facelet Taglib 1.0//EN"
@@ -183,21 +183,21 @@ to create a tag and auto-wire the converter’s properties.
       </converter>
    </tag>
 </facelet-taglib>
-....
+----
 
 Use a file name ending in _.taglib.xml_ and put it in the _/META-INF_
 directory of one of your application’s JARs.
 
 Now you can display the date without the time:
 
-....
+----
 <ui:composition
    xmlns="http://www.w3.org/1999/xhtml"
    xmlns:luna="http://lunatech.com/">
 <h:outputText value="#{date}">
    <luna:relativeDateTimeConverter showTime="false"/>
 </h:outputText>
-....
+----
 
 For the tag to work, the file’s namespace must match the namespace
 declared in the tag library descriptor.
@@ -208,5 +208,3 @@ Note that if you are using http://seamframework.org/[Seam], you can do
 this more simply using the
 http://docs.jboss.com/seam/2.0.1.GA/api/org/jboss/seam/annotations/faces/Converter.html[@Converter]
 annotation.
-
-

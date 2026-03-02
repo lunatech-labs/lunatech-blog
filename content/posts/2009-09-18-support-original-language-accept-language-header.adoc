@@ -90,11 +90,11 @@ proposed by my colleague Stéphane. The spec already allows weights,
 which is derived from the order specified in the dialog. The change
 would be to add tags to the weights:
 
-....
+----
 Accept-Language: en;q=1.0;t=original, es;q=1.0;t=original, gl;q=1.0;t=original, \\
 nl;q=1.0;t=original, en;q=0.8;t=translated, es;q=0.8;t=translated, gl;q=0.8;t=translated, \\
 nl;q=0.8;t=translated,  pt;q=0.7, fr;q=0.6, de;q=0.6
-....
+----
 
 In plain English, the above would mean: _"Give me the text in the
 *original* language if that language is English, Spanish, Galician or

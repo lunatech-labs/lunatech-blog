@@ -41,7 +41,7 @@ By the end of this part, you’ll have:
 
 Once set up, your backend folder will look like this:
 
-....
+----
 src/
 ├── app.module.ts
 ├── main.ts
@@ -60,7 +60,7 @@ src/
 │   ├── users.module.ts
 │   └── users.service.ts
 .env
-....
+----
 
 '''''
 
@@ -106,10 +106,10 @@ podman run --name pg-nest \
 
 Once the project is created in Step 2, add a `.env` file to your root:
 
-....
+----
 DB_HOST=localhost DB_PORT=5432 DB_USERNAME=nestuser DB_PASSWORD=nestpass
 DB_NAME=nestdb JWT_SECRET=dev_secret BCRYPT_SALT_ROUNDS=10
-....
+----
 
 '''''
 
@@ -564,9 +564,9 @@ Response:
 
 Use this token to access protected routes with:
 
-....
+----
 Authorization: Bearer <JWT_TOKEN>
-....
+----
 
 '''''
 

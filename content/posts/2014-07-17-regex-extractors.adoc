@@ -50,10 +50,10 @@ http://scala-lang.org/api/current/#scala.collection.immutable.StringOps[StringOp
 which is an implicit wrapper that adds a bunch of methods to strings.
 This means that you can do the following:
 
-....
+----
 scala> val Email = "(.*)@(.*)".r
 Email: scala.util.matching.Regex = (.*)@(.*)
-....
+----
 
 Let’s explain what’s going on here. Calling `r` on a `String` (or any
 method on any object that doesn’t have said method) makes the compiler
@@ -72,21 +72,21 @@ pattern matching.
 
 So you can use it as a pattern in a variable definition:
 
-....
+----
 scala> val Email(local, domain) = "foo@example.com"
 local: String = foo
 domain: String = example.com
-....
+----
 
 or in a match expression:
 
-....
+----
 scala> "foo@example.com" match {
      | case Email(local, domain) => s"Got local [$local], domain [$domain]"
      | case _ => "Got nothing"
      | }
 res0: String = Got local [foo], domain [example.com]
-....
+----
 
 In both the assignment and the match expression, the compiler now
 creates a call to `Regex`’s `unapplySeq` method, passing the string

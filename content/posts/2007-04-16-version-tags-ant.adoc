@@ -14,23 +14,23 @@ When you release a software application, it is nice to put the version number so
 In Java - any language for that matter - this is pretty easy to do, just
 use the _$Name$_ tag for CVS or the _$HeadURL$_ tag for SVN, like so:
 
-....
+----
 ...
 String tag = "$Name$";
 String tag = "$HeadURL$";
 ...
-....
+----
 
 When next you check out a tagged version of your code, the keywords
 should be expanded to something that contains the version number. Note
 that you will need to strip out the extra junk programmatically.
 
-....
+----
 ...
 String tag = "$Name: v1_0_0 $";
 String tag = "$HeadURL: svn://repo/project/tags/v1.0.0/src/com/lunatech/sample/Foo.java $";
 ...
-....
+----
 
 All this works fine, however, you might want to put the same version
 number in the name of your release package or your manifest. If you're
@@ -39,7 +39,7 @@ from _http://ant-contrib.sourceforge.net/[antcontrib]_, to strip the
 junk from the expanded keywords and use them in your build script. The
 following snippets show you how to do this.
 
-....
+----
 ...
 <!-- Set a property from the SVN URL to extract the version number, for a tagged release -->
 <property name="version.tag" value="$HeadURL: svn://repo/project/tags/v1.0.0/build.xml $"/>
@@ -60,7 +60,7 @@ following snippets show you how to do this.
     </filterset>
 </target>
 ...
-....
+----
 
 Note that your _regexp_ and _select_ attributes need to be slightly more
 funky if you are using CVS, since it does not allow periods (.) in tag

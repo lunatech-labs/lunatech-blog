@@ -35,13 +35,13 @@ your favourite editor and use the manifest task to make sure that it's
 correctly formatted. Here is a snippet of a build.xml that does exactly
 that:
 
-....
+----
 ...
 <target name="manifest">
     <manifest file="MANIFEST.MF" mode="update"/>
 </target>
 ...
-....
+----
 
 You can set attributes from ant by using the _attribute_ element. Note
 that you do not have to set all the attributes in this way. You can keep
@@ -51,13 +51,13 @@ next example shows how to use this hybrid method.
 
 The manifest before running ant:
 
-....
+----
 Class-Path: profile-server-client-dev.jar commons-httpclient-3.0.jar commons-betwixt-0.8-dev.jar k2.jar
-....
+----
 
 a snippet from the build file:
 
-....
+----
 ...
 <target name="manifest">
     <manifest file="MANIFEST.MF" mode="update">
@@ -65,18 +65,18 @@ a snippet from the build file:
     </manifest>
 </target>
 ...
-....
+----
 
 and the resulting manifest:
 
-....
+----
 Manifest-Version: 1.0
 Ant-Version: Apache Ant 1.6.5
 Created-By: 1.5.0_06-b05 (Sun Microsystems Inc.)
 Class-Path: profile-server-client-dev.jar commons-httpclient-3.0.jar c
  ommons-betwixt-0.8-dev.jar k2.jar
 Implementation-Version: 1.0
-....
+----
 
 Note that the manifest task does its work _in place_. You can also see
 the strangeness of the format here, where the word

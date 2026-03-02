@@ -191,10 +191,10 @@ column types.
 If you do try writing cross-database SQL scripts, you probably won’t be
 able to quote table names, because the quoting characters vary:
 
-....
+----
 create table "COCKTAILS" -- H2 uses double quotes
 create table `COCKTAILS` -- MySQL uses backticks
-....
+----
 
 In SQL, quoted table names are case-sensitive while unquoted names are
 not, which is reasonable. What you might not expect is that if you’re
@@ -205,7 +205,7 @@ lower-case names in your Slick table definition:
 
 [source,text,linenums]
 ----
-[JdbcSQLException: Table "cocktail" not found; SQL statement: 
+[JdbcSQLException: Table "cocktail" not found; SQL statement:
 select x2."id", x2."name" from "cocktail" x2 [42102-168]]
 ----
 
@@ -329,9 +329,9 @@ object Global extends GlobalSettings {
   /**
    * Writes the given DDL statements to a file.
    */
-  private def writeScript(ddlStatements: Seq[Iterator[String]], directory: File, 
+  private def writeScript(ddlStatements: Seq[Iterator[String]], directory: File,
 	fileName: String): Unit = {
-	
+
 	val createScript = new File(directory, fileName)
 	val createSql = ddlStatements.flatten.mkString("\n\n")
 	Files.writeFileIfChanged(createScript, ScriptHeader + createSql)
