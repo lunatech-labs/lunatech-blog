@@ -1,0 +1,114 @@
+---
+layout: post
+title: Regex extractors
+date: 2014-07-17
+author: fcanedo
+lang: en
+tags:
+  - regex
+  - scala
+---
+= Regex extractors
+
+This article explains how to use regular expressions in Scala pattern matching.
+
+Sometimes the best way to decompose string data is with capturing groups
+in regular expressions. However, using Java’s `java.util.regex` package
+is no fun. Fortunately Scala’s `scala.util.matching` package uses Scala
+language features to make things a lot easier for you.
+
+== Follow along
+
+Note that the examples shown are from a REPL session and can be
+copy-pasted into another Scala REPL. The REPL will figure out what’s
+going on, repeat the commands, and ignore the output from the other
+session. But note that you have to press ctrl-D when you’re done pasting
+before it does anything.
+
+== What do we want to achieve
+
+Let’s say we want to decompose a string containing an e-mail address
+into its local and domain parts. The regular expression `(.\*)@(.\*)`
+splits an e-mail address into its local (first capture group) and domain
+(second) parts.
+
+We’re not trying to fully validate the e-mail address for this example.
+If you do plan to properly validate e-mail addresses in your
+application, make sure you get it right. There are many web sites out
+there that get it wrong — mainly not allowing ``+'' (plus sign) in the
+local part, see
+https://en.wikipedia.org/wiki/Email_address#Local_part[Wikipedia]. Let’s
+take it step by step.
+
+== Regular expressions in Scala
+
+In Scala you can easily create a regular expression from a `String` by
+calling its `r` method. Since Scala uses Java’s `String` class which
+doesn’t contain an `r` method, this method has to come from somewhere
+else:
+http://scala-lang.org/api/current/#scala.collection.immutable.StringOps[StringOps],
+which is an implicit wrapper that adds a bunch of methods to strings.
+This means that you can do the following:
+
+----
+scala> val Email = "(.*)@(.*)".r
+Email: scala.util.matching.Regex = (.*)@(.*)
+----
+
+Let’s explain what’s going on here. Calling `r` on a `String` (or any
+method on any object that doesn’t have said method) makes the compiler
+search for something that is defined as implicit and can turn a `String`
+into something that does have an `r` method. Which is what exactly what
+`implicit def augmentString(x: String): StringOps` in the `scala.Predef`
+package (which is automatically in scope) is.
+
+== Extractors
+
+`r` returns a
+http://scala-lang.org/api/current/#scala.util.matching.Regex[Regex]
+which contains an `unapplySeq` method. When an object has an
+`unapplySeq` (or `unapply`) method, it can be used by the compiler for
+pattern matching.
+
+So you can use it as a pattern in a variable definition:
+
+----
+scala> val Email(local, domain) = "foo@example.com"
+local: String = foo
+domain: String = example.com
+----
+
+or in a match expression:
+
+----
+scala> "foo@example.com" match {
+     | case Email(local, domain) => s"Got local [$local], domain [$domain]"
+     | case _ => "Got nothing"
+     | }
+res0: String = Got local [foo], domain [example.com]
+----
+
+In both the assignment and the match expression, the compiler now
+creates a call to `Regex`’s `unapplySeq` method, passing the string
+``foo@example.com'' as the argument. `unapplySeq` returns a list with
+the captured values. The values in the returned list are assigned to
+`local` and `domain` in the order they were found in the list.
+
+== Naming conventions
+
+You may have noticed that we’re starting the name of a value (`Email`)
+with an uppercase letter, which is unusual. Since most Scala developers
+— at least the ones I have worked with — apply variable-naming rules to
+values in Scala. However, Scala developers also tend to apply naming
+rules according to the intended usage. We’re not planning to use `Email`
+as a regex directly, but as an extractor, therefore we apply
+extractor-naming rules.
+
+== Conclusion
+
+Easy-to-create regexes and extractors make it very easy to write custom
+string extractors. Use them to your advantage to write concise and
+expressive code. Also, realize that any object with an `unapply` or
+`unapplySeq` method can be used as an extractor. Therefore you can write
+extractors for anything you want. See section 26.2 in _Programming in
+Scala_ for more information.

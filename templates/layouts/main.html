@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="{page.data.getString('lang') ?: 'en'}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{page.data.getString('title') ?: 'Lunatech Blog'} - Lunatech Blog</title>
+    <meta name="description" content="{page.data.getString('description') ?: 'Technical articles by Lunatech engineers'}">
+
+    {#if page.data.getString('img')}
+    <meta property="og:image" content="{site.url}/{page.data.getString('img')}">
+    {/if}
+    <meta property="og:title" content="{page.data.getString('title') ?: 'Lunatech Blog'}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{site.url}{page.url}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" type="image/svg+xml" href="/images/logo-lunatech-visual.svg">
+</head>
+<body>
+    <header class="header" id="header">
+        <div class="header__inner">
+            <a href="/" class="header__logo">
+                <img src="/images/logo-lunatech-full.svg" alt="Lunatech" class="logo-full">
+                <img src="/images/logo-lunatech-visual.svg" alt="Lunatech" class="logo-small">
+            </a>
+
+            <nav class="header__nav">
+                <a href="https://lunatech.com" target="_blank" class="nav__link">
+                    <i class="fa-solid fa-globe"></i>
+                    <span>Official website</span>
+                </a>
+                <a href="https://lunatech.com/careers" target="_blank" class="nav__link nav__link--highlight">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Join us</span>
+                </a>
+            </nav>
+
+            <button class="header__toggle" id="menu-toggle">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="main">
+        {#insert /}
+    </main>
+
+    <footer class="footer">
+        <div class="footer__inner">
+            <div class="footer__brand">
+                <img src="/images/logo-lunatech-full.svg" alt="Lunatech" class="footer__logo">
+            </div>
+            <div class="footer__social">
+                <a href="https://www.linkedin.com/company/lunatech" target="_blank" aria-label="LinkedIn">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
+                <a href="https://twitter.com/luaboratory" target="_blank" aria-label="Twitter">
+                    <i class="fa-brands fa-x-twitter"></i>
+                </a>
+                <a href="https://github.com/lunatech-labs" target="_blank" aria-label="GitHub">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <a href="https://www.instagram.com/lunatechlabs" target="_blank" aria-label="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+            </div>
+            <div class="footer__copy">
+                <p>&copy; Lunatech</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scroll');
+            } else {
+                header.classList.remove('scroll');
+            }
+        });
+
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.querySelector('.header__nav').classList.toggle('open');
+        });
+
+        // Syntax highlighting
+        hljs.highlightAll();
+    </script>
+</body>
+</html>

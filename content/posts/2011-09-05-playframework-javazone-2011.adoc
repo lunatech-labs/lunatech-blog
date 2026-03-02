@@ -1,0 +1,25 @@
+---
+layout: post
+title: Lunatech presents Play Framework at JavaZone 2011
+date: 2011-09-05
+author: hilton
+lang: en
+tags:
+  - event
+  - playframework
+---
+= Lunatech presents Play Framework at JavaZone 2011
+
+On
+Thursday this week, Nicolas Leroux and Peter Hilton will be presenting
+the http://www.playframework.org/[Play Framework] at the http://jz11.java.no/[JavaZone
+2011] conference in Oslo, Norway.
+
+http://javazone.no/incogito10/events/JavaZone%202011/sessions#7f248f8a-300e-4078-b711-399d97135b02[Play!
+Framework: to infinity and beyond] - Thursday, 8 September 2011, 11:40, room 3.
+
+Our presentation will include an overview of what’s great about Play,
+with a live-coding demo so you can see for yourself. We are also looking
+forward to meeting lots of Play users and other Java or web application
+developers.
+

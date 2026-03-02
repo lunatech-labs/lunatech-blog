@@ -1,0 +1,31 @@
+---
+layout: post
+title: RivieraDEV - the official pictures
+date: 2011-10-25
+author: pepite
+lang: en
+tags:
+  - event
+---
+= RivieraDEV - the official pictures
+
+:imagesdir: /images/media/2011-10-25-rivieradev-official-pictures
+
+Thanks to http://touilleur-express.fr[Nicolas
+Martignole] I can now show some pictures
+from the http://rivieradev.fr[RivieraDEV] event.
+
+image:../media/2011-10-25-rivieradev-official-pictures/rivieradev-1.jpg[image]
+
+image:../media/2011-10-25-rivieradev-official-pictures/rivieradev-2.jpg[image]
+
+image:../media/2011-10-25-rivieradev-official-pictures/rivieradev-3.jpg[image]
+
+image:../media/2011-10-25-rivieradev-official-pictures/rivieradev-4.jpg[image]
+
+image:../media/2011-10-25-rivieradev-official-pictures/rivieradev-5.jpg[image]
+
+image:../media/2011-10-25-rivieradev-official-pictures/rivieradev-6.jpg[image]
+
+image:../media/2011-10-25-rivieradev-official-pictures/rivieradev-7.jpg[image]
+

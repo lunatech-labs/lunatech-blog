@@ -1,0 +1,17 @@
+---
+layout: post
+title: WipidoTV.com - over 1 million served
+date: 2008-08-07
+author: Michael Pentowski
+lang: en
+tags:
+  - ventures
+---
+= WipidoTV.com - over 1 million served
+
+http://www.wipido.com/[WipidoTV], our
+video streaming site, has reached its first major milestone, it streamed
+over 1 million videos during July. Wipido served up 1.25 million videos,
+our best month to date. Not too shabby for a service that is only a few
+months old. Watch this space as lots of exciting things are happening in
+WipidoLand.

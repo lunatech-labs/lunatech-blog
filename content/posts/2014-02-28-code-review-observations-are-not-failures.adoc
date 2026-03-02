@@ -1,0 +1,141 @@
+---
+layout: post
+title: Code review observations are not failures
+date: 2014-02-28
+author: hilton
+lang: en
+tags:
+  - collaboration
+---
+= Code review observations are not failures
+
+Although we have had some success in introducing code review to teams, not everyone is clear about what it’s for, or how it’s supposed to work. Code review deserves some explanation.
+
+We mostly think about code review as a way to reduce code defects and
+make code more consistent and maintainable. But code review can give us
+more: an efficient way to fill the gap left by the detailed technical
+specifications delivered by the waterfall projects that no-one does any
+more. Code review isn’t about fixing things, it’s about learning.
+
+To make things a little more concrete, here are some goals for code
+review on software development projects.
+
+[arabic]
+. Help all team members to learn from each other.
+. Avoid the need for all team members to have all specialist project
+knowledge.
+. Maintain a system’s chosen technical design.
+. Continuously improve the project’s software and code quality.
+. Identify some bugs before the code goes into production.
+
+It turns out that the first three of these are not obvious, and we tend
+to forget about the other two.
+
+The first thing that bears repeating is that code review observations
+are not failures, they are a sign that code review is working. A code
+review that raises zero observations has no value, and although this
+might happen occasionally, there’s no point aiming for this. If your
+goal is for a colleague to review your code and not raise any
+observations, then you have probably misunderstood code review. It’s
+also unrealistic.
+
+== Good kinds of code review observations
+
+A code review observation can be one of the small mistakes that everyone
+makes, but cannot see by staring at their own work. These mistakes are
+normal, not failures. If you don’t make any mistakes, you might actually
+be an android.
+
+A code review observation might be an opportunity to learn something
+that a colleague knows, but you don’t, perhaps about how the system
+works, how the team approaches development, how to use a specific
+technology or just about programming in general. If you don’t have
+anything to learn, then you are probably the deity of a recognised
+religion.
+
+Code review observations occasionally contain specialist knowledge that
+you don’t need to know, because it’s not worth having more than one or
+two people think about it. You don’t really want to know everything that
+someone who’s been a subject matter expert for ten years knows, or
+everything that the local expert in a technology we hardly use knows.
+
+A code review observation can be a detail that makes the difference
+between the code getting slightly better instead of slightly worse. The
+http://programmer.97things.oreilly.com/wiki/index.php/The_Boy_Scout_Rule[Boy
+Scout Rule] applies to all of the small things that aren’t quite right
+yet - spelling mistakes, UI inconsistencies, missing comments, awkward
+variable names, hard-to-read code. Most importantly, there’s no `trash
+ownership' - it’s irrelevant if it’s not `your' empty beer bottle by the
+camp fire*.
+
+A code review observation is sometimes a nudge towards the desired
+technical design, putting the code back on track. There’s always more
+than one way to do it, but when you’re working at the code level you
+cannot expect to remember all of the constraints that determine the
+right technical design, or even what the current design is. This
+wouldn’t matter so much if you re-read the system’s technical
+specification before changing code, but there isn’t one. Not any more.
+
+Finally, a code review observation might even be that most basic of
+things: a proper functional bug, when the code does exactly what you
+wanted it to, which is the wrong thing. However much agile software
+development works to delay detailed functional design and shorten cycle
+times and feedback loops, once you’ve committed an idea to code its
+worthing finding out what’s wrong with it sooner, rather than later.
+
+* I’ve never been a boy scout, so I wouldn’t know if they drink beer.
+
+== Better questions to ask about code review
+
+I suspect that if you’re not doing code review on your current project,
+it’s at least partly because you don’t like it much. Either way, you’re
+missing out, so perhaps it’s worth thinking about
+http://programmer.97things.oreilly.com/wiki/index.php/Code_Reviews[other
+approaches] and whether changing the way you think about it will make it
+more appealing. Meanwhile, the next questions are:
+
+* What are bad reasons for not doing code review?
+* What are good reasons for not doing code review?
+* How can we use code review to implement a technical design?
+* How can we make code review more effective and more efficient without
+being unpleasant?
+* Can code review be as much fun as writing code?
+
+== How much time to spend on code review
+
+How much time should you spend on code review? Not much, and certainly
+less than on testing, but not none either.
+
+As with writing system documentation, a small amount of effort - perhaps
+a few of hours per week - can have a big impact. Additional hours
+quickly suffer from diminishing returns. A thorough code review takes
+more like half an hour than half a day.
+
+From the perspective of a single pull request, ten minutes rather than
+hours are probably enough to discover the important things worth
+improving, and more useful than however much additional time you might
+spend. Besides, effective code review requires more concentration than
+you can keep up for very long.
+
+There’s no rule for an exact amount of time to spend on code review, or
+a maximum, but perhaps there’s a neat rule of thumb waiting to be
+discovered. A good starting point might be to spend a quarter of each
+user story’s development time on review-and-test, and a quarter of the
+review-and-test time on code review. The more important thing is to
+decide whether this is the right amount, and adjust it so that you’re
+getting value for the time you spend.
+
+There is still one way that more review time can be useful: review by a
+second person. Complex logic benefits from review by a domain expert,
+while a different team member may have more input on technical design.
+Even so, it’s probably better to just choose the more suitable reviewer,
+and to leave the other kind of review for the next time the same code
+comes around.
+
+Code review doesn’t need hours at a time or several people because the
+code doesn’t have to be (and won’t be) perfect in one go. Continuous
+incremental improvement is more effective: when applied to
+frequently-changed code the result is that the code that has the most
+maintenance becomes the most maintainable. The most effective code
+review consists of frequent but short focused bursts of concentration
+from a variety of people.

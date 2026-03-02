@@ -1,0 +1,41 @@
+---
+layout: post
+title: Typesafe at 010DEV
+date: 2013-04-03
+author: hilton
+lang: en
+tags:
+  - event
+---
+= Typesafe at 010DEV
+
+:imagesdir: /images/media/2013-04-03-typesafe-at-010dev
+
+At yesterday’s 010DEV developer meet-up, Typesafe and Lunatech presented Play and Akka to a room full of developers.
+
+image:../media/2013-04-03-typesafe-at-010dev/typesafe-at-010dev.jpg[James
+Ward and Nicolas Leroux]
+
+*Photo: James Ward (left) and Nicolas Leroux (right) present Play
+Framework 2.1. Roland Kuhn (far-left) waits to present Akka.*
+
+https://twitter.com/_JamesWard[James Ward] from Typesafe joined us after
+presenting with https://twitter.com/nicolasleroux[Nicolas Leroux]
+(Lunatech) at Devoxx UK and Devoxx FR last week.
+https://twitter.com/rolandkuhn[Roland Kuhn], Akka tech lead at Typesafe,
+travelled from Sweden.
+
+James and Nicolas live-coded a Play framework application that used the
+meetup.com API to select a competition winner from the list of
+attendees. http://www.meetup.com/010DEV/members/68836872/[Robert Bakker]
+won a free place on the
+http://lunatech.com/training/play-2-training[Fast Track to Play with
+Scala] training course at Lunatech on 30-31 May 2013.
+
+Locus Publicus remains a popular choice of venue, with the facilities
+this kind of event needs: a projector, a bar and a great beer selection.
+For this event, Lunatech sponsored the beer.
+
+Although we created http://010dev.nl[010DEV] to be a community of
+Rotterdam-based developers, this event attracted people from further
+afield, including five developers who travelled from Belgium.

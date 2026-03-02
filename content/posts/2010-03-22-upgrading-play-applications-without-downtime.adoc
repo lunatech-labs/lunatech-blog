@@ -1,0 +1,107 @@
+---
+layout: post
+title: Upgrading Play 1.0 applications without downtime
+date: 2010-03-22
+author: pepite
+lang: en
+tags:
+  - playframework
+  - apache
+  - web-applications
+---
+= Upgrading Play 1.0 applications without downtime
+
+You have your Play 1.0 application deployed on production. It is a real
+success and you have loads of users. You are really happy, and because
+Play! is quite fast you do not have any performance issues yet :)
+However, you are receiving feature requests. Being agile developers, you
+implement them quickly, test them in acceptance and you are ready to let
+your users enjoy them. But, your web applications is so successful that
+you do not really want to plan any downtime…
+
+Tough choice: new features to keep your users happy or 100 per cent
+uptime? Well it is quite simple to do both using Play! This is because
+Play! is fully stateless.
+
+My Play! web applications always use a front end proxy. Apache being the
+most popular I will illustrate how to do it with this web server. The
+basic idea is to run two Play! instances of your web application and let
+the front-end proxy load-balance them. In case one is not available, it
+will forward all the requests to the available one.
+
+Let's start our the same Play! application, deployed two times: one on
+port 9999 and one on port 9998.
+
+What I actually did is to copy the my application two times and to edit
+the application.conf in the conf directory to change the port numbers.
+
+For each web application directory:
+
+----
+play start mysuperwebapp
+----
+
+Now, let's configure our Apache web server to have a load balancer.
+
+In Apache, I have the following configuration:
+
+[source,brush:,xml;,gutter:,false]
+----
+<VirtualHost mysuperwebapp.com:80>
+  ServerName mysuperwebapp.com
+
+  <Location /balancer-manager>
+    SetHandler balancer-manager
+
+    Order Deny,Allow
+    Deny from all
+    Allow from .mysuperwebapp.com
+  </Location>
+
+  <Proxy balancer://mycluster>
+    BalancerMember http://localhost:9999
+    BalancerMember http://localhost:9998 status=+H
+  </Proxy>
+
+  <Proxy *>
+    Order Allow,Deny
+    Allow From All
+  </Proxy>
+
+  ProxyPreserveHost On
+  ProxyPass /balancer-manager !
+  ProxyPass / balancer://mycluster/
+  ProxyPassReverse / http://localhost:9999/
+  ProxyPassReverse / http://localhost:9998/
+</VirtualHost>
+----
+
+The important part is `balancer://mycluster`. This declares a load
+balancer. The +H option means that the second Play! application is on
+stand-by. It will take over if the first one fails. This is exactly what
+I want.
+
+Every time I want to upgrade mysuperwebapp, here what I am doing:
+
+----
+play stop mysuperwebapp1
+----
+
+The load-balancer then forwards everything to mysuperwebapp2. In the
+meantime I update mysuperwebapp1. Once I am done:
+
+----
+play start mysuperwebapp1
+----
+
+And I can now safely update mysuperwebapp2 the same way.
+
+Apache also provides a way to view the status of your cluster. Simply
+point your browser to `/balancer-manager` to view the current status of
+your clusters.
+
+Because Play! is completely stateless you do not have to manage sessions
+between the two clusters. You can actually easily scale to more than two
+Play! instances. As we have seen, that is really easy to do.
+
+Happy Play!

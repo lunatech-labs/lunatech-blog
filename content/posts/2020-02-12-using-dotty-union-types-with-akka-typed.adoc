@@ -1,0 +1,283 @@
+---
+layout: post
+title: Using Dotty Union types with Akka Typed
+date: 2020-02-19
+author: eloots
+lang: en
+tags:
+  - dotty
+  - akka
+img: images/media/2020-02-12-using-dotty-union-types-with-akka-typed/background.png
+---
+= Using Dotty Union types with Akka Typed
+
+:imagesdir: /images/media/2020-02-12-using-dotty-union-types-with-akka-typed
+
+== Introduction
+
+I've been using _Akka Typed_ for some time, and when I read the blog article
+titled https://scala-lang.org/2019/12/18/road-to-scala-3.html[*"Scala 2 Roadmap Update - The Road to Scala 3"*]
+on https://scala-lang.org[scala-lang.org], it reminded me of an idea I had when
+I learned about _Union types_ in Dotty. More specifically, in the QA section of
+the article under the _Migrating The Ecosystem_ section, specific instructions
+were given about how to use Scala 2.13 binaries with Dotty source code. With
+that, I had all I needed to start experimenting and to check that my idea was
+sound. If so, the combination of Akka Typed with Dotty would enable an important
+simplification of the way responses to messages are handled in _Akka Typed_
+with Scala 2.
+
+We'll start from a simple actor based application written in Scala 2 that uses
+Akka 2.6.1, and we'll walk through 3 stages:
+
+* Initial Scala 2/Akka 2.6.1 application
+* Make the application run as-is on Dotty/Akka 2.6.1
+* Take advantage of Dotty's Union types to simplify the code
+
+=== A simple sample *_Akka 2.6_*/*_Scala 2_* application
+
+The Scala 2/Akka 2.6.1 application consists of two actors, a `Pinger` and a
+`PingPong` actor. Furthermore, there's a main program that will drive the
+"pinging" process and signal the intent to terminate the program to the `Pinger`
+actor after a preset number of pings. The following figure shows the main
+components of the application and the messages flowing between them.
+
+[#img-PingPongActors]
+.The `PingPong` application
+image::../media/2020-02-12-using-dotty-union-types-with-akka-typed/PingPongActors.png[{in-between-width}]
+
+The fact that the application uses Akka Typed implies a number of things:
+
+* Each actor has a strictly defined protocol, and any code that violates the
+protocol will not compile.
+* Unlike with Akka Classic, there's no implicit `sender()` that can be used to
+respond to the sender of a message. With Akka Typed, we have to explicitly
+send an appropriately typed `ActorRef` as part of a message so that the receiver
+can use it to send a response.
+
+Let's have a look at the protocol of the actors in our code:
+
+[#img-PingPongProtocol]
+.Protocol of `Pinger` and `PingPong` actors
+image::../media/2020-02-12-using-dotty-union-types-with-akka-typed/PingPongProtocol-1.png[{in-between-width}]
+
+As can be seen, the `Pinger` actor "understands" the `SendPing` and
+`StopPingPong` messages while the `PingPong` actor understands the `Ping` message.
+Combining the flow of messages in the application with the protocol definitions,
+we see that we have to solve a problem: the `Pinger` actor needs to "understand"
+the response message from the `PingPong` actor. Let's have a look at the code of
+the protocol definition of both actors:
+
+[source,scala,linenums]
+----
+object PingPong {
+
+  sealed trait Command
+  final case class Ping(replyTo: ActorRef[Response]) extends Command
+
+  sealed trait Response
+  case object Pong extends Response
+
+  ...
+}
+----
+
+
+[source,scala,linenums]
+----
+object Pinger {
+
+  sealed trait Command
+  case object SendPing extends Command
+  case object StopPingPong extends Command
+
+  ...
+}
+----
+
+Obviously, there's something missing in the `Pinger` protocol definition: it has
+to provide a way to understand the response from the `PingPong` actor. We
+somehow need to extend the `Command` ADT to achieve this. In Scala 2 and Akka
+2.6 this is achieved by using _message adapters_.
+
+The following figure shows the updated protocol definition.
+
+[#img-PingPongUpdatedProtocol]
+.Full protocol of `Pinger` and `PingPong` actors
+image::../media/2020-02-12-using-dotty-union-types-with-akka-typed/PingPongProtocol-2.png[{in-between-width}]
+
+
+The corresponding code looks as follows:
+
+[source,scala,linenums]
+----
+object Pinger {
+
+  sealed trait Command
+  case object SendPing extends Command
+  case object StopPingPong extends Command
+  final case class WrappedPongResponse(pong: PingPong.Response)
+    extends Command <1>
+
+  def apply(pingPong: ActorRef[PingPong.Ping]): Behavior[Command] =
+    Behaviors.setup { context =>
+      val pongResponseMapper: ActorRef[PingPong.Response] =
+        context.messageAdapter(response => WrappedPongResponse(response)) <2>
+
+      Behaviors.receiveMessage {
+        case StopPingPong =>
+          context.log.info(s"End of ping-pong game")
+          context.system.terminate()
+          Behaviors.stopped
+        case SendPing =>
+          pingPong ! PingPong.Ping(replyTo = pongResponseMapper) <3>
+          Behaviors.same
+        case WrappedPongResponse(response) => <4>
+          context.log.info(s"Hey: I just received a $response !!!")
+          Behaviors.same
+      }
+  }
+}
+----
+<1> Let's explain this step-by-step: to start, we extend the `Command` ADT by adding a new message that wraps the response.
+<2> Next, we use the `messageAdaptor` method on the `ActorContext` to create a message adapter.
+<3> The type of the latter is an `ActorRef[PingPong.Response]`. The message adapter is sent along to the `PingPong` actor as a field in the `Ping` message.
+<4> Finally, we receive the wrapped response.
+
+I think it's fair to state that this feels a bit boilerplate-ish and it
+obfuscates the simple operation of receiving a message from another actor. We'll
+see how Dotty can simplify this in the last section of this article.
+
+The full code and instructions about how to run this specific step can be found
+on https://github.com/lightbend/Pi-Akka-Cluster[this repository].
+
+=== Running the application using *_Dotty_* instead of *_Scala 2_*
+
+If we want to explore features unique to Dotty, which will become Scala 3 near
+the end of 2020, with the application described in the previous paragraph, we
+first need a way to run an application that uses libraries such as the Akka
+2.16.1 library that was built with Scala 2.13. The Dotty folks describe how to
+do exactly this in https://github.com/lampepfl/dotty-example-project#getting-your-project-to-compile-with-dotty[this paragraph]
+of the main README of the https://github.com/lampepfl/dotty-example-project#getting-your-project-to-compile-with-dotty[Dotty Example Project].
+
+We just need to make a few changes to our sbt build definition and load the
+Dotty sbt plugin:
+
+[source,scala,linenums]
+----
+$ cat build.sbt
+val dottyVersion = "0.22.0-RC1"
+
+lazy val root = project
+  .in(file("."))
+  .settings(
+    name := "dotty-simple",
+    version := "0.1.0",
+
+    //scalaVersion := dottyLatestNightlyBuild.get,
+    scalaVersion := dottyVersion,
+
+    libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.2.3",
+
+    libraryDependencies ++= Seq(
+       "com.typesafe.akka" %% "akka-actor-typed" % "2.6.1",
+       "com.typesafe.akka" %% "akka-slf4j"       % "2.6.1",
+       "org.scalatest"     %% "scalatest"        % "3.1.0" % "test",
+    ).map(_.withDottyCompat(scalaVersion.value))
+  )
+----
+
+[source,bash]
+----
+$ cat project/plugins.sbt
+addSbtPlugin("ch.epfl.lamp" % "sbt-dotty" % "0.4.0")
+----
+
+So, not much going on here apart from applying
+`withDottyCompat(scalaVersion.value))` to all cross-built libraries.
+
+We're now ready for the final step in our experiment!
+
+=== Using Dotty's Union types with Akka Typed
+
+Dotty introduces two new types for us to use, _Intersection_ and _Union types_.
+In a certain way, Intersection types are the counterpart of Union types. Let's
+focus on the latter for this article.
+
+From the Dotty reference documentation, we find the following definition for
+Union types:
+
+[#img-DottyUnionTypes]
+image::../media/2020-02-12-using-dotty-union-types-with-akka-typed/Union types - definition.png[{in-between-width},align='center']
+
+Interesting... and this brings us to my original idea about using Union types
+together with Akka Typed: Union types give us the possibility to add the types
+of the responses from other actors to an actor's `Command` ADT!
+
+Here's how the `Pinger` actor's protocol looks now:
+
+[#img-PingPongProtocolUnionTypes]
+.Full protocol of `Pinger` and `PingPong` actors with Union types applied
+image::../media/2020-02-12-using-dotty-union-types-with-akka-typed/PingPongProtocol-3.png[{in-between-width}]
+
+The `Pinger` actor's implementation now looks as this:
+
+[source,scala,linenums]
+----
+object Pinger {
+
+sealed trait Command
+  case object SendPing extends Command
+  case object StopPingPong extends Command
+
+  type CommandIncludingResponses = Command | PingPong.Response <1>
+
+  def apply(pingPong: ActorRef[PingPong.Ping]):
+                               Behavior[CommandIncludingResponses] = <2>
+    Behaviors.setup { context =>
+
+      Behaviors.receiveMessage {
+        case StopPingPong =>
+          context.log.info(s"End of ping-pong game")
+          context.system.terminate()
+          Behaviors.stopped
+        case SendPing =>
+          pingPong ! PingPong.Ping(replyTo = context.self)
+          Behaviors.same
+        case response : PingPong.Response => <3>
+          context.log.info(s"Hey: I just received a $response !!!")
+          Behaviors.same
+      }
+  }
+}
+----
+<1> We introduce a type alias for convenience.
+<2> It is a Union of the original `Command` ADT and the type of the responses we want to be able process. We use this Union type when we describe our `Behavior`.
+<3> With this in place, we can perform a pattern match of `PingPong.Response` (which, in essence is a`Pong` message).
+
+And that's it! It doesn't get more concise!
+
+=== Conclusions
+
+In this article we have shown two important things about Dotty:
+
+1. We can use existing Scala 2.13 libraries as-is in combination with Dotty
+source code. This is a major convenience that can not be overestimated!
+2. Dotty Union types can help to eliminate all the boilerplate that is needed
+to handle responses from other actors in a given actor when using Scala 2.
+
+Based on what I've read and experimented with, it's obvious that Dotty brings a
+lot of features that enable writing more concise and clearer code. To name just
+a few:
+
+* Top level definitions
+* Enums
+* The completely overhauled contextual abstractions system (aka implicits in Scala 2)
+
+Stay tuned for more on this.
+
+This is all very exciting and I can't wait till the day Scala 3.0.0 hits Maven
+Central!
+
+==== Article updates
+
+* 2020-02-19: fix mismatch in message name of `Pinger` protocol

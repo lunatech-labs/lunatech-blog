@@ -1,0 +1,137 @@
+---
+layout: post
+title: The Scala List extractor demystified
+date: 2011-11-25
+author: fcanedo
+lang: en
+tags:
+  - scala
+---
+= The Scala List extractor demystified
+
+This article explains
+and demystifies Scala list extraction, which is a technique for
+extracting lists from larger lists.
+
+In Scala code, you'll often come across list extraction, as in, for
+example, a pattern in a variable definition:
+
+[source,brush:,scala;,gutter:,false]
+----
+scala> val head :: tail = List(1,2,3) // <--
+head: Int = 1
+tail: List[Int] = List(2, 3)
+----
+
+or the second pattern (case) in this simple implementation of map:
+
+[source,brush:,scala;,gutter:,false]
+----
+def map[A, B](list: List[A])(func: A => B): List[B] = list match {
+  case Nil => Nil
+  case head :: tail => func(head) :: map(tail)(func) // <--
+}
+----
+
+What's happening is that we're deconstructing a list into its head and
+tail components using the ‘`head :: tail`’ pattern; in both cases
+‘`head`’ becomes the first element of the list and ‘`tail`’ becomes a
+list that contains the remaining elements of the list. In the first
+example the head is the `Int` with value 1 and the tail a list of `Int`
+with the values 2 and 3 or rather, the list's first element and the
+rest.
+
+You might be asking yourself ‘_what's going on here, is this a trick in
+the language?_’ It's not, it's a language feature that everyone can use.
+
+[[TheScalaListextractordemystified-Howitworks]]
+== How it works
+
+You can figure out what's going on from the source of the collections
+library. But first you need to know the following things:
+
+* ‘`head :: tail`’ in a pattern, is the infix version of
+‘`::(head, tail)`’
+* a pattern like ‘`::(head, tail)`’ results in a call to
+‘`::.unapply(selector)`’, where ‘selector’ is the left-hand-side of a
+match expression (‘`list`’ before ‘`match`’ in the second example) or
+the right-hand-side of a variable definition (‘`List(1,2,3)`’ in the
+first). `unapply` is supposed to return an `Option` of tuple whose
+values are assigned to ‘`head`’ and ‘`tail`’ respectively
+
+`unapply` (like `apply`) is one of those methods that the Scala compiler
+will use without the method being named and is used specifically for
+deconstructing objects in pattern matching. This means that there must
+be a `::` object defined somewhere with an `unapply` method, whose
+definition is:
+
+[source,brush:,scala;,gutter:,false]
+----
+object :: {
+  def unapply[A](value: List[A]): Option[(A, List[A])] = { … }
+  …
+}
+----
+
+There is no such thing. So, what's going on here?
+
+[[TheScalaListextractordemystified-Exploringcaseclasses]]
+== Exploring case classes
+
+It turns out that there's a *case* class called
+http://www.scala-lang.org/api/2.9.1/scala/collection/immutable/$colon$colon.html[::]
+(in the `scala.collection.immutable` package) that extends `List`. One
+of the many neat things that case classes give you, is a synthetic
+companion object with an `unapply` method that can deconstruct instances
+of that type, for free.
+
+This means that any case class automatically gets everything you need to
+be able to both construct and deconstruct an instance. Without having to
+type any boilerplate. For example, you could do the following in the
+http://www.scala-lang.org/node/2097[Scala REPL]:
+
+[source,brush:,scala;,gutter:,false]
+----
+scala> case class Person(handle: String, name: String) // define the class
+defined class Person
+
+scala> val person = Person("paco", "Francisco") // construct an instance; look mum, no ‘new’
+person: Person = Person(paco,Francisco)
+
+scala> val Person(handle, name) = person // deconstruct it
+handle: String = paco // a new val with the handle from the person object
+name: String = Francisco // and a new val with the name
+
+scala> val handle2 Person name2 = person // and again with infix notation, which looks rather silly in this case
+handle2: String = paco
+name2: String = Francisco
+----
+
+There, with one line of code, we've created a `Person` class that has a
+synthetic unapply method that can deconstruct a `Person` instance into
+its components. Just like a `List`.
+
+[[TheScalaListextractordemystified-Mysterysolved]]
+== Mystery solved
+
+Lists can be deconstructed with `::` because there is an appropriate
+case class for that. ‘_Hold on,_’ you say, ‘_doesn't this mean that
+deconstructing something with `::` will only work with instances of
+`::`?_’ Well, you're right, if you can deconstruct `List(…)` with `::`,
+that must mean that a `List` is, somehow, an instance of `::`.
+
+Looking at the source code of the collections library, you'll see that
+all the methods that instantiate a ‘`List`’, actually return an instance
+of `::`. It's just that `::`'s toString method insists that it's a
+`List`, cheeky.
+
+[[TheScalaListextractordemystified-Conclusion]]
+== Conclusion
+
+Scala gives you features that help you (and library makers) to build
+powerful and concise APIs. Although I wouldn't recommend that everyone
+start using punctuation characters to name their classes. Learn more
+from http://www.artima.com/shop/programming_in_scala[_Programming in
+Scala_] chapter _Case Classes and Pattern Matching_.
+
+

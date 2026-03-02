@@ -1,0 +1,40 @@
+---
+layout: post
+title: Eximion launches with first games type
+date: 2007-06-21
+author: Michael Pentowski
+lang: en
+tags:
+  - ventures
+---
+= Eximion launches with first games type
+
+Who says gaming is all fun? Well,
+http://eximion.com/[Eximion], one of our portfolio companies does.
+Those who thought Holland only produced tulips and wooden shoes should
+think again! Out of their converted student home, Eximion from Eindhoven
+in the Netherlands, have worked for two years on their 'new style' web
+game platform. Last week the covers were pulled off this labour of love
+… the http://corporate.eximion.com/[Kalydo platform]. 
+
+The 'Kalydo platform' is a technology package which enables the
+creation, deployment and usage of advanced 3D web applications, such as
+games. Pivotal to the 'Kalydo Platform' is that everything runs directly
+through your web browser with unsurpassed ease and it's absolutely free
+to use. That is of course unless you prefer playing even higher quality
+games with extra features, in which case they do ask a small payment.
+The platform will be opened to third party developers who would like to
+develop their own games using Eximions' technology in the coming months.
+
+To officially open the platform, they invited the
+http://eximion.com/page/thread/28[Burgemeester (Mayor) of Eindhoven] to
+kill some aliens. Apparently, the Mayor can hold his own in a hostile 3D
+environment!
+
+We recommend you have a look at the games and experience for yourself
+the next generation of casual web gaming. There is lots of work to do
+still for the folks at Eximion, but the feedback they have been getting
+is very positive. More games and improvements will be rolling out fast
+and furious. The efforts have not gone unnoticed, they recently made the
+list of the http://www.bizz.nl/1605-de-25-innovatietoppers.html[top 25
+innovative young companies in the Netherlands].

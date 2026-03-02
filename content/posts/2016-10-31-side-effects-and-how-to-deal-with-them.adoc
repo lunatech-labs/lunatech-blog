@@ -1,0 +1,193 @@
+---
+layout: post
+title: "Side Effects and How To Deal With Them The Cool Way, Part 2 - Monads Introduction"
+date: 2016-10-31
+author: FrancoAra
+lang: en
+tags:
+  - fp
+  - scala
+  - monad
+img: images/media/2016-10-31-side-effects-and-how-to-deal-with-them/background.png
+---
+= Side Effects and How To Deal With Them The Cool Way, Part 2 - Monads Introduction
+
+:imagesdir: /images/media/2016-10-31-side-effects-and-how-to-deal-with-them
+
+In part 1 of this series we learnt how to decouple the code that deals with side effects from our pure functions by using functors (Any type constructor which implements the map function). Now lets see how we can extend our functors so that we can sequence computations that each fall under the indeterminism of side effects.
+
+== Function Composition And a Slight Issue
+
+Remember that we mentioned that the `Option[A]` type in the standard library of scala is a functor, that actually handles the side effect of possible missing values. Now lets create two pure functions to compute integers:
+
+[source,scala]
+----
+val f: Int => Int = 
+	x => x + 5
+
+val g: Int => Boolean =
+	x => x > 10
+
+val gof: Int => Boolean = g compose f
+
+gof(6)
+> true
+----
+
+
+The essence of functional programming is doing this, create programs from composing small functions into larger functions, which provide us with the type safety and the determinism of pure functions. but what happens when we have functions that require to handle a side effect and return the appropriate type constructor?
+
+[source,scala]
+----
+val f: Int => Int = 
+	x => x + 5
+
+val filter10: Int => Option[Int] =
+	x => if (x > 10) Some(x) else None
+
+val gof: Int => Boolean = f compose filter10
+> error: type mismatch;
+ found   : Int => Option[Int]
+ required: ? => Int
+       f compose filter
+----
+
+On this case our `map` function from our functor can help us:
+
+[source,scala]
+----
+val sumIfMoreThan10: Int => Option[Int] =
+	x => filter10(x).map(f)
+
+sumIfMoreThan10(15)
+> Option[Int] = Some(20)
+
+sumIfMoreThan10(9)
+> Option[Int] = None
+----
+
+Great the `map` function is allowing a type of function composition, but now what happens when we want to compose more functions that return our functor?
+
+[source,scala]
+----
+val f: Int => Int = 
+	x => x + 5
+
+val filter10: Int => Option[Int] =
+	x => if (x > 10) Some(x) else None
+
+val sumIfMoreThan10: Int => Option[Int] =
+	x => filter10(x).map(f)
+
+val sumIfPositive: Int => Option[Int] =
+	x => if (x > 0) Some(f(x)) else None
+
+val total: Int => Option[Int] = 
+	x => sumIfPositive(6).map(sumIfMoreThan10)
+> error: type mismatch;
+ found   : Int => Option[Int]
+ required: Int => Int
+       val total: Int => Option[Int] = 
+	       x => sumIfPositive(6).map(sumIfMoreThan10)
+
+----
+
+Oh no, we have a problem, we cannot compose side effects only using `map`, we need a new mechanism for combination. Lets do it then! lets introduce a function similar to `map` but called `flatMap`! (Because it will 'flatten' the structure between two functors.)
+
+== Monads! The Combinator We Were Looking For
+
+[source,scala]
+----
+trait Option[+A] {
+	def value: A
+
+	def isDefined: Boolean
+
+	def map[B](f: A=>B): Option[B] =
+	    flatMap(x => Some(f(x)))
+
+	def flatMap[B](f: A=>Option[B]): Option[B] =
+		if(isDefined) f(value) else None
+}
+----
+
+As you may have already guessed, the scala library already implements this function, but lets analyse it any way: `flatMap` is very similar to our last definition to `map`, but since the provided effectful function `f` is already giving us an `Option` then we do not need to wrap it. Also notice that we redefined `map` in terms of our new `flatMap`, clever right?
+
+Now this new mechanism will allow us to combine effectful functions! (functions that return a functor instead of a pure value).
+
+[source,scala]
+----
+val f: Int => Int = 
+	x => x + 5
+
+val filter10: Int => Option[Int] =
+	x => if (x > 10) Some(x) else None
+
+val sumIfMoreThan10: Int => Option[Int] =
+	x => filter10(x).map(f)
+
+val sumIfPositive: Int => Option[Int] =
+	x => if (x > 0) Some(f(x)) else None
+
+val total: Int => Option[Int] = 
+	x => sumIfPositive(x).flatMap(sumIfMoreThan10)
+
+total(6)
+> Option[Int] = Some(16)
+
+total(-1)
+> Option[Int] = None
+
+---- 
+
+Amazing right! And you just have been introduced to the concept of a monad! Any type constructor that supports the `flatMap` function is known as a monad. `flatMap` and `map` (a monad) allow us to not just decouple the side effect handling code from our functions, but also gives us the mechanism to compose our functions (effectful or pure) to make bigger programs that handle side effects perfectly and are more maintainable because we can split the program into smaller peaces which are easy to combine.
+
+== More About Monads
+
+On the last post we created a type class to generalise the concept of a functor, lets do the same for a monad. Notice that we implemented `map` in terms of `flatMap`, which means that every type constructor with `flatMap` can automatically have a `map` function, hence every Monad is also a Functor!
+
+To further formalise the definition of a monad we need also a function called `pure` (which is actually the signature of an Applicative, but we can view Applicatives in another post [every Monad is an Applicative, and every Applicative is a Functor]). The `pure` function "lifts" a pure value into the context of a monad:
+
+[source,scala]
+----
+trait Monad[F[_]] extends Functor[F] {
+	def pure[A](a: A): F[A]
+
+	def map[A, B](M: F[A])(f: A => B): F[B] =
+		flatMap(M)(x => pure(f(x)))
+
+	def flatMap[A, B](M: F[A])(f: A => F[B]): F[B]
+}
+----
+
+
+And to really finalise the formalisation of a Monad one must take in consideration the Monad laws, which are mathematical properties that every instance of a Monad must comply with if we want to really maintain the properties of composability of a Monad:
+
+=== Left identity:	
+
+If we lift a pure value, and then flatMap with a monadic function (a function with the signature `A => F[A]` where `A` is a pure value and `F[\_]` a Monad type constructor) then that must be equal to just passing the pure value through the monadic function:
+
+[source,scala]
+----
+pure(a).flatMap(f) === f(a)
+----
+
+=== Right identity:	
+
+If we take a monadic value `m` (a pure value that has been lifted to the context of a monad, has signature `M[A]`) and flatMap the `pure` function from it, that must be equal to the original `m`:
+
+[source,scala]
+----
+m.flatMap(pure) === m
+----
+
+=== Associativity:	
+
+Let `m` be a monadic value, and `f` and `g` monadic functions, then it must be that flat mapping `f` and then `g` be equal to composing `f` and `g` first (using flatMap) and then using the resulting monadic function to flatMap from `m`:
+
+[source,scala]
+----
+m.flatMap(f).flatMap(g) === m.flatMap(\x => f(x).flatMap g)
+----
+
+

@@ -1,0 +1,101 @@
+---
+layout: post
+title: Processing EDIFACT messages with Smooks
+date: 2011-12-30
+author: ludofischer
+lang: en
+tags:
+  - java
+---
+= Processing EDIFACT messages with Smooks
+
+http://www.smooks.org[Smooks] is a
+set of tools written in the Java programming language to assist you in
+parsing a variety of formats such as XML, CSV, fixed width formats and
+making the information accessible from your Java code. My interest in
+Smooks was related to the fact that it is one of the few open source
+projects which offer facilities for accessing data in EDI formats. In
+fact, Smooks might be the only actively-maintained open source project
+that offers this.
+
+In this article, I am going to share the results of my investigation on
+using Smooks to process EDI data, and in particular messages that follow
+the UN/EDIFACT standards.
+
+== What is UN/EDIFACT anyway?
+
+EDI generally refers to a set of standards for exchanging electronic
+messages. The two main standards are the North American ANSI X12 and
+UN/EDIFACT, which is being maintained by the United Nations. UN/EDIFACT
+messages generally contain the information necessary to perform such
+business tasks as delivering a shipment or placing an order, and are
+heavily used in the logistics industry, which is one of Lunatech’s
+fields of expertise. In fact, Lunatech has developed over the years its
+own set of tools for EDIFACT processing, and we were interested in
+comparing our home-grown solutions with what others have done.
+
+
+== The Smooks processing model
+
+Usually, Smooks maps its input onto an XML stream, which can then be
+processed with the approaches familiar from the XML world. In addition
+to that, because Smooks limits the portion of the document that is kep
+in memory at any one time, Smooks can offer increased performance
+compared to, for example, a traditional XSLT processor.
+
+In the case of an UN/EDIFACT document, Smooks offers two solutions. Both
+require specifying a mapping from the EDI message segments to SAX events
+using a custom XML format (see the official Smooks documentation for
+http://www.smooks.org/mediawiki/index.php?title=V1.5:edi-to-java[an
+example of the syntax]). Then you can either process the SAX events in
+your customary way, or use the ECJ, the EDI Java compiler supplied by
+Smooks, to generate Java classes that allow you to access the content of
+the EDI messages as fields. Smooks also provides a complete set of
+generated Java classes for the whole of the UN/EDIFACT specification.
+
+
+== Evaluation process
+
+My evaluation involved attempting to perform some of the common EDIFACT
+processing tasks using Smooks. I wanted to read EDIFACT messages, but
+also to write them and modify their content. In certain cases, I wanted
+to introduce some additional validation rules beyond what is defined in
+the standard. I used both hand written mapping files and the generated
+classes supplied by Smooks.
+
+In general, Smooks works as advertised. I was able to access EDIFACT
+documents as an XML stream, and also use the generated Java classes to
+manipulate the information. Nevertheless, there were a couple of
+limitations.
+
+One problem was that the investment in designing the mapping EDIFACT to
+XML mapping was not sufficiently repaid. Most of all because Smooks only
+offers a solution for processing EDI input, and you are essentially left
+on your own if you need to output EDI documents. For instance, I could
+not find a way to reuse the mapping file to perform validation of the
+output.
+
+On the other hand, using the generated Java classes, I could produce
+valid EDIFACT output, but I could not specify any extra validation
+rules. In addition, these classes are a bit unwieldly to use, as
+generated code is wont to be, and you are forced to use a different
+class for every EDIFACT message type, even though the syntax and the
+structure of the different messages are very similar.
+
+== Conclusion
+
+I feel that Smooks EDIFACT processing is a bit too rigid for our
+customer’s needs and we will probably stick to our own solution for the
+time being.
+
+The goal of EDI processing is probably best achieved at a different
+abstraction level than Smooks’. In Smooks, every configuration you
+define or every class you generate targets a single message type. We are
+looking to have a set of tools that work on the common features of the
+different EDI message formats, and can be combined to flexibly handle
+both input and output.
+
+Nevertheless, Smooks is the only game in town at the moment if you are
+looking for open source, and it might be good enough if your worklow is
+limited to ingesting large quantities of EDI messages, without much
+further processing.

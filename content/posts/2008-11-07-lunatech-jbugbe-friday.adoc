@@ -1,0 +1,27 @@
+---
+layout: post
+title: Lunatech at the JBug.be this Friday
+date: 2008-11-07
+author: pepite
+lang: en
+tags:
+  - java
+  - event
+  - jbug
+  - belgium
+---
+= Lunatech at the JBug.be this Friday
+
+This Friday, Peter Hilton and Nicolas Leroux, senior software
+developers at Lunatech Research, will present \"Playing with Seam and
+the latest JEE technologies\". The presentation aims to show you the
+latest development methods using Java EE, the JBoss Seam framework,
+Hibernate Validation, Hibernate Search, JAXB, RESTful web services,
+etc.
+
+Kris will also give a presentation about Drools and Alexey Loubyansky
+about the new features of JBoss AS 5.
+
+The conference is organized by the JBoss User Group Belgium. More
+information is available http://jbug.be[here]. We hope to see you there
+;).

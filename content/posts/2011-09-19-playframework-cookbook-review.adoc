@@ -1,0 +1,269 @@
+---
+layout: post
+title: Review - Play Framework Cookbook
+date: 2011-09-19
+author: hilton
+lang: en
+tags:
+  - book
+  - playframework
+---
+= Review - Play Framework Cookbook
+
+:imagesdir: /images/media/2011-09-19-playframework-cookbook-review
+
+This article is
+a review of http://www.packtpub.com/play-framework-cookbook/book[Play Framework
+Cookbook] - a new
+book about the http://www.playframework.org/[Play framework] from
+http://www.packtpub.com/[Packt Publishing] under the Packt Open Source
+brand.
+
+*This book goes way beyond the Play framework documentation, and
+includes useful practical techniques and source code for Play developers
+at every level. Every Play developer should have a copy of this book.*
+
+== Introduction
+
+http://www.packtpub.com/play-framework-cookbook/book[image:play-framework-cookbook.png[Play
+Framework Cookbook]]__Play Framework Cookbook__ is a significant book,
+because it is the first Play framework book in print from a major
+publisher, following the http://the-play-book.co.uk/[Introducing the
+Play! Framework] e-book (also available as a
+http://www.lulu.com/product/paperback/introducing-the-play-framework/14926666[paperback
+from Lulu]. Packt describe themselves as an on-demand publisher, and
+have beat the other major publishers to market with this book, as they
+did with their
+http://www.packtpub.com/jboss-drools-business-rules/book[Drools]
+http://www.packtpub.com/drools-jboss-rules-50-developers-guide/book[books]
+two years ago. Perhaps
+http://hilton.org.uk/computer_books.phtml[O’Reilly] is no longer
+http://macdevcenter.com/pub/a/mac/2002/05/14/oreilly_wwdc_keynote.html[watching
+the alpha geeks]
+(http://video.google.com/videoplay?docid=-3436067109364123518[video]
+from 9:15).
+
+This is a ‘cookbook’, split into ‘recipes’ that each show you how to do
+one thing, and include the code you need to do it yourself. This skips
+the very basics, since you don't buy a book for that, and lets the
+concepts and discussion remain second to simply getting things done.
+
+This kind of book lends itself well to the cookbook format, which avoids
+attempting to cover a range of topics in equal detail, in the way that a
+manual does. Instead, the book contains task-oriented tutorial-style
+content, which is a useful way to structure a book about practical
+techniques. This is not a reference that explains every detail of Play.
+
+== Overview
+
+Although this is not strictly necessary for the cookbook format, this
+book is split into seven chapters.
+
+. Basics of the Play Framework
+. Using Controllers
+. Leveraging Modules
+. Creating and Using APIs
+. Introduction to Writing Modules
+. Practical Module Examples
+. Running Into Production
+. Appendix: Further Information About the Play Framework
+
+Many computer books suffer from too much introductory content, with long
+descriptions of how to do the easy things, providing a more basic
+description of what is already included in the manual. Fortunately,
+getting started and using Play by itself is only a minority of the book:
+only the first chapter includes basic recipes for tasks that are covered
+more briefly in the Play documentation.
+
+This book is mostly about how to use Play with other technologies:
+integration with components from broader web and enterprise
+architectures. This is where a book can go further than the Play
+framework documentation, and where this particular book does.
+
+Once you start to understand the Play framework better, it actually
+makes a lot of sense that most of the chapters are about modules. This
+is because the ideally-structured Play application only contains domain
+specific data and logic, with functionality that is not domain-specific
+moved into modules. This book covers topics such as persistence,
+caching, search, reporting, security and third-party API integration:
+these are all cross-domain concerns that can be implemented in modules.
+
+== Contents
+
+The book starts well, with a foreword that sets the scene with two key
+observations. First, when you build web applications, it is better to
+embrace standard web technologies instead of hiding HTTP features under
+an abstraction layer. Second, a lot of software developers like the Java
+language and the Java Virtual Machine (JVM) run-time environment, which
+has a lot to offer compared to PHP and Ruby on Rails, for example.
+
+Recipes progress to advanced topics, so Play developers at all levels
+can learn how to do more with the framework.
+
+[[ch1]]
+=== Chapter 1 - basics
+
+The first chapter covers the basics of getting started with the Play
+framework. This is pretty much all covered in the Play documentation’s
+tutorial, which makes this the weakest chapter in the book, but that
+does not make the recipes any less useful. What this chapter does better
+than the Play documentation is to identify a subset of tasks that you
+need to know how to do to be productive with Play, before moving onto
+more advanced topics.
+
+[[ch2]]
+=== Chapter 2 - controllers
+
+Chapter 2 focuses on keeping controllers clean, with custom code and
+Play modules for additional features. There are some great examples of
+how to do this, such as the PDF example which shows you how to implement
+a custom renderer to avoid adding custom render logic to your
+controllers.
+
+This is perhaps the most important chapter in the book, because the
+controller layer is where the benefits of Play’s simple but flexible and
+powerful approach are most apparent: HTTP routing, HTTP request
+parameter binding, input validation and generating other response types.
+These are all covered by recipes in this chapter.
+
+The odd one out is the annotation-based routing recipe, since this uses
+a third-party module (developed by my colleague,
+link:/author/nicolas-leroux[Nicolas Leroux]) instead of Play framework
+core functionality. This is also the only recipe that is an alternative
+solution to a task covered by a previous recipe, in this case the
+‘Defining routes’ recipe in the previous chapter.
+
+[[ch3]]
+=== Chapter 3 - using modules
+
+Chapter 3 - the shortest chapter in the book - is something of an
+anomaly. This chapter contains recipes that demonstrate several
+third-party Play modules. This is certainly useful, and gives a good
+insight into how modules can provide powerful extensions to Play’s core
+functionality.
+
+However, it does seem a little odd to provide recipes for just five
+modules from the 95 http://www.playframework.org/modules[Play framework
+modules] available at the time of writing, because a cookbook for how to
+use the many modules is worth a whole book by itself, especially since
+many of the modules do not have extensive documentation.
+
+In any case, it is useful to see a few examples of the available
+modules, to prompt further investigation of the Play module repository.
+
+[[ch4]]
+=== Chapter 4 - using third-party APIs
+
+Chapter 4 follows on from previous chapters by extending the approach
+used for writing controllers and using modules to recipes that cover
+integration with third-party APIs. This is an important part of building
+a modern web application, and this chapter does a good job of picking
+recipes that demonstrate the different features that Play provides for
+this: using tags to modularise view template fragments, making web
+service requests to external services, mapping JSON and XML data,
+asynchronous requests and caching.
+
+The recipes in this chapter make this all seem easy, which it is, even
+though these would normally be fairly advanced web application
+development topics.
+
+[[ch5]]
+=== Chapter 5 - writing modules
+
+Chapter 5 demystifies the business of writing Play modules, which
+isolate application functionality and make it available to other
+applications. This is another very useful set of recipes, because when
+you are getting started with Play it can take a while to get into the
+habit of modularising your Play applications. An explanation of how to
+do it is not nearly as helpful as examples that show you how.
+
+This chapter introduces more advanced techniques: as plug-ins, events,
+Python commands, using a service interface to prevent a module depending
+on your application, and using bytecode enhancement to allow a module to
+modify application code at run-time.
+
+[[ch6]]
+=== Chapter 6 - module examples
+
+The third chapter about modules combines the ideas from the previous two
+chapters by showing how Play modules can integrate third-party libraries
+with Play’s APIs so you can use them as if they were built-in to Play as
+core functionality. These recipes include model class enhancement to use
+a non-JPA persistence framework or add full-text search functionality,
+integrating Play plug-in messages with JMS and replacing the distributed
+cache implementation.
+
+This chapter’s recipes show you how accessible Play makes this kind of
+advanced integration, with examples that you can adapt. It is only a
+shame that there is no example of replacing Play’s Groovy templates with
+an alternative template engine, to expand the demonstration of how much
+of what Play provides is pluggable.
+
+[[ch7]]
+=== Chapter 7 - running in production
+
+The last chapter is the most promising, because continuous integration
+and production deployment are tasks that edge towards the black arts of
+devops and system administration. These are perhaps the most practical
+and useful recipes, because they cover necessary tasks that software
+developers often lack specialist skills for. This covers a collection of
+tools including Jenkins, Apache, Nginx, Lighttpd, as well as techniques
+such as virtual host and SSL configuration.
+
+However, the description of Play application deployment is tantalisingly
+incomplete. Play currently lacks a standard file distribution and server
+deployment model, such as the cross-platform WAR deployment supported by
+Java EE application servers. As with the previous chapter, although the
+scope of a book like this always has to be limited, it would still have
+been nice to see platform-specific packaging and deployment instructions
+for platforms like Debian and Red Hat linux.
+
+[[appendix]]
+=== Appendix - links to more information
+
+The appendix is a collection of links to several other modules and
+sources of information about the Play framework. It’s awesome. I would
+say that, though, because it includes a link to the
+http://www.lunatech-research.com/[Lunatech Research web site], where I
+have published several Play articles, and a list of Twitter accounts,
+including my own as well as the other Play committers’.
+
+== Criticisms
+
+Although this book is well-written and contains relevant content, the
+layout and typography could certainly be better. The biggest problem is
+that the code samples are all set in a Courier typeface that is too
+large, so that lines wrap randomly, made worse by the random number of
+spaces used to indent code blocks. There are much better monospace
+typefaces for use in print. The headings are also bizarrely ugly.
+
+Occasionally the structure of the recipes themselves could be improved.
+Some of the recipes describe concepts without doing a good job of having
+a clearly-identified task. For example, ‘Understanding session
+management’ is no more of a recipe than ‘understanding kitchen hygiene’
+would be in a conventional cook book; ‘Sticky Chocolate Cake’ - that is
+what I call a recipe.
+
+== Conclusion
+
+The bottom line for a computer book is the combination of the relevance,
+depth and level of the technical content. This is where _Play Framework
+Cookbook_ delivers, and this is why it deserves its place on the
+bookshelf, be it physical or electronic. Although there is room for
+improvement, all of the other possible (possibly better) Play framework
+books fail on account of not having been published yet. There is room
+for more books on this subject, so perhaps we shall see the following
+hypothetical titles on the shelves in the future.
+
+* _Learning the Play Framework_ - a gentler introduction that does not
+assume Java knowledge.
+* _Building web applications with Play and Scala_ - because not everyone
+uses Java on the JVM any more.
+* _Play Modules Cookbook_ - because there are more Play modules than
+there are recipes in _Play Framework Cookbook_.
+* _Programming Play 2.0_ - because http://www.playframework.org/2.0[Play
+2.0] will introduce significant changes +
+(*Update: we decided to fix this ourselves and write
+http://www.lunatech-research.com/books[our own books about Play 2]*)
+
+Meanwhile, every Play developer should read _Play Framework Cookbook_.

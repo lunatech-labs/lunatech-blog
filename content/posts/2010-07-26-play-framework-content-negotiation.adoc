@@ -1,0 +1,207 @@
+---
+layout: post
+title: Play framework 1.0 content negotiation
+date: 2010-07-26
+author: PeterHilton
+lang: en
+tags:
+  - playframework
+  - java
+---
+= Play framework 1.0 content negotiation
+
+One thing that the http://www.playframework.org/[Play
+framework] 1.0 has in common with other
+RESTful architectures is the direct use of HTTP functionality, instead
+of trying to hide HTTP or put an abstraction layer on top of it. This
+article shows you how to use HTTP content negotiation in a Play
+framework web application.
+
+[[Contentnegotiation]]
+== Content negotiation
+
+http://en.wikipedia.org/wiki/Content_negotiation[Content negotiation] is
+an HTTP feature that allows an HTTP server to serve different
+http://en.wikipedia.org/wiki/Internet_media_type[media types] for the
+same URL, according to which media types are requested by the HTTP
+client. The client specifies acceptable content types using media types
+in the `Accept` header, such as requiring an XML response with:
+
+[source,brush:,plain;,gutter:,false]
+----
+ Accept: application/xml
+----
+
+A client may specify more than one media type, and also specify that any
+media type is acceptable with a catch-all wild-card media type (`*/*`):
+
+[source,brush:,plain;,gutter:,false]
+----
+ Accept: application/xml, image/png, */*
+----
+
+Conventional web browsers always include the wild-card value in the
+`Accept` header: they will accept any media type, and Play will serve
+HTML - the default 'format'. Content negotiation is more likely to be
+used by custom clients, such as an Ajax request that requires a JSON
+response, or an e-book reader that requires a PDF or EPUB version of a
+document.
+
+[[Playrequestformat]]
+== Play request format
+
+Play implements content negotiation by parsing the `Accept` header and
+setting `request.format`, which is used to select the view template by
+file extension.
+
+The default format for a Play request is `html`, which is selected if
+the `Accept` header contains `text/html` or `application/xhtml`, or as a
+result of the wildcard `*/*` value. The default format is not selected
+if the wildcard value is not present.
+
+The default template for the `index()` controller method (and `html`
+format) is therefore the file `index.html`. If you specify a different
+format, in one of several ways, you can select an alternate template.
+
+[[Builtinformats]]
+== Built-in formats
+
+Play has built-in support for a few formats: `html`, `txt`, `json` and
+`xml`. For example, define a controller method that renders some data:
+
+[source,java]
+----
+ public static void index() {
+   final String name = "Peter Hilton";
+   final String organisation = "Lunatech Research";
+   final String url = "http://www.lunatech-research.com/";
+   render(name, organisation, url);
+}
+----
+
+If you request a URL that is mapped to this method
+(`http://localhost:9000/` in a new Play application) in a web browser,
+then play will render the `index.html` template, because web browsers
+send an `Accept` header that includes the value `text/html`.
+
+Play responds to a request with the header `Accept: text/xml` by setting
+the request format to `xml` and rendering an `index.xml` template, such
+as:
+
+[source,xml]
+----
+<?xml version="1.0"?>
+<contact>
+   <name>${name}</name>
+   <organisation>${organisation}</organisation>
+   <url>${url}</url>
+</contact>
+----
+
+The built in `Accept` header format mappings work as follows, for an
+`index()` controller method.
+
+[cols=",,,",]
+|===
+|`Accept` header  |Format  |Template file name  |Mapping
+
+|`null` |`null` |`index.html` |Default template extension for `null`
+format
+
+|`image/png` |`null` |`index.html` |Media type not mapped to a format
+
+|`*/*, image/png` |`html` |`index.html` |Default media type mapped to
+`html` format
+
+|`text/html` |`html` |`index.html` |Built-in format
+
+|`application/xhtml` |`html` |`index.html` |Built-in format
+
+|`text/xml` |`xml` |`index.xml` |Built-in format
+
+|`application/xml` |`xml` |`index.xml` |Built-in format
+
+|`text/plain` |`txt` |`index.txt` |Built-in format
+
+|`text/javascript` |`json` |`index.json` |Built-in format
+
+|`application/json, */*` |`json` |`index.json` |Built-in format, default
+media type ignored
+|===
+
+[[Customformats]]
+== Custom formats
+
+If you want to serve a response with a particular media type you can set
+the format before calling the `render` method. For example, to serve a
+http://en.wikipedia.org/wiki/Vcard[vCard], you can do:
+
+[source,brush:,java;,gutter:,false]
+----
+ request.format = "vcf";
+----
+
+Instead of applying this format to all requests, you can implement
+content negotiation by inspecting the request headers, so that you only
+set that format when the HTTP request selects the corresponding media
+type. In your controller, check for your custom format before all
+requests:
+
+[source,java]
+----
+ @Before
+static void setFormat() {
+   if (request.headers.get("accept").value().equals("text/x-vcard")) {
+      request.format = "vcf";
+   }
+}
+----
+
+Now, a request with a `Accept: text/x-vcard` header will render an
+`index.vcf` template, such as:
+
+[source,brush:,plain;,gutter:,false]
+----
+ BEGIN:VCARD
+VERSION:3.0
+N:${name}
+FN:${name}
+ORG:${organisation}
+URL:${url}
+END:VCARD
+----
+
+Note that this also sets the response `Content-type` to `text/x-vcard`
+because of the media type mapping in Play's `mime-types.properties`
+file, which may allow your system to open the vCard in a suitable
+application, such as Address Book on a Mac.
+
+[[URLbasedformatspecification]]
+== URL-based format specification
+
+An alternative to using HTTP headers is to use the URL to specify the
+format. This is less in the spirit of HTTP, but can be useful as a
+fallback for supporting HTTP clients that cannot control the headers
+they send.
+
+You can add formats as specific routes, by specifying the format for the
+controller method. With the same `index()` method as above, the
+following route will handle a request for `/index.xml`, setting the
+format to `xml` and rendering the `index.xml` template.
+
+[source,brush:,plain;,gutter:,false]
+----
+ GET    /index.xml          Application.index(format:'xml')
+----
+
+Play can also extract the format directly from the URL, with a route
+such as the following.
+
+[source,brush:,plain;,gutter:,false]
+----
+ GET    /index.{format}     Application.index
+----
+
+With this route, a request for `/index.xml` will set the format to `xml`
+and render the XML template, while `/index.txt` will render the plain
+text template.

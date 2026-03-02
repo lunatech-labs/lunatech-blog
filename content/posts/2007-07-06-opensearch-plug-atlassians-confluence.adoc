@@ -1,0 +1,169 @@
+---
+layout: post
+title: OpenSearch plug-in for Atlassian’s Confluence
+date: 2007-07-06
+author: evelienket
+lang: en
+tags:
+  - java
+aliases:
+  - /posts/2007-07-06-opensearch-plug-atlassians-confluence
+---
+= OpenSearch plug-in for Atlassian’s Confluence
+
+:imagesdir: /images/media/2007-07-06-opensearch-plug-atlassians-confluence
+
+With this OpenSearch plug-in developed for http://www.atlassian.com/software/confluence/[Atlassian's
+Confluence], you make it
+possible to search your Confluence site from the outside with an
+OpenSearch client. Atlassian's Confluence is an enterprise wiki for
+sharing knowledge that comes with its own search engine. By using
+OpenSearch to search through your Confluence from another website, you
+continue to use Confluence's own search engine.
+
+== Why we built the plug-in
+
+*Federated/aggregated search*
+
+The company this plug-in was built for, has many sources employees want
+to search through, looking for information on a subject. These many
+sources include different file systems holding documents that have been
+written during many years, documents published on websites,
+databases/websites with documentation on specific subjects, e-mail, and
+a Confluence installation used by the IT-department.
+
+We want to make it possible for employees to search through all the
+sources in a single search action and we want to use OpenSearch to make
+it happen. "http://opensearch.org/[OpenSearch] is a collection of simple
+formats for the sharing of search results." For the sources in our case
+that means that they have to return search results in such a format, and
+an OpenSearch client must be able to interpret these formats so that
+search results can be aggregated and presented together.
+
+The Confluence plug-in we are talking about here makes our Confluence
+source return search results in an OpenSearch format. (The URL you need
+for this is described in the OpenSearch description.)
+
+Examples of _public_ OpenSearch clients, doing the request, reading the
+results and aggregating and presenting the results in a single page are
+http://a9.com/[http://a9.com] and http://osfeed.com/[http://osfeed.com].
+You can register your OpenSearch enabled site at
+http://osfeed.com/[http://osfeed.com] if your pages are accessible for
+everyone.
+
+An OpenSearch client that can be used within this company is currently
+being built, because such a client does not yet seem to exist.
+
+*The search box in a* *browser's* *toolbar.*
+
+The browsers 'Search Engine List' (Mozilla 5) or 'Instant Search Box'
+(IE 7) is also using the OpenSearch standard. To be able to add your
+Confluence to the search engine list of your browser you do _not_ need
+this plug-in, but you need to make an OpenSearch description and add it
+to your site. (See link:#cc[How to configure Confluence for the
+browser's search engine list].)
+
+== How to use the plug-in
+
+The OpenSearch description
+(link:../media/2007-07-06-opensearch-plug-atlassian’s-confluence/opensearch-description-example2.xml[example opensearch.xml])
+describes the URL's with which you can do a search request and get
+results back in a standard format, RSS or Atom. Normally an OpenSearch
+client would read this file and use the URLs but you can also just try
+them in a browser.
+
+Snipped from the OpenSearch description (with line breaks inserted for
+legibility):
+
+----
+...
+<Url type="application/atom+xml"
+template="http://yourdomain/plugins/servlet/opensearch?
+ searchfor={searchTerms}&startIndex={startIndex}&itemsPerPage={count}&
+ un={custom:userName}&pw{custom:passWord}&format=atom"/>
+<Url type="application/rss+xml"
+template="http://yourdomain/plugins/servlet/opensearch?
+ searchfor={searchTerms}&startIndex={startIndex}&itemsPerPage={count}&
+ un={custom:userName}&pw{custom:passWord}&format=rss"/>
+...
+----
+
+The 'searchfor' parameter in the URL behaves the same as Confluence's
+'dosearchsite' action, which is the simple one field search that appears
+by default in the top right corner. Besides the 'searchfor', none of the
+parameters in the URL are required. Below you find a few examples of how
+the URL parameters can be used.
+
+`http://yourdomain/plugins/servlet/opensearch?searchfor=cookbooks&format=rss`::
+  * The output format is RSS 2.0.
+  * The first 10 results of the complete result list are returned.
+  * No authorisation happens so only what is publicly available is
+  presented. (The user name and password are not required because we are
+  using the plugin in a Confluence where pages are accessible to
+  everyone within the company. You only need to login if you want to add
+  comments, add new pages or change things.)
+
+`http://yourdomain/plugins/servlet/opensearch?searchfor=cookbooks&un=username&pw=password`::
+  * The output format defaults to atom_1.0 because no format is
+  specified
+  * The first 10 results of the complete result list are returned
+  * If the authorisation fails an error is returned
+
+`http://yourdomain/plugins/servlet/opensearch?searchfor=cookbooks&startIndex=21&itemsPerPage=20`::
+  * The output format defaults to atom_1.0 because no format is
+  specified.
+  * The second 20 results of the complete result list are returned.
+  * No authorisation happens so only what is publicly available is
+  presented.
+
+== How to install the plug-in
+
+To install the plug-in you need to:
+
+. Have a confluence installation.
+. Download the link:../media/2007-07-06-opensearch-plug-atlassian’s-confluence/plugins-opensearch-1.0.jar[plug-in]. (or the source,
+available on request)
+. Upload the Opensearch-plugin in your Confluence installation. (This is
+part of the administrators menu.)
+. Customize the link:../media/2007-07-06-opensearch-plug-atlassian’s-confluence/opensearch-description-example2.xml[opensearch.xml]
+file.
+. Upload the opensearch.xml file as an attachment in a space of your
+Confluence installation that's public. Now everyone that can access your
+Confluence can download the file and use the OpenSearch functionality.
+. Configure the plug-in, set title, description and the location of the
+opensearch.xml file. These are values that are included in the search
+result output.
+
+*Release notes:*
+
+* Developed and tested with the Confluence stand-alone version 2.4.4.
+The plug-in might work in earlier versions.
+* The code is based on https://rome.dev.java.net/[Rome] (version 0.9)
+for the generation of RSS/Atom and Rome's Opensearch plug-in version
+0.1.
+
+[#cc]##
+
+== How to configure Confluence for the browser's search engine list
+
+To be able to add Confluence to your browser's search engine list you
+need to configure the following:
+
+. Make an OpenSearch description using this
+link:../media/2007-07-06-opensearch-plug-atlassian’s-confluence/opensearch-description-example1.xml[example opensearch.xml].
+. Login Confluence as administrator
+. Attach the OpenSearch description file to a page
+. Select _Administration_
+. Select _Custom HTML_
+. Select _Add at the end of Head_
+. Add
++
+----
+<link rel="search" type="application/opensearchdescription+xml"
+href="{/../os-description.xml}" title="My Confluence"/>
+----
++
+(Replace the value of href.)
+. When you now open the page in your browser the 'Search Engine List' or
+'Instant Search Box' will offer the opportunity to add the site to the
+list.

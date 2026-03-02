@@ -1,0 +1,110 @@
+---
+layout: post
+title: JavaPolis 2005
+date: 2005-12-21
+author: hilton
+lang: en
+tags:
+  - java
+---
+= JavaPolis 2005
+
+Last week I went to the http://www.javapolis.com/[Javapolis conference] in Antwerp, run by the BeJUG - Belgium's Java user group. There were a couple of thousand attendees, and we saw as many interesting Java technologies during the day as we drank Belgian beers in the evening.
+
+++++
+<p>The technology content was pretty good overall, and the conference was only marred by the appallingly miserly lunch (no wine at lunch any more) and tedious presentation styles. All of the presenters need to spend some time at <a href="http://www.beyondbullets.com/">Beyond Bullets</a>; how can smart people so completely fail to realise how wrong it is to fill the slides with so many bullets and then read them word-for-word?</p>
+
+<h2>Sun Microsystems</h2>
+
+<p>The main keynote speech was given by <a href="http://wiki.javapolis.com/confluence/display/JP05/Jeff+Jackson">Jeff Jackson</a>, VP Java Developer Platform & Strategy, Sun Microsystems. He was billed as being James Gosling's boss, and that we should therefore be more impressed than by James Gosling himself, who presented at Javapolis two years ago. That is, of course, ridiculous; as if a programmer's manager necessarily has more interesting things to say to other programmers. Worse yet, Mr Jackson's presentation was simply terrible.</p>
+
+<p>We were subjected to slide after slide of adverts from Sun community web sites, accompanied by the sounds of Sun wetting themselves with excitement over the Java developer community doing their product development for them. As if that weren't enough, these guys' egos were sufficiently huge for them to suggest that what I should really aspire to is getting my name on a Sun documentation set or book. I simply cannot believe that anyone buys this 'please design and document our products for us' approach.</p>
+
+<p>Sun seems to have transmogrified itself into a two-headed beast that does not know what it wants. One head thinks of itself as an open-source collective, devoted to developing and using Java technology. Unfortunately, the other head (and the whole body no doubt) is a product company that cannot resist ramming said product down the developer community's respective throats. Does Sun really think that being a Java user means that I want to use Sun hardware, operating system and developer tools?</p>
+
+<p>Unfortunately, it just got worse, as they went on to tell us that what we all wanted was to trek over to California for JavaOne, for more T-shirt launching excitement. I simply do not get it; perhaps you can only understand their wild glee at T-shirt launching if you went to an American high-school or something.</p>
+
+<p>I was hoping that things would improve once Mr Jackson handed over to the <a href="http://blogs.sun.com/roller/page/cbeckham">Charles Beckham</a>, Technical Director of the Tools group, but I was outrageously wrong. Instead of the actual advertising-free information and insights one might reasonably expect, we had to sit through a painfully embarrassing display of someone unable to give a demo of his own product, combined with poor familiarity with PowerPoint and no interesting content or personal charisma to compensate. I now have no idea whether Java Studio Creator is any more interesting than it used to be; I suspect not. All I know is that it takes a <em>really</em> long time to create a new empty project when a thousand people are watching.</p>
+
+<p>These guys really need to spend less time playing with their T-shirt launcher and working on their presentations.</p>
+
+<h2>More Java Puzzles</h2>
+
+<p>Fortunately, the appalling I-should-have-stayed-in-bed keynotes were followed by an extremely interesting, well-prepared and funny presentation on <a href="http://wiki.javapolis.com/confluence/display/JP05/More+Java+Puzzles">Java Puzzles</a>, by Joshua Bloch and Neal Gafter.</p>
+
+<p>The presentation focused on seven Java code puzzles, each demonstrating some counter-intuitive Java code behaviour of the kind that leads to hard-to-find bugs. The examples were pretty interesting, although perhaps more as entertainment than useful tips. Each puzzle demonstrates a bug caused by the intuitive interpretation of Java code being wrong. However, I do not believe that competent programmers would suffer from these bugs, because the code looks so horrible in each case. In fact, this kind of code smells so bad that no decent coding style would allow it.</p>
+
+<p>This stuff is a book - <a href="http://www.awprofessional.com/bookstore/product.asp?isbn=032133678X&rl=1">Java Puzzlers: Traps, Pitfalls, and Corner Cases</a>, which I would like to read. It is almost certainly fun, with some cool optical illusions to go with the 'code illusions'. I would expect it to be a source of fascinating trivia about the Java language and cool examples of things not to do. It might even be useful as a collection that you can use to define a coding standard by counter-example.</p>
+
+<h2>EJB 3.0 and the Java Persistence API</h2>
+
+<p>After the Java Puzzles talk, we went to hear about <a href="http://wiki.javapolis.com/confluence/display/JP05/EJB+3+Simplified+Components">EJB 3.0 Simplified Components</a> from the specification authors, who were extremely dull and long winded about telling us what we already knew: EJB 2.1 really sucked because it was unnecessarily cumbersome and complex, and version 3.0 gets rid of lots of the cruft and loves it up with Java annotations instead. Too bad they couldn't just come out and apologise for the excesses of the past and admit that lots of users only ever needed POJOs and XDoclet anyway. Still, at least this is a good direction, where instead of inflicting a bad standard on us all, the standard serves to add consistency, documentation and mainstream credibility to architectures that people are already using: Hibernate, XDoclet and Spring.</p>
+
+<p>The EJB thing was so dull that we took a strategic early exit, and got some lunch before I went back in for the lunchtime short talks.</p>
+
+<p>The second afternoon included another EJB 3.0 session, this time more specifically about the Java Persistence API. Basically, JPA is about standardising what Hibernate does, allowing you to declare persistent beans and object-relational mapping using annotations or XML. This stuff is something for next year, because for now, Hibernate offers a more advanced implementation; JPA is focussing on a smaller set of core functionality than what Hibernate 3.0 implements.</p>
+
+<p>This all means that EJB 3.0 and JPA are unlikely to be new and exciting for Hibernate users, but are likely to popularise this approach to application persistence and object-relational mapping for those who find Hibernate too cutting edge.</p>
+
+<h2>Selenium: web application testing tool</h2>
+
+<p>The first <a href="http://wiki.javapolis.com/confluence/display/JP05/A+quicky+on+test+tool+Selenium">Selenium quickie</a> was a presentation of Thoughtworks' <a href="http://selenium.thoughtworks.com/">Selenium</a>. This looks like a pretty useful approach to unit testing web application user-interfaces by actually loading pages in the web browser, instead of testing the page source externally. So far this looks like a good alternative to HttpUnit/JWebUnit for testing Java web apps using JUnit, with better support for selecting elements on the pages and being able to write simple testing code in Java. Crucially, it looks like you can select HTML elements using arbitrary XPath expressions. Another option is to define tests in HTML, possible by recording actions using a Firefox plug-in, which might make more sense for testing non-Java applications. Further investigation required.</p>
+
+<h2>Apache Derby: yet another pure-Java database</h2>
+
+<p>Next talk was a short introduction to <a href="http://db.apache.org/derby/">Apache Derby</a>, which is a lightweight
+
+RDBMS written in Java. It's based on Cloudscape, and aims to be useful by being simple, cross-platform and standards compliant (SQL 92, 99, 2003; JDBC, JSR-169). It seems to offer all of the standard database functionality. The talk presented various possible usage scenarios:</p>
+
+<p>1. conventional client-server set-up, as you would normally use a database, where Derby may be useful as a free development database on a project that will use a different database in production
+
+2. embedded mode, where you run the database in the same JVM as your application, to avoid administration or network traffic
+
+3. read-only mode, with the database on read-only media or embedded in a JAR file
+
+4. in-memory mode, which is still in development.</p>
+
+<p><a href="http://www.javapolis.com/confluence/display/JP05/Fernanda+Torres+Pizzorno">Fernanda Pizzorno</a> and Andreas said vague but positive things about performance, which I look forward to trying out. Unfortunately, they have not compared Derby to Hypersonic, which is the most obvious alternative for an embedded Java database, which is how Fernanda characterised Derby.</p>
+
+<h2>Terracotta: Java object clustering and caching</h2>
+
+<p>The last quickie was the deliciously technical <a href="http://wiki.javapolis.com/confluence/pages/viewpage.action?pageId=15644"> Time To Throw Out Your Distributed HashMap?</a> by <a href="http://jonasboner.com/">Jonas Bonér</a> who was talking about
+
+some cool-sounding software for doing transparent non-invasive object clustering and caching from <a href="http://www.terracottatech.com/">Terracotta</a>, where he now works. The demo was cool, but quick, so I need to read more about this later.</p>
+
+<h2>JBoss: margheritas and the support proposition</h2>
+
+<p>It was JBoss who really stole the show, without a single PowerPoint slide. Instead, the <a href="http://jboss.com/events/javapolis">JBoss Happy Hour</a> involved a couple of hours of all-you-can-drink cocktails, and some interesting chats with various JBoss sales staff and users. The short story is that JBoss wants to expand their support services business in Benelux, obviously, but I get the impression that they would much prefer 'partners' to actually deliver these services, which is a reasonable attempt to scale things up. Personally, the other way around would be more convenient for me; we deliver solutions based on JBoss and I would prefer our customers to buy system administration support and training from JBoss directly. I vaguely remember that the conversation got really interesting after that, but it all got somewhat vague after the tenth margherita.</p>
+
+<h2>Spring 2.0: the EJB alternative</h2>
+
+<p>The first presentation on day two was Rod Johnson's <a href="http://springframework.org/">Spring</a> presentation, which is now at version 2.0M1 with 2.0 final expected in March 2006. Interestingly, Spring 2.0 adds very EJB-style functionality including message driven POJOs that support JMS, which he described as 'the last corner case justifyin EJB use'. Apparently, it is take-over-the-world time. I later spoke to Rod at the Interface21 booth, and he wanted me to believe that actually Spring is not about being an EJB 3.0 competitor because Spring is so much more advanced...</p>
+
+<p>New features are more expressive XML configuration with new tags for AOP and JNDI, and custom tags; also the AOP now natively
+
+implements some of <a href="http://eclipse.org/aspectj/">AspectJ</a> AOP stuff, and integrates with AspectJ proper. The next steps for the 2.x series include implementing the almost final Java Persistence API.</p>
+
+<p>Note: <a href="http://interface21.com/">Inteface21</a> is about 18 people, including Rod Johnson, who do Spring consultancy.</p>
+
+<h2>Declarative Caching with Spring: more Spring/AOP goodness</h2>
+
+<p>The second presentation was about declarative method-level caching in Spring - yet another EJB-type feature. This is about plugging in one of five cache engines, such as <a href="http://ehcache.sourceforge.net/">ehcache</a>, and using AOP to implement caching in a nice transparent way for Spring-managed beans. It looked pretty straightforward to use annotations or XML to specify cached methods, and corresponding methods which trigger cache flushing.</p>
+
+<h2>Joda Time - better Date and Calendar classes</h2>
+
+<p>The first lunchtime quickie was <a href="http://joda-time.sourceforge.net/">Joda Time</a>, which is a replacement for the JDK Date and Calendar classes. This looked pretty interesting, and more complete than the <a href="http://jakarta.apache.org/commons/lang/">Commons Lang</a> classes, so could well be useful.</p>
+
+<h2>Caucho Resin: web application hot-swapping and PHP support</h2>
+
+<p>The second quickie was about using the <a href="http://caucho.com/">Caucho Resin</a> application server to avoid the compile-deploy part of the development cycle. Resin can automatically compile and re-deploy changed Java code, and other web app resources such as web.xml. There is also a HotSwap feature that should allow you to see changes in your web app without reloading the web app, which is much faster. I'm going to try this out - run Resin on another port, using the Eclipse workspace as the web app directly. This would then allow me to
+
+avoid 2-3 seconds for the Ant build, followed by 5-10 seconds for JBoss to restart the web app.</p>
+
+<p>Resin's Quercus engine is a pure Java implementation of PHP 5. As well as being able to run PHP apps in a JVM, you can access Java classes and methods as PHP classes and functions.</p>
+
+<p>The obvious question, of course, is 'why?' The first slide on this covered vague but possibly sensible advantages involving Java's  security, garbage collection, and general not-based-on-C-ness. Quercus would also allow you to integrate PHP code with some kind of  Java back-end. This all seems a bit pointless, though, since you might as well just use Java in the first place.</p>
+
+<p>The real news is that Quercus reportedly runs PHP four times as fast  as mod_php, tested by timing MediaWiki page loads - 5.2 vs 22 pages per second. Amusingly, once they configured HTTP caching properly in Resin it served 4500 pags per second. I wonder if Wikipedia have heard about this yet.</p>
+
+<p>An interesting spin on all of this, is that PHP is now yet another option for web app front-ends, as opposed to JSP, say. Weird, but possibly useful somewhere - even if only to employ all those thousands of PHP hackers.</p>
+++++

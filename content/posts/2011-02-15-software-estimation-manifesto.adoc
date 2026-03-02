@@ -1,0 +1,80 @@
+---
+layout: post
+title: The Software Estimation Manifesto
+date: 2011-02-07
+author: PeterHilton
+lang: en
+tags:
+  - estimation
+  - methodology
+---
+= The Software Estimation Manifesto
+
+Making estimates for how long a software
+development task will take is the closest that commercial software
+developers come to performing a black art. And a black art it is,
+because software estimation is a minefield of mis-information and
+misunderstandings, unrealistic expectations and wishful thinking, risk
+and reward.
+
+== 28 theses
+
+. Accept that making estimates is unavoidable in commercial software
+development, whatever your methodology.
+. Accurate estimation is hard, harder without lots of experience, and
+even harder with changing scope or project risks.
+. Accept that time and money are never unlimited (if you can
+consistently achieve this please tell us how).
+. Assume initial bad estimates and use an ‘expected vs actual’ feedback
+loop to improve accuracy over time.
+. Verify your estimates (get a second opinion) before you communicate
+them to the project manager.
+. Move away from development methods that require perfect predictions in
+an up-front project plan written in stone.
+. Adopt development methods that minimise the impact of bad estimates
+and generate continuous improvement.
+. There are many types of estimate: developer fantasy world, realistic,
+pessimistic, arse-covering and downright cynical.
+. Realistic estimates allow for frequent annoyances (telephones),
+occasional impediments & rare disasters (office on fire).
+. Pessimistic estimates are more useful than best-case estimates;
+under-run usually has less impact than over-run.
+. Your estimates are not just wrong because the task takes longer, but
+also because you forgot a quarter of the tasks.
+. Estimates are inherently non-negotiable - how long it will actually
+take. Argue about price and quality instead.
+. Don’t negotiate estimates with your manager. Apart from anything else,
+he is better at it and will ‘win’.
+. Define ‘done’. What are you estimating exactly? (Several of Scrum’s
+benefits are individual wins.)
+. Specify who does the work. Despite much wishful thinking in the
+industry, programmers are not fungible, especially not good ones.
+. Make estimates that can be added together. If you say each feature
+will take a day, they’ll expect five per week.
+. How long a task *should* take is a fantasy best-case. Telling your
+colleagues about your fantasies is TMI.
+. The most cynical technique is sometimes true: take the next time unit
+and double it - ‘3 days’ becomes ‘6 weeks’.
+. Do not vary quality; software quality is a project-level
+consideration, not a per-feature decision.
+. Making estimates is a game of averages. Trade individual accuracy for
+overall accuracy.
+. Avoid the bandwagon effect. Blind estimation is common to the Delphi
+method, Scrum planning and others.
+. Improve estimates with comparison (with other estimates) and feedback
+(how good they turned out to be).
+. Learn the estimation techniques, such as Delphi method or Scrum
+planning; then learn some rules of thumb.
+. Even if you are not using Scrum, its principles of Transparency,
+Measurement and Improvement are useful.
+. Check your estimates to avoid them being ‘obviously wrong’. The best
+way to do this: ask someone else.
+. Understand the business context to the question ‘how long will it
+take?’ to discover the actual question.
+. Communicate estimates carefully - project stakeholders’ own
+interpretations are not necessarily the ones you want.
+. Improve your estimates. Use reality for feedback, i.e. ask yourself
+how long it actually took.
+
+_link:/author/peter-hilton[Peter Hilton] is a senior software developer
+at Lunatech Research._

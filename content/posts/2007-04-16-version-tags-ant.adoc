@@ -1,0 +1,79 @@
+---
+layout: post
+title: Version tags with Ant
+date: 2007-04-16
+author: fanedo
+lang: en
+tags:
+  - java
+---
+= Version tags with Ant
+
+When you release a software application, it is nice to put the version number somewhere for identification purposes. One of our custom applications puts a line with the version number, URL of the page, any GET parameters and user ID of the logged in user at the bottom of every page. This helps tremendously when the customer logs a support issue. The version number helps especially when there are multiple versions of your application out in the wild.
+
+In Java - any language for that matter - this is pretty easy to do, just
+use the _$Name$_ tag for CVS or the _$HeadURL$_ tag for SVN, like so:
+
+----
+...
+String tag = "$Name$";
+String tag = "$HeadURL$";
+...
+----
+
+When next you check out a tagged version of your code, the keywords
+should be expanded to something that contains the version number. Note
+that you will need to strip out the extra junk programmatically.
+
+----
+...
+String tag = "$Name: v1_0_0 $";
+String tag = "$HeadURL: svn://repo/project/tags/v1.0.0/src/com/lunatech/sample/Foo.java $";
+...
+----
+
+All this works fine, however, you might want to put the same version
+number in the name of your release package or your manifest. If you're
+using Ant to build your release you can use the _propertyregex_ task,
+from _http://ant-contrib.sourceforge.net/[antcontrib]_, to strip the
+junk from the expanded keywords and use them in your build script. The
+following snippets show you how to do this.
+
+----
+...
+<!-- Set a property from the SVN URL to extract the version number, for a tagged release -->
+<property name="version.tag" value="$HeadURL: svn://repo/project/tags/v1.0.0/build.xml $"/>
+<target name="version">
+    <!-- Make the antcontrib tasks available. -->
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties" classpathref="class.path"/>
+    <!-- Set the default version for development. -->
+    <property name="version" value="dev"/>
+    <!-- Set version to a version-number, if this is a tagged release -->
+    <propertyregex override="true" property="version"
+        input="${version.tag}" regexp="/tags/v([^/]+).* \$"
+        select="\1"/>
+    <echo message="version = ${version}"/>
+    <filterset id="VersionFilterSet">
+        <filter token="ContextRoot" value="project-${version}"/>
+        <filter token="Datasource" value="Datasource-${version}"/>
+        <filter token="VersionSuffix" value="-${version}"/>
+    </filterset>
+</target>
+...
+----
+
+Note that your _regexp_ and _select_ attributes need to be slightly more
+funky if you are using CVS, since it does not allow periods (.) in tag
+names.
+
+You will have noticed that the version target creates a filter-set that
+can later be used to replace tokens in arbitrary files with the version
+from the tag name, when creating the release. Also, the version property
+is initialized with some value that indicates that this is a development
+release. This works, since the _propertyregex_ task will not overwrite
+that value if the regular expression does not match. In other words, if
+this is an *un*-tagged check-out, the value of _version_ will simply be
+"dev".
+
+How to use the filter-set and set the version in a manifest file from
+Ant is left as an exercise for the reader.

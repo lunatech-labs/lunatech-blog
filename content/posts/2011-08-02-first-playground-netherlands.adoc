@@ -1,0 +1,55 @@
+---
+layout: post
+title: "First Play!ground in the Netherlands"
+date: 2011-08-02
+author: pepite
+lang: en
+tags:
+  - playframework
+---
+= First Play!ground in the Netherlands
+
+Join us for the first Play!ground in the Netherlands. We love the Play
+framework so much that we decided it was time to organise an event to
+share our passion.
+
+This is also the perfect opportunity to discover Play with Java and
+Scala or to ask more about Play’s advanced features. But most of all, a
+Play!ground is a fun event, so expect to enjoy yourself as well!
+
+* *When*: Friday, 12 August 2011 starting at 16h00
+* *Where*:
+http://maps.google.nl/maps?f=l&hl=en&q=lunatech+research&near=&sll=52.372797,4.893749&sspn=5.689092,7.624512&ie=UTF8&om=1&ll=52.335339,4.724121&spn=2.003392,5.685425&z=8&iwloc=A&cid=51919412,4455850,9500097742604493715&source=embed[Lunatech
+Office, Heemraadssingel 70, 3021DD, Rotterdam]
+
+== Programme
+
+* 16h15 *Play framework introduction and advanced features*, Nicolas
+Leroux and Peter Hilton, Lunatech
+* 17h15 *Break*
+* 17h30 *Play framework and Scala*, Erik Bakker, Lunatech
+* 18h00 *Play framework in practice*, Arne van den Ing, Connexys
+* 18h30 *Borrel*
+
+The programme will begin with a presentation of the Play framework by
+Nicolas Leroux and Peter Hilton. Nicolas Leroux and Peter Hilton work
+for Lunatech and also happen to be contributors to the Play framework
+open-source project. The presentation will start with a quick
+introduction to Play and demonstrate a real practical example showing
+more advanced features. Peter and Nicolas will also discuss the business
+benefits of using the framework.
+
+In the second presentation, Erik Bakker, another developer at Lunatech,
+will talk about using Scala with Play: how to get started with Play
+Scala and why you should keep an eye on this emerging technology.
+
+In the third presentation, Arne van den Ing from Connexys will present
+how they are applying Play framework to their current project. What are
+the main differences in developing with Play framework and what are the
+real benefits of the framework? This will be a more practical
+presentation.
+
+Of course, beer and networking are also part of the programme ;)
+
+*The Play!ground reached his maximum capacity. We'll make sure to
+organise another one pretty soon. Stay tuned!*

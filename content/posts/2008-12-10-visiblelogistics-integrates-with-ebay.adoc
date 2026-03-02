@@ -1,0 +1,20 @@
+---
+layout: post
+title: VisibleLogistics integrates with eBay
+date: 2008-12-10
+author: kaas
+lang: en
+tags:
+  - ventures
+---
+= VisibleLogistics integrates with eBay
+
+VisibleLogistics has today unveiled their
+integration with eBay for power sellers. After a sale has been completed
+on the eBay system, the order is immediately transferred to
+VisibleLogistics. From there on both the seller and buyer have all the
+advantages the VisibleLogistics platform has to offer (order visibility,
+notifications and tracking to name a few). 
+
+Sign-up for sellers is easy and instant. Read more at
+http://ebay.visiblelogistics.com/.

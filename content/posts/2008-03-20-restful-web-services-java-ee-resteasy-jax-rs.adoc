@@ -1,0 +1,946 @@
+---
+layout: post
+title: RESTful web services in Java EE with RESTEasy (JAX-RS)
+date: 2008-03-20
+author: FroMage
+lang: en
+tags:
+  - java
+  - seam
+  - rest
+---
+= RESTful web services in Java EE with RESTEasy (JAX-RS)
+
+This article
+describes how we implemented
+http://en.wikipedia.org/wiki/Representational_State_Transfer[RESTful]
+web services in our http://seamframework.org/[Seam]-based http://java.sun.com/javaee[Java
+EE] web application." ---
+
+== Introduction
+
+Suppose we have a web application, where one can access and edit
+catalogues or inventory. We have a nice web site with lots of pages and
+nice user interface, wizards and all the web 2.0 buzzwords (ever notice
+how that attracts buzzards?). The web site is very useful for people and
+they find it nice.
+
+Now since we are talking about catalogues and inventory, we want our web
+site to be useful for companies doing inventory management. They have a
+different expectation: integration. They want their existing system's
+data to be loaded (and managed) automatically from their existing system
+into our web site, which was designed for real people rather than remote
+programs.
+
+At this point we have to start thinking about how to allow remote
+programmatic access to our web site's back-end, where we store our
+catalogue and inventory data. We store this data in a database, but we
+don't want to allow outside people access in our precious database,
+where they could bypass all the security and validation that we have
+built in the layers above our database in our web application.
+
+We are using
+http://java.sun.com/javaee/overview/faq/persistence.jsp[Java
+persistence] to map database rows and tables to _POJOs_ (Plain Old Java
+Objects using
+http://java.sun.com/j2se/1.5.0/docs/guide/language/annotations.html[Java
+annotations] to describe the database mapping). These are called
+http://java.sun.com/javaee/5/docs/tutorial/doc/bnbpy.html[_Entity Java
+Beans_] in the _EJB 3_
+(http://java.sun.com/javaee/5/docs/tutorial/doc/bnblr.html[Enterprise
+Java Beans 3]) jargon.
+
+Our two main such entities are:
+
+* `Item`, which represents a catalogue or inventory item, and
+* `Person`, which represents the owner of a catalogue, or item.
+
+We even have a nice tier-based decoupling of our web application:
+
+* the web interface tier, responsible for the user interface,
+* the business logic tier, the middle-man between the tiers above and
+below, and
+* the persistence tier, which comes down to storing the data accessed
+and displayed by the other tiers.
+
+Obviously if we want to allow remote access and manipulation of data
+with security and validation, the remote interface on the server side
+has to have access to the persistence tier, and possibly some of the
+business logic tier if validation or security resides there.
+
+Our goal is then to provide access to our `Item` and `Person` entities
+via web services.
+http://en.wikipedia.org/wiki/Representational_State_Transfer[RESTful]
+web services are so hyped at the moment, so we will try that.
+
+The rest of this article describes our existing architecture, the
+introduction of RESTful web services within our architecture, its
+effects and how we did it.
+
+[[architecture]]
+== Our existing architecture
+
+In the introduction I mentioned the traditional tier-based organisation
+of our web application. With a little bit more detail, this is how they
+are implemented:
+
+* Web interface tier: Java https://facelets.dev.java.net[Facelets]
+* Business logic tier:
+http://java.sun.com/javaee/5/docs/tutorial/doc/bnbly.html#bnbma[stateful
+session beans] which pass along the web interface requests to the
+persitence tier
+* Persistence tier:
+http://java.sun.com/javaee/5/docs/tutorial/doc/bnbly.html#bnbmb[stateless
+session beans] (_DAO_:
+http://en.wikipedia.org/wiki/Data_Access_Object[Data Access Objects])
+which provide access to the database layer through entity beans
+
+All of these tiers are integrated with
+http://www.seamframework.org[Seam], the framework we use to ease the
+implementation of each tier, and the interaction between them.
+
+Security is usually found in the web interface tier, if only to forbid
+the users from accessing functions they are not privileged to execute.
+In the context of a web interface though, this is not enough because
+hiding a link from a web page does not prevent a malicious user from
+accessing it _by hand_ (through other tools than the website). So a
+similar layer of security is traditionally found on the business logic
+tier, which restricts privileged actions. Once we have been privileged
+to run the business logic actions, there may or may not be another layer
+of security in the persistence tier. In our case there isn't: all the
+security is done in the first two tiers.
+
+Validation is another troublesome subject: we need to make sure that the
+data provided by the user (via the web site or using a web service) is
+valid. The
+http://java.sun.com/javaee/5/docs/api/javax/persistence/package-summary.html[Java
+Persistence API] describes a number of validation annotations which can
+be put on persisted properties, such as the traditional SQL (Structured
+Query Language) constraints `NOT NULL` or `UNIQUE`. In fact they _only_
+provide constraints which can be mapped in SQL. For higher-level
+constraints, which could only be expressed in Java, we have to look
+elsewhere. Our particular implementation of Java Persistence,
+http://www.hibernate.org[Hibernate], provides a few more
+http://www.hibernate.org/hib_docs/validator/reference/en/html_single[constraints]
+as well as higher-level customisable constraints that fit our needs.
+
+These constraints (Java Persistence or Hibernate) are only appropriate
+on our entities `Item` and `Person`, but there is often validation done
+in the web tier (checking that a text field contains a valid number
+before trying to give it as a number to the business logic tier) or in
+the business logic tier for validation which cannot be located on
+entities themselves (does a given `Person` instance exist?).
+
+The exact way to distribute the validation constraints between the three
+tiers and the techniques used to do so will be the purpose of another
+lengthy article of mine, so I will not go into much detail here aside
+from mentioning that the only validation relevant to our needs for the
+web services will be located in the persistence tier (the stateless DAO
+EJBs and entities).
+
+[[entities]]
+== Our entities
+
+Our two main entities are `Item` and `Person`.
+
+[[person]]
+=== The `Person` entity
+
+A `Person` has:
+
+* A unique key in a certain format
+* A unique valid email address
+(http://tools.ietf.org/html/rfc822#section-6.1[RFC-822])
+* An optional name (which is only optional if the organisation name is
+not given)
+* An optional organisation name (which is only optional if the name is
+not given)
+
+Here is its implementation class:
+
+*Person.java*
+
+[source,java=nogutter]
+----
+@Entity
+public class Person implements Serializable {
+
+  //
+  // Persisted property fields
+
+  @Id
+  @GeneratedValue
+  private long id;
+
+  @Column(unique = true)
+  @Pattern(regex = "^[A-Z][A-Z0-9]+$")
+  private String key;
+
+  @Column(unique = true)
+  @NonLocalEmailAddress
+  private String emailAddress;
+
+  // we cannot put @NotEmpty here since it can be empty if organisationName is not empty
+  private String name;
+
+  // we cannot put @NotEmpty here since it can be empty if name is not empty
+  private String organisationName;
+
+  //
+  // Validation methods
+
+  @AssertTrue
+  private boolean isValid(){
+    // this is simplistic but good enough for an example
+    if(name != null && name.trim().length() > 0)
+      return true;
+    return (organisationName != null && organisationName.trim().length() > 0);
+  }
+
+  //
+  // Persisted properties methods (getters and setters)
+
+  [...]
+}
+----
+
+All the annotations here come either from Java Persistence or Hibernate,
+except the `@NonLocalEmailAddress` annotation which is our own Hibernate
+validator annotation. This annotation is linked to a custom validator
+which will be invoked by Hibernate when validating the contents of the
+annotated property. It will in our case check that the `emailAddress`
+property is a valid non-local email address according to RFC-822.
+
+[[item]]
+=== The `Item` entity
+
+An `Item` has:
+
+* A non-empty name
+* An optional description
+* A catalogue owner
+* A reference (unique by owner)
+* A generated key (combining the owner key and the reference)
+
+*Item.java*
+
+[source,java=nogutter]
+----
+@Entity
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "reference", "owner" }) })
+public class Item implements Serializable {
+
+  //
+  // Persisted property fields
+
+  @Id
+  @GeneratedValue
+  private long id;
+
+  private String description;
+
+  @Column(nullable = true)
+  @ManyToOne
+  private Item owner;
+
+  private String reference;
+
+  //
+  // Persisted properties methods (getters and setters)
+
+  [...]
+
+  //
+  // Transient properties methods
+
+  public String getKey(){
+    return owner.getKey() + '-' + reference;
+  }
+
+}
+----
+
+[[dao]]
+=== Our DAOs
+
+Our DAOs will not check for validation in this case, because it is
+handled by the persistence layer. Should we try to persist an invalid
+entity, the persistence layer will throw an exception and the
+transaction will be rolled-back.
+
+Here are the interfaces (their implementations do not matter much) for
+`Person`:
+
+*PersonDAO.java*
+
+[source,java=nogutter]
+----
+@Local
+public interface PersonDAO {
+  public Person findByKey(String key);
+}
+----
+
+*PersonDAOBean.java*
+
+[source,java=nogutter]
+----
+@Name("personDAO")
+@Stateless
+public class PersonDAOBean implements PersonDAO {
+  [...]
+}
+----
+
+And for `Item`:
+
+*ItemDAO.java*
+
+[source,java=nogutter]
+----
+@Local
+public interface ItemDAO {
+  public Item findByKey(String key);
+  public Set<String> findItemKeys(Person catalogueOwner);
+  public void merge(Item oldItem);
+  public void persist(Item newItem);
+}
+----
+
+*ItemDAOBean.java*
+
+[source,java=nogutter]
+----
+@Name("itemDAO")
+@Stateless
+public class ItemDAOBean implements ItemDAO {
+  [...]
+}
+----
+
+[[framework]]
+== Choosing our RESTful framework
+
+In Java, the http://jsr311.dev.java.net[JSR-311 (JAX-RS)] seems to be
+the way to go to start developing RESTful web services. While the JSR is
+not finished yet, it provides support for POJO RESTful web services
+using annotations.
+
+Its reference implementation, http://jersey.dev.java.net[Jersey], was
+not chosen because we had trouble integrating it well with EJB3 and
+Seam.
+
+We are using the http://www.jboss.org/resteasy[RESTEasy] implementation
+of JAX-RS, because we had no trouble integrating it with our EJBs and
+Seam. It also has sufficient documentation.
+
+There is another implementation from
+http://cwiki.apache.org/CXF20DOC/jax-rs-jsr-311.html[Apache], but I
+haven't tried it because it uses an older version of JAX-RS.
+
+Finally there is yet another framework for RESTful web services for Java
+called http://www.restlet.org[Restlet] but we did not favour it because
+at the time of this writing, it is using a custom architecture, even
+though proper JAX-RS support is http://stephankoo.wordpress.com/[in the
+works].
+
+[[terminology]]
+== Terminology and architecture
+
+RESTEasy can scan your JAR file for classes annotated with the
+https://jsr311.dev.java.net/nonav/releases/0.6/javax/ws/rs/Path.html[@Path]
+annotation which specify that the annotated class is a RESTful resource
+handler.
+
+It can also use JNDI lookups to register EJBs as resource handlers. This
+is more useful for us since it allows us to use Seam components with
+injection and transactions, which is why we are using this alternative.
+Our two resource EJBs will be `RESTItem` and `RESTPerson`.
+
+We are using JAXB to serialise and unserialise persistent entities
+to/from XML. Basically we annotate our persistent entities with the few
+JAXB annotations required to describe the XML structure. If we want to
+separate the XML into several resources, we use XML IDs to map
+persistent IDs to XML pointers. In order to do this we need to specify
+our own JAXB _provider_ to JAX-RS, which is a class in control of how
+JAXB-annotated classes will be serialised and deserialised. Our JAXB
+provider will be `JAXBProvider`.
+
+This JAXB provider has to be registered within RESTEasy. Once registered
+we will use a custom IDResolver class of our own making to allow
+unresolved XML IDs (which are not in the XML document sent to us by the
+user) to be loaded from the persistence layer. Our custom IDResolver
+will be `EntityIDResolver`.
+
+[[deploy]]
+== Deploying RESTEasy under JBoss AS
+
+We decided to download the latest version of RESTEasy as of this
+writing, which is 1.0-beta7
+
+Once you have downloaded it, add at least the following jars to your
+project:
+
+* jaxrs-api-1.0-beta-7.jar
+* resteasy-jaxrs-1.0-beta-7.jar
+* scannotation-1.0.2.jar
+* slf4j-api-1.5.2.jar
+
+You have to include these files in your EAR's `lib/` folder because we
+are not using their web application setup.
+
+Next, configure your `web.xml` to start the RESTful servlet which maps
+your RESTful resources under the prefix `/rest/`:
+
+*web.xml*
+
+[source,xml=nogutter]
+----
+<!-- RESTful servlet adapter -->
+
+   <!-- We need to specify our own JAXB provider, but also
+          the default ones we do not want to lose -->
+   <context-param>
+      <param-name>resteasy.providers</param-name>
+      <param-value>
+         com.visiblelogistics.rest.JAXBProvider,
+         org.jboss.resteasy.plugins.providers.DefaultTextPlain,
+         org.jboss.resteasy.plugins.providers.ByteArrayProvider,
+         org.jboss.resteasy.plugins.providers.InputStreamProvider,
+         org.jboss.resteasy.plugins.providers.ByteArrayProvider,
+         org.jboss.resteasy.plugins.providers.StringTextStar
+      </param-value>
+   </context-param>
+
+   <!--
+    We want to use EJB3 components to handle RESTful requests.
+    These names depend on your JNDI naming pattern.
+   -->
+   <context-param>
+      <param-name>resteasy.jndi.resources</param-name>
+      <param-value>RESTItemBean/local,RESTPersonBean</param-value>
+   </context-param>
+
+   <context-param>
+      <param-name>resteasy.use.builtin.providers</param-name>
+      <param-value>false</param-value>
+   </context-param>
+
+   <listener>
+      <listener-class>
+        org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap
+      </listener-class>
+   </listener>
+
+   <servlet>
+      <servlet-name>Resteasy</servlet-name>
+      <servlet-class>
+        org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
+      </servlet-class>
+   </servlet>
+
+   <context-param>
+      <param-name>resteasy.servlet.mapping.prefix</param-name>
+      <param-value>/rest</param-value>
+   </context-param>
+
+   <servlet-mapping>
+      <servlet-name>Resteasy</servlet-name>
+      <url-pattern>/rest/*</url-pattern>
+   </servlet-mapping>
+----
+
+[[changes]]
+== Changes in the persistence entities
+
+In order to be able to serialise and deserialise our entities using
+JAXB, we only need to add a few annotations on our entities:
+
+* http://java.sun.com/javaee/5/docs/api/javax/xml/bind/annotation/XmlRootElement.html[@XmlRootElement]
+on our entity classes
+* http://java.sun.com/javaee/5/docs/api/javax/xml/bind/annotation/XmlAccessorType.html[@XmlAccessorType](http://java.sun.com/javaee/5/docs/api/javax/xml/bind/annotation/XmlAccessType.html[XmlAccessType.NONE])
+on our entity classes, in order for JAXB to only consider explicitely
+annotated members for serialisation
+* http://java.sun.com/javaee/5/docs/api/javax/xml/bind/annotation/XmlElement.html[@XmlElement]
+on any property we want to serialise
+* http://java.sun.com/javaee/5/docs/api/javax/xml/bind/annotation/XmlID.html[@XmlID]
+on a property used as a foreign key
+* http://java.sun.com/javaee/5/docs/api/javax/xml/bind/annotation/XmlIDREF.html[@XmlIDREF]
+on a property which should be serialised as a pointer (foreign key)
+rather than by serialising its content
+
+Here is our JAXB-annotated `Person`:
+
+*Person.java*
+
+[source,java=nogutter]
+----
+@Entity
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.NONE)
+public class Person implements Serializable {
+
+  //
+  // Persisted property fields
+
+  @Id
+  @GeneratedValue
+  private long id;
+
+  @Column(unique = true)
+  @Pattern(regex = "^[A-Z][A-Z0-9]+$")
+  @XmlID
+  @XmlElement
+  private String key;
+
+  @Column(unique = true)
+  @NonLocalEmailAddress
+  @XmlElement
+  private String emailAddress;
+
+  // we cannot put @NotEmpty here since it can be empty if organisationName is not empty
+  @XmlElement
+  private String name;
+
+  // we cannot put @NotEmpty here since it can be empty if name is not empty
+  @XmlElement
+  private String organisationName;
+
+  [...]
+}
+----
+
+And for our `Item` entity:
+
+*Item.java*
+
+[source,java=nogutter]
+----
+@Entity
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "reference", "owner" }) })
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.NONE)
+public class Item implements Serializable {
+
+  //
+  // Persisted property fields
+
+  @Id
+  @GeneratedValue
+  private long id;
+
+  @XmlElement
+  private String description;
+
+  @Column(nullable = true)
+  @ManyToOne
+  @XmlIDREF
+  @XmlElement
+  private Item owner;
+
+  @XmlElement
+  private String reference;
+
+  //
+  // Transient properties methods
+
+  @XmlID
+  @XmlElement
+  public String getKey(){
+    return owner.getKey() + '-' + reference;
+  }
+
+  [...]
+
+}
+----
+
+We can now serialise and deserialise our entities to/from XML using
+JAXB.
+
+[[provider]]
+== Our JAXB provider
+
+In JAX-RS we can register an object responsible for reading/writing to a
+given MIME type. In our case we want to be able to serialise/deserialise
+any JAXB-annotated object to XML using the `application/xml` MIME type
+but also all subformats of XML using the `application/*+xml` wildcard.
+In order to do that we define the following provider:
+
+*JAXBProvider.java*
+
+[source,java=nogutter]
+----
+@Provider
+@Consumes( { "application/xml", "application/*+xml" })
+@Produces( { "application/xml", "application/*+xml" })
+public class JAXBProvider implements MessageBodyReader<Object>,
+  MessageBodyWriter<Object> {
+
+  public boolean isReadable(Class<?> type, Type genericType, Annotation[] annotations,
+                         MediaType mediaType) {
+    return type.isAnnotationPresent(XmlRootElement.class);
+  }
+
+  public Object readFrom(Class<Object> type, Type genericType,
+                         Annotation[] annotations,
+                         MediaType mediaType,
+                         MultivaluedMap<String, String> httpHeaders,
+                         InputStream entityStream)
+   throws IOException {
+    try {
+      JAXBContext jaxb = JAXBContext.newInstance(type);
+      Unmarshaller unmarshaller = jaxb.createUnmarshaller();
+      // set our own IDResolver because we want to resolve our XML IDs from the database
+
+      unmarshaller.setProperty(IDResolver.class.getName(), new EntityIDResolver());
+      Object obj = unmarshaller.unmarshal(entityStream);
+
+      if (obj instanceof JAXBElement)
+        obj = ((JAXBElement<?>) obj).getValue();
+      if (!type.isInstance(obj))
+        throw new WebApplicationException(HttpURLConnection.HTTP_BAD_REQUEST);
+      return obj;
+    }
+    catch (WebApplicationException e) {
+      throw e;
+    }
+    catch (Throwable e) {
+      throw new WebApplicationException(e);
+    }
+  }
+
+  public long getSize(Object arg0) {
+    return -1;
+  }
+
+  public boolean isWriteable(Class<?> type, Type genericType,
+                             Annotation[] annotations, MediaType mediaType) {
+    return type.isAnnotationPresent(XmlRootElement.class);
+  }
+
+  /**
+   * Marshalls any JAXB object to XML.
+   */
+  public void writeTo(Object object, Class<?> type, Type genericType,
+                      Annotation[] annotations, MediaType mediaType,
+                      MultivaluedMap<String, Object> httpHeaders,
+                      OutputStream entityStream)
+   throws IOException {
+    try {
+      JAXBContext jaxb = JAXBContext.newInstance(object.getClass());
+      Marshaller marshaller = jaxb.createMarshaller();
+      marshaller.marshal(object, entityStream);
+    }
+    catch (Exception e) {
+      throw new WebApplicationException(e);
+    }
+  }
+
+}
+----
+
+You will have noticed the use of JAX-RS
+https://jsr311.dev.java.net/nonav/releases/0.6/javax/ws/rs/WebApplicationException.html[WebApplicationException]
+to wrap internal exceptions, and sometimes set the HTTP response code.
+This exception will be caught by our JAX-RS provider (RESTEasy) and used
+to construct the HTTP response. It is also possible to specify more
+elements of the response by building a
+https://jsr311.dev.java.net/nonav/releases/0.6/javax/ws/rs/core/Response.html[Response]
+object and passing it as parameter to the `WebApplicationException`.
+
+In order to be able to resolve XML IDs from our database, here is our
+implementation of `EntityIDResolver`:
+
+*EntityIDResolver.java*
+
+[source,java=nogutter]
+----
+public class EntityIDResolver extends IDResolver {
+  @Override
+  public void bind(final String id, final Object value) throws SAXException {}
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public Callable<?> resolve(final String id, final Class type) throws SAXException {
+    return new Callable<Object>() {
+      @SuppressWarnings("unchecked")
+      public Object call() throws Exception {
+        if (type == Person.class) {
+          // use some uninteresting JNDI lookup to get our EJB DAOs
+          PersonDAO personDAO = lookupEJB(PersonDAOBean.class);
+          Person person = personDAO.findByKey(id);
+          if (person != null)
+            return person;
+          throw
+            new SAXException(new WebApplicationException(HttpURLConnection.HTTP_NOT_FOUND));
+        }
+        if (type == Item.class) {
+          // use some uninteresting JNDI lookup to get our EJB DAOs
+          ItemDAO itemDAO = lookupEJB(ItemDAOBean.class);
+          Item item = itemDAO.findByKey(id);
+          if (item != null)
+            return item;
+          throw
+            new SAXException(new WebApplicationException(HttpURLConnection.HTTP_NOT_FOUND));
+        }
+        return null;
+      }
+    };
+  }
+
+}
+----
+
+Once again in this code we use `WebApplicationException` to specify the
+response HTTP status, even though we wrap it in `SAXException` so that
+the JAXB stack will unwrap it.
+
+[[resource]]
+== Our REST item resource
+
+Now we can get to the real JAX-RS web services.
+
+Since we are using Seam EJB components as resources, we need to split
+the resource into implementation bean and interface. This allows us to
+put all the JAX-RS annotations on the interface and keep our
+implementation bean clean and lighter.
+
+[[interface]]
+=== The RESTItem resource interface
+
+*RESTItem.java*
+
+[source,java=nogutter]
+----
+@Local
+// This declares the global path mapping of these resources
+@Path("/items")
+// This declares that we produce both JAXB entities, and plain text error messages
+@Produces( { "application/xml", "text/plain" })
+public interface RESTItem {
+
+ /**
+  * Gets a list of all the Item entities, with the optional "creator" query parameter.
+  * @param creatorKey optional query parameter used to filter the returned Item entities.
+  */
+ // this defines a mapping for the GET HTTP method
+ @GET
+ // the @QueryParam annotation will cause the value of the "creator" HTTP query parameter
+ // to be injected into our method argument
+ public ItemList getItems(@QueryParam("creator") String creatorKey);
+
+ /**
+  * Posts a new Item object
+  * @param newItem the new Item object to persist
+  * @param uriInfo an object used to determine the location of the new Item resource.
+  */
+ // this defines a mapping for the POST HTTP method
+ @POST
+ // the @Context annotation will cause the method argument to be provided
+ // by the JAX-RS container
+ public Response postItem(Item newItem, @Context UriInfo uriInfo);
+
+ /**
+  * Gets an Item object
+  * @param key the XML ID of the object to retreive
+  */
+ // this defines an additional path parameter to the global prefix
+ @Path("{key}")
+ @GET
+ // the @PathParam annotation will cause the value of the "key" HTTP path parameter
+ // to be injected into our method argument
+ public Item getItem(@PathParam("key") String key);
+
+ /**
+  * Updates an Item object
+  * @param key the XML ID of the object to update
+  * @param newItem the new Item object to update
+  * @param uriInfo an object used to determine the location of the new Item resource.
+  */
+ @Path("{key}")
+ @PUT
+ public void putItem(@PathParam("key") String key, Item newItem,
+                     @Context UriInfo uriInfo);
+
+}
+----
+
+We use the `Response` return value for POST in order to specify the HTTP
+`Location` header for the newly created `Item`, as well as the 201
+(Created) HTTP status code.
+
+[[mapping]]
+=== The RESTful API mapping
+
+Our annotated `RESTItem` class will map the following URLs to the
+following results:
+
+[cols=",,,",]
+|===
+|Method |URL |mime type |result
+|GET |/rest/items |application/xml |Retreives a list of Item XML IDs
+|POST |/rest/items |application/xml |Creates a new Item object
+|GET |/rest/items/\{key} |application/xml |Retrieves an Item instance
+|PUT |/rest/items/\{key} |application/xml |Updates an Item instance
+|===
+
+[[implementation]]
+=== The RESTItem implementation
+
+*RESTItemBean.java*
+
+[source,java=nogutter]
+----
+@Name("RESTItem")
+@Stateless
+public class RESTItemBean implements RESTItem {
+
+ @EJB
+ private ItemDAO itemDAO;
+
+ @EJB
+ private PersonDAO personDAO;
+
+ //
+ // JAXB Collection wrappers
+
+ // We use this wrapper class in order to avoid loading Item objects
+ // from the persistence tier when we only want to return their keys
+ @XmlRootElement(name = "list")
+ public static class ItemList {
+  @SuppressWarnings("unused")
+  @XmlElement(name = "itemLink")
+  private List<String> itemLinks;
+
+  public ItemList() {}
+
+  public ItemList(final List<String> itemLinks) {
+    this.itemLinks = itemLinks;
+  }
+ }
+
+ //
+ // REST services
+
+ public ItemList getItems(final String creatorKey){
+   List<String> itemKeyList;
+   if(creatorKey != null){
+     Person creator = personDAO.findByKey(creatorKey);
+     if(creator == null)
+       throw new WebApplicationException(HttpURLConnection.HTTP_NOT_FOUND);
+     itemKeyList = itemDAO.findItemKeys(creator);
+   }else
+     itemKeyList = itemDAO.findItemKeys(null);
+   return new ItemList(itemKeyList);
+ }
+
+ public Response postItem(final Item newItem, UriInfo uriInfo);
+   try{
+     itemDAO.persist(newItem);
+     // Now we have to find the URI that can be used to retrieve the newly created object
+     // The UriInfo object is used to locate the URI corresponding to RESTItem.getItem
+     // The UriInfo.build() method takes arguments which will replace path parameters
+     URI newURI = uriInfo.getBaseUriBuilder().path("RESTItem", "getItem")
+      .build(newItem.getKey());
+     return Response.created(newURI).build();
+   }catch(Throwable t){
+     throw processValidationError(t);
+   }
+ }
+
+ public Item getItem(String key){
+   Item item = itemDAO.findByKey(key);
+   if(item == null)
+     throw new WebApplicationException(HttpURLConnection.HTTP_NOT_FOUND);
+   return item;
+ }
+
+ public void putItem(String key, Item newItem, UriInfo uriInfo){
+   try{
+     Item oldItem = itemDAO.findByKey(key);
+     if(oldItem == null)
+       throw new WebApplicationException(HttpURLConnection.HTTP_NOT_FOUND);
+     oldItem.updatePropertiesFrom(newItem);
+     itemDAO.merge(oldItem);
+   }catch(Throwable t){
+     throw processValidationError(t);
+   }
+ }
+
+}
+----
+
+[[validation]]
+=== Handling validation errors
+
+As you have no doubt observed, there is no attempt at validation for
+entities we receive and store. This is done entirely using the
+annotations in our entities when the persistence layer will attempt to
+merge or persist them. In the case of validation error, an exception
+will be thrown by the DAO, which we catch and handle in the
+`processValidationError` method:
+
+*Validation error processing*
+
+[source,java=nogutter]
+----
+public WebApplicationException processValidationError(Throwable x) {
+  Throwable cause = x;
+  // We need to do some unwrapping of exception first
+
+  while (cause != null) {
+    if (cause instanceof WebApplicationException)
+      return (WebApplicationException) cause;
+    if (cause instanceof InvalidStateException)
+      break;
+    if (cause instanceof BatchUpdateException)
+      cause = ((SQLException) cause).getNextException();
+    else
+      cause = cause.getCause();
+  }
+
+  // This is a Persistence exception with information
+  if (cause instanceof InvalidStateException) {
+    InvalidStateException e = (InvalidStateException) cause;
+    StringBuilder stringBuilder = new StringBuilder();
+    // Construct a "readable" message outlining the validation errors
+
+    for (InvalidValue invalidValue : e.getInvalidValues())
+      stringBuilder.append(invalidValue.getPropertyName()).append(": ")
+                   .append(invalidValue.getMessage()).append("n");
+
+    return
+      new WebApplicationException(Response.status(HttpURLConnection.HTTP_BAD_REQUEST)
+                                            .entity(stringBuilder.toString()).build());
+  }
+  return new WebApplicationException(x, HttpURLConnection.HTTP_INTERNAL_ERROR);
+}
+----
+
+[[conclusion]]
+== Final thoughts and conclusion
+
+The `RESTPerson` features nothing new compared to `RESTItem` and is
+therefore left as an exercise for the reader.
+
+Hibernate validation constraints can be localised, not the EJB ones, but
+Hibernate provides similar validation constraints to EJB with proper
+localisation.
+
+Handling errors and providing meaningful HTTP responses is not easy, and
+in our real code I have favoured using the `Response` object as a return
+type for every RESTful method, for consistency, and because we had
+strict specifications that forced us to include a blurb of text on top
+of success responses as well as error responses.
+
+There were a few bugs we had to fix in RESTEasy by hand throughout our
+exercise, but that was alright because they provide their sources, and
+they're fairly small and compact, so we can't complain.
+
+We have finished our first version of our RESTful web services for
+http://www.visiblelogistics.com[VisibleLogistics] using the techniques
+outlined in this article, so you can expect to see them put to some
+public test shortly.
+
+Always on the bleeding edge.

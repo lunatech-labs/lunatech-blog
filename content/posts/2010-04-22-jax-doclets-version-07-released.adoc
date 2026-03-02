@@ -1,0 +1,28 @@
+---
+layout: post
+title: jax-doclets version 0.7 released
+date: 2010-04-22
+author: FroMage
+lang: en
+tags:
+  - resteasy
+  - java
+  - rest
+  - documentation
+---
+= jax-doclets version 0.7 released
+
+Did you know we have an http://www.lunatech-labs.com[open-source web
+site]?
+
+We release all our open-source projects there, as a way to give back to
+the open-source community we use and abuse every day and without which
+we’d be knee-deep stuck in proprietary code, inscrutable bugs and opaque
+security.
+
+Our first such project is
+http://www.lunatech-labs.com/open-source/jax-doclets[jax-doclets]: a
+JavaDoc extension that uses Java comments to document your JAXB
+resources and JAX-RS web services. Today we released version 0.7,
+http://code.google.com/p/jax-doclets/downloads/list[get it] while it’s
+hot.

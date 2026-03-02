@@ -1,0 +1,19 @@
+---
+layout: post
+title: Geo Freedom Day 2011
+date: 2011-12-05
+author: wjkveen
+lang: en
+tags:
+  - event
+---
+= Geo Freedom Day 2011
+
+Lunatech will be at the event http://geofreedomday.nl/[Geo Freedom Day
+2011]. The event is cool because we have done
+GeoMap related development for our Logistics division in the past and
+want to continue monitoring the progress in the field.
+
+Specifically, an interesting presentation will be about the work with
+the new Red programming language and the map libraries Champlain and
+OMS-GS-map.

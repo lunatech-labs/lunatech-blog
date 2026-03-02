@@ -1,0 +1,267 @@
+---
+layout: post
+title: Mapping Slick query results to case classes 1.0.1
+date: 2013-11-21
+author: hilton
+lang: en
+tags:
+  - slick
+  - playframework
+---
+= Mapping Slick query results to case classes 1.0.1
+
+This tutorial shows you how to handle database query results in a Slick application by building on the previous Slick tutorials.
+
+By default, Slick query results are collections of Scala tuples, whose
+structure corresponds to a Slick projection. When each row is more than
+a single value, it is more natural to use domain model case classes than
+tuples. To to this, add a mapping to the table definition’s default
+projection, in the form of two functions that convert between tuples and
+case class instances.
+
+== Summary
+
+Perform the following tasks to learn how to map query results.
+
+[arabic]
+. Define a table mapping to a tuple
+. Define a default mapping to a case class
+. Mapping multiple columns to custom types
+. Use implicit conversions for custom types (or not)
+
+Source code: https://github.com/lunatech-labs/play-slick-examples.
+
+== Defining a table mapping to a tuple
+
+To continue from previous tutorials, start with the table mapping from
+http://blog.lunatech.com/2013/08/08/play-slick-getting-started[Getting
+started with Play and Slick]. In your Play application, this is a
+database model in:
+
+[source,scala,linenums]
+----
+// app/models/database/Cocktails.scala
+package models.database
+
+import play.api.db.slick.Config.driver.simple._
+
+class Cocktails extends Table[(Long, String)]("COCKTAIL") {
+  def id = column[Long]("ID")
+  def name = column[String]("NAME")
+  def * = id ~ name
+}
+----
+
+This class defines a mapping to the `COCKTAIL` database table, with two
+columns and a projection called `*`.
+
+Use this table mapping to define a `finder' method in your application’s
+model layer, as explained in
+http://blog.lunatech.com/2013/10/04/play-slick-executing-queries[Executing
+database queries with Slick]. In `app/models/Cocktail.scala`:
+
+[source,scala,linenums]
+----
+// app/models/Cocktail.scala
+package models
+
+import models.database.Cocktails
+import play.api.Play.current
+import play.api.db.slick.Config.driver.simple._
+import play.api.db.slick.DB
+import scala.slick.session.Session
+
+object Cocktail {
+  val table = new Cocktails
+
+  def find: List[(Long, String)] = DB.withSession { implicit session: Session =>
+	Query(table).list
+  }
+}
+----
+
+The query results a list of `(Long, String)` pairs (tuples). Now you’re
+ready for the next step.
+
+== Defining a default mapping to a case class
+
+Working with tuples is not convenient, and results in code that is hard
+to maintain, because it is an anonymous structure. Instead, use add the
+following case class to your model, so you can refer to `id` and `name`
+by name.
+
+Add the case class, before the `object Cocktail` declaration:
+
+[source,scala,linenums]
+----
+// app/models/Cocktail.scala
+case class Cocktail(id: Option[Long], name: String)
+----
+
+The `id` has to be an `Option` type so you can create instances that do
+not have an ID yet, before you insert them into the database.
+
+Slick will return instances of this case class from queries if you
+change the table mapping. To do this, first change the table superclass
+type from `Table[(Long, String)]` to `Table[models.Cocktail]`. Next, use
+the `<>` operator to add a mapping to the table’s default projection:
+
+[source,scala,linenums]
+----
+// app/models/database/Cocktails.scala
+def * = id.? ~ name <> (Cocktail.apply _, Cocktail.unapply _)
+----
+
+Note that you have to change the projection’s first column from `id` to
+`id.?`, wrapping the column with Slick’s option type mapper to match the
+`Option[Long]` type in the case class.
+
+The mapping’s first function converts a `(Option[Long], String)` tuple
+from the projection to a `Cocktail` instance. The second function
+performs the opposite conversion,
+`Cocktail => Option[(Option[Long], String)]`. In this case, you can use
+the case class’ `apply` and `unapply` functions for the mapping, because
+the case class structure matches the column types, in order.
+
+The complete table mapping is now:
+
+[source,scala,linenums]
+----
+// app/models/database/Cocktails.scala
+package models.database
+
+import play.api.db.slick.Config.driver.simple._
+import models.Cocktail
+
+class Cocktails extends Table[Cocktail]("COCKTAIL") {
+  def id = column[Long]("ID")
+  def name = column[String]("NAME")
+  def * = id.? ~ name <> (Cocktail.apply _, Cocktail.unapply _)
+}
+----
+
+In general, it is so convenient to be able to use case class `apply` and
+`unapply` functions (most of the time) that it is worth using this as a
+starting point, even if you ultimately want a different case class
+structure in your domain model - without IDs and with foreign keys
+replaced by instances.
+
+Now change the finder return type to `Cocktail`:
+
+
+[source,scala,linenums]
+----
+// app/models/Cocktail.scala
+def find: List[Cocktail] = DB.withSession { implicit session: Session =>
+  Query(table).list
+}
+----
+
+== Mapping multiple columns to custom types
+
+Sometimes you don’t want to map column values directly, because multiple
+values represent a custom type. For example, add price information to
+the cocktails table (or in a separate table if you know how to do
+joins):
+
+[source,scala,linenums]
+----
+// app/models/database/Cocktails.scala
+def priceCurrency = column[String]("PRICE_CURRENCY")
+def priceAmount = column[BigDecimal]("PRICE_AMOUNT", O.DBType("DECIMAL(13,3)"))
+
+----
+To support multiple currencies, these two columns will store a monetary
+value as a three-letter http://en.wikipedia.org/wiki/ISO_4217[ISO 4217]
+currency code and a decimal amount, with a MySQL custom column type. You
+could model these as two separate properties in the `Cocktail` case
+class, but what you really want to do is use
+http://www.joda.org/joda-money/[Joda Money].
+
+Add `"org.joda" % "joda-money" % "0.9"` to the application dependencies
+in `project/Build.scala`, and change the case class:
+
+[source,scala,linenums]
+----
+// app/models/Cocktail.scala
+import org.joda.money.Money
+
+case class Cocktail(id: Option[Long], name: String, price: Money)
+
+----
+
+To make this work, you have to change the projection mapping functions
+to convert between the `String` and `BigDecimal` values and
+`org.joda.money.Money` instances. You can do this inline in the
+projection declaration:
+
+
+[source,scala,linenums]
+----
+// app/models/database/Cocktails.scala
+
+def * = id.? ~ name ~ priceCurrency ~ priceAmount <> (
+  c => Cocktail(c._1, c._2, money(c._3, c._4)),
+  (c: Cocktail) => {
+	Some((c.id, c.name, c.price.getCurrencyUnit.getCode, c.price.getAmount))
+  })
+  
+private def money(currencyCode: String, amount: BigDecimal): Money = {
+  val currency = CurrencyUnit.of(currencyCode)
+  Money.of(currency, amount.bigDecimal, RoundingMode.DOWN)
+}
+----
+
+This is already a lot less readable, even with this few database columns. In practice, you should probably extract the functions to ‘map’ and ‘un-map’ a table row:
+
+[source,scala,linenums]
+----
+// app/models/database/Cocktails.scala
+
+def * = id.? ~ name ~ priceCurrency ~ priceAmount <> (mapRow _, unMapRow _)
+
+private def mapRow(id: Option[Long], name: String, currency: String, 
+  amount: BigDecimal): Cocktail = {
+  Cocktail(id, name, money(currency, amount))
+}
+
+private def unMapRow(cocktail: Cocktail) = {
+  val currency = cocktail.price.getCurrencyUnit.getCode
+  val amount: BigDecimal = cocktail.price.getAmount
+  val tuple = (cocktail.id, cocktail.name, currency, amount)
+  Some(tuple)
+}
+----
+
+Note that the `mapRow` and `unMapRow` functions are called `map` and
+`comap` in the Slick source code.
+
+== Using implicit conversions for custom types
+
+You may want to use an implicit conversion instead of
+`money(currency, amount)`. For example, you could just write
+`(currency, amount)` or `currency -> amount` if you define the following
+conversion from the tuple to `Money`:
+
+[source,scala,linenums]
+----
+// app/models/database/Cocktails.scala
+
+implicit def tuple2Money(money: (String, BigDecimal)): Money = {
+  val currency = CurrencyUnit.of(money._1)
+  Money.of(currency, money._2.bigDecimal, RoundingMode.DOWN)
+}
+----
+
+Whether you do this is a matter of personal taste, and whether you think
+using Scala implicit declarations like this is better than having
+maintainable code.
+
+== Next steps
+
+Now you can map query results to case classes, you can:
+
+* define join queries
+* define aggregate and group-by queries
+* http://blog.lunatech.com/2014/01/24/slick-insert-data[insert], update
+and delete data.

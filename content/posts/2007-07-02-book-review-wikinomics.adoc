@@ -1,0 +1,27 @@
+---
+layout: post
+title: Book review - Wikinomics
+date: 2007-07-02
+author: hilton
+lang: en
+tags:
+  - opinion
+  - book
+---
+= Book review - Wikinomics
+
+:imagesdir: /images/media/2007-07-02-book-review-wikinomics
+
+http://www.wikinomics.com/[Wikinomics] is a book about the mass
+web-based collaboration that has emerged in the last few years. It
+explains well-known phenomena such as Wikipedia and Flickr, as well as
+new kinds of business such as
+http://www.innocentive.com/[InnoCentive], which introduces a
+peer-to-peer model to scientific research.
+
+image:../media/2007-07-02-book-review-wikinomics/wikinomics.jpg[Wikinomics]
+
+The only annoyance is the book's relentless repetition of the key
+points, as if it were not a fairly simple idea, so although I recommend
+the book, you should skip half of it.
+

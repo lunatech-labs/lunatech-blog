@@ -1,0 +1,54 @@
+---
+layout: post
+title: "Benelux JBoss User Group, 22 May 2009"
+date: 2009-04-29
+author: pepite
+lang: en
+tags:
+  - java
+  - event
+  - jbug
+---
+= Benelux JBoss User Group, 22 May 2009
+
+We would like to invite you to our **sixth Benelux JBoss User
+Group meeting**: an evening of free technical sessions presented by
+JBoss and Lunatech developers.
+
+We will meet in the Lunatech Research's office in Rotterdam.
+
+* Date: Friday, 22 May 2009
+* Time: Arrival 1600-1630, presentations start 1630, finish 1900-1930
+* Location: http://lunatech-research.com/contact
+
+== Programme
+
+The programme will begin with a presentation of *JBoss Reloaded* by
+*Carlo de Wolf* from JBoss. Carlo de Wolf began his career in 1994
+programming C applications for various applications. In 1997 he started
+using Java to develop desktop applications. He developed an application
+server based on the EJB 0.8 specifications for a large Netherlands bank
+and then was hooked on EJB. He has been with Red Hat for over three
+years working with a small team to produce the EJB 3 services for AS and
+EAP. The talk will explain the why and what of the new JBoss Reloaded
+project: JBoss Reloaded is the low-level base of all major upcoming
+JBoss releases that use MicroContainer and the Virtual Deployer
+Framework. Be it JBoss EJB 3 Embeddable, JBoss Embedded and of course
+JBoss Application Server.
+
+In the second presentation, *Joram Barrez*, jBPM expert at RealDolmen
+and Co-founder of the JBoss User Group Belgium (www.jbug.be), will talk
+about business Intelligence with jBPM4. It will show the usage of the
+new jBPM4 API and how to extract simple KPIs from the process
+executions.
+
+In the third presentation, *Peter Hilton*, lead for the
+*VisibleLogistics* project, will talk about language localisation in JSF
+and Seam. He will introduces the mechanisms for internationalising a web
+application built using JavaServer Faces (JSF) application and the Seam
+Framework for language localisation (L10N).
+
+Of course, beer and networking are also part of the programme ;)
+
+Please http://www.lunatech-research.com/event/register/jbug6[register]
+as soon as possible as we have a limited number of seats.

@@ -1,0 +1,202 @@
+---
+layout: post
+title: Play Framework 1.2 - Writing a Multitenancy Application with Hibernate Filters
+date: 2011-03-04
+author: eamelink
+lang: en
+tags:
+  - playframework
+  - hibernate
+---
+= Play Framework 1.2 - Writing a Multitenancy Application with Hibernate Filters
+
+This article describes a method to simplify the
+construction of a Play 1.2 application with multiple users that have
+little or no shared data, using Hibernate Filters.
+
+A multitenancy application is characterized by having multiple users
+that have independent data in the system. An example could be a todo
+list application, where every user has his own todo lists and tasks, and
+there is no relation to lists or tasks of other users of the system.
+
+[[Conventionalsolution]]
+== Conventional solution
+
+Various methods can be used to separate the data of the users. You can
+use different database servers or different database instances within
+the same database server. For maintenance reasons however it is often
+preferable to keep all the data together and use a single database. In
+this case, every record in the database, and every database mapped Java
+class, must have a property that keeps track of the user to which it
+belongs, like in the following example:
+
+[source,java]
+----
+public class Task extends Model {
+    public String description;
+    public Boolean done;
+
+    @ManyToOne
+    public User user;
+}
+----
+
+On the other side of the relationship, we have the User class:
+
+[source,java]
+----
+@Entity
+public class User extends Model {
+    public String name;
+    
+    @OneToMany(mappedBy="user")
+    public Set<Task> tasks;
+}
+----
+
+Now, to get a list of all the Tasks for the user that is logged in, we
+must do something like:
+
+[source,java]
+----
+List<Task> tasks = Task.find("byUser", loggedInUser).fetch();
+----
+
+And to search for Tasks for the user that is logged in and that are not
+done yet, we can do:
+
+[source,java]
+----
+List<Task> tasks = Task.find("byUserAndDone", loggedInUser, false).fetch();
+----
+
+What we see is that in every query we have to explicitly specify the
+user, which can become very cumbersome. This is especially true when you
+have a large amount of models that are all tied to a single user.
+
+[[HibernateFilters]]
+== Hibernate Filters
+
+You can improve on the situation by using Hibernate Filters. This
+feature of Hibernate allows you to automatically add extra `WHERE`
+clauses to every query that queries a specific table. It is slightly
+similar to creating a view on a table, but it is easier to manage from
+your application, easier to apply to multiple tables and it scales
+better, as you don't have to explicitly define views for every user.
+
+Hibernate filters consist of two annotations. The first is an
+`@FilterDef` annotation that defines the filter. The second is an
+`@Filter` annotation that applies the filter to the class the annotation
+is set on. A filter only has to be defined once, and can be applied to
+many entities.
+
+We want to use the filter in the entire package, so we specify them on a
+package level in in the file `package-info.java`, residing in the
+`models` package:
+
+[source,java]
+----
+@FilterDef(name="user", parameters= { @ParamDef( name="user_id", type="long") }, defaultCondition=":user_id = user_id", )
+package models;
+
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.ParamDef;
+----
+
+Here we have defined a filter with the name `user`, and one parameter
+`user_id` of type `long`. We have also specified a default condition.
+This condition can be overridden each time the filter is applied, but
+this is a good default for the cases where you just have a `user` member
+in an entity class, like in our `Task`.
+
+It should also be possible to just define this filter on an arbitrary
+entity class, but a
+http://opensource.atlassian.com/projects/hibernate/browse/HHH-2091[bug]
+in Hibernate may cause you trouble in that case.
+
+[[ApplyingaFilter]]
+== Applying a Filter
+
+Now that the filter is defined, we can apply it on an entity class, for
+example on our `Task`:
+
+[source,java]
+----
+@Entity
+@Filter(name="user")
+public class Task extends Model {
+  ⋮
+}
+----
+
+Finally, we must enable this particular filter. It is convenient to have
+it automatically applied on every request, so we can do that in an
+`@Before` interceptor:
+
+[source,java]
+----
+@Before
+public static void setFilters() {
+
+    Long loggedInUser = 1L; // Replace this with the actual user id
+        
+    ((Session)JPA.em().getDelegate()).enableFilter("user").setParameter("user_id", loggedInUser);
+}
+----
+
+Here we grab the instance of the Hibernate `Session`, enable the filter
+`user` that we defined, and set the parameter `user_id`. If you use
+Play's `secure` module, you could get this user id from the session.
+
+This interceptor can be defined on a superclass of your controllers, or
+on a class that you add to your controllers with an `@With` annotation.
+
+[[Result]]
+== Result
+
+Now with the `user` filter applied, we can do a query like
+`Task.findAll()` and we only get the tasks of the user that is logged
+in. Also queries like `Tasks.count()` or `Tasks.find("byDone", false)`
+and even HQL queries only take tasks of the currently logged in user
+into account.
+
+Every Play requests has a fresh Hibernate Session, so if you do not
+enable a filter during the request, you can just query your entire
+database. This can be useful for some global administration page. If you
+want to do a query without the filter after enabling it, you can disable
+it with `((Session)JPA.em().getDelegate()).disableFilter("user")`.
+
+[[Additionaluses]]
+== Additional uses
+
+Filters can also be very useful for implementing a soft-delete. Add a
+filter that filters away records that are flagged as deleted, and you
+don't have do modify any queries in your program. In general, a filter
+is useful everywhere you have multiple queries with a common selection
+criterium and you want to unclutter your queries.
+
+[[PlayGotcha]]
+== Play Gotcha
+
+Play 1.1.1 has a
+http://play.lighthouseapp.com/projects/57987/tickets/478-exception-thrown-when-redeploying-package-infojava-files#ticket-478-5[bug]
+that bites you when you have a package-info.java file in a package that
+has a class with an enum or nested class. You get a "Compilation Error -
+The file /app/models/package-info.java could not be compiled. Error
+raised is : The type package-info is already defined" message. A
+https://github.com/playframework/play/pull/54[patch] is available and
+will hopefully make it into Play 1.2.
+
+Meanwhile, you can apply the patch to your Play installation, or
+alternatively define the `@FilterDef` on the first-loaded model in your
+application.
+
+[[Conclusion]]
+== Conclusion
+
+For maintenance reasons, it might be preferable to keep all data of a
+multitenant application in a single database. To avoid unnecessary
+repetition of a query criterium that selects only data for the current
+user, you can use Hibernate filters. With the Play framework, it is very
+easy to enable such a filter in an interceptor.
+

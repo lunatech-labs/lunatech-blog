@@ -1,0 +1,23 @@
+---
+layout: post
+title: JavaZone Play framework presentation video
+date: 2011-09-12
+author: hilton
+lang: en
+tags:
+  - event
+  - playframework
+---
+= JavaZone Play framework presentation video
+
+"Last week, Nicolas Leroux and Peter Hilton gave a [Play
+Framework](http://www.playframework.org/) presentation at
+[JavaZone](http://jz11.java.no/) in Oslo. Here is the video.
+
+link:http://vimeo.com/28769045[Play! Framework: to infinity and beyond]
+
+There are many more http://vimeo.com/javazone[JavaZone videos]; we
+especially recommend http://vimeo.com/28772382[CoffeeScript: JavaScript
+without the Fail].
+
+

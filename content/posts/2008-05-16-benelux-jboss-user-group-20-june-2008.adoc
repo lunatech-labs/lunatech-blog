@@ -1,0 +1,59 @@
+---
+layout: post
+title: "Benelux JBoss User Group, 20 June 2008"
+date: 2008-05-16
+author: pepite
+lang: en
+tags:
+  - java
+  - jboss
+  - jbug
+  - event
+---
+= Benelux JBoss User Group, 20 June 2008
+
+:imagesdir: /images/media/2008-05-16-benelux-jboss-user-group-20-june-2008
+
+We would like to invite you to our fourth Benelux JBoss User
+Group meeting: an afternoon of free technical sessions presented by
+JBoss developers.
+
+The JBoss User Group is growing and even our last location is now too
+small, so once again we arranged something special: we will meet in the
+http://www.staalrotterdam.nl/Zaalstaal/tabid/265/Default.aspx[Staal
+Zaal] in Rotterdam. http://www.i-portal.nl/[i-Portal Rotterdam] has
+kindly agreed to sponsor the event by providing us with a sumptuous
+room.
+
+image:jbug-2008-06-staal.jpg[Staal Rotterdam]
+
+* *Date:* Friday, 20 June 2008
+* *Time:* Arrival 1330-1400, presentations start 1400, finish 1830-1900,
+open bar 1900-2000
+* *Location:* http://www.staalrotterdam.nl/[Staal], Beursplein 33, 3011
+AA Rotterdam
+(http://maps.google.com/maps?f=q&hl=en&geocode=&q=staal+cafe,rotterdam&ie=UTF8&ll=51.92088,4.478999&spn=0.003593,0.010021&z=17&iwloc=A[map])
+
+*Programme*
+
+*The programme will begin* with a complete presentation of JBoss Portal.
+Julien Viet, founder and lead developer, will introduce JBoss Portal,
+and together with Thomas Heute, core developer, will dive into the
+specifics of JBoss Portal and introduce the latest developments . *In
+the second presentation*, Emmanuel Bernard, lead for Hibernate Search
+and Hibernate Validation, core developer of Hibernate , will show us how
+easy it is to integrate Hibernate Search in our project. *In the third
+presentation*, Clara Ko and Linda van der Pal, jduchess.org founders,
+will tell us all about women in I.T. Why are most of the people working
+as software engineers female? Why are men not attracted to a career as
+software engineers? We are testing if you are following the program, of
+course :) *In the fourth* and last presentation, Kris Verlaenen, will
+introduce and show us the JBoss rules engine: Drools. He will guide us
+on how and when to use a rules engine, and tell us about the specifics
+of JBoss Drools. In case you get thirsty, there will be an open bar
+where you will get the chance to talk with the speakers around a nice
+glass of wine or a cold beer. The jBPM team - Tom Baeyens and Koen Aers
+- will be present as well, so that might be your chance to talk with
+them. Please
+http://www.lunatech-research.com/event/register/jbug4[register] as soon
+as possible as we have a limited number of seats.

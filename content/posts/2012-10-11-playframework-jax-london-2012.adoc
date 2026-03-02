@@ -1,0 +1,20 @@
+---
+layout: post
+title: Lunatech presents Play at JAX London 2012
+date: 2012-10-11
+author: hilton
+lang: en
+tags:
+  - conference
+  - playframework
+---
+= Lunatech presents Play at JAX London 2012
+
+:imagesdir: /images/media/2012-10-11-playframework-jax-london-2012
+
+Next week, on 17 October 2012, Peter Hilton will present http://jaxlondon.com/2012/sessions/?tid=2675#session-23180[Play Framework
+2] at http://jaxlondon.com/[JAX
+London 2012].
+
+http://jaxlondon.com/[image:../media/2012-10-11-playframework-jax-london-2012/jaxlondon-logo.png[JAX London]]
+

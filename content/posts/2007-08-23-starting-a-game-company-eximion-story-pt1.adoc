@@ -1,0 +1,21 @@
+---
+layout: post
+title: Starting a game company - Eximion story pt.1
+date: 2007-08-23
+author: Michael Pentowski
+lang: en
+tags:
+  - ventures
+aliases:
+  - /posts/2007-08-23-starting-a-game-company---eximion-story-pt.1
+---
+= Starting a game company - Eximion story pt.1
+
+Chris van der Linden, our art
+director at http://www.eximion.com/[Eximion] is writing a http://chrisvanderlinden.blogspot.com/2007/08/starting-game-company-eximion.html[series of
+articles about starting a gaming
+company].
+Anyone interested in one man’s nostalgic view on starting a company
+should join Chris on http://chrisvanderlinden.blogspot.com/2007/08/starting-game-company-eximion.html[his stroll down memory
+lane].
+

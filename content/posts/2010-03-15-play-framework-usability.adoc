@@ -1,0 +1,194 @@
+---
+layout: post
+title: Play framework usability
+date: 2010-03-15
+author: PeterHilton
+lang: en
+tags:
+  - playframework
+---
+= Play framework usability
+
+:imagesdir: /images/media/2010-03-15-play-framework-usability
+
+Perhaps the most
+striking thing about about the http://www.playframework.org/[Play! framework] 1.0 is that its biggest
+advantage over other Java web application development frameworks does
+not fit into a neat feature list, and is only apparent after you have
+used it to build something. That advantage is usability.
+
+Note that usability is separate from functionality. In what follows, I
+am not suggesting that you cannot do this in some other framework: I
+merely claim that it is easier and more pleasant in Play! I need to
+emphasise this because geeks often have a total blind spot for usability
+because they enjoying figuring out difficult things, and
+under-appreciate the value of things that Just Work.
+
+[[webdevelopers]]
+== Written by web developers for web developers
+
+The first hint that something different is going on here is when you
+first hear that the Play! framework is 'written by web developers for
+web developers', an unconventional positioning that puts the web's
+principles and conventions first and Java's second. Specifically, this
+means that the Play! framework is more in line with the W3C's
+http://www.w3.org/TR/webarch/[Architecture of the World Wide Web] than
+it is with Java Enterprise Edition (Java EE) conventions.
+
+[[urls]]
+== URLs for perfectionists
+
+For example, the Play! framework, like other modern web frameworks,
+provides first-class support for arbitrary 'clean' URLs, which has
+always been lacking from the Servlet API. It is no coincidence that at
+the time of writing, link:/2005/07/29/struts-urls[Struts URLs for
+perfectionists], a set of work-arounds for the Servlet API-based Struts
+1.x web framework, remains the third-most popular out of 160 articles on
+_www.lunatech-research.com_ despite being a 2005 article about a
+previous-generation Java web technology.
+
+In Servlet-based frameworks, the Servlet API does not provide useful
+URL-routing support; Servlet-based frameworks configure `web.xml` to
+forward all requests to a single controller Servlet, and then implement
+URL routing in the framework, with additional configuration. At this
+point, it does not matter whether the Servlet API was ever intended to
+solve the URL-routing problem and failed by not being powerful enough,
+or whether it was intended to be a lower-level API that you do not build
+web applications in directly. Either way, the result is the same: web
+frameworks add an additional layer on top of the Servlet API, itself a
+layer on top of HTTP.
+
+Play! combines the web framework, HTTP API and the HTTP server, which
+allows it to implement the same thing more directly with fewer layers
+and a single URL routing configuration. This configuration, like Grails'
+and Cake PHP's, reflects the structure of an HTTP request - HTTP method,
+URL path, and then the mapping:
+
+----
+# Play! 'routes' configuration file…
+
+# Method   URL path         Controller
+
+GET        /                Application.index
+GET        /about           Application.about
+POST       /item            Item.addItem
+GET        /item/{id}       Item.getItem
+GET        /item/{id}.pdf   Item.getItemPdf
+----
+
+In this example, there is more than one controller. We also see the use
+of an `id` URL parameter in the last two URLs.
+
+[[servlet]]
+== HttpServletRequest
+
+Another example is Play!'s
+http://www.playframework.org/@api/play/mvc/Http.Request.html[Http.Request]
+class, which is a far simpler than the Servlet API's
+http://java.sun.com/javaee/6/docs/api/javax/servlet/http/HttpServletRequest.html[HttpServletRequest]
+interface. In addition, Play! uses a class where Java EE 6 uses the Java
+EE convention of using an interface. This interface is also split
+between `HttpServletRequest` and the more generic
+http://java.sun.com/javaee/6/docs/api/javax/servlet/ServletRequest.html[ServletRequest]
+interface. This separation may be useful if you want to use Servlets for
+things other than web applications, or if you want to allow for the
+unlikely possibility of the web changing protocol, but for most of us it
+is merely irrelevant complexity. In other words, the Servlet API is
+always used with a framework on top these days because it is
+sub-optimised for building web applications, which is what all of us
+actually use it for. Play! fixes that.
+
+[[usability]]
+== Better usability is not just for normal people
+
+Another way of looking at the idea that Play! is by and for web
+developers is to consider how a web developer might approach software
+design differently to a Java EE developer. When you write software, what
+is the primary interface? If you are a web developer, the primary
+interface is a web-based user-interface constructed with HTML, CSS and
+(increasingly) JavaScript. A Java EE developer, on the other hand, may
+consider their primary interface to be a Java API, or perhaps a web
+services API, for use by other layers in the system.
+
+This difference is a big deal, because a Java interface is intended for
+use by other programmers, while a web user-interface interface is
+intended for use by non-programmers. In both cases, good design includes
+usability, but usability for normal people is not the same as usability
+for programmers. In a way, usability for everyone is a higher standard
+than usability for programmers, when it comes to software, because
+programmers can cope better with poor usability. This is a bit like the
+http://www.designcouncil.org.uk/Case-Studies/All-Case-Studies/OXO-Good-Grips/[Good
+Grips] kitchen utensils: although they were originally designed to have
+better usability for elderly people with arthritis, it turns out that
+making tools easier to hold is better for all users.
+
+The Play! framework is different because the usability that you want to
+achieve in your web application is present in the framework itself. For
+example, the web interface to things like the framework documentation
+and error messages shown in the browser is just more usable. Along
+similar lines, the server's console output avoids the pages full of
+irrelevant logging and pages of stack traces when there is an error,
+leaving more focused and more usable information for the web developer.
+
+----
+$ play run phase
+~        _            _
+~  _ __ | | __ _ _  _| |
+~ | '_ \| |/ _' | || |_|
+~ |  __/|_|\____|\__ (_)
+~ |_|            |__/
+~
+~ play! 1.0, http://www.playframework.org
+~
+~ Ctrl+C to stop
+~
+Listening for transport dt_socket at address: 8000
+10:15:58,629 INFO  ~ Starting /Users/peter/Documents/work/workspace/phase
+10:16:00,007 WARN  ~ You're running Play! in DEV mode
+10:16:00,424 INFO  ~ Listening for HTTP on port 9000 (Waiting a first request to start) ...
+10:16:11,847 INFO  ~ Connected to jdbc:hsqldb:mem:playembed
+10:16:13,448 INFO  ~ Application 'phase' is now started !
+10:16:14,825 INFO  ~ starting DispatcherThread
+10:16:48,168 ERROR ~
+
+@61lagcl6i
+Internal Server Error (500) for request GET /application/startprocess?account=x
+
+Java exception (In /app/controllers/Application.java around line 41)
+IllegalArgumentException occured : Person not found for account x
+
+play.exceptions.JavaExecutionException: Person not found for account x
+    at play.mvc.ActionInvoker.invoke(ActionInvoker.java:200)
+    at Invocation.HTTP Request(Play!)
+Caused by: java.lang.IllegalArgumentException: Person not found for account x
+    at controllers.Application.startProcess(Application.java:41)
+    at play.utils.Java.invokeStatic(Java.java:129)
+    at play.mvc.ActionInvoker.invoke(ActionInvoker.java:127)
+    ... 1 more
+----
+
+Try to imagine a JSF web application producing a stack trace this short.
+In fact, Play! goes further: instead of showing the stack trace, the web
+application shows the last line of code within the application that
+appears in the stack trace. After all, what you really want to know is
+where things first went wrong _in your own code_.
+
+image:../media/2010-03-15-play-framework-usability/play-exception.png[image,title="Play! error page"]
+
+This kind of usability does not happen by itself; the Play! framework
+goes to considerable effort to filter out duplicate and irrelevant
+information, and focus on what is essential.
+
+[[details]]
+== Quality is in the details
+
+In the Play! framework, much of the quality turns out to be in the
+details: they may be small things individually, rather than big
+important features, but they add up to result in a more comfortable and
+more productive development experience. The warm feeling you get when
+building something with Play! is the absence of the frustration that
+usually results from fighting the framework.
+
+We recommend that you go to http://www.playframework.org/, download the
+latest binary release, and spend half an hour on the
+http://www.playframework.org/documentation/1.0.1/guide1[tutorial].

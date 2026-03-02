@@ -1,0 +1,56 @@
+---
+layout: post
+title: My favorite FireFox add-ons for MacOS
+date: 2009-01-13
+author: kaas
+lang: en
+tags:
+  - mac
+  - firefox
+---
+= My favorite FireFox add-ons for MacOS
+
+Although as a company we deliver most stuff to run on Linux servers, I
+see more and more Macs show up in the office. Our developers either
+[line-through]*blackmail*persuade us to get them these new toys or they
+decide to make the investment themselves.
+
+Now, apart from some extensive abuse ten years ago, I have always been a
+big Apple fan. I started coding for the Macintosh prior to System 7 and
+released several applications through the years. After Steve Jobs
+cancelled the Newton, I tossed all my Apple stuff into a corner and
+fully switched to Linux. I did not come back for more abuse until MacOS
+X 10.1.
+
+At that time, for browsing, I used Camino exclusively. Mozilla just
+didn't feel like a MacOS application. Then, when Apple release Safari I
+switched almost immediately. I can't remember exactly what swayed me,
+but it must have had something to do with the level of integration with
+the OS. But, since a few months now, I exclusively use FireFox.
+
+Firefox 3 is great, but doesn't yet totally cut the mustard out of the
+box. So, here is my list of Firefox add-ons that make it work really
+well on the Mac:
+
+* http://www.takebacktheweb.org/[*GrApple Yummy (blue)*]: +
+This makes Firefox look like Safari.
+* http://systemproxy.mozdev.org/[*System Proxy*]: +
+This nice little extension makes Firefox look at the MacOS proxy
+settings instead of its own. Ideal for people like me that make
+extensive use of the MacOS locations.
+* http://code.google.com/p/firefox-mac-pdf/[*Quartz PDF Plugin*]: +
+Out of the box Firefox does not have the ability to view a PDF file in
+the browser. This is one of the things I really liked about Safari. Both
+the Schubert and Acrobat plugins do not work in Firefox (on Intel). Just
+when I was about to start developing my own, I found this plugin that
+does exactly what I need.
+* http://mozilla.zeniko.ch/fission.html[*Fission*]: +
+A plugin that will use the address bar to show progress, just like
+Safari.
+* https://addons.mozilla.org/en-US/firefox/addon/3818[*Resizeable
+Textarea*]: +
+Somehow those textarea's are always the wrong size. This little add-on
+makes it possible to resize them, just like Safari.
+
+The above are just a few of the plugins I use daily, but they're
+definitely the ones that made me switch from Safari to Firefox.

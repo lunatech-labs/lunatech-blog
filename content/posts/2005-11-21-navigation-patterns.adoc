@@ -1,0 +1,43 @@
+---
+layout: post
+title: Web application navigation design patterns
+date: 2005-11-21
+author: hilton
+lang: en
+tags:
+  - web-applications
+---
+= Web application navigation design patterns
+
+Each year some web application and web site user-interface features have become de-facto standards, whilst other newer ideas become common enough for common solutions to start emerging. This means that it is increasingly possible to use design patterns to describe aspects of web application user-interface design. Books like http://useit.com/homepageusability/[Homepage Usability] cover web page elements such as a top-left site logo that links to the home page, or a simple search box on every page. Similarly, pattern collections such as the one at http://www.welie.com/patterns/[www.welie.com] describe detailed user-interface element patterns for specific things you can put on a web page. More in flux, however, are the larger scale structural and navigational patterns that correspond to the standard use of wizards and dialogue boxes in traditional graphical user-interface applications: not things on the pages, but how the pages themselves relate to each other in the web site structure.
+
+++++
+
+<p>The following patterns are ideas that you can use when designing a web site or web application. Web application structural patterns include using:</p>
+<ul>
+<li><em>details page</em> - a separate page for each 'item', such as a product page on <a href="http://www.amazon.com/">Amazon</a></li>
+<li><em>edit page</em> - a separate page for editing an item's details, such as the profile edit page on <a href="http://www.orkut.com/">Orkut</a></li>
+<li><em>page tabs</em> - tabs that group separate pages into a single navigational unit that acts as one details page, as used for each TV show on <a href="http://www.tv.com/">TV.com</a></li>
+<li><em>task sequence</em> - a user-interface for completing a task, broken down into several pages that are accessed in a fixed order, such as the payment process on almost any shopping web site.</li>
+</ul>
+
+<p>These can  then be tied together using different kinds of links:</p>
+<ul>
+<li><em>navigation path</em> - a horizontal trail of links to higher levels in some hiearchy, as used since the beginning of time on a <a href="http://dir.yahoo.com/Regional/Countries/Netherlands/Provinces/Zuid_Holland/Cities/Rotterdam/">Yahoo! directory page</a></li>
+<li><em>category link</em> - a link from the name of a category (or tag) to a browse category (see below), followed by a number of items in the category, as on the same Yahoo! page</li>
+<li><em>item link</em> - links from the name of an item to the item's details page</li>
+<li><em>command link</em> - links on a details page that perform actions on the item that the user selected by navigating to its details page.</li>
+</ul>
+
+<p>So far, this covers most of the bottom-level content pages. What is still missing is a search/browse interface, which is more of a solved problem.</p>
+<ul>
+<li><em>quick search</em> - a search box on every page to search key attributes of the main item's type, e.g. a book's author or title</li>
+<li><em>advanced search</em> - a dedicated page for all search types and options</li>
+<li><em>search results</em> - a list of item links, each annotated with some additional information about each item, that integrates with browsing by showing each result's categories and by including categories themselves as search results</li>
+<li><em>browse category</em> - a list of category links for subcategories, plus a list of item links for the items the selected category, integrated with search by supporting 'search in this category'.</li>
+</ul>
+
+<p>None of these are particularly new on the web, but neither are they so standard that it would be weird to do something different. These are merely abstractions of one way of implementing web site structure and navigation.</p>
+
+<p>The level of abstraction is important, because it is much easier to implement a consistent navigation design based on these ideas than by trying to copy specific elements of some other web site. One danger of copying elements of other designs is that different elements do not fit together will, because they come from different overall visions. Another is that without the abstraction, the particular <em>visual design</em> that some site uses gets confused with the overall concept: better decide how you want to use command links before you decide what they should look like.</p>
+++++

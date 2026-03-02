@@ -1,0 +1,37 @@
+---
+layout: post
+title: Lunatech live from Paris
+date: 2010-01-25
+author: FroMage
+lang: en
+tags:
+  - jug
+  - event
+  - jax-doclets
+  - playframework
+---
+= Lunatech live from Paris
+
+:imagesdir: /images/media/2010-02-01-lunatech-live-paris
+
+Lunatech
+will be present at this year's http://www.parisjug.org/xwiki/bin/view/Meeting/20100209[second anniversary] of
+the http://www.parisjug.org[Paris JUG].
+
+The second anniversary of the biggest French JUGs (but only second
+coolest to the http://www.rivierajug.org[Riviera JUG]) will this year
+present many open-source technologies made by or with French people.
+Since Lunatech Labs is active in open-source Java software, and Lunatech
+employees just tend to get involved in and out of work with third-party
+open-source software, we got not one but two quickies at the
+http://www.parisjug.org/xwiki/bin/view/Meeting/20100209[February 9
+event]:
+
+http://www.parisjug.org/xwiki/bin/view/Meeting/20100209[image:../media/2010-02-01-lunatech-live-paris/juggyannif02.jpg[image]]
+
+* Stéphane Épardaud will be presenting
+http://www.lunatech-labs.com/open-source/jax-doclets[jax-doclets], our
+open-source JavaDoc tool for Java extensions, and
+* Nicolas Leroux will be presenting the
+http://www.playframework.org[Play! framework] with
+http://guillaume.bort.fr/[Guillaume Bort].

@@ -1,9 +1,0 @@
-= On the road again - Scala days Berlin 2016
-Antoine Laffez
-v1.0, 2016-05-16
-:title: On the road again - Scala days Berlin 2016
-:tags: [scala,event]
-
-Lunatech is proud to present the real star of this event: the Lunatech carry-on suitcase. With its class and convenience, it will accompany all Lunatech employees to the 2016 Scala days in Berlin. All suitcases are personalised with their owner’s name to make it difficult to sell them to the highest bidder and to prevent people ending up with their colleague’s suitcase. 
-
-image:../media/2016-05-16-on-the-road-again---scala-days-berlin-2016/background.png[]

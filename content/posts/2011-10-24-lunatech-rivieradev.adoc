@@ -1,0 +1,43 @@
+---
+layout: post
+title: Lunatech at the RivieraDEV
+date: 2011-10-25
+author: pepite
+lang: en
+tags:
+  - event
+  - playframework
+---
+= Lunatech at the RivieraDEV
+
+:imagesdir: /images/media/2011-10-24-lunatech-rivieradev
+
+I just came back from
+http://rivieradev.fr[RivieraDEV], located on the French Riviera.
+Lunatech sponsored this nice and sunny conference. There were load of
+good talks and http://www.touilleur-express.fr/[Nicolas Martignole]
+and myself - the Nicolases ™ - gave a presentation about http://playframework.org[Play!
+framework] with some really nice demos. One of
+the demo showed a video chat. 
+
+image:../media/2011-10-24-lunatech-rivieradev/rivieradev-2011.png[RivieraDEV]
+
+The presentation's video should be available pretty soon, stay tuned!
+
+Highlight of the conference were probably the
+http://jashkenas.github.com/coffee-script/[Coffeescript] presentation by
+http://bodil.tv/[Bodil Stokke] and the http://github.com[Github]
+presentation by http://zachholman.com/[Zach Holman]. I hope to be
+invited next year - this year was easy since I helped organised the
+conference ;). Big thanks to Stephane, Yannis and all the RivieraDEV
+team.
+
+== Play framework presentation slides
+
+Our presentation is available here:
+link:../media/2011-10-24-lunatech-rivieradev/play-2011-10-rivieradev.pdf[Play! Framework: To infinity and
+beyond] (PDF).
+
+PS: I left my phone in Rotterdam, so although it was nice and quiet, I
+did not get any pictures of the event.
+

@@ -1,0 +1,32 @@
+---
+layout: post
+title: Bootstrapping Our Internal Android App With Kotlin
+date: 2019-06-19
+author: VincentBrule
+lang: en
+tags:
+  - ktor
+  - kotlin
+img: images/media/2019-06-19-bootstrapping-our-internal-android-app-with-kotlin/background.png
+---
+= Bootstrapping Our Internal Android App With Kotlin
+
+:imagesdir: /images/media/2019-06-19-bootstrapping-our-internal-android-app-with-kotlin
+
+In Lunatech, we are experts on Scala and Java. Since last year, we started to expand our field of competence with Kotlin. Our first Kotlin project, https://lunatech.com/posts/2018-09-06-a-journey-into-annias-project[Annia], an internal phone book, is made with the https://ktor.io/[Ktor] framework for all the backend part.
+
+A few weeks ago we’ve started a new project with Kotlin for an Android application, to centralise our internal services inside one place.
+
+If you are a beginner like us in Kotlin Android, the next links can be interesting for you. To start, I recommend you the nice plugin for Intellij IDEA: https://play.kotlinlang.org/koans/overview[https://play.kotlinlang.org/koans/overview]. It’s a group of exercises integrated inside your IDE (Intellij or Android Studio) to start mastering Kotlin.
+
+After this introduction, I advise you to directly try Kotlin inside an Android project because it’s quite different from using it for backend for example. To start in this direction, you can follow the https://developer.android.com/training/basics/firstapp[“Build your first app”] guide  from the Android developer website.. You will build a first real Android application and you’ll test  it directly on your smartphone. If you don’t have an Android smartphone, don’t worry, you can still use the very powerful emulator integrated inside Android Studio to test your application in real time.
+
+On our side, we have two pages for the moment.
+
+The first one is the login activity because only Lunatech employees will be allowed inside this application. For this case, we use Google Sign-In, and we authorised only Lunatech domains. In addition, we use Firebase for metrics purpose.
+
+The second page is the main activity. We display a list of all internal applications and a drawer to display some options. It’s not over yet but it will be in the next blog post and we will show you some screenshot of these activities.
+
+Next step on our roadmap is to call one of our internal API to allow the user to interact with the service from the Android application.
+
+If you are interested in Android and Kotlin development, stay tuned! We will do regular small blog post like this one to show you the progress of the application.

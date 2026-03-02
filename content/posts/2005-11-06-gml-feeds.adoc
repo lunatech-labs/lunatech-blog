@@ -1,0 +1,36 @@
+---
+layout: post
+title: The geoweb - open standards for publishing geodata
+date: 2005-11-06
+author: hilton
+lang: en
+tags:
+  - opinion
+---
+= The geoweb - open standards for publishing geodata
+
+Geographic Informations Systems (GIS) are nothing new, but in the past involved expensive software only available to professionals solving serious problems. Maps on web pages are nothing new either, but the maps themselves are usually small bitmaps - low-resolution data that is miles from serious GIS data sets. O'Reilly's recent book http://www.oreilly.com/catalog/webmapping/[Web Mapping Illustrated], however, is a fast introduction to open-source digital mapping for geeks that describes software and standards that may soon become mainstream and change maps on the web the same way that http://en.wikipedia.org/wiki/RSS_%28file_format%29[RSS] changed news feeds on the web.
+
+++++
+<p>What RSS did for news feeds was to separate the content from presentation in a way that allowed a list of news items to be presentated in a separate web site, a separate application such as a dedicated RSS feed reader, or just as input to other software for further processing. News items on web sites were just part of a web page until RSS separated their data for their presentation; so now my web browser knows how many of a sites items are new since my last visit. <a href="http://en.wikipedia.org/wiki/Geography_Markup_Language">Geographic Markup Language</a> (GML), and associated web services standards, may do the same for geographic (geospatial) data.</p>
+
+<p>While I might tell you that my all-time favourite pub is the Highbury Vaults at <a href="http://www.mapquest.com/maps/map.adp?searchtype=address&formtype=latlong&latlongtype=decimal&latitude=51.461&longitude=-2.602">www.mapquest.com/maps/map.adp?...latitude=51.461&longitude=-2.602</a>, this data (URL) relies on MapQuest for display, making the information just as much a prisoner of proprietary data format as text in a MS Word document, and equally inacessible to other programs. GML, on the other hand, raises the possibility of publishing the locations of my favourite cafes as data, separate from a particular representation or map. The attraction of GML is being able to replace the MapQuest-specific query (URL) with something along the lines of:</p>
+
+<pre>
+&lt;Feature&gt;
+   &lt;name&gt;Highbury Vaults, The&lt;/name&gt;
+   &lt;Point&gt;
+      &lt;pos&gt;-2.602 51.462&lt;/pos&gt;
+   &lt;/Point&gt;
+&lt;/Feature&gt;
+</pre>
+
+<p>It makes sense to separate this data from a particular representation on a map, for all sorts of reasons. For example, I may have more geodata that I want to draw on the same map; perhaps I want to overlay the locations of Indian restaurants on the map showing where the pub is. With current mapping web sites, I would have two separate maps at best, and have to do the overlay in my head. This is why I hope that in the future, 'geoweb browsers' that display location data on a map will become as mainstream as web browsers are today.</p>
+
+<p>Google (Maps/Earth) and Microsoft (MapPoint/MSN) undoubtedly understand this, and are probably thinking ahead to a future platform war that may mimic the web browser platform wars, albeit in competion with already-existing open-source geodata software such as <a href="http://openev.sourceforge.net/">OpenEV</a> and <a href="http://qgis.org/">Quantum GIS</a>. As before, power will come from having a platform, not just an application.</p>
+
+<p>This is obviously not an original idea, so now I can go and find discussion elsewhere. For example, <a href="http://geoweb.blog.com/299278/">'Web Feeds' and Geographic Information</a> is much more interesting than this article, so I suggest you navigate your way over there.</p>
+
+<p>Meanwhile, I'll be in the pub.</p>
+
+++++

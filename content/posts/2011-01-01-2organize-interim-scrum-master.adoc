@@ -1,0 +1,33 @@
+---
+layout: post
+title: 2organize Scrum master
+date: 2011-01-01
+author: PeterHilton
+lang: en
+tags:
+  - scrum
+  - methodology
+---
+= 2organize Scrum master
+
+Lunatech’s expert first assisted the product owner with writing the
+product backlog, ensuring that the development team had a clear overview
+of the prioritised functional requirements. In addition, Lunatech
+assisted the 2organize Scrum master with his first Scrum project,
+providing advice on how to successfully apply Scrum.
+
+2organize uses Scrum to develop marketing automation solutions that
+deliver business value within short timescales. Scrum enables faster
+results with better transparency and communication, and less project
+management overhead, while retaining the flexibility to respond to
+evolving customer requirements.
+
+Scrum, as summarised by the http://www.scrumalliance.org/[Scrum
+Alliance]:
+
+____
+Scrum is an iterative, incremental framework for developing any product
+or managing any work. It allows teams to deliver a potentially shippable
+set of functionality every iteration, providing the agility needed to
+respond to rapidly changing requirements.
+____

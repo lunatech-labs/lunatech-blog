@@ -1,0 +1,114 @@
+---
+layout: post
+title: The double-sided Scrum board
+date: 2012-07-29
+author: hilton
+lang: en
+tags:
+  - scrum
+  - methodology
+---
+= The double-sided Scrum board
+
+:imagesdir: /images/media/2012-07-29-double-sided-scrum-bord
+
+In theory, Scrum is a
+collection of simple practices. It sounds easy, but Reality Scrum™ is a
+game of compromise and adapting Scrum principles to the situation at
+hand. Constraints breed creativity, and that’s where interesting new
+ideas come from. Like the double-sided Scrum board.
+
+image:../media/2012-07-29-double-sided-scrum-bord/double-sided-scrum-board.jpg[A double-sided scrum board]
+
+[[room]]
+== The Scrum Board doesn’t fit in the room
+
+I’m currently working as a Scrum Master (and coach) on a development
+team that has a great working environment, but not enough room for a big
+Scrum board in the main room. The Scrum board is on the other side of
+the glass wall that separates the room from the corridor, which is
+great, because it means that there’s lots of room for it and we don’t
+disturb other people when we have our Daily Scrum.
+
+The only problem is that team members can’t see the Scrum board from
+where they sit. Fortunately, we’re using
+http://www.atlassian.com/software/jira/overview[JIRA]
+http://www.atlassian.com/software/greenhopper/overview[with
+GreenHopper].
+
+[[tools]]
+== Software tools
+
+Using JIRA and GreenHooper as the project collaboration tool allows team
+members (and external stakeholders) to see the sprint status in a web
+browser. This isn’t supposed to matter, because they’re supposed to be
+in the room, or observing at Scrum meetings otherwise. But they’re not
+and they don’t.
+
+Using JIRA to track the development work-flow leads to the additional
+benefit of having a recorded time line of status changes and hours
+logged, because we use JIRA for time-tracking. Again, this isn’t
+supposed to matter, but this is the Netherlands which means that almost
+all of the team members work fewer than five days per week, and
+sometimes want to see what happened when they weren’t there.
+
+The software tools give you a way to capture what happened and when,
+which provides visibility for team members and stakeholders who are
+separated by time and space.
+
+[[board]]
+== Physical Scrum Board
+
+Software tools are all very well, and software developers do like their
+software, but they lack the simple immediacy of the ever-present
+physical Scrum Board, which is why we have one of those as well.
+Maintaining a Scrum board in both GreenHopper and on the wall is not
+entirely duplicated effort, though.
+
+At the start of the sprint, I can just print the story cards from
+GreenHopper and stick them on the front of the yellow stickies, which
+saves a lot of work with the marker pen. Best of all, the stickies only
+need to be physical proxies for the JIRA issues, that capture discussion
+with the Product Owner and other information that emerges during
+development.
+
+The glass wall makes it possible to link the physical Scrum Board with
+user stories in JIRA by making the Scrum Board double-sided. The back of
+each story card shows the JIRA issue number, so you can see at a glance
+where each story is. Issue numbers tend to stick in your head while
+you’re working on them, and there are only three or four in progress at
+a time - 524, 80 and 366 in the photo, above.
+
+Just don’t forget to read the board from right to left, since you’re
+looking at the back.
+
+[.image-wrap]#image:double-sided-scrum-board-annotated.jpg?version=2&modificationDate=1343381700790[image]#
+
+This double-sided Scrum board shows:
+
+. four user stories are not started; the next one is SP-418.
+. SP-524 is in progress (the second sticky shows UX details)
+. the user story SP-80 is being tested
+. SP-366 is ready for a mid-Scrum demo to the Product Owner
+. seven user stories are done, including one - SP-522 - that was
+completed out of order
+. emergency equipment, in case of fire or injury during the Daily Scrum.
+
+== Conclusion
+
+When you can’t do Scrum ‘by the book’, you often discover that a little
+creativity reveals an approach that’s just as good. Besides, there is no
+‘book’.
+
+It is good to be wary of Scrum process support software, like
+GreenHopper, because it’s easy to get caught up in the intricacies of
+the tool and customising it to follow the evolving Scrum process, while
+losing the benefits of a tangible Scrum Board. However, a good tool is
+also an opportunity to layer information: the Scrum Board can also
+consist of sticky ‘links’ to the JIRA issues that contain more detailed
+information.
+
+https://plus.google.com/107170847819841716154/posts/ja13Pf1t7hC[Comments
+on Google+]
+
+

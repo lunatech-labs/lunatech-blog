@@ -1,0 +1,20 @@
+---
+layout: post
+title: "Development - Ernst & Young Indirect Tax"
+date: 2006-07-25
+author: hilton
+lang: en
+tags:
+  - case-study
+---
+= Development - Ernst & Young Indirect Tax
+
+:imagesdir: /images/media/2006-07-25-development-ernst-young-indirect-tax
+
+http://www.ey.com/NL/en/Services/Tax/Indirect-Tax[Ernst & Young Indirect Tax] selected Lunatech to design and build a new online tax advice product. In the first phase, Lunatech quickly developed a working proof-of-concept prototype to validate the project without requiring Ernst & Young to first commit to a large investment. Following this initial success, we then proceeded to develop the complete product.
+
+++++
+<p><img src='../media/2006-07-25-development-ernst-young-indirect-tax/ey-overview.png' style='float:right;margin:0 0 1em 1em' />In each phase, Lunatech and Ernst & Young worked together to define the requirements - this being a major part of the total project. We helped Ernst & Young refine their ideas and formulate them into a detailed and consistent functional description, translating complex tax calculations and workflows into clear documentation. This gave Ernst & Young a clear description of the planned system functionality, which Lunatech then used to construct a sophisticated but easy-to-use web application.</p>
+
+<p style='clear:right'><img src='../media/2006-07-25-development-ernst-young-indirect-tax/ey-result.png'  style='float:right;margin:0 0 1em 1em' />Lunatech used an agile development method that allowed us to stay on schedule throughout the project. We achieved this by being flexible enough to accommodate changing requirements without being held back by an outdated project plan, and by helping Ernst & Young to plan releases that kept up the pace rather than succumb to unnecessary feature creep.</p>
+++++

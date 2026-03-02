@@ -1,0 +1,29 @@
+---
+layout: post
+title: Lunatech at JavaPolis 2007
+date: 2007-12-09
+author: hilton
+lang: en
+tags:
+  - java
+  - event
+---
+= Lunatech at JavaPolis 2007
+
+:imagesdir: /images/media/2007-12-09-lunatech-javapolis-2007
+
+Several
+Lunatech Research employees will be at
+http://www.javapolis.com/[JavaPolis] in Antwerp this week, starting
+with Peter Hilton and Nicolas Leroux who did a http://www.javapolis.com/confluence/display/JP07/Seam+in+Action[Seam In
+Action]
+presentation on the first day.
+
+image:../media/2007-12-09-lunatech-javapolis-2007/javapolis-2007-1.jpg[Seam In Action - the audience]
+
+We will also be hanging around the JBoss stand from time to time to
+promote the Benelux JBoss User Group, meet
+people and drink the odd beer, so do say hello if you see us there or at
+the
+http://www.javapolis.com/confluence/display/JP07/Javapolis+Magic+Potion+party[Magic
+Potion Party].

@@ -1,0 +1,30 @@
+---
+layout: post
+title: Investment in BitLogistics Ltd.
+date: 2007-06-29
+author: Michael Pentowski
+lang: en
+tags:
+  - ventures
+---
+= Investment in BitLogistics Ltd.
+
+BitLogistics Ltd, a provider solutions for
+monitoring and managing supply chains, has secured undisclosed amount of
+seed financing from Rotterdam-based Lunatech Ventures. Other investors
+in BitLogistics include internet guru Eshter Dyson.This additional
+capital will enable BitLogistics to further develop its VisibleLogistics
+platform, a self-service online visibility solution.
+
+The VisibleLogistics platform is currently in stealth mode and is
+expected to start a public beta during 4Q2007. BitLogistics acquired the
+innovative supply chain solutions provider Sourceree Solutions.
+Sourceree had Cisco Systems, Rolls Royce Aerospace and various
+Government agencies amongst others, as customers.
+
+Links:
+
+* http://www.bitlogistics.com/
+* http://www.visiblelogistics.com/
+
+Email: contact-us@bitlogistics.com

@@ -1,0 +1,30 @@
+---
+layout: post
+title: Fun with PDF and hardware tokens
+date: 2005-12-05
+author: fcanedo
+lang: en
+tags:
+  - java
+---
+= Fun with PDF and hardware tokens
+
+Recently we delivered a custom-built solution to electronically sign Adobe PDF documents with a hardware token. In short, the system receives PDF files and returns a signed copy. These PDF documents can then be authenticated by the Acrobat Reader, which informs the reader that the document is indeed from the author in question and that the document has not changed since signing it.
+
+++++
+<p>Firstly, the most important thing about digital signatures, is that your token is secure. Since otherwise, for obvious reasons, the signature would be worthless. This is why you will want to use a hardware token. You can lock up the hardware token along with the machine in some cabinet and have your network set-up so that only the machine that actually needs the signed PDF files has access to the ‘signing’ service. This does not protect you from someone, illegally, using said machine to access the service. So further security measures are in order.</p>
+
+<p>One final note about hardware tokens and security. It is a good idea to purchase a hardware token that can generate its own private/public key pair.  This way you are absolutely certain that the private key is secure and can not be copied. At least, if you have a well-designed token.  The software in the token should never publish the private key, but should itself generate all signatures that are requested. Also the token needs to provide some physical security, at the very least it should be obvious from looking at the token that it has been tampered with (ie.  opened to gain direct access to its memory chips).</p>
+
+<p>Our certificate authority made it difficult for us to use our own hardware  tokens. Instead we were provided with hardware tokens with a private key already on them. This means that we have no guarantee that the certificate authority does not have a copy of our private key. The issue is not that they are not to be trusted, but that we should not have to. We are in contact with <a href="http://www.geotrust.com/products/signing_services/adobe_doc_signing.asp">GeoTrust </a> though, and they have indicated that they are interested in reviewing their procedures, to deal with these concerns.</p>
+
+<p>While we were building this system, a couple of solutions were examined. One of these, which initially seemed to be perfect for us, was <a href="http://www.lowagie.com/iText/">iText</a>. iText is a Java library that can produce PDF files. One of its features, of course, is digitally signing PDF files. iText is compatible with Java 1.5's PKCS11 support. The code, which makes a signed copy of a PDF file, is trivially simple  (less than 30 lines of code). However, we soon discovered that iText generates the wrong kind of signature.</p>
+
+<p>Adobe provides for author signatures and recipient signatures, apparently recipient signatures are to be used by people who want to confirm a document or who haved filled in a PDF Form. We tried to change the iText source code to have it generate the proper signature. This turned out to be such a large effort, that we had to abandon it. This is probably also the reason that it is not supported by iText. It turns out that a PDF file with an author signature is very much different from one with a recipient signature. We felt, that we would have had to become experts on the PDF format in order to get this to work. I, personally, did not feel the need to be able to write PDF documents by hand!</p>
+
+<p>There are of course off-the-shelf solutions, but these are difficult to integrate into our environment or overkill and rather expensive. Adobe's LiveCycle product for instance is a complete PDF generation environment, however since there was already a custom system in place, we would need only a small part of this system and were therefore able to avoid these costs.</p>
+
+<p>In the end we decided to use Adobe Acrobat Professional, controlled by JavaScript.  Although this is now working well in production, it is a bit clunky.  Apart from having macros running to close and restart Acrobat every day (apparently there is a memory leak in Acrobat), there is also a macro that types in the token password. There seemed to be no way to supply the password from JavaScript to the specific tokens that we are using, although this did work with keys in files and other tokens that we tested with.</p>
+
+<p>We decided to purchase our certificate from GeoTrust. This is because Adobe, in their infinite wisdom, have seen fit to only support said certificate authority out of the box. Using any other certificate authority, would mean that users/customers would have to install either plugins or a CA certificate by hand.</p>
+++++

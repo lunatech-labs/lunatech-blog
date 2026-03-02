@@ -1,0 +1,288 @@
+---
+layout: post
+title: Introduction to ZTemplates
+date: 2008-10-29
+author: killdashnine
+lang: en
+tags:
+  - java
+  - web-applications
+---
+= Introduction to ZTemplates
+
+This article introduces
+http://ztemplates.org[ztemplates], a multi-tier open source web
+application framework for Java. ztemplates is licensed under the http://www.apache.org/licenses/LICENSE-2.0[Apache
+2.0 license]. It uses Java
+annotations, thus meaning at least Java 1.5 or higher is required.
+ztemplates has a lot of features, but we will only introduce the basics
+in this post. This article will not describe how to set-up a project.
+Instead, it will explain the basics of the architecture of ztemplates.
+
+ztemplates is a good framework. The missing features are not critical
+issues, nor will they cause problems in your day-to-day work.
+
+[source,java=nogutter]
+----
+public final Word = "See what ztemplates can do for you!";
+----
+
+== Architecture
+
+ztemplates uses a two-tier architecture that consists of a
+http://ztemplates.org/Wiki.jsp?page=ZtemplatesActions[controller] tier
+and a http://ztemplates.org/Wiki.jsp?page=ZtemplatesRender[view] tier.
+Both tiers are glued together by another module called
+http://ztemplates.org/Wiki.jsp?page=ZtemplatesWeb[ZTemplatesWeb], making
+it a framework.
+
+== Controller
+
+The controller tier matches
+http://ztemplates.org/Wiki.jsp?page=Url[URLs]. They are used to invoke
+the so-called http://ztemplates.org/Wiki.jsp?page=ActionPojo[action
+POJO's]. The action http://en.wikipedia.org/wiki/POJO[POJO's] match a
+certain URL using a http://ztemplates.org/Wiki.jsp?page=ZMatch[@ZMatch]
+annotation. These URLs can be parameterized as well, giving ultimate
+freedom in your URI scheme. So basically you are able to match a URL to
+a POJO, which is a very powerful mechanism.
+
+Due to its parameterized nature, ztemplates will try to pass all of the
+parameters defined in the @ZMatch annotation to the action POJO. For
+this reason you will need to implement
+http://en.wikipedia.org/wiki/Accessor[setters] in your POJO for those
+parameters.
+
+After ztemplates has finished filling up your POJO it will do a callback
+on your POJO. Basically it invokes an *after()* method that you'll need
+to implement. This method should render the appropriate view, which we
+will discuss later on.
+
+We suggest defining an interface class for action POJO's:
+
+ActionInterface.java:
+
+[source,java=nogutter]
+----
+public interface ActionInterface {
+
+  public void after() throws Exception;
+
+}
+----
+
+Here is an example of an action POJO implementation:
+
+SampleAction.java:
+
+[source,java=nogutter]
+----
+@ZMatch("/url/${parameter}")
+public class SampleAction implements ActionInterface
+{
+  private String parameter;
+
+  public void after() throws Exception {
+
+    // Render the parameter
+    ZTemplates.getServletService().render("Parameter: " + this.parameter);
+  }
+
+  public void setParameter(String parameter) {
+    this.parameter = parameter;
+  }
+}
+----
+
+If you would go to http://host/url/example (this is an example) now you
+would see something like: "Parameter: example."
+
+Please note that we are rendering a view already, which is basically a
+String. However ztemplates provides a way to integrate templating with
+http://en.wikipedia.org/wiki/JavaServer_Pages[JSP],
+http://velocity.apache.org/[Velocity],
+http://www.freemarker.org/[Freemarker] and possibly more. This we will
+discuss next.
+
+Also note that you could also implement a *before()* method which gets
+called before the action POJO gets initialized, meaning before its
+properties are set. This could be useful in some scenarios.
+
+== View
+
+So what is so special about how ztemplates handles the view tier?
+Basically, it allows multiple template systems to be used. Currently
+only three are implemented. We will be using JavaServer Pages (JSP) as
+an example, mainly because many people are familiar with it.
+
+Again we will need a POJO. This time it is called a
+http://ztemplates.org/Wiki.jsp?page=ZtemplatesRender[render POJO]. In
+this POJO we define which members will be exported to the template using
+the http://ztemplates.org/Wiki.jsp?page=ZExpose[@ZExpose] annotation. To
+be able to actually link the view to a template we need to annotate the
+POJO with the http://ztemplates.org/Wiki.jsp?page=ZRenderer[@ZRenderer]
+annotation to specify which templating engine should be used for
+rendering the view. You can even use annotations for doing
+http://ztemplates.org/Wiki.jsp?page=ZScript[CSS and JavaScript].
+
+Let's look at an example. First we need to define our render POJO.
+
+SampleView.java:
+
+[source,java=nogutter]
+----
+@ZRenderer(ZJspRenderer.class)
+public class SampleView {
+
+  String message;
+
+  @ZExpose
+  public String getMessage() {
+    return this.message;
+  }
+
+  /** Usage will be explained later on */
+  public String setMessage(final String message) {
+
+    this.message = message;
+  }
+}
+----
+
+Next we will need a JSP file. The name of the file has to match the name
+of the POJO:
+
+SampleView.jsp:
+
+[source,html=nogutter]
+----
+<html>
+<body>
+    <p>SampleView message: ${message}</p>
+</body>
+</html>
+----
+
+Also this file should be in the same directory as the view. However
+there are possibilities within the framework to alter this location
+using the
+http://ztemplates.org/Wiki.jsp?page=ZTemplateAnnotation[ZTemplate]
+annotation.
+
+That was easy, however if you would go to http://host/url/example (this
+is an example) it will not render: "SampleView message: example", it
+will still show "Parameter: example." In the next section we will make
+the action POJO render the view properly.
+
+== Putting it all together
+
+The last thing we need to do is to render the view in our action POJO.
+This is in fact easier than you might think. Do keep in mind that you
+also need to transfer the input parameter to the render POJO so that the
+view can be rendered properly. Here you can immediately see the power of
+the multi-tier architecture. If the input parameter is invalid you could
+load an 'error' view instead of the 'SampleView' saying that no message
+is specified. We will not get into rendering the error view right now,
+but we will show you how to render the view in the controller. So, we
+need to modify our action POJO:
+
+SampleAction.java:
+
+[source,java=nogutter]
+----
+@ZMatch("/url/${parameter}")
+public class SampleAction implements ActionInterface
+{
+  private SampleView view = new SampleView();
+
+  public void after() throws Exception {
+
+    // typical controller action: validation
+    if(view.getMessage() == null || view.getMessage().length == 0) {
+
+      // render an error view
+      [...]
+    }
+    else {
+
+      // Render the view
+      ZTemplates.getServletService().render(this.view);
+    }
+  }
+
+  public void setParameter(String parameter) {
+
+    this.view.setMessage(parameter);
+  }
+}
+----
+
+That was easy now wasn't it?! These are only the basics. There are lots
+more features to ZTemplates.
+
+This article doesn't describe how to setup a project barebone, we would
+like to refer you to
+http://ztemplates.org/Wiki.jsp?page=TutorialEmpty[this] page where it is
+explained in detail.
+
+== What makes ztemplates a good web framework?
+
+You have seen the basic principles now. Due to its simplicity and
+efficiency it's a very easy framework to use. However does this make it
+a good framework? If you also consider the fact that it's a small
+framework, it would be safe to say that it is good.
+
+Most interesting features:
+
+* Depends on existing and proven techniques like the Java Servlet API
+* Multi-tier. Development is very easy since you have good overview of
+what's happening. If you know a URL, you can find the action or render
+POJO very easily
+* Stateless
+* Uses annotations and auto discovery, no need to use messy XML
+* Use any URI scheme you like without much hassle
+* Specify your own rendering engine
+* Re-use a render POJO. You are not forced to have one render POJO for
+each action POJO
+* Inherit the POJOs. This means very rapid development, you just re-use
+your POJOs
+* Easy to extend with new features
+* Built-in http://ztemplates.org/Wiki.jsp?page=AJAX[AJAX] support
+* Specify a custom class path filter to decrease deployment time
+* Annotate a POJO with
+http://ztemplates.org/Wiki.jsp?page=ZScript[@ZScript] to specify CSS and
+Javascript
+* Most of all: easy to use
+
+Great features, but no framework is perfect. Let's discuss that in the
+next section.
+
+== What is it missing to be a great framework?
+
+The basic foundations of the framework are good, however to be taken
+seriously some missing features should be implemented.
+
+What is not so good:
+
+* No integration with frameworks like Hibernate. It would be a nice
+gimmick but not mandatory. Most people prefer integrating it themselves.
+* No IDE integration. It would be nice if it pointed out where possible
+issues might be before deployment. However that is not really the
+responsibility of the framework, now is it
+* When ztemplates throws an exception it is not easy to find the cause.
+* The website's documentation seems to be a bit scattered. I would like
+to see more pointers or specifically more tutorials on various topics.
+
+== Conclusion
+
+Looking at the above we can't deny the fact that ztemplates is a good
+framework. Its missing features are not critical issues nor will they
+cause problems in your day-to-day work.
+
+[source,java=nogutter]
+----
+public final Word = "See what ztemplates can do for you!";
+----
+
+_http://blog.mserver.nl[Matthias van der Vlies] is doing an internship
+in software development at Lunatech Research._

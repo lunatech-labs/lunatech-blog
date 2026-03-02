@@ -1,0 +1,26 @@
+---
+layout: post
+title: Eximion game artwork archive
+date: 2007-09-28
+author: hilton
+lang: en
+tags:
+  - fun
+---
+= Eximion game artwork archive
+
+One of
+http://www.lunatech-ventures.com/[Lunatech Ventures] cool investments
+at the moment is http://www.eximion.com/[Eximion] - next generation
+games on the web. Now that Eximion is ready for the prime time, it was
+interesting to talk to art director Chris van der Linden about the work
+behind the graphics, and how he has a huge catalogue of sketches that he
+made while developing ideas and game characters.
+
+http://chrisvanderlinden.blogspot.com/[Chris' blog] is now starting to
+feature some of this artwork, which is stylish stuff. He may need to
+keep this up for some time if he is going to publish all
+http://chrisvanderlinden.blogspot.com/2007/09/horror-of-developing-website.html[twelve
+thousand images].
+
+

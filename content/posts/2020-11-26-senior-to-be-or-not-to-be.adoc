@@ -1,0 +1,39 @@
+---
+layout: post
+title: "Senior - To be, or not to be"
+date: 2020-11-26
+author: nMoncho
+lang: en
+tags:
+  - opinion
+img: images/media/2020-11-26-senior-to-be-or-not-to-be/background.png
+---
+= Senior - To be, or not to be
+
+:imagesdir: /images/media/2020-11-26-senior-to-be-or-not-to-be
+
+During a recent interview we touched the concept of seniority, which is a concept that we also discussed at length with several colleagues, and I thought it would be a good time to share my opinion on the subject. SPOILER ALERT: Seniors don’t exist.
+
+When reviewing a resume we always wonder, Is she/he a senior or a junior, or maybe something in between? It’s almost inevitable to put tags or labels, we as humans are obsessed with categorical concepts. It’s our way of abstracting the world, how we make sense of it. And as much as I understand the need for such constructs in our daily life, and even if I don’t agree with deconstructing everything, I beg to wonder: What is a senior? How does a person become one? What are its differences with, say, a mid-level?
+
+Let’s start with an analogy, I got into weightlifting a few years ago, nothing really serious, just wanted to get in shape. A great beginner program is SL5x5, which yields a linear progression, meaning you lift heavier weights in a linear fashion every workout. Now this progression can be tracked with hard numbers, you started lifting 10kg and now you can achieve 100kg, congrats you got stronger! With some statistical data, after a year or so, I’m considered an intermediate lifter. But this approach cannot be used in software engineering, here progression cannot be tracked with hard numbers. Take years of experience, those alone are meaningless, you could’ve two candidates with the same amount of years of experience but with completely different levels of seniority. Another common metric is how many technologies the candidate knows, which is also difficult to assess, the fact that one person lists ten technologies in her resume where another lists twenty for the same period of time doesn’t yield any kind of judgment. And why is that? Essentially because a piece of paper is a bad predictor of past, current and future performance. Having five years of experience isn’t important, what’s important is how did you spend those five years, how much did you learn. Having twenty technologies under your belt isn’t important, how well and how much you can transfer those skills is.
+
+One thing I try to encourage people, especially beginners, is to avoid big companies. Now don’t get me wrong, working in big companies has lots of positive factors (eg. job security, reputation, climb the corporate ladder, etc.), but I always felt better working in small companies. Their teams tend to be smaller, forcing you to wear different hats, prompting you to adapt faster. My first job experience was at a company that had at the time around 10 developers, structure was flat, and they had two or three clients. I was put in a very small team, as a matter of fact, the entire team was only me. I had to do almost everything; backend development in Java, frontend development in Adobe Flash (ActionScript), had to write my own database functions, store procedures and schema (PL/SQL), and on top I had to talk to the client to understand their requirements. All this with little to no support, can’t say that the experience didn’t feel overwhelming at times, but I can’t also overstate how much I learned during that time. In contrast my next job was at a huge multinational company, hired as a Backend developer. I had experience on several subjects, but no, this company stubbornly assigned me the Java Developer label, which was pretty difficult to shake off and meant that I had to stay on my backend corner. It felt constrained, like I was a small cog in a big machine. Now, specialisation has its pros and cons, but you’ve to consider which is the point of diminishing returns, generalising can pay off as well, as the saying goes: A jack of all trades is a master of none, but oftentimes better than a master of one.
+
+
+We are all looking at ways to get better and improve, my recommendation here is similar to most people: get exposed to different environments over time (whatever that means, a new language, a new project, a new tool, etc.), identify when you’re becoming stagnant and need a change, but at the same time embrace the grind; try to look at things with different hats to get new insights, and go back to the basics. Exposure to new things broadens our perspective and it helps us avoid the https://en.wikipedia.org/wiki/Law_of_the_instrument[Golden Hammer Anti-Pattern]. This is not limited to technical matters, soft skills are also important (dealing with users, managing expectations, understanding needs, etc.), software engineering is social activity as much as a technical one. But even if we try newest tool around is key to be aware of the hype, tools shape the way we think which in turn change the tools we build, you would be amazed about how much of what we consider revolutionary isn’t at all (https://web.archive.org/web/20120814193650/https://www.drdobbs.com/architecture-and-design/interview-with-alan-kay/240003442[Computing is Pop Culture]), take some time to re-learn the basics, get a strong foundation. Most current “ground-breaking” technologies are actually things designed or discovered during the 60s or 70s, but weren’t implemented due to some restriction (eg. compute power). And one last thing, learn to trust your team, people are multi-variable beings, who excel at different things, and given that it’s impossible to know everything about everything you’ll have to delegate or defer to them (you can probably learn something from everyone).
+
+If we can define what a Senior is, without betraying my first remark, it would be someone who can easily adapt to new challenges, can work without supervision, can support its team, clients, and users in an effective manner. Notice I never mentioned a specific technology.
+
+I used to be desperate to get the senior title, my black belt so to speak, and surely I’m not alone on this. But after ten years of doing software engineering professionally, I reached the point where I think chasing these labels is pointless. Instead I now prefer to consider this as an exploratory journey, driven by how I want to improve myself and contribute to others. And also, try to have some fun!
+
+_Caveat: Categorization is useful mostly for external purposes, for example, salary ranges._
+
+=== Further Reading
+
+* https://cpsc.yale.edu/epigrams-programming[Epigrams in Programming – Alan Perlis]
+* http://www.canonical.org/~kragen/tao-of-programming.html[The Tao of Programming – Geoffrey James]
+* https://paperswelove.org/[Papers We Love]
+* https://blog.codonomics.com/2020/11/ten-commandments-of-egoless-programming.html[Ten Commandments of Egoless Programming]
+
+Stock picture from CC: https://www.rawpixel.com/image/680871/computer-code[Computer code] by Markus Spiske is marked with https://creativecommons.org/licenses/cc0/1.0/?ref=ccsearch&atype=rich[CC0 1.0]

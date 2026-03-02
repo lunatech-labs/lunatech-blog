@@ -1,0 +1,86 @@
+---
+layout: post
+title: Scrum when the product owner is not available
+date: 2012-08-08
+author: hilton
+lang: en
+---
+= Scrum when the product owner is not available
+
+environment set-up
+:tags: [scrum,methodology]
+
+Scrum theory tells you to
+expect the Product Owner to be in the room; in practice, team members
+may need to stalk the Product Owner.
+
+In theory, the Product Owner is ‘always available’. Ain’t gonna happen.
+
+Even the most available Product Owner is sometimes in a meeting, out of
+the office, working on another project and all manner of other opaque
+‘management activities’. Development team members are going to have to
+deal with this. They’re going to have to learn to stalk the Product
+Owner.
+
+[[availability]]
+== Availability matters
+
+Product Owner availability matters, because Scrum relies on just-in-time
+functional specification, in the form of a face-to-face conversation
+between the developer who is going to implement user stories and the
+Product Owner who describes them. This works because making
+functionality decisions as late as possible allows you to make the most
+informed decision, and because face-to-face conversation is the
+second-highest bandwidth form of communication. (Face-to-face
+conversation with a whiteboard is better.)
+
+If the Product Owner isn’t there, then communication bandwidth is zero.
+In the worst case, development stops and the Product Owner doesn’t know
+that he’s limiting the team’s productivity.
+
+[[tactics]]
+== Tactics for the team
+
+There are three things the development team can do about an absent
+Product Owner.
+
+. Find as many communication channels as possible: e-mail, IM, group
+chat, issue tracker, etc. Experiment and find out what works, in
+addition to camping out at his desk.
+. Use every channel necessary to let the Product Owner know that
+progress on a story is waiting for a discussion. Ping him to let him
+know that he’s needed.
+. While you’re waiting, prepare your questions and send them to the
+Product Owner in advance. Leave him a note so he can find and think
+about the question before you catch up with him.
+
+Although the Product Owner isn’t at his desk, he might be nearby or able
+to return. Software developers often give up when the Product Owner is
+AFK* because their own work is mostly planned and desk-bound, unlike
+management work which is more interrupt-driven and meeting-based.
+
+Secondly, coming up with a clear question is half the work in a
+conversation about software requirements. Before going to ask the
+Product Owner a question, it can often be useful to first write the
+question down, which makes it easier to see whether the question is
+coherent. If you do this in an issue tracker, you can later edit the
+text and incorporate the answer into additional notes on the user story
+in question.
+
+[[kiss]]
+== Keep it simple
+
+Some questions are straightforward enough that you can get a one-word
+answer from a Product Owner who is in the middle of something else.
+Chances are he’s just stuck in a boring meeting anyway.
+
+Finally, don’t forget to try the simplest thing you can do: put a big
+‘your team needs you’ sticky note on the Product Owner’s monitor. You
+never know, perhaps he was just getting a coffee and will appear minutes
+later.
+
+* away from keyboard
+
+https://plus.google.com/107170847819841716154/posts/gSACGVpSo6E[Comments
+on Google+]
+

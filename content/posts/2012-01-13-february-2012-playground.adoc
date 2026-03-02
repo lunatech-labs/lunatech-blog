@@ -1,0 +1,65 @@
+---
+layout: post
+title: "February 2012 Play!ground at Paddy Murphy’s"
+date: 2012-01-13
+author: hilton
+lang: en
+tags:
+  - event
+  - playframework
+  - playground
+---
+= February 2012 Play!ground at Paddy Murphy’s
+
+:imagesdir: /images/media/2012-01-13-february-2012-playground
+
+By
+popular demand, we have arranged a bigger location for next month’s
+February Play!ground event, for http://www.playframework.org/[Play
+framework] users, because we have had
+close registration for previous events that were full. Instead of using
+the Lunatech office, which limits us to thirty attendees, we have booked
+a location with capacity for 150 people.
+
+Almost three years ago, in February 2008, Lunatech organised a
+now-legendary JBUG event at http://www.paddymurphys.nl/[Paddy Murphy’s
+Irish Pub] in Rotterdam, with presentations from core JBoss developers
+Pete Muir and Tom Baeyens
+(https://blog.lunatech.com/posts/2008-03-03-benelux-jboss-user-group-29-february-photos[February
+2008 event photos]).
+
+image:../media/2012-01-13-february-2012-playground/jbug-2008-02-photos-7.jpg[The audience watching the presentation]
+
+Three years on, it’s time to return to ‘Paddy’s’ for our next event…
+
+== Details
+
+* 15:00-18:00, Friday, 3 February 2012
+* Paddy Murphy’s -
+http://maps.google.com/maps?q=51.92125,4.48145(Paddy+Murphy’s,+Rodezand+15,+Rotterdam)&z=18[Rodezand
+15, Rotterdam (map)]
+* Open bar (i.e. free beer) sponsored by Lunatech
+
+Our Play events are the perfect opportunity to learn practical
+techniques, learn more about Play’s advanced features and meet other
+Play developers. We also expect to have some fun.
+
+== Programme
+
+We are planning presentations on both Play 1.x and Play 2.0, which we
+will confirm during the next couple of weeks.
+
+* 15:00 - arrival and drinks
+* 15:30 - Express-Board: ’How I created a new service with Play!’ -
+Nicolas Martignole
+* 16:15 - break
+* 16:30 - Connected GameStore - Robert Bakker, BoosterMedia
+* 17:30 - drinks, networking
+
+As always, beer and networking are an essential part of the programme.
+
+== Registration
+
+http://playframework.eventbrite.com/[Register] for this event.
+
+We look forward to seeing you in 3 weeks, in Rotterdam.

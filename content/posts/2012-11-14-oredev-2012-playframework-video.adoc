@@ -1,0 +1,28 @@
+---
+layout: post
+title: Øredev 2012 Play Framework 2 presentation video
+date: 2012-11-14
+author: hilton
+lang: en
+tags:
+  - conference
+  - playframework
+---
+= Øredev 2012 Play Framework 2 presentation video
+
+On 7 November 2012, Peter Hilton presented http://oredev.org/2012/sessions/play-framework-2[Play Framework
+2] at http://oredev.org/2012/[Øredev
+2012] in Malmö. Øredev is a cross-platform
+developer conference in Sweden, started in 2005. Here is the video of
+the presentation.
+
+Video: http://vimeo.com/53065671[Play Framework 2] from
+http://vimeo.com/user4280938[Øredev Conference on Vimeo].
+
+https://vimeo.com/53065671[]
+
+[[crawler_player]]
+Play
+
+image:https://f.vimeocdn.com/p/images/crawler_logo.png[Vimeo]
+

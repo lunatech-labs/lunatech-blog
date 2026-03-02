@@ -1,0 +1,24 @@
+---
+layout: post
+title: Automated website testing with Java - HttpUnit / JWebUnit
+date: 2005-11-06
+author: lypanov
+lang: en
+tags:
+  - opinion
+---
+= Automated website testing with Java - HttpUnit / JWebUnit
+
+The http://jwebunit.sourceforge.net/[JWebUnit] API provides several abstractions over the lower level API provided by http://httpunit.sourceforge.net/[HttpUnit]. For moments in which JWebUnit's partially mirrored coverage of the HttpUnit API is simply not enough, there are methods providing access to the underlying lower low level library.
+
+++++
+<p>On the documentation front, while the JavaDoc available for HttpUnit is fairly complete, JWebUnit's is sorely lacking. JWebUnit's lack of unified naming for methods makes the task of writing tests far from trivial. Even after several hours of attempting to explore the full extent of the API's coverage I am as yet unable to derive a methods usage knowing only the name and the passed in parameter types, again and again I find myself looking into the source.</p>
+
+<p>Areas of the JWebUnit API showing extreme fragility include: table comparisons for anything but trivial tables, inability to select with anything but a tag's <code>id</code> for many areas of the API (in several cases even this fails, while the source looks obviously correct given the httpunit api, am I to summize that even HttpUnit is far from stable?), lack of normalization for text comparisons (it appears the raw HTML is used, even trivial spans are remain non-normalized, IMHO adding a <code>&lt;em&gt;</code> should under no circumstances break a test).</p>
+
+<p>Testing of any system requires a fair amount of experience with the test API used. Unfortunately my experience with these two APIs has led to only one conclusion, both have tried to implement too much, and in doing so failed in anything but the most trivial. The level of support for Javascript is impressive, but far from adequate given the currently increasing tendency to use technologies such as AJAX and the obvious need to test interactions between the user and the application in such systems.</p>
+
+<p>Nevertheless, the most gravely ill-considered area of both libraries is the lack of ability to perform the various abstracted assertions and summaries after having 'drilled down' to a given level in the DOM structure. Far easier than mirroring the DOM in its entirety would surely be creating an orthogonal interface providing useful tools above the previously invested-in infrastructure? Helpers are quite acceptable, in fact, necessary, in order to keep code cruft and paradigm over-duplication down, but on more than one occasion I've been forced to add <code>id</code> attributes to tags for which other unique identifiers were available to which the DOM would certainly provide navigability.</p>
+
+<p>Based on the highly negative experiences with both APIs and the lack of any truly productivity-increasing tests, even weighing in the time invested, I have decided to move on and try other systems. The next one in my sights is <a href="http://selenium.thoughtworks.com">Selenium</a>.</p>
+++++

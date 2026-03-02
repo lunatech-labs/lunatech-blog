@@ -1,0 +1,150 @@
+---
+layout: post
+title: Struts URLs for perfectionists
+date: 2005-07-29
+author: hilton
+lang: en
+tags:
+  - java
+  - struts
+---
+= Struts URLs for perfectionists
+
+IMPORTANT: when this article was written, this was a useful technique. These days, it is simpler to just use http://tuckey.org/urlrewrite/[UrlRewrite], which is far more powerful and flexible.
+
+== Remove the `.do`
+
+The first step is to remove the redundant `.do` from the URL. After all, http://en.wikipedia.org/wiki/MIME#Content-Type[MIME Content-type headers] mean that web resources do not need 'file extensions' to indicate their type.
+
+The `.do` is there to map certain URLs to the Struts ActionServlet, which is achieved by the following `web.xml` entries:
+
+[source,xml]
+----
+	<servlet>
+	    <servlet-name>action</servlet-name>
+		<servlet-class>org.apache.struts.action.ActionServle</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>action</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+----
+
+The most obvious option is to replace the Servlet mapping's extension mapping to a prefix mapping like `<url-patter>/do/*</url-pattern>` to get a URL like `/do/customer?method=edit&id=42`. However, this just moves the problem around rather than fixing anything. After all, if your server name is only used for one Struts application, then it is a shame to have to start all URLs with `/somearbitrarysubpath`. It is, however, the clue to a better solution.
+
+In the http://jcp.org/aboutJava/communityprocess/final/jsr154/index.html[Servlet 2.4 specification], section SRV.11.1 describes how the following four mapping rules are used in order:
+
+* exact match, e.g. `/access/login`
+* longest path prefix match, beginning `/` and ending `/*`, e.g. `/access/*` or `/*`
+* extension match, beginning `*.`, e.g. `*.css`</tt>
+* default servlet, specified by the single character pattern `/`
+
+The trick is to only use the third and fourth rules: use the third rule to map static files by their extensions, and the fourth rule to map all other requests to the Struts action Servlet.
+
+[source,xml]
+----
+<!-- Extension mappings to static content -->
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.css</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.js</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.png</url-pattern>
+	</servlet-mapping>
+	<!-- Default mapping to Struts action Servlet -->
+	<servlet-mapping>
+		<servlet-name>action</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping></pre>
+
+----
+
+Now you can use `/customer?method=edit&id=42` instead of `/customer.do?method=edit&id=42`
+
+Unfortunately, this solution only works in Tomcat and JBoss: the extension mappings use the Servlet name 'default', which Tomcat uses for serving static files. This is a good enough reason to avoid this technique for some applications, but does not matter for others. The other disadvantage is that you have to add an extension mapping for each extension that your application uses, because you cannot write `<url-pattern>&#42;.&#42;</url-pattern>`
+
+
+== Remove the method parameter from DispatchAction URLs
+
+The action mapping is like this (and might be the only one you need):
+
+
+[source,xml]
+----
+<action path="/*/*" 
+        type="com.example.web.{1}Action"
+		parameter="{2}" />
+----
+
+The asterisks match paths like `/customer/` or `/customer/edit`. The first downside is that if you want to have lower-case URLs then the action class needs to be called `customerAction` instead of `CustomerAction` - legal but unconventional. Still, I personally think it would be worse to include upper-case letters in the URL, although that is probably unavoidable with form parameter names later on.
+
+The second asterisk is something like 'view' or 'edit' - the `DispatchAction` method name. The standard approach is to say
+`parameter="method"` in the action mapping and then specify the method in the URL with `method=edit`.
+
+With the wildcards in the mapping, you can just get the method name from the URL and specify it in as the parameter directly by `using parameter="{2}"`in the mapping configuration. Then all you need to do is override the http://struts.apache.org/api/org/apache/struts/actions/DispatchAction.html#getMethodName(org.apache.struts.action.ActionMapping,%20org.apache.struts.action.ActionForm,%20javax.servlet.http.HttpServletRequest,%20javax.servlet.http.HttpServletResponse,%20java.lang.String)[DispatchAction.getMethodName] method with:
+
+[source,java]
+----
+	protected String getMethodName(ActionMapping m, ActionForm f,
+		HttpServletRequest req, HttpServletResponse res, String p) throws Exception
+	{
+		return parameter;
+	}
+----
+
+This means that that Struts calls the method in your action class whose name is the `parameter` value in the action mapping, which in turn is the second part of the path.
+
+Now you can use `/customer/edit&id=42` instead of `/customer?method=edit&id=42`.
+
+An advantage of this scheme is that you can use the same wildcard parameters to specify the form name and the JSP path for forwards. For example, if you use the mapping:
+
+[source,xml]
+----
+	<action
+		path="/*/*"
+		type="com.example.web.{1}Action"
+		name="{1}Form"
+		scope="request"
+		validate="false"
+		parameter="{2}">
+		<forward name="success" path="/WEB-INF/{1}{2}.jspx"/>
+	</action>
+----
+
+then the URL path `/customer/edit` will map to `customerForm` and `customeredit.jspx`. 
+
+The last time I tried this, this was all we needed for six months. Only then did we want to add specific roles for each action, so we stopped using wildcards and listed each action explicitly in `struts-config.xml`, using XDoclet to generate the entries.
+
+
+== Remove the `?id=`
+
+To get a URL like `/customer/edit/42` we need to avoid using a query string parameter for a single standard parameter. This is a common case, if you have pages determined by a database primary key, such as a customer ID in this example.<
+
+This time we will appropriate the Struts mapping parameter for this, and use a normal `Action` instead of a `DispatchAction`. This gives us the Struts mapping:
+
+[source,xml]
+----
+	<action path="/customer/edit/*"
+		type="com.example.web.CustomerEditAction"
+		parameter="{1}">
+		<forward name="success" path="/WEB-INF/customer-edit.jspx"/>
+	</action>
+----
+
+Then you can use the URL `/customer/edit/42` and in the `Action`, do `id = mapping.getParameter()` to get the ID. You can, of course, combine this with the generic action mapping technique, to get:
+
+[source,xml]
+----
+	<action path="/*/*/*"
+		type="com.example.web.{1}Action"
+		parameter="{3}">
+		<forward name="success" path="/WEB-INF/{1}{2}.jspx"/>
+	</action>
+----
+
+Perfect.

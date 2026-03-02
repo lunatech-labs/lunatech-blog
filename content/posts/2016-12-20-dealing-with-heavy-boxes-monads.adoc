@@ -1,0 +1,138 @@
+---
+layout: post
+title: Dealing with heavy boxes (monads)
+date: 2016-12-20
+author: eamelink
+lang: en
+tags:
+  - fp
+  - scala
+aliases:
+  - /posts/2016-12-20-dealing-with-heavy-boxes-monads
+---
+= Dealing with heavy boxes (monads)
+
+At Lunatech we build a lot of REST API's involving dealing with `Future[A]`, `Future[Option[A]]`, `Try[A]`, `Option[A]`, `Form[A]` and so on. 
+Dealing with the outcome of these "boxes/effects" might become cumbersome and you'll end up with convoluted code. 
+One way to deal with this is: "Monad Transformers". Erik Bakker has done a https://www.youtube.com/watch?v=hGMndafDcc8[talk] on that a few years ago. 
+
+The downsides of using monad transformers in your application are:
+
+* Type signatures are hard to read. If you would use a `ReaderT[EitherT[Future, Result, ?], Env, A]` everywhere, it might be a little too much cognitive load to read. 
+* When dealing with futures, the combinators which lift a certain boxes/effects into the monad transformers stack might require a implicit `ExecutionContext`, but where to pull that from? It's better to do at the end.
+
+image::http://i0.kym-cdn.com/photos/images/newsfeed/000/562/776/afe.jpg[]
+
+So what would be a alternative? `effects` could do the job. The downside of effects is; it requires you to learn free monads, coproducts and a little more functional programming jargon first. Though I encourage to do so, it's sometimes more convenient to not overload your team members with all kinds of concepts. Free monads can also simulate `effects` (Putting different boxes/effects in a ADT and evaluate it later. Basically it's effects.. but without introducing the library and syntax, etc). Later on, when people get more experienced or the library is more wildly known you could consider to refactor it or use it from the start. 
+
+We've been using the Play framework over the past few years, so I'll use that in this post to give you an example. But you could also use Http4s, Finch, etc.
+
+[source,scala]
+----
+import cats.data.EitherT
+import cats.free.Free
+import cats._
+import cats.implicits._
+import play.api.mvc.Result
+import play.api.mvc.Results._
+
+import scala.concurrent.{ExecutionContext, Future}
+import scala.util.{Failure, Success, Try}
+
+sealed trait HttpResultAlg[A]
+
+object HttpResult {
+----
+
+Our algebra for working with different kind of boxes/effects, like options, futures, future of options, forms, try's or even other algebra's (free monads)
+
+[source,scala]
+----
+ 
+ private final case class FromOption[A](option: Option[A], error: Result) extends HttpResultAlg[A]
+ 
+ private final case class FromFut[A](fut: Future[A]) extends HttpResultAlg[A]
+ 
+ private final case class FromFutOpt[A](fut: Future[Option[A]], error: Result) extends HttpResultAlg[A]
+ 
+ private final case class FromTry[A](fut: Try[A], error: Result) extends HttpResultAlg[A]
+
+ // Type alias for Free[HttpResultAlg, A]
+ type HttpPrg[A] = Free[HttpResultAlg, A]
+
+----
+
+== Smart constructors
+
+
+[source,scala]
+----
+ def fromOption[A](option: Option[A], error: Result): HttpPrg[A] = Free.liftF(FromOption(option, error))
+ def fromFuture[A](fut: => Future[A]): HttpPrg[A] = Free.liftF(FromFut(fut))
+ def fromFutureOpt[A](fut: => Future[Option[A]], error: Result): HttpPrg[A] = Free.liftF(FromFutOpt(fut, error))
+ def fromTry[A](t: => Try[A], error: Result): HttpPrg[A] = Free.liftF(FromTry(t, error))
+----
+
+The default interpreter. You could pass inject interpreters here if you would have different algebras which get interpretered
+
+[source,scala]
+----
+ def defaultInterpreter(implicit EC: ExecutionContext): HttpResultAlg ~> EitherT[Future, Result, ?] = new (HttpResultAlg ~> EitherT[Future, Result, ?]) {
+   override def apply[A](fa: HttpResultAlg[A]): EitherT[Future, Result, A] = fa match {
+     case FromOption(o, error) => EitherT[Future, Result, A](Future.successful(o.fold[Either[Result, A]](Left(error))(Right.apply)))
+     case FromFut(f) => EitherT[Future, Result, A](f.map(Right.apply))
+     case FromFutOpt(f, error) => EitherT[Future, Result, A](f.map(x => x.fold[Either[Result, A]](Left(error))(Right.apply)))
+     case FromTry(t, error) => EitherT[Future, Result, A] {
+       t match {
+         case Success(v) => Future.successful(Right(v))
+         case Failure(err) => Future.successful(Left(error))
+       }
+     }
+   }
+ }
+----
+
+Shortcut for running `HttpPrg[Result]` programs with the specified interpreter. Note that, in the end we need to return a `Future[Result]`, therefore we require the interpreter to be a `EitherT[Future, Result, ?]` (? syntax is for type lambda's, which is supplied by kind-projector). This will result in a `Future[Either[Result, Result]]` when you run it. After folding, you'll end up with `Future[Result]` to make play happy
+
+[source,scala]
+----
+def runWith(interpreter: HttpResultAlg ~> EitherT[Future, Result, ?])(prg: HttpPrg[Result])(implicit EC: ExecutionContext): Future[Result] =
+   prg.foldMap[EitherT[Future, Result, ?]](interpreter).value.map(_.fold(identity, identity))
+
+}
+
+object Controller {
+
+ import HttpResult._
+
+ An example of a method which might be a Action.async in Play This one will succeed with Ok("2")
+
+
+ def prg1: Future[Result] = runWith(defaultInterpreter) {
+   for {
+     a <- fromOption(Some(1), NotFound("We couldn't find the thing you were looking for!"))
+     b <- fromFuture(Future.successful(1))
+   } yield Ok(s"${a + b}")
+ }
+----
+
+An example of a method which might be a Action.async in Play This one will fail with NotFound("We couldn't find the thing you were looking for!")
+
+[source,scala]
+----
+ def prg2: Future[Result] = runWith(defaultInterpreter) {
+   for {
+     a <- fromOption(Option.empty[Int], NotFound("We couldn't find the thing you were looking for!"))
+     b <- fromFuture(Future.successful(1))
+   } yield Ok(s"${a + b}")
+ }
+
+}
+----
+
+You can easily extend this example to work with other kind of boxes/effects. This is a small example which only requires you to pull in `cats`, `kind-projector` and `playframework`. 
+
+Similar approaches are, which might be more suitable:
+
+* https://github.com/atnos-org/eff[atnos-eff]
+* https://github.com/47deg/freestyle[freestyle]

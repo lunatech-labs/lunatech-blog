@@ -1,0 +1,267 @@
+---
+layout: post
+title: "Progress bars with jQuery UI, WebSocket & Play"
+date: 2011-10-31
+author: hilton
+lang: en
+tags:
+  - playframework
+  - java
+---
+= Progress bars with jQuery UI, WebSocket & Play
+
+:imagesdir: /images/media/2011-10-31-progressbar-jqueryui-websockets-playframework
+
+This article
+shows you how to use a http://jqueryui.com/[jQuery UI] component and
+Web Sockets to implement a progress bar for a deterministic asynchronous
+server-side job in a http://www.playframework.org/[Play framework] web
+application. This is an example of a user-interface component that is
+not part of the web’s stateless request-response paradigm, but is now
+possible with new HTML5 features.
+
+This follows on from earlier jQuery UI component articles:
+https://blog.lunatech.com/posts/2011-07-05-jquery-ui-ajax-autocomplete-playframework[jQuery
+UI Ajax autocomplete with Play],
+https://blog.lunatech.com/posts/2011-08-10-lazy-loading-jquery-ui-ajax-play[Lazy
+loading page content with jQuery UI, Ajax and Play] and
+https://blog.lunatech.com/2011-10-11-selector-dialog-jquery-ui-ajax-playframework[Selector
+dialogue with jQuery UI, Ajax and Play]. The examples and source code
+for all of these articles are available as part of the Play framework
+http://www.playframework.org/modules/jqueryui[jQuery UI module].
+
+For this example, we are going to start a long-running job in our web
+application on the server, and display progress in real-time:
+
+image:jqueryui-progress.png[Progress bar example]
+
+Note that this time we are not using a time zones example, although the
+recent
+http://blog.joda.org/2011/10/today-time-zone-database-was-closed.html[time
+zone database debacle] seems to have been
+http://blog.joda.org/2011/10/time-zone-database-rebooted.html[largely
+resolved].
+
+== Architecture
+
+The http://www.w3.org/TR/webarch/[Architecture of the World Wide Web] is
+about resources and their identifiers and representations, and while we
+are used to the original web of HTML documents and URLs, resources and
+representations can be richer. The key resource in this progress bar
+example is a server-side process.
+
+The Play framework includes support for starting asynchronous
+server-side jobs - processes that continue running outside the scope of
+the HTTP request-response cycle. This is useful for important tasks that
+must be completed independently of the user’s navigation behaviour, such
+as sending hundreds of party invitation e-mails. The challenge with
+these long-running jobs is to use URIs to identify them as ‘resources’
+in the web architecture sense, and to provide useful representations.
+
+For this example, we will use a web socket URI to address an
+asynchronous job, and on the server-side generate a representation
+consisting of only a single number - the job’s completion percentage.
+Play’s web sockets support is ideal for updating the progress bar, and
+Play’s asynchronous jobs are suitable for long-running jobs.
+
+Note that web sockets support on both server-side and client-side is
+still evolving. This example works with Play 1.2.3 and Safari 5.1.1;
+Play 1.2.4 adds Chrome support.
+
+[[progressbar]]
+== Progress bar
+
+The jQuery UI http://jqueryui.com/demos/progressbar/[progress bar]
+widget shows progress for a server-side process for which the completion
+percentage can be calculated. Progress bars are useful for processes
+that take longer than a few seconds to complete, provided that they are
+deterministic, i.e. processes whose progress can be measured or
+predicted.
+
+=== Client
+
+The widget is based on an empty HTML div element.
+
+[source,brush:,html;,gutter:,false]
+----
+<div id="progressbar" data-url="@@{jqueryui.ProgressSocket.progress(processId)}"></div>
+----
+
+The `data-url` attribute value specifies the URL for a web socket
+connection. Note that the template uses the `@@` syntax to generate an
+absolute URL that includes the web socket protocol -
+`ws://localhost:9000/progressbar/progress`.
+
+The `progressbar.js` JavaScript applies the jQuery UI dialog plug-in to
+the `div` element and opens a web socket connection. Finally, the
+JavaScript uses web socket messages to update the progress bar value.
+
+[source,brush:,javascript;,gutter:,false]
+----
+$(function() {
+
+   // Initialise the progress bar.
+   var $progressbar = $('#progressbar').progressbar();
+
+   // Open the web socket connection.
+   var serverUrl = $progressbar.data('url');
+   var socket = new WebSocket(serverUrl);
+
+   // Use web socket messages to update the progress bar.
+   socket.onmessage = function(event) {
+      $progressbar.progressbar('value', parseInt(event.data));
+   };
+});
+----
+
+=== Server
+
+The server-side has three parts. First, we define an implementation of a
+long-running job, which has a generated UUID identifier and an event
+stream that the job will publish progress to. The implementation in this
+example simply waits for short intervals, publishing progress to the
+event stream after each one.
+
+[source,brush:,java;,gutter:,false]
+----
+package models.jqueryui;
+
+import play.jobs.Job;
+import play.libs.Codec;
+import play.libs.F;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * Example job that publishes progress as an event stream.
+ */
+public class Process extends Job implements Serializable {
+
+   public static Map<String, Process> registry = new HashMap<String, Process>();
+
+   public String id = Codec.UUID();
+
+   /**
+    * Event stream for events that report job completion percentage.
+    */
+   public F.EventStream<Integer> percentComplete = new F.EventStream<Integer>();
+
+   public void doJob() {
+      // Report completion percentage every 100 ms.
+      for (int i = 1; i <= 50; i++) {
+         try {
+            Thread.sleep(100l);
+            final int percent = i * 2;
+            this.percentComplete.publish(percent);
+         } catch (InterruptedException e) {
+            // ignore
+         }
+      }
+   }
+}
+----
+
+The second server-side class is a conventional action that starts an
+asynchronous long-running job, and stores a reference to the job in a
+‘registry’ singleton. This action then renders the same page with a
+`processId` argument that indicates that a job has been started.
+
+[source,brush:,java;,gutter:,false]
+----
+package controllers.jqueryui;
+
+import models.jqueryui.Process;
+
+/**
+ * Progressbar example.
+ */
+public class Progressbar extends JQueryUI {
+
+   /**
+    * Start a job, cache it and re-render the page
+    */
+   public static void startJob() {
+      final Process process = new Process();
+      process.now();
+      final String processId = process.id;
+      Process.registry.put(processId, process);
+      renderTemplate("jqueryui/Progressbar/index.html", processId);
+   }
+}
+----
+
+The last part is a web socket controller that retrieves the running job
+from the registry, using its ID, and waits for events on the job’s event
+stream. When the job publishes a completion percentage to its event
+stream, the controller sends the data in a web socket message to the
+browser client.
+
+[source,brush:,java;,gutter:,false]
+----
+package controllers.jqueryui;
+
+import models.jqueryui.Process;
+import play.libs.F;
+import play.mvc.Http;
+import play.mvc.WebSocketController;
+
+import static play.libs.F.Matcher.ClassOf;
+
+/**
+ * Web socket controller for use by the progress bar.
+ */
+public class ProgressSocket extends WebSocketController {
+
+   public static void progress(final String processId) {
+
+      final Process process = Process.registry.get(processId);
+      final F.EventStream<Integer> progress = process.percentComplete;
+
+      // Loop while the socket is open
+      while (inbound.isOpen()) {
+
+         // Wait for either an inbound socket event or a process progress event.
+         F.Either<Http.WebSocketEvent, Integer> e = await(F.Promise.waitEither(
+            inbound.nextEvent(),
+            progress.nextEvent()
+         ));
+
+         // Case: The socket has been closed
+         for (Http.WebSocketClose closed : Http.WebSocketEvent.SocketClosed.match(e._1)) {
+            disconnect();
+         }
+
+         // Case: percentComplete published - send the value to the client.
+         for (Integer percentComplete : ClassOf(Integer.class).match(e._2)) {
+            outbound.send(percentComplete.toString());
+            if (percentComplete >= 100) {
+               disconnect();
+            }
+         }
+      }
+   }
+
+}
+----
+
+Note that this design means that the job is started by a conventional
+HTTP POST request to the `Progressbar.startJob()` action, which means
+that the job is executed even if the client does not have web socket
+support and is therefore unable to update the progress bar.
+
+One possible enhancement would be to add JavaScript to detect the case
+where web sockets are not supported, and send a single Ajax request to
+get the current progress value to update the progress bar.
+
+== Conclusion
+
+Web sockets are an HTML5 technology that you can now use in your web
+applications, thanks to browser support for the JavaScript API and
+Play’s server-side support. This is good news for developers who can see
+opportunities to improve user-experience in their applications with more
+sophisticated applications.
+
+_link:/author/peter-hilton[Peter Hilton] is a senior software developer
+at Lunatech Research and committer on the Play open-source project._

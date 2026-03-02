@@ -1,0 +1,118 @@
+---
+layout: post
+title: Literal data structures in Scala
+date: 2010-07-19
+author: PeterHilton
+lang: en
+tags:
+  - java
+  - scala
+---
+= Literal data structures in Scala
+
+Here is an example of a striking
+difference in verbosity between Java and Scala. Some languages make it
+easy to concisely declare data structures in your code. Perl, Python,
+Ruby, PHP all do. Java doesn't.
+
+Let's say you would like to maintain a simple lookup table in your code,
+to map from country code to country name. And to make it more
+interesting, let's say you want to have the country names in a couple of
+different languages.
+
+In Scala, this could look like the following:
+
+[source,scala]
+----
+val countryNames = Map(
+  "NL" -> Map("nl" -> "Nederland", "en" -> "The Netherlands", "fr" -> "Les Pays-Bas"),
+  "UK" -> Map("nl" -> "Het Verenigd Koninkrijk", "en" -> "The United Kingdom", "fr" -> "Le Royaume-Uni"),
+  "FR" -> Map("nl" -> "Frankrijk", "en" -> "France", "fr" -> "France"),
+  "UNKNOWN" -> Map("nl" -> "[onbekend land]", "en" -> "[unknown country]", "fr" -> "[pays inconnu]")
+  )
+val here = countryNames("NL")("en")
+val there = countryNames.get("DE").getOrElse(countryNames("UNKNOWN"))("en")
+
+println("We're here in "+here+".")
+println("We don't know about "+ there)
+----
+
+If you put this in a file `example.scala` and run it using
+`scala example.scala` then it will print:
+
+----
+We're here in The Netherlands.
+We don't know about [unknown country]
+----
+
+Compare this with the java version:
+
+[source,java]
+----
+// imports, class, and main method omitted
+Map<String, Map<String, String>> countryNames = new HashMap<String, Map<String, String>>();
+Map<String, String> nl = new HashMap<String, String>();
+nl.put("nl", "Nederland");
+nl.put("en", "The Netherlands");
+nl.put("fr", "Les Pays-Bas");
+countryNames.put("NL", nl);
+// …10 more lines…
+Map<String, String> unk = new HashMap<String, String>();
+unk.put("nl", "[onbekend land]");
+unk.put("en", "[unknown country]");
+unk.put("fr", "[pays inconnu]");
+countryNames.put("UNKNOWN", unk);
+
+String here = countryNames.get("NL").get("en");
+Map<String, String> tmp = countryNames.get("DE");
+String there = tmp == null ? countryNames.get("UNKNOWN").get("en") : tmp.get("en");
+
+out.println("We're here in "+here+".");
+out.println("We don't know about "+ there);
+
+----
+
+One difference between the two languages is that the types seem to be
+largely missing in the Scala version, it looks like a weakly typed
+language. But the types are there, they are just inferred by the
+compiler. +
+We could have written
+
+[source,scala]
+----
+val countryNames: Map[String, Map[String,String]] = …
+----
+
+Now let's say that we're setting the list of languages in stone and
+instead of the inner maps we want to use objects with methods for each
+language:
+
+[source,scala]
+----
+case class Names(nl: String, en: String, fr: String)
+
+val countryNames2: Map[String,Names] = Map(
+  "NL" -> Names("Nederland", "The Netherlands", "Les Pays-Bas"),
+  "UK" -> Names("Het Verenigd Koninkrijk", "The United Kingdom", "Le Royaume-Uni"),
+  "FR" -> Names("Frankrijk", "France", "France"),
+  "UNKNOWN" -> Names("[onbekend land]", "[unknown country]", "[pays inconnu]")
+  )
+
+val holiday = "We gaan op vakantie naar "+countryNames2("FR").nl
+println(holiday)
+// prints: We gaan op vakantie naar Frankrijk
+----
+
+
+Defining the `Names` class took just one line. What that line does is
+define a class with:
+
+* a 3-argument constructor
+* a singleton method which calls the constructor
+* 3 public accessor methods
+* a toString() method
+* implementations of equals() and hashCode()
+* a few other tricks
+
+Scala makes for code that's a pleasure to read and write, because you
+can skip the boilerplate.

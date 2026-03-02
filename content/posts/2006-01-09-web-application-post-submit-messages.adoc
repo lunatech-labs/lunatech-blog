@@ -1,0 +1,93 @@
+---
+layout: post
+title: Web application post-submit messages
+date: 2006-01-09
+author: hilton
+lang: en
+tags:
+  - java
+  - web-applications
+  - struts
+---
+= Web application post-submit messages
+
+:imagesdir: /images/media/2006-01-09-web-application-post-submit-messages
+
+What's the right way to do confirmation messages in a web application after the user has done a database insert or update - like 'Customer details updated' after a permanent change? This article describes on approach that works well with Struts.
+
+image::../media/2006-01-09-web-application-post-submit-messages/postsubmit.png[post submit]
+
+++++
+
+<p><img src='postsubmit.png' alt='Example post-submit message' /></p>
+
+<h2>Struts messages</h2>
+
+<p>Struts lets you create and save these kinds of messages in the <code>Action</code> class with:</p>
+
+<pre>ActionMessages messages = new ActionMessages();
+messages.add(Globals.MESSAGE_KEY, new ActionMessage(&quot;message.success&quot;));
+addMessages(request, messages);</pre>
+
+<p>You can then display the list of messages in the JSP with:</p>
+
+<pre>&lt;html:messages message=&quot;true&quot; id=&quot;message&quot;&gt;
+&lt;bean:write name=&quot;message&quot;/&gt;
+&lt;/html&gt;</pre>
+
+<p>However, there's a problem with this in Struts 1.1.</p>
+
+<h2>The redirection problem</h2>
+
+<p>After doing something like an insert/update/delete in an Action, I normally send the user a redirect to a view page using something like:</p>
+
+<pre>ActionForward forward = new ActionForward(&quot;/customer/view?id=42&quot;);
+forward.setRedirect(true);
+return forward;</pre>
+
+<p>so that the current URL (i.e. browser history list entry) is no longer <code>/customer/update</code>. This is so that refreshing the page will not submit the form again and repeat the insert/update/delete.</p>
+
+<p>The problem is that the Struts 1.1 messages mechanism relies on setting the messages in the request attribute, but sending a redirect creates a new request so there will be no messages.</p>
+
+<h2>The <code>HttpSession</code> solution</h2>
+
+<p>Fortunately, Struts 1.2 allows you to put the messages in the <code>HttpSession</code>. In your <code>Action</code>, do:</p>
+
+<pre>ActionMessages messages = new ActionMessages();
+messages.add(Globals.MESSAGE_KEY, new ActionMessage(&quot;info.success&quot;));
+
+// Use the HttpSession instead of doing addMessages(request, messages);
+request.getSession().setAttribute(Globals.MESSAGE_KEY, messages);</pre>
+
+<p>and in the JSP</p>
+
+<pre>&lt;html:messages message=&quot;true&quot; id=&quot;message&quot;&gt;
+&lt;bean:write name=&quot;message&quot;/&gt;
+&lt;/html:messages&gt;</pre>
+
+<p>It turns out that in Struts 1.2:</p>
+
+<ol>
+<li><code>&lt;html:messages&gt;</code> also looks in the session scope, and if messages=&quot;true&quot; it looks under the attribute name <code>&lt; %=
+org.apache.struts.Globals.MESSAGE_KEY %&gt;</code>. This is actually in the Struts
+documentation, but that only made sense <em>after</em> I had worked out what you are supposed to do.</li>
+<li><p><code>&lt;html:messages&gt;</code> removes the messages from the session bean after it has displayed them, so you do not need to manually do:</p>
+<pre>&lt;% session.removeAttribute(org.apache.struts.Globals.MESSAGE_KEY); %&gt;</pre>
+</li>
+<li><code>&lt;html:messages&gt;</code> also has a <code>name</code> attribute that allows you to specify a session attribute name other than <code>org.apache.struts.Globals.MESSAGE_KEY</code></li>
+</ol>
+
+<p>Anyway, this means that if you have the JSP on every page (i.e. in the template) then you can put info messages in the <code>HttpSession</code> and know that they will be shown to the user precisely once.</p>
+
+<p>Note that in practice the <code>&lt;html:messages&gt;</code> start tag is really something like</p>
+
+<pre>&lt;html:messages message=&quot;true&quot; id=&quot;message&quot; header=&quot;info.header&quot; footer=&quot;info.footer&quot;&gt;</pre>
+
+<p>with the header and footer defined in the application resources</p>
+
+<pre>info.header = &lt;ul class=&quot;donemessage&quot;&gt;
+info.footer = &lt;/ul&gt;</pre>
+
+<p>This means that you could have separate message lists in the <code>HttpSession</code> and display separate lists for user info/done/warning/error messages, as on <a href="http://style.tigris.org/">Tigris Style</a>, whose stylesheet and icon is used in the example at the start of this article.</p>
+
+++++

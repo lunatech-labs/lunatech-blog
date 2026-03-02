@@ -1,0 +1,70 @@
+---
+layout: post
+title: Browsers don’t do layout
+date: 2011-04-13
+author: dutchcelt
+lang: en
+tags:
+  - front-end
+  - ux
+---
+= Browsers don’t do layout
+
+Good layout has been the bane of many front-enders
+existance for years and years. Positioning isn't layout and tables and
+floats are nasty hacks. Browsers totally suck at layout.
+
+There have been drafts published to the http://www.w3.org/[W3C] on
+constructing grids, flexible boxes and multiple columns. Have the
+browsers seen fit to implement these recommendations? Apparently they
+haven't put much effort into this at all. Some browsers have partially
+implemented multiple columns. But not all, so it's useless.
+
+Microsoft has just released version 9 of their web browser client and it
+has come a long way towards converging on a more uniform usage of the
+web stack. In other words; Microsoft is still playing catch-up.
+
+IE10 hopes to address that. Yes, IE9 is barely out the door and the
+preview of the next version has already been released.
+
+This time next year the holy grail of web layouts may be upon us. Web
+page layout is in my view more important than 3D transforms, <video>,
+<canvas> or any other fancy-pants media manipulation stuff.
+
+Stephen Hay has also been
+http://www.the-haystack.com/presentations/fronteers09/[banging on about
+this] for some time now and has given
+http://www.slideshare.net/stephenhay/realworld-responsive-design-breaking-development-2011[presentations
+on the problem]. It looks like he'll be
+http://blogs.msdn.com/b/ie/archive/2011/04/12/native-html5-first-ie10-platform-preview-available-for-download.aspx[granted
+his wish].
+
+IE10 will include all the things we need for high-powered CSS layouts:
+
+. http://www.w3.org/TR/css3-mediaqueries/[Media Queries] - allowing CSS
+rules to depend on the display
+. http://www.w3.org/TR/css3-flexbox/[Flexbox] - layout based on boxes
+. http://www.w3.org/TR/css3-grid-layout/[Grid Layout] - similar to
+http://www.w3.org/TR/css3-layout/[Template Module]
+. http://www.w3.org/TR/css3-multicol/[Multiple columns] - columns within
+a block element.
+
+The split in point 3 shows where it could all go horribly wrong if we
+ever want to use this in the real world. The Grid Layout is Mircosoft's
+approach and the Template Module was initiated by W3C’s own Bert Bos.
+This explains why there is no layout method in browsers. Regardless
+whether it is open-source, companies don't like to use the work of
+others.
+
+So if the browser vendors go their own way on layouts we, the designers
+and developers, will be stuck doing it the old way because we can only
+work with what browsers have in common. I'm keeping my fingers crossed
+that one day we will have a native way of creating layouts for web
+browsers. The Grid Layout looks like the first proper attempt at a
+browser implementation and thus an obvious candidate for others to use.
+Apple, Google and Mozilla may need to get of their high horse and do
+what Microsoft has been doing, adopting other peoples’ good work.
+
+_link:/author/egor-kloos[Egor Kloos] is a UX consultant at Lunatech
+Research where he oversees design and front-end matters. ( aka
+http://dutchcelt.nl/[dutchcelt])_

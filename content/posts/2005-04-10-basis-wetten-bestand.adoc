@@ -1,0 +1,24 @@
+---
+layout: post
+title: Basis Wetten Bestand
+date: 2005-04-10
+author: kaas
+lang: en
+tags:
+  - java
+  - xml
+  - case-study
+---
+= Basis Wetten Bestand
+
+In the relatively short timeframe of about two years, the Dutch government wanted a content management system through which laws could be consolidated, and a front-end web system such that the general public could view past, current and future law.
+
+Together with the people working at the state publisher, Lunatech designed and built a flexible system that could handle the complex content structures, and requested functionality within the set boundaries of performance and scalability.
+
+The backend system allows editors (equipped with a custom desktop application) to process the updates to legislation, which are published by the Dutch government in the form of incremental updates. A workflow system integral to the back-end enforces a task model that ensures the proper handling of these changes, and makes sure that all changes are double-checked before being accepted.
+
+The backend has interfaces available through which incremental law updates can be sent to clients taking a data-feed. These interfaces can deliver XML, HTML as well as RTF.
+
+The website provides a web interface to search through all legislation as of May 2002. Through various search options the user can view past, present and future laws, and can browse them in various ways. The interface offers a variety of ways to get an overview of historical changes and meta data, and allows most screens to be exported in HTML, RTF or plain text.
+
+The front-end website updates itself automatically through the incremental interface of the backend. In March 2003 the system went live and so far, has been functioning up till now without any major glitches.

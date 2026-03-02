@@ -1,0 +1,17 @@
+---
+layout: post
+title: BitLogistics blog
+date: 2007-08-04
+author: kaas
+lang: en
+tags:
+  - ventures
+---
+= BitLogistics blog
+
+BitLogistics Ltd. has started a public blog to visualize
+development of the new tools that it is building. The marketing team, as
+well as the developers, will write about their experiences in
+approaching the market with their new tools. 
+
+Go and read up on things at http://blog.bitlogistics.com/.

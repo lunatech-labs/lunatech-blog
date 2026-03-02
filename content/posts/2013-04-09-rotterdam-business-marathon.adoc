@@ -1,0 +1,33 @@
+---
+layout: post
+title: Rotterdam Business Marathon
+date: 2013-04-09
+author: annagos
+lang: en
+tags:
+  - event
+---
+= Rotterdam Business Marathon
+
+:imagesdir: /images/media/2013-04-09-rotterdam-business-marathon
+
+On Sunday, April 14, Lunatech will participate in Rotterdam Business Marathon
+
+image:../media/2013-04-09-rotterdam-business-marathon/marathon.jpg[Rotterdam
+Marathon 2013 - t-shirt,title="Rotterdam Marathon 2013 - t-shirt"]
+
+Coming Sunday nearly the half of Lunatech’s staff will participate in
+the Rotterdam marathon. Two teams of four will run in the
+http://www.marathonrotterdam.nl/business-runs/business-estafette-marathon[Business
+Relay Marathon] and complete together the distance of 42.195km. During
+last few months we have been perfecting our form together to make sure
+we will enjoy crossing the finish line.
+
+Even though running has little to do with our everyday business there
+are some similarities between running a marathon and being a software
+developer. Having a good mentor will help you to become better while
+going as fast a possible is usually a bad idea because you might not
+reach the finish. Choosing the right tools will make you more efficient
+but be always realistic regardless how confident you feel. And most of
+all, have fun! Doing something you dislike for a long time will make you
+miserable.

@@ -1,0 +1,20 @@
+---
+layout: post
+title: We are hiring Java EE / J2EE developers (Rotterdam)
+date: 2008-03-28
+author: Michael Pentowski
+lang: en
+tags:
+  - opinion
+---
+= We are hiring Java EE / J2EE developers (Rotterdam)
+
+Lunatech is looking to hire some clever Java EE
+developers for our Rotterdam office. If you are interested in joining a
+great company, please have a look at our http://www.lunatech-research.com/about/employment/developer-j2ee[job
+posting].
+
+It is hard to find qualified and motivated Java developers, but we know
+you are out there. If you have ever considered working in Rotterdam, the
+Netherlands, and want to work in an amazing office with a great team
+using the latest Java technologies, please contact us.

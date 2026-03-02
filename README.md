@@ -1,59 +1,85 @@
-# lunatech-blog
-## How It All Comes Together
-lunatech-blog contains our blog in [Asciidoctor](https://asciidoc.org/) format. We write blog posts in this repository. We then point a separate asciidoctor project (in our case currently [lunatech-blog-engine](https://github.com/lunatech-labs/lunatech-blog-engine)) to this project. That project then runs Asciidoctor on these files to convert and serve them as HTML.
+# Lunatech Blog
 
-Each post is located in the `posts` directory with the following format: `yyyy-MM-dd-title.adoc`
+The Lunatech engineering blog, powered by [Quarkus Roq](https://iamroq.com/) — a static site generator built on Quarkus.
 
-In the `media` directory there should be a matching image named `yyyy-MM-dd-title/background.png`
+Blog posts are written in [AsciiDoc](https://asciidoc.org/) format with YAML frontmatter.
 
-All media used in the posts should be located in the `media` directory under a `yyyy-MM-dd-title` directory ie `media/yyy-MM-dd-title`
+**Live site:** [blog.lunatech.com](https://blog.lunatech.com)
 
-To add your blog post:
-* Install giter8, via coursier
-```commandline
-brew install coursier/formulas/coursier
-cs install giter8
+## Writing a new blog post
+
+1. Create a new `.adoc` file in `content/posts/` with the naming format `YYYY-MM-DD-title-slug.adoc`
+2. Add YAML frontmatter at the top of the file:
+
+```asciidoc
+---
+layout: post
+title: "Your Post Title"
+date: 2025-01-15
+author: yourgithubhandle
+lang: en
+tags:
+  - tag1
+  - tag2
+img: images/media/2025-01-15-title-slug/background.png
+---
+= Your Post Title
+
+:imagesdir: /images/media/2025-01-15-title-slug
+
+Your content here...
 ```
-* Fork this repo
-* Checkout the forked repo
-* In the repo directory `g8 file://.`
-* Write your blog post
-* Submit a pull request and follow the template
 
-# Information regarding giter8
+3. Add your images in `public/images/media/YYYY-MM-DD-title-slug/`:
+   - `background.png` — featured image for the post card (required)
+   - Any other images referenced in the post
 
-If you see this error :
+## Preview locally
 
-Error: giter8 has been disabled because it fetches unversioned dependencies at runtime!
+```bash
+./mvnw quarkus:dev
+```
 
-Then you can bypass the warning message by doing the following:
+The blog will be available at [http://localhost:8080](http://localhost:8080) with live reload.
 
-brew edit giter8
+## Build for production
 
-and delete this line:
+```bash
+./mvnw package -DskipTests -Droq
+```
 
-disable! because: "fetches unversioned dependencies at runtime"
+The static site output is generated in `target/roq/`.
 
-then run brew install giter8 again.
+## Deployment
 
-# Provide compressed images
-Every blogpost has at least one image which makes the Lunatech blog relatively heavy in memory consumption.
-One way of to combat this is by compressing images using `pngcrush`. You can install it using brew:
-```commandline
+Merging to `main` automatically deploys the blog to GitHub Pages via the GitHub Actions workflow.
+
+## Project structure
+
+```
+content/
+  index.html              Homepage
+  404.html                Error page
+  posts/                  Blog posts (AsciiDoc with YAML frontmatter)
+  authors/                Author pages
+data/
+  authors.yml             Author metadata
+  menu.yml                Navigation menu
+public/
+  css/style.css           Stylesheet
+  images/                 Logos, avatars
+  images/media/           Post images (background.png, etc.)
+templates/
+  layouts/                Page layouts (Qute templates)
+  partials/               Reusable components
+pom.xml                   Maven project with Roq dependencies
+```
+
+## Compressing images
+
+Images should be compressed before committing. Install `pngcrush`:
+
+```bash
 brew install pngcrush
+pngcrush -rem allb -brute -reduce input.png output.png
 ```
-You can then create a compressed version of each image (png/jpeg/gif) you are submitting alongside your blogpost:
-```commandline
-pngcrush -rem allb -brute -reduce in.png out.png
-```
-For very large images the command may take a long time to complete.
-
-# How to deploy your post
-
-Merging your PR will update the `main` branch only. In order to share your blog post with the world,
-you'll need to deploy it first in [Acceptance](https://blog.acceptance.lunatech.com/), and then
-in [Production](https://blog.lunatech.com/).
-
-You can do both with the help of GitHub Actions:
-* [Deploy Acceptance](https://github.com/lunatech-labs/lunatech-blog/actions/workflows/deploy_acceptance.yaml)
-* [Deploy Production](https://github.com/lunatech-labs/lunatech-blog/actions/workflows/deploy_production.yaml)

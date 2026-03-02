@@ -1,0 +1,101 @@
+---
+layout: post
+title: Upgrading JSF applications to JBoss 4.2.0.GA
+date: 2007-06-14
+author: pepite
+lang: en
+tags:
+  - java
+  - jsf
+  - jboss
+---
+= Upgrading JSF applications to JBoss 4.2.0.GA
+
+JBoss 4.2.0.GA comes
+with JavaServer Faces (JSF) 1.2 - a newer JSF version than JBoss
+4.0.5.GA. They chose the SUN implementation. (I think that MyFaces will
+really soon be obsolete.) This upgrade requires some changes in
+applications using JSF (for example the applications that are Seam
+based). Here is what I have done to make it work, including some steps
+from [Michael Yuan's blog
+post](http://www.michaelyuan.com/blog/2007/05/29/seam-book-examples-updated-to-jboss-as-420-ga/).
+
+== application.xml
+
+In your `application.xml` you need to remove the following libraries:
+
+----
+<module>
+   <java>el-api.jar</java>
+</module>
+<module>
+   <java>el-ri.jar</java>
+</module>
+----
+
+You also need to add the following:
+
+----
+<module>
+   <java>commons-collections-3.1.jar</java>
+</module>
+----
+
+Make sure that `commons-collections-3.1.jar` is at the root of your EAR.
+This is required by Ajax4jsf, because JBoss 4.2.0.GA is provided with a
+version of Commons Collections that does not seem to work with Ajax4jsf.
+
+== Facelets view
+
+It seems that JBoss Seam and Facelets in conjunction with JBoss 4.2.0.GA
+delivers your content with MIME type `xhtml+xml`. In order to fix this
+problem you have to add the following in your Facelets template:
+
+----
+<f:view contentType="text/html">
+----
+</f:view}
+----
+
+This has to come just after the `html` tag.
+
+== faces-config.xml
+
+It is advisable to use the new SEAM EL resolver - in `faces-config.xml`
+use the following:
+
+----
+<application>
+   <el-resolver>org.jboss.seam.jsf.SeamELResolver</el-resolver>
+   <message-bundle>messages</message-bundle>
+</application>
+----
+
+Note that it seems to work without changing the resolver.
+
+If you choose to use the new EL-resolver don't forget to change your
+`faces-config.xml` to use the new 1.2 JSF schema:
+
+----
+<faces-config version="1.2"
+   xmlns="http://java.sun.com/xml/ns/javaee"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+   http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+----
+
+== web.xml
+
+Last but not least, you need to remove the following from your
+`web.xml`:
+
+----
+<listener>
+   <listener-class>org.apache.myfaces.webapp.StartupServletContextListener</listener-class>
+</listener>
+----
+
+This is because JSF 1.2 doesn't need a start-up context (and this one
+was MyFaces-based anyway).
+
+Happy coding with JBoss 4.2.0.GA.

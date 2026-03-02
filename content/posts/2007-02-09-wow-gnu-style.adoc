@@ -1,0 +1,14 @@
+---
+layout: post
+title: Wow GNU Style
+date: 2007-02-09
+author: bartschuller
+lang: en
+tags:
+  - fun
+---
+= Wow GNU Style
+
+:imagesdir: /images/media/2007-02-09-wow-gnu-style
+
+image:../media/2007-02-09-wow-gnu-style/wow-gnu-style.jpg[Wow GNU Style]

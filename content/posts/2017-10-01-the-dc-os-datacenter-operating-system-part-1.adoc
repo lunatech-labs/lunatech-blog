@@ -1,0 +1,158 @@
+---
+layout: post
+title: The DC/OS (Datacenter Operating System)-Part 1
+date: 2017-10-01
+author: Pepite
+lang: en
+tags:
+  - java
+  - scala
+img: images/media/2017-10-01-the-dc-os-datacenter-operating-system-part-1/background.png
+aliases:
+  - /posts/2017-10-01-the-dc-os-datacenter-operating-system-part-1
+---
+= The DC/OS (Datacenter Operating System)-Part 1
+
+:imagesdir: /images/media/2017-10-01-the-dc-os-datacenter-operating-system-part-1
+
+DC/OS or Datacenter Operating System is an open-source project started by a company named Mesosphere. The project aimed to make infrastructure blueprints (for building and delivering data-driven services to run on any datacenter or cloud) accessible for everyone.
+
+It is a system that consists of Linux machines or nodes that communicate with one another, effectively sub-dividing large applications into small tasks that can be executed independently from one another in a more resource efficient manner. It is structured in such a way that each node performs a certain role. The roles these nodes can play include the master node, the private agent node, and the public agent node.
+
+The _master node/s_ typically run a few services in the background (Zookeeper, Mesos, etc...) but generally are responsible for monitoring and making sure that the DC/OS cluster is in good condition, (by checking: the state of every node, running services or scheduled tasks, etc...), it reports any problems it identifies visualizable in the web UI homepage for DC/OS.
+
+The _agent nodes_ are the workhorses for running services and applications. These agent nodes communicate their available resources to the master node and the master node being the orchestrator, devises a plan on how to carry out tasks with the resources these agent nodes expose and work toward combining their results. The master and agent nodes work together in an attempt to exploit and fully utilize the available resources agent nodes ( together as a whole) contribute as an offering to the cluster of master nodes.
+
+This approach ensures that every task has dedicated resources making evaluations even more efficient, and effectively eliminating the problem of hardware limitations, typically seen when running an application on a single powerful machine.
+
+After these tasks are evaluated, they are then communicated to a leader node (an elected master node that manages how and on which node tasks are running), that knows how to combine their outcomes and finish a cycle of what the application / service aimed to do.
+
+https://docs.mesosphere.com/1.9/[DC/OS Documentation]
+
+## Differentiating Apache Mesos, Mesosphere and DC/OS
+
+*Mesos -* an open-source cluster resource manager, the Kernel of DC/OS.
+
+*Mesosphere -* the company that started and continues to contribute to both Apache Mesos and DC/OS.
+
+*DC/OS -* an open-source distribution around Apache Mesos including UI, networking, and many other pieces. Mesosphere also offers an Enterprise Edition of DC/OS with support and some advanced features.
+
+https://stackoverflow.com/questions/44171100/whats-difference-between-apache-mesos-mesosphere-and-dcos[What's difference between Apache Mesos, Mesosphere and DCOS?]
+Please *NOTE* the following:
+
+* this setup is not intended for production use, but rather as a means for you to experience building an environment for sandboxing purposes.
+* you will need to meet the minimum hardware requirements in order to fully experience the setup process for yourself.
+
+https://github.com/dcos/dcos-vagrant/blob/master/[Github dcos-vagrant repository]
+
+*Hardware requirements*
+
+In terms of hardware, you should have at least *4GB available memory / RAM* and your operating system should be listed below:
+
+*Operating System (OS)*
+
+Mac OS X 10.x
+
+Windows 7, 10
+
+Ubuntu 14, 15, 16
+
+Fedora 23
+
+Arch Linux
+
+*Software requirements*
+
+For those already using a package manager, (i.e. Homebrew for the Mac, Linuxbrew for Linux, Scoop for Windows), please install the following components: `vagrant`,`VirtualBox`, and `git`.
+
+If you don't have a package manager, you can always install the tools needed for this tutorial manually.
+
+* https://git-scm.com/downloads[Git] a distributed version control system.
+* https://www.vagrantup.com/downloads.html[Vagrant] a tool for building and managing virtual machine environments. It is recommended you install version 1.9.7 as previous versions appear to have issues.
+* https://www.virtualbox.org/wiki/Downloads[VirtualBox] a cross-platform virtualization application.
+
+If you haven't already done so, it would be good to start by first creating a working project directory and changing to that directory on a terminal.
+
+Once in your working directory, run the following commands to clone the project repository and make it the current directory in your preferred command line tool.
+
+[source,bash]
+----
+$ git clone https://github.com/dcos/dcos-vagrant
+
+$ cd dcos-vagrant
+----
+
+## DC/OS setup guidelines
+
+Install `vagrant-hostmanager`, a plugin that makes it possible for you to access virtual machines from your computer via ssh.
+
+[source,bash]
+----
+$ vagrant plugin install vagrant-hostmanager
+----
+
+The following command populates your hosts file with the DNS routes to each of your cluster nodes.
+
+[source,bash]
+----
+$ vagrant hostmanager
+----
+
+This next command appends to cluster configuration file a property that disables OAuth authentication for your DC/OS cluster.
+
+[source,bash]
+----
+$ echo "oauth_enabled: 'false'" >> etc/config-1.9.yaml
+----
+
+Register temporary environment variables for provisioning your cluster. These two commands are required in order to set up a specific DC/OS version and for making use of the configuration we edited to not use OAuth. (see above command)
+
+[source,bash]
+----
+$ export DCOS_GENERATE_CONFIG_PATH=installers/dcos/dcos_generate_config-1.9.2.sh
+
+$ export DCOS_CONFIG_PATH=etc/config-1.9.yaml
+----
+Copy a predefined template for a DC/OS cluster describing the nodes (m = master, a = private agent, p = public agent) under the appropriate yaml filename. Vagrant searches for a file called VagrantConfig.yaml that is used to figure out which virtual machines to create.
+
+[source,bash]
+----
+$ cp VagrantConfig-1m-2a-1p.yaml VagrantConfig.yaml
+----
+Before we run the command to create virtual machines, it would be good to review the configuration file.
+Edit the `VagrantConf.yaml` file and lower the memory for the private agent nodes (a1, a2) down from `6144` to `2048` Megabytes or to some value you are certain your machine can handle.
+
+Run `$ vagrant up` and wait until the command completes successfully. NOTE: You can ignore the countless warning logs as they are just part of the logic defined in the deploy script to repeatedly access one of the machines still being prepared.
+
+## Visualizing your provisioned DC/OS cluster
+If all is well, you should be able to access http://m1.dcos/in your web browser (Safari, Chrome, etc...)
+
+image::https://prismic-io.s3.amazonaws.com/lunatech%2F4f2c172b-0730-4fbb-bd7e-168f5ba59380_1visualizecluster.png[alt=Visualizer,width=1024]
+
+This is the front user interface of the DC/OS cluster you just prepared.
+
+From here, you have a range of things you can do with your newly provisioned cluster including but not limited to viewing the state of your running services, nodes, management package and or services, etc...
+
+Alternatively, you can install the dcos CLI tool to perform the same said tasks via terminal:
+[source,bash]
+----
+ci/dcos-install-cli.sh
+----
+## Making snapshots of your working cluster
+
+If you intend to make changes to your cluster, the first thing we would recommend is to save the working state. If you installed VirtualBox you should be able to open the application and see which virtual machines you have running.
+
+The first thing to do once you open the application is to shutdown/power off every machine. Select every machine listed in the left, right click and hover your cursor over `Close` then click on `Power off`.
+
+In the top right corner, you should see a button `Snapshots` if you click on this one you can save the current state of each machine. Making Snapshots in http://www.techrepublic.com/article/how-to-use-snapshots-in-virtualbox/[VirtualBox]
+
+## Destroying your cluster
+If you're interested to continue with part 2 and 3 of this tutorial, it's best not to destroy your cluster. Just keep in mind that after you are through with reading through this guide, you will most likely want to clean your computer.
+
+To do so, simply run the command `vagrant destroy` -f from within the `dcos-vagrant` project repository you cloned.
+
+## Coming soon
+
+* Part 2 - Running services on your DC/OS cluster
+
+* Part 3 - Enforcing Network Policies with Calico

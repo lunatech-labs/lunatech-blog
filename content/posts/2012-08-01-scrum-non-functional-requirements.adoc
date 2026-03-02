@@ -1,0 +1,101 @@
+---
+layout: post
+title: Scrum and non-functional requirements
+date: 2012-08-01
+author: hilton
+lang: en
+tags:
+  - scrum
+  - methodology
+---
+= Scrum and non-functional requirements
+
+Scrum doesn’t help you
+with non-functional requirements, but that doesn’t mean you’re supposed
+to ignore them
+
+When you work on a Scrum project, you tend to focus on implementing the
+next set of features. After all, that’s pretty much the whole point of
+the Sprint Backlog. Features aren’t everything, though. When do you work
+on fixing bugs and usability issues? When do you improve performance and
+scalability?
+
+[[examples]]
+== Reliability, security, usability, performance, scalability…
+
+You can get into trouble if you neglect bugs and don’t think about
+security requirements. At a certain point, an application can become so
+buggy that the development team gives up on the idea of being able to
+fix all of the known bugs, and users give up on the idea of the software
+ever being trustworthy or reliable. Usability is similar: it is an
+inherent quality of all of a system’s interfaces (not just the
+user-interface) and not a set of features that you can just add to an
+existing system later on.
+
+Performance and scalability requirements are somewhat different.
+Although performance is a pervasive quality of a system, good
+performance relies on repeatedly tuning specific performance
+bottlenecks, instead of trying to make everything ‘fast’ first time
+(also known as premature optimisation*). Scalability requirements,
+meanwhile, tend to depend on business requirements that evolve over
+time, such as an on-line service’s number of users, and have high costs
+that are best delayed.
+
+[[requirements]]
+== Functional vs non-functional requirements
+
+Software development involves two kinds of requirements: functional
+requirements, which are about features like being able to send e-mail,
+and non-functional requirements, which include those qualities such as
+reliability, usability, performance and security. Wikipedia has a
+http://en.wikipedia.org/wiki/Non-functional_requirement#Examples[long
+list of non-functional requirements] , which all contribute to overall
+software quality.
+
+On a Scrum project, there is a serious risk that non-functional
+requirements will be neglected, resulting in poor-quality software. It
+is natural for the Product Owner to think about progress in terms of
+user stories and features, and to hold the development team responsible
+for the ‘quality’ of the resulting software.
+
+[[scrum]]
+== Prioritising Scrum project requirements
+
+Scrum gives you an effective way to prioritise, specify and implement
+functional requirements, in the form of user stories, but doesn’t
+particularly help with the non-functional requirements. Agile software
+development includes the principle that ‘working software is the primary
+measure of progress’, but assumes that your team has enough experience
+and common sense to decide what ‘working’ means.
+
+The solution, in general, is to bake non-functional requirements into a
+Scrum project by including them in the Definition of Done, and any
+associated review process. This means that non-functional requirements
+for things like reliability and usability can be incorporated into every
+user story, and therefore all development work.
+
+This approach also makes it possible to discuss the cost of implementing
+non-functional requirements with business stakeholders. Adding
+conditions to the Definition of Done increases the time required to
+implement each user story, as well as the time required to review or
+test that it is ‘Done’. Non-functional requirements are not free.
+
+Alternatively, each sprint can budget a fixed amount of non-story time
+that team members spend on technical tasks, such as bug fixing and
+performance improvements. This comes to the same thing, and is a just
+the choice of whether user stories include all work.
+
+[[catchup]]
+== Playing catch-up
+
+In practice, some non-functional requirements will still be addressed by
+user-stories that make the software catch up with where it should be.
+This is appropriate for improving performance, for example, in the form
+of specific performance improvements. This can still be continuous work:
+many applications would benefit from one performance improvement each
+sprint, and ‘performance improvements’ in every release.
+
+* a.k.a. The Root of all Evil
+
+https://plus.google.com/107170847819841716154/posts/Q1fe53bufso[Comments
+on Google+]

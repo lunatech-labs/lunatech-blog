@@ -1,0 +1,33 @@
+---
+layout: post
+title: "Book review - Designing Interfaces, Jenifer Tidwell"
+date: 2006-04-05
+author: hilton
+lang: en
+tags:
+  - opinion
+---
+= Book review - Designing Interfaces, Jenifer Tidwell
+
+:imagesdir: /images/media/2006-04-05-book-review-designing-interfaces-jenifer-tidwell
+
+http://designinginterfaces.com/[*Designing Interfaces*] is a valuable source-book of modern user-interface design, whose pattern approach transcends the operating system-specific references of the 1980's and 1990's. *Designing Interfaces* is much less technology-specific than most O'Reilly books, and replaces the jargon of Human-Computer Interaction with clear language and well-chosen examples. This means that instead of targeting a specific breed of alpha geeks, this book has wide appeal for software developers.
+
+++++
+
+<p><a href="http://designinginterfaces.com/" style="float:right; margin:0 0 1em 1em"><img src='../media/2006-04-05/book-review-designing-interfaces-jenifer-tidwell/designinginterfaces.gif' alt='Designing Interfaces' /></a>There was a time that application user-interface design was easier, in the sense that it was massively constrained by what you could draw on a dialogue box in a particular environment, and by books such as <a href="http://developer.apple.com/documentation/mac/higuidelines/HIGuidelines-2.html">Macintosh Human Interface Guidelines</a>. Since then two things have changed: there are now many more graphical user-interface platforms in widespread use, such as those on mobile telephones and digital cameras, and much software has shifted from the PC desktop to the web page, where there is much more variation in interaction design. This much variation and choice, needless to say, is plenty more rope for the unwary software developer to hang himself with.</p>
+
+<p>In principle, Human Computer Interaction is something of a solved problem, so the introduction of web applications should not change that. However, the jargon and high-level abstractions of HCI are rarely accessible to web application developers. Things improved a lot once people realised that it is better to <a href="http://www.it.bton.ac.uk/staff/lp22/guidelinesdraft.html">write patterns instead of guidelines</a>. Jenifer Tidwell did this, among others, and her original <a href="http://www.mit.edu/~jtidwell/interaction_patterns.html">Common Ground</a> pattern collection was a clear step in the direction of <em>Designing Interfaces</em>, whose web site is now one of several useful online pattern repositories:</p>
+
+<ul>
+<li><a href="http://designinginterfaces.com/">Designing Interfaces</a></li>
+<li><a href="http://www.welie.com/patterns/">welie.com patterns</a></li>
+<li><a href="http://developer.yahoo.com/yui/">Yahoo! UI Library</a></li>
+</ul>
+
+<p>These pattern collections are now targeted at software developers, and especially web application developers, rather than the clear academic focus of earlier collections. The <em>Designing Interfaces</em> book achieves this remarkably well, with a clear structure that starts each chapter with enough context and explanation of the underlying principles to properly introduce the subsequent patterns. These explanatory sections also serve as mini-introductions to HCI concepts, adding depth to the book for software developers interested in broadening their multi-discipline knowledge.</p>
+
+<p>The core of the book, of course, is in the patterns themselves. These are so clearly written that the what-when-why-how of each one seems obvious when you read it, which leads you quickly on to the bullet lists of how to implement each pattern and on to the examples. It is these examples that make the book what it is: their huge variety and number, clearly printed in full-colour, are why you need the book and not just the web site. The examples go beyond the single obvious example web site to show variations, in desktop application and hand-held device user-interfaces. This allows side-by side comparison, and communicates each pattern extremely effectively.</p>
+
+<p><em>Designing Interfaces</em> book is now recommended reading for web application developers here.</p>
+++++

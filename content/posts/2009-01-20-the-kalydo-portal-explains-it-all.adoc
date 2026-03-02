@@ -1,0 +1,17 @@
+---
+layout: post
+title: The Kalydo Portal Explains it All
+date: 2009-01-20
+author: kaas
+lang: en
+tags:
+  - ventures
+  - confluence
+---
+= The Kalydo Portal Explains it All
+
+title:  type: post layout: article meta: \{} status:
+
+Should you have gotten lost somewhat in all the exciting stuff [Eximion](http://www.eximion.com/) has done lately, then
+go to their new portal site [http://portal.kalydo.com/](http://portal.kalydo.com/). Clarity. We love
+it. 

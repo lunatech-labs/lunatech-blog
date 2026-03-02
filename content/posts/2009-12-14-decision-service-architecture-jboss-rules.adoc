@@ -1,0 +1,215 @@
+---
+layout: post
+title: Decision service architecture with JBoss Rules
+date: 2009-12-10
+author: PeterHilton
+lang: en
+tags:
+  - java
+  - drools
+---
+= Decision service architecture with JBoss Rules
+
+:imagesdir: /images/media/2009-12-14-decision-service-architecture-jboss-rules
+
+This article describes an
+architecture for implementing a decision service with http://www.jboss.org/drools/[JBoss
+Rules], a http://en.wikipedia.org/wiki/Business_rules_engine[business rules
+engine]. This is a
+high-level description, without code, for architects who are considering
+using JBoss Rules or implementing a decision service.
+
+This article is part 1 of a series:
+
+. Decision service architecture with JBoss Rules - this article
+. link:/2009/12/28/decision-service-business-rules-jboss-rules[Decision
+service business rules in JBoss Rules] - how to implement the decision
+service logic
+. link:/2010/01/04/how-build-decision-service-using-jboss-rules-execution-server[How
+to build a decision service using JBoss Rules Execution Server] - how to
+get this working, with example rules - a RESTful decision service with
+no Java code required.
+
+[[Decisionservices]]
+== Decision services
+
+A decision service is some kind of software component that acts as a
+business logic black box: other parts of a system present it with data,
+it makes potentially-complex business 'decisions' and returns some
+result. Typically, this is a component of a
+http://en.wikipedia.org/wiki/Service-oriented_architecture[service-oriented
+architecture] that encapsulates the business logic required to make
+business decisions, and which is called by applications that do not
+contain this logic themselves. In such an architecture, this
+communication typically uses web services.
+
+image:decision-service-architecture-1.png[image]
+
+For example, imagine a hypothetical retailer that has point of sale
+systems in many locations, as well as a web shop. A decision service
+would be useful for calculating which discounts apply to a particular
+sale, using rules that could change daily based on time-limited special
+offers. (Aren't they always?) The 'checkout' system would send details
+of the order to the decision service, which would apply business rules
+and calculate a result in the form of a percentage discount.
+
+Another example is product configuration, such as a web site that allows
+you to build your own PC by choosing components such as motherboard,
+processor, graphics card and enclosure (case). A user-interface would
+allow the buyer to make selections, the business rules would work out
+which combinations are valid, and tell the user-interface which options
+to disable. For example, if you select a powerful graphics card with its
+own fan, then you cannot select the smallest PC enclosure: only a larger
+tower has room.
+
+Note that this is about accessing remote _business logic_ rather than
+accessing remote data, such as a particular customer's purchase history.
+
+[[JBossRules]]
+== JBoss Rules
+
+http://www.jboss.org/drools/[JBoss Rules] (also known as Drools), part
+of the http://www.jboss.com/products/platforms/brms/[JBoss Enterprise
+Business Rules Management System], is a business rules platform built
+around a http://en.wikipedia.org/wiki/Business_rules_engine[rules
+engine]. There are many different usage scenarios for this kind of
+platform: building a decision service is perhaps the simplest.
+
+There are several reasons why JBoss Rules is an especially useful
+component in a decision service architecture. For example, it can run in
+a high-performance stateless mode, for use in a request-response pattern
+from multiple simultaneous clients. Secondly, the Drools Rule Language
+has a clear syntax for authoring rules, which are the core of the
+decision service implementation. Declarative business rules are usually
+far easier to read and verify than traditional procedural code. It is
+also possible to implement complex business logic as a large number of
+small independent rules, which also makes them easier to read and test.
+
+In addition, JBoss Rules provides both an
+http://downloads.jboss.com/drools/docs/5.0.1.26597.FINAL/drools-guvnor/html/ch01.html#d0e1095[Execution
+Server] that you can use as a simple/prototype decision service out of
+the box, as well as a flexible Java API (programming interface) for
+integrating the rules engine into your own application.
+
+In this scenario, JBoss Rules is a rules engine in the form of a Java
+library. Your decision service accepts web services request and uses the
+rules engine's API to execute the business rules.
+
+image:decision-service-architecture-2.png[image]
+
+[[Technicalarchitecture]]
+== Technical architecture
+
+JBoss Rules provides an out-of-the-box way to get started with this
+architecture, without writing any Java code. The Execution Service is
+included in the JBoss Rules distribution as _drools-server-5.0.1.war_ -
+a web application that you can run in any Servlet container, such as
+Apache Tomcat. This web application provides a default
+http://java.sun.com/developer/technicalArticles/WebServices/restful/[RESTful
+web services] interface to your business rules, which you write using
+the Drools Rule Language.
+
+image:decision-service-architecture-3.png[image]
+
+To use this service, you send data as XML in an HTTP POST request to the
+execution server, which takes care of passing the data to the rules
+engine, executing the rules, and formatting the results as an XML
+response. The Execution Server also supports
+http://en.wikipedia.org/wiki/JSON[JSON] as an alternative to XML.
+
+Either way, this is ideal for calling the decision service from a
+non-Java client, such as an
+http://en.wikipedia.org/wiki/Ajax_(programming)[Ajax] web page or
+another programming language.
+
+In this design, JBoss Rules executes the rules using a stateless
+session. This means that no state is preserved between requests to the
+decision service. Instead, if you repeat the same request, you get the
+same response each time, which allows the rules engine to optimise
+performance and makes testing far easier.
+
+The Execution Server is just a single Servlet with a fixed data model
+for input and output. If you look at the code, it is not difficult to
+imagine replacing it with extended functionality and customising it for
+your needs.
+
+[[Extendingthearchitecture]]
+== Extending the architecture
+
+Once beyond a proof of concept, or an initial version, various kinds of
+enhancement are interesting and possible. To have more control over the
+external web services API, you can replace the Execution Server with
+your own RESTful (http://en.wikipedia.org/wiki/JAX-RS[JAX-RS]) or SOAP
+(http://en.wikipedia.org/wiki/Java_API_for_XML_Web_Services[JAX-WS])
+interface.
+
+You may also want to improve performance or simplify the API by
+embedding the decision service directly as a component in another
+application, such as a web application, that will call your Java code
+directly.
+
+Or perhaps you want all of the above.
+
+image:decision-service-architecture-4.png[image]
+
+On a recent implementation project with one of our customers, we used
+just the far-right path: application uses SOAP API to call decision
+service facade.
+
+Either way, you would encapsulate the rules engine API and your rules as
+a single service interface or facade class.
+
+[[Domainfactobjectmodel]]
+== Domain fact object model
+
+The data model, defined as a Java class model, is the common factor
+across the architecture components. You will need a set of JavaBeans
+that define this data model for use in several places.
+
+. The classes define an XML representation for sending data across web
+services. This is typically based on a mapping from the JavaBeans using
+http://en.wikipedia.org/wiki/Java_Architecture_for_XML_Binding[JAXB].
+. The classes are used as
+http://en.wikipedia.org/wiki/Data_transfer_object[Data Transfer Objects]
+between the decision service's external (web services) interface and the
+rules engine.
+. Instances of these classes will be used as 'working memory facts' in
+the rules session. When the rules execute, the working memory is the set
+of data that the rules reason about and modify, consisting of facts,
+which are Java objects that each represent some assertion.
+
+In another application, these same JavaBeans may also define a
+persistent data model for storing data in a database - typically an
+object-relational mapping using
+http://en.wikipedia.org/wiki/Java_Persistence_API[JPA]. A decision
+service, however, is usually stateless and has no persistent data store
+because.
+
+Although in some sense this is necessarily an
+http://en.wikipedia.org/wiki/Anemic_Domain_Model[Anemic Domain Model],
+because the business logic resides in the rules, these need not be
+entirely bare JavaBean classes. When writing rules, it is frequently
+easier to implement derived data as additional JavaBean properties in
+the object model. For example, if a fact JavaBean has a (date) 'start
+date' property, it may be more convenient to add a transient Boolean
+property for whether the start date is a weekday that rules can refer to
+directly, without having to calculate it.
+
+[[Conclusion]]
+== Conclusion
+
+A decision service can be an effective way to extract business logic
+from multiple applications and system components, in order to reduce
+duplication and make testing easier. When implemented using a rules
+engine, these rules may be expressed more clearly and concisely, which
+makes them easier to read and maintain.
+
+JBoss Rules provides an Execution Server that allows you get started
+quickly, either as a proof of concept or in order to implement a basic
+decision service without writing any Java code. The same rules can be
+accessed using the JBoss Rules Java API, which allows you to embed this
+decisions service in a Java application, or to customise the decision
+service's external interface by making it into a new Java application
+with a Java web-services interface.
+
+

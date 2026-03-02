@@ -1,0 +1,26 @@
+---
+layout: post
+title: Unforgiven - user-interface labels
+date: 2005-06-24
+author: hilton
+lang: en
+tags:
+  - ui
+---
+= Unforgiven - user-interface labels
+
+If you are in IT, *format* is what you do to storage media, or perhaps a data representation standard, but to most people, *format* is an immutable property of what things look like.
+
+This, of course, was the culprit in that sorry digital camera tale - 'I was on my way back from holiday, and I thought it would make my photos look different'. I have now heard this three times from people who lost all of their photos (in which case you need http://www.digitalfilerecovery.com/[Media Investigator]. One had even used computers enough to realise what was happening, just when it was already <too> late: perhaps a progress message like "`formatting...`" was enough to make him switch context from *photos* to *electronic storage*.
+
+A word whose pre-computing meaning has long fallen by the wayside is "`clipboard`". I have been used to using the computer's "`clipboard`" since my first Atari ST in 1989, but I have almost never used a "`real`" clipboard. At last year's family Christmas lunch in a pub, my uncle pulled out a clipboard to check who had paid, which seemed faintly ridiculous. So how much sense does the Macintosh clipboard icon make to young people these days?
+
+Similarly, the floppy disk and dot-matrix printer http://www.kare.com/MakePortfolioPage.cgi?page=2">[icons for the original Apple Macintosh] made perfect sense then, but now they are pictures of artifacts that we no longer use: http://www.aresluna.org/guidebook/icons/drivesdevices[Marcin Wichary's icon gallery] shows the icons for newer devices. How long before the 'save' icon's floppy disk is no longer a recognisable object?
+
+Are these soon-to-be-unrecognisable icons worse than an ambiguous format option? Perhaps not, if you avoid pressing unlabelled big red buttons in case they do something bad. Besides, *save* and *print* are not nearly as bad as *delete all photos*.
+
+So what is the moral of this story? You might think it a warning to carefully choose good names (and icons) that avoid these problems. However, language just does not work that way - there will be always be ambiguities - and you cannot fit either a picture or a thousands words in an icon or on a small gadget's display. This is really a story about forgiveness.
+
+http://developer.apple.com/documentation/mac/HIGuidelines/HIGuidelines-2.html[The Macintosh Human Interface Guidelines] section on http://developer.apple.com/documentation/mac/HIGuidelines/HIGuidelines-24.html[forgiveness] instructs developers "`Always warn people before they initiate a task that will cause irretrievable data loss`" which means allowing for people misunderstanding their cameras' format options by asking for confirmation, with the warning: "`This option will delete all of the photos on the storage card`".
+
+This is especially worth remembering when developing web applications, since you need to resort to a (non-standard) JavaScript http://developer-test.mozilla.org/en/docs/window.confirm[window.confirm] for confirmation alert boxes, which HTML forms sadly lack.

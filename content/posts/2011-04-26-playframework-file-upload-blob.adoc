@@ -1,0 +1,258 @@
+---
+layout: post
+title: Play framework 1.2 file upload with play.db.jpa.Blob
+date: 2011-04-26
+author: PeterHilton
+lang: en
+tags:
+  - playframework
+  - json
+  - java
+---
+= Play framework 1.2 file upload with play.db.jpa.Blob
+
+This article describes how to use the http://www.playframework.org/[Play framework]’s built-in features for
+handling HTTP file uploads and saving the data in files on the server’s
+file system, in Play 1.2. This is frequently-used in web applications
+for things like allowing users to upload photos of themselves.
+
+Source code for this article is available at
+https://github.com/hilton/play-blob.
+
+[[architecture]]
+== Architectural considerations
+
+There are generally two approaches to persisting binary data: either
+save the data as a file on the server’s file system, or store the data
+directly in a database table. There are pros and cons to each approach.
+Using the file system may be easier to implement, but might not scale.
+Using the database allows you to support transactions, but might not
+scale.
+
+Confusingly, `play.db.jpa.Blob` data is stored in a file outside the
+database, and does not use the `java.sql.Blob` type with a
+http://en.wikipedia.org/wiki/Binary_large_object[BLOB] in the database.
+On the server, Play stores the uploaded image in a file in the
+`attachments/` folder, inside the application folder. The file name (a
+http://en.wikipedia.org/wiki/Uuid[UUID]) and MIME type are stored in a
+database attribute whose SQL type is `VARCHAR`.
+
+To store the data in a database column, you would annotate a model
+property with `@javax.persistence.Lob` which results in the data being
+stored in a column whose SQL type is BLOB or CLOB. How to implement this
+approach and how it compares to using the file system are beyond the
+scope of this article.
+
+[[upload]]
+== Upload a file and store it on the server
+
+The basic use case of uploading, storing and serving a file is extremely
+easy in Play. This is because the binding framework automatically binds
+a file uploaded from an HTML form to your JPA model, and because Play
+provides convenience methods that make serving binary data as easy as
+serving plain text.
+
+To store file uploads in your model, add a property of type
+`play.db.jpa.Blob`
+
+\{% highlight java %} package models; import play.db.jpa.Blob; import
+play.db.jpa.Model; import javax.persistence.Entity; @Entity public class
+User extends Model \{ public String name; public Blob photo; } \{%
+endhighlight %}
+
+To upload files, add a form to your view template:
+
+\{% highlight groovy %} #\{form @addUser(),
+enctype:'multipart/form-data'} #\{/form} \{% endhighlight %}
+
+Then, in the controller, add an action that saves the upload in a new
+model object:
+
+\{% highlight java %} public static void addUser(User user) \{
+user.save(); index(); } \{% endhighlight %}
+
+This code does not appear to do anything other than save the JPA entity,
+because the file upload is handled automatically by Play. First, before
+the start of the action method, the uploaded file is saved in a
+sub-folder of `tmp/uploads/`. Next, when the entity is saved, the file
+is copied to the `attachments/` folder, with a UUID as the file name.
+Finally, when the action is complete, the temporary file is deleted.
+
+To save attachments in a different folder, specify a different path in
+the `application.conf` file. This can be an absolute path, or a relative
+path to a folder inside the Play application folder:
+
+\{% highlight java %} attachments.path=photos \{% endhighlight %}
+
+To display the uploaded images, add image tags to a view:
+
+\{% highlight groovy %} #\{list items:models.User.findAll(), as:'user'}
+image:@%7BuserPhoto(user.id)%7D[image] #\{/list} \{% endhighlight %}
+
+Finally, add a controller method to load the model object and render the
+image:
+
+\{% highlight java %} public static void userPhoto(long id) \{ final
+User user = User.findById(id); notFoundIfNull(user);
+response.setContentTypeIfNotSet(user.photo.type());
+renderBinary(user.photo.get()); } \{% endhighlight %}
+
+[[update]]
+== Update the upload
+
+If you provide a `user.id` form (request) parameter, you can update an
+entry the same way you save one:
+
+\{% highlight java %} public static void updateUser(User user) \{
+user.save(); index(); } \{% endhighlight %}
+
+If a file upload is included, this will be saved as a new file, whose
+name is a new UUID. This means that the original file will now be
+orphaned. If you do not have unlimited disk space then you will have to
+implement your own scheme for cleaning up. There are several possible
+approaches.
+
+The brute force approach is to implement an
+http://www.playframework.org/documentation/1.2/jobs[asynchronous job]
+that periodically queries the JPA model for all currently-used file
+references, scans the `attachments/` folder, and deletes unused files.
+This might scale badly.
+
+Depending on your application, it might make sense to maintain
+references to all previous versions of attachments in your model, so
+that you can display them in the user interface, as a wiki generally
+does for previous versions of each page. Then the clean-up could either
+be manual, triggered when uploading a new file or from an asynchronous
+job. The clean up policy might be to keep a certain number of versions,
+or delete previous versions beyond a certain age. The `@PreUpdate` and
+`@PreRemove` JPA interceptors are useful for doing this kind of thing.
+
+A more hard-core solution would be to modify `play.db.jpa.Blob` to
+create an alternative `BinaryField` field implementation that handles
+transaction-aware file upload updates.
+
+[[delete]]
+== Delete the upload
+
+If you delete an object with a `play.db.jpa.Blob` property, the file in
+the `attachments/` folder is not deleted automatically. You can delete
+the file manually via a reference to a `java.io.File` property, as in
+the following action method.
+
+\{% highlight java %} public static void deleteUser(long id) \{ final
+User user = User.findById(id); user.photo.getFile().delete();
+user.delete(); index(); } \{% endhighlight %}
+
+Alternatively, you could encapsulate the file deletion in the model, by
+overriding the delete method in `User.java` to delete the file after the
+database entity has been successfully deleted.
+
+\{% highlight java %} @Override public void _delete() \{
+super._delete(); photo.getFile().delete(); } \{% endhighlight %}
+
+[[filename]]
+== Upload a file and save the file name
+
+Sometimes you want to store the name of the originally uploaded file, so
+that you can map the file extension to a MIME type on the server, or so
+that you can serve the file as an attachment with the original file
+name.
+
+To get at the file name, you need to bind the form control to a
+`java.io.File` action method parameter. This means that you need a new
+action method in your controller that constructs the model object from
+separate form parameters, instead of binding the whole model object as
+in the first example.
+
+Add the new action method to the controller, to instantiate a new model
+instance and its `Blog` property:
+
+\{% highlight java %} public static void addUserWithFileName(File photo)
+throws FileNotFoundException \{ final User user = new User();
+user.photoFileName = photo.getName(); user.photo = new Blob();
+user.photo.set(new FileInputStream(photo),
+MimeTypes.getContentType(photo.getName())); user.save(); index(); } \{%
+endhighlight %}
+
+To make this work, first add the new `photoFileName` property to the
+model:
+
+\{% highlight java %} @Entity public class User extends Model \{ public
+String photoFileName; public Blob photo; } \{% endhighlight %}
+
+Next, in the template, display the saved file name with the image, and
+change the form to use the new controller, and so that its file upload
+control’s name is just `photo` instead of `user.photo`:
+
+\{% highlight groovy %} #\{list items:models.User.findAll(), as:'user'}
+image:@%7BuserPhoto(user.id)%7D[image,title="${user.photoFileName}"]
+#\{/list} #\{form @addUserWithFileName(), enctype:'multipart/form-data'}
+#\{/form} \{% endhighlight %}
+
+[[download]]
+=== Download the file as an attachment
+
+When you serve a binary file to a web browser, the browser will normally
+display the data in the browser window, if possible. For example, the
+images in the example above are shown in-line in the browser window if
+you access their URLs directly.
+
+However, you can set an HTTP header to instruct the web browser to treat
+the file as an ‘attachment’, which generally results in the web browser
+downloading the file to the user’s computer.
+
+First, add a new action for the download. Assuming that the file name is
+always set, the only difference to the `userPhoto` action is that we
+pass the file name as a parameter to the `renderBinary` method, which
+causes Play to set the `Content-Disposition` response header, providing
+a file name.
+
+\{% highlight java %} public static void downloadUserPhoto(long id) \{
+final User user = User.findById(id); notFoundIfNull(user);
+response.setContentTypeIfNotSet(user.photo.type());
+renderBinary(user.photo.get(), user.photoFileName); } \{% endhighlight
+%}
+
+Now update the list of photos in the view template to include a link to
+the download URL.
+
+\{% highlight groovy %} #\{list items:models.User.findAll(), as:'user'}
+link:@%7BdownloadUserPhoto(user.id)%7D[image:@%7BApplication.userPhoto(user.id)%7D[image]]
+#\{/list} \{% endhighlight %}
+
+[[contenttype]]
+=== Support custom content types
+
+The response’s content type is set in the controller’s `userPhoto`
+action method, using the type stored in the Blob.
+
+The `play.libs.MimeTypes` looks up the MIME type for the given file
+name’s extension, using the list in
+`$PLAY_HOME/framework/src/play/libs/mime-types.properties`
+
+Since Play 1.2 you can add your own types to the `conf/application.conf`
+file. For example, to add a MIME type for GIMP images with the `.xcf`
+extension, add the line:
+
+\{% highlight java %} mimetype.xcf=application/x-gimp-image \{%
+endhighlight %}
+
+Note that with the code examples above, this only works if you use the
+`addUserWithFileName` action above, which explicitly looks up the MIME
+type based on the original file name. The earlier `addUser` example uses
+the MIME type sent in the file upload HTTP request. My web browser
+(Safari 5.0.4) sets the request content type to _image/png_ for PNG
+images, but does not recognise an `.xcf` file and sets its content type
+to _application/octet-stream_.
+
+=== Conclusion
+
+The Play framework greatly simplifies the task of handling and storing
+file uploads in a web application. However, this is for storing files in
+the server’s file system, which might not be the ideal solution for your
+application. To store the binary data in a database table, you would
+need to work out how to use JPA’s `@Lob` annotation.
+
+_Thanks to http://learn-to-play.tumblr.com/[Niko Schmuck] for additional
+review comments on this article._
+
