@@ -1,0 +1,120 @@
+---
+layout: post
+title: "Tensorflow Dev Summit, Sunnyvale March 6-7 2019"
+date: 2019-03-15
+author: Xavier Tordoir
+lang: en
+tags:
+  - event
+  - tenserflow
+img: images/media/2019-03-15-tensorflow-dev-summit-sunnyvale-march-6-7-2019/background.png
+---
+= Tensorflow Dev Summit, Sunnyvale March 6-7 2019
+
+:imagesdir: /images/media/2019-03-15-tensorflow-dev-summit-sunnyvale-march-6-7-2019
+
+Having been working on some projects with Tensorflow at Lunatech, we could get an invite for the dev summit at the Google Event Center in Sunnyvale.
+
+This 2 day event consists of technical talks about the framework, use cases and demos, and a great opportunity to meet the Tensorflow team and developers from all around the world.
+
+This breakdown is a non-exhaustive summary of topics covered during the talks at the event, i.e. those that caught more of my attention.
+
+== Tensorflow 2.0 alpha release
+
+A large faction of the talks discussed the 2.0 release, providing a python API that will be easier to use, this could increase Tensorflow dominance as the most adopted Machine Learning framework.
+
+Resources for the 2.0 preview is available here:
+
+https://www.tensorflow.org/alpha[https://www.tensorflow.org/alpha]
+
+https://www.tensorflow.org/versions/r2.0/api_docs/python/tf[https://www.tensorflow.org/versions/r2.0/api\_docs/python/tf]
+
+== Simpler and python idiomatic API
+
+The python language has its own adjective...'pythonic'.
+
+In Short, this new version is providing eager execution by default, without removing the capacity to work with graphs and lazy execution. Instead of working with explicit session runs:
+
+----
+# TensorFlow 1.x
+def f(placeholder):
+# do something
+outputs = session.run(f(placeholder), feed\_dict={placeholder: input})
+----
+
+The function decorator tf.function() is used to define standard python functions to be called, code is now more 'pythonic':
+
+----
+# TensorFlow 2.0
+@tf.function
+def f(placeholder):
+# do something
+outputs = f(input)
+----
+
+Code inside these functions is transformed, including while loops, and if statements is into corresponding Tensorflow ops to be executed as a graph.
+
+The API has been cleaned and unified, and the Keras API is now the recommended way to design models.
+
+The timeline is to evolve the released alpha version into an RC in spring. Toolings to help upgrade from 1.x to 2.0 are provided, like a conversion script.
+
+== Focus on deployment: TFX
+
+Tensorflow has for strong selling point, an important focus on a large ecosystem for deployment in production.
+
+TFX is a platform allowing to bring modelling to production. It provides tools for pipeline tasks like:
+
+- Data validation, including collecting statistics, schema inference
+- Data transformations for feature preparation before training/inference
+- Model evaluation
+- Model validation and serving
+
+_Tensorflow Serving_ allows very performant gRPC and REST serving of models with versionning, allowing canary deployment scenarii, easy rollbacks etc.
+
+_Tensorflow Hub_ is an API and model saving format to integrate prepared and published Tensorflow partial graphs as part of your own Tensorflow pipeline, e.g as a keras layer even.
+
+== TFLite, for the edge
+
+_Tensorflow Lite_ allows to convert and optimize existing models to run on devices, android or iOS. Converter scripts transform saved models in a FlatBuffers format that Tensorflow Lite can use, moreover, optimization strategies, like floating-point size reduction, quantization of parameters or even pruning parameters in networks significantly reduce the size of models under controlled quality decrease.
+
+Then the Tensorflow Lite library can run the models for predictions on the target platform.
+
+Tensorflow lite can even run on microcontrollers, see for examples the Sparkfun edition for Tensorflow, for which a demo of speech recognition was made:
+
+https://www.sparkfun.com/products/15170[https://www.sparkfun.com/products/15170]
+
+TPUs are also getting available for edge computing! We could watch a demo of image recognition learning on the coral development board, see also the USB-C TPU accelerator:
+
+https://coral.withgoogle.com/[https://coral.withgoogle.com/]
+
+== Swift Tensorflow
+
+Swift Tensorflow 0.2 is released. Swift is a performant typesafe language, with very appealing features for a Scala developers like me. Collab notebooks now support Swift for Tensorflow, giving an easy access to the API. It is fully interoperable with python, and calls to c functions are very easy too.
+
+One striking feature of the language is the differentiation as part of the language itself, making gradient computations on experimental models incredibly accessible.
+
+Certainly an API to follow for the future, exciting research field for Data Science tooling...
+
+== Various things...
+
+=== Tensorboard
+
+Tensorboard is a visualization tool to analyse training sessions. It is now able to be visualized directly in colab notebooks, e.g. by saving logs in gdocs. The board has now some features to analyse hyperparameter exploration characteristics.
+
+=== Tensorflow Probability and Agents
+
+Tensorflow has 2 interesting libraries to look into: Tensorflow Probability for probabilistic programming, Bayesian models and Tensorflow Agents for reinforcement learning.
+
+=== Community
+
+The community is getting big, with 1800 contributors, and lots of the Tensorflow 2.0 choices driven by users suggestions. A number of SIGs (Special Interest Groups), discussing the needs for several topics like Addons, build, IO, networking, Rust, Tensorboard.
+
+The Tensorflow World conference with O'Reilly has also been announced, to be held in Santa Clara in October, CFP is open!
+
+https://tensorflow.world/[https://tensorflow.world]
+
+There were many other things shown and discussed at the summit, including languages like javascript and julia, scalability, use cases etc.
+
+Tensorflow is getting more than just a deep-learning framework. It covers different models for various platforms, from servers to devices and mircocontrollers, with a very strong ecosystem for production grade deployment as well as research. If you want to go further, the complete content is available from the Tensorflow dev summit youtube channel:
+
+video::P4_rJfHpr7k[]

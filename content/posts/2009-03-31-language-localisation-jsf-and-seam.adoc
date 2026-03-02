@@ -1,0 +1,144 @@
+---
+layout: post
+title: Language localisation in JSF and Seam
+date: 2009-03-31
+author: PeterHilton
+lang: en
+tags:
+  - java
+  - jsf
+  - seam
+---
+= Language localisation in JSF and Seam
+
+This article introduces the mechanisms for
+http://en.wikipedia.org/wiki/Internationalization_and_localization[internationalising]
+a web application built using JavaServer Faces (JSF) application and the
+http://www.seamframework.org/[Seam Framework] for http://en.wikipedia.org/wiki/Language_localisation[language localisation]
+(L10N), expanding on the brief introduction in the Seam manual,
+http://docs.jboss.com/seam/2.1.1.GA/reference/en-US/html/i18n.html[Chapter 16. Internationalization, localization and themes].
+
+[[Simplelabels]]
+== Simple labels
+
+In the most simple case, as described in the Seam manual, you define a
+user-interface text labels in a properties file for each localisation.
+
+[source,ruby=nogutter]
+----
+# messages.properties - English localisation
+order = Order
+----
+
+[source,ruby=nogutter]
+----
+# messages_fr.properties - French localisation
+order = Commande
+----
+
+Then display the label in a Facelets view using an Expression Language
+(EL) expression that uses the `messages` Seam component.
+
+[source,xml=nogutter]
+----
+<h1>#{messages.order}</h1>
+----
+
+This syntax works, because the `Messages` component exposes a
+`java.util.Map` interface, keyed on the message key, which means that
+the EL expression above references the message for the Map key `orders`.
+
+[[Dotsinmessagekeys]]
+== Dots in message keys
+
+In practice, it is common to define hundreds or thousands of messages
+for an application user-interface, and to use a dot-hierarchy notation
+for the message keys, to organise them. For example:
+
+[source,ruby=nogutter]
+----
+model.Order = Order
+model.Order.carrierReference = Carrier reference
+model.Order.carrierReference.help = e.g. package tracking number.
+model.Order.deliveryAddress = Delivery address
+model.Order.dueDate = Due date
+----
+
+In this case, an expression like `#{messages.model.Order`} will no
+longer work: this is parsed as a reference to an `Order` property on the
+`#{messages.model`} map entry. If you try this you get the error:
+
+____
+javax.el.ELException: /example.xhtml: Property 'Order' not found on type
+java.lang.String
+____
+
+Instead, you have to use the more explicit Map look-up syntax:
+
+[source,xml=nogutter]
+----
+<h1>#{messages['model.Order']}</h1>
+----
+
+So far, this is pretty neat, in
+http://www.askoxford.com/concise_oed/neat[both senses] of the word.
+
+[[Placeholdersinmessages]]
+== Placeholders in messages
+
+In the application we are currently building, about a quarter of the
+messages contain a placeholder, whose value is inserted dynamically. For
+example:
+
+[source,ruby=nogutter]
+----
+# {0} date format, e.g. yyyy-MM-dd
+action.order.orderDate.invalid=Order date must be in {0} format
+----
+
+You can replace the placeholder, as per `java.text.MessageFormat`, by
+using the JSF `h:outputFormat` tag. Unfortuntely, this is somewhat
+verbose:
+
+[source,xml=nogutter]
+----
+<h:outputFormat value="#{messages['action.order.orderDate.invalid']}">
+ <!-- Insert the application date format from the configuration. -->
+ <f:param value="#{configuration.dateFormat}"/>
+</h:outputFormat>
+----
+
+Note that the `outputFormat` tag works independently of the message
+look-up mechanism, so you could insert the message directly in its
+`value` attribute. For example, you can output the current year in a
+Facelets view by using the `MessageFormat` date format style to format
+the Seam `currentDatetime` component:
+
+[source,xml=nogutter]
+----
+<!-- Output the current year -->
+<h:outputFormat value="{0,date,yyyy}">
+ <f:param value="#{currentDatetime}"/>
+</h:outputFormat>
+----
+
+[[Thingsyoucannotdo]]
+== Things you cannot do in JSF
+
+Sooner or later, you are going to want to do one of the following
+things.
+
+* Output a localised label containing a placeholder in an attribute
+value in a Facelets view, e.g. my name in the link text of
+`<h:commandLink action="#{action.notify}" value="Notify Peter"/>`
+* Use a JSF formatter, such as a date formatter, to format a value that
+will be inserted into a message placeholder.
+* Insert a JSF component, such as an `h:commandLink` into a message
+placeholder.
+
+Unfortunately, these are not currently possible with the facilities in
+JSF, Seam and Facelets. You can either vote for
+https://javaserverfaces-spec-public.dev.java.net/issues/show_bug.cgi?id=517[javaserverfaces-spec-public
+issue 517] and wait for a new version of JSF 2, or you can write your
+own implementations.
+

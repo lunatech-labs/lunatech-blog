@@ -1,0 +1,24 @@
+---
+layout: post
+title: Jfokus 2012 Play Framework 2.0 presentation video
+date: 2012-03-22
+author: hilton
+lang: en
+tags:
+  - event
+  - playframework
+---
+= Jfokus 2012 Play Framework 2.0 presentation video
+
+:imagesdir: /images/media/2012-03-22-jfokus-2012-playframework-video
+
+On 14 February 2012, Peter Hilton presented http://www.jfokus.se/jfokus/talks.jsp?lang=en#Play%20Framework%202.0[Play Framework
+2.0]
+at http://www.jfokus.se/jfokus/?lang=en&#page=page-1[Jfokus 2012] in
+Stockholm. Jfokus is the biggest Java developer conference in Sweden,
+started in 2007. Here is the video of the presentation.
+
+Video: http://parleys.com/d/3081[Parleys.com]
+
+http://parleys.com/d/3081[image:../media/2012-03-22-jfokus-2012-playframework-video/jfokus-video.jpg[Video on Parleys.com]]
+

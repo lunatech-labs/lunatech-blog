@@ -1,0 +1,77 @@
+---
+layout: post
+title: "My New PC is a Mac"
+date: 2008-02-11
+author: hilton
+lang: en
+tags:
+  - opinion
+  - mac
+---
+= My New PC is a Mac
+
+Until recently,
+my desktop PC was running Linux, like all of the other desktops at
+Lunatech. Since it was time to get a new PC with powerful hardware, I
+took the opportunity to join the laptop users and switch to an Apple Mac
+for software development. I now have my favourite development machine
+ever, and not just because it is shiny either.
+
+Note that I do not particularly care whether you use a Mac; I just
+wanted to explain why I am so happy with mine.
+
+== Hardware
+
+The new http://www.apple.com/macpro/[Mac Pro] is not so much a PC as a
+20 Kg aluminium beast. I got fairly basic specifications with extra
+memory - two 2.66 GHz Dual-Core Intel Xeon processors with 5 Gb of
+memory. I now have plenty of memory to run Eclipse, JBoss and
+PostgreSQL, along with the other applications, and everything is
+_really_ fast. Happiness is JBoss Application server starting-up in nine
+seconds.
+
+== A better operating system
+
+However, the real improvement is running http://www.apple.com/macosx/[OS
+X 10.5] (Leopard) instead of Gnome or KDE. Gnome and KDE are not bad,
+but OS X is so far ahead that it just seemed stupid to have a better
+operating system at home than the one I use for most of the day at work.
+
+One of the benefits is better hardware integration - more things just
+work: web cam and video chat, Bluetooth, printer set-up, sound and
+monitor set-up. Linux cost me a lot of time to get sound and 1920x1200
+resolution working last year.
+
+== Software
+
+Some of the software is just the same to use on OS X as on Linux:
+
+* server software, such as JBoss Application Server and PostgreSQL
+* Eclipse
+* NeoOffice (OpenOffice)
+* Firefox
+* Gimp.
+
+However, some of the other software I now use regularly is a great
+improvement over what I had before:
+
+* Apple software that comes pre-installed - Safari (web browser), Mail,
+iCal (calendaring), iChat (chat client), QuickLook/Preview (file
+viewers) and Address Book
+* http://www.omnigroup.com/applications/omnigraffle/[OmniGraffle] -
+diagram software
+* http://colloquy.info/[Colloquy] - IRC client.
+* http://www.lemkesoft.com/xd/public/content/index._cGlkPTE5Mw_.html[GraphicConverter]
+- bitmap image editor
+
+I have been using GraphicConverter for years, since I never really need
+Photoshop, but it would be nice to find an image editor with a more
+modern inspector-based user-interface like the iWork applications. I
+have not yet fallen in love with any of the newer OS X image editors,
+such as http://seashore.sourceforge.net/[Seashore],
+http://www.pixelmator.com/[Pixelmator] and
+http://www.flyingmeat.com/acorn/[Acorn], although they look nice and
+have potential.
+
+_http://hilton.org.uk/about_ph.phtml[Peter Hilton] is a senior software
+developer at Lunatech Research._

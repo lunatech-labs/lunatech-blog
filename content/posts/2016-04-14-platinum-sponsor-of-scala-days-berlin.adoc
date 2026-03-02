@@ -1,0 +1,18 @@
+---
+layout: post
+title: Platinum sponsor of Scala Days Berlin
+date: 2016-04-14
+author: fcanedo
+lang: en
+tags:
+  - event
+img: images/media/2016-04-14-platinum-sponsor-of-scala-days-berlin/background.png
+---
+= Platinum sponsor of Scala Days Berlin
+
+:imagesdir: /images/media/2016-04-14-platinum-sponsor-of-scala-days-berlin
+
+Lunatech is proud to be a http://event.scaladays.org/scaladays-berlin-2016#05-Sponsors[platinum sponsor for Scala Days Berlin 2016]. This year Lunatech is taking the whole team to Scala Days Berlin.
+
+If you’re there and are looking for a job with the kind of company that sponsors and takes all its employees to Scala Days, have a chat with us, there’ll be a lot of us walking around. 
+If you can’t wait, http://lunatech.nl/careers[get in touch with us right now].

@@ -1,0 +1,30 @@
+---
+layout: post
+title: Play framework meet-up at Devoxx
+date: 2011-11-11
+author: hilton
+lang: en
+tags:
+  - event
+  - playframework
+---
+= Play framework meet-up at Devoxx
+
+:imagesdir: /images/media/2011-11-11-play-framework-meet-devoxx
+
+The Lunatech team
+will be at [Devoxx 2011](http://devoxx.com/display/DV11/Home) next week.
+We think this is the perfect opportunity to organise a Play framework
+meet-up at the same time.
+
+So if you want to talk about Play and meet other players, please join
+us:
+
+* Where:
+http://maps.google.nl/maps?q=51.2458,4.416(AXXES%20Cafe)&z=17&t=k[AXXES
+Café] - Metropolis, Antwerpen (next to the Devoxx venue)
+* When: Thursday 17 of November, starting at 20:00
+
+See you there...
+
+image:../media/2011-11-11-play-framework-meet-devoxx/lunatech-network-logo.png[Lunatech Network]

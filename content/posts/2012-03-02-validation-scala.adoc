@@ -1,0 +1,220 @@
+---
+layout: post
+title: Validation in Scala
+date: 2012-03-02
+author: bastschuller
+lang: en
+tags:
+  - scala
+  - validation
+---
+= Validation in Scala
+
+When you start your journey in the land of
+Scala, you’ll often receive the friendly advice to not wander in the
+woods of http://code.google.com/p/scalaz/[Scalaz] (pronounced
+Scala-*zed*), because there’s nothing of interest for beginners there
+and you’ll most likely get lost. It’s certainly possible to get lost,
+but this article will show you that it’s possible to pick just a few
+things that give you immediate benefit.
+
+The subject of this trip is _Validation_: how to represent a computation
+which can either give a result, or a failure message. Or rather: how to
+represent a _sequence_ of computations (each of which may fail) giving
+either a complete result or else a _list_ of the failure messages.
+
+== Introduction
+
+To start, consider a plain case class for representing a person with a
+birth date and an address:
+
+=== Person.scala
+
+
+[source,scala,linenums]
+----
+import java.util.Date
+case class Person(name: String, birthDate: Date, address: List[String])
+----
+
+
+We would now like to construct `Person` objects given a string with
+components separated by a semicolon, for instance a CSV file. You can
+imagine this parse failing in a number of ways:
+
+* less than 3 components found
+* unparseable date
+* incomplete address
+
+Our test data looks like this:
+
+[source,scala,linenums]
+----
+val bad = "Name Only"
+val partial = "Joe Colleague;1974-??-??;Rotterdam"
+val good = "Bart Schuller;2012-02-29;Some Street 123, Some Town"
+----
+
+== Types
+
+To represent the result of the parse, we are looking for a type with two
+faces: either a `Person` or a list of error messages. There are two
+candidates in the Scala standard library that aren’t quite right:
+
+`Option[Person]` can represent `Some[Person]` or `None`, but there’s no
+place to store the error messages inside `None`.
+
+`Either[List[String], Person]` though can be either `Left[List[String]]`
+or `Right[Person]`, which at least gives us a place to store everything
+we want. Unfortunately, it doesn’t offer a nice API: putting the
+failures on the left is only a convention, and it’s still possible to
+have a failure without a message: `Left[Nil]` fits the type.
+
+[[scalaz]]
+=== Scalaz to the rescue
+
+Scalaz has `Validation[A, B]` where `Failure[A]` is your type for
+failures and `Success[B]` for success. But we can do one better. Because
+you often want to collect _all_ failures and because having _a_ failure
+means we have _at least one_ failure message, there’s
+`ValidationNEL[A, B]`. ‘NEL’ stands for Non-Empty List, and `A` is the
+element type, for which we’ll use plain strings. So our parser will
+return `ValidationNEL[String, Person]`.
+
+When we break up our program into smaller parts, we’ll also use
+validations for the substeps, to be combined later. So you’ll see
+`ValidationNEL[String,Date]` when we try to parse our birth dates.
+
+[[validations]]
+== Creating validations
+
+Here’s a complete example of a method returning a validation. We use the
+normal java way of parsing a `Date`, where failure is indicated by
+returning `null`. We test for that and generate a nice failure message
+instead:
+
+[source,scala,linenums]
+----
+def parseDate(in: String): ValidationNEL[String, Date] = {
+  val sdf = new SimpleDateFormat("yyyy-MM-dd")
+  sdf.parse(in, new ParsePosition(0)) match {
+    case null => ("Can’t parse ["+in+"] as a date").failNel[Date]
+    case date => date.successNel[String]
+  }
+}
+----
+
+As you can see, you can create a `Failure` from anything, by calling
+`failNel[B]` on it, where B is the type you’d rather have. Conversely,
+you need to wrap a `Date` inside a `Success` and you do that by calling
+`successNel[A]` where A is again the type parameter for the other
+branch. Because we use strings for failure messages we say
+`successNel[String]`
+
+[[options]]
+=== Dealing with Options
+
+On the top level of our parser, we start by splitting the string on
+semicolons. `string.split(';')` returns an array, but we don’t know how
+many elements it will have. Each component could be missing, and if so,
+would need its own failure message. One trick for dealing with sequences
+of unknown size is to call `lift` on them, which gives you a function
+that will accept any integer index and return an `Option` of the element
+type. This makes it easy to test for the presence of each element,
+without having to catch exceptions.
+
+For each component we now want to specify what to return when we have a
+string, and what failure to generate when we have nothing. The `fold`
+method which Scalaz adds to `Option` does just that.
+
+[source,scala,linenums]
+----
+def parsePerson(in: String): ValidationNEL[String, Person] = {
+  val components = in.split(';').lift
+  val name = components(0).fold(_.successNel[String], "No name found".failNel[String])
+  val date = components(1).fold(parseDate(_), "No date found".failNel[Date])
+  val address = components(2).fold(parseAddress(_), "No address found".failNel[List[String]])
+  …
+----
+
+`parseAddress` splits the given string again on comma and whitespace,
+checking that we have at least two address lines:
+
+[source,scala,linenums]
+----
+def parseAddress(in: String): ValidationNEL[String,List[String]] = {
+  val address = in.split(",\\s*")
+  if (address.length > 1)
+    address.toList.successNel[String]
+  else
+    ("An address needs to have a street and a city, separated by a comma; found ["+in+"]").failNel[List[String]]
+}
+----
+
+[[combining]]
+== Combining Validations
+
+Now that we have all the components required to construct a `Person` (or
+the individual reasons why we can’t), we need to actually make this
+combination work. Our inputs are Validations and our output should be a
+single Validation, with `Person` as the success type. So the type of the
+expression should be something like
+`(Validation, Validation, Validation) => ValidationNEL[String, Person]`.
+
+=== parsePerson, continued
+
+[source,scala,linenums]
+----
+(name |@| date |@| address) { Person(_, _, _) }
+----
+
+The `|@|` operator (sometimes written as the unicode character `⊛`) is
+the combinator we’re looking for: it combines validations into a single
+object, which in turn allows us to specify how we want the success
+branch to combine. The failure branch will automatically do the right
+thing, constructing a list of the failure messages. +
+The combined object has an `apply` method with the right number of
+parameters and so it’s just a matter of passing them to the `Person`
+constructor.
+
+To wrap it up, here’s how to call parsePerson and handle the result:
+
+[source,scala,linenums]
+----
+def tryParse(s: String) {
+  parsePerson(s) match {
+    case Success(p) => {
+      println("Succesfully parsed a person: " + p)
+    }
+    case Failure(f) => {
+      println("Parsing failed, with the following errors:")
+      f foreach { error => println("  " + error) }
+    }
+  }
+}
+----
+
+[[conclusion]]
+== Contrast and Conclusion
+
+There are lots of ways to handle errors in your programs. In Java, the
+most obvious way is to use Exceptions. Methods using exceptions
+automatically combine, but unfortunately not in the way you would like:
+any failure will immediately be reported, and it will be the _only_
+failure reported. It is of course possible to combine exceptions in
+other ways, but that means riddling your program with try-catch blocks
+around every sub step, which clutters the code beyond recognition.
+
+`Validation` allows you to organize your code along the lines of the
+_happy flow_, while still handling errors correctly.
+
+You have seen a practical use for some of the powerful concepts that
+Functional Programming and Scalaz offer. I haven’t told you that you’ve
+used an _Applicative Functor_, because that might have scared you off.
+You don’t need to know the fancy names to use the library though.
+
+The complete source code for this tutorial is available on github:
+https://github.com/bartschuller/scalaz-validation-example
+
+
+http://news.ycombinator.com/item?id=3656152[This article] at Hacker News

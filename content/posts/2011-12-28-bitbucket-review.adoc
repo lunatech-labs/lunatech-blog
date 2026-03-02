@@ -1,0 +1,91 @@
+---
+layout: post
+title: BitBucket review
+date: 2011-12-28
+author: targeter
+lang: en
+tags:
+  - code-hosting
+---
+= BitBucket review
+
+http://www.bitbucket.org[BitBucket] is a source code repository
+hosting solution by http://www.atlassian.com[Atlassian]. Besides
+repository hosting, it also offers issue tracking and wikis. We are
+currently considering BitBucket as a http://gitorious.org/[Gitorious] replacement." ---
+
+
+== Hierarchical structure
+
+The main hierarchical unit in BitBucket is a repository. That’s also the
+_only_ level: there’s no grouping of repositories or the notion of a
+project. That means if you have 50 repositories, you’ll have to scroll
+through the list to find the one you need, which means you’ll be wanting
+a strict naming convention. The issue tracker and wiki are
+per-repository.
+
+== Repositories
+
+BitBucket supports git and Mercurial source-code repositories.
+Repositories belong to a single user, who can give access permissions to
+that repository (see below). Users with access to a repository can fork
+and/or watch it. Forking allows users to create pull requests for the
+original repository.
+
+
+== Access control
+
+Access to the repositories is configured per-repository, by the owning
+user (i.e. the ‘Lunatech’ user). Users can be grouped, and access can be
+granted to an individual, or to an entire group. There are three levels
+of access: read, read/write, and admin.
+
+BitBucket accounts do not belong to an organisation or other account. In
+other words, it’s not possible for us to create or delete users, we can
+only give existing BitBucket users access to our repositories. It’s also
+not possible to revoke access from all repositories for a single user,
+so you would normally grant access to a group instead.
+
+== Wiki
+
+Bitbucket repositories can have a wiki attached. Wiki pages are written
+in http://www.wikicreole.org/[Creole] syntax. Pages can be edited by
+checking out the wiki as a git repository, or through an editor built
+into Bitbucket. There’s a pretty decent Creole editor and preview
+functionality.
+
+
+== Issue tracker
+
+A BitBucket repo can have issue tracker. On creation, tickets have
+(non-customisable) types and priority, and can be assigned to a user.
+Once created, the ticket gets the status ‘new’, which can be changed to
+one of open, resolved, invalid, duplicate or wontfix. Milestones,
+versions and components can be configured per repository, in which case
+they become available as properties on tickets.
+
+== Conclusion
+
+BitBucket is an obvious migration path from JIRA/Confluence to hosted
+DVCS with integrated lightweight issue tracker and wiki. Our specific
+conclusions are as follows.
+
+* There’s a simple git-based wiki, and Creole is an acceptable syntax
+(although Markdown support would be nice).
+* There’s a simple issue tracker.
+* Not being able to group repositories is a minor inconvenience (solved
+by a naming prefix convention).
+* There is no way to archive/hide unused repositories, which would be
+nice.
+* We would have to restrict the admin group to people who are allowed to
+access all the contents of all wikis, which would be the very small
+group who has access to the most sensitive wiki.
+* You would have to log in to a central account to create a private
+repo.
+* BitBucket’s pricing model is a better fit for our situation (few
+users, many repos) than GitHub’s.
+* GitHub is more mature, seems to generally do more and have more
+development effort behind it.
+
+Our conclusion is therefore that we want to use GitHub, even though it’s
+going to cost more and we’ll be limited in the number of repositories.

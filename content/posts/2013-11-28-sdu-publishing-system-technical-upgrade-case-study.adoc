@@ -1,0 +1,122 @@
+---
+layout: post
+title: Sdu publishing system - technical upgrade
+date: 2013-11-28
+author: vijaykiran
+lang: en
+tags:
+  - case-study
+  - jboss
+  - seam
+  - jee
+---
+= Sdu publishing system - technical upgrade
+
+Lunatech has been helping build and maintain several software systems and publication platforms for Sdu. Lunatech recently upgraded the platform and application to a more recent version of constituent technologies to make sure that the application is well-maintained and up-to-date.
+
+
+== Introduction
+
+http://www.sdu.nl/[Sdu Uitgevers] works closely with the Dutch
+government and provides publication services helping government bodies
+to publish official versions of various government documents. In 2010,
+Lunatech worked with Sdu to build one of the platforms using enterprise
+Java Seam 2 framework, running on the JBoss 4.x application server
+(JBoss AS). Read our
+http://blog.lunatech.com/2010/01/25/electronic-government-publications[Case
+study].
+
+This technical case study gives an overview of the approach we followed
+in making the upgrade project successful.
+
+== Goals
+
+Lunatech upgraded the platform and application to a more recent version
+of constituent technologies to make sure that the application is
+well-maintained and up-to-date, as part of ongoing adaptive maintenance.
+
+The application platform consists of complex software modules that
+integrate with external web services, conversion systems (using XML/XSLT
+transformations), business rules implementation and messaging. Lunatech
+built the system’s user interface
+http://www.jboss.org/richfaces[RichFaces] and
+http://www.seamframework.org/Home/JBossSeam#H-Seam2[Seam 2], which
+provided the visibility of various business process workflows, and
+access to manual actions.
+
+The goal of this upgrade and migration project was to analyse each
+system component system and upgrade to the latest version. In case of
+obsolete components, Lunatech reviewed the functionality and implemented
+it using better technology where possible. Apart from upgrading the
+application, there have also been significant changes and improvements
+in the underlying platform (JBoss AS and Java EE), which we also
+considered for the upgrade.
+
+In addition to keeping the platform and application up-to-date, the
+upgrade project also used improved technologies where appropriate to
+provide better performance and improve usability and overall system
+stability.
+
+== Approach & implementation
+
+The approach we followed in this project is first to create the
+inventory of various libraries and components used in the system and
+prepare the strategy of upgrade for each one. For simple cases, such as
+upgrading a library to the current version, the effort required was
+fairly minimal, as for upgrading the Apache Commons library used in the
+system or the Axis2 modules that interact with the external web
+services.
+
+The platform’s backend services were mostly driven by Enterprise
+JavaBeans (EJBs - Stateless Session Beans and Message-driven beans) and
+the business rules were implemented using
+http://www.jboss.org/drools/[Drools]. Since the EJBs were written using
+the Java EE6 standard, the effort required to port them to the newer
+version of JBoss platform was minimal.
+
+http://ant.apache.org[Apache Ant] was previously used as the build
+system, being more or less standard when the application was first
+built. Lunatech migrated the build to use http://maven.apache.org[Apache
+Maven], now an industry-standard software configuration management tool
+for Java projects.
+
+More complex cases such as upgrading Seam 2 to Seam 3 (CDI/Weld) needed
+more work - reviewing the architecture and updating components. Seam 2
+and Seam 3 (now mostly
+http://incubator.apache.org/deltaspike/[DeltaSpike]) are completely
+different frameworks and upgrading from Seam 2 to Seam 3 involves more
+than swapping the libraries.
+
+The previous version of the application’s user interface was built using
+RichFaces. We decided to port the user interface to a simpler library
+that provides better theming and user interface functionality. We
+selected http://primefaces.org[PrimeFaces], which has significantly
+reduced the amount of front-end code, while making the application look
+and perform better.
+
+The last major piece of the upgrade puzzle was upgrading JBoss AS 4.x to
+latest version of JBoss AS - 7.1.1. The configuration of the JBoss
+changed significantly compared to the 4.x series, but the migration was
+straightforward. The only custom feature of JBoss AS 4.x in use were the
+Scheduler xMBeans, which have been changed to a platform-independent
+technology: http://quartz-scheduler.org/[Quartz Scheduler].
+
+Since this is a major upgrade, Lunatech adopted a comprehensive
+phased-testing approach, to make sure that we didn’t miss anything
+during upgrade. As well as reviewing the manual acceptance test plans,
+we also improved automated testing using
+http://arquillian.org/[Arquillian], which has helped us write
+fine-grained integration tests for several features.
+
+== Conclusion
+
+At http://www.lunatech.com[Lunatech], we have been working with the
+complex publishing systems for well over a decade. Over the years,
+Lunatech has acquired significant domain knowledge and
+http://lunatech.com/services/technology-solutions[technology expertise]
+in building and maintaining complex enterprise systems, which we use to
+deliver quality solutions to our clients.
+
+Having completed this upgrade project, we provided considerable value to
+our client - Sdu Uitgevers - by keeping their software platform
+up-to-date and healthy.

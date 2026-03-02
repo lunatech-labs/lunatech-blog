@@ -1,0 +1,26 @@
+---
+layout: post
+title: Seam in action - JavaPolis presentation
+date: 2007-12-14
+author: hilton
+lang: en
+tags:
+  - java
+  - jboss
+  - seam
+---
+= Seam in action - JavaPolis presentation
+
+:imagesdir: /images/media/2007-12-14-seam-action-javapolis-presentation
+
+This week Peter Hilton
+and Nicolas Leroux, senior software developers at Lunatech Research,
+presented http://www.javapolis.com/confluence/display/JP07/Seam+in+Action[Seam In
+Action]
+at http://www.javapolis.com/[JavaPolis] in Antwerp.
+
+link:../media/2007-12-14-seam-action-javapolis-presentation/javapolis-2007-seam.pdf[image:../media/2007-12-14-seam-action-javapolis-presentation/javapolis-2007-seam.jpg[Seam In
+Action presentation slides (PDF)]]
+
+You can download the link:../media/2007-12-14-seam-action-javapolis-presentationjavapolis-2007-seam.pdf[presentation slides]
+(PDF, 2.6 Mb).

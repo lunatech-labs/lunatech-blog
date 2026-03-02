@@ -1,0 +1,188 @@
+---
+layout: post
+title: Planning Scrum project documentation
+date: 2012-11-20
+author: hilton
+lang: en
+tags:
+  - scrum
+  - methodology
+---
+= Planning Scrum project documentation
+
+A Scrum team and external
+stakeholders must agree how much time to spend on documentation; ‘none’
+is almost certainly the wrong answer
+
+[[where]]
+== Where’s the documentation?
+
+It’s Monday morning and the finance guy wants to know where the
+documentation is. This is somewhat disconcerting because half of the
+team doesn’t know who he is, let alone why he’s suddenly interested in a
+software development project, and because of the look on his face when
+you tell him that there isn’t any. So you talk.
+
+It turns out that although this looks like just another productive Scrum
+project, from the development team’s point of view, there’s something
+missing. There’s great visibility of how things are going right now but
+there’s no long-term plan, and the external stakeholders are getting
+nervous, because they’re missing some sense of what the ‘whole project’
+is. So they start picking on the lack of documentation.
+
+Software project and system documentation used to come for ‘free’, on
+development projects that cost too much. Before agile software
+development, methodology focused on processes that anyone could
+systematically follow. This tended to result in lots of intermediate
+documentation intended to demonstrate that the process was being
+followed correctly, instead of more efficient but unverifiable verbal
+communication. This does not mean that this documentation wasn’t useful.
+It was useful, but expensive.
+
+Business people who are new to agile software development may be
+surprised by and nervous about the lack of documentation. Without
+detailed functional specifications, how can there be agreement between
+business stakeholders and software developers? The answer is that agile
+software development involves talking to people. The lack of
+documentation doesn’t mean that the conversation isn’t taking place.
+
+It is surprisingly difficult to get used to the idea that agile software
+development focuses on producing the _software_ - if you want other more
+tangible deliverables then you'll probably have to take care of them
+yourself.
+
+Scrum doesn’t explicitly plan much in the way of documentation, but that
+doesn't have to stop you using Scrum principles and your Scrum process
+to add them to your project if necessary.
+
+[[developer]]
+== Developer documentation
+
+It’s another Monday morning, it’s the middle of the sprint and the
+development team is humming along nicely - everyone’s doing fine. Except
+for the new guy. He’s just joined the team and is feeling frustrated
+because the software is complex enough and difficult to understand, and
+the rest of the team don’t appreciate being interrupted with all of the
+‘what does this mean?’ questions.
+
+It turns out that the problem is that the data model is just one big
+ball of jargon and that once you understand that you can work everything
+else. Given that this is a pretty common issue in domain-specific
+software, you know what to do: you add a technical task to write a data
+dictionary. This will de-jargonify the system by defining what every
+entity and attribute means, what it’s for, and what its data looks like.
+
+A Scrum development team needs some basic system and functional design
+documentation. System documentation, such as a
+http://blog.lunatech.com/2012/08/15/scrum-development-environment-documentation[development
+environment set-up guide], smoothes over the disruption caused by team
+member changes. Functional design documentation, such as a functional
+overview or data dictionary, makes communication more effective by
+defining what the software is about and what the jargon means.
+
+When the team writes documentation for itself, this is an overhead task
+that is intended to support software development. The goal of spending
+time on this documentation is to _increase_ velocity, not to support
+some ideal that there should be certain kinds of documentation. This
+means that there is no reason to involve the Product Owner in planning
+this kind of documentation.
+
+The best approach is to budget this documentation as a fixed small
+overhead per sprint. This can either be a fixed time budget or a
+technical task. For example, team members might take it in turns to
+spend one hour per week updating documentation, or half an hour each, or
+to schedule a technical task to add or update one document every sprint.
+
+[[stakeholder]]
+== External stakeholder documentation
+
+It’s Friday afternoon, and the project is basically ‘done’. The last
+release just passed acceptance testing and it’s going in production next
+week. The last thing the development team is expecting at this point to
+write functional documentation, so they’re surprised when someone from
+marketing shows to ask for just that. The software might be ready, but
+now there’s a press release and brochures to write, and a web site to
+produce.
+
+A software project’s business sponsors sometimes want to see some kind
+of functional specification that defines what the system does. With
+pictures. That’s all very well, but Scrum isn’t going to give you one of
+those. Even though the Scrum process evolves, no Sprint retrospective
+ever resulted in a team deciding to cancel the next two sprints and
+write an old-school fifty-page* functional specification. However, a
+good functional overview and pretty screen shots turn out to be useful
+for related non-software activities, such as marketing.
+
+Documentation for stakeholders outside the development team is
+different, in that the development team doesn’t need it.
+
+The team doesn’t need this documentation to develop the software, so it
+is an additional deliverable. This means that it is best to make a user
+story for each documentation task, and estimate and schedule it as part
+of the normal Scrum process. This empowers the Product Owner to decide
+how important the documentation is, compared to work on the software
+itself.
+
+[[vanity]]
+== Vanity documentation
+
+Old hands in software often reminisce about how some 1970’s software
+manual was a work of literature, and all kinds of essential. Then the
+web was invented, and spiral-bound historical artefacts were replaced by
+HTML. Meanwhile, we sometimes get stuck with the idea that there should
+be a physical ‘manual’, even though we all know deep down that no-one is
+actually going to read it and that there are more accessible approaches
+to software documentation.
+
+You can’t _see_ software, but you can see a manual. If you get a nice
+cover design, perhaps with retro 70s design elements, it might even look
+good on the shelf. This is vanity documentation, which is the strangest
+kind of documentation.
+
+An occasional challenge in agile software development is the need to be
+honest about what deliverables are for, when they’re not about finishing
+the software. Occasionally, a documentation deliverable’s only real
+purpose is to look good, or to make someone look good. Not only does the
+development team not need this documentation to produce the software,
+but no-one needs it.
+
+This is actually just a special case of external stakeholder
+documentation, with the catch that it might be difficult to get anyone
+to agree that they want it enough to pay for it, without being able to
+explain why. From the development team’s point of view, you can have it
+if you pay for it, along with pointless features in the software itself.
+
+[[planning]]
+== Planning documentation
+
+There are many different good reasons to be writing documentation on an
+agile software development project, even though that documentation might
+not be necessarily for simply developing the software with the existing
+team. For planning purposes, it’s useful to consider two categories:
+developer documentation and external stakeholder documentation.
+
+Developer documentation is documentation that addresses project
+impediments and improves productivity. This puts it in the same category
+as other useful work that is not part of the deliverable software, such
+as automated tests, and can be planned the same way. It is usually
+enough to plan the occasional technical task to create or update system
+documentation, rather than updating the ‘definition of done’ to include
+a documentation check for every user story, because the most useful
+documentation is system-level rather than feature-level documentation.
+
+External stakeholder documentation is anything that is required beyond
+the scope of the software itself, as part of the software project. When
+this work competes for the same resources on the development team as
+programming, it is useful to plan the same way: use user stories. This
+way the documentation can be judged on the same terms as other work:
+business value and cost.
+
+* Fifty pages if you're lucky, usually more.
+
+https://plus.google.com/107170847819841716154/posts/TscaYXPM3jm[Comments
+on Google+]
+
+_link:/author/peter-hilton[Peter Hilton] is a senior software developer
+at Lunatech Research, currently coaching a Scrum team for one of
+Lunatech’s customers, and co-author of the book
+http://bit.ly/playforscala[Play for Scala] (Manning)._

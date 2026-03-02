@@ -1,0 +1,151 @@
+---
+layout: post
+title: Numbered Headings in Confluence
+date: 2008-12-29
+author: kaas
+lang: en
+tags:
+  - wiki
+  - confluence
+---
+= Numbered Headings in Confluence
+
+:imagesdir: /images/media/2008-12-29-numbered-headings-confluence
+
+As
+Confluence aficionados we usually write all of our documentation and
+proposals in its Wiki syntax first before polishing it in OpenOffice for
+PDF export. One of Confluence's shortcomings however is support for
+section/headline numbering, which makes authoring larger pages less
+pleasant.
+
+== The Macro
+
+With the use of a user macro we were able to add support however. The
+macro uses the "Automatic counters and numbering" CSS2 properties to get
+CSS generated numbering. The contents of the macro are:
+
+....
+<style type="text/css">
+<!--
+div.numbered_headings h1 {
+  counter-increment: h1c;
+  counter-reset: h2c;
+}
+div.numbered_headings h1:before {
+  display: marker;
+  content: counter(h1c) ". ";
+}
+
+div.numbered_headings h2 {
+  counter-increment: h2c;
+  counter-reset: h3c;
+}
+div.numbered_headings h2:before {
+  display: marker;
+  content: counter(h1c) "." counter(h2c) ". ";
+}
+
+div.numbered_headings h3 {
+  counter-increment: h3c;
+  counter-reset: h4c;
+}
+div.numbered_headings h3:before {
+  display: marker;
+  content: counter(h1c) "." counter(h2c) "." counter(h3c) ". ";
+}
+
+div.numbered_headings h4 {
+  counter-increment: h4c;
+  counter-reset: h5c;
+}
+div.numbered_headings h4:before {
+  display: marker;
+  content: counter(h1c) "." counter(h2c) "." counter(h3c) ". "
+    counter(h4c) ". ";
+}
+
+div.numbered_headings h5 {
+  counter-increment: h5c;
+  counter-reset: h6c;
+}
+div.numbered_headings h5:before {
+  display: marker;
+  content: counter(h1c) "." counter(h2c) "." counter(h3c) ". "
+    counter(h4c) ". " counter(h5c) ". ";
+}
+
+div.numbered_headings h6 {
+  counter-increment: h6c;
+}
+div.numbered_headings h6:before {
+  display: marker;
+  content: counter(h1c) "." counter(h2c) "." counter(h3c) "."
+    counter(h4c) ". " counter(h5c) ". " counter(h6c) ". ";
+}
+-->
+</style>
+
+<div class="numbered_headings">
+${body}
+</div>
+....
+
+== How to Install?
+
+To install the User Macro above you will have to be logged in to
+Confluence as a +++Confluence Administrator+++. Then:
+
+. Go to +++Confluence Admin+++.
+. Select +++User Macros+++ from the menu on the left.
+. Click +++Create a User Macro+++ to create a new user macro. On the
+page that follows you will have to fill out the following:
+* *Macro Name:* the name of the macro, we are using
+"`numbered_headings`" (omit the quotation marks).
+* *Macro has a body:* must be checked and you will have to select
++++Convert macro body wiki markup to HTML+++.
+* *Output:* select +++Macro generates HTML markup+++.
+* *Template:* the contents of the macro as listed above.
+
+== Using the Macro
+
+You can use the `numbered_headings` macro as demonstrated below. All
+sections of your page that need headline numbers must be surrounded by
+`{numbered_headings}` tags. Usually you will simply include them around
+the entire text. Note that this is possible in +++Rich Text+++ as well
+as +++Wiki Markup+++. We use the latter to demonstrate:
+
+....
+h1. Example
+
+Below is an example of numbered headings.
+
+{numbered_headings}
+h1. Introduction
+
+h1. Details
+
+h2. First Option
+
+h2. Second Option
+{numbered_headings}
+....
+
+This should roughly come up as:
+
+image:../media/2008-12-29-numbered-headings-confluence/numbered-headings-example.png[Numbered Headings Example]
+
+== Caveats
+
+It seems that you need a reasonably recent browser with decent CSS 2
+support for this all to work. Firefox 3 or the latest Safaris will do.
+Neither MSIE 6 or 7 seems to support it. Furthermore, because this macro
+uses CSS it will not work in exports such as PDF or Word unfortunately.
+Printing will work just fine.
+
+== Acknowledgements
+
+This macro is based on a comment by
+http://confluence.atlassian.com/display/~tmb[Tiffany Bartlett] on
+http://confluence.atlassian.com/display/DEVNET/Numbered+Sections+Macro[Numbered
+Sections Macro].

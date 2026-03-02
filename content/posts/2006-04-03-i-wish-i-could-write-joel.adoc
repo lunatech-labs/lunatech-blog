@@ -1,0 +1,32 @@
+---
+layout: post
+title: I wish I could write like Joel…
+date: 2006-04-03
+author: Michael Pentowski
+lang: en
+tags:
+  - opinion
+aliases:
+  - /posts/2006-04-03-i-wish-i-could-write-joel
+---
+= I wish I could write like Joel…
+
+Why is it that some people have no problems taking their thoughts and putting them into writing? I wish I was one of these persons, I wish I could write like http://www.joelonsoftware.com/[Joel].
+
+++++
+
+<p>I can be very clever when it comes to running a company, analyzing a situation, completing a deal, or finding a suitable solution to the challenge at hand. But when it comes to taking pen to paper, I fall apart. I script ideas in my head, talk it through with other people, but when it comes to sitting behind the keyboard and getting on with the task at hand I freeze. Why? I suppose it has something to do with my other character traits. For example, if you want a great public speaker to enthrall the audience, don't call on me. On the other hand, if you are looking for a panelist for a debate, I'm your man. I like interaction not monologues. I like intimate conversation in smaller audiences. If you are looking for a short to the point business plan or summary, I'm up for the task. A long drawn out 100 page plan is not my bag. But I digress...</p>
+
+<p>A while back I thought it a good idea to start writing up our experiences with running a software company and share these with others. My head was full of great stories, advice, and such to share with those interested. I asked our team to provide me with the tools to be able to publish articles on our web site. They rose to the challenge, I did not.</p>
+
+<p>The irritating part for me is that we have no shortage of material to write about. I am proud to be part of a great company, we have mutiple successes and a few failures, we have attracted a great team and know how to keep them (and our customers) motivated. Luckily for us, the team is not afraid to write articles about what we do best: technology related issues. To add to the mix, I do have some ideas for subjects which I would like to write about:</p>
+
+<ul>
+<li>How to hire the wrong people</li>
+<li>Resource juggling 101</li>
+<li>Paying lip service versus action</li>
+<li>Meetings for the sake of meeting</li>
+</ul>
+
+<p>The challenge for me now is to find the discipline and self confidence to deliver on my promise. I suppose this admission is my first step on the road towards self help. My name is Michael, I have a problem with writing. I must confront this problem one sentence at a time...</p>
+++++

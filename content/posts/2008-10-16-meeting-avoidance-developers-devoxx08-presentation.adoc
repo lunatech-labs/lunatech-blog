@@ -1,0 +1,34 @@
+---
+layout: post
+title: Meeting-avoidance for developers - Devoxx08 presentation
+date: 2008-10-16
+author: hilton
+lang: en
+tags:
+  - project-management
+---
+= Meeting-avoidance for developers - Devoxx08 presentation
+
+Peter Hilton will be presenting
+a http://www.devoxx.com/display/JV08/Meeting-avoidance+for+self-managing+developers[Meeting-avoidance for self-managing
+developers]
+presentation at this year's
+http://www.devoxx.com/display/JV08/Home[Devoxx08]
+formerly-known-as-JavaPolis conference. See you there!
+
+== Presentation abstract
+
+Many developers are frustrated by time spent in meetings, when they
+would rather be coding. These meetings are often project management
+activities, such as weekly project status meetings, that have evolved
+into a large fixed overhead on software development projects.
+
+This presentation presents ways for developers to reduce meeting time,
+and other overhead, with various tools and techniques to reduce the cost
+of project management activities.
+
+Another cause of developer frustration is micro-management by a
+non-technical project manager who is not part of the development team.
+This presentation describes how a development team can self-manage in
+order to address this.
+

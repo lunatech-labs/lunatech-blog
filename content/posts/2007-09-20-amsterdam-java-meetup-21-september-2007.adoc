@@ -1,0 +1,19 @@
+---
+layout: post
+title: "Amsterdam Java Meetup, 21 September 2007"
+date: 2007-08-06
+author: hilton
+lang: en
+tags:
+  - event
+---
+= Amsterdam Java Meetup, 21 September 2007
+
+Although I generally avoid Amsterdam, I will be making an
+exception tomorrow to go to http://blog.interface21.com/main/2007/08/02/amsterdam-java-meetup-q307-september-21st/[The 7th Amsterdam Java
+Meetup]
+with http://sam.brodkin.com/[Sam]. It should be a good chance to meet
+some more Java developers who work in the Netherlands, and although http://hilton.org.uk/amsterdam.phtml#de-jaren[De
+Jaren] is hardly my
+favourite cafe-bar, at least it is big enough for the expected large
+crowd.

@@ -1,0 +1,120 @@
+---
+layout: post
+title: Last article from me
+date: 2011-10-14
+author: FroMage
+lang: en
+tags:
+  - fun
+---
+= Last article from me
+
+"Today is my last day as a Lunatech Research employee,
+so this is my last blog entry on this site.
+
+[[Lastarticlefromme-Lookingback]]
+== Looking back
+
+Lunatech and I have a long history. Ancient in IT timescales in fact,
+because I started working for Lunatech in Rotterdam in 1998 for a summer
+internship back when we were not even ten people yet, had a small office
+which looked like a typical startup. That internship changed into a
+permanent contract shortly afterwards, and I've started working on Java
+(mostly) and Perl (sometimes) since that day.
+
+What made Lunatech such a nice place was that the people working there
+were smarter than average, and while smarter people all have their own
+type of autism, we only had friendly people with whom teamwork was not
+only possible but agreeable, motivating and highly rewarding. And to
+this day it's still true, now that we're a lot more employees in a much
+bigger office that doesn't look like a startup that much anymore (though
+it definitely doesn't look like a boring work place).
+
+Over the years I've learned a lot at Lunatech, as a person and as a
+developer, I've had the opportunity to attend conferences such as
+http://devoxx.com/[Devoxx], start the http://rivierajug.org[Riviera JUG]
+and organise my own conferences, produce and work on
+http://www.lunatech-labs.com[open-source software] and even on customer
+projects, use only cool and/or new technologies to make the best
+products in the most rewarding way possible.
+
+With Nicolas Leroux, we've promoted
+http://en.wikipedia.org/wiki/Software_craftsmanship[software
+craftmanship] back before it became a _thing_ (“Artisan Développeur” in
+French), but a good company to work for is more than just that. Lunatech
+has always been very accommodating with its employees. As long as the
+job is done well (and it is always), work hours are flexible, location,
+hardware and software too. In fact the only thing not flexible is
+quality, but otherwise you're pretty much free to do a good work in the
+way you can justify is best. Process, policies or dogma doesn't get in
+the way of delivery.
+
+Lunatech has always let its employees pursue education as well if they
+wanted to. I myself did two years of university in France, working
+remotely part-time for Lunatech. Throughout the years I can tell you
+Lunatech, and especially our beloved benevolent evil orverlord Michael
+Pentowski will make sure that Lunatech will help you when you need help,
+because employees not numbers, and it's this looking out for us that
+makes this place feel like family.
+
+Back in 2004 I left Lunatech for the first time, not because I was
+unhappy in the company, but because I moved definitively from Rotterdam
+to the south of France, and decided I wanted to become a University
+professor. After an interesting PhD, I was determined *not* to become a
+professor. I was also about fed up with commuting, especially since I
+wanted to spend more time with the kids, so I decided I should try
+working from home.
+
+Because I obviously stayed friend Lunatech ex-colleagues, the subject
+came up during a discussion and we decided to give it a try once again.
+So in 2008 I joined up again, seeing familiar and new faces, but I dare
+say that after 4 years of absence Lunatech got an even more interesting
+place to work in. I really had a blast these last 4 years.
+
+[[Lastarticlefromme-Lookingforward]]
+== Looking forward
+
+Then early this year when the news started spreading about the
+http://relation.to/Tutorials/IntroductionToCeylon[Ceylon language], I
+became very enthusiastic about the ideas in that language and because I
+wanted very much a compiler to test this language, and none was
+forthcoming, I naturally got in contact with the Ceylon team and started
+quickly hacking the compiler. It's been crazy work, working almost every
+night and weekend on it since May. I've rarely been so motivated to work
+on something in my free time for something that isn't for my immediate
+needs (I did spend half a year of evenings on a Picasa clone that I made
+to host my own photos), but this language, this compiler and the team of
+people helping build this are just that motivating.
+
+I guess it's only natural that after spending 3 years of PhD working on
+the implementation of a language, compiler and virtual machines that I'd
+be interested to go at it again, but this time with reasonable hope that
+we'll have users :)
+
+So after months of hard evening work, when the occasion presented itself
+to join the Ceylon Red Hat team as a full-time employee, I decided I had
+to go on this adventure, I couldn't stay in the Shire among my dear
+Hobbit friends, I simply had to take the hard and long road, get rid of
+the Goblins and Smog on the way and do all I can to make Ceylon a great
+language with great tools. It's always hard to leave the comfort of home
+and family, such as Lunatech, but sometimes an Adventure is all you
+need, it imposes itself to you. I'm very glad to be joining Red Hat and
+I'm not that scared of the unknown so much because I know a lot of my
+new colleagues already and they're all smart and friendly, and the
+Ceylon team certainly kick ass.
+
+[[Lastarticlefromme-Togettothepoint]]
+== To get to the point
+
+All this to say, I cannot recommend a better place to work for than
+Lunatech. If you're in the Netherlands and are a talented developer,
+then http://www.lunatech-research.com/content/employment[you want to
+work there]. If you're studying and want the best place to work for,
+http://www.lunatech-research.com/content/internships[you need to apply
+for an internship there].
+
+It's a weird feeling to be both sad to leave and exited to start a new
+job. This is my last blog entry here, but there are many more to come
+from me at Red Hat, including my upcoming Ceylon presentations at
+http://rivieradev.fr/application/talk?id=138[Riviera DEV] and
+http://www.devoxx.com/display/DV11/The+Ceylon+programming+language[Devoxx].

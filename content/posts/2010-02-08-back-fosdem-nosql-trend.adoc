@@ -1,0 +1,64 @@
+---
+layout: post
+title: Back from FOSDEM - the NoSQL trend
+date: 2010-02-08
+author: pepite
+lang: en
+tags:
+  - fosdem
+  - event
+---
+= Back from FOSDEM - the NoSQL trend
+
+This week end, I went to
+http://fosdem.org[FOSDEM]. Even if it was a bit too geeky for my
+taste, it was certainly worth going. I attended quite a few talks and
+met the http://jboss.org[JBoss] team, the http://playframework.org[play! framework] team and http://jbug.be[JBUG.be]
+people.
+
+I was actually quite surprised by the number of people attending the
+http://en.wikipedia.org/wiki/NoSQL[NoSQL] tracks. While I understand the
+enthusiasm this new trend brings, it seems I am not sharing much of it
+with the people I talk to.
+
+What is NoSQL anyway? NoSQL promotes the use of very simple interfaces
+such as associative arrays or Key-Value pairs. It is also possible to
+largely distribute them and is highly scalable.
+
+What really interested me about the NoSQL movement is the fact that
+solutions can be schema free. How is that relevant for web applications?
+I think it is a crucial point when you think about web applications, and
+the social aspects that web applications bring to users nowadays. Humans
+are not really structured and it is getting more and more complicated to
+enforce a structure that pretends to link users, services and
+technologies together.
+
+However, to my surprise no one was interested by this aspect: it was all
+about performance! Let me tell you that this is the last aspect of this
+technology that I am interested by. I don't think that any of the
+applications we develop require nanosecond response times and scaling to
+100 million users. Besides, when you are talking about serving billions
+of terabytes of content, it is a completely different infrastructure
+that you are talking about anyway. So the performance aspect was quite
+irrelevant to me.
+
+So, the bottom line is: should we really care about it?
+
+I don't see myself advising ditching relational databases just because
+of performance reasons or because the latest trend tells us that NoSQL
+is the future. Database performance is not yet a problem for us. What I
+was interested in, being schema or data structure agnostic, is not the
+main concern of the people who are developing these NoSQL solutions.
+However, the tooling that SQL databases have, and the relationships
+between entities are not really quite there, even if there is more and
+more development in those areas.
+
+However, because this NoSQL movement is getting more and more popular,
+we might see object databases coming back as first-class citizens. Then
+I might get the best of both worlds: tooling, relational queries and a
+rather schema agnostic persistent storage.
+
+In conclusion, I think this latest hype might bring new solutions that
+can be used for small projects helping us to develop quicker solutions,
+even if we are not quite there yet.
+

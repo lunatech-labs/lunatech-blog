@@ -1,0 +1,41 @@
+---
+layout: post
+title: Lunatech presents at Scala Stockholm
+date: 2012-02-08
+author: hilton
+lang: en
+tags:
+  - event
+  - playframework
+  - scala
+---
+= Lunatech presents at Scala Stockholm
+
+On 15 February 2012, Peter Hilton
+will present Play to the http://www.meetup.com/Scala-Stockholm/events/46249872/[Scala-Stockholm user
+group].
+
+Peter Hilton will open the meeting with a short presentation on his view
+about Scala's role as language on the JVM which we will discuss with
+other Scala celebrities.
+
+== Why Play needs Scala and why Scala needs Play
+
+Play 2.0 is a Scala rewrite of Play 1.2, which was implemented in Java.
+Although Scala makes various things easier to implement and reduces the
+need to use bytecode enhancement at runtime, it's the type-safe
+templates that will have the biggest impact for most users. Play needs
+Scala to provide compile-time checking and type-safety.
+
+Meanwhile, Play is the first Scala web framework that's designed for
+mainstream web developers, with full-stack functionality and support for
+modern front-end technologies. This is fundamentally different to web
+frameworks that are designed for Scala enthusiasts, using Scala language
+features to implement a partial web framework in a Scala way. Scala
+needs Play, because Play makes Scala useful for mainstream software
+development, which these days means web application development.
+
+Peter Hilton (Play! Framework 2.0), Heiko Seeberger (Scala in Action),
+Viktor Klang (Up and out: Scaling software with Actors), ﻿Andrey Breslav
+(The Kotlin Programming Language)﻿ and Jonas Bonér (Akka) have confirmed
+their participation.

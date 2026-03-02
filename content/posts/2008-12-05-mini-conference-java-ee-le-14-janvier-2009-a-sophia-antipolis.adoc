@@ -1,0 +1,252 @@
+---
+layout: post
+title: Mini-conférence Java EE le 14 janvier 2009 à Sophia-Antipolis
+date: 2008-12-05
+author: FroMage
+lang: en
+tags:
+  - java
+  - event
+  - france
+aliases:
+  - /posts/2008-12-05-mini-conference-java-ee-le-14-janvier-2009-a-sophia-antipolis
+---
+= Mini-conférence Java EE le 14 janvier 2009 à Sophia-Antipolis
+
+:imagesdir: /images/media/2008-12-05-mini-conférence-java-ee-le-14-janvier-2009-à-sophia-antipolis
+
+http://www.lunatech-research.com[Lunatech
+Research] et l'http://www.iut.unice.fr[IUT de Nice
+Sophia-Antipolis] organisent une
+mini-conférence **gratuite** sur http://java.sun.com/javaee/[Java EE]
+le **mercredi 14 janvier 2009** sur le site de l'http://portail.unice.fr/jahia/Jahia/site/iut/pid/9941[IUT de
+Sophia-Antipolis]
+http://maps.google.fr/maps?q=IUT+Sophia-Antipolis+650,+Route+des+Colles+06560+Valbonne@43.616365,7.071826[Google
+Maps].
+
+
+Nous attendons de nombreux développeurs et étudiants de Nice et
+Sophia-Antipolis. Venez nombreux, transmettez la nouvelle à tous les
+développeurs Java de la Côte d'Azur et nous transformerons l'essai en
+http://jboss.org/resources/jbugs.html[JBug] ou
+http://java.sun.com/community/usergroups/[JUG].
+
+S'il vous plaît prenez le temps de vous
+http://www.lunatech-research.com/event/register/miniconf-sophia[inscrire
+en ligne]. L'inscription est gratuite et même si elle n'est pas
+obligatoire, elle est recommandée pour nous permettre de prévoir les
+rafraîchissements d'usage.
+
+N'hesitez pas à mailto:jbug-sophia@lunatech.com[nous contacter] pour de
+plus amples informations.
+
+== Audience
+
+Nous attendons aussi bien des étudiants de l'http://www.iut.unice.fr[IUT
+Nice-Sophia-Antipolis] et de http://www.polytechnice.fr/[Polytech Nice],
+que des professionnels novices et confirmés. Toutes nos présentations
+sont accessibles aux débutants tout en restant intéressantes pour les
+développeurs expérimentés de par la nouveauté des technologies
+présentées, qui sont souvent négligées par les entreprises avant d'avoir
+atteint une maturité qui ne vient que trop tardivement.
+
+Le minimum requis pour apprécier ces présentations est de connaître le
+langage http://en.wikipedia.org/wiki/Java_(programming_language)[Java]
+(ou http://en.wikipedia.org/wiki/C_Sharp[C#] donc, de par leur
+http://en.wikipedia.org/wiki/Comparison_of_C_Sharp_and_Java[similitude]),
+l'univers du http://en.wikipedia.org/wiki/World_Wide_Web[web]
+(http://en.wikipedia.org/wiki/HTTP[HTTP],
+http://en.wikipedia.org/wiki/HTML[HTML]...) et d'aimer la programmation.
+Ces présentations s'adressent principalement aux développeurs avec du
+code, du code et encore du code. Plein de buzzwords certes — comment les
+éviter en Java? — mais pas de présentations vagues et abstraites.
+
+Nous vous recommandons de venir nombreux, pour découvrir par besoin ou
+par curiosité, et échanger des idées avec les intervenants entre les
+présentations, leur poser des questions, leur suggérer des
+améliorations. N'oubliez-pas, l'entrée est gratuite.
+
+== Programme
+
+[width="100%",cols="50%,50%",]
+|===
+|Horaire |Description
+|13:30 - 14:00 |Accueil
+|14:00 - 15:00 |Nouvelles technologies de développement Java EE +
+(par Stéphane Épardaud et Nicolas Leroux)
+|15:15 - 16:00 |RESTful web services avec JAX-RS +
+(par Stéphane Épardaud)
+|16:15 - 16:45 |Pause café
+|16:45 - 17:45 |Programmation de Portlets +
+(par Julien Viet)
+|18:00 - 19:00 |GlassFish v3 +
+(par Alexis Moussine-Pouchkine)
+|19:15 - 19:30 |Fin/Rencontres?
+|===
+
+== Programme détaillé
+
+=== Nouvelles technologies de développement Java EE
+
+À travers la création d'un service web permettant de gérer les
+évènements que nous organisons, nous présentons plusieurs technologies
+http://java.sun.com/javaee/[Java EE] récentes ou futures de façon
+incrémentale. Nous présentons ainsi JSF
+(http://java.sun.com/javaee/javaserverfaces/[Java Server Faces]) et
+https://facelets.dev.java.net/[Facelets] pour l'interface web, EJB
+(http://java.sun.com/products/ejb/[Enterprise Java Beans]) et
+http://www.seamframework.org[Seam] pour le middle-tier, JPA
+(http://java.sun.com/developer/technicalArticles/J2EE/jpa/[Java
+Persistence API]) pour le storage-tiers,
+http://www.hibernate.org/412.html[Hibernate Validation] et
+http://jcp.org/en/jsr/detail?id=303[Bean Validation] pour les
+contraintes DB de haut-niveau, JAXB (https://jaxb.dev.java.net/[Java API
+for XML Binding]) pour la sérialisation XML,
+https://jsr311.dev.java.net/[JAX-RS] (Java API for
+http://en.wikipedia.org/wiki/REST[RESTful] services) pour les web
+services, http://www.hibernate.org/410.html[Hibernate Search] pour le
+http://en.wikipedia.org/wiki/Full_text_search[full-text search],
+http://www.jboss.org/drools/[Drools] pour l'inférence d'information.
+
+Bien entendu nous survolons les technologies mais prenons le temps à
+chaque fois de les présenter en montrant des exemples concrets et
+fonctionnels. Après ce tour d'horizon, vous saurez de quoi Java EE est
+capable.
+
+=== RESTful web services avec JAX-RS
+
+http://en.wikipedia.org/wiki/REST[RESTful] est le dernier-cri des
+protocoles de http://en.wikipedia.org/wiki/Web_service[web services].
+Contrairement à
+http://en.wikipedia.org/wiki/Simple_Object_Access_Protocol[SOAP] ou
+http://en.wikipedia.org/wiki/XML-RPC[XML-RPC] qui définissent un
+protocole complexe, RESTful utilise
+http://en.wikipedia.org/wiki/HTTP[HTTP] comme transport et permet
+d'accéder directement aux ressources distantes au moyen
+d'http://en.wikipedia.org/wiki/Uniform_Resource_Locator[URLs] simples et
+structurés. Chaque ressource peut avoir une ou plusieurs représentations
+différentes. Tout cela permet à des clients simples d'obtenir des
+données structurées et formatées à leur goût.
+
+https://jsr311.dev.java.net/[JAX-RS] est le nouveau
+http://jcp.org/en/jsr/overview[JSR] permettant d'implementer une API
+RESTful en Java au moyen d'annotations. Il est très simple de déclarer
+quels URLs invoqueront quelles méthodes, quels paramètres (path,
+query...) seront acceptés et comment sérialiser les données en plusieurs
+formats (http://en.wikipedia.org/wiki/XML[XML],
+http://www.json.org/[JSON]...). Nous présenterons JAX-RS et
+l'implémentation de http://bill.burkecentral.com/[Bill Burke] pour
+http://www.jboss.org[JBoss]: http://www.jboss.org/resteasy/[RESTEasy].
+Bill Burke ne pouvant malheureusement venir, Stéphane Épardaud fera une
+présentation basée sur celle de Bill Burke.
+
+=== Glassfish V 3.0
+
+GlassFish v3, son architecture modulaire (OSGi), ses fonctionnalités de
+serveur léger, ses modules Java EE 6 (JAX-RS, EJB 3.1, ...), etc...
+
+==== À propos des intervenants
+
+===== Julien Viet
+
+image:../media/2008-12-05-mini-conférence-java-ee-le-14-janvier-2009-à-sophia-antipolis/portrait-julien.jpg[image]
+
+http://www.julienviet.com/[Julien Viet] a rejoint la
+http://www.jboss.org[communauté JBoss] en 2001 peu de temps après s'est
+fait embaucher par la http://www.jboss.com[compagnie JBoss]. À JBoss,
+Julien a commencé comme contributeur au projet
+http://www.jboss.com/products/platforms/application[JBoss Application
+Server] en 2002. En 2004, il fonde le projet open-source
+http://www.jboss.org/jbossportal[JBoss Portal] et en reste à la tête
+jusqu'à août 2008.
+
+Il est membre du groupe d'experts
+_http://jcp.org/en/jsr/detail?id=286[JSR 286 Portlet 2.0]_ et de la
+spécification _http://jcp.org/en/jsr/detail?id=283[JSR 283 Content
+Repository] for Java Technology API 2.0_.
+
+Aujourd'hui Julien est _portal product manager_ à
+http://www.exoplatform.com/[eXo platform].
+
+Il a parlé aux conférences suivantes:
+
+* _what's new and cool in Portlet 2.0_ à http://javazone.no/[JavaZone]
+en septembre 2008;
+* _what's new and cool in Portlet 2.0_ à WebExpo Bern en mars 2008;
+* _portlet Best Practices_ à http://java.sun.com/javaone/[Javaone] en
+2006;
+* _JBoss Portal talk_ à http://www.javapolis.com/[Javapolis] en 2005;
+* http://www.jbossworld.com/[_JBoss World_] plusieurs fois.
+
+===== Nicolas Leroux
+
+image:../media/2008-12-05-mini-conférence-java-ee-le-14-janvier-2009-à-sophia-antipolis/portrait-nicolas.jpg[image]
+
+Niçois d'origine, il est maintenant basé à Rotterdam, Pays-Bas où il
+travaille comme développeur senior à
+http://www.lunatech-research.com[Lunatech Research]. Il a de nombreuses
+années d'expérience de conception d'applications Java EE pour
+l'industrie et le service public grâce aux librairies open-source et des
+méthodes
+http://en.wikipedia.org/wiki/Agile_software_development[agiles].
+
+Expert en http://java.sun.com/products/ejb/[Enterprise Java Beans],
+http://www.seamframework.org[JBoss Seam],
+http://java.sun.com/products/jms/[Java Message Service],
+http://jboss.com/products/jbpm[JBPM], http://struts.apache.org/[Struts],
+http://www.springframework.org/[Spring] pour ne citer qu'eux, car il met
+un point d'honneur à tester les nombreux nouveaux frameworks qui sortent
+chaque année, restant ainsi à la pointe des dernières innovations.
+Organisateur de plusieurs link:/2008/01/17/jbug-2008-02[Benelux JBug]
+(http://jboss.org/resources/jbugs.html[JBoss User Group]) à Rotterdam.
+http://www.parleys.com/display/PARLEYS/Home#talk=18972706;slide=1;title=Seam%20in%20Action%20-%20Part%202[Présentation]
+à http://www.javapolis.com/[Javapolis] en 2007.
+
+===== Stéphane Épardaud
+
+image:../media/2008-12-05-mini-conférence-java-ee-le-14-janvier-2009-à-sophia-antipolis/portrait-stef.jpg[image]
+
+Senior développeur à http://www.lunatech-research.com[Lunatech Research]
+depuis 1998, aujourd'hui basé dans
+l'http://fr.wikipedia.org/wiki/Nice[arrière-pays Niçois]. Passionné de
+hacks http://en.wikipedia.org/wiki/Java_(programming_language)[Java],
+http://en.wikipedia.org/wiki/C_(programming_language)[C],
+http://en.wikipedia.org/wiki/Perl[Perl] ou
+http://en.wikipedia.org/wiki/Scheme_(programming_language)[Scheme].
+Baigné dans les http://en.wikipedia.org/wiki/Web_standards[standards
+web] et les http://en.wikipedia.org/wiki/Database[bases de données], il
+a implémente entre autres un éditeur
+http://en.wikipedia.org/wiki/XML[XML]
+http://en.wikipedia.org/wiki/WYSIWYG[WYSIWYG], une
+http://www-sop.inria.fr/teams/mimosa/Stephane.Epardaud/lurc/[librairie
+de multi-threading] en C, un
+http://www-sop.inria.fr/teams/mimosa/Stephane.Epardaud/ulm/[langage pour
+agents mobiles] en Scheme (compilateur, machine virtuelle), des services
+http://en.wikipedia.org/wiki/Web_2.0[Web 2.0]] comme
+http://www.visiblelogistics.com[VisibleLogistics]. Présentations au
+http://www.cs.indiana.edu/scheme2004/[Scheme Workshop 2004], à l'IUT de
+Nice en 2008. Il est investi à temps plein depuis 2008 dans les
+nouvelles technologies http://java.sun.com/javaee/[Java EE] et
+http://en.wikipedia.org/wiki/Web_2.0[Web 2.0], il dévore les
+http://jcp.org/en/jsr/overview[JSRs] et utilise les plus récents projets
+open source auquels il contribue souvent.
+
+===== Alexis Moussine-Pouchkine
+
+image:../media/2008-12-05-mini-conférence-java-ee-le-14-janvier-2009-à-sophia-antipolis/portrait-alexis.jpg[image]
+
+http://blogs.sun.com/alexismp[Alexis Moussine-Pouchkine] aime le bon vin
+et les architectures Java. Chez http://www.sun.com/[Sun Microsystems],
+il tient le rôle d’ambassadeur du projet Libre
+https://glassfish.dev.java.net/[GlassFish], un serveur d’application
+Java EE de nouvelle génération. Ceci lui permet de rencontrer lors de
+réunions ou de conférences de nombreux développeurs Java et autres
+utilisateurs de technologies libres. Il participe à plusieurs
+communautés open source, traduit en français des ouvrages techniques
+autour de http://en.wikipedia.org/wiki/Java[Java] ou
+http://en.wikipedia.org/wiki/XML[XML] et possède une vie en dehors de
+Java. Alexis est intervenu aux conférences
+http://www.javazone.no/[JavaZone], http://devoxx.com/[JavaPolis/Devoxx],
+http://jazoon.com/[Jazoon],
+http://developers.sun.com/events/communityone/[CommunityOne] et
+http://developers.sun.com/events/techdays/[Sun TechDays].

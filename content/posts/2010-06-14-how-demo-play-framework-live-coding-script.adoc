@@ -1,0 +1,414 @@
+---
+layout: post
+title: How to demo the Play framework 1.2 - live coding script
+date: 2010-06-08
+author: PeterHilton
+lang: en
+tags:
+  - playframework
+  - java
+---
+= How to demo the Play framework 1.2 - live coding script
+
+If you want
+someone to know how fast and straightforward it is to build a Java web
+application with the http://www.playframework.org/[Play framework],
+then *show*, don't *tell*. The most compelling way to do this is to
+download Play 1.2 and start coding a web application from scratch, while
+they watch. This article is a script for a five-minute live-coding Play
+demo.
+
+This script is based on how I have seen Play's creator, Guillaume Bort,
+demonstrate Play to introduce it to a small audience. More or less the
+same demo, but with Ajax, is the video on the front page of
+http://www.playframework.org/. This is an especially good way of showing
+Play to a small group of people, if you are fairly fluent with the
+framework, because you can answer questions about how you do something
+by just writing the code and showing it working far more quickly than
+you would be able to with other frameworks.
+
+== Summary
+
+. Download the Play framework.
+. Create and run the application.
+. Inspect the set-up for the default welcome page.
+. Replace the welcome page with a trivial dynamic template.
+. Generate a Java compilation error.
+. Retrieve HTTP request parameters.
+. Show message file content in the template
+. Add the project to Eclipse.
+. Add a JPA Entity.
+. Add an HTML form for creating entity instances.
+. Add a link for deleting each instance.
+. Use a Java extensions in the view template.
+. Add form validation.
+
+Source code for this article is available at
+https://github.com/hilton/play-tasks.
+
+[[create]]
+== Create and run the application
+
+*Open* http://www.playframework.org/ Download the binary
+
+____
+There is no need to _install_ Play as such, although you might want to
+add the download's directory to your `PATH`, so you can execute the
+`$PLAY_HOME/play` commmand directly. On my machine, though, it's just as
+easy to just type `~/Downloads/play-1.2.4/play` for this kind of demo.
+____
+
+*Execute* `play new tasks ~ What is the application name? tasks`
+
+____
+A task list application is an easy example for people to understand, but
+it is more fun to pick an example that is more familiar and relevant to
+your audience, such as 'customers' or 'cocktails'.
+____
+
+*Execute* `find tasks -type f` (optional) - List the generated files
+
+____
+It is crucial to note that Play has not generated a lot of code here;
+the files are minimal stubs that you will only add to, rather than a lot
+of generated code that you will have to delete.
+____
+
+*Execute* `play run tasks` - Start the Play server runtime to run the
+application.
+
+____
+Depending on what you are used to, start-up time may seem extremely
+short.
+____
+
+*Open* http://localhost:9000/ - Show welcome page.
+
+____
+The welcome page describes how the stub application works, which the
+next few steps show.
+____
+
+*Start* a text editor.
+
+____
+You could use an IDE, such as Eclipse, already at this point. However,
+it is useful to start with a plain text editor to make it clear that you
+do not have to compile the Java code yourself.
+____
+
+*Edit* `conf/routes` - Show the route for the `GET /` HTTP request.
+
+____
+Since Play has an HTTP focus, in incoming HTTP request is a good
+starting point for explaining how it works. The `routes` file, is
+therefore crucial, because this defines the (two-way) mapping between
+HTTP requests and Java methods.
+____
+
+*Edit* `app/controllers/Application.java` - Show the `index()` method.
+
+*Edit* `app/views/main.html` - Show the default template: HTML 5, CSS
+and jQuery.
+
+*Edit* `app/views/Application/index.html` - Show the `#{welcome /`} tag
+and replace it with `<h1>Tasks</h1>`.
+
+*Open* http://localhost:9000/ - Show the heading.
+
+*Edit* `public/stylesheets/main.css` - Add some CSS to make things less
+ugly:
+
+[source,brush:,css;,gutter:,false]
+----
+html { border-top: 5px solid #67A927;  }
+body { font-family:"Helvetica Neue"; padding:2em; background: #F7F7F7 url(/public/playmanual/logo.png) no-repeat 98% 20%; }
+body:before { content:'Play task list demo'; color:#568C00; font-size:150%; text-transform:uppercase; letter-spacing:0.4em; }
+ul { padding:0; list-style:none; }
+li, form { width:30em; background:white; padding:1em; border:1px solid #ccc; border-radius:0.5em; margin:1em 0; position:relative; }
+li a { text-decoration:none; color:transparent; position:absolute; top:1em; right:1em; }
+li a:after { content:'❎'; color:#aaa; font-size:120%; font-weight:bold; }
+form * { font-size:120%; }
+input { width:16em; }
+button { cursor:pointer; color: white; background-color: #3D6F04; background-image: -webkit-linear-gradient(top, #5AA706, #3D6F04); text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); border: 1px solid #CCC; border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25); border-radius:4px; }
+p.error { margin:0; color:#c00; }
+----
+
+[[template]]
+== Show dynamic data in the template
+
+*Edit* `app/views/Application/index.html` - Change the heading to
+`<h1>${items}</h1>`.
+
+*Edit* `app/controllers/Application.java` - Change the `index()` method
+body to the following (omitting a semi-colon).
+
+[source,brush:,java;,gutter:,false]
+----
+final String items = "Things"
+render(items);
+----
+
+*Open* http://localhost:9000/ - Show the Java compilation error.
+
+*Edit* `app/controllers/Application.java` - Add the missing semi-colon.
+
+*Open* http://localhost:9000/ - Show the new heading, and Java changes
+without compilation or deployment.
+
+*Edit* `app/controllers/Application.java` - Replace the `items`
+declaration line with a `String items` method parameter.
+
+*Open* http://localhost:9000/?items=Things
+
+*Edit* `app/controllers/Application.java` - Undo the last change -
+remove the parameter and put the declaration back.
+
+[[messages]]
+== Show message file content in the template
+
+*Edit* `app/views/Application/index.html` - Change the heading to
+`<h1>&{'model.shipments'}</h1>`.
+
+*Open* http://localhost:9000/ - Show the message key being displayed,
+because the message is not defined.
+
+*Edit* `conf/messages` - Add the line `model.shipments = Shipments`
+
+*Open* http://localhost:9000/ - Show the message being displayed.
+
+== Eclipse
+
+*Execute* `Control+C` - Show how little logging there is by default.
+
+*Execute* `play eclipsify tasks` - Generate Eclipse project and class
+path configuration.
+
+*Eclipse* _File » Import… » Existing projects into workspace_ - Show
+project structure.
+
+*Eclipse* `eclipse/tasks.launch` » Run » tasks - Start the Play server
+runtime from within Eclipse.
+
+*Open* http://localhost:9000/ - Show the application running.
+
+[[idea]]
+== IntelliJ IDEA
+
+*Execute* `Control+C` - Show how little logging there is by default.
+
+*Execute* `play idealize tasks` - Generate IDEA project and class path
+configuration.
+
+*Execute* `open tasks/tasks.ipr` - Open the project in IDEA.
+
+*Execute* `play run tasks` - Start the Play server again.
+
+[[jpa]]
+== JPA entity
+
+*Edit* `app/models` - create class:
+
+[source,brush:,java;,gutter:,false]
+----
+@Entity
+public class Task extends play.db.jpa.Model {
+
+   public String title;
+}
+----
+
+____
+At this point you may need to explain that `Task` is a Java Bean at
+run-time, because Play dynamically adds getter and setter methods for
+the public fields, turning them into normal Java Bean properties.
+____
+
+*Edit* `app/controllers/Application.java` - Change the `index()` method
+body to
+
+[source,brush:,java;,gutter:,false]
+----
+List tasks = Task.findAll();
+render(tasks);
+----
+
+*Edit* `app/views/Application/index.html` - After the heading, add:
+
+[source,brush:,html;,gutter:,false]
+----
+<ul>
+#{list tasks, as:'task'}
+   <li>${task.title}</li>
+#{/list}
+</ul>
+----
+
+*Open* http://localhost:9000/ - Show the JPA error.
+
+*Edit* `conf/application.conf` - Uncomment the line `# db=mem`
+
+*Open* http://localhost:9000/ - Show the page - no tasks.
+
+[[html]]
+== HTML form
+
+*Edit* `app/views/Application/index.html` - After the list, add:
+
+[source,brush:,html;,gutter:,false]
+----
+#{form @add()}
+<p>
+  <input name="task.title" autofocus>
+  <button type="submit">Add Task</button>
+</p>
+#{/form}
+----
+
+*Edit* `app/controllers/Application.java` - Add the method:
+
+[source,brush:,java;,gutter:,false]
+----
+public static void add(final Task task) {
+   task.save();
+   index();
+}
+----
+
+*Open* http://localhost:9000/ - Add tasks.
+
+[[link]]
+== Command link
+
+*Edit* `app/views/Application/index.html` - Inside the `<li>` add a
+link:
+
+[source,brush:,html;,gutter:,false]
+----
+<a href="@{delete(task.id)}">delete</a>
+----
+
+____
+As for forms, there is also a tag for generating links; this way just
+generates the URL.
+____
+
+*Edit* `conf/routes` - Add `GET /delete Application.delete`
+
+*Edit* `app/controllers/Application.java` - Add the method, noting the
+`id` parameter:
+
+[source,brush:,java;,gutter:,false]
+----
+public static void delete(final Long id) {
+   Task task = Task.findById(id);
+   task.delete();
+   index();
+}
+----
+
+*Open* http://localhost:9000/ - Delete tasks - show the link URL and
+query string parameter.
+
+*Edit* `conf/routes` - Change the delete route to
+`GET /delete/{id} Application.delete`
+
+*Open* http://localhost:9000/ - Delete tasks - show the link URL and URL
+path parameter.
+
+[[extensions]]
+== Java extensions
+
+*Edit* `app/views/Application/index.html` - Change the heading to:
+
+[source,brush:,html;,gutter:,false]
+----
+<h1>${tasks.size()} Task${tasks.pluralize()}</h1>
+----
+
+*Open* http://localhost:9000/ - Add/delete tasks to show singular and
+plural forms.
+
+____
+If you are lucky, at this point someone in the audience will be smart
+enough to point out that some plurals are not just formed by adding an
+'s', at which point you can change the example, and show the `pluralize`
+method with one or more parameters, e.g.
+`${tasks.pluralize(messages.get('task'), messages.get('tasks'))`}
+____
+
+[[validation]]
+== Form validation
+
+*Edit* `app/controllers/Application.java` - Add the `@Valid` annotation
+to the add method's `Shipment` parameter, replace the first line of the
+method body (`Task.save();`) with the following.
+
+[source,brush:,java;,gutter:,false]
+----
+if (validation.hasErrors()) {
+   validation.keep();
+}
+else {
+   task.save();         
+}
+----
+
+*Edit* `app/views/Application/index.html` - immediately after the `form`
+tag, add:
+
+[source,brush:,html;,gutter:,false]
+----
+#{errors}
+    <p class="error">${error}</p>
+#{/errors}
+----
+
+*Open* http://localhost:9000/ - Show the validation error when
+submitting an empty name.
+
+____
+The validation error is just 'Required', but we can change this.
+____
+
+*Edit* `conf/messages` - Add the line
+`validation.required = %s is a required field`
+
+*Open* http://localhost:9000/ - Show the new validation error.
+
+____
+Now we get the field name, but not as a formatted label.
+____
+
+*Edit* `conf/messages` - Change the placeholder in `validation.required`
+to `&{{ "{%s" }}`}, and add the line `task.name = Task name`
+
+*Open* http://localhost:9000/ - Show the new validation error.
+
+____
+This lists validation errors in one place. A better way is to list the
+errors next to each field.
+____
+
+*Edit* `app/views/Application/index.html` - Replace the errors tag with:
+
+[source,brush:,html;,gutter:,false]
+----
+#{ifErrors}
+    <p class="error">Validation failed</p>
+#{/ifErrors}
+----
+
+… and after the text input and button, before the closing `form` tag,
+add:
+
+[source,brush:,html;,gutter:,false]
+----
+<p class="error">#{error 'task.title'/}</p>
+----
+
+*Open* http://localhost:9000/ - Show the new validation error.
+
+_http://hilton.org.uk/about_ph.phtml[Peter Hilton] is a senior software
+developer at Lunatech Research and committer on the Play open-source
+project._

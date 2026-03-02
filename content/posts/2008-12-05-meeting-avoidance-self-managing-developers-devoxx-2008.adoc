@@ -1,0 +1,25 @@
+---
+layout: post
+title: Meeting-avoidance for self-managing developers - Devoxx 2008
+date: 2008-12-05
+author: hilton
+lang: en
+tags:
+  - project-management
+---
+= Meeting-avoidance for self-managing developers - Devoxx 2008
+
+:imagesdir: /images/media/2008-12-05-meeting-avoidance-self-managing-developers-devoxx-2008
+
+This week, Peter Hilton will be
+presenting http://www.devoxx.com/display/JV08/Meeting-avoidance+for+self-managing+developers[Meeting-avoidance for self-managing
+developers]
+at Devoxx in Antwerp. With 3200 attendees, Devoxx is the world's biggest
+vendor-independent Java conference, and a key event for European Java
+developers.
+
+link:../media/2008-12-05-meeting-avoidance-self-managing-developers-devoxx-2008/meeting-avoidance.pdf[Slides] (PDF, 1.6 MB)
+
+link:../media/2008-12-05-meeting-avoidance-self-managing-developers-devoxx-2008/meeting-avoidance.pdf[image:../media/2008-12-05-meeting-avoidance-self-managing-developers-devoxx-2008/meeting-avoidance.png[slides]]
+
+

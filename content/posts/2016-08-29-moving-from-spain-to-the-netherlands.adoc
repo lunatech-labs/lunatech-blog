@@ -1,0 +1,47 @@
+---
+layout: post
+title: Moving from Spain to the Netherlands
+date: 2016-08-29
+author: JMCeron
+lang: en
+tags:
+  - opinion
+img: images/media/2016-08-29-moving-from-spain-to-the-netherlands/background.png
+---
+= Moving from Spain to the Netherlands
+
+:imagesdir: /images/media/2016-08-29-moving-from-spain-to-the-netherlands
+
+Last week, I started talking about the main things I've faced when learning Scala, after being a Java developers for a few years. Today, I will talk about how it was to move from Spain to the Netherlands, in order to join Lunatech.
+
+Food. Oh boy, the food. Spain is known for its Iberian ham, and you have a lot of different hams on every supermarket you visit. Usually, there is a big fridge, full of brands of ham, and also meat: pork, chicken, beef. And beef is also classified depending on the part of the animal it comes from, there are more than 10 possible kinds of beef and I don't even know which one to choose when I go to buy something.
+
+When I arrived to a dutch supermarket for the first time (Albert Heijn), I was surprised: there weren't so many types of ham to choose, and most of the beef meat was ground meat, not slices. But, this supermarket shared one thing with the Spanish ones... the big fridge. This time, the fridge was full of cheese.
+
+I've never seen so many different types of cheese in my life. On Spanish supermarkets, you usually find like 5 or 6 different cheese to choose about. But here, I've never seen less than 20 different cheeses on every supermarket I've visited so far. There is also cheese with spices! Never seen that before.Main differences between spanish and dutch gastronomy
+
+Let's talk about the weather. When I was still doing Skype interviews with the people from Lunatech before joining them, everybody made the same joke: "why do you want to come to the Netherlands? Because of the weather?" And they laughed afterwards. I didn't understood why.
+
+My parents were also confused: "why do you want to move to the Netherlands? Most of the people from Europe comes to Spain because of the sun and the beach, and now you are moving to a country that is well known for its rain and wind". I was sure of my decision, I always thought that Spain was too hot for me, too dry, and the weather from the Netherlands would fit me more, with more rain and more clouds. I was so wrong.
+
+The first week I spent here, it rained every single day. Dutch weather welcomes foreigners by making them real men, under the rain. I wasn't prepared for that. In Spain (not in the northern regions), when we say "rain" we are usually talking about some water falling over your shoulders and walking over wet floor. A standard dutch rain would be something to tell on the news if it happened on Spain. And I even remember the day some trains got delayed because of floods. In July, in summer. In Madrid (the city where I come from) we barely have 3 or 4 days of rain between May and September.
+
+And the worst part about the dutch rain is that is also very irregular. Usually in Spain if you have rain, you have rain the whole day, and if you have sun, the same. But then, you wake up in the Netherlands, ready to go to the office, you see the sun in the sky and then you choose to go with a T-shirt. Few hours later, when you are coming home, the sky is black, you are absolutely wet on the street and you are wondering why you didn't picked the jacket that morning.
+
+I remember one conversation with one of my coworkers:
+
+----
+	Him: “Oh look, the sun! Maybe you should go to the beach today”
+	Me: “But there are some clouds on the sky…"
+	Him: “This is the best you can get"
+----
+
+Main differences between spanish and dutch weather
+
+But there is something that I really love about the dutch culture, and I wasn't expecting to: bikes. Bikes here are very easy to get, and the streets are prepared to be crossed by bike. In Madrid it's almost impossible to use a bike because the streets are narrow most of the time, and the cars are going through, but here, almost every street as a bike path, so you can safely go everywhere.
+
+You can park your bike at the station (actually, everywhere, if you are brave enough), and a lot of the people use the bike to make small distances, like going to the supermarket. I mean, this is very important: the relief of being able to carry all your bags on the bike and park it in front of your house, is almost a blessing.
+
+But not everything is wonderful about bikes: because you are in the Netherlands, and the dutch weather wants you to become a real man. Sometimes you are having a great moment on your bike, and then suddenly the strongest wind you could ever imagine decides to go exactly on the opposite direction you are going, testing if your legs are strong enough, and if your will can handle the situation. And when is not coming from the front, is coming from your side, and then you will fall to the ground if you are not experienced enough.
+
+But you can become an expert biker too. And dutch people love to show how professional they are on this matter. You think you are strong because you can carry all your supermarket bags and still going fast enough? Look at this mother carrying their two children on the bike and passing you on the left. You think you are cool because you can handle the bike with one hand while scratching your head with the other one? I've seen many times people texting on their phones, with both hands, while turning the bike. I've so much to learn.

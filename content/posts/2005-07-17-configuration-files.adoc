@@ -1,0 +1,31 @@
+---
+layout: post
+title: Paranoid configuration - tamper-proof text
+date: 2005-07-17
+author: hilton
+lang: en
+tags:
+  - java
+---
+= Paranoid configuration - tamper-proof text
+
+Obviously, you cannot put store a file's hash in the file itself. Having thought about it for a while, I like the sound of the following approach.
+
+
+* Make a wrapper for the code that reads configuration files - XML files or Java properties files, perhaps.
+* For each file, define a constant whose value is the file's hash. In Java, this could be a statically-defined Properties object that maps file names to hashes.
+* Add code to the wrapper so that when a configuration file is loaded, its hash is calculated and compared to the predefined value; raise an error if they do not match.
+* Have your build script calculate the hash for each configuration file and insert each hash as the assigned value of the constants from step 2. If you are using Ant this is really easy: use a `checksum` task to calculate the hash and use a `copy` task with a nested `filterset` to perform the substitution.
+
+
+This solution has two key benefits. Once set-up, it is transparent for the developers - hashes are calculated and used automatically. Secondly, although not truly secure, it would be rather inconvenient for users to modify an application's predefined configuration file hashes without the source code. The only downside I can think of offhand is that you now have to rebuild the source files and recompile after each configuration file change, but that is no big deal when you have a decent automated build. (If not, you already have bigger problems.)
+
+In any case, this is only really a quick-and-easy technique, since the right thing to do is to digitally sign everything, but that requires more infrastructure.
+
+== Why this is useful: no Gremlins during maintenance
+
+This would make it easy to enforce a policy that 'we are not going to guarantee that the application works, or support it, if users make random configuration file changes'. Put another way, you would not have to worry about Gremlins mysteriously changing configuration files and breaking things, leaving the users to say, "`it wasn't me, honest!`"
+
+<p>Just do not forget to include backup copies of the configuration files, to make it easy to undo any tampering that might take place.</p>
+
+I blame the managers who gave me an aversion to the word `pragmatic` by using it when they mean _sloppy and rushed, with excessive short-sightedness_, as in "`that would take too long - you have to be pragmatic`".

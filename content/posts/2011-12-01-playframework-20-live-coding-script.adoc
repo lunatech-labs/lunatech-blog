@@ -1,0 +1,439 @@
+---
+layout: post
+title: Play 2.0 demo - live coding script
+date: 2011-12-08
+author: hilton
+lang: en
+tags:
+  - java
+  - playframework
+---
+= Play 2.0 demo - live coding script
+
+--- layout: article drupal-format: Unfiltered HTML, with syntax
+highlighter title: "Play 2.0 demo - live coding script" tags:
+playframework author: Peter Hilton summary: "The best way to introduce
+Play to an audience is to show them how it works in the kind of
+live-coding demo that lets people see for themselves how easy it is.
+Here is a Play 2.0 (Java) version of last year’s [Play 1.x live coding
+script](https://blog.lunatech.com/posts/2010-06-14-how-demo-play-framework-live-coding-script),
+in which you will code a simple but functional to-do list application,
+using Play 2.0, Java and Ebean.
+
+== Getting started
+
+Download Play 2.0. This version of the script is based on the _2.0-beta_
+release.
+
+[source,brush:,plain;,gutter:,false]
+----
+$ wget http://download.playframework.org/releases/play-2.0-beta.zip
+$ unzip -q play-2.0-beta.zip
+$ export PATH=$PATH:`pwd`/play-2.0-beta
+----
+
+*Note: at this point you would normally add the `play` command to the
+path more permanently.*
+
+Create the application:
+
+[source,brush:,plain;,gutter:,false]
+----
+$ play new tasks
+
+What is the application name? 
+> tasks
+
+Which template do you want to use for this new application? 
+
+  1 - Create a simple Scala application
+  2 - Create a simple Java application
+  3 - Create an empty project
+
+> 2
+----
+
+See which files were generated:
+
+[source,brush:,plain;,gutter:,false]
+----
+$ find tasks -type f
+tasks/.gitignore
+tasks/app/controllers/Application.java
+tasks/app/views/index.scala.html
+tasks/app/views/main.scala.html
+tasks/conf/application.conf
+tasks/conf/routes
+tasks/project/build.properties
+tasks/project/Build.scala
+tasks/project/plugins.sbt
+tasks/public/images/favicon.png
+tasks/public/javascripts/jquery-1.6.4.min.js
+tasks/public/stylesheets/main.css
+----
+
+Run the application:
+
+[source,brush:,plain;,gutter:,false]
+----
+$ cd tasks
+$ play run
+----
+
+Open the welcome page: http://localhost:9000/
+
+== Compilation errors and dynamic data
+
+Edit `app/views/index.scala.html` and replace the contents with the
+following (with a bogus variable name):
+
+[source,brush:,html;,gutter:,false]
+----
+@(items: String)
+
+@main("Tasks") {
+    <h1>@item</h1>
+}
+----
+
+Reload the page, which shows a template compilation error:
+`not found: value item`.
+
+*The compilation error shows that template parameters must be declared.*
+
+In the console, type Control-D to stop the application, then start the
+Play console and compile the application:
+
+[source,brush:,plain;,gutter:,false]
+----
+$ play
+[tasks] $ compile
+----
+
+*You can also discover template compilation errors without running the
+application.*
+
+Start the application again:
+
+[source,brush:,plain;,gutter:,false]
+----
+[tasks] $ run
+----
+
+In `app/views/index.scala.html` fix the error: change `@item` to
+`@items`.
+
+Edit `app/controllers/Application.java` and change the `index()` method
+body to the following line (with a missing semi-colon):
+
+[source,brush:,java;,gutter:,false]
+----
+return ok(index.render("Things"))
+----
+
+Reload the page, which shows a Java compilation error: `';' expected`.
+
+In `app/controllers/Application.java` fix the error: add the missing
+semi-colon.
+
+Reload the page, which shows the heading ‘Things’.
+
+In `public/stylesheets/main.css`, add some CSS to make things less ugly:
+
+[source,brush:,css;,gutter:,false]
+----
+body { font-family:"Helvetica Neue"; padding:2em; background: #B2EB5A url("/assets/images/play20header.png") no-repeat top center ; }
+body:before { content:'Play 2.0 task list demo'; color:rgba(255,255,255,0.7); font-size:150%; text-transform:uppercase; letter-spacing:0.4em; }
+ul { padding:0; list-style:none; }
+li, form { width:30em; background:white; padding:1em; border:1px solid #ccc; border-radius:0.5em; margin:1em 0; position:relative; }
+li a { text-decoration:none; color:transparent; position:absolute; top:1em; right:1em; }
+li a:after { content:'❎'; color:#aaa; font-size:120%; font-weight:bold; }
+form * { font-size:120%; }
+input { width:16em; }
+button { cursor:pointer; color: white; background-color: #3D6F04; background-image: -webkit-linear-gradient(top, #5AA706, #3D6F04); text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); border: 1px solid #CCC; border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25); border-radius:4px; }
+p.error { margin:0; color:#c00; }
+----
+
+In `app/controllers/Application.java` replace `"Things"` with a
+`String items` method parameter.
+
+[source,brush:,java;,gutter:,false]
+----
+public static Result index(final String items) {
+   return ok(index.render(items));
+}
+----
+
+In `conf/routes`, replace the first route with (with a bogus lower-case
+`string` type):
+
+[source,brush:,scala;,gutter:,false]
+----
+GET /   controllers.Application.index(i: string)
+----
+
+Open http://localhost:9000/?i=Tasks, which shows a routes compilation
+error: `not found: type string`.
+
+*The routes file is compiled, and HTTP parameters must be declared. HTTP
+parameter names do not have to match the action method names.*
+
+In `conf/routes`, correct the error: change the parameter type to
+`String`.
+
+Reload the web page.
+
+Undo the last changes in `app/controllers/Application.java` – remove the
+`index` method parameter:
+
+[source,brush:,java;,gutter:,false]
+----
+public static Result index() {
+   return ok(index.render("Tasks"));
+}
+----
+
+Undo the change in `conf/routes` – remove the method parameter:
+
+[source,brush:,scala;,gutter:,false]
+----
+GET /   controllers.Application.index()
+----
+
+== Set-up IntelliJ IDEA
+
+*This section is optional, for IntelliJ IDEA users.*
+
+In the console, type Control-D to stop the application, and create the
+IntelliJ project:
+
+[source,brush:,plain;,gutter:,false]
+----
+[tasks] $ gen-idea
+----
+
+*This currently uses a separate sbt plug-in, but something like this
+will be built in to Play 2.0.*
+
+Open the project, containing the generated `.idea` directory, in
+IntelliJ IDEA.
+
+== Ebean entity
+
+Create a new `models.Task` class in `app/models/Task.java`, either by
+hand or using IntelliJ IDEA:
+
+[source,brush:,java;,gutter:,false]
+----
+package models;
+
+import play.db.ebean.Model;
+import javax.persistence.Id;
+import javax.persistence.Entity;
+
+/**
+ * A human-task, e.g. 'Get the presenter a beer'.
+ */
+@Entity
+public class Task extends Model {
+
+    @Id
+    public Long id;
+
+    public String title;
+
+    public static Finder<Long, Task> find = new Finder<Long, Task>(Long.class, Task.class);
+}
+----
+
+*The ‘finder’ is more explicit than the methods added by byte code
+enhancement in Play 1.*
+
+In `app/controllers/Application.java`, import `models.Task` and replace
+`"Things"` with a call to the finder:
+
+[source,brush:,java;,gutter:,false]
+----
+return ok(index.render(Task.find.orderBy("title").findList()));
+----
+
+Open http://localhost:9000/, which shows a Java compilation error:
+`render(java.lang.String) in views.html.index cannot be applied to (java.util.List<models.Task>)`.
+
+*Template parameters are type safe.*
+
+In `app/views/index.scala.html` change the type in the template
+parameter declaration:
+
+[source,brush:,scala;,gutter:,false]
+----
+@(tasks: List[models.Task])
+----
+
+Also, change the HTML block to:
+
+[source,brush:,html;,gutter:,false]
+----
+<h1>@tasks.size task@(if(tasks.size != 1) "s")</h1>
+<ul>
+    @for(task <- tasks) {
+        <li>@task.title</li>
+    }
+</ul>
+----
+
+Reload the page, which shows a data source error:
+`[RuntimeException: DataSource user is null?]`.
+
+In `conf/application.conf`, uncomment the default values for the
+in-memory database and Ebean configuration:
+
+[source,brush:,perl;,gutter:,false]
+----
+db.default.driver=org.h2.Driver
+db.default.url=jdbc:h2:mem:play
+ebean.default=models.*
+----
+
+Reload the web page, which shows the ‘Database ‘default’ needs
+evolution!’ page.
+
+*The `db/evolutions/default/1.sql` database evolution script is
+generated for you.*
+
+Click the ‘Apply this script now!’ button.
+
+*In templates, dynamic content and control structures start at `@` and
+continue until the end of the statement or expression.*
+
+Open http://localhost:9000/: there are no tasks.
+
+== HTML form
+
+In `app/views/index.scala.html`, add a form after the list.
+
+[source,brush:,html;,gutter:,false]
+----
+<form method="post" action="@routes.Application.add()">
+   <input name="title" placeholder="Enter a task description…">
+   <button type="submit">Add Task</button>
+</form>
+----
+
+In `app/controllers/Application.java`, import `play.data.Form` and add
+the `add` method:
+
+[source,brush:,java;,gutter:,false]
+----
+public static Result add() {
+   final Form<Task> taskForm = form(Task.class).bindFromRequest();
+   final Task task = taskForm.get();
+   task.save();
+   return redirect(routes.Application.index());
+}
+----
+
+In `conf/routes`, add the new HTTP mapping:
+
+[source,brush:,scala;,gutter:,false]
+----
+POST /  controllers.Application.add()
+----
+
+Reload http://localhost:9000/, enter a value in the text input and click
+the _Add_ button.
+
+== Command link
+
+In `app/views/index.scala.html`, inside the `<li>`, add a link:
+
+[source,brush:,html;,gutter:,false]
+----
+<a href="@routes.Application.delete(task.id)">delete</a>
+----
+
+In `conf/routes`, add the new HTTP mapping:
+
+[source,brush:,scala;,gutter:,false]
+----
+GET /delete/:id controllers.Application.delete(id: Long)
+----
+
+In `app/controllers/Application.java`, add the `delete` method:
+
+[source,brush:,java;,gutter:,false]
+----
+public static Result delete(final Long id) {
+   Task.find.ref(id).delete();
+   return redirect(routes.Application.index());
+}
+----
+
+Reload http://localhost:9000/ and delete some tasks, showing the link
+URLs.
+
+== Form validation
+
+In `app/models/Task.java`, import `play.data.validation.Constraints` and
+annotate the `title` field with `@Constraints.Required`.
+
+[source,brush:,java;,gutter:,false]
+----
+@Constraints.Required
+public String title;
+----
+
+In `app/controllers/Application.java`, import `java.util.List` and
+extract the list of tasks to a new method:
+
+[source,brush:,java;,gutter:,false]
+----
+private static List<Task> tasks() {
+   return Task.find.orderBy("title").findList();
+}
+----
+
+Add validation to the `add` method:
+
+[source,brush:,java;,gutter:,false]
+----
+public static Result add() {
+   final Form<Task> taskForm = form(Task.class).bindFromRequest();
+   if(taskForm.hasErrors()) {
+       return badRequest(index.render(tasks(), taskForm));
+   } else {
+      taskForm.get().save();
+      return index();
+   }
+}
+----
+
+*The `play.data.Form` is an explicit wrapper for HTTP form data and
+validation errors, used for binding. This is more explicit and more
+structured than the Play 1.2 validation data.*
+
+Change the `index` method to add an empty form to the template call:
+
+[source,brush:,java;,gutter:,false]
+----
+return ok(index.render(tasks(), form(Task.class)));
+----
+
+In `app/views/index.scala.html`, add the new form parameter on the first
+line:
+
+[source,brush:,scala;,gutter:,false]
+----
+@(tasks: List[models.Task], form:play.data.Form[models.Task])
+----
+
+After the form’s submit button, add a line to display error messages:
+
+[source,brush:,html;,gutter:,false]
+----
+<p class="error">@form("title").errors.map(_.message).map(Messages(_))</p>
+----
+
+*The `play.api.i18n.Messages` Scala object is being used for message key
+look-up.*
+

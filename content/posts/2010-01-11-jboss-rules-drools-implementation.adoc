@@ -1,0 +1,47 @@
+---
+layout: post
+title: JBoss Rules (Drools) implementation Execution Server
+date: 2010-01-11
+author: PeterHilton
+lang: en
+tags:
+  - java
+  - drools
+  - case-study
+---
+= JBoss Rules (Drools) implementation Execution Server
+
+In 2009,
+http://www.bbned.nl/[BBned] hired Lunatech to assist with their first
+http://www.jboss.org/drools/[JBoss Rules] (Drools) implementation.
+Lunatech provided a technical expert whose task was to ensure the smooth
+introduction of the open-source JBoss Rules product and to reduce
+project technical risk. The work included writing technical design
+documentation, building part of the software, and coaching BBned's own
+staff with the new technology.
+
+Lunatech's expert successfully applied JBoss Rules as planned, within
+the project constraints, and ensured that BBned's initial lack of
+experience with JBoss Rules did not result in technical problems on the
+project. In addition, Lunatech performed knowledge transfer to internal
+staff so that BBned is able to apply the technology on other projects,
+without being dependent on third-party vendors or consultants.
+
+BBned used JBoss Rules to implement a decision service - a component of
+a Service-Oriented Architecture that encapsulates the business logic
+required to make business decisions, and which is called by applications
+that do not contain this logic themselves. This decision service
+dynamically validates product configuration options while a customer is
+preparing an order for network services, which allows BBned to offer a
+flexible range of services rather than limiting customers to fixed
+choices.
+
+The http://www.jboss.com/products/platforms/brms/[JBoss Business Rules
+Management System] is the ideal technology platform for implementing
+this kind of decision service: it provides a mature implementation of a
+high-performance rules engine that developers can use to execute
+business rules written in the Drools Rule Language. For BBned, this
+means that business requirements are implemented as clearly identifiable
+independent rules in the decision service, which results in software
+that is easier to understand, debug and maintain.
+

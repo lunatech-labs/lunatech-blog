@@ -1,0 +1,48 @@
+---
+layout: post
+title: Devoxx 2011 tips
+date: 2011-11-14
+author: hilton
+lang: en
+tags:
+  - event
+---
+= Devoxx 2011 tips
+
+:imagesdir: /images/media/2011-11-14-devoxx-2011-tips
+
+Last year I published https://blog.lunatech.com/posts/2010-11-23-10-devoxx-tips[10 Devoxx
+tips]. You probably
+need these tips again this week, as well as updates for this year.
+
+image:../media/2011-11-14-devoxx-2011-tips/kulminator.jpg[image]
+
+== Kulminator closed!
+
+http://hilton.org.uk/antwerp/kulminator[Kulminator], where you usually
+find the serious beer drinkers in Antwerp, is
+https://plus.google.com/photos/101174951617223562800/albums/5673423416237350737[rumoured
+to be closed for Devoxx week].
+
+This is bad.
+
+Fortunately, there are plenty of other places in Antwerp to meet for a
+drink. We suggest cocktails at
+http://hilton.org.uk/antwerp/cafe-au-lait[Café au Lait] .
+
+== Play framework overload
+
+Following a disappointing lack of http://www.playframework.org/[Play
+framework] talks last year, there is lots to see this year:
+
+* http://www.devoxx.com/display/DV11/Let%27s+Play%21+with+Scala[Let's
+Play! with Scala] (BOF), Tuesday 19:00
+* http://www.devoxx.com/display/DV11/Play+2.0%2C+a+Web+framework+for+a+new+era[Play
+2.0, a Web framework for a new era], room 5, Wednesday 12:00
+* http://www.devoxx.com/pages/viewpage.action?pageId=5015973[Deploying
+Java & Play Framework Apps to the Cloud], room 4, Thursday 12:00
+* http://www.devoxx.com/display/DV11/HTML5+with+Play+Scala%2C+CoffeeScript+and+Jade[HTML5
+with Play/Scala, CoffeeScript and Jade], room 5, Thursday 14:00
+* http://blog.lunatech.com/2011/11/11/play-framework-meet-devoxx[Play
+framework meet-up], AXXES Café, Thursday 20:00
+

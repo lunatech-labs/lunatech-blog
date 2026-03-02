@@ -1,0 +1,25 @@
+---
+layout: post
+title: Lunatech presents Play at GeeCON 2012
+date: 2012-05-15
+author: hilton
+lang: en
+tags:
+  - event
+---
+= Lunatech presents Play at GeeCON 2012
+
+:imagesdir: /images/media/2012-05-15-playframework-geecon-2012
+
+This week,
+on 18 May 2012, Peter Hilton will present http://2012.geecon.org/)[Play Framework
+2.0] at http://2012.geecon.org/[geecon 2012]
+in Poznań, Poland. geecon is a Java developer conference in Poland,
+started in 2009.
+
+http://2012.geecon.org/[image:../media/2012-05-15-playframework-geecon-2012/geecon2012.png[Play Framework 2.0]]
+
+image:../media/2012-05-15-playframework-geecon-2012/geecon-2012-room.jpg[Before the start of the presentation, at
+geecon]
+
+

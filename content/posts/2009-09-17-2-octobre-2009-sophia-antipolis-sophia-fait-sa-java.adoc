@@ -1,0 +1,65 @@
+---
+layout: post
+title: "2 octobre 2009 @Sophia-Antipolis - Sophia fait sa Java"
+date: 2009-09-17
+author: FroMage
+lang: en
+tags:
+  - event
+---
+= 2 octobre 2009 @Sophia-Antipolis - Sophia fait sa Java
+
+http://www.rivierajug.org/xwiki/bin/view/Main/20091002[2nd October 2009 @ Sophia-Antipolis - Sophia fait sa Java] The
+http://www.rivierajug.org[Riviera JUG] will host its fifth **free**
+conference the 2nd October of 2009 in collaboration with http://www.polytechnice.fr[Polytech Nice] and http://www.telecom-valley.fr[Telecom Valley] at
+http://www.polytechnice.fr[Polytech] à Sophia-Antipolis (http://maps.google.fr/maps?f=q&source=s_q&hl=en&geocode=&q=polytech+nice&sll=46.75984,1.738281&sspn=10.629961,17.094727&ie=UTF8&ll=43.616831,7.073522&spn=0.010967,0.024869&t=h&z=16&iwloc=A[Google
+Maps])."
+---
+
+Réservez votre journée car nous aurons pas moins de quatre présentations
+de qualité par des pointures dans leurs domaines:
+
+* http://www.rivierajug.org/xwiki/bin/view/Main/20091002#pete[Pete
+Muir], le project lead de
+[.wikiexternallink]#http://www.seamframework.org[Seam]# et
+[.wikiexternallink]#http://seamframework.org/WebBeans[Web Beans]#
+viendra nous présenter
+http://www.rivierajug.org/xwiki/bin/view/Main/20091002#web-beans[Web
+Beans] : l’implémentation de référence du
+[.wikiexternallink]#http://jcp.org/en/jsr/detail?id=299[JSR-299]# Java
+Contexts and Dependency Injection, dérivé (mais bien amélioré) du
+système de bijection de Seam 2, qui sera au cœur de Seam 3.
+* http://www.rivierajug.org/xwiki/bin/view/Main/20091002#alexis[Alexis
+Moussine-Pouchkine], ambassadeur du projet Libre
+[.wikiexternallink]#https://glassfish.dev.java.net/[GlassFish]# viendra
+nous présenter la dernière version
+http://www.rivierajug.org/xwiki/bin/view/Main/20091002#glassfish[V3 de
+GlassFish].
+* http://www.rivierajug.org/xwiki/bin/view/Main/20091002#tom[Tom
+Baeyens], le project lead de
+[.wikiexternallink]#http://jboss.com/products/jbpm[jBPM]#, vendra nous
+présenter la dernière version
+http://www.rivierajug.org/xwiki/bin/view/Main/20091002#jbpm[4.1 de
+jBPM], et comment l’utiliser dans vos projets.
+* http://www.rivierajug.org/xwiki/bin/view/Main/20091002#antonio[Antonio
+Goncalves], auteur du livre
+[.wikiexternallink]#http://www.antoniogoncalves.org/xwiki/bin/view/Book/JavaEE6[Java
+EE 6]# et membre des groupes d’experts sur les
+[.wikiexternallink]#http://www.jcp.org/en/jsr/detail?id=316[JSR 316]#
+(Java EE 6),
+[.wikiexternallink]#http://www.jcp.org/en/jsr/detail?id=317[JSR 317]#
+(JPA 2.0) et
+[.wikiexternallink]#http://www.jcp.org/en/jsr/detail?id=318[JSR 318]#
+(EJB 3.1), viendra nous présenter
+http://www.rivierajug.org/xwiki/bin/view/Main/20091002#jee6[Java
+Enterprise Edition 6] qui ne va pas tarder à sortir avec un paquet de
+nouvelles technologies.
+
+De 13:30 à 21:15 ne manquez pas cette journée gratuite et de qualité
+exceptionnelle (nous nous sommes surpassés). Naturellement vous pouvez
+ne venir que pour les talks que vous voulez, mais nous vous encourageons
+à assister à l’ensemble du programme.
+
+N’hesitez pas à visiter la
+http://www.rivierajug.org/xwiki/bin/view/Main/20091002[page de
+l’évènement pour vous inscrire].

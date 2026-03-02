@@ -1,0 +1,171 @@
+---
+layout: post
+title: Codebase review
+date: 2011-12-21
+author: targeter
+lang: en
+tags:
+  - code-hosting
+---
+= Codebase review
+
+http://codebasehq.com[Codebase] is a project hosting solution by
+http://atechmedia.com/[aTech Media]. It tries to be a complete
+solution, including repository hosting, issue and time tracking, wiki
+and discussion forum. We are currently considering it as a
+http://gitorious.org/[Gitorious] replacement in the near future, and
+as a lightweight replacement for http://www.atlassian.com/software/jira/overview[Jira
+] and
+http://www.atlassian.com/software/confluence/overview[Confluence]
+later. 
+
+[[structure]]
+== Hierarchical structure
+
+The main hierarchical unit in Codebase is a _project_. Every project can
+have an unlimited number of source code repositories, and will have a
+_Tickets_ (issue tracker), a _Notebook_ (wiki-like functionality),
+_Files_, _Discussions_ and _Time_ (a time tracker).
+
+A project always belongs to a _company_, and optionally to a _group_.
+For example, we could have two companies in our Codebase account, one
+called ‘Lunatech’ and one called ‘http://minoto.tv/[Minoto]’. Lunatech
+would have groups such as ‘Internal applications’ and ‘Customer X
+projects’, and the latter would contain projects such as ‘Project Y’,
+which in turn contains the repositories `y-server` and `y-client`.
+
+Projects within Codebase can be _archived_. Archived projects cannot be
+written to, but they also do not count towards the project limit, which
+is what the Codebase pricing model is based on (that, and storage).
+
+== Repositories
+
+Repositories in Codebase are not necessarily git repositories – when you
+create a repository you can choose between Git, Subversion, Mercurial
+and Bazaar. But we’ll probably stick with git.
+
+Unlike most other (git) hosting solutions, there is no notion of a
+‘fork’ in Codebase. There’s the repository, which you can of course
+clone, but that’s it. You cannot fork it to your own account, every
+repository is in the context of the company account (see hierarchy). Of
+course you are free to create a second repository and push the exact
+same commits to it, but Codebase does not know about any relation
+between the two repositories. By extension, there are no pull/merge
+requests. This makes certain development workflows hard or impossible.
+
+[[access]]
+== Access control
+
+Users are assigned a _Role_. Roles are groups of _permissions_ that are
+granted to users with that role. Every user can have one, and only one,
+role. This keeps things nice and simple. Roles are customisable, but a
+Codebase account comes with a sane set of default roles:
+
+* Account administrator – Full access to the account.
+* Administrator – Full access to the account
+* Staff members - Read/Write access to all projects. This is the role
+all employees should have.
+* Trusted users - Read access to all projects. We probably don’t need
+this.
+* Users – No permissions at all, which means users with this role will
+have read/write access only to projects to which they have been
+assigned.
+
+Access to repositories is configured per-project (in other words, you
+get access to a project, which includes repositories). Users can gain
+access through a role which gives them automatic permission, or they can
+be _assigned_ to a project, giving them full read/write access by
+default (but this can be customised per user).
+
+== Wiki
+
+Each project can be assigned a _Notebook_, which is Codebase’s way of
+saying ‘wiki’. Notebook pages are written in Markdown (with Codebase
+specific extensions), Textile or plain text, but Markdown is
+recommended. Pages can be edited by checking out the notebook as a git
+repository, or through an editor built into codebase. Note that there is
+no WYSISWIG editor, but there _is_ a preview feature.
+
+Some features are missing when compared to Confluence: There is no way
+to add images or attachments to a wiki page, although there is an area
+per project where you can upload files. Files can be assigned a category
+from a pre-defined list, customisable per-project. Also MIA are comments
+on pages, but there is a separate ‘discussion’ area per project.
+Discussion can also be assigned a category, and again the list of
+categories is customisable per-project.
+
+[[tracker]]
+== Issue tracker
+
+The issue tracker is not as comprehensive as, say, Jira, but that’s a
+good thing, since it is less complex. There is an issue tracker per
+project, and tickets have the following properties, the possible values
+of which can be customised, you guessed it, per-project:
+
+[cols=",,",]
+|===
+|Property |Default values |Jira equivalent
+|Type |Bug, Enhancement, Feature, Task |Issue type
+|Milestone |- |Release
+|Status |New, Accepted, In Progress, Completed, Invalid |Resolution
+|Priority |Critical, High, Normal, Low |Priority
+|Categories |API, Cosmetic, General, Refactoring, Security |-
+|===
+
+While the extra level of hierarchy that Jira calls ‘components’ isn’t
+there, Codebase has the concept of a ticket ‘category’, which could be
+used for the same feature, or some sort of project organisation.
+
+[[time]]
+== Time Tracking
+
+Time tracking in Codebase is simple and straightforward: You log chunks
+of time spent (expressed in hours and minutes) with a date and summary,
+and optionally a group (which just groups hours). Hours can be marked
+billed or unbilled, which is useful for, well, billing. The time
+tracking system is integrated with the issue tracker, so it’s easy to
+enter hours spent on a certain issue. There are reporting features,
+other than just basic browsing and filtering of hours. However, all
+hours can be exported as CSV and also read through the API for
+integration with other applications.
+
+Unfortunately, this functionality does not appear to be enough for
+customer project use. For example, it does not appear to be possible to
+show all hours for one person (on all projects), even the in the CSV
+export (which does not include a project column); this is needed to
+check whether hours are complete. For billing one customer, however, it
+does appear to be possible to show all hours (for all people) for one
+project between two dates.
+
+[[API]]
+== API
+
+Codebase has a RESTFul, JSON-based HTTP
+http://support.atechmedia.com/codebase/docs/api-documentation[API] that
+allows read/write access to all features listed above, with the
+exception of ACL management. Authentication is HTTP basic with an API
+access token per user. In addition to the REST API it’s possible to
+configure an URL per repository that will receive an HTTP POST whenever
+someone pushes to that repository.
+
+== Conclusion
+
+Codebase is an obvious migration path from JIRA/Confluence to hosted
+DVCS with integrated lightweight issue tracker and wiki. Our specific
+conclusions are as follows.
+
+* There is no functionality to fork repos and submit pull requests in
+the web interface, so you have to manually create new repositories and
+send merge requests some other way.
+* The management functionality includes useful repository grouping
+(projects and project groups) and users (organisations).
+* It’s useful to be able to archive old projects.
+* There’s a simple git-based wiki, that supports Textile and Markdown.
+* There’s a simple issue tracker.
+* Codebase’s pricing model is a better fit for our situation (many
+repos) than GitHub.
+* GitHub is more mature, seems to generally do more and have more
+development effort behind it.
+
+Our conclusion is therefore that we want to use GitHub, even though it’s
+going to cost more and we’ll be limited in the number of repositories.

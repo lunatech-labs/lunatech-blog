@@ -1,0 +1,24 @@
+---
+layout: post
+title: New open-source libraries
+date: 2010-08-20
+author: FroMage
+lang: en
+tags:
+  - java
+  - playframework
+---
+= New open-source libraries
+
+Today we’ve released three new OSS
+libraries for the http://www.playframework.org/[Play! Framework] in
+our OSS section:
+
+* http://www.lunatech-labs.com/open-source/resteasy-play-module[RESTEasy
+Play! module]: Define your Play! Framework RESTful web services in
+JAX-RS using RESTEasy.
+* http://www.lunatech-labs.com/open-source/secure-permissions-play-module[Secure
+permissions Play! module]: Define your security policy using Drools
+security rules.
+* http://www.lunatech-labs.com/open-source/debian-play-module[Debian
+Play! module]: Debianise your Play! Framework applications and modules.

@@ -1,0 +1,387 @@
+---
+layout: post
+title: jBPM4 and Seam working together
+date: 2010-03-09
+author: pepite
+lang: en
+tags:
+  - jboss
+  - jbpm
+  - seam
+  - jsf
+---
+= jBPM4 and Seam working together
+
+So you wonder why there is
+no integration between Seam and jBPM4? Actually it is quite simple to
+build you own integration layer. This article describes a simple way to
+integrate jBPM 4 with JBoss Seam 2." ---
+
+== Getting started
+
+Download the latest jBPM 4.3 package and unzip it. In your Seam project,
+copy the jBPM library jar files. Setup an XA datasource for jBPM and one
+for your application. The jBPM XA datasource should look like this:
+
+[source,brush:,xml;,gutter:,false]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources>
+    <xa-datasource> 
+        <jndi-name>jBPMDevDatasource</jndi-name> 
+        <xa-datasource-class>org.postgresql.xa.PGXADataSource</xa-datasource-class>
+        <xa-datasource-property name="ServerName">localhost</xa-datasource-property>
+        <xa-datasource-property name="ServerName">localhost</xa-datasource-property>
+        <xa-datasource-property name="PortNumber">5432</xa-datasource-property>
+        <xa-datasource-property name="DatabaseName">vl-bpm</xa-datasource-property>
+        <xa-datasource-property name="User">visiblebpm</xa-datasource-property>
+        <xa-datasource-property name="Password">visible</xa-datasource-property>
+        <!-- disable transaction interleaving -->
+        <track-connection-by-tx />
+        <!-- Uses the pingDatabase method to check a connection is still valid 
+             before handing it out from the pool -->
+        <valid-connection-checker-class-name>
+            org.jboss.resource.adapter.jdbc.vendor.PostgreSQLValidConnectionChecker
+        </valid-connection-checker-class-name>
+        <metadata>
+            <type-mapping>PostgreSQL 8.0</type-mapping>
+        </metadata>
+    </xa-datasource> 
+</datasources>
+----
+
+The one for you application should look similar but pointing to your
+database. Why do we need XA datasources? Because that allows us to have
+transactions that go over multiple databases. This is our case, we want
+to have a database for our application and a database for jBPM to
+maintain the state of business processes.
+
+== Glueing Seam and jBPM4
+
+Because we do not want jBPM3 anymore, we need to override the default
+Seam jBPM component. So let's do that:
+
+[source,brush:,java;,gutter:,false]
+----
+@Name("com.lunatech.bpm.jbpm")
+@Scope(ScopeType.APPLICATION)
+@Startup
+@BypassInterceptors
+@Install(precedence = Install.APPLICATION)
+public class Jbpm {
+
+    private ProcessEngine processEngine;
+    private RepositoryService repositoryService;
+    private String[] processDefinitions;
+
+    // ...
+
+    @Create
+    public void init() {
+        try {
+            this.processEngine = Configuration.getProcessEngine();
+            this.repositoryService = processEngine.getRepositoryService();
+            // Look up the definitions from the theme directory. 
+            // Each definition is stored as theme-definitionname.
+            Map<String, NewDeployment> deployments = 
+                new HashMap<String, NewDeployment>();
+            for (String processDefinition : processDefinitions) {
+                ClassLoader loader = Thread.currentThread().getContextClassLoader();
+                InputStream is = 
+                    loader.getResourceAsStream(processDefinition);
+                if (is != null) {
+                    NewDeployment deployment =
+                        repositoryService.createDeployment()
+                        .addResourceFromInputStream(processDefinition, is);
+                    deployments.put(processDefinition, deployment);
+                }
+            }
+
+    // ...
+
+    public String[] getProcessDefinitions() {
+        return processDefinitions;
+    }
+
+    public void setProcessDefinitions(String[] processDefinitions) {
+        this.processDefinitions = processDefinitions;
+    }
+
+    public static Jbpm instance() {
+        if (!Contexts.isApplicationContextActive()) {
+            throw new IllegalStateException("No application context active");
+        }
+        return (Jbpm) Component.getInstance(Jbpm.class, ScopeType.APPLICATION);
+    }
+
+    @Destroy
+    public void shutdown() {
+        if (processEngine != null) {
+            processEngine.close();
+        }
+    }
+}
+----
+
+We also need a package-info.java file to indivate the namespace we are
+using:
+
+[source,brush:,java;,gutter:,false]
+----
+@Namespace(value = "http://jboss.com/products/seam/jbpm4", prefix = "com.lunatech.bpm")
+@AutoCreate
+package com.visiblelogistics.bpm;
+
+import org.jboss.seam.annotations.AutoCreate;
+
+
+
+
+We are now ready and we should tell Seam to use our new jBPM component. Nothing more easy, edit your components.xml file from the WEB-INF directory.
+
+Add the following namespace:
+
+
+xmlns:bpm="http://jboss.com/products/seam/jbpm4"
+----
+
+and add the following lines, to define our business process:
+
+[source,brush:,xml;,gutter:,false]
+----
+<bpm:jbpm >
+      <bpm:process-definitions>
+          <value>processdefinitions/lunatech/confirm-registration.jpdl.xml</value>
+      </bpm:process-definitions>
+</bpm:jbpm>
+----
+
+We are now able to inject our jBPM engine into Seam. So, in our
+controller, we can start a business process:
+
+[source,brush:,java;,gutter:,false]
+----
+ProcessEngine processEngine = Jbpm.instance().getProcessEngine();
+ExecutionService executionService = processEngine.getExecutionService();
+Map<String, Object> variables = new HashMap<String, Object>();
+String confirmationCode = ConfirmationService.generateConfirmationCode();
+variables.put("personId", person.getKey());
+variables.put("confirmationCode", confirmationCode);
+executionService.startProcessInstanceByKey("confirm_registration", variables, confirmationCode);
+----
+
+This is all good, but now how do I make Seam and JBPM 4 interact with
+each other? Well let's have a look.
+
+== jBPM4 and Seam interaction
+
+Let's first review our jBPM business process:
+
+[source,brush:,xml;,gutter:,false]
+----
+<process name="confirm_registration" key="confirm_registration">
+  <start>
+    <transition to="send_request_to_group_leaders" />
+  </start>
+  <seam-component name="send_request_to_group_leaders"
+    expression="#{groupAction.sendNotificationToGroupLeaders('/emails/request-to-join-group.xhtml')}">
+    <transition to="verify_request" />
+  </seam-component> 
+  <state name="verify_request">
+    <transition name="approved" to="send email to user"/>
+    <transition name="rejected" to="send rejection email"/> 
+  </state>
+  <seam-component name="add user to group" expression="#{groupAction.addPersonToGroup()}">
+    <transition to="send email to user" />
+  </seam-component> 
+  <seam-component name="send email to user" expression="#{groupAction.approveMembership()}">
+    <transition to="end" />
+  </seam-component> 
+  <seam-component name="send rejection email" 
+    expression="#{groupAction.rejectRequestToJoinGroup('/emails/reject-request-to-join-group.xhtml')}">
+    <transition to="end" />
+  </seam-component> 
+  <end name="end"/>
+</process>
+----
+
+This business process is about accepting or refusing a membership. As a
+group leader, you can accept or refuse a member request.
+
+As you can notice, I introduce a new `activity`: the `seam-component`
+activity. Now, jBPM does not know anything about it. Let's define it.
+Create a file called `jbpm.jpdl.bindings.xml`. +
+This file needs to be in your classpath so jBPM can find it. However, it
+did not work for me, so I updated the jbpm.jar with this file (using
+`jar uvf jbpm.jar jbpm.jpdl.bindings.xml`).
+
+Here is the content of the file:
+
+[source,brush:,xml;,gutter:,false]
+----
+<bindings>
+  <activity binding="org.jbpm.jpdl.internal.activity.StartBinding" />
+  <activity binding="org.jbpm.jpdl.internal.activity.StateBinding" />
+  <activity binding="org.jbpm.jpdl.internal.activity.DecisionBinding" />
+  <activity binding="org.jbpm.jpdl.internal.activity.EndBinding" />
+  <activity binding="org.jbpm.jpdl.internal.activity.EndCancelBinding" />
+  <activity binding="org.jbpm.jpdl.internal.activity.EndErrorBinding" />
+  <activity binding="org.jbpm.jpdl.internal.activity.ForkBinding" />
+  <activity binding="org.jbpm.jpdl.internal.activity.JoinBinding" />
+  <activity binding="org.jbpm.jpdl.internal.activity.HqlBinding" />
+  <activity binding="org.jbpm.jpdl.internal.activity.SqlBinding" />
+  <activity binding="org.jbpm.jpdl.internal.activity.JavaBinding" />
+  <activity binding="org.jbpm.jpdl.internal.activity.ScriptBinding" />
+  <activity binding="org.jbpm.jpdl.internal.activity.TaskBinding" />
+  <activity binding="org.jbpm.jpdl.internal.activity.SubProcessBinding" />
+  <activity binding="org.jbpm.jpdl.internal.activity.MailBinding" />
+  <activity binding="org.jbpm.jpdl.internal.activity.GroupBinding" />
+  <activity binding="org.jbpm.jpdl.internal.activity.CustomBinding" />
+  <activity binding="org.jbpm.jpdl.internal.activity.AssignBinding" />
+  <activity binding="org.jbpm.jpdl.internal.activity.PassthroughBinding" />
+  <activity binding="org.jbpm.jpdl.internal.activity.RulesBinding" />
+  <activity binding="org.jbpm.jpdl.internal.activity.RulesDecisionBinding" />
+  <activity binding="org.jbpm.jpdl.internal.activity.JmsBinding" />
+
+  <activity binding="com.lunatech.bpm.SeamComponentBinding" />
+
+  <eventlistener binding="org.jbpm.jpdl.internal.activity.EventListenerBinding" />
+  <eventlistener binding="org.jbpm.jpdl.internal.activity.JavaBinding" />
+  <eventlistener binding="org.jbpm.jpdl.internal.activity.HqlBinding" />
+  <eventlistener binding="org.jbpm.jpdl.internal.activity.SqlBinding" />
+  <eventlistener binding="org.jbpm.jpdl.internal.activity.ScriptBinding" />
+  <eventlistener binding="org.jbpm.jpdl.internal.activity.MailBinding" />
+  <eventlistener binding="org.jbpm.jpdl.internal.activity.AssignBinding" />
+  <eventlistener binding="org.jbpm.jpdl.internal.activity.JmsBinding" />
+</bindings>
+----
+
+Maybe I am doing something wrong, but I did not find out how to only
+specify your new activity. jBPM team, if you are reading this, please
+enlighten me ;)
+
+Anyway, we now need to define our SeamComponentBinding and our
+SeamComponentActivity.
+
+[source,brush:,java;,gutter:,false]
+----
+public class SeamComponentBinding extends JpdlBinding {
+
+    public static final String TAG = "seam-component";
+    public SeamComponentBinding() {
+        super(TAG);
+    }
+    @Override
+    public Object parseJpdl(Element element, Parse parse, JpdlParser parser) {
+        SeamComponentActivity seamComponentActivity = new SeamComponentActivity();
+        parseSeamComponentInvocation(seamComponentActivity, element, parse, parser);
+        String variableName = XmlUtil.attribute(element, "var");
+        seamComponentActivity.setVariableName(variableName);
+        return seamComponentActivity;
+    }
+
+    private void parseSeamComponentInvocation(SeamComponentActivity seamComponentActivity, 
+                        Element element, Parse parse, JpdlParser parser) {
+        String expression = XmlUtil.attribute(element, "expression", true, parse, null);
+        seamComponentActivity.setExpression(expression);
+    }
+}
+----
+
+SeamComponentBinding, instantiate our SeamComponentActivity with the
+right state (our `var` and `expression` attribute).
+
+[source,brush:,java;,gutter:,false]
+----
+public class SeamComponentActivity extends JpdlActivity implements EventListener {
+
+    private static final long serialVersionUID = 1L;
+
+    protected String expression = null;
+    protected String variableName;
+
+    public void execute(ActivityExecution execution) throws Exception {
+        perform(execution);
+        ((ExecutionImpl) execution).historyAutomatic();
+    }
+
+    public void notify(EventListenerExecution execution) throws Exception {
+        perform(execution);
+    }
+
+    public void perform(OpenExecution execution) throws Exception {
+        Map<String, Object> variables = ((ExecutionImpl) execution).getVariables();
+        Object returnValue = null;
+        if (expression != null) {
+            // Do the lookup using seam EL resolver
+            MethodExpression<Object> actionExpression = 
+                Expressions.instance().createMethodExpression(expression);
+            returnValue = actionExpression.invoke();
+        }
+        else {
+            throw new JbpmException("no EL expression specified");
+        }
+
+        if (variableName != null) {
+            variables.put(variableName, returnValue);
+        }
+        // Save the variables in the process context
+        execution.setVariables(variables);
+      }
+
+      // Setters and getters
+}
+----
+
+The business logic happens inside the `SeamComponentActivity` object. So
+what happens here? During the perform operation, the class delegates to
+the Expression seam object. It is now possible to use EL expressions
+within the jBPM process.
+
+It is also worth noting that the `SeamComponentActivity` object sets the
+process variables inside the execution service process context. It means
+I can access the process variables from my Seam controller and I can
+therefore interact with the business process.
+
+For example, here is the code to approve a membership:
+
+[source,brush:,java;,gutter:,false]
+----
+public void approveMembership() throws Exception {
+ ProcessEngine processEngine = Jbpm.instance().getProcessEngine();
+ ExecutionService executionService = processEngine.getExecutionService();
+ // From the doc, the Execution id is process def name + key
+ String key = process + "." + confirmationCode;
+ String groupKey = (String) executionService.getVariable(key, "groupKey");
+ String personKey = (String) executionService.getVariable(key, "personKey");
+ Group group = groupDAO.findGroupByKey(groupKey);
+ executionService.signalExecutionById(key, "approved");
+}
+----
+
+== What next?
+
+As you can see, this is a very basic activity component. The
+processExecution and the signaling could be automated.
+
+In the example I am using the executionService to get the variables
+instead of the business context scope. But we could imagine an
+interceptor to propagate those variables in and out of the business
+context scope to the process variable context. You could then use the
+@In seam annotation, or the Contexts.getBusinessProcessContext() scope.
+
+However, I did not find the need to do so as I needed the
+executionService to signal my process anyway.
+
+But you are more than welcome to extend this component to fit your
+needs...
+
+== In a nutshell
+
+Something worth nothing, the jBPM4 API is easy to use and readable. It
+allows to easily manipulate you business processes. I had no difficulty
+coming with this solution whereas using jBPM3 it would have been a bit
+harder... jBPM4 is also fully extendable, thus is easy to come up with
+new activities. Dues to his embed-able nature, jBPM4 is the de-facto
+framework as soon as maintaining state is involved, and as we have seen,
+it is really easy to embed into your project.

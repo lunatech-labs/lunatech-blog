@@ -1,0 +1,209 @@
+---
+layout: post
+title: Configuring Applications With Docker
+date: 2020-01-03
+author: nMoncho
+lang: en
+tags:
+  - testing
+  - docker
+img: images/media/2020-01-03-configuring-applications-with-docker/background.png
+---
+= Configuring Applications With Docker
+
+:imagesdir: /images/media/2020-01-03-configuring-applications-with-docker
+
+_But it worked on my machine!_I still remember when I was a young developer and someone introduced me to the environments where an application could be deployed: dev, test, acceptance, production. We as developers need to deal a lot with context, we deal with it on context switches, on variable scoping, and this is yet another context.
+
+We need to code our application so it can modify its parameters or behaviour based on the place it’s running, this type of input has roughly three forms: arguments, files and environment variables.[1] For which Docker provides several alternatives to accommodate for these different inputs. With Docker we can configure applications in two moments: during _build time_, or at _runtime_. The former includes the configuration right into the image, the latter is given when the container is instantiated. The code for this blogpost can be found https://github.com/nMoncho/docker-app-config[here].
+
+== Configuring At Build Time
+
+=== Arguments
+
+We can provide build arguments with the ARG statement inside the Dockerfile in combination with the `--build-arg` cli argument:
+
+----
+FROM bash:4.4
+ARG MY_BUILD_ARG1
+ARG MY_BUILD_ARG2
+ARG MY_BUILD_ARG3=Baz
+RUN echo "Hey look at my ${MY_BUILD_ARG1} argument!"
+----
+
+After this we can build the image doing:
+----
+$ docker build \
+  --build-arg MY\_BUILD\_ARG1=Foo \
+  --build-arg MY\_BUILD\_ARG2=Bar \
+  --tag bash-build-args .
+----
+
+A message with the first argument will appear on the console, ignoring the others. The values given to these arguments only exist at build time, if you connect to the container you won’t be able to see them. This is quite useful for passwords or other sensitive information we need to provide when building the image but don’t want to persist inside the image.
+
+=== Files
+
+We can use either the `COPY` or `ADD` command to include files and folders inside images:
+
+----
+FROM bash:4.4
+COPY readme.md .
+ADD  my_photos/ cat_pics/
+RUN echo "Finished copying!"
+----
+
+Both commands work similarly, but ADD decompresses tar files and allows to specify URLs (but not to decompress files coming from them). After building the image we should have the files available in the container.
+
+== Configuring At Run Time
+
+=== Arguments
+
+Using the command ENTRYPOINT we can treat a docker container as a shell command:
+
+----
+FROM bash:4.4
+ENTRYPOINT ["echo"]
+CMD ["this a default message!"]
+----
+
+What this will do is invoke the echo program when we do docker run; CMD will act as default argument if we don’t provide any to Docker.
+
+----
+$ docker run bash-run_args
+this a default message!
+
+$ docker run bash-run_args Look At My Custom Message!!
+Look At My Custom Message!!
+----
+
+Alternatively, we can provide a script as a more elaborate entrypoint:
+
+----
+FROM bash:4.4
+
+COPY args_entrypoint.sh .
+
+RUN ["chmod", "+x", "args_entrypoint.sh"]
+ENTRYPOINT ["./args_entrypoint.sh"]
+CMD ["this a default message!"]
+----
+
+Where the script uses `$@` to handover all the arguments issued to Docker:
+
+----
+#!/usr/local/bin/bash
+
+echo "$@"
+----
+
+=== Files
+
+We use volumes to provide files or folders to a container, which unlike `ADD` or `COPY`, can provide different files on different executions.
+
+----
+$ docker run -it \
+    --entrypoint=bash \
+    --volume $(pwd)/my_photos:/cat_photos \
+    bash:4.4
+----
+
+This will mount the local folder `my_photos` with the name `cat_photos` inside the containers. Alternatively, we can use `--mount` instead of `--volume`:
+
+----
+$ docker run -it \
+  --entrypoint=bash \
+  --mount source=$(pwd)/my\_photos,target=/cat\_photos,type=bind \
+  bash:4.4
+----
+
+Volumes are normally used to persist information outside the life of a container, like data stored inside a database.
+
+The nice thing about volumes is that they work transparently, you just mount a folder into volume and it magically appears in your container without even adding something in the Dockerfile.
+
+=== Environment Variables
+
+We define environment variables with the keyword `ENV` in the Dockerfile:
+
+----
+FROM bash:4.4
+
+ENV MY\_NAME "John Doe"
+ENV MY\_EMAIL "jonh.doe@noname.com"
+----
+
+If we would connect to this docker container we would see those environment variables set. We can override such values with the `--env argument`:
+
+----
+$ docker run -it \
+  --env MY\_NAME="Jane Smith" \
+  --env MY\_EMAIL="jane.smith@noname.com" \
+  bash-run_env
+----
+
+Environment variables are both available during build time and at runtime. It’s interesting to note that we can mix copying files at build time with environment variables at runtime, if you use https://github.com/lightbend/config[Typesafe Config], you can copy files that refer to environment variables which values can be redefined on every execution.
+
+== Putting It All Together
+
+Let’s see a more meaningful example, an image that compiles and runs a Maven project, a very simple Web application that shows pictures uploaded by the users.[2]
+
+----
+# Base on maven image to get java and javac available
+FROM maven:3-jdk-8
+
+# Define build arguments from where to locate the repository
+ARG github_account
+ARG github_repository_name
+
+# Define the full GitHub url based on build arguments
+ENV github_url "https://github.com/${github_account}/${github_repository_name}.git"
+ENV JAVA_OPTS "-Xmx1024m"
+
+WORKDIR /tmp
+
+# Clone and compile the project
+RUN git clone "$github_url" && \
+cd ${github_repository_name}/petshop && \
+mvn clean compile && \
+mv ../petshop /tmp/petshop
+
+# Copy our entrypoint and make it runnable.
+COPY petshop.sh petshop/run.sh
+RUN ["chmod", "+x", "petshop/run.sh"]
+
+WORKDIR /tmp/petshop
+
+# Define entrypoint and default argument
+ENTRYPOINT ["./run.sh"]
+CMD ["7000"]
+----
+
+First this project defines a couple of build arguments, useful for say, you want to fork this repository. Then we defined two environment variables, one defining the GitHub url from where to get the code and another as the standard JAVA\_OPTS. After that we clone repository and compile it. The next step is copying the entrypoint and giving proper permissions to it’s usable when running the container. The final instructions define then entrypoint as the script copied in the step before with the default argument of 7000 (the port where the Http server will be listening).
+
+We can build the image with the following command:
+
+----
+$ docker build \
+  --build-arg github_account="nMoncho" \
+  --build-arg github_repository_name="docker-app-config" \
+  --tag petshop .
+----
+
+And then run it with: 
+
+----
+$ docker run \
+  --publish 7000:7000 \
+  --env JAVA_OPTS="-Xmx1536m" \
+  --volume $(pwd)/my_photos:/tmp/petshop/upload \
+  petshop
+----
+
+If we go to our web browser and hit http://localhost:7000/ we should be able to see our simple app.
+
+== Conclusion
+
+I hope that with these very simple examples you could get an idea of how easy is to configure applications using Docker, and that it helps you avoid the mistake of pretending your machine is the only environment for your code has to run like I did.
+
+[1] Programs can also take input from other means, such as sockets: for JVM processes you can use JMX, or expose an HTTP API.
+
+[2] You wouldn’t do this in a real project, you would have at least two containers, one building your code and another running it. I decided to put everything into one to make things simpler.

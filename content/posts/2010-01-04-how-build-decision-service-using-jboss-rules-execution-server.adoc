@@ -1,0 +1,309 @@
+---
+layout: post
+title: How to build a decision service using JBoss Rules Execution Server
+date: 2010-01-04
+author: PeterHilton
+lang: en
+tags:
+  - java
+  - drools
+---
+= How to build a decision service using JBoss Rules Execution Server
+
+:imagesdir: /images/media/2010-01-04-how-build-decision-service-using-jboss-rules-execution-server
+
+This
+article shows you exactly how to get this working, with example rules -
+a RESTful decision service with no Java code required.
+
+This article is part 3 of a series:
+
+. link:https://blog.lunatech.com/posts/2009-12-14-decision-service-architecture-jboss-rules[Decision
+service architecture with JBoss Rules] - what a decision service is and
+gave a high-level technical overview how you can use the JBoss Rules
+Execution Server to build one
+. link:https://blog.lunatech.com/posts/2009-12-28-decision-service-business-rules-jboss-rules[Decision
+service business rules in JBoss Rules] - how to implement the decision
+service logic
+. How to build a decision service using JBoss Rules Execution Server -
+this article.
+
+The source code for this article is also available at
+https://github.com/hilton/drools-pc-configuration.
+
+[[ExecutionServer]]
+== Execution Server
+
+http://www.jboss.org/drools/[JBoss Rules] includes the JBoss Rules
+http://downloads.jboss.com/drools/docs/5.0.1.26597.FINAL/drools-guvnor/html/ch01.html#d0e1095[Execution
+Server] as part of the standard distribution. We will configure this to
+provide a decision service using the following architecture.
+
+image:../media/2010-01-04-how-build-decision-service-using-jboss-rules-execution-server/decision-service-architecture-3.png[Decision service architecture
+diagram]
+
+The Execution Server is a standard web application WAR that includes the
+JBoss Rules rules engine library. We will configure it by adding a
+properties file that provides the location of our rules file.
+
+[[HowtosetuptheExecutionServer]]
+== How to set-up the Execution Server
+
+This section describes the manual steps for installing and configuring
+the Execution Server, followed by the same steps using Ant.
+
+First, check that you have the following pre-requisites:
+
+* a Servlet container, e.g. http://tomcat.apache.org/[Apache Tomcat]
+* a http://www.jboss.org/drools/downloads.html[Drools 5.0 Binaries]
+download.
+* the link:/media/2010-01-04-how-build-decision-service-using-jboss-rules-execution-server/pc-configuration.zip[pc-configuration.zip] source files for this example
+
+Expand (i.e. unzip) the Drools Execution Server WAR and deploy it to the
+Servlet container.
+
+* unzip ~/Downloads/drools-5.1.0.M1/drools-server-5.1.0.M1.war -d
+/Applications/apache-tomcat-5.5.28/webapps/drools-server.war
+
+Expand `pc-configuration.zip` to a local directory:
+
+* `/User/peter/Downloads/pc-configuration/pc.properties` - Knowledge
+Agent configuration file
+* `/User/peter/Downloads/pc-configuration/pc.drl` - rule language file
+(business rules)
+* `/User/peter/Downloads/pc-configuration/build.xml` - Ant build (see
+below)
+* `/User/peter/Downloads/pc-configuration/request/*.xml` - XML files to
+use as requests.
+
+Edit the example `pc.properties` configuration file and edit its
+contents so that the `dir` property refers to the same directory, using
+an absolute path that starts with a slash:
+
+[source,brush:java;,gutter:false]
+----
+name=pc
+newInstance=true
+dir=/Users/pedro/Downloads/pc-configuration
+poll=10
+----
+
+If the Servlet container was already started, then reload the web
+application; otherwise, start the Servlet container.
+
+[[Antsetup]]
+== Ant set-up
+
+Alternatively, run the following Ant script after checking the two
+pre-requisites and editing the `deploy.dir` and `drools-server.war`
+properties.
+
+[source,brush:xml;,gutter:false]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="pc-configuration" default="install">
+
+<!-- Pre-requisite: an installed Servlet container, e.g. Tomcat -->
+<property name="deploy.dir" value="/Applications/apache-tomcat-5.5.28/webapps" />
+
+<!-- Pre-requisite: Drools download -->
+<property name="drools-server.war" value="~/Downloads/lib/drools-5.1.0.M1/drools-server-5.1.0.M1.war" />
+
+<target name="install" description="Install the Drools Execution Server and the rules">
+  
+  <!-- 1. Expand (i.e. unzip) the Drools Execution Server WAR and deploy it to the Servlet container -->
+  <unwar src="${drools-server.war}" dest="${deploy.dir}/drools-server.war"/>
+
+  <!-- 2. In pc.properties, set 'dir' to the absolute path of the directory containing pc.drl -->
+  <!-- 3. Copy pc.properties to the deployed WAR's WEB-INF/classes -->
+  <copy todir="${deploy.dir}/drools-server.war/WEB-INF/classes" overwrite="true">
+     <fileset dir="." includes="*.properties"/>
+     <filterset>
+        <filter token="basedir" value="${basedir}"/>
+     </filterset>
+  </copy>
+
+  <copy todir="${deploy.dir}/drools-server.war/WEB-INF/lib">
+     <fileset dir="lib-runtime" includes="**/*.jar"/>
+  </copy>
+
+  <!-- Reload the web application, in case this is a re-deploy -->
+  <touch file="${deploy.dir}/drools-server.war/WEB-INF/web.xml"/>
+</target>
+
+</project>
+----
+
+[[HowtoruntheExecutionServer]]
+== How to run the Execution Server
+
+This section describes how to run the Execution Server from the command
+line.
+
+The Execution Server has a RESTful HTTP interface, which means that we
+can run it from the command line using the http://curl.haxx.se/[curl]
+command (pre-installed with all good operating systems) to sent an XML
+document as the body of an HTTP POST request to the Execution Server web
+application.
+
+First, check that we can send an empty request and get an empty
+response, without errors:
+
+* curl --data "<knowledgebase-request/>"
+http://localhost:8080/drools-server/knowledgebase/pc
+
+This should generate the response:
+
+[source,brush:xml;,gutter:false]
+----
+<knowledgebase-response/>
+----
+
+as well as the following via standard output in the Servlet container
+(in `logs/catalina.out` for Tomcat):
+
+[source,brush:java;,gutter:false]
+----
+com.lunatech.configuration.Log: Processors inserted
+com.lunatech.configuration.Log: Motherboards inserted
+com.lunatech.configuration.Log: Memory inserted
+----
+
+To get a more interesting response, send one of the example XML files in
+the request:
+
+[source,brush:xml;,gutter:false]
+----
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<knowledgebase-request>
+<queries>
+  <query-type>
+     <queryName>messages</queryName>
+     <factNames><string>value</string></factNames>
+  </query-type>
+</queries>
+</knowledgebase-request>
+----
+
+with the command:
+
+* curl --data @test-request/request-empty.xml
+http://localhost:8080/drools-server/knowledgebase/pc
+
+which generates the response:
+
+[source,brush:xml;,gutter:false]
+----
+<knowledgebase-response>
+<outFacts>
+<named-fact>
+  <id>value</id>
+  <fact class="com.lunatech.configuration.Message">
+    <text>No memory selected</text>
+    <type>result</type>
+  </fact>
+</named-fact>
+<named-fact>
+  <id>value</id>
+  <fact class="com.lunatech.configuration.Message">
+    <text>No selection</text>
+    <type>result</type>
+  </fact>
+</named-fact>
+</outFacts>
+</knowledgebase-response>
+----
+
+[[Runtheexamples]]
+== Run the examples
+
+Repeat the curl command for each of the example XML request files, and
+compare the results to the business rules defined in the `pc.drl` file.
+
+[[RunningtheExecutionServerusingJSON]]
+== Running the Execution Server using JSON
+
+The Execution Server's REST interface also supports JSON, as an
+alternative to XML. With the request:
+
+[source,brush:java;,gutter:false]
+----
+{
+"knowledgebase-request":{
+  "queries":{
+     "query-type":[{
+        "queryName":"messages", "factNames":{"string":["value"]}
+     }]
+  }
+}
+}
+----
+
+use the command:
+
+* curl --header "Content-Type: application/json" --data
+@request/empty.json http://localhost:8080/drools-server/knowledgebase/pc
+
+to generate the response:
+
+[source,brush:java;,gutter:false]
+----
+{
+"knowledgebase-response":{
+  "outFacts":{
+     "named-fact":[{
+        "id":"value","fact":{
+           "@class":"com.lunatech.configuration.Message","text":"No memory selected","type":"result"
+        }
+     },
+     {
+        "id":"value","fact":{
+           "@class":"com.lunatech.configuration.Message","text":"No selection","type":"result"
+        }
+     }]
+  }
+}
+}
+----
+
+[[Nextsteps]]
+== Next steps
+
+If you are implementing this kind of decision server, automated testing
+is crucial because the nature of the rules are that you do not (need to)
+know in advance which are going to be activated for a given set of input
+data. What you need is a suite of automated tests that collectively
+cover the different cases. That way, when you add a new rule, or make a
+change, you can see that the existing functionality is preserved. In
+this case, the resulting unit tests would need to use something like
+http://xmlunit.sourceforge.net/[XMLUnit], in order to make assertions
+about the XML response.
+
+This example's rules file contains the type declarations for the domain
+object JavaBeans. In practice, it would be more useful to write these in
+Java code: although this results in more code, you have more
+flexibility, such as the ability to use constructors with parameters and
+write accessor methods for additional derived JavaBean properties. You
+also get better tool support in Eclipse, for example, for Java code than
+DRL code. The same applies to the functions in the rules file: these are
+easier to write as static methods in a separate utility class. To use
+this Java code, just deploy the compiled classes to the web
+application's class path: copy the class files to the `WEB-INF/classes`
+directory, or package them in a JAR archive and copy it to the
+`WEB-INF/lib` directory.
+
+Although the Execution Server's REST API is easy to use from another
+software component, you may just want a web-based user-interface. A
+straightforward way to build this would be entirely in JavaScript,
+running in the web browser, that uses Ajax to handle the Execution
+Server requests and responses. There are many JavaScript frameworks for
+doing this. This is an effective way to build high-performance
+interactive form validation, with complex server-side logic.
+
+Another likely development direction would be to replace the Execution
+Server with your own Java application that access the rules engine,
+either to have more control over the external interface's design or to
+allow direct Java API access to the decision server rules. Accessing the
+rules engine's Java API directly is especially useful for writing unit
+tests, so that they execute as fast as possible - you can expect a few
+hundred milliseconds per rules session execution.

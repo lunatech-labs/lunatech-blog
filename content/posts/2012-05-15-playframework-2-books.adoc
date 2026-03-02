@@ -1,0 +1,128 @@
+---
+layout: post
+title: Play framework 2 books
+date: 2012-05-15
+author: hilton
+lang: en
+tags:
+  - playframework
+  - books
+---
+= Play framework 2 books
+
+:imagesdir: /images/media/2012-05-15-playframework-2-books
+
+For the last six months we’ve been
+working on a not-so-secret project to write http://www.lunatech-research.com/books[books about Play
+2]. Ideally, one book about the
+http://www.playframework.org/[Play framework] would have been enough,
+but these days there isn’t just Java: now there’s Scala as well, which
+is why we are happy to announce both *Play for Scala* and *Play for
+Java*.
+
+image:../media/2012-05-15-playframework-2-books/play-for-scala-cover.jpg[Play for Scala cover]
+image:../media/2012-05-15-playframework-2-books/play-for-java-cover.jpg[Play for Java cover]
+
+[[meap]]
+== MEAP release
+
+Both books are one-third complete, and now available for purchase
+on-line via the Manning Early Access Program (MEAP):
+
+* http://bit.ly/playscala[Play for Scala] by Peter Hilton, Erik Bakker
+and Francisco Canedo
+* http://bit.ly/playjava[Play for Java] by Nicolas Leroux and Sietse de
+Kaper
+
+The early access edition gives you four chapters, plus new chapters as
+they are written, the opportunity to discuss the books with the authors
+on Manning’s Author Online forum, and the final book when it is
+published.
+
+[[free]]
+== Free chapters
+
+The first chapter of each book is currently available on-line for free:
+
+* http://bit.ly/playscala[Play for Scala] chapter 1 - Introduction to
+Play 2
+* http://bit.ly/playjava[Play for Java] chapter 1 - Getting started
+
+[[scala]]
+== Play for Scala
+
+_Play for Scala_ defines Play as the easiest and default way to build
+web applications with Scala. The book gets you started with Play and
+then focuses on how to apply standard web application development
+techniques, which will be familiar to developers who have built web
+applications with another platform, using Play and Scala. The third part
+of the book will cover more advanced topics. The content and code
+examples are Scala only and assume basic Scala knowledge, rather than
+reproducing or reinventing existing high-quality tutorials such as
+http://twitter.github.com/scala_school/[Scala School]. Scala beginners
+won’t have any problems keeping up.
+
+Readers need this book because despite the rising popularity of Scala as
+a post-Java language that runs on the Java Virtual Machine (JVM), none
+of the existing web frameworks have captured the attention of mainstream
+web developers. Play has achieved this for Java web developers in the
+two years since Play 1.0’s October 2009 release, and added Scala support
+with Play 1.1’s November 2010 release. Scala support is fully-integrated
+in Play 2.0, putting it on equal footing with Java, making Play a true
+Scala web application development framework.
+
+[[java]]
+== Play for Java
+
+_Play for Java_ is the book for people who want to start developing web
+applications using the Play and Java, whether they are new to Java web
+development or have a Java EE background. The book assumes basic
+knowledge of the Java language. This book explains that web development
+does not need to be complex: simplicity is at the core of Play. The book
+will explain all aspects of the Play framework, and can serve as a
+complete tutorial as well as a reference. It will also address Java EE
+developer concerns, demonstrate how a stateless web application can fit
+in an enterprise environment, and show the productivity bonuses one can
+get from using Play.
+
+The book’s running example introduces the reader to the philosophy
+behind Play, and how to apply it in practice. Some of the patterns and
+concepts found in a Play application will be contrasted with examples
+found in Java EE applications, to ease the reader's mind shift to a
+stateless way of thinking about web applications. Throughout the book,
+discussion of Scala code will be kept to a minimum, since you don't have
+to learn Scala to use Play.
+
+[[why]]
+== Who publishes books these days anyway?
+
+Technical book publishing isn't dead just yet, but a few things have
+changed in the last ten years. There are now more ways to share
+information, this hasn’t killed off any of the media completely, any
+more than video made cinema redundant, or ‘moving pictures’ stopped
+everyone listening to the radio. What we do have is more choices.
+
+The important thing about different media is that you present
+information differently, instead of just translating content directly to
+another format. We have already learned a lot from the team at Manning
+about what we can do in a book and how it's different to blog posts and
+on-line documentation.
+
+Nobody _only_ publishes books these days, and we're not just writing
+books about Play. We also publish code, present at conferences, host
+informal developer events, and post on-line. This worked pretty well for
+Play 1.x, which went from first release to mainstream web framework in
+two years. Things are moving faster with Play 2, and we decided to write
+books to help accelerate adoption.
+
+We have several goals for the books, which are all part of helping smart
+software developers to get things done:
+
+* share our Play expertise - we don't have time to build all of the web
+applications the world needs
+* bring Play to a wider audience - some programmers just prefer books,
+and they need Play too
+* keep the books less than 2 cm thick - we don't like books with
+gratuitous padding and a lack of focus
+* avoid writing books for idiots - these are books for smart but busy
+programmers.

@@ -1,0 +1,39 @@
+---
+layout: post
+title: Three Scrum benefits (video)
+date: 2011-06-15
+author: PeterHilton
+lang: en
+tags:
+  - scrum
+  - methodology
+  - event
+---
+= Three Scrum benefits (video)
+
+After
+the recent http://talkabout-it.nl/[Talk About IT] event in Amsterdam,
+Hugo Messer interviewed me and asked, ‘What are the three biggest
+benefits for software companies and IT departments who implement Scrum?’
+http://www.youtube.com/v/eRC2-q8YCjQ)([video - YouTube]
+
+== tldw?
+
+I told Hugo that the three biggest benefits of Scrum are that it gives
+your software development:
+
+. transparency that exposes status, progress and issues that prevent
+progress
+. the opportunity to address the issues that Scrum helps you identify
+. the chance that you will actually improve your software development
+process, and therefore project success.
+
+This was not an especially prepared answer, and is one that reflects my
+usual operational perspective. If I had been thinking from a
+business-focused perspective, I could have just as easily named the
+three biggest benefits of:
+
+. customer involvement in key project decisions
+. customer control and influence over project direction
+. customer responsibility for setting business priorities.
+

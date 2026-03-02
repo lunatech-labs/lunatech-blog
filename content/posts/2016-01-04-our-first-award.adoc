@@ -1,0 +1,21 @@
+---
+layout: post
+title: "Our first award!"
+date: 2016-01-04
+author: pepite
+lang: en
+tags:
+  - event
+img: images/media/2016-01-04-our-first-award/background.png
+aliases:
+  - /posts/2016-01-04-our-first-award
+---
+= Our first award!
+
+:imagesdir: /images/media/2016-01-04-our-first-award
+
+Lunatech has been awarded by the “The National Business Success Award Institute” as branch winner 2015 in the category “ICT”.
+
+The jury cited the company's service quality, technology excellence and innovation. Representatives of the award winner also make appearances on the RTL television show "De Success Factor" .
+
+image:../media/2016-01-04-our-first-award!/background.png[]

@@ -1,0 +1,199 @@
+---
+layout: post
+title: Localized Play framework 1.0 validation messages
+date: 2010-09-28
+author: PeterHilton
+lang: en
+tags:
+  - playframework
+  - java
+---
+= Localized Play framework 1.0 validation messages
+
+My
+previous Play framework 1.0 article discussed https://blog.lunatech.com/posts/2010-08-30-playframework-builtin-validations[HTTP form data validation], but did not
+cover validation messages. This article describes how to customise and
+localise validation error messages with Play.
+
+The http://www.playframework.org/documentation/1.0.3/validation[Play
+validation guide] describes three ways to validate form (HTTP request)
+data in a Play web application.
+
+. In the controller method, call methods on the controller's
+`validation` field directly.
+. Add validation annotations to the controller method's parameter
+declarations.
+. Add the `@Valid` annotation to action methods’ POJO parameters, and
+add validation annotations to the POJO properties.
+
+In each case, there are three ways to customise the validation message.
+
+. Override the default message, by redefining the message in your
+application’s `messages` file.
+. Provide a custom message as an additional validation parameter.
+. Provide a message key for a localised message as an additional
+validation parameter.
+
+[[localised]]
+== Localised validation messages
+
+The easiest way to change validation error messages is to override the
+default messages that Play uses. Play’s validation messages are
+internationalised using `play.i18n.Messages`, and the actual messages
+are defined in the file `$PLAY_HOME/resources/messages`.
+
+For example, the following action method parameter’s `@Required`
+annotation generates the default validation message 'Required':
+
+[source,java]
+----
+public static void save(@Required String name) {
+   …
+}
+----
+
+To override one of these messages, simply use the same message key for a
+message in your application’s `conf/messages` file. For example - in
+`conf/messages`:
+
+[source,java]
+----
+validation.required = Please enter a value
+----
+
+You can also provide localisations in other languages, as described in
+the earlier article
+link:/2010/04/12/how-localise-play-framework-web-application[How to
+localise a Play framework web application].
+
+[[parameters]]
+== Validation message parameters
+
+You can use a placeholder in the message for the error key:
+
+[source,java]
+----
+validation.required = Please enter the %s
+----
+
+This error key defaults to the parameter name, and is itself used to
+look up a message. For example, the `name` parameter in the `save`
+action method above could be localised with:
+
+[source,java]
+----
+name = customer name
+----
+
+This would result in the message 'Please enter the customer name'.
+
+Several of the built-in validations define additional message parameters
+that correspond to the validation parameters. For example, the 'match'
+validation defines a second `String` parameter for the specified regular
+expression, which differs from the `%s` placeholder above in that it
+specifies the parameter index '2':
+
+[source,java]
+----
+validation.match=Must match %2$s
+----
+
+Similarly, the 'range' validation defines two additional numeric
+parameters, with indices 2 and 3:
+
+[source,java]
+----
+validation.range=Not in the range %2$d through %3$d
+----
+
+Look in the file `$PLAY_HOME/resources/messages` to see which other
+validations have parameters.
+
+[[custom]]
+== Custom localised validation messages
+
+The validation messages in `$PLAY_HOME/resources/messages` use the
+default message key for each of Play’s
+link:https://blog.lunatech.com/posts/2010-08-30-playframework-builtin-validations[built-in
+validations]. You can specify a different message key. For example:
+
+[source,java]
+----
+validation.required.emphasis = You must enter the %s!
+----
+
+Use this new message key for the message, for manual validation in the
+action method:
+
+[source,java]
+----
+validation.required(manualKey).message("validation.required.emphasis");
+----
+
+Alternatively, use the key in the annotation’s `message` parameter:
+
+[source,java]
+----
+public static void save(@Required(message = "validation.required.emphasis") String name) {
+   …
+}
+----
+
+You can use the same technique with validation annotations on POJO
+properties:
+
+[source,bjava]
+----
+public static void save(@Valid Person person) {
+   …
+}
+
+public class Person extends Model {
+   @Required(message = "validation.required.emphasis") public String name;
+   …
+}
+----
+
+[[literal]]
+== Custom literal (non-localised) validation messages
+
+The Play message look-up just returns the message key if there is no
+message defined for the key, which means you can also just use a literal
+message instead of the message key if you prefer. Using the same
+examples as above, for manual validation:
+
+[source,java]
+----
+validation.required(manualKey).message("Give us a name!");
+----
+
+For action method parameter annotations:
+
+[source,java]
+----
+public static void save(@Required(message = "Give us a name!") String name) {
+   …
+}
+----
+
+For JavaBean property annotations:
+
+[source,java]
+----
+public static void save(@Valid Person person) {
+   …
+}
+
+public class Person extends Model {
+   @Required(message = "Give us a name!") public String name;
+   …
+}
+----
+
+[[Conclusion]]
+== Conclusion
+
+Play’s validation framework is flexible when it comes to validation
+error messages, and makes it possible for you to cover a wide variety of
+use cases with a minimum of fuss or verbose syntax. Furthermore,
+providing multiple language localisations is just as convenient.

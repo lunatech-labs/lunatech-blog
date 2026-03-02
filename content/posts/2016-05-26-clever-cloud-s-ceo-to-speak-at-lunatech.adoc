@@ -1,0 +1,24 @@
+---
+layout: post
+title: Clever Cloud’s CEO to speak at Lunatech
+date: 2016-05-26
+author: Antoine Laffez
+lang: en
+tags:
+  - scala
+  - event
+img: images/media/2016-05-26-clever-cloud-s-ceo-to-speak-at-lunatech/background.png
+---
+= Clever Cloud’s CEO to speak at Lunatech
+
+:imagesdir: /images/media/2016-05-26-clever-cloud-s-ceo-to-speak-at-lunatech
+
+Friday 27 May 2016 Clever Cloud’s CEO, Quentin Adam, will be visiting Lunatech where he will give a presentation about using Clever Cloud with Scala.
+
+Clever Cloud is a “Europe-based PaaS company” that helps “developers deploy and run their apps with bulletproof infrastructure, automatic scaling, fair pricing” and aims “to make an easy-to-use service, without any vendor lock-in”.
+
+Due to his experience at Clever Cloud — where he can work a wide range of technologies and tools — he has a lot of knowledge and is able to speak about many different subjects. He regularly speaks at various tech conferences.
+
+We are opening up the presentation to everyone. Feel free to join us at 16:00.
+
+image:../media/2016-05-26-clever-cloud-s-ceo-to-speak-at-lunatech/background.png[]

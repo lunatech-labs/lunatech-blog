@@ -1,0 +1,27 @@
+---
+layout: post
+title: Late Christmas at Lunatech
+date: 2012-01-10
+author: hilton
+lang: en
+tags:
+  - fun
+---
+= Late Christmas at Lunatech
+
+:imagesdir: /images/media/2012-01-10-late-christmas
+
+Christmas at Lunatech came late for some of us this
+year: we got another five 27-inch Apple monitors. Sometimes bigger is
+better.
+
+image:../media/2012-01-10-late-christmas/monitors.jpg[27 inch Apple monitors]
+
+If it’s not immediately obvious why, then you probably need to re-read
+http://www.joelonsoftware.com/articles/fog0000000043.html[The Joel
+Test], and point 9 in particular:
+
+Do you use the best tools money can buy?
+
+https://plus.google.com/107170847819841716154/posts/eftbNGrsvhU[Comments
+on Google+]

@@ -1,0 +1,100 @@
+---
+layout: post
+title: XML and Namespaces
+date: 2008-10-03
+author: bartschuller
+lang: en
+tags:
+  - xml
+---
+= XML and Namespaces
+
+This article
+explains namespaces in XML: when to use namespaces, and how to declare a
+namespace.
+
+When you see a piece of XML like this:
+
+[source,literal-block]
+----
+<foo:bar xmlns:foo="http://foo.example.com/2008/foo">
+  <foo:baz mumble="1"/>
+</foo:bar>
+----
+
+it is using a namespace.
+
+== History
+
+http://www.xml.com/axml/axml.html[XML 1.0] itself doesn't define a
+namespace mechanism, although it does already reserve the colon for
+future namespace use. It also reserves names starting with the letters
+X, M and L in any case for official use in future specifications. The
+minimal conformance requirement for an XML document is that it is
+_well-formed_. The other side of the coin is that anything that's not
+well-formed is _not_ an XML document, whatever the sender may tell you.
+
+http://www.w3.org/TR/REC-xml-names/[Namespaces in XML] became a W3C
+recommendation in 1999, a year after XML 1.0. It is an optional addition
+to XML.
+
+== Purpose
+
+The purpose of namespaces is to separate different uses of the same
+names. For example, you may have a list of people with element names
+like `<name>` and `<address>`, and I can have a list of computers with
+element names like `<hostname>` and `<address>` (for IP-addresses). To
+unambiguously point to my meaning of `<address>` I can introduce a
+namespace.
+
+Even if the names don't overlap exactly, namespaces serve to separate
+different vocabularies.
+
+== Nature
+
+An XML namespace is a http://www.rfc-editor.org/rfc/rfc3986.txt[URI]
+reference (I'll use URI for short) and you can make them up any way you
+want. However, because we wanted to separate my element's names from
+yours, it makes sense to use URIs that point to your own organisation. A
+first stab at my namespace URI could be `mailto:computerss@example.com`
+but notice that it contains very little information about what it
+represents. It is also hard to find out what it means, except perhaps by
+sending a mail to the address. The same problem exists for URIs with the
+`file:` and `urn:` schemes. As a best practice, use `http:` URLs and try
+to maintain some documentation at that address. So, we'll go for
+`http://namespaces.example.com/2008/computers` instead.
+
+== Notation
+
+URI references can get pretty long, so if every element and attribute in
+a namespace would suddenly be preceded by the URI, then the size of your
+XML documents would explode. That is why the elements themselves use
+something shorter called a _namespace prefix_, which is declared using a
+_namespace declaration_. The idea is that URI references ensure global
+uniqueness, while prefixes are enough to ensure local uniqueness within
+a document, or even a part of a document. Here is an example of a
+namespace declaration:
+
+[cols=",",options="header",]
+|===
+|Term |Example
+|namespace declaration |`xmlns:foo="http://foo.example.com/2008/foo"`
+|namespace |`http://foo.example.com/2008/foo`
+|namespace prefix |`foo`
+|===
+
+Notice that it looks like it is just an attribute with the funny name
+`xmlns:foo`, but since it starts with the letters xml and it contains a
+colon, it can't be a normal attribute. What it does is make `foo` a
+shorthand for `http://foo.example.com/2008/foo` inside the current
+element and its children. This shorthand can be used on element names,
+like so `<foo:bar/>` and on attribute names, like so `foo:baz="1"`. Both
+the `bar` element and the `baz` attribute are said to be in the
+`http://foo.example.com/2008/foo` namespace, but you'll mostly
+abbreviate that to just _the foo namespace_.
+
+== Next episode
+
+This is part one in a series of articles about XML for programmers. In
+the next parts, we will look at the available tools for working with XML
+and namespaces.

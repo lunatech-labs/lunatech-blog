@@ -1,0 +1,491 @@
+---
+layout: post
+title: A functional programming puzzle
+date: 2011-03-21
+author: FroMage
+lang: en
+tags:
+  - javascript
+---
+= A functional programming puzzle
+
+:imagesdir: /images/media/2011-03-21-functional-programming-puzzle
+
+This article
+describes a functional programming puzzle that we had to solve in order
+to implement a JavaScript templating system. It is a very simple problem
+(to explain), with a very simple solution (in size and complexity) that
+was not easy to find. We will describe the problem and its solution here
+because it is not specific to JavaScript (it is mostly
+functional-language neutral) and the solution has been a
+http://en.wikipedia.org/wiki/Eureka_(word)[eureka] moment to most
+people who found it or learned about it." ---
+
+Although this article will be easier to read if you have a functional
+programming background (and/or are advanced JavaScript programmers), we
+will do our best to introduce procedural programmers into the problems
+and techniques described.
+
+[[Afunctionalprogrammingpuzzle-Theproblem]]
+== The problem
+
+The problem at hand is pretty straightforward: We want to write a
+JavaScript templating system that lets me define new variables in
+_environments_ (lexical scopes) that we can manipulate.
+
+[[Afunctionalprogrammingpuzzle-Aboutlexicalscopes]]
+=== About lexical scopes
+
+An example will help explaining. Suppose the following syntax directly
+stolen from Groovy templates in the Play framework:
+
+[source,brush:,html;,gutter:,false]
+----
+#{list items:[1,2,3], var: 'i'}
+ #{list items:[4,5], var: 'j'}
+  ${i * j}
+ #{/list}
+#{/list}
+----
+
+In this example, there are two `list` tags, which iterate over a list
+and define a new variable inside their lexical scope, to hold the
+current iteration value. You can think of them exactly as the Java (and
+many other languages) `foreach`:
+
+[source,brush:,java;,gutter:,false]
+----
+for(int i : new int[]{1,2,3}){
+ for(int j : new int[]{4,5}){
+  System.out.println(i * j);
+ }
+}
+----
+
+In a lexical scope you can only access variables defined in the current
+scope or the scopes that contain your scopes lexically. In Java you
+would say you can only see variables defined in the current block, or
+containing blocks (plus arguments, fields and statics). Once you get out
+of a lexical scope, all the variables of that scope become _unbound_
+(undefined).
+
+[[Afunctionalprogrammingpuzzle-Whyweneedtodealwithscopes]]
+=== Why we need to deal with scopes
+
+Now, suppose we want to implement the previous templating example in
+JavaScript. We need to be able to:
+
+. evaluate the first list "[1,2,3]"
+. define a new scope `s1` where `i := 1`
+. evaluate the second list "[4,5]" in the `s1` scope
+. define a new scope `s2`, which extends `s1`, where `j := 4`
+. evaluate "i * j" in the `s2` scope
+. get back to the `s1` scope (when the inner list terminates)
+. get back to the initial scope (when the outer list terminates)
+
+And the only tool we possess in JavaScript for evaluating an expression
+is `eval(s)` which evaluates a string as JavaScript code and returns the
+value of the evaluation.
+
+Other functional languages (yes JavaScript is a functional programming
+language) let you define environments and pass them to `eval` (such as
+http://www.schemers.org/Documents/Standards/R5RS/HTML/r5rs-Z-H-9.html#%_sec_6.5[Scheme]),
+but not JavaScript.
+
+Because JavaScript’s `eval` does not let us deal with environments, we
+have to do it ourselves. Of course writing a new evaluator is out of the
+question, so we´ll have to use _our brains_ to find a solution.
+
+[[Afunctionalprogrammingpuzzle-Thehuntforthesolution]]
+== The hunt for the solution
+
+Now that we have explained the problem, let us say that we need a
+function that takes in some code as text (either an expression, or a
+statement) and an environment, and returns either the expression’s
+evaluated value (for an expression), or a new environment (in the case
+of a statement).
+
+At this point you can stop reading this article if you want to solve the
+puzzle yourself, then come back here later to either check that your
+working solution is the same one (we’re interested in other solutions),
+or to read hints that should help you find the solution.
+
+The rest of the article describes iterations that led to our solution.
+
+[[Afunctionalprogrammingpuzzle-Howtocaptureanenvironment]]
+=== How to capture an environment
+
+We will begin with a quick explanation of a technique often used by
+JavaScript developers who may not know its name or how it works exactly.
+
+In JavaScript, you only have two scopes: global scope and lexical scope.
+Whenever you enter a function you extend the current environment with
+new variables. You can think of the current environment as a linked list
+of all the containing lexical scopes: from the innermost function until
+the outermost function. Whenever you access a variable, that variable is
+looked up in the current environment (the containing function), and if
+that variable is not defined there, it will be looked up in the parent
+environment (the function containing the current function), and again
+all the way until either we find that varible in a parent containing
+function, or until the global environment.
+
+Let us illustrate this with an example:
+
+[.image-wrap]#image:capture-environment.png[image]#
+
+In this example we define a function `foo` which declared one
+`outerParam` variable, then returns a new function which defines one
+`innerParam` variable. When we invoke `foo(2)` we get inside the
+function with a current environment (we can name it `e1`) which binds
+the `outerParam` variable to `2`, then we return the inner function and
+store it in `a`.
+
+That inner function keeps a reference to its environment (`e1`) for when
+we will invoke it, because the code of that inner function references a
+variable bound in `e1`. This is called _capturing the environment_.
+
+When we then invoke that function with `a(3)`, we create a new
+environment (let´s name it `e2`) which extends the captured `e1` with
+the variable `innerParam` bound to `3`.
+
+[[Afunctionalprogrammingpuzzle-Findingthegeneralidea]]
+=== Finding the general idea
+
+JavaScript’s `eval` always evaluates the code in the current lexical
+scope, which means that any variable you define inside the `eval` will
+only be visible in the current scope, which is not something we can
+manipulate.
+
+On the other hand, we know of a way to define a new scope: defining a
+new function. You can define a new function and return it outside of
+`eval` and it will _capture_ that variable. Because when we capture the
+environment, we can exit the current lexical scope and yet keep a
+reference to the environment (and all defined variables therein) which
+we can use later. You can manipulate a function, so this is good, we’re
+getting somewhere.
+
+Let us try to see how we can define a new scope where `i = 2*6` and we
+can retrieve that variable later on.
+
+[source,brush:,javascript;,gutter:,false]
+----
+function evalInEnv(){
+  return eval("(function (){ var i = 2*6; return i; })");
+}
+var capturedEnvironment = evalInEnv();
+assertEquals(12, capturedEnvironment());
+----
+
+The `evalInEnv` function returns a function, which represents our
+captured environment. We later invoke this function to get values out of
+the captured environment. We’re getting somewhere, we’ve found that an
+environment has to be a function.
+
+[[Afunctionalprogrammingpuzzle-Dealingwithsideeffects]]
+=== Dealing with side-effects
+
+Now the problem with our first solution is that the environment is not
+really captured, what we’ve done here is _defer_ evaluation of `2*6`,
+but every time we’re going to invoke our environment to get the value of
+`i`, we are going to re-evaluate `2*6`. This is very bad because if we
+replace `2*6` with something that has side-effects, we are going to
+trigger the side-effect every time we access `i`.
+
+Let us illustrate the side-effect problem with a global variable we
+increment:
+
+[source,brush:,javascript;,gutter:,false]
+----
+var c = 0;
+function evalInEnv(){
+  return eval("(function (){ var i = c++; return i; })");
+}
+var capturedEnvironment = evalInEnv();
+assertEquals(0, capturedEnvironment());
+assertEquals(1, capturedEnvironment());
+----
+
+So we have to store the variable first, and then return a function that
+captures it. In order to do that we need a first scope where we define
+the variable, and we can do this in JavaScript by declaring a function
+and invoking it immediately with this syntax: `(function(){ … })()`.
+There is nothing mystical here, we’re merely:
+
+. defining a new function: function()\{ … }
+. wrapping it into an expression by surrounding it with parenthesis:
+`(f)`
+. invoking the function by appending parenthesis: `(f)()`
+
+This gives us:
+
+[source,brush:,javascript;,gutter:,false]
+----
+var c = 0;
+function evalInEnv(){
+  var code = "(function (){ "
+   + " var i = c++; "
+   + " return function (){ return i; }"
+   + "})()";
+  return eval(code);
+}
+var capturedEnvironment = evalInEnv();
+assertEquals(0, capturedEnvironment());
+assertEquals(0, capturedEnvironment());
+----
+
+[[Afunctionalprogrammingpuzzle-Extractingwhatwewantfromtheenvironment]]
+=== Extracting what we want from the environment
+
+Our previous example is a good start but we want to be able to use any
+statement (`var i = c++;`) and evaluate any expression (`i`) in the new
+environment, so we can extend our previous example with additional
+parameters:
+
+[source,brush:,javascript;,gutter:,false]
+----
+function evalInEnv(statement, expression){
+  var code = "(function (){ "
+   + statement
+   + " return function (){ return " + expression + "; }"
+   + "})()";
+  return eval(code);
+}
+----
+
+But this is stupid, because we’ve limited ourselves into being able to
+extract only a fixed expression for any given statement. We want smarter
+environments where once we execute a statement, we can evaluate any
+expressions inside that environment, so we have to move the `expression`
+parameter from `evalInEnv` to the environment that it returns:
+
+[source,brush:,javascript;,gutter:,false]
+----
+function evalInEnv(statement){
+  var code = "(function (){ "
+   + statement
+   + " return function (expression){ return eval(expression); }"
+   + "})()";
+  return eval(code);
+}
+var c = 0;
+var capturedEnvironment = evalInEnv("var i = c++;");
+assertEquals(0, capturedEnvironment("i"));
+assertEquals(0, capturedEnvironment("i"));
+// and to illustrate that we can modify the environment
+assertEquals(1, capturedEnvironment("++i"));
+assertEquals(2, capturedEnvironment("++i"));
+----
+
+[[Afunctionalprogrammingpuzzle-Extendinganenvironment]]
+=== Extending an environment
+
+So we can define a new environment and evaluate any expression inside
+that environment, as well as modify that environment, but how do we
+extend one? In our requirements we want to be able to extend an
+environment with new variables and that is not possible with our current
+solution.
+
+If we want our environment to be able to handle statements as well as
+expressions, we have to add a new parameter which tells us if we are
+evaluating an expression or a statement. And hey, since we already have
+some code that evaluates statements, let’s use recursion for that case:
+
+[source,brush:,javascript;,gutter:,false]
+----
+function evalInEnv(statement){
+  var environmentFunction = "function (code, isExpression) {"
+   + " if(isExpression) return eval(code);"
+   + " else return evalInEnv(code)"
+   + "}";
+  var code = "(function (){ "
+   + statement
+   + " return " + environmentFunction
+   + "})()";
+  return eval(code);
+}
+var c = 0;
+var e1 = evalInEnv("var i = c++;");
+assertEquals(0, e1("i", true));
+assertEquals(0, e1("i", true));
+// and to illustrate that we can modify the environment
+assertEquals(1, e1("++i", true));
+assertEquals(2, e1("++i", true));
+// now let's extend the environment
+var e2 = e1("var j = i;", false);
+assertEquals(2, e2("j", true));
+----
+
+If you try to run this you’ll get the following error when you try to
+extend the environment:
+
+....
+ReferenceError: i is not defined
+....
+
+Why do we get this error? Because of recursion. The `i` variable is
+_bound_ in the lexical scope of the function in `e1`, but as soon as
+this function invokes `evalInEnv` it moves into a new lexical scope:
+that of a new call to `evalInEnv`. When using recursion in
+lexically-scoped variables, the variables _bound_ in the _caller_
+function are not bound in the _callee_ function. This is actually part
+of the definition of a lexical scope.
+
+So we can´t use recursion for extending the environment and we´re stuck.
+
+=== [#Afunctionalprogrammingpuzzle-Theeurekamoment]####The _eureka_ moment
+
+Of course we can allow for `X` levels of extending the environment by
+not using recursion but using a manual version of a technique called
+http://en.wikipedia.org/wiki/Inline_expansion[inline expansion]: by
+manually adding the code of `evalInEnv` as many times as needed inside
+the body of `environmentFunction` instead of using recursion. But this
+is a manual process that limits us to `X` levels of environment
+extension, where `X` is the number of times we’ve manually copied the
+code.
+
+Unless… instead of using recursion and manual inlining, we use automatic
+inlining using a different kind of recursion. Since we want to inline
+the code of a function, let’s make that function return its code instead
+of evaluating it. This way we can use recursion to inline it infinitely
+in a lexical scope that is extended every time we need to extend the
+environment.
+
+Let’s redefine our evaluator thus:
+
+[source,brush:,javascript;,gutter:,false]
+----
+function evalInEnv(code, isExpression){
+  var environmentFunction = "function (code2, isExpression2) {"
+   + " return eval(evalInEnv(code2, isExpression2));"
+   + "}";
+  var body;
+  if(isExpression)
+   body = "return ("+code+");";
+  else
+   body = code
+   + " return " + environmentFunction + ";"
+  // return our code, do not evaluate it
+  return "(function(){" + body + "})()";
+}
+var c = 0;
+// since it now returns code, we have to bootstrap it here
+var e1 = eval(evalInEnv("var i = c++;"));
+assertEquals(0, e1("i", true));
+assertEquals(0, e1("i", true));
+// and to illustrate that we can modify the environment
+assertEquals(1, e1("++i", true));
+assertEquals(2, e1("++i", true));
+
+// now let's extend the environment
+var e2 = e1("var j = i;", false);
+assertEquals(2, e2("j", true));
+
+// let's make sure "i" is also visible in e2
+assertEquals(2, e2("i", true));
+
+// and let's make sure "j" is not visible in e1
+try{
+ e1("j", true);
+ assertFail();
+}catch(e){
+ assertTrue(e instanceof ReferenceError);
+}
+----
+
+This is it. It works, it’s cross-browser since it conforms to a standard
+JavaScript feature that was already supported in IE6 and with that you
+can implement an `eval` with first-class environments.
+
+[[Afunctionalprogrammingpuzzle-Usingthatsolution]]
+=== Using that solution
+
+So let’s say the initial environment is one where you did not define any
+variable:
+
+[source,brush:,javascript;,gutter:,false]
+----
+// let's use a random expression to bootstrap our environment
+var initialEnvironment = eval(evalInEnv("42", true));
+----
+
+Now you can extend the current environment using a stack of environments
+to represent the current lexical scope:
+
+[source,brush:,javascript;,gutter:,false]
+----
+var lexicalScope = [initialEnvironment];
+
+function currentEnvironment(){
+ return lexicalScope[lexicalScope.length-1];
+}
+
+function extendEnvironment(statement){
+ var currentEnvironment = currentEnvironment();
+ lexicalScope.push(currentEnvironment(statement, false));
+}
+----
+
+And you can evaluate any expression in the current environment:
+
+[source,brush:,javascript;,gutter:,false]
+----
+function evaluateExpression(expression){
+ var currentEnvironment = currentEnvironment();
+ return currentEnvironment(expression, true);
+}
+----
+
+And when you’re done with the current environment, when you get out of
+the current lexical scope, you can get back to the outer environment:
+
+[source,brush:,javascript;,gutter:,false]
+----
+function popEnvironment(){
+ lexicalScope.pop();
+}
+----
+
+[[Afunctionalprogrammingpuzzle-Conclusion]]
+== Conclusion
+
+We have shown a technique for extending JavaScript’s `eval` with a
+http://en.wikipedia.org/wiki/Reification_(computer_science)[reified]
+environment which allows us to define new environments, extend, drop,
+modify and access them, by using a mix of recursion and inlining to
+achieve our goal in a cross-browser implementation that is minimal in
+size and complexity.
+
+In terms of performance we have to remember that JavaScript’s `eval` is
+not any more costly than loading a `<script>` element since the
+JavaScript engine uses the same mechanism. The only difference in
+execution frequency is that most `<script>` evaluation is done only
+once, while we do this every time we extend the environment, so it could
+be an expensive solution, but one that in practice does not show any
+performance penalty in our tests.
+
+In terms of heap size this process is not any more costly than standard
+recursion, though it is more costly in terms of code segment size, even
+though the code generated by our recursion/inlining technique is fairly
+small and limited to the number of scopes used in the environment.
+
+We do not know if the recursion/inlining technique we used has been
+found and/or named before, and we certainly never came across it before,
+so even if it’s old news, it was very gratifying to reinvent it.
+
+We believe this technique can be reused in every functional language
+that supports `eval` within the current lexical scope.
+
+To get back to the original goal of implementing JavaScript templates,
+it is of course entirely possible to implement templates by compiling
+them to JavaScript code. We can do this using the `with` statement to
+simulate new environments, and this leads to faster code since the
+statements and expressions are only compiled once. But not reifying the
+environment prevents such templates from capturing it for delaying
+nested parts of the template (futures) or repeated evaluation of such
+nested parts (reevaluate some part every `X` seconds), both of which are
+features of our templating system.
+
+Oh, and of course, we’ve published our JavaScript client-side templating
+system, it’s called http://stampsjs.org[Stamps.js] and it’s open-source.
+
+Check it out, this piece of magic code is used in there.

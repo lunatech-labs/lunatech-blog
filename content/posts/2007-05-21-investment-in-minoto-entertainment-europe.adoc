@@ -1,0 +1,31 @@
+---
+layout: post
+title: Investment in Minoto Entertainment
+date: 2007-05-21
+author: kaas
+lang: en
+tags:
+  - investment
+  - startup
+---
+= Investment in Minoto Entertainment
+
+Minoto Entertainment Europe , a company in the
+gaming and entertainment industry, today announced that it has raised an
+undisclosed amount from Lunatech Ventures.
+
+This funding will enable Minoto Entertainment Europe to accelerate the
+product development and expansion of http://www.yourogc.com/[Online Game
+Challenger]
+
+____
+This funding of Lunatech Ventures gives us the boost to become the
+market leader in our sector“ says Eric-Paul Scholten, co-founder and CEO
+of Minoto Entertainment Europe.
+____
+
+Minoto Entertainment Europe is further proud to announce the acquisition
+of PicServer. Picserver (www.picserver.org) is a photo sharing website,
+which will aid to the development of the Online Game Challenger project.
+Minoto Entertainment Europe will take over all assets , including all
+75.000 users.

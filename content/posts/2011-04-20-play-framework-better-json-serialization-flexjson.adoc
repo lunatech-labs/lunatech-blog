@@ -1,0 +1,254 @@
+---
+layout: post
+title: Play Framework 1.2 - Better JSON serialization with FlexJSON
+date: 2011-04-20
+author: eamelink
+lang: en
+tags:
+  - playframework
+  - json
+  - java
+---
+= Play Framework 1.2 - Better JSON serialization with FlexJSON
+
+When writing rich interfaces, you often have to generate a JSON
+representation of your data to be used in your HTML templates. http://www.playframework.org/[Play framework] 1.2 comes bundled with
+Google’s JSON library http://code.google.com/p/google-gson/[Gson], but
+the developers of this library have made some design choices that keep
+it from being ideal for generating JSON that is going to be sent to the
+HTTP client.
+
+[[PlayFramework-BetterJSONserializationwithFlexJSON-Objective]]
+== Objective
+
+We want to be able to create multiple different JSON views on the same
+object, to be used in our Play templates. This is useful, because
+entities are often used in several contexts. A news item may be shown
+with only a few details in a listing of news items, with more details on
+a separate page for that news item, and with even more details for an
+editor of the website.
+
+[[PlayFramework-BetterJSONserializationwithFlexJSON-ProblemswithGson]]
+== Problems with Gson
+
+When you use Gson, the default JSON representation of a class is a map
+with key-value pairs that represent the field names and their values.
+Serialization is done recursively, which poses the first problem, namely
+that you cannot serialize objects that have circular references. In a
+Play application, structures like these are very common. Consider the
+following two classes:
+
+[source,brush:,java;,gutter:,false]
+----
+@Entity
+public class Post extends Model {
+    @ManyToOne
+    public Author author;
+    public String title;
+    public Integer views;
+    public String content; 
+}
+----
+
+[source,brush:,java;,gutter:,false]
+----
+@Entity
+public class Author extends Model {
+    public String name;
+    @OneToMany(mappedBy="author")
+    public Set<Post> posts; 
+}
+----
+
+Trying to serialize an instance of either of them with Gson will fail
+with the following error:
+
+[source,brush:,java;,gutter:,false]
+----
+IllegalStateException occured : circular reference error Offending field: author Offending object: com.google.gson.ObjectTypePair@1
+----
+
+What happens is that during serialization of a post, the author is
+recursively serialized, which holds a reference to the post, thereby
+causing a circular reference which would lead to infinitely deep JSON
+trees.
+
+There are more problems with Gson. By default, Gson serializes all
+fields of an object, except `transient` fields. Additional fields can be
+excluded by implementing your own `ExclusionStrategy`. This
+include-by-default behaviour seems perfectly reasonable when you use the
+JSON representation to transfer an object between multiple systems. We
+however want to use the JSON to show parts of an object to clients. For
+our purpose, it is much more practical to explicitly include fields than
+to explicitly exclude them. For example, suppose that we add a password
+field to our `Author` class. If fields are included by default, the
+password would be visible in JSON output if we forget to also explicitly
+exclude it in the `ExclusionStrategy`. On the other hand, if we would
+use a system where we had to explicitly include fields, no harm would
+come to us if we added a password field to the `Author` class.
+
+Gson can be switched into a mode where it excludes fields by default,
+and includes only fields that are annotated with `@Expose`. This seems
+nice at first, but this couples the JSON representation definition with
+the model itself, which conflicts with our objectives. After all, we
+wanted to have multiple different JSON views on an object. The ‘content’
+of a post should be included on the details page, but not on the listing
+page. In other words, we want the definition of the JSON view to be part
+of the serializer, of which we can have many, instead of being part of
+the class we are serializing.
+
+Even this is possible with Gson, for we can create an
+`ExclusionStrategy` that excludes by default, and includes only
+explicitly named fields. We can also have multiple exclusion strategies,
+so we can satisfy our objective. However, writing an `ExclusionStrategy`
+that works well with nested objects is extremely cumbersome.
+
+Taking it all together, the circular reference issues, the including by
+default and the cumbersome exclusion strategies make Gson not ideal for
+generating JSON to use in a template.
+
+[[PlayFramework-BetterJSONserializationwithFlexJSON-FlexJSON]]
+== FlexJSON
+
+With FlexJSON, it is very easy to specify which fields you want to
+serialize, even with nested objects. Take for example this serializer
+for a details view of a post:
+
+[source,brush:,java;,gutter:,false]
+----
+JSONSerializer postDetailsSerializer = new JSONSerializer().include(
+                "title",
+                "content",
+                "author.name").exclude("*");
+----
+
+This serializer includes the title and content of the post object, and
+also the name of the author. As you can see, you can specify which
+fields of nested objects to include simply by adding a dot to the field
+followed by the field of the nested object. To serialize a post object,
+we can now use
+
+[source,brush:,java;,gutter:,false]
+----
+postDetailsSerializer.serialize(post);
+----
+
+To have a JSON view of a post without the content, we can simply create
+another serializer:
+
+[source,brush:,java;,gutter:,false]
+----
+JSONSerializer postListSerializer = new JSONSerializer().include(
+                "title",
+                "author.name").exclude("*");
+----
+
+To use FlexJSON in your Play application, download the latest version
+from http://flexjson.sourceforge.net/ and put the jar into the `lib`
+folder in your Play application.
+
+FlexJSON may not suit all your needs, but will help you out in a whole
+lot of cases. Remember, you don't have to fully switch to FlexJSON to
+take advantage of it, you can still use other JSON libraries might the
+need arise in a given situation.
+
+[[PlayFramework-BetterJSONserializationwithFlexJSON-Convenienceclasses]]
+== Convenience classes
+
+We can easily use these serializers from our view templates, if we
+create a
+http://www.playframework.org/documentation/1.2/templates#Createcustomextensions[custom
+Java object extension]:
+
+[source,brush:,java;,gutter:,false]
+----
+/**
+ * Extensions for the template system.
+ */
+public class SerializerExtensions extends JavaExtensions {
+    /**
+     * Serialize a model to JSON with a given serializer.
+     */
+    public static String serializeWith(Object model, String serializer) throws IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException {
+        JSONSerializer js = (JSONSerializer) Serializers.class.getField(serializer).get(null);
+        return js.serialize(model);
+    }
+    
+    /**
+     * Serialize a list of models to JSON with a given serializer.
+     */
+    public static String serializeWith(Collection<Object> models, String serializer) throws IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException {
+        JSONSerializer js = (JSONSerializer) Serializers.class.getField(serializer).get(null);
+        return js.serialize(models);
+    }
+}
+----
+
+With this code in place, we can easily convert a single model or a
+collection of models into JSON, while in a Play template:
+
+[source,brush:,java;,gutter:,false]
+----
+<script type="text/javascript">
+  var post = ${post.serializeWith('postDetailsSerializer').raw()};
+</script>
+----
+
+This works equally for a collection of posts:
+
+[source,brush:,java;,gutter:,false]
+----
+<script type="text/javascript">
+  var posts = ${posts.serializeWith('postListSerializer').raw()};
+</script>
+----
+
+The Java extension gets the relevant serializers from the `Serializers`
+class, which holds static references:
+
+[source,brush:,java;,gutter:,false]
+----
+public class Serializers {
+    public static final JSONSerializer postListSerializer;
+    public static final JSONSerializer postDetailsSerializer;
+    
+    static {
+        boolean prettyPrint = Play.mode == Mode.DEV; 
+        
+        postListSerializer = new JSONSerializer().include(
+                "title",
+                "author.name").exclude("*").prettyPrint(prettyPrint);
+        
+        postDetailsSerializer = new JSONSerializer().include(
+                "title",
+                "author.name",
+                "content").exclude("*").prettyPrint(prettyPrint);
+    }
+}
+----
+
+In development mode, we get pretty printed JSON, while in production
+mode the JSON is more compact.
+
+[[PlayFramework-BetterJSONserializationwithFlexJSON-Notes]]
+== Notes
+
+You might want to instantiate Serializers differently to the approach
+used in this example. For example, you can choose to store them as
+fields of the class they are supposed to serialize. Be aware of
+multithreading issues though. A serializer is thread-safe, but only when
+you do not call the `include` or `exclude` methods. If you do have to
+call those from your request handling threads, be very careful.
+Multithreading problems might show up only in production mode, since by
+default only a single thread is used in development mode.
+
+[[PlayFramework-BetterJSONserializationwithFlexJSON-Conclusion]]
+== Conclusion
+
+The design choices made for GSON do not make it very suitable for
+generating JSON that is going to be used in your application templates.
+With FlexJSON, it is much easier to create multiple views on the same
+data, which is extremely useful in web applications. With custom Java
+extensions, FlexJSON serialization can be used seamlessly from your
+templates.
+

@@ -1,0 +1,106 @@
+---
+layout: post
+title: Classifying Visibility Solutions
+date: 2007-04-20
+author: Willem-Jan Veen
+lang: en
+tags:
+  - opinion
+---
+= Classifying Visibility Solutions
+
+In
+this article on Visibility Solutions, I focus on a general
+classification of such solutions. My goal is to provide a concise and
+logical structure to discuss and assess concrete visibility solutions,
+like the ones we have developed at Lunatech.
+
+As with every classification, the rationale behind it is as important,
+or even more important. For that reason, I shall not only provide a
+scheme to classify visibility solutions, but also explain why I consider
+it a useful one.
+
+== Classification Scheme
+
+In general, Visibility Solutions aim to provide an accurate insight on
+one or more operational processes being monitored. In principle this
+could be any kind of operational process, but in Lunatech's case we are
+mainly concerned with business processes of which logistical activities
+are a prime example.
+
+When looking at visibility solutions, you'll find them in all kinds and
+sizes. The difference between the various solutions are mostly caused by
+the nature of the operational process being monitored, but there are
+more indicators that can be used to qualify visibility solutions. Below
+I give key indicators that I consider important, when addressing the
+solutions. Equipped with these four indicators, existing visibility
+solutions as developed at Lunatech Research can be discussed and planned
+solutions examined.
+
+=== Domain - solutions with a mature concise domain model versus an in-progress ad-hoc model
+
+One business process is not the other. As a consequence, one visibility
+solution is not the other. Of course, this is a platitude, but an
+important one. It means that you can't just take a standard,
+works-for-all, solution and expect it to work instantly. You will have
+to understand the type of activities or transactions that take place in
+the business process you are monitoring. Based on that understanding you
+can identify the kind of information you want to see and model it
+accordingly. Only then you will have a solution that effectively
+addresses the needs of the business processes.
+
+=== Coverage - isolated solutions versus integrated solutions
+
+This addresses whether the visibility solution is isolated to one
+business application, like a Warehouse Management System, a Transport
+Management System and an Enterprise Resource Planning System, or whether
+it aims to provide an integrated view across various business
+applications that are not necessarily under the control of one
+enterprise.
+
+=== Interaction - strict monitoring solutions versus interactive solutions
+
+A visibility solution should at least allow its users to view the
+monitored business process in some intelligent way. However, a next step
+quickly becomes that such a system allows its users to actively interact
+with the business process being monitored. An even more advanced
+solution would be able to autonomously cooperate with the business
+process, while in the most extreme case such a solution could even
+direct the business process automatically.
+
+=== Technology - traditional solutions versus leading-edge solutions
+
+A lot of choices arise when it comes to technology, where the
+possibilities are constantly changing and boundaries blurring. Currently
+you can choose between web based solutions or desktop solutions, mobile
+solutions that integrate with a PDA, or what ever else that is arising
+as a new trend. As technology keeps on changing, a more useful way of
+classifying the technology is needed.
+
+A practical alternative to classify a visibility solution is to look at
+the level of innovation, or in other words traditional solutions versus
+leading-edge solutions. This gives you an indication how much problems
+you may encounter along the way, but also how innovative the solution
+might be.
+
+== Rationale
+
+To conclude with the rationale behind the selection of these indicators,
+one should start by considering the why, what, where and how behind each
+visibility solution. Understanding them is mandatory, but also
+sufficient to give a high-level assessment of the effectiveness of a
+solution on one side and the complexity and innovation on the other.
+
+In this article's view, the why, what, where and how is answered as
+follows:
+
+* why is answered by the domain indicator, which explains why the
+visibility solution fits into the business processes
+* what is answered by the coverage indicator, which tells what parts of
+the business processes are covered and what not
+* where is answered by the interaction indicator, which shows where it
+still has an influence, and where not
+* how is answered by the technology indicator, which shows the technical
+choices made or to make in the implementation
+
+

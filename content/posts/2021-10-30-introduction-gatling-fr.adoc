@@ -1,0 +1,162 @@
+---
+layout: post
+title: Test de charge avec Gatling
+date: 2021-10-30
+author: VincentBrule
+lang: fr
+tags:
+  - gatling
+  - test de charge
+  - opensource
+img: images/media/2021-10-30-introduction-gatling-fr/background.png
+---
+= Test de charge avec Gatling
+
+:imagesdir: /images/media/2021-10-30-introduction-gatling-fr
+
+Test de charge, ou Load Testing en anglais, désigne le fait d’injecter un nombre d’utilisateurs défini dans son application afin de voir si elle résiste à la charge. 
+Un exemple typique est de faire un test de charge sur vos APIs pour voir le nombre de requêtes maximum supporté. 
+Ces tests permettent de tester la robustesse de nos applications ainsi que leur réaction face à un nombre d’utilisateurs important. 
+Grâce à cela, nous pouvons identifier les goulots d'étranglement et affiner les dimensionnements de nos applications.
+
+Dans cet article, nous allons présenter Gatling. 
+Ensuite, nous verrons un outil mis à disposition par cette solution qui va nous être très utile pour créer nos tests de charges : Gatling Recorder. 
+Enfin, nous mettrons en place un test de charge simple en Scala avec le plugin SBT Gatling.
+
+== Gatling
+Avant de présenter Gatling, j’aimerais revenir sur la définition d’un test de charge. Les tests de charge font partie de la famille des tests de performance. On peut y retrouver différents types de tests pour nos applications :
+
+* _test de charge_ : simule la charge d'utilisation prévue par nos spécifications
+* _test de stress_ : simule l’arrivée simultanée d’un très grand nombre d’utilisateurs
+* _test de capacité_ : simule des utilisateurs par paliers afin d’identifier la limite maximale
+* _test d’endurance_ : simule une charge importante sur une longue durée afin de vérifier que notre application ne dégrade pas les performances
+
+Gatling est une solution Open Source nous permettant de mettre en place des *tests de performance*.
+Cette solution développée en France fonctionne sur tous les systèmes d’exploitation. Les tests sont définis en Scala grâce à un DSL _(Domain Specific Language)_ simple et intuitif. 
+La première publication date du 13 janvier 2012. Gatling bénéficie d’une grande communauté et de mises à jour régulières. 
+Pour finir, Gatling met à disposition une solution entreprise depuis juin 2016 : https://gatling.io/enterprise/[https://gatling.io/enterprise/].
+
+Avant de rentrer dans le vif du sujet en vous présentant la création d’un test de charge, j’aimerais vous présenter l’outil Gatling Recorder qui peut nous faire gagner énormément de  temps pour l’écriture de nos tests.
+
+== Gatling Recorder
+https://gatling.io/docs/gatling/reference/current/http/recorder/[Gatling Recorder] permet de générer les tests en Scala directement depuis vos interactions avec votre application.
+
+Pour cela, vous avez deux choix :
+
+* Configurer l’outil comme un proxy HTTP qui va intercepter vos requêtes
+* Charger un fichier HAR (Http ARchives)
+
+Dans cette section, je vais vous montrer comment configurer Gatling recorder en proxy HTTP.
+
+Une fois l’outil lancé, vous avez cet écran (pour l’installation, je vous laisse la page officielle : https://gatling.io/docs/gatling/reference/current/http/recorder/[https://gatling.io/docs/gatling/reference/current/http/recorder/]) :
+
+.Gatling Recorder
+image::gatling-recorder-1.png[Gatling Recorder, width = 700]
+
+Avant de démarrer, il faut configurer plusieurs choses :
+
+* le port a utilisé (8000 dans l’exemple ci-dessus)
+* le mode : HTTP Proxy dans notre cas
+* le nom du package pour vos tests
+* le dossier final
+* le nom de la classe
+* vous avez plusieurs autres options disponibles en fonction de vos besoins
+
+Une fois tout mis en place, vous pouvez cliquer sur le bouton _“Start”_.
+Vous devriez avoir le même écran que ci-dessous : 
+
+.Gatling Recorder en action
+image::gatling-recorder-2.png[Gatling Recorder en action, width = 700]
+
+Après cela, on peut utiliser Postman par exemple pour lancer une requête en passant par Gatling Recorder comme vous pouvez le voir sur l’image 3.
+
+.Configurer Postman custom proxy
+image::postman-config.png[Configurer Postman custom proxy, width = 700]
+
+Une fois la requête exécutée, on peut la voir apparaître dans l’interface de Gatling Recorder (image 4).
+
+.Gatling Recorder après avoir réalisé un GET sur google.fr
+image::gatling-recorder-3.png[Gatling Recorder après avoir réalisé un GET sur google.fr, width = 700]
+
+Une fois que toutes vos interactions sont terminées, vous pouvez mettre fin à l’enregistrement en cliquant sur _“Stop and Save”_. 
+L’outil va alors générer un fichier Scala permettant de relancer toutes vos requêtes avec les mêmes attributs que lors de l’enregistrement.
+
+Cet outil s'avère très utile pour avoir un premier jet que nous pourrons peaufiner par la suite pour correspondre exactement au résultat voulu.
+
+Dans la partie suivante, nous allons explorer la définition de ces tests plus en détail.
+
+
+
+== Définir des tests en Scala pour Gatling
+Pour cet exemple, nous allons utiliser le https://gatling.io/docs/gatling/reference/current/extensions/sbt_plugin/[plugin SBT Gatling] afin d’avoir tout à disposition rapidement (Gatling + Gatling Recorder). Pour ce faire, il suffit d’ajouter le plugin avec :
+
+[source,scala]
+----
+addSbtPlugin("io.gatling" % "gatling-sbt" % "VERSION")
+----
+
+Puis activer le plugin avec :
+
+[source,scala]
+----
+lazy val testBlog = project.enablePlugins(GatlingPlugin)
+----
+
+Le plugin expose plusieurs tâches, mais les deux plus importantes pour notre exemple sont :
+
+* *sbt gatling:startRecorder* : permet de démarrer le recorder comme dans la partie précédente
+* *sbt gatling:test* : permet de lancer les tests de charge et générer un rapport avec les résultats
+
+Il est possible de configurer Gatling beaucoup plus spécifiquement mais je ne rentrerai pas dans les détails dans cet article. Si vous êtes intéressés, je vous renvoie vers la documentation : https://gatling.io/docs/gatling/tutorials/[https://gatling.io/docs/gatling/tutorials/]
+Ci-dessous, vous pouvez voir le code final que nous allons détailler morceau par morceau dans la suite de l’article :
+
+[source,scala]
+----
+class SimulationForTheBlog extends Simulation { // 1
+
+ val httpProtocol: HttpProtocolBuilder = http // 2
+   .baseUrl("https://test-blog-vincent.fr")
+
+ val scn: ScenarioBuilder = scenario("Simulation For The Blog")
+   .exec(
+     http("Basic Get Request")
+       .get("/")
+       .check(status.is(200)) // 3
+   )
+
+ setUp(scn.inject(atOnceUsers(10))).protocols(httpProtocol) // 4
+}
+----
+
+. Votre classe doit étendre Simulation afin d’être reconnue par la suite
+
+. À cet endroit, vous pouvez définir toutes les propriétés communes à vos tests. Par exemple, nous définissons une URL qui sera utilisée dans toutes les requêtes. Vous pouvez aussi par exemple définir des headers à inclure à chaque fois ou alors certaines stratégies comme suivre les redirections. Cette page regroupe toutes les propriétés disponibles : https://gatling.io/docs/gatling/reference/current/http/protocol/[https://gatling.io/docs/gatling/reference/current/http/protocol/]
+
+. Dans le scénario, nous définissions le fil rouge que la simulation doit suivre. À cette étape, aucune simulation démarre mais nous spécifions toutes les actions à réaliser. Dans notre cas, nous créons un scénario avec une seule requête GET et nous nous assurons que la réponse est OK = 200. Vous pouvez chaîner les requêtes ainsi que les conditions pour arriver à des scénarios très détaillés. Gatling mets à disposition une cheat-sheet avec toutes les options possibles, je vous recommande d’y jeter un coup d’oeil avant de vous lancer : https://gatling.io/docs/gatling/reference/current/cheat-sheet/[https://gatling.io/docs/gatling/reference/current/cheat-sheet/]. Vous pouvez par exemple, mettre en pause la simulation entre différentes requêtes ou encore extraire des informations d’une réponse pour les utiliser dans la requête suivante. Bref, avec le DSL Gatling, vous pouvez écrire un scénario imitant exactement vos réelles interactions (ou encore mieux, utiliser le Recorder pour générer ce code automatiquement).
+
+. Dans la dernière partie, nous mettons toutes les pièces ensemble. Dans notre exemple, nous informons Gatling qu’il doit injecter 10 utilisateurs en même temps et que la simulation doit utiliser les paramètres définis précédemment dans httpProtocol. Gatling mets à disposition de nombreuses stratégies pour injecter les utilisateurs comme par exemple : 
+.. rampUser : inject un nombre d’utilisateur sur un temps donné
+.. constantUsersPerSec : injecte les utilisateurs à un rythme constant défini en utilisateur par seconde
+.. etc.
++
+Toutes ces stratégies sont expliquées ici : https://gatling.io/docs/gatling/reference/current/general/simulation_setup[https://gatling.io/docs/gatling/reference/current/general/simulation_setup]
+
+
+Après avoir terminé notre simulation, un rapport HTML détaillé est généré (Image 5).
+Nous pouvons y retrouver de nombreuses informations comme le temps de réponse, le statut des requêtes, etc.
+
+.Rapport généré par Gatling
+image::gatling-report.png[Rapport généré par Gatling, width = 700]
+
+== Conclusion
+Gatling est une solution complète et facile à mettre en place notamment grâce à son enregistreur (Gatling Recorder). Son DSL rend le développement simple même sans connaître Scala en détail.
+Dans cet article je vous ai présenté les bases ainsi qu’un cas d’utilisation simple mais si vous êtes curieux, restez à l’écoute car je suis en train d’écrire une suite sur mon retour d’expérience suite à la mise en place de l’outil dans mon projet actuel. De plus, nous rentrerons plus en détails sur les fonctionnalités de Gatling afin de débloquer tout son potentiel !
+
+J’espère que vous appréciez cet article et n’hésitez pas à me contacter si vous avez des questions !
+
+== Source
+. https://blog.revolve.team/2018/03/05/gatling-test-performance/[https://blog.revolve.team/2018/03/05/gatling-test-performance/]
+. https://gatling.io/docs[https://gatling.io/docs]
+
+
+

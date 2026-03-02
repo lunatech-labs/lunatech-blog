@@ -1,0 +1,105 @@
+---
+layout: post
+title: Wiki is my word-processor
+date: 2006-12-04
+author: hilton
+lang: en
+tags:
+  - documentation
+  - wiki
+  - confluence
+---
+= Wiki is my word-processor
+
+Most commercial software development produces project documentation, which is a software developer’s main use for a word-processor. This year, our intranet wiki became my word-processor; this article explains why.
+
+++++
+<h2>Project documentation with a word-processor</h2>
+
+<p>Once upon a time, all of the software projects I worked on generated a large standard set of documentation, using Microsoft Word, ranging from project plans and design documentation to code review records and meeting minutes. In this traditional approach, each type of document has its own template that helps ensure a consistent format. Word-processors generally do this quite well, and a polished look is appropriate for deliverable documentation that you send to the customer.</p>
+
+<p>However, fancy templates and layouts are far less important for a project’s internal documentation, such as code review records. It is more important that these documents are easy to create and that they be an effective way to share information with team members. It turns out that word-processors are awful for this: typographical formatting controls distract the author, rather than making composition easier, and print formatting does not make a document easy to read on screen. Meanwhile, there is no meaningful support for collaborative authoring, versioning, document management or navigation - hypertext browsing and full-text search.</p>
+
+<h2>Project documentation with a wiki</h2>
+
+<p>Last year, in the spirit of agile software development, I cut out all of the non-essential project documentation - almost all of the internal documentation - to give us more time to focus on building working software. Although I produced the deliverable documentation using a word-processor, as before, it was natural to use our intranet wiki for the internal documentation we did need, such as the table of project milestones or the step-by-step release guide.</p>
+
+<p>The main benefit of this approach is that it is much more convenient to search, browse and read the documentation on the wiki than it would be to browse print-format documents on the file system or maintain a folder full of paper copies. This is largely due to the wiki’s built-in navigation functionality and hyperlinks in the text itself. This is important, because if you lower the barrier for reading project documentation, then you increase both the likelihood that it will actually be read and the motivation for creating it in the first place. In short, any documentation becomes a little more valuable.</p>
+
+<h2>Using a wiki for rough text</h2>
+
+<p>Over the course of the project, we also used the wiki for notes that would later become part of the content of some deliverable document, such as the functional design document. This worked especially well during the functional design phase: different people worked on different parts of the document, and the final structure only emerged many weeks and one hundred pages later.</p>
+
+<p>Instead of taking it in turns to edit a single document in a word-processor, or writing sections as separate documents to concatenate later, we played with the structure until a finished section emerged, and then migrated that to the word-processor. Programmers get this right when they edit source code: first they structure the code and separate it into many small files, then they manage these files using a source code control system that allows concurrent edits by different developers; imagine object-oriented design and Subversion for project documentation.</p>
+
+<p>A wiki is great for working on a large amount of text like this, not specifically because it is a wiki, but because it makes it natural to use hypertext in a way that word-processors do not achieve. Hypertext is great for managing the early stages of a big document, or a collection of documents, when you do not know what the structure is yet. The linear page-based structure and the section hierarchy that a word-processor gives you are a hindrance, when your text does not yet have a consistent linear structure.</p>
+
+<h2>Using a wiki to manage versions</h2>
+
+<p>Another benefit of using a wiki for this kind of collaborative authoring is that you do not have to send copies of documents for other people to comment on or contribute to. Instead, the single master version is accessible as an intranet web page, so there is no need to waste time on attaching files to e-mail messages or trying to work out which version is which. This also means that readers always know where to find the current version, and do not have to worry that someone might have a newer version somewhere.</p>
+
+<p>You need versions, of course, but wikis do the right thing while word-processors generally do not: you see the latest version by default, but all of the old versions are still there for comparison or roll-back. Now you <em>could</em> use a version control system to manage and share versions of word-processor documents, in theory at least. But nobody does.</p>
+
+<h2>Composition and layout</h2>
+
+<p>When I thought about this work flow of using the wiki to prepare draft text, I realised that it separates two tasks that a word-processor forces you to combine. The first task is composition, in which you prepare the text but pay no attention to the presentation. The text can still be structured, with headings, lists and emphasis, but there is no messing around with margins or page-breaks to distract you from thinking about the actual content.</p>
+
+<p>The second task, which is separate from composition, is typography and layout, also known as typesetting. This is when you take the finished text, and choose its look by creating a design that fits the text, or by inserting the text into a pre-designed template.</p>
+
+<p>This is much more like the way a newspaper is produced. On a newspaper, writers prepare articles of an agreed length, which are checked and edited before they are delivered to the layout team. Layout staff then insert the finished article contents into the document, choosing the typography and layout.</p>
+
+<p>Once upon a time, word-processors were only composition tools. In fact, when I was layout editor for a university newspaper in the early nineties, the journalists used an early version of Microsoft Word on old (even then) Mac Classics, whose nine-inch monochrome screens made them suitable for composition but not layout. It was later, when desktop publishing (DTP) went mainstream, that word-processor bloatware used professional layout software as inspiration for their ever-growing feature sets. This is what spawned what came to be known as Word 6.0 for Windows, the first fully Microsofted version.</p>
+
+<h2>Wiki-based composition</h2>
+
+<p>More recently, I have spent two months preparing requirements and technical specifications for another project. This time, I decided to do all of the composition using our intranet wiki, planning from the start to save other tools for the final layout step. That is, I changed the production work flow to completely separate composition and layout.</p>
+
+<p>The first step in the composition was to dive in to one of the topics that the document would cover, without thinking further about structure. In one example, this was a collection of around 70 short use-cases, of around 100 words each. Use cases are a good example of why you need the ability to produce structured (rich) text: each use-case needs to have a separate heading, its main body is a numbered list, and the text needs to emphasise user-interface text (‘click the <em>Save</em> button’).</p>
+
+<p>In parallel to bottom-up composition of part of the main document, I also worked on the top-down structure, which starts with the document’s introduction: the purpose, scope and summary that determine the ultimate document structure. This introduction plus document structure can easily use hyperlinks to refer to the body of each section, in a separate wiki page.</p>
+
+<h2>Draft versions</h2>
+
+<p>One of the useful features of some wiki software, such as the excellent <a href="http://www.atlassian.com/confluence/">Confluence</a>, which we use, is the ability to export a page as an HTML or PDF document. This is useful at the halfway stage, when there is a significant amount of content that you want to circulate for external review, by a third party such as a customer who cannot access the wiki directly. The PDF export does not have the final layout, but may have a generated table of contents and page numbers, to make it easier to review.</p>
+
+<h2>Post-composition layout</h2>
+
+<p>Once composition is complete, it is time to use another tool to produce the final layout. Desktop publishing software is designed for this task, and if you are producing a newspaper or magazine, then you need desktop publishing software such as Adobe’s InDesign. However, a word-processor like Microsoft Word or OpenOffice is probably the best choice for most people, since few of us have access to or experience with professional layout tools.</p>
+
+<p>Something to watch, however, is open-source desktop publishing software like the capable but rough-feeling <a href="http://www.scribus.net/">Scribus</a>, a review of which is outside the scope of this article.</p>
+
+<p>For my specifications, I used OpenOffice Writer to design a document template with the following components.</p>
+
+<ul>
+<li>Cover page, with a company logo, project name masthead, document title, and document meta-data table.</li>
+<li>Revision history table, for externally distributed versions.</li>
+<li>Generated table of contents.</li>
+<li>Page header, to show key document identification meta-data on every page: title, date, version and status.</li>
+<li>Page footer, to show document classification and copyright statement, and page number.</li>
+<li>Paragraph styles, corresponding to styles used in composition.</li>
+</ul>
+
+<p>I then produced the final version as follows.</p>
+
+<ol>
+<li>Save the composition as plain unstyled HTML.</li>
+<li>Insert the HTML document into the OpenOffice template.</li>
+<li>Edit the document meta-data.</li>
+<li>Update the table of contents.</li>
+<li>Check that the template’s paragraph styles were correctly mapped from the different HTML elements.</li>
+<li>Export the document in PDF format.</li>
+<li>Publish the OpenOffice and PDF versions as attachments to the wiki page.</li>
+</ol>
+
+<h2>Deliverable versions</h2>
+
+<p>A document gets a new version number for every time it will be read by someone other than the authors, so that reviewers know if there are changes since the last version they reviewed. Previously, when I used the file system, I had to include the version number in the document file name, but now the wiki handles versioning, as mentioned above. This also applies to OpenOffice and PDF attachments to the wiki page - all old versions of those are kept as well.</p>
+
+<p>You do not need to maintain these version numbers in the main wiki version of the document. Instead, I just use this version number in the OpenOffice version. If you want to find a specific old version, the latest version’s revision table gives you versions and the dates that you can use to look up old versions of the wiki page or its attachments. This means that you can always use the wiki to find the PDF of the previous deliverable version that you sent to a customer, for example.</p>
+
+<h2>Conclusion</h2>
+
+<p>Although there are some inconveniences to using separate tools for composition and layout, this turns out to be very useful for project documents more than even a few pages long, when document review is required, or when there is more than one author. The main benefits are simpler composition, easier collaboration and versioning, and better access to the document for people searching and browsing a wiki-based intranet.</p>
+
+<p>The main weak point of using this approach is the availability of appropriate layout tools.</p>
+++++

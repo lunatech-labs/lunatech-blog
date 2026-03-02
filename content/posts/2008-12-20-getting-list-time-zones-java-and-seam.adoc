@@ -1,0 +1,181 @@
+---
+layout: post
+title: Getting a list of time zones in Java and Seam
+date: 2008-12-20
+author: hilton
+lang: en
+tags:
+  - web-applications
+  - jboss
+  - seam
+---
+= Getting a list of time zones in Java and Seam
+
+:imagesdir: /images/media/2008-12-20-getting-list-time-zones-java-and-seam
+
+If you are building a web application
+with a user-interface for editing dates that supports time zones, then
+you are going to need a list of time zones. You need this if you want to
+edit or display times in 'local time' and store them as UTC (universal
+time). This article shows the Java code and a handy Seam component that
+provides the list.
+
+== Get a time zone list from `java.util.TimeZone`
+
+In principle, you just get your list of time zones from
+`java.util.TimeZone` like this:
+
+[source,java=nogutter]
+----
+final String[] timeZoneIds = TimeZone.getAvailableIDs();
+----
+
+You can pass each ID to `TimeZone.getTimeZone(String id)` to get a list
+of `TimeZone` objects.
+
+[source,java=nogutter]
+----
+final List<TimeZone> timeZones = new ArrayList<TimeZone>();
+for (final String id : timeZoneIds) {
+   timeZones.add(TimeZone.getTimeZone(id));
+}
+----
+
+However, there are a few small details to take care of.
+
+== Filter the list
+
+First, the list contains a lot of duplication since there is more than
+one kind of ID for the same time zone:
+
+* city names, like _Europe/Amsterdam_
+* three-letter codes, including unfamiliar ones like _WET_ (Western
+European Time)
+* a handful of country names, like _Egypt_
+* GMT offsets, like _Etc/GMT+2_
+* other random entries, like _SystemV/EST5_.
+
+Taking a cue from existing user-interfaces, like the OS X time zone
+selector, we shall filter the list to the first format - continent and
+city - using a regular expression:
+
+[source,java=nogutter]
+----
+^(Africa|America|Asia|Atlantic|Australia|Europe|Indian|Pacific)/.*
+----
+
+== Sort the list
+
+Second, `TimeZone.getAvailableIDs()` returns an unsorted list, so we
+will sort the result by ID.
+
+[source,java=nogutter]
+----
+Collections.sort(timeZones, new Comparator<TimeZone>() {
+   public int compare(final TimeZone a, final TimeZone b) {
+      return a.getID().compareTo(b.getID());
+   }
+});
+----
+
+== TimeZones Seam component
+
+Seam includes a built-in Seam component called
+`org.jboss.seam.international.timezoneSelector` for setting the 'Seam
+timezone', which is stored in a session-scoped component called
+`org.jboss.seam.international.timezone`. However, there is no component
+that provides a list of time zones. It therefore makes sense to package
+the code above as a separate Seam component, as follows.
+
+[source,java=nogutter]
+----
+import java.util.*;
+
+import org.jboss.seam.ScopeType;
+import org.jboss.seam.annotations.Name;
+import org.jboss.seam.annotations.Scope;
+import org.jboss.seam.annotations.Unwrap;
+
+/**
+ * Seam component that provides a list of time zones, limited to time zones
+ * with IDs in the form Continent/Place, excluding deprecated three-letter
+ * time zone IDs. The time zones returned have a fixed offset from UTC,
+ * which takes daylight savings time into account. For example,
+ * Europe/Amsterdam is UTC+1; in winter this is GMT+1 and in summer GMT+2.
+ */
+@Scope(ScopeType.APPLICATION)
+@Name("timeZones")
+public class TimeZones {
+
+   private static final String TIMEZONE_ID_PREFIXES =
+      "^(Africa|America|Asia|Atlantic|Australia|Europe|Indian|Pacific)/.*";
+
+   private List<TimeZone> timeZones = null;
+
+   @Unwrap
+   public List<TimeZone> getTimeZones() {
+      if (timeZones == null) {
+         initTimeZones();
+      }
+      return timeZones;
+   }
+
+   private void initTimeZones() {
+      timeZones = new ArrayList<TimeZone>();
+      final String[] timeZoneIds = TimeZone.getAvailableIDs();
+      for (final String id : timeZoneIds) {
+         if (id.matches(TIMEZONE_ID_PREFIXES)) {
+            timeZones.add(TimeZone.getTimeZone(id));
+         }
+      }
+      Collections.sort(timeZones, new Comparator<TimeZone>() {
+         public int compare(final TimeZone a, final TimeZone b) {
+            return a.getID().compareTo(b.getID());
+         }
+      });
+   }
+}
+----
+
+== Output an HTML time zone selector
+
+In a Seam application, we can add the time zones to an HTML `SELECT` by
+outjecting the `timeZones` list and using the following mark-up:
+
+[source,xml=nogutter]
+----
+<option jsfc="s:selectItems" value="#{timeZones}" var="tz" label="#{tz.ID} - #{tz.displayName}"/>
+----
+
+This adds each time zone as its ID followed by a dash and the time
+zone's display name, and looks like this:
+
+image:../media/2008-12-20-getting-list-time-zones-java-and-seam/time-zones.png[HTML select screenshot]
+
+== Shorten the two long names
+
+The HTML `SELECT` ends up being quite wide, because there are two
+particularly long time zone display names:
+
+* Australia/Broken_Hill - Central Standard Time (South Australia/New
+South Wales)
+* Australia/Yancowinna - Central Standard Time (South Australia/New
+South Wales)
+
+If you want to save space, you can just abbreviate these two names using
+JSTL:
+
+[source,xml=nogutter]
+----
+<option jsfc="s:selectItems" value="#{timeZones}" var="tz"
+label="#{tz.ID} - #{fn:replace(tz.displayName, '\\(South Australia/New South Wales\\)', '(SA/NSW)')}"/>
+----
+
+which makes the `SELECT` less wide:
+
+image:../media/2008-12-20-getting-list-time-zones-java-and-seam/time-zones-short.png[HTML select screenshot]
+
+If space is really short, just omit the display name entirely.
+
+_http://hilton.org.uk/about_ph.phtml[Peter Hilton] is a senior software
+developer at Lunatech Research._

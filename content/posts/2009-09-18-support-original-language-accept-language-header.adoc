@@ -1,0 +1,103 @@
+---
+layout: post
+title: Support for original language in Accept-Language header
+date: 2009-09-18
+author: fcanedo
+lang: en
+tags:
+  - localization
+  - internationalization
+  - web-applications
+---
+= Support for original language in Accept-Language header
+
+In most browers' preferences dialogs, you can find
+settings for which language to display if the content is available in
+more than one language. What happens is, that your browser and the
+server negotiate over which language to show you. Your browser tells the
+server which languages you're comfortable with and in which order of
+preference. For instance, if you tell your browser that you understand
+English and French, but prefer English, the server will serve you an
+English version of the text and a French one only if it doesn't have an
+English one. If it doesn't have either version, it will serve you the
+original language, I presume. The http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4[HTTP 1.1 specification]
+explains how this should work.
+
+This doesn't work really well for me. You see, I am fluent in English,
+Dutch, Spanish and
+[.nobr]#http://en.wikipedia.org/wiki/Galician_language[Galician]#, I get
+by in Portuguese (or
+[.nobr]#http://en.wikipedia.org/wiki/Portu%C3%B1ol[Portuñol]#, rather),
+and I dabble in French and German. If the original text is in one of the
+four languages that I am comfortable with, I really prefer the original.
+In other words, if the original is in Spanish, for instance, I don't
+want to read the English translation. I like to think that my
+understanding of the original text will be better than the translation.
+
+Unfortunately, there is no way to tell the browser — and by extension
+the server at the other end — what I really want. Which is: _"I
+understand English, Dutch, Spanish and Galician, if the original version
+is not in one of those languages I'd like a translation in one of those
+languages in that order of preference. If there is no original or
+translation in one of those languages, I'm willing to try Portuguese,
+French or German."_ The way things are now, I have to tell the browser
+that I prefer one language over another — when I really don't — and run
+the risk of reading a bad translation when I'm perfectly capable of
+understanding the original. I could set the same weight for each of my
+fluent languages — which the spec allows, but my browser doesn't allow
+me to set — but what would this mean to the server? Probably that I
+don't care which one of those four I get and I might still get a
+translation instead of the original.
+
+In order to help you understand why this is important for me, I'll
+explain how I feel about translations. When an author writes a piece of
+text he translates an idea into a series of words. The reader then reads
+the words and translates them into an idea. This idea is a different
+idea — although hopefully very similar to the original idea that the
+author started with. When you add translation into the mix, the
+translator adds a couple of steps. Basically he reads the words,
+translates them into an idea, translates his idea into words — in
+another language —, that the reader then has to read to form his idea of
+what the author meant. In the best-case scenario — no translation — the
+reader ends up with an idea that's been translated twice, an original
+idea into words and those words into a new idea. The translator adds two
+more translations. Maybe even three, depending on whether he actively
+translates or just writes the words while "thinking" in the target
+language.
+
+I shouldn't encounter this problem in the wild too often, as the
+language selection functionality is hardly ever used. Most users don't
+know about it and web-developers don't implement it since most users
+don't know about it, etc. Instead, they display little flags that users
+can click. Which reminds me, *don't use flags for language selection*. A
+lot of Spanish speakers do not come from Spain and therefore take
+offence to having to click a Spanish flag in order to read a text in
+their mother-tongue. Likewise, not all English speakers come from New
+Zealand, nor do all German speakers come from Austria. There are lots of
+Dutch speakers in Belgium and a lot of the Belgians speak French. I
+understand some of them speak German. Not using flags for language
+selection can also save you from another embarrassing mistake concerning
+the Spanish flag. It amazes me how many people don't know that the
+[.nobr]#http://en.wikipedia.org/wiki/Spanish_Flag[Spanish flag]# is not
+1/3 red, 1/3 yellow and 1/3 red. It's actually 1/3 red, 2/3 yellow and
+1/3 red (you mathematicians might prefer 1/4, 2/4 and 1/4). Well all
+right, I'll get off my high horse, you have to take a good look at the
+flag to notice it. So I won't blame you if you get it wrong.
+
+But I digress. Should this functionality be used more in the future —
+and it should — I would like to see some simple changes that have been
+proposed by my colleague Stéphane. The spec already allows weights,
+which is derived from the order specified in the dialog. The change
+would be to add tags to the weights:
+
+....
+Accept-Language: en;q=1.0;t=original, es;q=1.0;t=original, gl;q=1.0;t=original, \\
+nl;q=1.0;t=original, en;q=0.8;t=translated, es;q=0.8;t=translated, gl;q=0.8;t=translated, \\
+nl;q=0.8;t=translated,  pt;q=0.7, fr;q=0.6, de;q=0.6
+....
+
+In plain English, the above would mean: _"Give me the text in the
+*original* language if that language is English, Spanish, Galician or
+Dutch. Otherwise give me the translation in one of those languages.
+Failing that, give me Portuguese and finally French or German if there's
+nothing else."_

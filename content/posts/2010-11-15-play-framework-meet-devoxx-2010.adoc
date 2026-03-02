@@ -1,0 +1,66 @@
+---
+layout: post
+title: Play framework meet-up at Devoxx 2010
+date: 2010-11-15
+author: PeterHilton
+lang: en
+tags:
+  - playframework
+  - event
+---
+= Play framework meet-up at Devoxx 2010
+
+:imagesdir: /images/media/2010-11-15-play-framework-meet-devoxx-2010
+
+Peter Hilton and Nicolas
+Leroux joined thousands of Java developers at http://devoxx.com/display/Devoxx2K10/Home[Devoxx 2010], for technical talks,
+networking and Belgian beer. About 60 people went to our Wednesday
+evening for a http://www.playframework.org/[Play framework] meet-up,
+to talk to us about Play (Nicolas and Peter are both committers on the
+project), get free drinks and meet other developers.
+
+image:devoxx-2010-play-meetup.jpg[About 60 people turned up at the Play
+framework meet-up at Axxes Café, sponsored by Lunatech and Zenexity] +
+About 60 people turned up at the Play framework meet-up at Axxes Café,
+sponsored by Lunatech and Zenexity
+
+[[meetups]]
+== Recommended evening meet-ups
+
+*Monday 20:00*:
+http://in.relation.to/Bloggers/SeamInfinispanAndArquillianSocialAtDevoxxPlusYourJBossPlanner[Seam,
+Infinispan and Arquillian Social],
+http://hilton.org.uk/antwerp/kulminator[Kulminator]. The Seam team are a
+great crowd that you should definitely meet, and Kulminator is the only
+place for serious beer drinkers.
+
+*Tuesday*: er, we haven't decided what to do on Tuesday yet, but there's
+a good chance that we'll be in
+http://hilton.org.uk/antwerp/cafe-au-lait[Café au Lait], the best
+cocktail bar in Antwerp. Send us your recommendations via Twitter to
+http://twitter.com/#!/PeterHilton[@PeterHilton] or
+http://twitter.com/#!/NicolasLeroux[@NicolasLeroux].
+
+*Wednesday 19:00*: Play framework meet-up, AXXES Café. Come and talk to
+us about Play. Did we mention the free drinks?
+
+*Wednesday 21:00*: French Java User Groups meet-up, AXXES Café. This
+will probably be big, given the huge involvement in Java open-source and
+Java User Groups in France. You probably need to be able to speak French
+for this one.
+
+*Thursday 19:00*:
+http://www.devoxx.com/display/Devoxx2K10/Women+in+IT+an+unconference[Duchess
+BOF], location TBA.
+
+*Thursday 22:00*: http://www.mulkers.com/devoxx/devoxx-sound.jpg[The
+Sound of Devoxx Party], Café Marmite, Trofbrug 8. This dodgy small dance
+bar is great fun, especially as it gets more crowded and louder the
+later you stay. Kudos to http://www.mulkers.com/[Robin Mulkers] for
+picking the venue.
+
+[[eatanddrink]]
+== Recommended places to eat and drink
+
+See http://hilton.org.uk/antwerp/[Eating & drinking in Antwerp].
+

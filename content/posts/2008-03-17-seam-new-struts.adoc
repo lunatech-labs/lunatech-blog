@@ -1,0 +1,143 @@
+---
+layout: post
+title: Seam is the new Struts
+date: 2008-03-17
+author: hilton
+lang: en
+tags:
+  - java
+  - seam
+  - opinion
+---
+= Seam is the new Struts
+
+:imagesdir: /images/media/2008-03-17-seam-new-struts
+
+After Nicolas and I said that
+‘(http://seamframework.org/)[Seam] is the next Struts’ in our https://blog.lunatech.com/2007-12-14-javapolis-2007-seam)[JavaPolis
+presentation],
+http://in.relation.to/Bloggers/Max[Max] told us that
+‘http://in.relation.to/Bloggers/Gavin[Gavin] will hate that’, which is
+funny because of how it takes our statement out of context. This article
+is the context.
+
+image:../media/2008-03-17-seam-new-struts/seam-is-the-new-struts.png[Seam is the new Struts]
+
+When we say that Seam is the new Struts, we mean that Seam will take
+over Struts’ position as the default choice for Java web applications.
+This is only going to happen because Seam is so different to Struts -
+enough of a revolution to topple Struts from its previously unassailable
+position of popularity.
+
+Struts 1.x, which this article is about, has been a wildly popular Java
+web application framework for years. In fact, Struts became so popular
+that it is easy to use Google to solve Struts problems, which has meant
+that the alternatives would be harder to learn and use, despite whatever
+other advantages they may have had, such as being better technology.
+
+[[s1]]
+== Struts has outlived its usefulness
+
+Since then, incremental improvements to competing web application
+frameworks have given way to entirely more sophisticated frameworks.
+Improvements in recent years both focus on improvements that eliminate
+previous annoyances, and replacements for whole technologies. The next
+generation of frameworks have a component-based model that abstracts
+away the HTTP API, the ability to use an application’s model classes for
+HTML form data, view definition mark-up that improves on JavaServer
+Pages, and integration between application layers using dependency
+injection.
+
+Meanwhile, there are so many good Java libraries that implement useful
+functionality, that integrating libraries has become a more significant
+part of web application development than it was a few years ago. Part of
+this library-use expansion has been the increase in what Java EE covers,
+which matters because libraries that implement an official Java EE API
+are more respectable, especially in corporate IT and because more people
+are involved via the
+http://en.wikipedia.org/wiki/Java_Community_Process[Java Community
+Process]. This is why JavaServer Faces (JSF) is already popular, and why
+its eventual success is inevitable, despite its initial design flaws.
+
+Seam is one of several frameworks, including
+http://tapestry.apache.org/[Tapestry] and
+http://wicket.apache.org/[Wicket], that offer a component-based approach
+to web application development. Technically, there are differences but
+they will not determine eventual popularity. Note that ‘Struts 2’,
+another of the competing frameworks, is really
+http://www.opensymphony.com/webwork/[WebWork], which is significantly
+different to Struts 1.x.
+
+Spring goes beyond providing a better view layer framework, by making it
+easy to integrate the view layer with back-end components such as a
+Hibernate data access layer. Spring provides additional classes that
+provide easy access to the Hibernate API from within Spring’s component
+model. In this sense, Seam follows Spring’s lead by integrating Java
+EE’s JSF view layer with its EJB model layer, making it far simpler to
+build real-world applications.
+
+[[s2]]
+== Why Seam is the new Struts
+
+The first sense in which Seam is the new Struts is that Seam has
+replaced Struts for most web application projects here at Lunatech
+Research. In 2006 there were enough interesting alternatives that we
+decided not to start any new applications with Struts, so we had to
+choose its replacement. the result of the competition was not conclusive
+at the time, but we decided to use Seam for our next project. Seam has
+two killer features, from our point of view: Facelets’ approach to
+defining views as well-formed XHTML (shared by Tapestry and Wicket) and
+Enterprise Java Beans 3 (EJB3) integration.
+
+A year on, almost all of our initial problems and complaints have been
+resolved, we have two products now using Seam, and it is increasingly
+unlikely that a new project will use something else. So, where Struts
+was the default framework at Lunatech, Seam is the new Struts.
+
+[[s3]]
+== Why Seam might be your new Struts
+
+Looking beyond our own organisation, we are certainly curious to know
+how popular Seam is globally, not least because popularity is good for
+more and better documentation, books, tutorials and Google-aided
+solutions to problems. In the absence of any real data on popularity,
+however, we shall have to rely on pure speculation.
+
+Seam’s integration of JSF, EJB3, Hibernate and
+http://java.sun.com/javase/technologies/security/[JAAS] make it a
+natural choice for developers who are using those technologies,
+especially given Seam’s improvements, such as annotations that you can
+use instead of XML configuration. The same applies, of course, to the
+other libraries that are integrated, such as
+http://www.lowagie.com/iText/[iText]. For integrated libraries, Seam
+provides some combination of annotations that replace libraries’ XML
+configurations, Seam components that allow you to use dependency
+injection to access library classes, and JSF components for use in
+views.
+
+It turns out be be convenient that a Seam release includes compatible
+versions of many other libraries. In a way, the same thing has happened
+with Eclipse plug-ins. The de-facto set of plug-ins for Java web
+application development is now so big that it is simply easier to avoid
+version management issues by using a combined download and use one of
+the annual
+http://en.wikipedia.org/wiki/Eclipse_%28software%29#Simultaneous_releases[simultaneous
+releases].
+
+Another aspect of Seam that will stimulate mass adoption is that it does
+not prescribe one true coding style, architecture or pattern, which will
+allow more people to fit it to their tastes or needs. For example, a
+‘backing bean’ can be an EJB or a POJO, and you can have one per page or
+share them between views.
+
+[[s4]]
+== Seam’s future
+
+The future is, of course, uncertain but Seam currently has the
+ingredients of future Struts-like success: compelling web application
+framework technology improvements, integration with the evolving Java EE
+platform, Java Community Process involvement, high-quality
+documentation, a high-traffic users’ forum, the commitment of smart
+developers who get things done and, with the recent launch of the
+http://seamframework.org/[seamframework.org] web site, its own home -
+symbolic independence from its corporate sponsors.

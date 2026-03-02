@@ -1,0 +1,134 @@
+---
+layout: post
+title: Transparent development and the project management
+date: 2012-06-04
+author: hilton
+lang: en
+tags:
+  - project-management
+  - methodology
+---
+= Transparent development and the project management
+
+In his http://www.reinventing-business.com/[Reinventing Business]
+presentation at http://2012.geecon.org[geecon] last month, Bruce
+Eckel suggested that improving how companies operate requires
+experimentation. Since then, I’ve been wondering whether the absence of
+dedicated project management at Lunatech is a reproducible experiment,
+rather than a random exception to the norm in software development.
+
+Hypothesis: transparency and better communication let development teams
+be self-managing.
+
+Corollary: this is the start of a project management renaissance, as
+project management gets more interesting.
+
+In summary, this article asks a question: can other software development
+organisations use a policy of transparency, varied Internet-based
+communication tools and the occasional programmer with social skills to
+remove the need to have a dedicated project manager for every
+development team?
+
+[[analogies]]
+== Two analogies
+
+On a small cargo ship, with a crew of five or six, there’s the skipper
+(captain), the first mate (would-be captain), a few deck-hands (able
+seamen) and the engineer. Unlike the skipper, who also has management
+functions, the engineer is a senior role purely because he is a
+specialist in running the ship’s ultimate back-end system: a giant
+diesel engine.
+
+Ten years ago, I was a programmer - deck hand if you like - on
+development teams that typically had five or six members. There were
+similar roles, although 'would-be project manager' was not explicit.
+Senior to the programmers was the DBA. (I hesitate to say ‘Database
+Administrator’ because it suggests a more limited scope and status than
+what I experienced.)
+
+[[dba]]
+== The disappearance of the DBA
+
+I haven’t been on a cargo ship for years, but I have noticed that during
+the last ten years, the DBAs went away. First, I worked on projects that
+didn’t have their own full-time DBA, but hired one in for a few days per
+year. Later, I realised that I hadn’t seen a DBA anywhere on a project
+for several years. What happened?
+
+I don’t know what happened. It occurs to me that the way we use
+technology has changed somewhat, so that the database is a less central
+component of what we build, even though it’s always still there. Also,
+we switched to open-source databases that over the same ten years have
+introduced two important qualities: they Just Work and are easy to use.
+Meanwhile, I expect that the DBAs are somewhere else, working on that
+small subset of software that represents a hard database problem. Ships
+haven’t changed; software has.
+
+The same thing has happened to the dedicated system administrators, as
+it happens: now you don’t necessarily need a full-time specialist to
+deploy software in production.
+
+[[team]]
+== Team ÷ 2 - 1
+
+Similar changes have affected project management at Lunatech:
+transparency, communication tools and agile software development.
+
+After Clay Shirky invented the Internet and transparency (not really -
+I’m summarising), software developers realised that they could use
+better communication tools, more transparency and sharing the workload
+to make a third of project management redundant: information-sharing.
+Status reports and status meetings are gone.
+
+Agile software development has changed too, in that more of our
+customers embrace rather than resist it. The change on the team is that
+simpler agile methods facilitated by one or more developers (e.g. a
+Scrum Master) make another ‘third’ of project management redundant:
+managing the process and assigning work. Now developers self-assign
+work.
+
+[[management]]
+== Project management
+
+The first big consequence of this is that there is less project
+management left: mostly stakeholder relationship management. Given the
+occasional developer with good social skills, this becomes one of the
+developer’s part-time responsibilities. The second change is that a lot
+of the above, including agile software development and simpler
+architectures, mean that we can solve the same problems with half the
+number of developers.
+
+The end result is that we replace the old six-person team that includes
+a dedicated project manager, with a self-managing team of three
+developers that includes one who spends around 30% of the time on
+project management.
+
+[[managers]]
+== Project managers
+
+Part of what makes the development team smaller is that you kill off
+empire-building behaviour. There is a risk that a full-time project
+manager won’t have enough to do unless the project is in trouble or
+there are ten people to manage. Most project managers prefer the bigger
+team. However, if project management is someone’s part-time overhead
+function, they are likely motivated to do it as efficiently as possible,
+to have more time to produce deliverables.
+
+At Lunatech, we don’t need to worry about where this leaves pure-play
+project managers, because we don’t hire them. I imagine that the good
+ones find big or difficult projects that need a project-management
+specialist, or that they diversify and broaden their roles to include
+business analysis or product management (e.g. Scrum product owner)
+roles.
+
+[[question]]
+== The concluding question
+
+I suspect that the accidental evolution of half-size self-managing
+development teams at Lunatech is something that might be reproduced
+elsewhere. Does this sound plausible? Is it obvious how you might go
+about this particular experiment, or would you need more detail on which
+specific practices can make this possible, such as exactly how you get
+rid of status meetings and customer status reports?
+
+

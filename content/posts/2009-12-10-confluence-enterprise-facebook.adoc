@@ -1,0 +1,164 @@
+---
+layout: post
+title: Confluence as an enterprise Facebook
+date: 2009-12-10
+author: PeterHilton
+lang: en
+tags:
+  - confluence
+  - opinion
+---
+= Confluence as an enterprise Facebook
+
+Large
+organisations are starting to consider deploying an internal
+http://www.facebook.com/[Facebook] clone, in their quest for
+http://en.wikipedia.org/wiki/Enterprise_2.0[Enterprise 2.0]. This
+article considers what you need to achieve this, and how far you can get
+with http://www.atlassian.com/software/confluence/[Atlassian
+Confluence].
+
+[[Facebookcorefunctionality]]
+== Facebook core functionality
+
+What does Facebook actually do? Here is a high-level overview of its
+core functionality.
+
+* *The name* 'Facebook', a descriptive name that is an explanatory
+metaphor for the American university students who were its initial
+target users. It probably could have been called 'Yearbook'.
+* *Search* - find people, shown with basic identifying information and
+photo.
+* *Friends* list - maintain a list of your friends and browse the list
+of friends' friends.
+* *Wall* - an activity feed of statuses, notes and URLs
+* *Events* - linked to a group of people who are invited, and attendees.
+* *Photos* - share photos that are linked to events and to the people
+pictured.
+* *Groups* - arbitrary self-organising groups of people that extend
+other functionality from individuals to groups, and provide more choices
+for who to share data with than 'friends' and 'friends of friends'.
+* *Applications* that extend this core functionality with new social
+features, often in the form of mash-ups with other web sites.
+
+If you consider how the applications work, then it becomes clear that
+the core functionality is to manage your profile and friends list, and
+to search and browse friends and groups; everything else is an
+application that uses this data.
+
+[[Enterprisefunctionality]]
+== Enterprise functionality
+
+The interesting thing about Facebook's social functionality is that if
+you find it useful, and do not think that it is 'just for kids', then it
+is fairly obvious how the same functionality would be useful within a
+large organisation. After all, employees are people too. Some of them
+might even be your friends.
+
+There are some differences in functionality, once you translate it to
+the enterprise, although these are mostly cosmetic.
+
+* *The name* 'facebook' does not really mean anything in a business
+context. For want of a better name, we can call this a 'staff network'.
+Perhaps this would become so central to an organisation's IT that it
+would just become synonymous with 'The Network'.
+* *Search* is the same, but the identifying information would include
+business information such as job title and roles.
+* *Friends* translates to people you are working with - 'team mates',
+perhaps.
+* *Wall* is an odd metaphor in a business context - 'company activity'
+is better.
+* *Events* are generally called 'meetings'.
+* *Photos* are less interesting; a useful business equivalent, for
+sharing finished work that people are not going to edit, would be
+PDF-sharing. For this to be more interesting than just posting links,
+the PDF should link to authors or people mentioned, in the same way that
+Facebook photos link to people in the photo.
+* *Groups* are generally called 'teams', as in departments or project
+teams.
+* *Applications* are then integration points for the rest of the
+enterprise's IT systems. Mash-ups translate to Service Oriented
+Architecture implementations.
+
+[[Confluence]]
+== Confluence
+
+Confluence is a commercial enterprise collaboration platform that is
+based on a wiki. You can purchase for installation in your own
+organisation, or subscribe to a hosted version. The ideal way to use
+Confluence is as the platform for an organisation's intranet, for any
+size of organisation.
+
+If you want to deploy your own 'staff network', the Facebook software is
+not available so you need to buy or build something else. Since we use
+Confluence as our intranet wiki, it is natural to consider how much of
+the staff network functionality it supports without additional
+development.
+
+* *The name* - you can set the _Site Title_ and server host name.
+* *Search* - you can search for people, but search results only show
+name and photo, with a link to the profile.
+* *Friends* - you can 'follow' other users and view their recent
+activity. You can also see which users someone else is following.
+* *Wall* - the dashboard and the
+http://confluence.atlassian.com/display/JIRAEXT/Atlassian+Activity+Stream+Plugin[Activity
+Stream Plugin] show recent updates, including status updates.
+* *Events* - partially supported - you can publish events with the
+http://confluence.atlassian.com/display/CONFEXT/Calendar+Plugin[Calendar
+Plugin], but it does not link to groups (invitees) or people (invitees
+and attendees).
+* *Photos* - you can attach files to pages and news items, although you
+do not see thumbnails in the recent updates lists (in Confluence 3.0 -
+but should work in 3.1).
+* *Groups* - partially supported - use Confluence spaces and user groups
+to group information and determine access. However, there is no group
+that corresponds to your 'friends' (i.e. users that you follow) when
+setting permissions. Moreover, although you can allow all users to
+create Confluence spaces, only administrators can control group
+membership: a normal user cannot decide to join or leave a user group.
+* *Applications* - write Confluence plug-ins.
+
+On the face of it, Confluence, along with a few plugins, combine to
+allow you to deploy most Facebook functionality within your
+organisation. However, the weakest area is the list of friends, which is
+the central concept of Facebook: all of the other functionality is
+implemented in terms of the friends list. Following other users is a
+recent edition to Confluence, in version 3, and has not yet been
+integrated with other functionality.
+
+This means that equivalent functionality works differently in
+Confluence. This raises the fundamental question of whether an
+enterprise-Facebook absolutely requires permissions based on 'friends
+lists', for example, or whether this is unnecessary within a company,
+where people are already grouped into formal departments and teams. The
+answer is probably that it does, given that ad-hoc groups may well be
+more important than the official organisation.
+
+[[Conclusion]]
+=== Conclusion
+
+Social networking features are all the rage in collaboration software,
+and other enterprise collaboration platforms are no-doubt adding social
+networking features. However, a few tacked-on marketing features do not
+necessarily make a useful social platform: you may end up with a
+poorly-integrated attempt to reproduce Facebook, albeit with the
+advantage of using established off-the-shelf software.
+
+At least this is less bad than collaboration platforms that seem to be
+based around proprietary office-suite documents, such as the various
+Sharepoint products, or suites that seem to have no central information
+type and are instead a more complex everything-platform.
+
+Confluence's social features are indeed well-designed and useful, but
+the application remains a wiki whose functionality is all based around
+'pages', not around 'friends'. This means that there is real benefit to
+be had from using it as a social collaboration platform within an
+organisation, rather then 'merely' as a wiki, but the resulting
+experience is a less me-focused experience than Facebook.
+
+For now, this does not really matter and is as good as it gets. Besides,
+perhaps large organisations are not ready to give up their assumption of
+a top-down hierarchical org-chart and acknowledge that each individual
+employee works with a network of concentric circles of trusted
+colleagues with himself at the centre.
+

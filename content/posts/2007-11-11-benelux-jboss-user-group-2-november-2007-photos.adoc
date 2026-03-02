@@ -1,0 +1,47 @@
+---
+layout: post
+title: "Benelux JBoss User Group, 2 November 2007 - photos"
+date: 2007-11-11
+author: hilton
+lang: en
+tags:
+  - jbug
+  - event
+---
+= Benelux JBoss User Group, 2 November 2007 - photos
+
+:imagesdir: /images/media/2007-11-11-benelux-jboss-user-group-2-november-2007-photos
+
+Here are a few photos from last week's https://2007-10-01-benelux-jboss-user-group-2-november-2007[JBoss User Group
+event].
+
+This time we had plenty of food and drink:
+
+image:../media/2007-11-11-benelux-jboss-user-group-2-november-2007-photos/jbug-2007-11-001.jpg[This time we had plenty of food and drink]
+
+http://www.linkedin.com/in/brunogeorges[Bruno Georges] (top-right) gets
+ready to give his presentation while everyone socialises:
+
+image:../media/2007-11-11-benelux-jboss-user-group-2-november-2007-photos/jbug-2007-11-002.jpg[Bruno Georges (top-right) gets ready to give
+his presentation while everyone socialises]
+
+image:../media/2007-11-11-benelux-jboss-user-group-2-november-2007-photos/jbug-2007-11-003.jpg[image]
+
+Bruno's presentation on http://labs.jboss.com/jbossesb/[JBossESB]:
+
+image:../media/2007-11-11-benelux-jboss-user-group-2-november-2007-photos/jbug-2007-11-004.jpg[Bruno's presentation on JBossESB]
+
+image:../media/2007-11-11-benelux-jboss-user-group-2-november-2007-photos/jbug-2007-11-005.jpg[image]
+
+Break-out session in Martin's office:
+
+image:../media/2007-11-11-benelux-jboss-user-group-2-november-2007-photos/jbug-2007-11-006.jpg[Break-out session in Martin's office']
+
+Peter and Nicolas' Seam presentation:
+
+image:../media/2007-11-11-benelux-jboss-user-group-2-november-2007-photos/jbug-2007-11-007.jpg[Peter and Nicolas' Seam presentation]
+
+The hard-core getting ready to leave around 11 pm:
+
+image:../media/2007-11-11-benelux-jboss-user-group-2-november-2007-photos/jbug-2007-11-008.jpg[The hard-core getting ready to leave around
+11 pm]

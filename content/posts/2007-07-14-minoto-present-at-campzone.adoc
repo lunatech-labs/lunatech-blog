@@ -1,0 +1,15 @@
+---
+layout: post
+title: Minoto present at CampZone 2007
+date: 2007-07-14
+author: kaas
+lang: en
+tags:
+  - ventures
+---
+= Minoto present at CampZone 2007
+
+http://www.me-eu.com/[Minoto Entertainment] will be
+present at http://www.campzone.nl/[CampZone 2007] to demonstrate the
+first version of their new http://www.wipido.nl/[Wipido service]
+(including the Online Game Challenger) and to host a few matches.

@@ -1,0 +1,69 @@
+---
+layout: post
+title: "Continuous Delivery on GitLab with Play, Scala, SBT and Heroku"
+date: 2016-08-08
+author: jasperdenkers
+lang: en
+tags:
+  - cdci
+  - playframework
+  - sbt
+img: images/media/2016-08-08-continuous-delivery-on-gitlab-with-play/background.png
+---
+= Continuous Delivery on GitLab with Play, Scala, SBT and Heroku
+
+:imagesdir: /images/media/2016-08-08-continuous-delivery-on-gitlab-with-play
+
+Last week we talked about Continuous Integration (CI) with Scala and SBT on GitLab. This week we are going to take a step further and implement Continuous Delivery (CD) on GitLab with Play and Heroku.
+
+Let’s first recap last week’s post. To enable CI, we used the .gitlab-ci.yml file. Builds are run in Docker and to make sure we could execute our tests, we used a Java Docker image and made sure SBT was installed. The definition in our .gitlab-ci.yml file contained only a single stage: the test stage. This week we are going to extend our pipeline with a deploy stage.
+
+== Play Deployment with Heroku
+
+The application we are going to deploy is a Play Framework application. For now we assume we already have such application with SBT as the build tool.
+
+Heroku is a cloud application platform that has support for Play applications. This means that running your application on Heroku requires little setup and most important is getting the source of your application there. For that, we use the tool dpl from Travis CI.
+
+Dpl is a simple command line deployment tool that supports Heroku. We can deploy our Play application to Heroku using dpl with the following command:
+
+----
+dpl --provider=heroku --app=<application-name> --api-key=<api-key>
+----
+
+First you have to create an application in Heroku. <application-name> in the command above should be substituted with the name you gave the application. Additionally, <api-key> should be substituted by your Heroku API key which you can find under (under Account > API Key).
+
+== Putting It All Together
+
+We extend the definition of our pipeline in the .gitlab-ci.yml file by adding a deploy stage and in the deploy stage, we install dpl and instruct it to deploy the new version of the application to Heroku. To hide the API key it is passed via a secret variable. This can be added in GitLab in your project’s settings under Variables.
+
+The .gitlab-ci.yml file now looks like this:
+
+[source,yaml]
+----
+stages:
+  - test
+  - deploy
+
+test:
+  stage: test
+  script:
+    # Test the project
+    - sbt clean test
+
+deploy:
+  stage: deploy
+  script:
+    # Install dpl
+    - apt-get update -yq
+    - apt-get install rubygems ruby-dev -y
+    - gem install dpl
+    # Deploy to Heroku
+    - dpl --provider=heroku --app=lunatech-demo-cd-play-scala --api-key=$HEROKU_API_KEY
+
+----
+
+After pushing this .gitlab-ci.yml file to our GitLab repository containing the Play project, our continuous delivery pipeline is enabled. On every new push, the tests of the project are run and if the tests pass, the new version of the application is deployed to Heroku using dpl.
+
+=== Source Code
+
+The source code of a demo project implementing the pipeline described in this post can be found here: https://gitlab.com/jasperdenkers/lunatech-demo-cd-play-scala-heroku.

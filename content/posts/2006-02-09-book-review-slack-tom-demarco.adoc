@@ -1,0 +1,23 @@
+---
+layout: post
+title: "Book review - Slack, Tom Demarco"
+date: 2006-02-09
+author: hilton
+lang: en
+tags:
+  - opinion
+---
+= Book review - Slack, Tom Demarco
+
+I have just read http://www.atlsysguild.com/GuildSite/TDM/Slackpage.html[Slack: getting past burnout, busywork and the myth of total efficiency], by Tom DeMarco, which I spotted on Joel Spoelsky's http://www.joelonsoftware.com/articles/FogCreekMBACurriculum.html[software management reading list]. *Slack* is an excellent book that makes its points clearly and briefly, avoiding hundreds of pages of management consultant waffle."
+
+++++
+<p style="float:right; margin:0 0 1em 1em"><a href="http://www.atlsysguild.com/GuildSite/TDM/Slackpage.html" title="Book details"><img src="http://images.amazon.com/images/P/0767907698.01._SCMZZZZZZZ_PC_PU_PU-5_.jpg"/></a></p>
+
+<p>The premise of the book is that if an organisation aims for total efficiency - everyone busy all the time - there can be no spare resources to provide the flexibility, or slack, that you need in order to do anything new. Efficiency is what you get when you cut all costs in order to improve short-term profitability, which much of the tech industry has done in recent years. What may be appropriate for a manufacturing production line can have dire consequences for knowledge work, and software development in particular. The price of this efficiency, as <em>Slack</em> goes on to explain, includes an organisation that takes longer to get anything done, knowledge workers who do not have the freedom or the time to get any useful work done, and increasing stress, resistance to change and risk-avoidance. It is clear that these lead to an organisation where fewer people want to work, and that falls behind its competitors.</p>
+
+<p>I used to work for a large systems integrator, which had an extremely strong culture of avoiding slack: goal number one was to book all forty hours in the week to an external customer project. This even went as far as a culture of Management By Objectives where utilisation - the time spent on this billable work - was more important in practice than various other issues such as attrition, which was consistently high among technical staff. While reading <em>Slack</em> I recognised so many of the causes and consequences that Tom DeMarco describes, from my previous employer, that I got a lot from reading his views on less familiar subjects. I also wish I had read the book a few years ago.</p>
+
+<p>These days I work here at Lunatech Research, which informally shares <a href="http://www.google.com/support/jobs/bin/static.py?page=about.html">Google's policy</a> of '20 per cent time' for technical staff to work on personal projects. This slack is the kind of serious investment that Tom Demarco writes about, which leads to payoffs such as having time to learn how to use new technology that enables you to deliver IT solutions that your competitors will take twice as long (or forever) to implement. These competitors will not be able to learn the technology until everyone else is using it, and they cannot ignore it any longer, and when there are 'proper' training courses which are an acceptable use of the one or two weeks per year of acceptable slack called 'training'. Meanwhile, we are impressing our customers with our abilities and providing the kind of interesting work that makes technical staff want to work here.</p>
+
+++++

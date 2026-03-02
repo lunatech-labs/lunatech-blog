@@ -1,0 +1,45 @@
+---
+layout: post
+title: Announcing the Lunatech Beginner Quarkus Course
+date: 2021-03-22
+author: njlbenn
+lang: en
+tags:
+  - quarkus
+  - java
+  - training
+img: images/media/2021-03-22-announcing-the-lunatech-beginner-quarkus-course/background.png
+---
+= Announcing the Lunatech Beginner Quarkus Course
+
+:imagesdir: /images/media/2021-03-22-announcing-the-lunatech-beginner-quarkus-course
+
+== Betting on Java for the cloud-native era
+
+In the last 18 months, one of the frameworks creating the most buzz is https://quarkus.io/[Quarkus]. We at Lunatech think that this is more than just the usual hype about a new framework. More and more of our clients have been asking about this framework and have been working with us to either develop proofs-of-concepts for migrating some existing applications or have already adopted the framework for some greenfield projects.
+
+It remains to be seen if Quarkus can gain the widespread adoption of, say, Spring Boot. Nonetheless, we are persuaded that Quarkus will become one of the go-to frameworks -- if not _the_ go-to framework -- for building cloud-native applications.
+
+== Free and open-source training material
+
+Because of this, Lunatech decided at the beginning of this year to invest time in preparing Quarkus training material, for use both internally to continually upskill our developers and externally to our clients in instructor-led courses. We also committed ourselves to making this material open-source and freely available online to add to the growing high-quality content available in the Quarkus community.
+
+So the point of this post is to announce that a first version of this https://github.com/lunatech-labs/lunatech-beginner-quarkus-course-student-app[training material is now available on the Lunatech Github]. This repository is the "course pack" that we give to students -- it contains the course slides as well as the exercises (instructions and solutions).
+
+We decided to target this course as a "Beginner Quarkus" course. It is mainly aimed at developers who are likely familiar with another framework (e.g. Spring Boot or Play Java) but who are unfamiliar with Quarkus concepts and who want to get their first taste of the framework. The main topics covered are:
+- Quarkus Philosophy
+- Quarkus Data Access Layer
+- The Qute Template Engine
+- Dependency Injection with ArC
+- RESTful API development
+- Reactive Programming
+
+== What's next?
+
+As we said earlier, this is just the first version of this training material. Over the next few months we will continue to make improvements to the course based on the feedback we get as more and more people take the course. With this in mind, if you download the course, read the material, and follow the exercises, we would love to hear your feedback so that we can continue to improve the material.
+
+In addition to iterating on this beginner course, we are also hoping to work on more advanced modules. Watch this space.
+
+== Credits
+
+As with most projects, the creation of this course relied on the time and effort of many people. Special mention must go to Erik Bakker, CTO of Lunatech NL, who did the bulk of the course design (including the implementation of the exercises). In addition, this would not have been possible without the help of: Benoit Montuelle, Cuneyt Ozen, Diego Roman, Eric Loots, Guillaume Garvanese, Jalal Madden, Kevin Duchemin, Sébastien Félix, Vincent Brulé.

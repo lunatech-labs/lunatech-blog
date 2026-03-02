@@ -1,0 +1,50 @@
+---
+layout: post
+title: Displaying access key assignments
+date: 2005-10-07
+author: hilton
+lang: en
+tags:
+  - web-applications
+---
+= Displaying access key assignments
+
+++++
+<div id="top"></div>
+++++
+
+It goes without saying that a desktop software application has keyboard shortcuts. Notwithstanding some old evidence that it is faster to use the mouse, it is surprisingly frustrating to use an application with no accelerator keys. That is why it is odd how long it has taken web applications to start using keyboard shortcuts, which have been available in HTML since 1997.
+
+The following HTML elements may have keyboard shortcuts specified by an `accesskey` attribute: `A AREA BUTTON INPUT LABEL LEGEND TEXTAREA`. 
+
+However, most browsers do not display the access key assignments. There are many suggestions out here for which keys to use and how to indicate the assignments visually, such as on http://www.alistapart.com/articles/accesskeys/[A List Apart], but no conventions.
+
+My favourite idea so far is to copy the visual style of <em>keyboard shortcuts</em> to the right of menu items in a GUI, as shown in the form, below, and the page footer, bottom. I prefer this to the more popular approach of underlining a letter in the label because it is more explicit, which hopefully makes sense to more people. The other popular style, putting the letter in square brackets after the link is better, but still lacks the analogy with desktop GUIs, and so is better suited to less mainstream expert applications. These considerations are particularly relevant  for as long as using keyboard shortcuts is not standard; only then will a more concise style be more appropriate.
+
+++++
+<form style="border: solid 1px #a1a5a9; width:25em; margin-left:20px">
+<h2 style="background:#00007b; color:white; border-bottom:1px #a1a5a9 solid; margin:0; padding:0.5em; font-size:100%">Example form</h2>
+<dl style="margin-left:1em">
+	<dt style="float:left; clear:left; width:5.5em;">One:</dt>
+	<dd style="margin-bottom:1em"><select tabindex="1"><option>select one</option></select></dd>
+	<dt style="float:left; clear:left; width:5.5em;">Two:</dt>
+	<dd style="margin-bottom:1em"><input tabindex="2" accesskey="w"/> <em style="font-size:80%; font-style:normal; border: none; background:#eee; color:black; padding:0em 0.5em; margin-right:1em">Alt+W</em></dd>
+	<dt style="float:left; clear:left; width:5.5em;">Three:</dt>
+	<dd style="margin-bottom:1em"><input tabindex="3" accesskey="t"/>	<em style="font-size:80%; font-style:normal; border: none; background:#eee; color:black; padding:0em 0.5em; margin-right:1em">Alt+T</em></dd>
+	<dt style="float:left; clear:left; width:5.5em;">Four:</dt>
+	<dd style="margin-bottom:1em"><input tabindex="4" accesskey="f"/>	<em style="font-size:80%; font-style:normal; border: none; background:#eee; color:black; padding:0em 0.5em; margin-right:1em">Alt+F</em></dd>
+</dl>
+<p style="margin-left:1em"><input type="submit" value="Apply" tabindex="5" accesskey="a"/>	<em style="font-size:80%; font-style:normal; border: none; background:#eee; color:black; padding:0em 0.5em; margin-right:1em">Alt+A</em></p>
+
+</form>
+++++
+
+Note that access keys have shortcomings. For example, a `SELECT` element cannot have an access key, so forms should specify a tab order like this one does to allow keyboard navigation. Also, the access key assignments override the browser's keyboard shortcuts: for example, in Firefox Alt+A normally does Select All, and Alt+1 normally selects the first tab, but not on this page.
+
+Access keys are not only useful for forms; in fact, they are probably more useful for global site navigation - a more frequently used and smaller set of options. For example, on any http://en.wikipedia.org/[WikiPedia] page, you can use Alt-Z to navigate to the home page, or Alt-X to navigate to a random page. The following example is global navigation for this web site, with keyboard shortcuts.
+
+++++
+<p style="width:auto; padding:1em 20px; border-top: solid 1px #a1a5a9; margin:3em 0">Global short-cuts:
+<a href="/" accesskey="h">Home</a> <em style="font-size:80%; font-style:normal; border: none; background:#eee; color:black; padding:0em 0.5em; margin-right:1em">Alt+H</em>
+<a href="#top" accesskey="z">Top of page</a> <em style="font-size:80%; font-style:normal; border: none; background:#eee; color:black; padding:0em 0.5em; margin-right:1em">Alt+Z</em></p>
+++++

@@ -1,0 +1,122 @@
+---
+layout: post
+title: "Plan Cruncher - Play! in production"
+date: 2010-03-29
+author: PeterHilton
+lang: en
+tags:
+  - playframework
+  - web-applications
+---
+= Plan Cruncher - Play! in production
+
+:imagesdir: /images/media/2010-03-29-plan-cruncher-play-production
+
+At
+Lunatech, we recently decided to build a small web application to
+implement one of our ideas for generating business plan summaries. We
+needed to get this running on-line as quickly as possible, with minimal
+time spent coding, so we chose to build it using the Play! framework.
+The result was fast development, clean code, easy deployment and an
+instantly popular web application -
+http://plancruncher.com/[http://plancruncher.com/].
+
+[[born]]
+== Plan Cruncher is born
+
+On 11 February, I presented an idea for ‘Business plan symbology’ at the
+http://www.meetup.com/Bootstrapping-and-agility/calendar/12317827/[Lean
+Start-up] event organised by http://www.lunatech-ventures.com/[Lunatech
+Ventures]. Basically, the idea is that if you choose a few standard
+icons that apply to your start-up idea, then you can put together a
+standard one-page summary of your business plan, with standard text,
+that avoids the length of normal business plans.
+
+We had a great discussion about the idea, and got lots of positive
+feedback, including
+http://www.involvd.com/blog/2010/02/17/the-route-to-launch-day/[Invold.com]
+and
+http://turtlethink.com/2010/02/business-plans-2-0-lean-and-icon-based/[turtlethink.com]
+blog posts, so we decided to do the lean and agile thing, and get the
+idea on-line. This meant that we needed to code a simple web application
+that would allow people to select some icons, and generate and e-mail a
+PDF of the business plan summary.
+
+[[play]]
+== Play! framework
+
+This is the kind of thing that PHP is ideal for - hacking-together a
+quick web application. PHP is not our thing though, because of the mess
+you inevitably end up with, which is one of the reasons why we prefer to
+use Java. However, while we normally work with the Java Enterprise
+Edition platform, that would be far too big a sledgehammer for this kind
+of small web application. We just want all of those Java libraries to be
+available in case we need them.
+
+The new Java web application framework in the ‘best of both worlds’
+category is the http://www.playframework.org/[Play! framework], which
+massively simplifies much of the unnecessary complexity that has
+accumulated among Java EE development conventions. Like PHP, Play! is by
+and for web developers, bringing a different set of values to the kind
+of framework favoured by the heavy-weight Java EE community.
+
+In particular, Play! was ideal for this project, because of the
+development speed you get from its edit-save-reload page development
+cycle (no build or deployment steps required), the cleanness and brevity
+of the code you end up writing (no code-generation), and the ease of
+integrating things like the Play! PDF module. We also wanted it to be
+easy to push new changes to the live application on a daily basis
+without interrupting users, because we were going to release-early, with
+a new idea that we were still thinking about.
+
+== plancruncher.com
+
+Everything worked out beautifully: despite me being on holiday for a
+week, and Nicolas having other work to do, we had Plan Cruncher in
+production at http://plancruncher.com/ within a couple of weeks, after
+spending about two days each on design, coding and testing. It was fun
+as well.
+
+image:../media/2010-03-29-plan-cruncher-play-production/plancruncher.png[plancruncher.com]
+
+After the first release, we released a new version every day for a week
+or so, to incorporate initial user feedback, as
+http://search.twitter.com/search?q=plancruncher[#plancruncher] started
+to find its way around Twitter. Doing this with a stateful web
+application is a problem, especially if the application server takes a
+long time to redeploy the application.
+
+We had no such problem with Play! because we set-up two instances of the
+application, and configured Apache load balancing to switch to the
+second instance if the first is not available. Since a Play! web
+application is stateless, you can use this to release a new version,
+without users noticing the switch from one instance to the next. What’s
+more, we can deploy a new version of Plan Cruncher (on both instances)
+in about ten seconds, because Play! application start-up is so fast.
+link:/2010/03/22/upgrading-your-play-applications-without-downtime[Upgrading
+your Play! applications without downtime] explains how this works.
+
+[[next]]
+== What’s next
+
+Who knows where Plan Cruncher will go from here, but some further
+development is inevitable. Big projects often start out with a small
+application like this, which is another reason why we are glad we did
+not start with PHP.
+
+We are certainly considering localisation, after attention from blogs in
+http://venturebeat.com/2010/03/11/visualize-your-business-plan-with-plancruncher/[the
+US], http://web.rambler.ru/post/biznes-plan/[Russia],
+http://www.web2null.de/plancruncher[Germany],
+http://www.workingcapital.telecomitalia.it/2010/03/plan-cruncher-un-tool-online-per-riassumere-in-icone-il-vostro-business-plan/[Italy],
+http://www.2v.lv/index.php/dienas-internets/2719-atrasts-internet-biznesa-plnu-vizualizators-jaunajiem-uzmjiem-plancrunchercom[Latvia]
+and http://www.100shiki.com/archives/2010/03/plan_cruncher.html[Japan].
+
+We also have (a long list of) other ideas for lightweight web
+applications like Plan Cruncher, and it is good to know that we have a
+platform that offers us rapid development and results in a small amount
+of clean code. Of course, these are advantages that large applications
+can also benefit from.
+
+_http://hilton.org.uk/about_ph.phtml[Peter Hilton] is a senior software
+developer at Lunatech Research._

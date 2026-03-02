@@ -1,0 +1,21 @@
+---
+layout: post
+title: Seam meetup at Devoxx
+date: 2008-12-05
+author: hilton
+lang: en
+tags:
+  - event
+  - jboss
+  - seam
+---
+= Seam meetup at Devoxx
+
+:imagesdir: /images/media/2008-12-05-seam-meetup-devoxx
+
+Next Wednesday,
+Lunatech Research is organising a http://www.devoxx.com/display/JV08/Seam+meetup[Seam
+Meetup] at the Devoxx
+conference in Antwerp. We will meet at 9 pm in http://www.cafe-au-lait.be/[Café au
+Lait], which is an excellent bar just
+behind Grote Markt, the main square in the centre of town.

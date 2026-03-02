@@ -1,0 +1,20 @@
+---
+layout: post
+title: Morphon Technologies releases Morphon T-o-M 1.0
+date: 2008-03-14
+author: kaas
+lang: en
+tags:
+  - ventures
+---
+= Morphon Technologies releases Morphon T-o-M 1.0
+
+After half a year of development and
+testing, Morphon Technologies released version 1.0 of Morphon T-o-M.
+This first version supports the bulk signing of Adobe PDF documents in
+an existing workflow, using a variety of hardware cryptographic devices
+and can communicate with the certificate authority's TSP and OCSP
+servers. 
+
+More information is available on the http://www.morphon.com/[Morphon
+homepage].

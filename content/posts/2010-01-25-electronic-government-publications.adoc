@@ -1,0 +1,58 @@
+---
+layout: post
+title: Electronic government publications
+date: 2010-01-25
+author: BartSchuller
+lang: en
+tags:
+  - seam
+  - itext
+  - drools
+  - xml
+  - case-study
+---
+= Electronic government publications
+
+On July 1, 2009,
+the Dutch Electronic Disclosure Act came into force. The current
+official published versions of Staatscourant, Staatsblad and
+Tractatenblad are now available at
+http://www.officielebekendmakingen.nl/[www.officielebekendmakingen.nl].
+Sdu Uitgevers, following a government mandate, made the transition from
+paper to electronic publishing. The government has developed an on-line
+service desk that mediates between the publications' submitters and
+producers.
+
+Sdu asked Lunatech to design and build a number of systems to support
+the new workflow:
+
+* A comprehensive system supporting the entire work process from order
+intake to delivering the finished publication
+* Conversion from different XML formats to the new XML format for
+official publications
+* Converting XML documents to HTML (which must comply with the
+http://www.webrichtlijnen.nl/english/[accessibility standards])
+* Converting XML documents into ODF (Open Document Format), the ISO
+standard format for 'office' documents
+* Adding metadata to PDF files to meet the PDF/A-1a standard
+* Reports on PDF files: number of pages with images and specific tags
+* Connecting the overall system to the on-line service desk and existing
+Sdu systems
+
+[[Technicaldetails]]
+== Technical details
+
+The overall system is built as a web application which makes use of the
+following technologies:
+
+* http://www.jboss.com/[JBoss] http://seamframework.org/[Seam]
+Enterprise Application Framework
+* JBoss Rules (http://www.jboss.org/drools/[Drools] ) to determine the
+necessary metadata and workflow for each document
+* SOAP MTOM for communication with the on-line service desk
+* Oracle databases
+* http://itextpdf.com/[iText] PDF library
+* The XML transformations are written in
+http://www.w3.org/TR/xslt20/[XSLT2] and use the
+http://www.saxonica.com/[Saxon] XSLT processor
+* XML validation by http://en.wikipedia.org/wiki/Schematron[Schematron]

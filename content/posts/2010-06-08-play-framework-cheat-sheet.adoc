@@ -1,0 +1,24 @@
+---
+layout: post
+title: Play framework 1.0 cheat sheet
+date: 2010-06-08
+author: PeterHilton
+lang: en
+tags:
+  - playframework
+  - java
+---
+= Play framework 1.0 cheat sheet
+
+:imagesdir: /images/media/2010-06-08-play-framework-cheat-sheet
+
+Now that you are getting started with the
+http://www.playframework.org/[Play framework] 1.0, you need a handy
+quick reference. Here is a link:../media/2010-06-08-play-framework-cheat-sheet/play-cheat-sheet.pdf[Play framework cheat
+sheet] (A4 PDF, 53 KB), with the essential
+commands, tags and extensions." ---
+
+link:../media/2010-06-08-play-framework-cheat-sheet/play-cheat-sheet.pdf[image:../media/2010-06-08-play-framework-cheat-sheet/play-cheat-sheet.png[Cheat sheet]]
+
+If you want to know why we like Play, then read about
+link:https://blog.lunatech.com/posts/2010-03-15/play-framework-usability[Play framework usability].

@@ -1,0 +1,17 @@
+---
+layout: post
+title: "January 2012 Play!ground"
+date: 2011-12-27
+author: hilton
+lang: en
+tags:
+  - playframework
+  - playground
+---
+= January 2012 Play!ground
+
+Following a break for
+Christmas, we are now planning the next http://www.playframework.org/[Play
+Framework] event, for software developers
+and technical managers. For details and registration, see
+http://playframework.eventbrite.com/[http://playframework.eventbrite.com/]

@@ -1,0 +1,146 @@
+---
+layout: post
+title: Panzano Sandwich Cruncher
+date: 2010-07-02
+author: PeterHilton
+lang: en
+tags:
+  - fun
+---
+= Panzano Sandwich Cruncher
+
+:imagesdir: /images/media/2010-07-02-panzano-sandwich-cruncher
+
+Panzano is an Italian deli that sells the best
+sandwiches in Rotterdam, and even delivers, which makes it the perfect
+catering for a business lunch. However, you cannot order on-line and,
+bizarrely, Panzano does not even have a web site, which makes it
+difficult to order by phone or fax for a group if you neglected to
+memorise all 28 sandwiches. Here is a copy of the menu (as of 1 July
+2010), and an idea.
+
+[[menu]]
+== Sandwich menu
+
+Prices are €4-6 for a white roll; €0.75 surcharge for brown, tomato,
+corn or olive rolls.
+
+[width="100%",cols="50%,50%",]
+|===
+a|
+*Provolone.* Provolone kaas, tomaat.
+
+*Prosciutto Cotto.* Achterham.
+
+*Salami.* Salami zacht of pikant.
+
+*Diavolo.* Pittige salami, zoetzure pepers.
+
+*Di Mamma.* Provolone kaas, ui, tomaat.
+
+*Gorgonzola.* Blauwaderige kaas, tomaat.
+
+*Toscana.* Achterham, Provolone, tomaat.
+
+*Parmaham.* Rauwe gedroogde ham (14 maanden).
+
+*Pazzo.* Pittige salami, mozzarella.
+
+*Fellini.* Salami, provolone kaas.
+
+*Primavera.* Mozzarella, tomaat, basilicum.
+
+*Milano.* Achterham, Provolone kaas, div. salami, tomaat.
+
+*Tonno.* Tonijnsalade.
+
+*Buono.* Gorgonzola, achterham, div. salami, tomaat.
+
+a|
+*Siena.* Achterham, tapenade, tomaat.
+
+*Sorpresa.* Parmaham, mozzarella.
+
+*Quatro.* Pikante salami, mozzarella, pesto, paprika.
+
+*Fresco.* Mozzarella, pesto, tomaat.
+
+*Mastroianni.* Gorgonzola, wilde spinazie.
+
+*Bari.* Parmaham, mozzarella, pesto.
+
+*Lino.* Provolone, rode pesto, aubergine.
+
+*Capoccia.* Bresaola, tomaat, mozzarella.
+
+*Mela.* Bresaola, rucola, pijnboompitten, grana padano.
+
+*Boxie.* Wilde spinazie, aubergine, provolone.
+
+*Ferrari.* Aubergine, artisjok, zongedroogde tomaat.
+
+*Bambino.* Rode pesto, mozzarella, rucola.
+
+*Vitello Tonato.* Kalfsmuis met tonijnsaus.
+
+*Nico.* Rode pesto, bresaola, aubergine, citroen.
+
+|===
+
+image:../media/2010-07-02-panzano-sandwich-cruncher/panzano-bari.jpg[image]
+
+Photo: the _Bari_, with Parma ham, green pesto and mozzarella.
+
+To order for delivery, telephone 010 233 4999 or fax 010 233 4220 before
+11:00. Delivery between 12:00 and 13:00. Cash on delivery.
+
+Alternatively, just go and have lunch at Panzano,
+http://maps.google.nl/maps?client=safari&rls=en&q=Vasteland+42,+3011+BM+Rotterdam&oe=UTF-8&redir_esc=&um=1&ie=UTF-8&hq=&hnear=Vasteland+42,+3011+Rotterdam&gl=nl&ei=IqYtTP_OA4WuON3P5eIB&sa=X&oi=geocode_result&ct=title&resnum=1&ved=0CBYQ8gEwAA[Vasteland
+42, 3011 BM Rotterdam].
+
+[[cruncher]]
+== Sandwich Cruncher
+
+The average cafe web site probably cost plenty of money, and does not
+actually contain more information than is on this web page. (Hey,
+Panzano, do I get a free lunch?) The average restaurant web site
+probably cost even more, and is merely more flashy, pretentious and
+annoying if you just want a phone number or to look at the menu. Worst
+of all, these are usually static web sites that the cafe rarely updates.
+I have a better idea.
+
+What a cafe like Panzano needs is a web site where they can enter their
+cafe details, menu text, prices and perhaps a few photos, and publish
+the menu as a web page. And then go back to the web site and update the
+menu when it changes.
+
+Ladies who lunch, and other potential customers might be able to do all
+sorts of funky things as well as just browse menus: find out where the
+soup of the day is _erwtensoep_ (in winter), search for menus with more
+than one vegetarian option, subscribe to an RSS feed of new
+menus/dishes, browse a list of highest-rated dishes, and integrate with
+Twitter and FourSquare accounts.
+
+Lunatech would love to build this: web applications are what we are good
+at.
+
+Contact us if you are an entrepreneur who can see a business model for
+how to make money from this. You might be into the printing business,
+and want to do for restaurant menus what http://moo.com/[moo.com] does
+for business cards, or perhaps you know how to make a subscription or
+advertising model work.
+
+Alternatively, contact us if you represent a cafe/restaurant
+chain/franchise that wants this for all of their locations. For example,
+there are several bagel and wok (not combined) franchises in the
+Netherlands; why does http://www.dailywok.nl/[Daily Wok] have a cool,
+well-designed and well-built web site with an up-to-date menu, while
+http://www.woktogo.nl/[Wok to Go] has a less accessible Flash-based web
+site with only a PDF menu ('our interactive menu is not yet active')?
+Similarly, http://www.bagelsbeans.nl/[Bagels & Beans] only has an
+awkward Flash-based version of their print menu.
+
+Until then, a Twitter feed will do, e.g.
+http://twitter.com/dailywok[@dailywok],
+http://twitter.com/picknickrdam[@picknickrdam] and
+http://twitter.com/sijf[@sijf].

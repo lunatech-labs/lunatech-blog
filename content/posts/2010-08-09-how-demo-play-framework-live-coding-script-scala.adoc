@@ -1,0 +1,416 @@
+---
+layout: post
+title: How to demo the Play framework - live coding script (in Scala)
+date: 2010-08-09
+author: fcanedo
+lang: en
+tags:
+  - playframework
+  - java
+---
+= How to demo the Play framework - live coding script (in Scala)
+
+If you want someone to know how fast and
+straightforward it is to build a Scala web application with the http://www.playframework.org/[Play framework], then *show*, don't *tell*.
+The most compelling way to do this is to download Play and start coding
+a web application from scratch, while they watch. This article is a
+script for a five-minute live-coding Play demo.
+
+This script is based on Peter Hilton's demo, but with Scala. See
+link:https://blog.lunatech.com/posts/2010-06-14-how-demo-play-framework-live-coding-script[his article]
+for more information.
+
+[[Summary]]
+== Summary
+
+. Download the Play framework.
+. Download the Scala plugin.
+. Create and run the application.
+. Inspect the set-up for the default welcome page.
+. Replace the welcome page with a trivial dynamic template.
+. Generate a compilation error.
+. Retrieve HTTP request parameters.
+. Rendering binary data.
+. Show message file content in the template
+. Add the project to Eclipse.
+. Add a JPA Entity.
+. Add an HTML form for creating entity instances.
+. Add a link for deleting each instance.
+. Use extensions in the view template.
+. Add form validation.
+
+[[Createandruntheapplication]]
+== Create and run the application
+
+*Open* http://download.playframework.org/1.1-nightly/ Download one of
+the nightly builds for 1.1, unless the final version has already been
+released — I used 1.1-unstable-r942. Resist the urge to use any other
+version for use with this demo.
+
+____
+There is no need to _install_ Play as such, although you might want to
+add the download's directory to your `PATH`, so you can execute the
+`$PLAY_HOME/play` commmand directly. On my machine, though, it's just as
+easy to just type `~/Downloads/play-1.1-unstable-r942/play` for this
+kind of demo.
+____
+
+*Execute* `play install scala`
+
+*Execute*
+`play new tasks --with scala~ What is the application name? tasks`
+
+____
+A task list application is an easy example for people to understand, but
+it is more fun to pick an example that is more familiar and relevant to
+your audience, such as 'customers' or 'cocktails'.
+____
+
+*Execute* `find tasks` (optional) - List the generated files
+
+____
+It is crucial to note that Play has not generated a lot of code here;
+the files are minimal stubs that you will only add to, rather than a lot
+of generated code that you will have to delete.
+____
+
+*Execute* `play run tasks` - Start the Play server runtime to run the
+application.
+
+____
+Depending on what you are used to, start-up time may seem extremely
+short.
+____
+
+*Open* http://localhost:9000/ - Show welcome page.
+
+____
+The welcome page describes how the stub application works, which the
+next few steps show.
+____
+
+*Start* a text editor.
+
+____
+You could use an IDE, such as Eclipse, already at this point. However,
+it is useful to start with a plain text editor to make it clear that you
+do not have to compile the Scala code yourself.
+
+If you are doing this demo with TextMate on a Mac, you can uncomment the
+line that starts with `# play.editor`. This will allow you to click on
+the sources in Play's error messages to make TextMate jump to the right
+place in the file.
+____
+
+*Edit* `conf/routes` - Show the route for the `GET /` HTTP request.
+
+____
+Since Play has an HTTP focus, an incoming HTTP request is a good
+starting point for explaining how it works. The `routes` file, is
+therefore crucial, because this defines the (two-way) mapping between
+HTTP requests and Scala methods.
+____
+
+*Edit* `app/controllers/Application.scala` - Show the `index` method.
+
+*Edit* `app/views/main.html` - Show the default template: HTML 5, CSS
+and jQuery.
+
+*Edit* `app/views/Application/index.html` - Show the `#{welcome /`} tag
+and replace it with `<h1>Tasks</h1>`.
+
+*Open* http://localhost:9000/ - Show the heading.
+
+[[Showdynamicdatainthetemplate]]
+== Show dynamic data in the template
+
+*Edit* `app/views/Application/index.html` - Change the heading to
+`<h1>${items}</h1>`.
+
+*Edit* `app/controllers/Application.scala` - Change the `index` method
+to the following (omitting a parenthesis).
+
+\{% highlight scala %} def index \{ val items = "Things" render(items }
+\{% endhighlight %}
+
+*Open* http://localhost:9000/ - Show the Scala compilation error.
+
+*Edit* `app/controllers/Application.scala` - Add the missing
+parenthesis.
+
+*Open* http://localhost:9000/ - Show the Scala changes without
+compilation or deployment.
+
+*Edit* `app/controllers/Application.scala` - Replace the `items`
+declaration line with an `items: String = "default"` method parameter.
+
+*Open* http://localhost:9000/?items=Things and
+http://localhost:9000/?items=Things[http://localhost:9000/] to show the
+working default value.
+
+*Edit* `app/controllers/Application.scala` - Undo the last change -
+remove the parameter and put the declaration back.
+
+[[Renderingbinarydata]]
+== Rendering binary data
+
+*Edit* `app/controllers/Application.scala` - Add a new method.
+
+\{% highlight scala %} import play.libs.Images … def captcha =
+Images.captcha \{% endhighlight %}
+
+*Edit* `conf/routes` - Add `GET /captcha Application.captcha`
+
+*Open* http://localhost:9000/captcha - Show the rendered image, show
+that the image has the correct mime-type according to the browser.
+
+____
+`Images.captcha`, which is part of Play's built-in captcha facilities,
+renders a new captcha image for every call.
+____
+
+[[Showmessagefilecontentinthetemplate]]
+== Show message file content in the template
+
+*Edit* `app/views/Application/index.html` - Change the heading to
+`<h1>&{'model.tasks'}</h1>`.
+
+*Open* http://localhost:9000/ - Show the message key being displayed,
+because the message is not defined.
+
+*Edit* `conf/messages` - Add the line `model.tasks = Tasks`
+
+*Open* http://localhost:9000/ - Show the message being displayed.
+
+[[Eclipse]]
+== Eclipse
+
+*Execute* `Control+C` - Show how little logging there is by default.
+
+*Execute* `play eclipsify tasks` - Generate Eclipse project and class
+path configuration.
+
+*Eclipse* _File » Import… » Existing projects into workspace_ - Show
+project structure.
+
+*Eclipse* `eclipse/tasks.launch` » Run » tasks - Start the Play server
+runtime from within Eclipse.
+
+*Open* http://localhost:9000/ - Show the application running.
+
+[[JPAentity]]
+== JPA entity
+
+*Edit* `app/models` - create class:
+
+[source,scala]
+----
+package models
+
+import javax.persistence.Entity
+
+import play.db.jpa.Model
+import play.db.jpa.QueryOn
+
+@Entity
+class Task(
+   var title: String
+) extends Model {
+   override def toString = title
+}
+
+object Task extends QueryOn[Task]
+----
+
+*Edit* `app/controllers/Application.scala` - Change the `index` method
+to
+
+[source,scala]
+----
+import models.Task
+…
+def index {
+   val tasks = Task.findAll
+   render(tasks)
+}
+----
+
+*Edit* `app/views/Application/index.html` - After the heading, add:
+
+[source,html]
+----
+<ul>
+#{list tasks, as:'task'}
+   <li>${task.title}</li>
+#{/list}
+</ul>
+----
+
+*Open* http://localhost:9000/ - Show the JPA error.
+
+*Edit* `conf/application.conf` - Uncomment the line `# db=mem`
+
+____
+Play needs to be restarted for this to take effect. Press Ctrl+C in the
+terminal window running Play and rerun the command `play run tasks`
+____
+
+*Open* http://localhost:9000/ - Show the page - no tasks.
+
+[[HTMLform]]
+== HTML form
+
+*Edit* `app/views/Application/index.html` - After the list, add:
+
+[source,html]
+----
+#{form @add()}
+<p><input name="task.title"></p> <p><input type="submit" value="Add Task"></p>
+#{/form}
+----
+
+*Edit* `app/controllers/Application.scala` - Add the method:
+
+[source,scala]
+----
+def add(task: Task) {
+   task.save
+   index
+}
+----
+
+*Open* http://localhost:9000/ - Add tasks.
+
+[[Commandlink]]
+== Command link
+
+*Edit* `app/views/Application/index.html` - Inside the `<li>` add a
+link:
+
+[source,html]
+----
+<a href="@{delete(task.id)}">delete</a>
+----
+
+____
+As for forms, there is also a tag for generating links; this way just
+generates the URL.
+____
+
+*Edit* `conf/routes` - Add `GET /delete Application.delete`
+
+*Edit* `app/controllers/Application.scala` - Add the method, noting the
+`id` parameter:
+
+[source,scala]
+----
+def delete(id: Long) {
+   Task.findById(id).foreach(_.delete())
+   index
+}
+----
+
+The `foreach` idiom is because `findById` returns a Scala `Option` which
+can behave like an empty list or one filled with one entry. This means
+that you don't have to check for `null` here, the call to `_.delete` is
+just never run if no task was found.
+
+*Open* http://localhost:9000/ - Delete tasks - show the link URL and
+query string parameter.
+
+== Extensions
+
+*Edit* `app/views/Application/index.html` - Change the heading to:
+
+[source,html]
+----
+<h1>${tasks.size()} Task${tasks.pluralize()}</h1>
+----
+
+*Open* http://localhost:9000/ - Add/delete tasks to show singular and
+plural forms.
+
+____
+If you are lucky, at this point someone in the audience will be smart
+enough to point out that some plurals are not just formed by adding an
+'s', at which point you can change the example, and show the `pluralize`
+method with one or more parameters, e.g.
+`${tasks.pluralize(messages.get('task'), messages.get('tasks'))`}
+____
+
+[[Formvalidation]]
+=== Form validation
+
+*Edit* `models/Task.scala` - Add the `@Required`
+(`import play.data.Validators.Required`) annotation to the `title`
+field.
+
+*Edit* `app/controllers/Application.scala` - Add the `@Valid` annotation
+to the `add` method's `Task` parameter, replace the first line of the
+method body (`Task.save`) with the following.
+
+[source,scala]
+----
+import play.data.validation._
+…
+if (Validation.hasErrors) {
+   Validation.keep
+}
+else {
+   task.save
+}
+----
+
+*Edit* `app/views/Application/index.html` - before the form, add:
+
+[source,html]
+----
+#{errors}
+    <p style="color:red">${error}</p>
+#{/errors}
+----
+
+*Open* http://localhost:9000/ - Show the validation error when
+submitting an empty name.
+
+____
+The validation error is just 'Required', but we can change this.
+____
+
+*Edit* `conf/messages` - Add the line
+`validation.required = %s is a required field`
+
+*Open* http://localhost:9000/ - Show the new validation error.
+
+____
+Now we get the field name, but not as a formatted label.
+____
+
+*Edit* `conf/messages` - Add the line `task.title = Task name`
+
+*Open* http://localhost:9000/ - Show the new validation error.
+
+____
+This lists validation errors in one place. A better way is to list the
+errors next to each field.
+____
+
+*Edit* `app/views/Application/index.html` - Replace the errors tag with:
+
+[source,html]
+----
+#{ifErrors}
+    <p style="color:red">Validation failed</p>
+#{/ifErrors}
+----
+
+… and after the text input, before the closing `</p>` tag, add:
+
+
+[source,html]
+----
+<strong style="color:red">#{error 'task.title' /}</strong>
+----
+
+*Open* http://localhost:9000/ - Show the new validation error.
+

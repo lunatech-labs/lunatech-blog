@@ -1,0 +1,30 @@
+---
+layout: post
+title: Dutch Clojure Meetup
+date: 2018-07-05
+author: Antoine Laffez
+lang: en
+tags:
+  - event
+img: images/media/2018-07-05-dutch-clojure-meetup/background.png
+---
+= Dutch Clojure Meetup
+
+:imagesdir: /images/media/2018-07-05-dutch-clojure-meetup
+
+Lunatech hosted the Dutch Clojure Meetup \#103 organised by Carlo Sciolla at our Rotterdam offices.  Clojure is an exciting programming language for the JVM. In this Meetup you will learn : 
+
+- Teaching each other Clojure
+
+- Presenting ongoing work and new technologies/libraries
+
+ - Hacking on our own Open Source projects (Dojo sessions) 
+
+ - Looking for Clojure startup opportunities  If you have an idea about, or a project concerning ongoing Meetup(s) in Rotterdam  / The Hague / Delft, about Programming Langage, JVM, IT student association, IoT, Big Data and more, don't hesitate to contact us, Lunatech is super active in this field! 
+
+The Clojure community grow in Netherlands, join their https://www.meetup.com/The-Dutch-Clojure-Meetup/[Meetup] or subscribe to their https://www.youtube.com/channel/UCkb1jQA-BMBwmYG1OkHILJw[YouTube Channel] for more.
+
+video::c5DifklnMI8[]
+
+To have a better idea, check the video link, a nice talk by https://www.linkedin.com/in/baruch-berger-a8a3735b/[Baruch Berger] on an original topic ;) Thanks to Adrien Haxaire Gustavo De Micheli and Celeste Franco for their help.
+

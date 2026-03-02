@@ -1,0 +1,96 @@
+---
+layout: post
+title: Tuples in Java
+date: 2006-04-28
+author: bartschuller
+lang: en
+tags:
+  - java
+---
+= Tuples in Java
+
+Every once in a while, a java programmer wonders *how do I return multiple values from my method?* Perl and lisp can return lists, but java is constrained to return just one object. Here's how that limitation can be overcome. Note that this requires a Java 5 implementation.
+
+++++
+
+<p>Let's start with an example program:</p>
+
+<pre>
+<code>
+<font color="#a020f0">package</font> org.smop.tests;
+
+<font color="#a020f0">import</font> java.util.ArrayList;
+<font color="#a020f0">import</font> java.util.Collection;
+
+<font color="#a020f0">import</font> org.smop.generics.Tuple;
+
+<font color="#2e8b57"><b>public</b></font> <font color="#2e8b57"><b>class</b></font> TupleTest {
+        <font color="#2e8b57"><b>public</b></font> <font color="#2e8b57"><b>static</b></font> Tuple&lt;String, Integer&gt; returnTwo() {
+                <font color="#a52a2a"><b>return</b></font> <font color="#a52a2a"><b>new</b></font> Tuple&lt;String, Integer&gt;(<font color="#ff00ff">&quot;Hello&quot;</font>, <font color="#ff00ff">5</font>);
+        }
+
+        <font color="#2e8b57"><b>public</b></font> <font color="#2e8b57"><b>static</b></font> Tuple&lt;Collection&lt;String&gt;, Tuple&lt;String, String&gt;&gt; returnComplex() {
+                Collection&lt;String&gt; l = <font color="#a52a2a"><b>new</b></font> ArrayList&lt;String&gt;();
+                l.add(<font color="#ff00ff">&quot;one&quot;</font>);
+                l.add(<font color="#ff00ff">&quot;two&quot;</font>);
+
+                <font color="#a52a2a"><b>return</b></font> <font color="#a52a2a"><b>new</b></font> Tuple&lt;Collection&lt;String&gt;, Tuple&lt;String, String&gt;&gt;(
+                                l,
+                                <font color="#a52a2a"><b>new</b></font> Tuple&lt;String, String&gt;(<font color="#ff00ff">&quot;c1&quot;</font>, <font color="#ff00ff">&quot;c2&quot;</font>));
+        }
+
+        <font color="#2e8b57"><b>public</b></font> <font color="#2e8b57"><b>static</b></font> <font color="#2e8b57"><b>void</b></font> main(String[] args) {
+                Tuple&lt;String, Integer&gt; r1 = returnTwo();
+                System.err.println(r1.first+<font color="#ff00ff">&quot; unboxing: &quot;</font>+(r1.second -<font color="#ff00ff">2</font>));
+
+                Tuple&lt;Collection&lt;String&gt;, Tuple&lt;String, String&gt;&gt; r2 = returnComplex();
+                <font color="#a52a2a"><b>for</b></font> (String string : r2.first) {
+                        System.err.println(string);
+                }
+                System.err.println(r2.second.first + <font color="#ff00ff">&quot; &quot;</font> + r2.second.second);
+        }
+}
+</code>
+</pre>
+
+<p>When we run this, the output is:</p>
+
+<blockquote><pre><code>
+Hello unboxing: 3
+one
+two
+c1 c2
+</code></pre></blockquote>
+
+<p>The first method, <code>returnTwo()</code> needs to return a String and an integer. People sometimes resort to returning arrays or HashMaps, but particularly in this case, where the values are not of the same type, this gets ugly.</p>
+
+<p>The solution here is to use a generic type <code>Tuple</code> which in this case has two type parameters. We declare the return value as being a Tuple of String and Integer and return a new object of that type. Notice that we can't use <code>int</code> here, but thanks to the automatic boxing and unboxing, the type <code>Integer</code> acts just like plain <code>int</code>.</p>
+
+<p>The second method combines two tuples so it can return three different types. As you can see, it quickly becomes unreadable.</p>
+
+<p>Here's our <code>Tuple</code> class:</p>
+
+<pre><code>
+<font color="#a020f0">package</font> org.smop.generics;
+
+<font color="#0000ff">/**</font>
+<font color="#0000ff"> *</font><font color="#6a5acd"> Generic Tuple class, for returning multiple objects.</font>
+<font color="#0000ff"> * </font><font color="#6a5acd">@author</font><font color="#0000ff"> Bart Schuller </font><font color="#6a5acd">&amp;lt;</font><font color="#0000ff">generics@smop.org</font><font color="#6a5acd">&amp;gt;</font>
+<font color="#0000ff"> *</font>
+<font color="#0000ff"> * </font><font color="#6a5acd">@param</font><font color="#008b8b"> &lt;T1&gt;</font><font color="#0000ff"> the type of the first object</font>
+<font color="#0000ff"> * </font><font color="#6a5acd">@param</font><font color="#008b8b"> &lt;T2&gt;</font><font color="#0000ff"> the type of the second object</font>
+<font color="#0000ff"> */</font>
+<font color="#2e8b57"><b>public</b></font> <font color="#2e8b57"><b>class</b></font> Tuple&lt;T1, T2&gt; {
+        <font color="#2e8b57"><b>public</b></font> T1 first;
+        <font color="#2e8b57"><b>public</b></font> T2 second;
+
+        <font color="#2e8b57"><b>public</b></font> Tuple(T1 first, T2 second) {
+                <font color="#2e8b57"><b>this</b></font>.first = first;
+                <font color="#2e8b57"><b>this</b></font>.second = second;
+        }
+}
+</code></pre>
+
+<p>Notice that it is extremely simple. I'll leave the implementation of a <code>Tuple3</code> class as an excercise for the reader...</p>
+
+++++

@@ -1,0 +1,17 @@
+---
+layout: post
+title: Embedded Journalism
+date: 2008-01-21
+author: Michael Pentowski
+lang: en
+tags:
+  - opinion
+---
+= Embedded Journalism
+
+One of the
+cool startups we are involved with, http://www.wipido.com/[Wipido],
+now supports embedding video channels into your own websites.
+
+This is my experiment to see if it really does work as advertised on the
+tin…

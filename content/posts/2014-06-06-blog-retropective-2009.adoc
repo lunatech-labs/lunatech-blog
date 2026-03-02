@@ -1,0 +1,74 @@
+---
+layout: post
+title: Lunatech blog retrospective - 2009
+date: 2014-06-06
+author: hilton
+lang: en
+tags:
+  - opinion
+---
+= Lunatech blog retrospective - 2009
+
+In 2009, we continued to fight JSF, win (usually), write about it, 
+    and tell our war stories at JBoss User Group events. However, the most
+    interesting blog posts were about other topics.
+
+image:../media/2009-12-21-chrimble-cocktail/chrimble-cocktail.jpg[Chrimble cocktail]
+
+== Programming
+
+link:/posts/2009-02-03-what-every-web-developer-must-know-about-url-encoding[What
+every web developer must know about URL encoding] is probably the most
+popular article on the Lunatech blog, and still getting a lot of
+attention years later. This is not just because Stéphane’s article does
+what it says on the tin (it explains in detailed what every web
+developer must know about URL encoding), but because there aren’t enough
+other ways to learn this stuff and because so many pervasive web
+application bugs are due to these issues. This is the basis of web
+development, which is already more than twenty years old, and these
+issues aren’t going away any time soon, so it’s never too late to catch
+up.
+
+link:/posts/2009-09-18-support-original-language-accept-language-header[Support
+for original language in Accept-Language header] continues along similar
+lines, in which Francisco writes about an HTTP request header that is
+perhaps less important to most people, who aren’t constantly doing
+(natural) language negotiation In Real Life. Lunatech is perhaps
+different, though, having a disproportionate number of staff who are
+tri-lingual.
+
+link:/posts/2009-11-23-generating-scalable-barcodes-itext-and-seam[Generating
+scalable barcodes with iText and Seam], by comparison, is a much more
+practical kind of article and even has pictures (or bar codes) as well
+as code. This is still my favourite kind of blog post, because software
+library documentation and books can never go into detail on every
+possible practical use case, so a well-written article on a niche topic
+can easily be the definitive reference (i.e. the only good Google search
+result). This is great for those development tasks that you only ever
+have to do once, but still take a long time to figure out if you haven’t
+done it before and can’t find a description on-line.
+
+== Architecture
+
+link:/posts/2009-12-14-decision-service-architecture-jboss-rules[Decision
+service architecture with JBoss Rules] was a rare digression into the
+higher-level territory of software architecture, which we don’t usually
+bother talking about because it always sounds so vague. (That’s probably
+not a good thing.) It’s worth doing for niche enterprise libraries and
+frameworks, though, because it’s usually not obvious when and how to use
+them. In more recent years, we have had similar discussions and learning
+experiences with other technologies, such as Activiti and Apache Camel,
+but sadly no blog posts.
+
+== And now for something completely different
+
+link:/posts/2009-12-21-chrimble-cocktail[Chrimble cocktail] is an altogether
+different kind of tutorial, which has nothing much to do with
+programming or even beer. Christmas, however, is a good time to be a
+polyglögg programmer as well as a polyglot programmer. It’s a good idea
+to try a new cocktail every year as well as a new programming language.
+It’s just too bad I didn’t get around to writing the follow-up blog
+post: _Do TDD-ers drink mocktails?_
+
+_Photo: https://www.flickr.com/photos/orijinal/4726603759[Jaysin
+Trevino]_

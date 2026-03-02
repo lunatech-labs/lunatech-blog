@@ -1,0 +1,46 @@
+---
+layout: post
+title: "December Play!ground in Rotterdam"
+date: 2011-11-08
+author: hilton
+lang: en
+tags:
+  - event
+  - playframework
+  - playground
+---
+= December Play!ground in Rotterdam
+
+Following a break for
+Devoxx and busy projects, we are now planning the next http://www.playframework.org/[Play
+Framework] event, for software developers
+and technical managers.
+
+This event is the perfect opportunity to learn practical techniques,
+learn more about Play’s advanced features and meet other Play
+developers. We also expect to have some fun.
+
+== Details
+
+* 16:30, Friday, 2 December 2011
+* Lunatech Office -
+http://maps.google.com/maps?q=Lunatech+Research,rotterdam[Heemraadssingel
+70, 3021DD, Rotterdam]
+
+== Programme
+
+This event will focus on Play 2.0, with presentations by
+Peter Hilton and Nicolas Leroux:
+
+* 16:30 - arrival and drinks
+* 17:00 - Play 1.2.4/2.0 news and the story behind the Devoxx announcements
+* 17:30 - break
+* 17:45 - Play 2.0 live coding example
+* 18:15 - drinks, networking
+
+As always, beer and networking are an essential part of the programme.
+
+== Registration
+
+http://www.lunatech-research.com/event/register/lunatech-labs/playground-december-2011[Register]
+for this event.

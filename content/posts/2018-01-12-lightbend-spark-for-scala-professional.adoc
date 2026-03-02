@@ -1,0 +1,21 @@
+---
+layout: post
+title: Lightbend Spark for Scala-Professional by Kensu
+date: 2018-01-12
+author: Antoine Laffez
+lang: en
+tags:
+  - event
+img: images/media/2018-01-12-lightbend-spark-for-scala-Professional/background.png
+aliases:
+  - /posts/2018-01-12-lightbend-spark-for-scala-Professional
+---
+= Lightbend Spark for Scala-Professional by Kensu
+
+:imagesdir: /images/media/2018-01-12-lightbend-spark-for-scala-Professional
+
+Many courses and trainings will take place this month at our Rotterdam offices. The first of the series is "Lightbend Spark for Scala-Professional".
+
+This two-day course is designed to teach developers how to implement data analytics using Apache Spark, an open-source cluster-computing framework for Reactive applications. 
+
+This course allows Full Stack Developers and Devops to dive into the world of modern data analytics. This will be a valuable addition for the personal development of the participants. Which is also beneficial for https://www.linkedin.com/company/52358/[Lunatech]'s tech-stack of course. 
