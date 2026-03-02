@@ -1,0 +1,12 @@
+items:
+  - title: "Blog"
+    path: "/"
+    icon: "fa-regular fa-newspaper"
+  - title: "Official website"
+    path: "https://lunatech.com"
+    icon: "fa-solid fa-globe"
+    target: "_blank"
+  - title: "Join us"
+    path: "https://lunatech.com/careers"
+    icon: "fa-solid fa-users"
+    target: "_blank"

@@ -1,0 +1,40 @@
+---
+layout: main
+---
+
+<article class="post">
+    <header class="post__header">
+        <h1 class="post__title">{page.data.getString('title')}</h1>
+
+        <div class="post__meta">
+            <div class="post__author">
+                <img src="https://github.com/{page.data.getString('author')}.png"
+                     alt="{page.data.getString('author')}"
+                     class="post__author-avatar"
+                     onerror="this.src='/images/default-avatar.svg'">
+                <div class="post__author-info">
+                    <span class="post__author-name">{page.data.getString('author')}</span>
+                    <time class="post__date" datetime="{page.data.getString('date')}">{page.date.format('dd MMM yyyy')}</time>
+                </div>
+            </div>
+        </div>
+
+        {#if page.data.getJsonArray('tags')}
+        <div class="post__tags">
+            {#for tag in page.data.tags.asStrings}
+            <a href="/posts/tag/{tag}" class="tag">{tag}</a>
+            {/for}
+        </div>
+        {/if}
+    </header>
+
+    {#if page.data.getString('img')}
+    <div class="post__cover">
+        <img src="/{page.data.getString('img')}" alt="{page.data.getString('title')}">
+    </div>
+    {/if}
+
+    <div class="post__content">
+        {page.content}
+    </div>
+</article>

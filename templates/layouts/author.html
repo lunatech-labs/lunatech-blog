@@ -1,0 +1,21 @@
+---
+layout: main
+---
+
+<section class="tag-page">
+    <h1 class="tag-page__title">
+        <img src="https://github.com/{page.data.getString('author-filter')}.png"
+             alt="{page.data.getString('author-filter')}"
+             style="width:48px;height:48px;border-radius:50%;vertical-align:middle;margin-right:12px"
+             onerror="this.src='/images/default-avatar.svg'">
+        {page.data.getString('author-filter')}
+    </h1>
+
+    <section class="posts-grid">
+        {#for post in site.collections.get('posts')}
+        {#if post.data.getString('author') == page.data.getString('author-filter')}
+        {#include partials/post-card.html post=post /}
+        {/if}
+        {/for}
+    </section>
+</section>

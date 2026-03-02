@@ -1,24 +1,32 @@
-.DS_store
-logs
-.bsp
-conf/overrides.conf
-project/project
-project/target
-target
-tmp
-.history
-dist
-/.idea
-/*.iml
-/out
+# OS
+.DS_Store
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
 /.idea_modules
 /.classpath
 /.project
-/RUNNING_PID
 /.settings
-/*.ipr
-/*.iws
-.DS_Store
+/out
 
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
 
-.idea
+# Quarkus
+.quarkus/
+
+# Web Bundler
+node_modules/
+
+# Misc
+logs
+tmp
+dist
+.history
+/RUNNING_PID

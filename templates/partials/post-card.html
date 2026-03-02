@@ -1,0 +1,43 @@
+<article class="card">
+    <a href="{post.url}" class="card__link">
+        {#if post.data.getString('img')}
+        <div class="card__cover">
+            <img src="/{post.data.getString('img')}" alt="{post.data.getString('title')}"
+                 loading="lazy"
+                 onerror="this.parentElement.classList.add('card__cover--error')">
+        </div>
+        {#else}
+        <div class="card__cover card__cover--placeholder">
+            <div class="card__cover-placeholder">
+                <i class="fa-solid fa-file-lines"></i>
+            </div>
+        </div>
+        {/if}
+    </a>
+
+    <div class="card__body">
+        <div class="card__author">
+            <img src="https://github.com/{post.data.getString('author')}.png"
+                 alt="{post.data.getString('author')}"
+                 class="card__author-avatar"
+                 loading="lazy"
+                 onerror="this.src='/images/default-avatar.svg'">
+            <div class="card__author-info">
+                <span class="card__author-name">{post.data.getString('author')}</span>
+                <time class="card__date" datetime="{post.data.getString('date')}">{post.date.format('dd MMM yyyy')}</time>
+            </div>
+        </div>
+
+        <h2 class="card__title">
+            <a href="{post.url}">{post.data.getString('title')}</a>
+        </h2>
+
+        {#if post.data.getJsonArray('tags')}
+        <div class="card__tags">
+            {#for tag in post.data.tags.asStrings}
+            <a href="/posts/tag/{tag}" class="tag">{tag}</a>
+            {/for}
+        </div>
+        {/if}
+    </div>
+</article>
