@@ -1,0 +1,170 @@
+= Unifyig the stack: Why we're considering moving to Odoo
+TanguySrd
+v1.0, 2026-04-13
+:title: Unifyig the stack: Why we're considering moving to Odoo
+:imagesdir: ../media/2026-04-13-unifyig-the-stack:-why-we're-considering-moving-to-odoo/
+:lang: en
+:tags: [odoo, erp, en]
+
+At Lunatech, we've always believed in using the best tool for the job. But over time, having our data split between
+Toggl, Klippa, Confluence, and custom apps started to feel like “death by a thousand tabs.” Here is why—and how—we are
+considering moving everything into Odoo.
+
+## What is Odoo?
+
+Odoo is an all-in-one, open-source ERP (Enterprise Resource Planning) platform. Unlike traditional rigid corporate
+software, Odoo is modular. You don't buy a massive monolith; you activate apps like Lego bricks—Project, Timesheets,
+Accounting, and HR—all sharing a single database.
+
+### The Power of Open Source
+At its heart, Odoo is built on a "core" that is entirely open source (the LGPLv3 licensed Community version).
+This philosophy is a game-changer for an IT consulting company like ours. It means we have full access to the source
+code, allowing us to audit exactly how the system handles data. It also allows us to fix bugs ourselves without waiting
+for a vendor's patch. Obviously, it is as well an opportunity for us to contribute back to a global ecosystem of
+thousands of developers. This transparency eliminates "vendor lock-in"—if we ever need to move our data or modify
+a core behavior, the keys are in our hands, not hidden behind a proprietary black box.
+
+## Solving the "Context-Switching Tax"
+
+In a first phase, our migration would focus on internal consolidation—replacing four disconnected silos with one
+integrated flow:
+
+- **Time Tracking**: Moving from Toggl to Odoo Timesheets. Time logged on a task would directly impact project
+profitability and draft billing in real-time.
+
+- **Expenses**: Replacing Klippa with Odoo Expenses. Our consultants can snap receipt photos via the mobile app, and the
+OCR automatically links them to invoices for faster reimbursement.
+
+- **Vacations**: Porting our custom vacation app to Odoo Time Off, ensuring leave requests automatically update project
+resource calendars so PMs can see true team capacity.
+
+- **Knowledge Management**: Transitioning from Confluence to Odoo Knowledge, keeping our technical documentation and
+SOPs right next to everything else.
+
+In a second phase, we aim to leverage Odoo's connectivity to transform how we interact with our clients. By moving
+beyond internal utility, we can provide a "Glass Box" experience:
+
+- **The Client Portal**: Giving clients a secure window into their projects where they can view live progress, and
+access shared documentation without waiting for a weekly status report.
+
+- **Integrated Support**: Using the Odoo Helpdesk to link support tickets directly to development tasks, giving clients
+full visibility into the lifecycle of their requests.
+
+- **Collaborative Billing**: Streamlining the financial relationship by allowing clients to view, sign, and pay for
+project milestones directly through a branded interface.
+
+## Deployment: Choosing the Right Engine Room
+Before we can start building, we have to decide where Odoo lives. There are three primary ways to host the platform,
+each offering a different balance between convenience and control:
+
+#### Odoo Online (SaaS)
+This is the "plug-and-play" version hosted by Odoo SA. It’s perfect for standard users because it requires zero
+maintenance and includes automatic upgrades. However, for a dev-centric environment like ours, it has a major drawback:
+you cannot use custom addons.
+
+#### Odoo.sh (PaaS)
+This is the "Goldilocks" zone for IT companies. It’s a cloud platform specifically designed for developers. It
+integrates directly with GitHub, automatically spinning up a new staging environment every time you create a Pull
+Request. It gives us the freedom to use custom addons while Odoo handles the server infrastructure.
+
+#### On-Premise (Self-Hosted)
+For total sovereignty, we can host Odoo on our own infrastructure (like AWS, GCP, or a local Ubuntu VPS). This gives us
+100% control over the PostgreSQL database and server tuning, but it means our internal IT team is responsible for
+backups, security, and maintenance.
+
+## The Developer's Playground: Creating Addons
+The “open-core” nature of Odoo is the aspect we value the most. We can extend the system using Python and XML without
+touching the core code through Inheritance.
+
+In the world of Odoo, **Inheritance** is the "secret sauce" that allows us to customize the system while keeping the
+core software clean and updatable. Instead of modifying Odoo’s original source code, we create a new layer that sits on
+top of it. This mechanism allows us to "inherit" the entire functionality of a standard module and simply inject our
+custom logic or UI changes right where we need them.
+
+#### Trivial Example: Adding Seniority Levels
+To give you an idea of the workflow, let's say we want to add a "Seniority Level" field to our internal user records.
+
+##### Step 1: Where to put the code (The Structure)
+Odoo modules follow a specific directory structure. We use the `scaffold` command to generate this instantly:
+
+```Bash
+python3 odoo-bin scaffold lunatech_seniority ./extra-addons
+```
+This creates a folder named `lunatech_seniority`. Inside, the two most important files for this example are the Model
+(database logic) and the View (the UI).
+
+##### Step 2: Defining the Logic (Python)
+In `models/user_extension.py`, we use Odoo's ORM to extend the existing user model. We don't create a new table; we simply
+tell Odoo to add a column to the existing one.
+
+```Python
+# models/user_extension.py
+from odoo import models, fields
+
+class ResUsers(models.Model):
+_inherit = 'res.users'  # Inheriting the base 'res.users' model
+
+    seniority_level = fields.Selection([
+        ('junior', 'Junior'),
+        ('medior', 'Medior'),
+        ('senior', 'Senior'),
+        ('principal', 'Principal')
+    ], string='Consultant Seniority', default='junior')
+```
+
+##### Step 3: Defining the Interface (XML)
+To make this field visible to our HR team, we need to "inject" it into the existing User form. We do this using XPath in
+an XML file.
+
+```XML
+<odoo>
+    <record id="view_users_form_inherit" model="ir.ui.view">
+        <field name="name">res.users.form.inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='login']" position="after">
+                <field name="seniority_level"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+```
+#### How to Deploy the Addon
+Depending on our environment, deployment follows a standard CI/CD pipeline:
+
+1. Local Development: We run Odoo locally using Docker or a virtual environment. We point our odoo.conf file to the
+extra-addons folder and restart the server with the -u lunatech_seniority flag to install the module.
+
+2. Staging & Production (Odoo.sh): Since Odoo.sh is integrated with GitHub, we simply push our code to a new branch.
+Odoo.sh automatically spins up a "Staging" instance of our database. We test the new field, and if it works, we merge
+the branch into production. The platform handles the database migration and service restart automatically.
+
+#### Where and How to Use It
+Once deployed, the field is immediately active.
+
+- HR Management: Our HR team can now go to Settings > Users, open any consultant's profile, and see the new "Consultant
+Seniority" dropdown.
+
+- Reporting: Because this is now a structured field in the PostgreSQL database, we can group our Pivot Reports by
+Seniority. We can instantly see if our "Senior" consultants are being over-utilized compared to "Juniors," allowing us
+to balance project loads effectively.
+
+## Conclusion
+
+To wrap up, moving to Odoo is more than just a technical migration—it’s a strategic decision to align our internal
+operations with our identity as a modern IT consulting company.
+
+By embracing an all-in-one, open-source ecosystem, we aren't just retiring a few subscriptions; we are building a
+foundation that is as scalable and agile as the solutions we deliver to our clients. Odoo provides the rare middle ground
+where high-level business management meets low-level developer freedom.
+
+Whether it’s through the use of Python inheritance, the transparency of the client portal, or the sheer efficiency of a
+unified database, Odoo empowers us to spend less time managing our tools and more time mastering our craft. As we look
+toward the future, this integration isn't just about working faster—it's about working smarter, together, on a platform
+that follows the same philosophy as we do.
+
+**The question for us isn't just "Why Odoo?", but rather "How far can we take it?"**
+
+
+
