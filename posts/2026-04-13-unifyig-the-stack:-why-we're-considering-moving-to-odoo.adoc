@@ -39,7 +39,9 @@ OCR automatically links them to invoices for faster reimbursement.
 resource calendars so PMs can see true team capacity.
 
 - **Knowledge Management**: Transitioning from Confluence to Odoo Knowledge, keeping our technical documentation and
-SOPs right next to everything else.
+SOPs right next to everything else. We can leverage Odoo’s native import tools and REST API to migrate our existing
+pages while maintaining document hierarchy and data integrity. Confluence provides a bulk export feature as well as an
+API to handle the knowledge export.
 
 In a second phase, we aim to leverage Odoo's connectivity to transform how we interact with our clients. By moving
 beyond internal utility, we can provide a "Glass Box" experience:
@@ -63,9 +65,11 @@ maintenance and includes automatic upgrades. However, for a dev-centric environm
 you cannot use custom addons.
 
 #### Odoo.sh (PaaS)
-This is the "Goldilocks" zone for IT companies. It’s a cloud platform specifically designed for developers. It
-integrates directly with GitHub, automatically spinning up a new staging environment every time you create a Pull
-Request. It gives us the freedom to use custom addons while Odoo handles the server infrastructure.
+This is the "Goldilocks" zone for IT companies. It gives us the total freedom to develop and host custom addons for any
+highly specific business logic we may need in the future, while Odoo handles the heavy lifting of the server
+infrastructure. Unlike the basic SaaS version, this platform allows us to maintain a professional developer workflow
+through its direct GitHub integration; it automatically spins up a new staging environment every time we create a Pull
+Request, ensuring any code we write to extend Odoo is battle-tested before it ever hits production.
 
 #### On-Premise (Self-Hosted)
 For total sovereignty, we can host Odoo on our own infrastructure (like AWS, GCP, or a local Ubuntu VPS). This gives us
@@ -165,6 +169,3 @@ toward the future, this integration isn't just about working faster—it's about
 that follows the same philosophy as we do.
 
 **The question for us isn't just "Why Odoo?", but rather "How far can we take it?"**
-
-
-
