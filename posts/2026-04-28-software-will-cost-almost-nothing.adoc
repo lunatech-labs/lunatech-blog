@@ -46,8 +46,6 @@ This is captured in a simple equation:
 
 image::../media/2026-04-28-software-will-cost-almost-nothing/equation.png[The AI Equation: Output Quality = AI Capability × Context Quality]
 
-image::../media/2026-04-28-software-will-cost-almost-nothing/equation.png[The AI Equation: Output Quality = AI Capability × Context Quality]
-
 AI capability improves every quarter. You cannot control it. Context quality is the lever you own. This is where engineering discipline makes the difference between a demo and production-grade software.
 
 == A battle-tested methodology
