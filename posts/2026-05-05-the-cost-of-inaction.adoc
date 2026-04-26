@@ -5,6 +5,8 @@ v1.0, 2026-05-05
 :lang: en
 :tags: [cost of inaction, legacy modernization, tech debt, digital transformation, en]
 
+
+image::../media/2026-05-05-the-cost-of-inaction/banner.png[Banner]
 In 1977, Ken Olsen, the founder of Digital Equipment Corporation, declared: "There is no reason anyone would want a computer in their home." DEC was worth $14 billion at the time. It no longer exists.
 
 This is not a story about prediction failures. It is a story about what happens when organizations see disruption coming and choose to stand still. And if you are running a legacy system in 2026, this story is about you.
