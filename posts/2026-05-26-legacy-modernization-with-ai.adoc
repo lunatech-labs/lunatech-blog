@@ -5,6 +5,8 @@ v1.0, 2026-05-26
 :lang: en
 :tags: [legacy modernization, AI methodology, agentic coding, context pack, en]
 
+
+image::../media/2026-05-26-legacy-modernization-with-ai/banner.png[Banner]
 In the previous articles, we established three things: inaction is expensive, AI is collapsing the cost of building software, and engineers are becoming orchestrators rather than instrumentalists. The natural question is: how do you put all of this together into a real engagement, with real stakes, real data, and zero tolerance for regression?
 
 This article reveals the methodology we have been building and refining at Lunatech over the past two years: Legacy Modernization with AI.
