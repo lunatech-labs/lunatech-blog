@@ -5,6 +5,8 @@ v1.0, 2026-05-19
 :lang: en
 :tags: [software engineering, AI orchestration, context quality, spec-driven development, en]
 
+
+image::../media/2026-05-19-from-coding-to-orchestrating/banner.png[Banner]
 There is a widespread fantasy about AI in software development. It goes like this: you tell the AI to rewrite your entire banking system in Kotlin, press a button, go to lunch, and come back to a perfect application.
 
 That is not how it works. And understanding why is the most important career insight for any engineer today.
