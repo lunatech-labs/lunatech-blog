@@ -5,6 +5,8 @@ v1.0, 2026-05-12
 :lang: en
 :tags: [AI, software cost, agentic coding, productivity, legacy modernization, en]
 
+
+image::../media/2026-05-12-ai-is-collapsing-the-cost-of-software/banner.png[Banner]
 Every previous industrial revolution replaced muscle. Steam engines, assembly lines, tractors -- each one amplified physical labor and made goods cheaper to produce. The revolution happening right now is different in kind. For the first time, what is being replaced is the ability to produce structured intellectual output: code, documentation, test plans, architecture decisions, migration scripts, compliance reports.
 
 This is not a future scenario. It is already measurable, benchmarked, and accelerating.
