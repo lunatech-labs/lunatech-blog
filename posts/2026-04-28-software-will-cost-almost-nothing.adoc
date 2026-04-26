@@ -1,5 +1,5 @@
 = Software Will Cost Almost Nothing. What Happens Next?
-nicolasleroux
+pepite
 v1.0, 2026-04-28
 :title: Software Will Cost Almost Nothing. What Happens Next?
 :lang: en
