@@ -1,0 +1,58 @@
+= The Cost of Inaction: Why Standing Still Is the Most Expensive Decision in Tech
+nicolasleroux
+v1.0, 2026-05-05
+:title: The Cost of Inaction: Why Standing Still Is the Most Expensive Decision in Tech
+:lang: en
+:tags: [cost of inaction, legacy modernization, tech debt, digital transformation, en]
+
+In 1977, Ken Olsen, the founder of Digital Equipment Corporation, declared: "There is no reason anyone would want a computer in their home." DEC was worth $14 billion at the time. It no longer exists.
+
+This is not a story about prediction failures. It is a story about what happens when organizations see disruption coming and choose to stand still. And if you are running a legacy system in 2026, this story is about you.
+
+== Famous last words
+
+The pattern is always the same. A dominant player sees the future but decides that the present is comfortable enough. Kodak invented the digital camera in 1975 -- thirty-seven years before filing for bankruptcy. Blockbuster declined a partnership with Netflix in 2000 for $50 million; Netflix is now worth over $250 billion. BlackBerry dismissed the iPhone as a toy in 2007 and watched its market share fall to zero.
+
+None of these companies lacked engineers, resources, or market intelligence. What they lacked was the willingness to cannibalize their own success in order to survive. They chose the comfort of the status quo over the discomfort of transformation.
+
+And the status quo killed them.
+
+== Meanwhile, in 2026
+
+The numbers tell a sobering story. There are still 240 billion lines of COBOL in production worldwide. 43% of banking and insurance systems run on mainframes designed in the 1960s. The average cost to modernize a legacy system has historically been around $9.1 million -- a figure that has served as the perfect excuse to postpone.
+
+Every year, companies spend billions maintaining systems that were obsolete a decade ago: patching vulnerabilities in frameworks that are no longer supported, onboarding developers into codebases that nobody fully understands, and running parallel infrastructure because the old system "still works" even though it cannot integrate with modern tools.
+
+"We'll modernize next year," says every CTO since 2015. Spoiler: next year never comes. And the bill keeps growing.
+
+== The three hidden costs
+
+The cost of inaction is rarely visible on a balance sheet. It manifests in three dimensions.
+
+The first is *technical*. Every year of postponement adds another layer of tech debt. Interfaces become more brittle, dependencies more tangled, and the pool of developers who understand the system shrinks. The longer you wait, the harder and more expensive the migration becomes. This is not linear -- it is exponential.
+
+The second is *organizational*. Companies that do not modernize tend to develop rigid, flat structures where no one owns the decision to change. Committees form. Reports are commissioned. Proof-of-concept projects are launched and quietly shelved. The organizational muscle for transformation atrophies.
+
+The third is *personal*. For the software engineers working on these systems, inaction means stale skill sets. Still building Struts MVC applications in 2026? Because of inertia? A stale skill set does not land new jobs, and it does not keep old ones interesting. Being a good engineer is not about knowing a particular technology. It is about understanding the business and learning fast.
+
+== Europe's particular challenge
+
+There is a cultural dimension to this as well. Europe favors stability, consensus, and regulation. The US moves fast, encourages risk-taking, and rewards bold innovation. The result? Europe has missed leadership in cloud, AI, social media, and platform economics.
+
+This is not because European engineers are less talented. It is because the institutional incentive in Europe is to avoid failure rather than pursue success. And fear of failure leads directly to missed opportunity. Innovation requires courage, not just competence.
+
+== Inaction is a choice
+
+The instinct to delay is understandable. Modernization is complex, expensive, and risky. But the cost of not modernizing is also complex, expensive, and risky -- it is just less visible.
+
+Every day a legacy system stays in production is a day of compounding cost: maintenance overhead, security exposure, opportunity cost of features that cannot be built, and the slow erosion of competitive position.
+
+Inaction does not protect you. It just delays the consequences.
+
+The good news? The economics of modernization have changed dramatically. In the next article, we will explore how AI is collapsing the cost of building software -- and why projects that were unthinkable two years ago are now within reach.
+
+'''
+
+_This is the second in a series of five articles based on the talk "Software Will Cost Almost Nothing. What Happens Next?" Read the full series on our blog._
+
+_Contact: nicolas.leroux@lunatech.com | https://lunatech.com[lunatech.com]_
