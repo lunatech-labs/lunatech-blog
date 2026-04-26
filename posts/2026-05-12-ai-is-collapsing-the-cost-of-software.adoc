@@ -1,0 +1,79 @@
+= AI Is Collapsing the Cost of Software. Here Are the Numbers.
+nicolasleroux
+v1.0, 2026-05-12
+:title: AI Is Collapsing the Cost of Software. Here Are the Numbers.
+:lang: en
+:tags: [AI, software cost, agentic coding, productivity, legacy modernization, en]
+
+Every previous industrial revolution replaced muscle. Steam engines, assembly lines, tractors -- each one amplified physical labor and made goods cheaper to produce. The revolution happening right now is different in kind. For the first time, what is being replaced is the ability to produce structured intellectual output: code, documentation, test plans, architecture decisions, migration scripts, compliance reports.
+
+This is not a future scenario. It is already measurable, benchmarked, and accelerating.
+
+== The timeline of AI-assisted development
+
+The shift has happened in barely five years. In 2020, AI in software development meant autocomplete -- Copilot-style code suggestions that saved a few keystrokes. By 2022, ChatGPT had replaced Stack Overflow as the first place developers looked for answers. In 2024, AI became embedded in CI/CD pipelines: generating tests, reviewing pull requests, checking architecture consistency. And in 2026, we have entered the era of agentic coding -- AI agents that plan, implement, and verify multi-step tasks autonomously.
+
+Each of these stages represents not just a feature improvement but a qualitative shift in what AI can do. We have gone from "help me write a function" to "here is the specification, the constraints, and the context -- build the module, write the tests, and verify the output."
+
+== The numbers do not lie
+
+The benchmarks are clear and consistent across multiple independent studies.
+
+46% of code written by GitHub Copilot users is now AI-generated. A study across 4,000 developers showed a 26% productivity boost. Controlled experiments report 55% faster task completion.
+
+And these are already outdated figures. GPT-4 in 2023 was good at snippets. Claude 3.5 in 2024 could handle full-file rewrites. Claude Code in 2025 introduced agentic workflows -- multi-step tasks with self-correction. Claude Opus 4 brought multi-step planning, self-verification, and parallel agent execution.
+
+Every six months, a generation leap. The curve is not flattening -- it is steepening.
+
+== What becomes economically viable
+
+The real impact is not that developers type less. It is that entire categories of projects that were previously too expensive suddenly become affordable.
+
+Legacy systems that were too expensive to replace? Now within reach. Custom software that was reserved for large budgets? Accessible to smaller companies. Complete test suites that nobody had time to write? Generated automatically.
+
+Consider the concrete numbers:
+
+[cols="1,1,1", options="header"]
+|===
+| Project | 2020 (Traditional) | 2026 (AI-Accelerated)
+
+| COBOL Migration (1M lines)
+| $9.1M, 18 months
+| $2-4M, 6-8 months
+
+| Custom CRM Development
+| $500K, 12 months
+| $80K, 3 months
+
+| Full Test Suite (legacy app)
+| $200K, 6 months
+| $15K, 2 weeks
+|===
+
+Same scope. Same quality. Fraction of the cost.
+
+== Why this matters for legacy modernization
+
+For decades, the standard answer to "should we modernize?" has been a cost-benefit analysis where the costs were terrifyingly high and the benefits were uncertain. That calculus has fundamentally changed.
+
+The average cost of modernization -- $9.1 million per Deloitte -- was the perfect excuse to do nothing. But when AI can reverse-engineer business rules from a COBOL codebase in two weeks instead of three months, when it can translate modules with verified behavioral equivalence, when it can generate test suites from golden datasets automatically, the cost curve collapses.
+
+This does not mean modernization becomes trivial. It means it becomes feasible. The economic barrier that protected legacy systems from replacement has eroded. What remains is the organizational will to act.
+
+== The inaction tax is now unbearable
+
+When action cost millions and took years, inaction could be rationalized. The system works. The risk is too high. We will revisit next quarter.
+
+But when action costs a fraction of what it did, and the alternative is continuing to pay $200K per year just to keep the lights on, the calculation flips. The "inaction tax" -- the cumulative cost of maintaining, patching, and working around a legacy system -- now exceeds the cost of replacing it.
+
+When action costs almost nothing, inaction becomes inexcusable.
+
+In the next article, we will explore what this means for the people who build software. If AI is producing the code, what is the new role of the engineer?
+
+'''
+
+_This is the third in a series of five articles based on the talk "Software Will Cost Almost Nothing. What Happens Next?" Read the full series on our blog._
+
+_Sources: GitHub Copilot Impact Study (2025), McKinsey Digital Productivity Report (2024), Google DeepMind (2024), Deloitte Legacy Modernization Cost Analysis (2025), Lunatech client data._
+
+_Contact: nicolas.leroux@lunatech.com | https://lunatech.com[lunatech.com]_
