@@ -36,6 +36,8 @@ Our framework follows seven phases, each with clear deliverables and exit gates.
 
 image::../media/2026-05-26-legacy-modernization-with-ai/methodology.png[The 7-Phase Legacy Modernization Methodology]
 
+image::../media/2026-05-26-legacy-modernization-with-ai/methodology.png[The 7-Phase Legacy Modernization Methodology]
+
 === Phase 1: Discover (1-2 weeks)
 
 Stakeholder interviews, system mapping, and the creation of the first version of the context pack. The goal is to understand what the system does, who depends on it, and what "done" looks like for this engagement.
