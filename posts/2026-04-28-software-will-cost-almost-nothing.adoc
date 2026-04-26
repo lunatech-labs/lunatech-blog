@@ -5,6 +5,8 @@ v1.0, 2026-04-28
 :lang: en
 :tags: [AI, software engineering, legacy modernization, agentic coding, en]
 
+
+image::../media/2026-04-28-software-will-cost-almost-nothing/banner.png[Banner]
 Every industrial revolution until now replaced muscle. The steam engine, the assembly line, the tractor -- each one amplified physical labor and made goods cheaper to produce. But the revolution we are living through right now is fundamentally different. For the first time, what is being replaced is the ability to produce structured intellectual output: code, documentation, test plans, architecture decisions, migration scripts, compliance reports. All of these can now be produced by AI agents.
 
 The implications for our industry are staggering. If software -- the most valuable and most expensive asset of the modern enterprise -- can be produced at a fraction of today's cost, then what changes?
