@@ -48,9 +48,9 @@ AI capability improves every quarter. You cannot control it. Context quality is 
 
 == A battle-tested methodology
 
-At Lunatech, we have spent the past two years building a methodology that makes AI-accelerated modernization reliable, reproducible, and predictable. Our Legacy Modernization with AI framework is built on seven phases -- Discover, Reverse-Engineer, Re-Architect, Rebuild, Migrate, Harden, Handover -- each with clear deliverables and exit gates.
+At Lunatech, we have spent the past year building a methodology that makes AI-accelerated modernization reliable, reproducible, and predictable. Our Legacy Modernization with AI framework is built on seven phases -- Discover, Reverse-Engineer, Re-Architect, Rebuild, Migrate, Harden, Handover -- each with clear deliverables and exit gates.
 
-At the heart of the framework is the Claude Context Pack: a versioned, curated knowledge base with seven layers (System, Code, Data, Business, Architecture, Test, Decision) that feeds every AI task with precisely the right context. A dedicated AI engineer builds, curates, and maintains it throughout the engagement.
+At the heart of the framework is the Claude (or Copilot) Context Pack: a versioned, curated knowledge base with seven layers (System, Code, Data, Business, Architecture, Test, Decision) that feeds every AI task with precisely the right context. A dedicated AI engineer builds, curates, and maintains it throughout the engagement.
 
 The result? Small teams of 2-4 senior engineers plus a dedicated AI engineer consistently outperform larger traditional teams. Parity is verified through behavioral equivalence testing and parallel running -- not assumed. And the context pack is transferred to the client as a durable asset at handover: the living documentation the legacy system never had.
 
