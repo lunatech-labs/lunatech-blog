@@ -1,0 +1,185 @@
+= We Depend on US Infrastructure More Than We Think, That Needs to Change.
+Ji Darwish
+2026-04-03
+:title: We Depend on US Infrastructure More Than We Think, That Needs to Change.
+:tags: [sovereignty, identity, google, eurostack, gdpr]
+
+
+Let's kick off with something uncomfortable to admit, but nonetheless something
+that probably holds true for many companies out there.
+
+If Google suspended our account tomorrow, we would lose access to most of our
+operational infrastructure within the hour. Email, identity, file storage,
+third-party authentication, all of it tied to Google, a single US company
+operating under US law. We did not plan it this way. Nobody does, It accumulates.
+
+We recognised this pattern recently and asked ourselves a simple question: if we
+needed to operate without Google, could we? The answer was uncomfortable. And
+that discomfort is what started this.
+
+== This is not just our story
+
+Take a step back. This is not a story about one company's tooling choices.
+
+European companies have been building on top of US cloud infrastructure for
+years, accumulating dependencies that are only examined when we have to. The
+dependency is not always visible because it does not feel like a dependency. It
+feels like convenience. And convenience, compounded over time, becomes a
+constraint. The question worth asking as a European company, is not "should we
+leave the hyperscalers?" That is the wrong question. The right question is a
+different one:
+
+_If you had to operate without your current US dependencies, because of a
+regulatory change, a geopolitical event, a pricing decision, or simply because a
+better alternative emerged, could you do it? And how long would it take?_
+
+For most European companies whose identity infrastructure runs on Google
+Workspace or Microsoft Entra ID, the honest answer is: not within any reasonable
+timeframe, and the process will probably be disruptive. That is not a great
+position to be in from a company resilience perspective or a
+regulatory/compliance perspective.
+
+
+== Delving deeper in why this matters
+
+=== Operational resilience
+
+Let's take a hypothetical scenario, what happens when Google has an outage?
+Authentication breaks, not just Gmail, but every tool that uses "Sign in with
+Google" simultaneously. Your team cannot reach the project management tool, the
+code repository, or the documentation platform. The blast radius of a single
+provider's incident covers the entire surface of your operations.
+
+What happens when Google changes its pricing? You pay it. Because the switching
+cost at that point is not a product migration, it is a complete re-architecture
+of your identity layer. Pricing leverage is a natural consequence of dependency.
+The deeper the integration, the less negotiating room you have.
+
+This is not a prediction about Google specifically. It is a risk assessment
+test: small probability, huge impact.
+
+=== Legal and regulatory exposure
+
+The problem is the https://en.wikipedia.org/wiki/CLOUD_Act[CLOUD Act]. It gives
+US authorities the ability to compel access to data held by US companies,
+regardless of which country that data physically sits in, and in some cases,
+https://uslawexplained.com/clarifying_lawful_overseas_use_of_data_act_cloud_act[without
+necessarily notifying the subject of the request].
+
+This creates a compliance contradiction for European companies. GDPR requires
+that personal data be protected from unauthorised access. The CLOUD Act creates
+a category of access that is authorised under US law and simultaneously
+unauthorised under GDPR. A US company operating under US law cannot make that
+contradiction disappear.
+
+The identity layer makes this especially concrete. An employee directory
+contains names, email addresses, role assignments, and authentication
+credentials, among the most sensitive categories of personal data an
+organisation holds. When that data lives in Google's infrastructure, it lives
+under US jurisdiction regardless of where the servers are physically located.
+
+=== Economic sovereignty
+
+Every euro spent on US hyperscaler services is a euro that leaves European
+technology economy. Multiplied across thousands of companies and billions in
+cloud spend, that is a sustained flow of capital to the same companies that are
+also competing with European businesses for investments, engineering talent, and
+increasingly for customers. 
+
+There is a compounding effect worth naming. The more European companies default
+to US controlled infrastructure, the less investment flows into European
+alternatives, which makes European alternatives less capable, which makes the
+default choice feel more justified. Read
+https://berthub.eu/articles/posts/ft-on-european-cloud/[this blog] by Bert
+Hubert, founder of PowerDNS, about how European leadership has been conditioned
+to believe that nothing other than US cloud is viable, while the engineers who
+ran perfectly capable European infrastructure have not gone anywhere. The
+capability exists. The default assumption is what needs to change.
+
+=== Innovation lock-in
+
+The smallest form of dependency is the one that shapes how we think. When
+identity infrastructure is Google native, engineers learn to build integrations
+against Google's APIs. Onboarding scripts assume Google accounts. Access control
+decisions are expressed in terms of Google Groups. Tooling choices are filtered
+by what supports "Sign in with Google". Over time, the architecture does more
+than just depending on Google, the architecture is completely built around
+Google's data model. Migrating at that point is not a configuration change. It
+requires rethinking how identity is represented across the entire stack. This
+previous example can be applied to other critical dependencies such as AWS.
+
+== Why now?
+=== The enforcement gap is closing
+
+For years after
+https://www.gdprsummary.com/gdpr-definitions/privacy-shield/[invalidating] the
+privacy shield in 2020, enforcement and regulatory coordination
+around EU–US data transfers were uneven in practice that many
+organisations made a uncounsious decision: the near-term risk
+seemed manageable, the cost of migration was high, so it's a change that can
+wait.
+
+But this logic has been getting harder to defend, GDPR is no longer the only
+framework that matters. A second wave of EU regulation has been stacking on top
+of it, each layer increasingly punishing weak control over dependencies,
+supply-chain risk, and cross-border data governance.
+
+https://eur-lex.europa.eu/eli/reg/2016/679/oj[GDPR] was the first layer. The
+https://artificialintelligenceact.eu/the-act/[EU AI Act] is phasing in through
+2027, increasing documentation, oversight, and compliance expectations for
+organisations that rely on external AI and cloud providers.
+https://eur-lex.europa.eu/eli/dir/2022/2555/oj[NIS2] raises the bar on
+cybersecurity and supply-chain governance, and in some sectors explicitly pushes
+organisations to take measures to limit vendor lock-in.
+https://eur-lex.europa.eu/eli/reg/2022/2554/oj[DORA] goes further for financial
+services, making ICT third-party risk, concentration risk, and exit planning
+formal compliance issues. The
+https://eur-lex.europa.eu/eli/reg/2024/2847/oj[Cyber Resilience Act] adds
+security-by-design and lifecycle security obligations for connected products. The
+https://eur-lex.europa.eu/eli/reg/2023/2854/oj[Data Act], which applies from
+September 2025, adds new data-access and data-sharing obligations for connected
+products and related services.
+
+No single one of these laws makes it not permissable to use US cloud
+automatically for most companies. But together they make it much harder to treat
+third-country dependencies as a architectural choice instead of a governance,
+resilience, and audit problem. Waiting until a requirement is formally
+enforceable is how organisations end up in a compliance crisis.
+
+=== The geopolitical risk
+
+This risk is hard to quantify, but it is no longer dismissible. A few years ago,
+the idea that a US administration might take actions that affect the access of
+European companies to US technology services still felt ignorable. That is a
+harder assumption to defend today. Without making any specific predictions, the
+range of plausible scenarios has widened, and organisations without operational
+alternatives to their US dependencies have no real response available beyond
+waiting. The time to build an exit strategy is before you need it.
+
+=== The alternatives are ready
+
+Five years ago, building identity infrastructure outside Google or Microsoft
+required engineering investment and operational maturity that most small and
+medium-sized companies could not justify. That is no longer true.
+
+Open-source identity platforms like zitadel, authentik and Keycloak have matured
+to the point where they are deployable by teams without dedicated IAM
+engineering. European hosting providers, Hetzner in Germany, OVHcloud and
+Scaleway in France offer infrastructure that is competitive in cost with US
+hyperscalers for the workloads most companies actually run. Many initiatives
+exist (e.g. The https://gaia-x.eu/[Gaia-X] initiative) are producing certifiable
+standards for what sovereign cloud infrastructure means in practice.
+
+== What we are doing about it
+
+For us, this means researching and beginning a phased migration away from Google
+as the identity backbone of our stack. Not a sudden cut. Not a rejection of all
+tools (even the ones that work). The objective is specific: we should be able to
+operate without our critical US dependencies within hours or days if we ever
+needed to. Because an organisation that cannot make that switch without a crisis
+has given that strategic decision to a vendor.
+
+The goal is not purity. It is optionality. The ability to make a different
+choice if circumstances require it, and to know what that choice actually
+involves before you are forced to make it under pressure.
+
