@@ -4,7 +4,6 @@ v1.0, 2026-04-24
 :title: Devoxx France 2026
 :lang: en
 :tags: [devoxx-fr, ai, java, conference, en]
-:imagesdir: ../media/2026-04-24-devoxx-france-2026
 
 I spent two days at https://www.devoxx.fr/[Devoxx France 2026] at the Palais des Congrès in Paris. The buzz words of this edition were hard to miss: AI, Vibe Coding, Claude, Agentic, Context, Determinism. Out of sixteen talks I attended, more than half dealt with AI in some form. The conference carried genuine optimism : barriers are falling, tools are powerful, now is the time to experiment. But the talks that stuck with me most went further. 
 They examined where AI breaks, what it costs, and what discipline it demands. Here is what I took away.
