@@ -1,0 +1,129 @@
+= Devoxx France 2026
+4nt0ineB
+v1.0, 2026-04-24
+:title: Devoxx France 2026
+:lang: en
+:tags: [devoxx-fr, ai, java, conference, en]
+:imagesdir: ../media/2026-04-24-devoxx-france-2026
+
+I spent two days at https://www.devoxx.fr/[Devoxx France 2026] at the Palais des Congrès in Paris. The buzz words of this edition were hard to miss: AI, Vibe Coding, Claude, Agentic, Context, Determinism. Out of sixteen talks I attended, more than half dealt with AI in some form. The conference carried genuine optimism : barriers are falling, tools are powerful, now is the time to experiment. But the talks that stuck with me most went further. 
+They examined where AI breaks, what it costs, and what discipline it demands. Here is what I took away.
+
+== AI Will Solve Everything... Right?
+
+Devoxx opened with keynotes spanning from enthusiasm to existential warning.
+
+=== Prompt, Ship, Test
+
+Nicolas Grenié set the tone on day one. The barriers to building are collapsing. Solo developers ship prototypes that would have taken teams months. Product Managers pick up Figma and Claude and start dreaming. His message: experiment now, ship, test. Both the tools and the way we use them will keep changing. Do not wait.
+
+=== The Right to Be Lazy
+
+Jean-Gabriel Ganascia, a philosopher and engineer, delivered his entire keynote without a single slide, a rare move at Devoxx. He opened with Paul Lafargue's 19th-century manifesto _The Right to Be Lazy_: if machines handle the drudgery, humans should work three hours a day and spend the rest thinking.
+
+Generative AI seems to fulfill that promise. It reads thousands of pages of reports, produces them, makes decisions. We keep only the rewarding tasks. "From that perspective, it's wonderful," Ganascia said.
+
+Then he flipped the argument and laid out four risks:
+
+1. **Boredom.** If we delegate cognitive work, will we have enough to keep our minds occupied? He quoted Baudelaire's _Fleurs du mal_, "It is Boredom!", as a warning.
+2. **The capitalist hydra won't wither away.** "Be honest — do you really believe that? Not long ago Meta laid off 8,000 people." AI will make large companies more profitable, not free workers.
+3. **De-skilling.** If we stop learning to read, write, and code on our own, what remains?
+4. **Moral alignment as censorship.** Who decides what an AI may or may not say? Ganascia mentioned France Travail's plan for AI-assisted annual interviews, a project that raises questions about large-scale behavioral control.
+
+His closing warning: after the Bronze Age, the Iron Age, and the Information Age, we risk entering the Age of Falsification and Control.
+
+=== Vibe Coding Meets Reality
+
+Marjory Canonne, who advises SMEs on AI adoption, described the gap between expectations and outcomes. Many companies approach AI in FOMO mode, hoping for immediate ROI. When she explains what AI actually is and what it costs, many lose interest.
+
+Her advice to companies: start by systematizing internal knowledge. Mine your data, capitalize on experience, speed up information access across the organization. That delivers value. Jumping straight to customer-facing AI products does not. During Q&A, a developer asked: what do you do when a Product Manager vibe-codes a prototype, then says "we can cut your budget, one dev will clean this up"? She responded that some companies will have to learn that the hard way. Grenié added with humour: "Where we used to have 500 days to deliver, we'll now have 5 days of vibe-coded prototype and 495 days cleaning up the mess."
+
+My own concern here: there is no certainty about the future of LLMs. Today AI is cheap. Providers sell at a loss. Putting an AI-as-a-service (GPT, Claude, Gemini) at the core of a product's business domain means accepting uncertainty by design: non-deterministic behavior, provider version changes, price hikes, or disappearance.
+
+=== Datacenters and the Sovereignty Paradox
+
+Loup Cellard, an anthropology researcher at Sciences Po, shifted the conversation to physical infrastructure. His talk mapped how submarine cables shape datacenter deployments in France. Marseille (7th best-connected city in the world) and Bordeaux (where Meta's "Amitié" cable arrives) concentrate the installations. The result: conflicts over energy between public transit and datacenters, land speculation, and a sovereignty paradox. Local authorities told Cellard they do not understand the government's position: France talks about digital sovereignty while welcoming US players, sometimes on publicly funded infrastructure.
+
+== Engineering with AI Agents: Discipline Over Hype
+
+If the keynotes asked "should we?", the afternoon talks asked "how do we do it properly?"
+
+=== Four Patterns for Agentic AI
+
+Guillaume Laforge presented four design patterns for AI agents, each addressing the same core problem: LLMs degrade when you give them too much at once.
+
+- **Progressive Disclosure.** Organize agent capabilities into skills, each with an abstract header and a detailed body. A `SKILL.md` index lets the agent load only what it needs. (See https://github.com/glaforge/deslopify[Deslopify skills] on GitHub.)
+- **Hierarchical Decomposition.** Break work into sequential steps with specialized agents. One writes an article, another de-slops it. The tradeoff is more latency and sometimes more tokens.
+- **LLM-as-Judge.** Use one model to evaluate another's output. Three summaries from Gemini 2.5 Flash Lite plus one review from Gemini 2.5 Flash costs roughly $0.80, versus $2.00 for a single Gemini 3.1 Pro summary, and produces better results.
+- **GOAP (Goal-Oriented Action Planning).** A supervisor LLM receives a high-level objective and orchestrates specialized agents. Laforge demonstrated this with LangChain4j.
+
+=== Constrain the Puzzle
+
+Cyrille Martraire and Olivier Penhoat presented a legacy migration case study where they used AI to generate end-to-end API tests.
+
+Their first approach was to have the AI run the tests by querying both APIs and comparing responses. It worked 100% of the time, but was slow, expensive, and non-deterministic. JSON payloads of ~400 KB ate the context window, and results varied between runs.
+
+Their second approach worked: the AI generates the tests instead of running them. They constrained the problem with two files: a `.yml` describing test scenarios and a `pivot-format.spec.md` specifying how to map old API responses to new ones. The AI fills in only the test implementation. Expensive once (generation), nearly free afterwards (standard execution). The principle: **constrain the AI to fill one piece of the puzzle, not generate the whole puzzle.** The more precise the framework you provide, the more deterministic the output.
+
+=== Context Engineering for Deterministic AI
+
+Benoît Fontaine's talk on taming AI agents reinforced the same idea from the tooling side. His key points:
+
+- Performance degrades not because of context size, but because of what is in the context. Compact at 60%, never exceed 80%. If auto-compaction kicks in, the session is dead.
+- Maintain at least two files: `AGENTS.md` (cross-tool source of truth with architecture rules, conventions, workflows, strict rules) and `CLAUDE.md` (tool-specific adapter). Keep each under 200 lines.
+- Place scoped context files in relevant directories (`/frontend`, `/backend`).
+- Ideal session workflow: research, compact, plan, compact, implement.
+
+His closing line resonated: "AI is an amplifier of the current state. If the documentation and specs were already clean, the AI output will be clean." In other words, operational maturity matters more than which model you pick.
+
+Presentation repo: https://github.com/b-fontaine/devoxx-2026
+
+=== Claude Code in 30 Minutes
+
+Erwan Gereec delivered 30 Claude Code tips in 30 minutes. A few stood out:
+
+- `/init` analyzes the codebase and initializes `CLAUDE.md`, a natural starting point for context engineering.
+- `/compact keep the developed API and remove explorations` targets compaction instead of blind compression.
+- `/insights` generates a detailed HTML report analyzing your usage habits, with personalized tips.
+- Custom skills live in `.claude/skills/<name>/SKILL.md` for repeatable workflows.
+
+== Java Keeps Shipping
+
+AI dominated, but Java had its own strong showing.
+
+=== Value Types: Codes Like a Class, Works Like an Int
+
+If you hadn't already followed java incoming evolutions, Rémi Forax and Clément de Tastes presented https://openjdk.org/jeps/401[Project Valhalla], the largest refactoring in JDK history (2,665 files modified, +200k lines). The core idea : using a new `value` keyword before `class` or `record` gives up the object's identity in exchange for memory flattening and scalarization.
+
+Using a https://github.com/rokon12/Mandelbrot[Mandelbrot] visualisation tool, they showed that switching from `record` to `value record` reduced GC pressure by 143x and memory usage by 88%. The JIT compiler can scalarize value types, copying field values directly into CPU registers because the objects are immutable and identity-free.
+
+Beyond raw performance, this will inevitably change the way we code by using more immutable objects and data structures. We must be aware now that current JDK `@ValueBased` annotated classes will automatically become value classes (no recompilation needed for old libraries). 
+Furthermore, a new `!` (bang) operator will guarantee non-nullity for array flattening, and `==` comparison will be possible on value objects (in that case, this is not a reference comparison, but a value comparison). But there are traps though : `==` on a value class holding a `String` field compares the reference, not the content. Moreover, `synchronized` won't work because the lock relies on the object header, which won't exist on value classes.
+
+=== Structured Concurrency
+
+José Paumard ran a 3-hour hands-on lab on the Structured Concurrency API (Project Loom), available in JDK 27 early access. Virtual threads (JDK 21) made threads cheap to create, but Java still lacked a concurrency model to match. Running parallel tasks meant either chaining `CompletableFuture` callbacks or adopting a reactive framework — both sacrifice readability and stack traces. Structured Concurrency fills that gap: fork tasks on virtual threads, write sequential-looking code, and let the scope handle cancellation and error propagation automatically.
+
+[source,java]
+----
+try (var scope = StructuredTaskScope.open(Joiner.allSuccessfulOrThrow())) {
+    scope.fork(taskA);
+    scope.fork(taskB);
+    scope.join();
+}
+----
+
+Multiple `Joiner` strategies handle success, failure, and timeouts. Structured Concurrency isn’t new as an idea. What Project Loom brings is making it finally practical at scale thanks to virtual threads, because platform threads are expensive to create and do not scale well when used in large numbers.
+
+Lab repo: http://github.com/JosePaumard/2026_DevoxxFR-Loom-lab
+
+=== In Brief
+
+- **Victor Rentea** delivered the funniest talk of the conference on Event-Driven Architecture pitfalls, covering ordering, partition keys, phantom writes, and idempotency. It moved too fast to capture in notes. Worth rewatching on https://youtube.com/@devoxxfrvideos?si=fo6T_UhA31Q1lx31[YouTube].
+- **Thomas Pierrain and Julien Topçu** presented "The Hive." Starting from a Big Ball of Mud, they showed how to modularize a monolith through vertical slicing, then isolate each module as a hexagon with adapters that translate types between modules so domain models never leak from one hexagon to another. Once that structure is in place, extracting a module into a microservice becomes straightforward.
+
+== Conclusion
+
+Build up AI skills now. The tools are powerful and priced below cost; that window will close. But tooling alone won't save you, as clean documentation and clear specs make AI output better, while sloppy inputs produce sloppy outputs, faster.
+AI needs a clear framework to fill in the missing pieces; constraining the puzzle is the key to tackle its lack of determinism.
+And Java keeps evolving. Value types, structured concurrency, and virtual threads address real performance and concurrency pain points. Valhalla alone justifies paying attention to the next JDK releases.
