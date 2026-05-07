@@ -1,6 +1,6 @@
 = The Cost of Inaction: Why Standing Still Is the Most Expensive Decision in Tech
-nicolasleroux
-v1.0, 2026-05-05
+pepite
+v1.0, 2026-05-07
 :title: The Cost of Inaction: Why Standing Still Is the Most Expensive Decision in Tech
 :lang: en
 :tags: [cost of inaction, legacy modernization, tech debt, digital transformation, en]
