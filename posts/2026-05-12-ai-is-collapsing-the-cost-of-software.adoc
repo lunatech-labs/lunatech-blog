@@ -1,12 +1,10 @@
 = AI Is Collapsing the Cost of Software. Here Are the Numbers.
-nicolasleroux
+pepite
 v1.0, 2026-05-12
 :title: AI Is Collapsing the Cost of Software. Here Are the Numbers.
 :lang: en
 :tags: [AI, software cost, agentic coding, productivity, legacy modernization, en]
 
-
-image::../media/2026-05-12-ai-is-collapsing-the-cost-of-software/banner.png[Banner]
 Every previous industrial revolution replaced muscle. Steam engines, assembly lines, tractors -- each one amplified physical labor and made goods cheaper to produce. The revolution happening right now is different in kind. For the first time, what is being replaced is the ability to produce structured intellectual output: code, documentation, test plans, architecture decisions, migration scripts, compliance reports.
 
 This is not a future scenario. It is already measurable, benchmarked, and accelerating.
@@ -26,6 +24,8 @@ The benchmarks are clear and consistent across multiple independent studies.
 And these are already outdated figures. GPT-4 in 2023 was good at snippets. Claude 3.5 in 2024 could handle full-file rewrites. Claude Code in 2025 introduced agentic workflows -- multi-step tasks with self-correction. Claude Opus 4 brought multi-step planning, self-verification, and parallel agent execution.
 
 Every six months, a generation leap. The curve is not flattening -- it is steepening.
+
+image::../media/2026-05-12-ai-is-collapsing-the-cost-of-software/cost-collapse.png[Costs]
 
 == What becomes economically viable
 
