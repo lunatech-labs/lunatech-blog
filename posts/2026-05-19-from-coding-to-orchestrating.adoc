@@ -1,5 +1,5 @@
 = From Coding to Orchestrating: The New Role of the Software Engineer
-nicolasleroux
+pepite
 v1.0, 2026-05-19
 :title: From Coding to Orchestrating: The New Role of the Software Engineer
 :lang: en
