@@ -1,12 +1,11 @@
 = Legacy Modernization with AI: A Battle-Tested Methodology
-nicolasleroux
+pepite
 v1.0, 2026-05-26
 :title: Legacy Modernization with AI: A Battle-Tested Methodology
 :lang: en
 :tags: [legacy modernization, AI methodology, agentic coding, context pack, en]
 
 
-image::../media/2026-05-26-legacy-modernization-with-ai/banner.png[Banner]
 In the previous articles, we established three things: inaction is expensive, AI is collapsing the cost of building software, and engineers are becoming orchestrators rather than instrumentalists. The natural question is: how do you put all of this together into a real engagement, with real stakes, real data, and zero tolerance for regression?
 
 This article reveals the methodology we have been building and refining at Lunatech over the past two years: Legacy Modernization with AI.
@@ -33,8 +32,6 @@ Third, *AI as a first-class tool*. We use agentic coding with Claude Code on eve
 == The seven phases
 
 Our framework follows seven phases, each with clear deliverables and exit gates.
-
-image::../media/2026-05-26-legacy-modernization-with-ai/methodology.png[The 7-Phase Legacy Modernization Methodology]
 
 image::../media/2026-05-26-legacy-modernization-with-ai/methodology.png[The 7-Phase Legacy Modernization Methodology]
 
