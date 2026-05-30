@@ -46,11 +46,9 @@ image::../media/2026-05-30-lunabet-a-panini-style-world-cup-pool-in-rust/08-lead
 
 The transactional emails follow the same theme: navy header, a striped pitch, a red _stamp_ button. Magic-link emails are localized to the visitor's language at request time, while match reminders are bilingual side by side because we do not store a per-user language.
 
-[cols="1,1", frame=none, grid=none]
-|===
-| image::../media/2026-05-30-lunabet-a-panini-style-world-cup-pool-in-rust/09-email-magic-link-fr.png[Magic link FR]
-| image::../media/2026-05-30-lunabet-a-panini-style-world-cup-pool-in-rust/10-email-magic-link-en.png[Magic link EN]
-|===
+image::../media/2026-05-30-lunabet-a-panini-style-world-cup-pool-in-rust/09-email-magic-link-fr.png[Magic link email, French version]
+
+image::../media/2026-05-30-lunabet-a-panini-style-world-cup-pool-in-rust/10-email-magic-link-en.png[Magic link email, English version]
 
 image::../media/2026-05-30-lunabet-a-panini-style-world-cup-pool-in-rust/11-email-reminder.png[Bilingual match reminder]
 
