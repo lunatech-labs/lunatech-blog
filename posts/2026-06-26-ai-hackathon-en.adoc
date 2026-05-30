@@ -1,0 +1,73 @@
+= AI is a tool. You are the one at the helm.
+Nicolas Leroux
+2026-06-26
+:page-layout: post
+:page-lang: en
+:page-image: /media/2026-06-26-ai-hackathon/background-en.png
+
+AI does not think for you. It executes what you hand it. Give it poor context and it produces something poor. Give it the right context, the right constraints, the right guardrails, and it produces something sound. The person operating the tool is in command. Not the other way around.
+
+That is the heart of the hackathon we are running. On the afternoon of Friday 26 June, across our three offices, everyone takes part. Developers and non-developers. We are few on the non-dev side, but having both in the room changes everything. Because AI is exactly what erases the line between the two.
+
+== Four themes, one question
+
+We will work on four themes in parallel.
+
+* *Legacy modernisation*: take an existing system and move it forward with AI, without rewriting blindly.
+* *New application*: start from a business need and produce something that runs.
+* *Process improvement*: look at one of our internal processes and make it faster or more reliable.
+* *Writing proposals*: turn a client brief into a structured commercial proposal.
+
+Four themes, but a single underlying question: how do we work with AI once it becomes a member of the team rather than a gadget.
+
+== Three notions to grasp before we start
+
+We will begin by laying the groundwork. Three notions, quickly, because they change everything.
+
+*Context.* AI only knows what you put in front of it. Context is the set of information you provide: the existing code, the constraints, the examples, the business need. Too much context drowns the model. Too little leaves it guessing. The work is to give exactly what is needed, no more and no less.
+
+*Skills.* A skill is a reusable capability you prepare once and the AI then draws on when needed. A way to generate a CV in our house format. A review procedure. A brand rule. Instead of explaining everything from scratch each time, you capitalise.
+
+*Agents.* An agent is an AI you hand a mission with a degree of autonomy. It chains steps, uses tools, checks its own work. You can have an agent that writes, another that controls, another that tests. You orchestrate.
+
+None of these three notions are technical in the way a developer means it. They are within reach of everyone in the room. That is precisely the point.
+
+== Working as a team with AI
+
+Here is where we will be blunt. The way we build software is going to change, and some habits have to go.
+
+Scrum and rigid agility with all its rituals must be lightened. When AI produces in minutes what used to take days, the ceremony weighs more than it helps. The ideal team to build software is three people maximum, AI included in the loop. Those people focus on one thing: expressing the need and connecting it to the technical side. They create skills, build agents, and above all carefully verify the inputs and the outputs.
+
+Pull request review as we know it no longer serves a purpose. Code will be checked by other agents before it is even committed. What becomes vital is the principle of iteration: refine the agents, adjust the context, start again until the output is right. That iteration loop is where quality is decided.
+
+And you will need to use your brain even more than before. Guiding AI demands clear thinking, decomposition, anticipation. The human does not disappear. The human moves up a level.
+
+== The end of the ticket-implementing developer
+
+Let us say it plainly. The developer whose role is to implement tickets is no longer necessary. A well-written ticket describes a context an AI understands perfectly. Translating that ticket into code no longer needs a human hand.
+
+What we will need are people who understand the business and the technical side at the same time. Or a team that knows how to combine the two and coordinate the AI. Two to three people should be enough to produce code that meets both the business need and the technical need, always keeping input and output validation in mind.
+
+Because AI produces so much code, we will no longer go back and read every line. We will return to more basic means of certification. We will mostly validate what goes in and what comes out. Trust shifts from the code to its boundaries.
+
+The ideal team is therefore made of analyst-programmers. People who understand the business, who can decompose tasks to keep an optimal AI context, who do architecture for the AI, who decide how to proceed with testing and tell the AI what to verify and what to certify.
+
+== The return of the generalist
+
+We are entering the world of IT generalists. AI lets us specialise very fast, on demand, on whatever the subject of the moment is. We will no longer need to know the details of a programming language, just as we no longer know assembly today.
+
+AI can even create a programming language far better suited to a precise need, instead of forcing us to use languages designed for humans. The language becomes an implementation detail. What matters is the thinking that comes before it.
+
+== Think differently, or disappear
+
+None of this works if we keep our old reflexes. "We have always done it this way" is the most dangerous sentence of the moment. It protected companies for years. Today it buries them.
+
+"I need training before I get started" is the second trap. The tool is learned by using it, not by waiting for the right course. Those who open the tool and try gain a lead the others will not catch up on in a classroom.
+
+Fear of change is human. But it has a cost. We operate in highly competitive markets, where a competitor who adopts these methods before us produces faster, cheaper, with fewer people. The cost of inaction is not a delay. It is fatal.
+
+So let us embrace change rather than endure it. This hackathon is built precisely for that: a place where you are allowed to try, to get it wrong, to discover that what scared you fits into a single afternoon. The door is open. It is up to us to walk through it before the others do.
+
+== Bring your brain
+
+That is what we will come and explore together on the afternoon of Friday 26 June. Bring your brain. The AI handles the rest.

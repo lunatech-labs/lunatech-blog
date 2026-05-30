@@ -1,0 +1,73 @@
+= L'IA est un outil. C'est vous qui tenez la barre.
+Nicolas Leroux
+2026-06-26
+:page-layout: post
+:page-lang: fr
+:page-image: /media/2026-06-26-ai-hackathon/background-fr.png
+
+L'IA ne pense pas a votre place. Elle execute ce que vous lui donnez. Donnez-lui un mauvais contexte, elle produira quelque chose de mauvais. Donnez-lui le bon contexte, les bonnes contraintes, les bons garde-fous, et elle produira quelque chose de juste. La personne qui manipule l'outil est aux commandes. Pas l'inverse.
+
+C'est tout l'enjeu du hackathon que nous organisons. Le vendredi 26 juin apres-midi, sur nos trois bureaux, tout le monde participe. Developpeurs et non-developpeurs. Nous ne sommes pas nombreux cote non-dev, mais cela change tout d'avoir les deux dans la salle. Parce que l'IA efface justement la frontiere entre les deux.
+
+== Quatre themes, une question
+
+Nous travaillerons sur quatre themes en parallele.
+
+* *Modernisation du legacy*: reprendre un systeme existant et le faire avancer avec l'IA, sans tout reecrire au hasard.
+* *Nouvelle application*: partir d'un besoin metier et produire quelque chose qui tourne.
+* *Amelioration de process*: regarder un de nos processus internes et le rendre plus rapide ou plus fiable.
+* *Redaction de propositions commerciales*: transformer un brief client en proposition structuree.
+
+Quatre themes, mais une seule question de fond: comment travaille-t-on avec l'IA quand elle devient un membre de l'equipe et plus un gadget.
+
+== Trois notions a comprendre avant de commencer
+
+Nous commencerons par poser les bases. Trois notions, rapidement, parce qu'elles changent tout.
+
+*Le contexte.* L'IA ne sait que ce que vous lui mettez sous les yeux. Le contexte, c'est l'ensemble des informations que vous lui fournissez: le code existant, les contraintes, les exemples, le besoin metier. Un contexte trop large noie l'IA. Un contexte trop pauvre la laisse deviner. Le travail consiste a donner exactement ce qu'il faut, ni plus ni moins.
+
+*Les skills.* Un skill est une competence reutilisable que l'on prepare une fois et que l'IA mobilise ensuite a la demande. Une facon de generer un CV au format maison. Une procedure de revue. Une regle de marque. Au lieu de tout reexpliquer a chaque fois, on capitalise.
+
+*Les agents.* Un agent est une IA a qui l'on confie une mission avec une certaine autonomie. Il enchaine les etapes, utilise des outils, verifie son travail. Vous pouvez avoir un agent qui ecrit, un autre qui controle, un autre qui teste. Vous orchestrez.
+
+Ces trois notions ne sont pas techniques au sens ou un developpeur l'entend. Elles sont a la portee de tout le monde dans la salle. C'est precisement le but.
+
+== Travailler en equipe avec l'IA
+
+Voila ou nous serons francs. La maniere dont nous fabriquons du logiciel va changer, et certaines habitudes doivent partir.
+
+Scrum et l'agilite rigide avec tous ses rituels doivent etre allegees. Quand l'IA produit en quelques minutes ce qui prenait des jours, le ceremonial pese plus qu'il n'aide. L'equipe ideale pour fabriquer du logiciel tient en trois personnes maximum, IA comprise dans la boucle. Ces personnes se concentrent sur une seule chose: exprimer le besoin et le relier a la technique. Elles creent des skills, montent des agents, et surtout verifient soigneusement les entrees et les sorties.
+
+La revue de pull request telle que nous la connaissons n'a plus d'interet. Le code sera verifie par d'autres agents avant meme d'etre commite. Ce qui devient vital, c'est le principe d'iteration: affiner les agents, ajuster le contexte, recommencer jusqu'a ce que la sortie soit juste. Cette boucle d'iteration est l'endroit ou se joue la qualite.
+
+Et il faudra utiliser son cerveau encore plus qu'avant. Guider l'IA demande de penser clairement, de decomposer, d'anticiper. L'humain ne disparait pas. Il monte d'un cran.
+
+== La fin du developpeur qui implemente des tickets
+
+Disons-le sans detour. Le developpeur dont le role est d'implementer des tickets n'est plus necessaire. Un ticket bien ecrit decrit un contexte qu'une IA comprend parfaitement. La traduction du ticket en code n'a plus besoin d'une main humaine.
+
+Ce dont nous aurons besoin, ce sont des gens capables de comprendre le metier et la technique en meme temps. Ou une equipe qui sait allier les deux et coordonner l'IA. Deux a trois personnes doivent suffire a produire du code qui repond au besoin metier et au besoin technique, en gardant toujours en tete la validation des entrees et des sorties.
+
+Comme l'IA produit enormement de code, nous ne reviendrons plus relire chaque ligne. Nous retournerons a des moyens de certification plus basiques. Nous validerons surtout ce qui entre et ce qui sort. La confiance se deplace du code vers ses frontieres.
+
+L'equipe ideale est donc composee d'analystes programmeurs. Des gens qui comprennent le business, savent decomposer les taches pour garder un contexte IA optimal, font de l'architecture pour l'IA, decident comment proceder avec les tests et disent a l'IA quoi verifier et quoi certifier.
+
+== Le retour du generaliste
+
+Nous entrons dans le monde des generalistes de l'informatique. L'IA permet de se specialiser tres vite, a la demande, sur le sujet du moment. Nous n'aurons plus besoin de connaitre les details d'un langage de programmation, tout comme nous ne connaissons plus l'assembleur aujourd'hui.
+
+L'IA peut meme creer un langage de programmation bien plus adapte a un besoin precis, au lieu de nous faire utiliser des langages concus pour des humains. Le langage devient un detail d'implementation. Ce qui compte, c'est la pensee qui le precede.
+
+== Penser autrement, ou disparaitre
+
+Rien de tout cela ne marchera si nous gardons nos vieux reflexes. "On a toujours fait comme ca" est la phrase la plus dangereuse du moment. Elle a protege des entreprises pendant des annees. Elle en enterre aujourd'hui.
+
+"J'ai besoin d'une formation avant de m'y mettre" est le deuxieme piege. L'outil s'apprend en l'utilisant, pas en attendant le bon stage. Ceux qui ouvrent l'outil et essaient prennent une avance que les autres ne rattraperont pas en salle de cours.
+
+La peur du changement est humaine. Mais elle a un cout. Nous evoluons dans des marches tres competitifs, ou un concurrent qui adopte ces methodes avant nous produit plus vite, pour moins cher, avec moins de monde. Le cout de l'inaction n'est pas un retard. C'est fatal.
+
+Alors embrassons le changement plutot que de le subir. Ce hackathon est exactement fait pour ca: un endroit ou l'on a le droit d'essayer, de se tromper, de decouvrir que ce qui faisait peur tient en une apres-midi. La porte est ouverte. A nous de la franchir avant les autres.
+
+== Apportez votre cerveau
+
+Voila ce que nous viendrons explorer ensemble le vendredi 26 juin apres-midi. Apportez votre cerveau. L'IA s'occupe du reste.
