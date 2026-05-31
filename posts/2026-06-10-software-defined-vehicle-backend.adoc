@@ -158,9 +158,13 @@ That is the part worth noting for anyone weighing AI-assisted development. The l
 
 == See it run
 
+Twenty vehicle pins are spread across Paris, each moving on its own at one update per second. Green pins are up to date, red pins are out of date or have a campaign in progress.
+
+image::01-fleet-map.png[Live fleet map with twenty vehicles moving across Paris,role=text-center]
+
 A full walkthrough: the live map, the vehicle drawer, the fleet table, an over-the-air campaign launch, and the state updates landing in real time.
 
-video::https://github.com/lunatech-labs/sdv-fleet-management/raw/main/docs/screenshots/demo.mp4[width=720,opts=controls]
+video::demo.mp4[width=720,opts=controls]
 
 == Run it yourself
 
