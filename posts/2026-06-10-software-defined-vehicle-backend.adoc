@@ -164,7 +164,7 @@ image::01-fleet-map.png[Live fleet map with twenty vehicles moving across Paris,
 
 A full walkthrough: the live map, the vehicle drawer, the fleet table, an over-the-air campaign launch, and the state updates landing in real time.
 
-video::demo.mp4[width=720,opts=controls]
+video::HokMqkx5VmI[youtube,width=960,height=540]
 
 == Run it yourself
 
