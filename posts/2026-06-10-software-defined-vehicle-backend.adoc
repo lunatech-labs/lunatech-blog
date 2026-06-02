@@ -1,5 +1,5 @@
 = The software-defined vehicle moves the work to the backend
-peutite
+peutit
 v2.0, 2026-06-10
 :title: The software-defined vehicle moves the work to the backend
 :imagesdir: ../media/2026-06-10-software-defined-vehicle-backend
