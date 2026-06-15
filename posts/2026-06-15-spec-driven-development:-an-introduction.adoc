@@ -1,0 +1,160 @@
+= Spec-Driven Development: An Introduction
+Gitcelo
+v1.0, 2026-06-15
+:title: Spec-Driven Development: An Introduction
+:lang: en
+:tags: [tag1, tag2, en]
+
+Ever since OpenAI released ChatGPT to the public in 2022, people have been using Large Language Models (LLMs) in an increasing amount to assist with, or fully take care of, coding for software systems. This makes software development more efficient and cheaper than ever before. However, LLMs face one major problem when it comes to software development, and that is a lack of context. LLMs can’t read our minds so they inevitably make a lot of assumptions when coding from prompts. 
+
+That is where Spec-Driven Development (SDD) comes in. When it comes to SDD, it is often said that code used to be king. Specifications, or “specs”, already existed before the advent of AI in forms such as requirements elicitation, user stories, diagrams, and more. Generally, these specs ultimately served the code, which was the single source of truth. The specs would often be forgotten early on in the lifecycles of software systems.
+
+SDD aims to reverse this. The code now serves the spec and is generated based on the spec and not vice versa.
+
+== What is a spec? 
+
+[quote, Birgitta Böckeler, https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html]
+____
+A spec is a structured, behavior-oriented artifact - or a set of related artifacts - written in natural language that expresses software functionality and serves as guidance to AI coding agents.
+____
+
+The artifacts Birgitta speaks of come generally in the form of markdown files. LLMs can be used to generate these markdown files. In SDD frameworks, the developer tells the agent what they want to build, just like in vibe coding. However, unlike vibe coding, the agent doesn’t immediately implement the code. Instead, the agent writes the plan into markdown files, which include functional and technical specifications along with implementation tasks. The developer can edit these markdown files or have the agent edit them as needed. Once the developer is happy with the specs, they have the agent implement them with code.
+
+Additionally, Birgitta explains how there is a difference between specs and more general documents which are called a memory bank. The memory bank contains rules and guidelines that AI agents must follow when making and implementing specs. Examples of rules are to always do Test-Driven Development, use some specific kind of linting, etc. The specs themselves go into their own directory where they may be further broken down into directories based on what feature they are for.
+
+There are three different ways to approach spec driven development. They are
+
+* *Spec-first*: A highly detailed spec is written before any code is made and that spec is then used in the AI-assisted workflow that generates the project’s code. After this initial setup, the code becomes the source of truth again and the spec often ends up rotting. It’s called spec drift when specs are outdated and don’t reflect the code anymore.
+
+* *Spec-anchored*: The spec and the code are equal. No changes can be made to the code without updating the spec. The spec is a living artifact that evolves with the system and is mechanically enforced against the code. Spec drift is detected automatically, not by a human.
+
+* *Spec-as-source*: Humans are regarded as architects that are only allowed to edit the spec, never the code. After the spec has been updated, the code gets regenerated. The regeneration can cover the whole codebase but can also just cover the files affected.
+
+With all of the information above, we can now take a look at a couple of the SDD frameworks.
+
+== Spec-Kit
+
+Spec-Kit is an SDD framework developed by Github. It makes a new spec per branch. Once a spec has been implemented, it is left to rot, never to be used again. This makes Spec-Kit better suited for Greenfield projects as the specs directory ends up bloating with a lot of old specs. 
+
+Spec-Kit breaks specification into four steps; *constitution*, *specify*, *plan*, and *task*. In each of these steps, the developer can always edit the generated markdown or have the agent edit it.
+
+[underline]#Constitution#
+
+The constitution file does not count as a spec. Instead, it is a part of Spec-Kit’s memory bank. I.e. it sets the rules for the whole codebase. The constitution is made at the beginning of a project and can be updated as needed during the project’s lifecycle. To have an agent generate the constitution markdown, the developer uses the command `/speckit-constitution` and writes the rules after it. Github’s documentation gives an example of how to generate solid constitution markdown:
+
+```
+/speckit-constitution Create principles focused on code quality, testing standards, user experience consistency, and performance requirements
+```
+
+[underline]#Specify#
+
+In this step, the developer tells the agent what they want to build. Only functional requirements should be given, not technical. 
+
+Example:
+
+```
+/speckit-specify I am building a website for selling glasses, sunglasses, and accessories for them. The website should have a landing page with a featured pair of glasses. There should be a glasses page, a sunglasses page, and a Contact Us page. 
+```
+
+When the specify command is run on the agent, a spec is added to the directory `specs` at the root of the project. The new spec contains a file called `spec.md` which contains the functional description of the project with things such as the developer’s functional description, functional requirements, and assumptions made by the agent.
+
+[underline]#Plan#
+
+With the plan stage come the technical details. It is run with the command `/speckit-plan`. 
+
+Example:
+
+```
+/speckit-plan I am going to use NextJS with a local sqlite database to store data. Site is responsive and ready for mobile.
+```
+
+This generates the follwoing files:
+
+* `plan.md`: Contains the technical plan.
+
+* `research.md`: Contains the research and decisions made by the agent.
+
+* `quickstart.md`: Contains the system setup and how to run the application.
+
+[underline]#Task#
+
+After the plan has been set up and verified, it can now be broken down into tasks using the command `/speckit-task`. No extra input needs to be given for this stage. The tasks get written into the file `tasks.md`.
+
+[underline]#Implement#
+
+After the specs have been generated and edited to the developer’s content, the developer runs the command `/speckit-implement` in the agent. The agent then generates code based on the specs.
+
+[underline]#Spec-Kit Conclusion#
+
+Github’s Spec-Kit gives the developer great control over both specs and code. A downside to this framework is that it generates a lot of markdown text for each spec. This can be overkill for smaller features or bug fixes. However, the fact that Spec-Kit is spec-first allows for developers to make smaller additions to the code themselves or maybe even use direct vibe-coding without making a spec.
+
+== OpenSpec
+
+OpenSpec is one of the pioneers of Spec-Anchored SDD. It emphasizes the fact that the spec is a living artifact that changes and evolves with the project over time. On top of this, it is brownfield-first. Many AI planning tools, such as Spec-Kit, work best on greenfield projects, whereas OpenSpec is more focused on handling messy, existing codebases by focusing on requirements with deltas, i.e. the diffs. It doesn’t try to learn the whole codebase at once. Instead, it focuses on the parts it needs to change and through that, over time, incorporates the whole codebase.
+
+Everything OpenSpec does takes place in the directory `openspec`. The memory bank consists of a file named `config.yaml`. The living source of truth spec is contained in the directory `specs`.
+
+In OpenSpec, spec generation and implementation takes place in four stages, with one of them being optional. They are: *propose*, *apply*, *sync*, *archive*.
+
+[underline]#Propose#
+
+This stage is akin to a combination of Spec-Kit’s first two stages, *specify* and *plan*. The developer gives their high-level intent by running the command `/opsx:propose` with the prompt. 
+
+Example:
+
+```
+/opsx:propose I am building a website for selling glasses, sunglasses, and accessories for them. The website should have a landing page with a featured pair of glasses. There should be a glasses page, a sunglasses page, and a Contact Us page. I am going to use NextJS with a local sqlite database to store data. The site is responsive and ready for mobile.
+
+```
+
+From this, OpenSpec generates a change folder, a.k.a. a delta spec, for the new feature spec in the directory `openspec/changes`. The change folder contains
+
+* `proposal.md`: The why and what of the feature.
+
+* `design.md`: The how. It contains architectural decisions, database schemas, and technical choices.
+
+* `tasks.md`: The tasks that need to be performed for a successful implementation of this new feature.
+
+* *Specs folder*: Contains the delta specs. It only tracks the changes relative to the project’s primary source of truth. It uses machine readable headers to denote if the changes contain added requirements, modified requirements, removed requirements, or renamed requirements.
+
+[underline]#Apply#
+
+Once the developer has reviewed and approved the markdown specifications, they run the command `/opsx:apply` on the agent to authorise it to implement what has been planned. The agent then implements the feature based on the spec.
+
+[underline]#Sync#
+
+This stage is optional and is unnecessary if the developer is working on a codebase alone. It assures that there is no spec drift. When the developer runs the command `/opsx:sync` on the agent, the agent pulls updates from the source-of-truth spec into a change folder that is being worked on, ensuring that new specs don’t contradict with the main one.
+
+[underline]#Archive#
+
+After everything is completed and verified the developer runs the command `/opsx:archive` on the agent. The agent then merges the delta spec into the main spec and moves the old change folder to an archive folder, maintaining a history of changes.
+
+[underline]#OpenSpec conclusion#
+
+Like Spec-Kit, OpenSpec generates a lot of artifacts. It feels less verbose than Spec-Kit and conveniently maintains one main spec as opposed to how Spec-Kit has multiple specs, which can be messy as the project develops further and older specs start to drift. With this single source of truth spec, the source folder can be deleted and immediately generated again. It is still important to note that, over time, the specs folder does get more and more bloated, making it a bit harder to read through. Of course, some developers may prefer going through a lot of specs rather than a lot of generated code.
+
+== Skills
+
+Although SDD adds more context and predictability to software development using AI, it does require a lot of human input and review. One way to make this process more efficient is to utilize skills.
+
+Skills are extremely popular these days and are kind of step-by-step instructions that tell agents how to go about achieving specific tasks such as deploy code, or schedule calendar meetings. Skills also set guardrails, telling the agent what it is not allowed to do when doing these tasks.
+
+SDD platforms, like Spec-Kit and OpenSpec, already leverage skills under the hood. More skills can be used to make SDD more efficient.
+
+Some examples of skills that can be used with SDD are:
+
+* *Multi-Model Optimization*: Running top-tier frontier models such as Claude 3.7 Sonnet throughout every stage of SDD can be prohibitively expensive. More cost-effective models can be employed for stages that require less sophisticated reasoning, reserving higher-capability models for tasks where they provide the greatest value. This could be achieved through stage-specific skills that determine model selection. For example, one skill could designate a high-reasoning model for specification and planning, another skill could assign a lower-reasoning model for implementing code from well-defined specifications, and a third skill could route verification and quality-assurance tasks back to a higher-reasoning model.
+
+* *Eliminating shortcuts*: Agents are known to sometimes take shortcuts and have been found to skip parts of planning or some tasks but still act like no shortcut was taken.
+
+* *Context Inflation and Token Management*: As a project grows, both Spec-Kit (with its fragmented feature folders) and OpenSpec (with a massive, unified "living" spec directory) can cause context bloat. Dumping the entire spec repository into an agent’s context window is expensive, slow, and introduces model distraction. A spec analyzer skill could be made that knows how to query only the relevant parts of a change spec so the coding agent gets exactly the context it needs instead of a massive wall of markdown text.
+
+== A return to Waterfall?
+
+Some of us may remember the days before agile when many companies followed the waterfall methodology, where everything was designed beforehand and the code had to exactly follow the rigid, pre-made designs. This would frustrate developers as it can be hard to know every facet of a system before implementing it and new requirements can pop up during the implementation process. That is where agile development stepped in, allowing developers to incrementally add to the systems as development went on and allowing them to make changes to the systems as new information appeared.
+
+Some people like to argue that SDD is a return to the waterfall methodology by having specs being made beforehand. This criticism misses the mark. SDD differs from waterfall in that specs are not immutable. In fact, the idea is that systems and requirements will change over time, allowing for more iterative development.
+
+== Conclusion
+
+SDD is a powerful way to add context and reduce the likelihood of AI making assumptions or hallucinating. For it to be used effectively, the developer needs to have a strong understanding of system architecture, best practices, security principles, etc. This means that even though coding is now more in the hands of AI agents, Software Engineers still have a lot to offer when it comes to generating good, functional, and safe software. SDD is of course not perfect. But I believe that it will become better over time as the SDD frameworks continue evolving and, again, we can use things such as skills in the meantime to make SDD even more efficient.
