@@ -2,7 +2,7 @@
 TehreemFatima07
 v1.0, 2022-12-20
 :title: AutomationSTAR 2022 Conference
-:imagesdir: ../media/2022-12-20-automation-star-conference
+:imagesdir: /media/2022-12-20-automation-star-conference
 :lang: en
 :tags: [conference, automation testing]
 

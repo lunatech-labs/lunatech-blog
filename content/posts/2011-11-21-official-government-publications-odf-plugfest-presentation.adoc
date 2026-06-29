@@ -21,7 +21,7 @@ legislation, state bulletins, parliamentary proceedings and many more,
 as part of the http://www.overheid.nl/help/oep/[Official Publication
 Project (OEP)].
 
-link:../media/2011-11-21-official-government-publications-odf-plugfest-presentation/plugfest-presentation-11-11.pdf[image:../media/2011-11-21-official-government-publications-odf-plugfest-presentation/plugfest-presentation-11-11.png[image]]
+link:/media/2011-11-21-official-government-publications-odf-plugfest-presentation/plugfest-presentation-11-11.pdf[image:/media/2011-11-21-official-government-publications-odf-plugfest-presentation/plugfest-presentation-11-11.png[image]]
 
 Of course, we have put our
-link:../media/2011-11-21-official-government-publications-odf-plugfest-presentation/plugfest-presentation-11-11.pdf[presentation] (PDF) online.
+link:/media/2011-11-21-official-government-publications-odf-plugfest-presentation/plugfest-presentation-11-11.pdf[presentation] (PDF) online.

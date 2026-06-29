@@ -11,7 +11,7 @@ There are different ways you can use database transactions with business process
 Throughout this explanation, we’ll be using the following business
 process as an example:
 
-image::../media/2014-03-12-squeryl-activiti-transactions/process.png[Example business process]
+image::/media/2014-03-12-squeryl-activiti-transactions/process.png[Example business process]
 
 === Normal situation
 
@@ -58,7 +58,7 @@ In Activiti, compensate handlers can be used in a _transaction
 subprocess_. If we want to use this in our example process from above,
 it would look like this:
 
-image::../media/2014-03-12-squeryl-activiti-transactions/process-with-compensation.png[Example business process]
+image::/media/2014-03-12-squeryl-activiti-transactions/process-with-compensation.png[Example business process]
 
 This makes the model much more complex, because you are forced to
 consider how to compensate tasks that can’t be naturally undone.
@@ -82,7 +82,7 @@ Cons:
 
 Let’s go back to our simple business process:
 
-image::../media/2014-03-12-squeryl-activiti-transactions/process.png[Example business process]
+image::/media/2014-03-12-squeryl-activiti-transactions/process.png[Example business process]
 
 If the only effects that our delegates cause are _database changes_, we
 don’t need to settle for Activiti’s general solution, but we can opt for
@@ -225,7 +225,7 @@ existing one otherwise.
 
 We’ll once more use our simple process to see what we can do:
 
-image::../media/2014-03-12-squeryl-activiti-transactions/process.png[Example business process]
+image::/media/2014-03-12-squeryl-activiti-transactions/process.png[Example business process]
 
 Suppose that we can start the business process with the code
 `startProcess()`. Now, if our delegates use an `inTransaction` block, we

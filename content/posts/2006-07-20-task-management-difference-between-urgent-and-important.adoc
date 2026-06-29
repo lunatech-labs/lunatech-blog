@@ -62,7 +62,7 @@ In http://en.wikipedia.org/wiki/Seven_habits[The Seven Habits For Highly Effecti
 
 <p>The urgent/important distinction may only make sense for specific tasks and projects. For example, a particular task or project for a paying customer may be more urgent or important than attending a specific conference, but it does not make sense to ask whether 'paying work' is urgent or important.</p>
 
-<p><img src='../media/2006-07-20-task-management-difference-between-urgent-and-important/urgentimportantexample.png' alt='Example urgent-important quadrant' /></p>
+<p><img src='/media/2006-07-20-task-management-difference-between-urgent-and-important/urgentimportantexample.png' alt='Example urgent-important quadrant' /></p>
 
 <p>Paul Graham explains this in <a href="http://www.paulgraham.com/procrastination.html">Good and Bad Procrastination</a>: 'There are three variants of procrastination, depending on what you do instead of working on something: you could work on (a) nothing, (b) something less important, or (c) something more important. That last type, I'd argue, is good procrastination.' He goes on to explain that this means putting off the 'small stuff', which is 'work that has zero chance of being mentioned in your obituary' <a href="http://www.whitedot.org/waste-o-rama/default.html">White Dot's Quiz</a> provides further insights.</p>
 
@@ -72,7 +72,7 @@ In http://en.wikipedia.org/wiki/Seven_habits[The Seven Habits For Highly Effecti
 
 <p><b>Techniques</b>: <a href="urgentimportantdesktopexample.png">desktop background</a> for the quadrant, and empty file icons for tasks. Alternatively, draw the quadrant on a Big Visible Chart, and write each task on a yellow sticky note, which you can move around.</p>
 
-<p><a href="urgentimportantdesktopexample.png"><img src="../media/2006-07-20-task-management-difference-between-urgent-and-important/urgentimportantdesktopexamplecrop.png" border="0" alt="Example icons on a desktop quadrant"/></a></p>
+<p><a href="urgentimportantdesktopexample.png"><img src="/media/2006-07-20-task-management-difference-between-urgent-and-important/urgentimportantdesktopexamplecrop.png" border="0" alt="Example icons on a desktop quadrant"/></a></p>
 
 <p><b>Software</b>: none. Perhaps we need a Web 2.0 task manager application, with draggable task icons and mashup-friendly iCalendar and <a href="http://en.wikipedia.org/wiki/RSS_%28file_format%29" title="Wikipedia: RSS">RSS</a> integration...</p>
 

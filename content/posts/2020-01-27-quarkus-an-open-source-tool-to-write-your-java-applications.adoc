@@ -10,7 +10,7 @@ We offer you to share our point of view and let you discover this framework.
 
 Ready for a trip?
 
-image::../media/2020-01-27-quarkus-an-open-source-tool-to-write-your-java-applications/quarkus_home.png[Quarkus {in-between-width}]
+image::/media/2020-01-27-quarkus-an-open-source-tool-to-write-your-java-applications/quarkus_home.png[Quarkus {in-between-width}]
 
 == A bit of history
 
@@ -79,4 +79,4 @@ Congratulations to Emmanuel and the other talents working on this project.
 
 To be continued…
 
-image::../media/2020-01-27-quarkus-an-open-source-tool-to-write-your-java-applications/emmnanuel_bernard_quarkus.png[Quarkus's Emmanuel Bernard {in-between-width}]
+image::/media/2020-01-27-quarkus-an-open-source-tool-to-write-your-java-applications/emmnanuel_bernard_quarkus.png[Quarkus's Emmanuel Bernard {in-between-width}]

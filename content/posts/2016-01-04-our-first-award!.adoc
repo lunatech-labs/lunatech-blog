@@ -8,4 +8,4 @@ Lunatech has been awarded by the “The National Business Success Award Institut
 
 The jury cited the company's service quality, technology excellence and innovation. Representatives of the award winner also make appearances on the RTL television show "De Success Factor" .
 
-image:../media/2016-01-04-our-first-award!/background.png[]
+image:/media/2016-01-04-our-first-award!/background.png[]

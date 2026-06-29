@@ -57,7 +57,7 @@ Familiarity and experience are good reasons to pick technologies; and on the oth
 
 Taking a look at the headers of the three CSV files we can deduce that we’ve three relational tables like:
 
-image::../media/2018-11-07-lunatech-airport-assessment/diagramUML.png[]
+image::/media/2018-11-07-lunatech-airport-assessment/diagramUML.png[]
 
 Based on this we can create an schema and upload the CSV data with a single SQL command per table:
 
@@ -158,7 +158,7 @@ _“Working with a higher level of abstraction doesn’t spare us from knowing l
 Now let’s focus on the query, which would be used to fulfil the first report (Highest and Lowest amount of airports per country).
 If you read the SQL query you will find that there is nothing wrong with it, in a matter of fact it will return the following:
 
-image::../media/2018-11-07-lunatech-airport-assessment/tab.png[]
+image::/media/2018-11-07-lunatech-airport-assessment/tab.png[]
 
 The problem is hidden on the data, which is: some countries don’t have any airports.
 Here we would ask the candidate to analyse the issue and try to solve it on the go, showing how well can he or she reason about the produced code, being of a manageable size the developer should be able to hold the entire program on his or her head.

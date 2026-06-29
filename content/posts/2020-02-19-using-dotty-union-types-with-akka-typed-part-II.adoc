@@ -19,7 +19,7 @@ Both the Scala 2 and the Dotty version of the `Pinger` actor suffer from the sam
 
 [#img-PingerProtocol]
 .The `Pinger` actor protocol
-image::../media/2020-02-19-using-dotty-union-types-with-akka-typed-part-II/PingerProtocol.png[{half-width}]
+image::/media/2020-02-19-using-dotty-union-types-with-akka-typed-part-II/PingerProtocol.png[{half-width}]
 
 === Solutions and insights
 

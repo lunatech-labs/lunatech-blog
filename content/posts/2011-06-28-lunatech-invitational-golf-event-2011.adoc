@@ -34,7 +34,7 @@ There were joint winners for the clinic, Arjen and Frans.
 * Honorable mention - Keith and Frans for providing the in-course
 cocktails.
 
-image:../media/2011-06-28-lunatech-invitational-golf-event-2011/open-winner.jpg[image]
+image:/media/2011-06-28-lunatech-invitational-golf-event-2011/open-winner.jpg[image]
 
 NB: Last year David Young was the single winner of both trophies,
 Stableford and Strokeplay, with a round of 78. The only tarnish on his
@@ -52,4 +52,4 @@ marketing@lunatech.com so we can post them to the blog.
 
 Thanks again everyone for joining us!
 
-image:../media/2011-06-28-lunatech-invitational-golf-event-2011/audience.jpg[image]
+image:/media/2011-06-28-lunatech-invitational-golf-event-2011/audience.jpg[image]

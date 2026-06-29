@@ -105,7 +105,7 @@ drop table "COCKTAIL";
 After Slick creates this Script, Play will see that there is a new
 Evolutions script and offer to run it:
 
-image:../media/2013-08-29-play-slick-evolutions/evolutions.png[Play offers to
+image:/media/2013-08-29-play-slick-evolutions/evolutions.png[Play offers to
 run the evolutions script]
 
 Now you have a database for your application to use at runtime.
@@ -134,7 +134,7 @@ insert into COCKTAIL values (3, 'Piña colada');
 In DEV mode, Play will detect the change on the next request and offer
 to run the new script.
 
-image:../media/2013-08-29-play-slick-evolutions/evolutions-test-data.png[Updated
+image:/media/2013-08-29-play-slick-evolutions/evolutions-test-data.png[Updated
 evolutions script]
 
 As you can see, Play will first run a `Downs` section that drops the
@@ -183,10 +183,10 @@ column types.
 If you do try writing cross-database SQL scripts, you probably won’t be
 able to quote table names, because the quoting characters vary:
 
-....
+----
 create table "COCKTAILS" -- H2 uses double quotes
 create table `COCKTAILS` -- MySQL uses backticks
-....
+----
 
 In SQL, quoted table names are case-sensitive while unquoted names are
 not, which is reasonable. What you might not expect is that if you’re

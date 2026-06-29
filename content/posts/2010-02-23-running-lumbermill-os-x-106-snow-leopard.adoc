@@ -19,7 +19,7 @@ dist/lib/lumbermill.jar* then there is a problem after you select the
 _New Server Mill_ menu option, and enter a port number under _Please
 enter the port to listen on_
 
-image:../media/2010-02-23-running-lumbermill-os-x-106-snow-leopard/lumbermill-1.png[Lumbermill - attempting to create a New Server
+image:/media/2010-02-23-running-lumbermill-os-x-106-snow-leopard/lumbermill-1.png[Lumbermill - attempting to create a New Server
 Mill]
 
 … the window doesn't open - nothing happens. Instead of opening the log
@@ -83,5 +83,5 @@ dist/lib/lumbermill.jar*
 This starts Lumbermill with Swing's 'Metal' look and feel, and the
 server mill window now opens normally.
 
-image:../media/2010-02-23-running-lumbermill-os-x-106-snow-leopard/lumbermill-2.png[New server window]
+image:/media/2010-02-23-running-lumbermill-os-x-106-snow-leopard/lumbermill-2.png[New server window]
 

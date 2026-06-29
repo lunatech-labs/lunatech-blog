@@ -25,7 +25,7 @@ And these are already outdated figures. GPT-4 in 2023 was good at snippets. Clau
 
 Every six months, a generation leap. The curve is not flattening -- it is steepening.
 
-image::../media/2026-05-12-ai-is-collapsing-the-cost-of-software/cost-collapse.png[Costs]
+image::/media/2026-05-12-ai-is-collapsing-the-cost-of-software/cost-collapse.png[Costs]
 
 == What becomes economically viable
 

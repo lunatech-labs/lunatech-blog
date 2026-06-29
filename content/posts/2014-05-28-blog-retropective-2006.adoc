@@ -13,10 +13,10 @@ programming languages yet, JIRA still didn’t have the complexity or
 serious competition that it has today, and http://www.devoxx.com[Devoxx]
 was still called Javapolis.
 
-image:../media/2006-06-28-books-software-developers/books-for-developers-codecomplete.png[Code Complete]
-image:../media/2006-06-28-books-software-developers/books-for-developers-envisioninginformation.png[Envisioning
+image:/media/2006-06-28-books-software-developers/books-for-developers-codecomplete.png[Code Complete]
+image:/media/2006-06-28-books-software-developers/books-for-developers-envisioninginformation.png[Envisioning
 Information]
-image:../media/2006-06-28-books-software-developers/books-for-developers-managinghumans.png[Managing
+image:/media/2006-06-28-books-software-developers/books-for-developers-managinghumans.png[Managing
 Humans]
 
 == Tips for programmers

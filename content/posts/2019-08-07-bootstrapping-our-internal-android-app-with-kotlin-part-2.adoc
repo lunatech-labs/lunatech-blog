@@ -69,18 +69,18 @@ private fun firebaseAuthWithGoogle(account: GoogleSignInAccount?) {
 
 The figure below illustrates all the steps of the connection workflow with a sequence diagram.
 
-image:../media/2019-08-07-bootstrapping-our-internal-android-app-with-kotlin-part-2/diagram.jpeg[]
+image:/media/2019-08-07-bootstrapping-our-internal-android-app-with-kotlin-part-2/diagram.jpeg[]
 
 The figure below shows the current login screen with the Google button to launch the login workflow explained above. After logging in, we are on the main screen. We will explain how this view is organised to make it maintainable and customisable.
 
-image:../media/2019-08-07-bootstrapping-our-internal-android-app-with-kotlin-part-2/login_screen.jpg[]
+image:/media/2019-08-07-bootstrapping-our-internal-android-app-with-kotlin-part-2/login_screen.jpg[]
 
 
 == Main Screen
 
 We decided to organise the main screen as a list of `Card`. Each `Card` corresponds to a different service (i.e. Weather, Annia, etc.). We want to have the most flexible interface possible to increase or reduce the number of services available afterwards. In addition, we have added a drawer from the left side of the screen, containing the list of applications and user actions as `logout`. To obtain this flexible result, we use `RecyclerView` coupled with `CardView`. I recommend this https://developer.android.com/guide/topics/ui/layout/recyclerview[tutorial] to implement the same kind of interface step by step.
 
-image:../media/2019-08-07-bootstrapping-our-internal-android-app-with-kotlin-part-2/main_screen.gif[]
+image:/media/2019-08-07-bootstrapping-our-internal-android-app-with-kotlin-part-2/main_screen.gif[]
 
 
 A `RecyclerView` is a view adapted to this use case. It allows to implement a view corresponding to an `item`, here, a `Card`. Then, an adapter is defined. Finally, the `RecyclerView` and its adapter will take care of creating all the sub-views and make several optimisations to make the application more fluid. We will see the code corresponding to the main steps of this implementation. Our main screen includes three `RecycleView`. The first one is used for the list displayed on the main screen. The other two make up the sliding drawer: one for the favourite applications and one for the other applications. To reduce the code to be displayed, we will explore the `RecycleView` used for the main screen.
@@ -107,7 +107,7 @@ data class ModelApplication(val icon: Int,
 
 Afterwards, we implement the adapter to transform instances of the previous class into a view (`Card` in this case). We start by selecting fields to update thanks to their `id`. We update all these fields with our `ModelApplication` instance. Finally, we link a `clickListener` on the heart icon to have the _like interaction_ to keep applications we use most regularly in focus. You can see the functionality of _Like_ in the following figure.
 
-image:../media/2019-08-07-bootstrapping-our-internal-android-app-with-kotlin-part-2/like.gif[]
+image:/media/2019-08-07-bootstrapping-our-internal-android-app-with-kotlin-part-2/like.gif[]
 
 
 We link another `clickListener` on our `Card` to trigger the interaction specific to each application. As we can see, apart from the `clickListener` to like an application, all the other information is filled in our `ModelApplication` instance. Therefore, we only need to create a new `ModelApplication` instance in our dataset and our logic will take care of creating all views.
@@ -265,7 +265,7 @@ call.enqueue(object : Callback {
 
 As you can see, **Retrofit** is a perfect client for using external APIs in Android applications. Next Figure shows final result of the weather service.
 
-image:../media/2019-08-07-bootstrapping-our-internal-android-app-with-kotlin-part-2/weather.gif[]
+image:/media/2019-08-07-bootstrapping-our-internal-android-app-with-kotlin-part-2/weather.gif[]
 
 
 We're finished for this well-filled blog post, thank you for reading! If you have any comments or questions, please do not hesitate to contact me.

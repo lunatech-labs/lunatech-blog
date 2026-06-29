@@ -2,7 +2,7 @@
 chriseteka
 v1.0, 2022-04-05
 :title: Bootiful ZIO
-:imagesdir: ../media/2022-04-05-bootiful-zio
+:imagesdir: /media/2022-04-05-bootiful-zio
 :lang: en
 :tags: [scala, zio, zlayer, service-pattern]
 > Spring Booting with ZIO's ZLayer

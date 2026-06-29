@@ -13,7 +13,7 @@ I'm part of the pool of about 10 coordinators at our location in Amsterdam-West.
 One of our coordinators, Jennifer, is in charge of keeping an eye out on the planning, which is collectively maintained on a shared Excel sheet. When there are gaps in the planning, Jennifer rings the alarm bells on our coordinator WhatsApp group to remind us to schedule ourselves to work on a particular Saturday.
 
 
-image:../media/2020-01-20-creating-an-android-and-ios-app-with-react-native/background.png[]
+image:/media/2020-01-20-creating-an-android-and-ios-app-with-react-native/background.png[]
 _An actual meal served at BuurtBuik_
 
 My incentive for creating an app is that it's cumbersome to search for the shared Excel sheet's URL that was emailed to me a year ago, open it, enter my email address, click a button that will email a verification code to me, go back to my email, copy the code and paste it into the OneDrive form. Once in the Excel sheet, it's quite clumsy to find the particular month and day you want to work and manually type your name.
@@ -41,7 +41,7 @@ At https://expo.io/learn[https://expo.io/learn] you can see an overview of the
 
 And that really reflects the brevity of my initial steps with Expo and React Native.
 
-image:../media/2020-01-20-creating-an-android-and-ios-app-with-react-native/tabs-template-project.png[]
+image:/media/2020-01-20-creating-an-android-and-ios-app-with-react-native/tabs-template-project.png[]
 _The template project I used_
 
 The first bump on the road was about https://facebook.github.io/react-native/docs/navigation[navigation]. The https://github.com/expo/expo/tree/master/templates/expo-template-tabs[template project I used] defines each screen as a function returning some https://reactjs.org/docs/introducing-jsx.html[JSX] (React's syntax extension to JS). This works fine, as long as you limit navigation to tapping one of the icons on your navigation bar.
@@ -51,7 +51,7 @@ But my app has a `SignUpScreen` and it's not part of my navigation bar. Navigat
 It was unintuitive to me that such a cool, friendly project template starts off on the wrong foot regarding a crucial aspect of mobile app development. But I went through several months of unbridled development after defining my screens properly. I felt very productive and in the zone, refining and redefining features and cosmetics as I progressed.
 
 
-image:../media/2020-01-20-creating-an-android-and-ios-app-with-react-native/sign-up-screen.png[]
+image:/media/2020-01-20-creating-an-android-and-ios-app-with-react-native/sign-up-screen.png[]
 _The Sign Up screen is not part of the navigation bar. Instead it has a go-back arrow._
 
 Then the next bump came and I wish someone had told me about it before writing the majority of the screens and components. Having a responsive design means that your frontend is capable of dealing with the various screen resolutions of your target platforms. It turns out React Native has no built-in solution or a documented approach for this.
@@ -62,10 +62,10 @@ I'm not a fan of using percentages in a `StyleSheet`, as they relate to the pare
 
 So I'm telling you now, from the outset use https://github.com/vitalets/react-native-extended-stylesheet[https://github.com/vitalets/react-native-extended-stylesheet] instead of React Native's `StyleSheet`. It allows you to do just that, whether you want to use a custom-defined root https://en.wikipedia.org/wiki/Em_(typography)[em] or percentage for the unit.
 
-image:../media/2020-01-20-creating-an-android-and-ios-app-with-react-native/sign-in-screen-iphone.png[]
+image:/media/2020-01-20-creating-an-android-and-ios-app-with-react-native/sign-in-screen-iphone.png[]
 _The Sign In screen displayed on an iPhone._
 
-image:../media/2020-01-20-creating-an-android-and-ios-app-with-react-native/sign-in-screen-ipad.png[]
+image:/media/2020-01-20-creating-an-android-and-ios-app-with-react-native/sign-in-screen-ipad.png[]
 _The Sign In screen displayed on an iPad. Units relative to dimensions support responsive design._
 
 

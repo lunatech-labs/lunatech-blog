@@ -2,7 +2,7 @@
 AnastasiiaL
 v1.0, 2023-05-17
 :title: Exploring Advanced Kotlin Features: A Deep Dive for Scala Developers
-:imagesdir: ../media/2023-05-17-advanced-kotlin
+:imagesdir: /media/2023-05-17-advanced-kotlin
 :lang: en
 :tags: [scala, kotlin]
 

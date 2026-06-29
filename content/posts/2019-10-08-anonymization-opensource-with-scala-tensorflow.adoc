@@ -32,20 +32,20 @@ val Seq(boxes, scores, classes, num) =
 
 As we can see from the diagram below, we will focus on the next part. This section use different detection boxes to blur the target areas of the image.
 
-image:../media/2019-10-08-anonymization-opensource-with-scala-tensorflow/1.png[]
+image:/media/2019-10-08-anonymization-opensource-with-scala-tensorflow/1.png[]
 
 == Create a mask
 
 The first step is to create a _mask_ to delimit areas to be blurred during future convolutions. `Convolution` is an awful word to describe the operation of applying a filter/kernel throughout an image. For this purpose, we design a mask with same size of the original image, initialised with `0` for 1 in the mask. Once the mask is ready, we transform it into Tensor to use the power of Tensorflow afterwards. Below, a visual representation of a mask with two objects detected in the initial image.
 
-image:../media/2019-10-08-anonymization-opensource-with-scala-tensorflow/6.png[]
+image:/media/2019-10-08-anonymization-opensource-with-scala-tensorflow/6.png[]
 
 
 == Generation of a gaussian kernel
 
 To blur desired areas, we need a _gaussian kernel_ in addition of the previous _mask_. The gaussian kernel allows, through a convolution, to make an average of neighbours around the pixel considered according to a Gaussian distribution. A Gaussian distribution depends on two parameters, the mean μ and the standard deviation σ. Below, you can see an example of a 3x3 gaussian kernel that we will use to illustrate next examples. All values are normalised (each value is multiplied by 1/16).
 
-image:../media/2019-10-08-anonymization-opensource-with-scala-tensorflow/5.png[]
+image:/media/2019-10-08-anonymization-opensource-with-scala-tensorflow/5.png[]
 
 
 We center each pixel on the gaussian kernel. In the example kernel, central cell with value 1/4. Then, this pixel has a new value depending on the weighted average of its neighbours by the gaussian window. For example, with the gaussian kernel above, for each pixel, we will take 1/4 of its value \+ 1/8 of its neighbour's value on the left and so on. To blur the image, we _drag_ the gaussian window through the image in order to assign a new value for each pixel. In our project, we can choose two parameters to change _level of blur_. The first parameter is the standard deviation σ. The higher the standard deviation, the lower the blur. In addition, we can set the size of the gaussian window to increase the number of neighbours involved during the weighted average. I will not present any code for this part because it's only a succession of mathematical operations to generate the gaussian kernel according to the input parameters. However, if you want to see the corresponding code, I refer you to the https://github.com/lunatech-labs/lunatech-scala-anonymization/blob/master/src/main/scala/nl/lunatech/anonymization/Obfuscator.scala[class concerned]. We will see how to apply this window to an image using Tensorflow operations.
@@ -106,19 +106,19 @@ val imageCombined = ((imageBlurred \* mask) + imageWithoutBox).toUByte
 
 We start by filtering the image to get the initial image without fields corresponding to the detection boxes (variable imageWithoutBox). Then, we fill in these gaps with the blurred areas. The figure below shows an example.
 
-image:../media/2019-10-08-anonymization-opensource-with-scala-tensorflow/4.png[]
+image:/media/2019-10-08-anonymization-opensource-with-scala-tensorflow/4.png[]
 
 As we can see, except for the mask generation, all other steps are independent of the image. Therefore, most elements are reusable for different images.
 
 To complete the question mark in Figure 1, we can summarise the previous steps with the following diagram:
 
-image:../media/2019-10-08-anonymization-opensource-with-scala-tensorflow/3.png[]
+image:/media/2019-10-08-anonymization-opensource-with-scala-tensorflow/3.png[]
 
 == Bonus: Smooth blurred areas' borders
 
 A last additional step is available in the https://github.com/lunatech-labs/lunatech-scala-anonymization[OpenSource code]. This step smoothes borders of blurred areas. Indeed, if we stop the implementation here, we have strict boundaries between blurred and initial areas. These delimitations create an undesirable visual effect as we can see in the image below with blurred rectangles visible:
 
-image:../media/2019-10-08-anonymization-opensource-with-scala-tensorflow/2.jpg[]
+image:/media/2019-10-08-anonymization-opensource-with-scala-tensorflow/2.jpg[]
 
 To solve this problem, we use the same principle mentioned for the gaussian kernel. Indeed, we will generate a window to make a weighted average of the neighbours. We will apply a convolution with the mask created previously and this window in order to obtain more vague blurred areas at borders. Indeed, borders of regions to be blurred will no longer be straight lines because they will have been averaged with the neighbouring pixels. All pixels in the mask are initially at 0 for normal areas and 1 for blurred areas. All pixels present at transitions (between a blurred area and a normal area) will be weighted with pixels at 0 and 1. We will therefore obtain pixels between 0 and 1 allowing us to smooth the transitions. Code to perform this convolution is as follows:
 

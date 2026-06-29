@@ -12,4 +12,4 @@ Due to his experience at Clever Cloud — where he can work a wide range of tech
 
 We are opening up the presentation to everyone. Feel free to join us at 16:00.
 
-image:../media/2016-05-26-clever-cloud-s-ceo-to-speak-at-lunatech/background.png[]
+image:/media/2016-05-26-clever-cloud-s-ceo-to-speak-at-lunatech/background.png[]

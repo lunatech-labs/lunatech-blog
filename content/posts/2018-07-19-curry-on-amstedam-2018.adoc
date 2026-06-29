@@ -25,7 +25,7 @@ At the end of the first day, linear types are making their appearance in Haskell
 The second day opens with sound: the lively http://www.felienne.com/[Felienne Hermans] shares her attempts to make people write code in order to read it as a poem. Apparently the main challenge was making people agree on translating symbol to common words (is == spelled "equals", "is equal to", "equivalent" or something else?). By the way, apparently some study found that Java and Perl syntax is as difficult to grasp as the one of a randomly generated language!
 
 
-image:../media/2018-07-19-curry-on-amstedam-2018/keynote.jpg[]
+image:/media/2018-07-19-curry-on-amstedam-2018/keynote.jpg[]
 
 After such discoveries, a talk on Akka streams. Arnout Engelen explained the basic attributes of streams such as being non-blocking, asynchronous and capable to handle back pressure.
 
@@ -41,7 +41,7 @@ After something very functional happened: Michael Arntzenius presented his funct
 
 It is not ready yet, but very promising.
 
-image:../media/2018-07-19-curry-on-amstedam-2018/curry.jpg[]
+image:/media/2018-07-19-curry-on-amstedam-2018/curry.jpg[]
 
 
 

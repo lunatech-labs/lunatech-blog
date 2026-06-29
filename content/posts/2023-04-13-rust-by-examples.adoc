@@ -2,7 +2,7 @@
 mcsuka
 v1.0, 2023-04-13
 :title: Rust by examples, for a Java developer
-:imagesdir: ../media/2023-04-13-rust-by-examples
+:imagesdir: /media/2023-04-13-rust-by-examples
 :lang: en
 :tags: [rust, java, scala]
 
@@ -296,7 +296,7 @@ A static item is a value which is valid for the entire duration of your program.
 [source,rust]
 ----
 fn return_match_borrow(pattern: &str, lines: &'static Vec<&str>) -> Option<&'static str> {
-....
+----
 ----
 
 To me, ownership and lifetimes are the most cumbersome part of Rust development, but this is the price to pay to avoid garbage collection.

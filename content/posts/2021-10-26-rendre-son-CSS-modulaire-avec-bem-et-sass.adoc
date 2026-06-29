@@ -15,7 +15,7 @@ Si cette pratique n'a pas d'impact sur le visuel de notre application, elle peut
 
 .Source : https://unsplash.com/
 [caption=""]
-image::../media/2021-10-26-rendre-son-CSS-modulaire-avec-bem-et-sass/modularite_css4.png[]
+image::/media/2021-10-26-rendre-son-CSS-modulaire-avec-bem-et-sass/modularite_css4.png[]
 
 La méthodologie que nous allons utiliser ici est la méthodologie BEM qui signifie Bloc, Élément, Modifier.
 Pour plus d'informations, n'hésitez pas à consulter la documentation officielle : http://getbem.com/
@@ -37,7 +37,7 @@ Les 3 entités de cette méthodologie comportent une syntaxe particulière qui e
 Comme une image vaut mieux qu'un long discours, prenons donc Elty, notre mascotte, et décortiquons nos classes :
 
 
-image::../media/2021-10-26-rendre-son-CSS-modulaire-avec-bem-et-sass/modularite_css1.png[]
+image::/media/2021-10-26-rendre-son-CSS-modulaire-avec-bem-et-sass/modularite_css1.png[]
 
 Nous avons donc :
 
@@ -58,7 +58,7 @@ En html nous avons le code suivant :
 
 Cette méthodologie a donc plusieurs avantages, au-delà du fait d'apporter une syntaxe cohérente et une lisibilité à notre code, elle permet également un meilleur découpage de nos composants et donc une meilleure maintenabilité en cas de déplacement de ceux-ci.
 
-image::../media/2021-10-26-rendre-son-CSS-modulaire-avec-bem-et-sass/modularite_css2.png[]
+image::/media/2021-10-26-rendre-son-CSS-modulaire-avec-bem-et-sass/modularite_css2.png[]
 
 Nous voyons que sur le premier screenshot, toutes les classes dépendent de la classe parente et que la nomenclature commence à ne plus respecter la méthodologie :
 
@@ -74,7 +74,7 @@ L'utilisation d'une méthodologie permet également d'empêcher d'avoir des conf
 
 == SASS dans tout ça ?
 
-image::../media/2021-10-26-rendre-son-CSS-modulaire-avec-bem-et-sass/modularite_css3.png[]
+image::/media/2021-10-26-rendre-son-CSS-modulaire-avec-bem-et-sass/modularite_css3.png[]
 
 L'utilisation d'un préprocesseur CSS comme SASS va nous permettre d'étendre la maintenabilité du code, la lisibilité ainsi que la rapidité. Nous n'allons pas nous intéresser ici à la définition des variables, des mixins & à notre arborescence avec les imports de partiels. Certes ce sont des éléments qui contribuent à la modularité de notre code CSS mais ce qui nous intéresse ici, ça sera uniquement le nesting (imbrication des sélecteurs en scss).
 

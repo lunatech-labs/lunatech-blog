@@ -12,7 +12,7 @@ new kinds of business such as
 http://www.innocentive.com/[InnoCentive], which introduces a
 peer-to-peer model to scientific research.
 
-image:../media/2007-07-02-book-review-wikinomics/wikinomics.jpg[Wikinomics]
+image:/media/2007-07-02-book-review-wikinomics/wikinomics.jpg[Wikinomics]
 
 The only annoyance is the book's relentless repetition of the key
 points, as if it were not a fairly simple idea, so although I recommend

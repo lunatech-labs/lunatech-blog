@@ -15,14 +15,14 @@ slides and source code from the presentations.
 Alexander Reelsen.
 http://spinscale.github.com/play-advanced-concepts.html[slides] (HTML)
 
-http://spinscale.github.com/play-advanced-concepts.html[image:../media/2011-10-03-playground-slides-code/play-2011-09-slides.png[slides]]
+http://spinscale.github.com/play-advanced-concepts.html[image:/media/2011-10-03-playground-slides-code/play-2011-09-slides.png[slides]]
 
 == jQuery UI module
 
 Peter Hilton, Lunatech. https://github.com/hilton/jqueryui-module[source
 code] (GitHub)
 
-https://github.com/hilton/jqueryui-module[image:../media/2011-10-03-playground-slides-code/play-2011-09-jqueryui.png[code]]
+https://github.com/hilton/jqueryui-module[image:/media/2011-10-03-playground-slides-code/play-2011-09-jqueryui.png[code]]
 
 == Gratuitous book promotion
 
@@ -31,5 +31,5 @@ Peter Hilton (left) also took the opportunity to get Alexander Reelsen
 https://blog.lunatech.com/posts/2011-09-19-playframework-cookbook-review[Play
 Framework Cookbook].
 
-https://blog.lunatech.com/posts/2011-09-19-playframework-cookbook-review[image:../media/2011-10-03-playground-slides-code/play-2011-09-alexander.jpg[Peter
+https://blog.lunatech.com/posts/2011-09-19-playframework-cookbook-review[image:/media/2011-10-03-playground-slides-code/play-2011-09-alexander.jpg[Peter
 Hilton and Alexander Reelsen]]

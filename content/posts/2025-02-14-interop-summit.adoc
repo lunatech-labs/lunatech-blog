@@ -2,7 +2,7 @@
 kolmar
 v1.0, 2025-02-14
 :title: Interop Summit. Why do we only import Java libraries?
-:imagesdir: ../media/2025-02-14-interop-summit
+:imagesdir: /media/2025-02-14-interop-summit
 :lang: en
 :tags: [jvm, interop, scala, scala3, kotlin, gradle, groovy, we-know-scala, scala-lujah]
 

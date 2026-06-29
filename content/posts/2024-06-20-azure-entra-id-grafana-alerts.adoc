@@ -3,7 +3,7 @@ vanny96
 v1.0, 2024-06-20
 :title: Create a Grafana Alert for expiring Microsoft Entra ID secrets
 :lang: en
-:imagesdir: ../media/2024-06-20-azure-entra-id-grafana-alerts
+:imagesdir: /media/2024-06-20-azure-entra-id-grafana-alerts
 :tags: [azure, grafana, monitoring, alert, entraid]
 
 Microsoft Entra ID is a key component of every cloud deployment. It allows, among other things, for

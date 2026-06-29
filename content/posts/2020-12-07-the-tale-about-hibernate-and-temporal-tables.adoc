@@ -51,7 +51,7 @@ select * from departmenthistory;
 ----
 we will see information like this:
 
-image::../media/2020-12-07-the-tale-about-hibernate-and-temporal-tables/db_result_1.png[]
+image::/media/2020-12-07-the-tale-about-hibernate-and-temporal-tables/db_result_1.png[]
 
 The department with `DeptId = 1` was updated twice, so both old values are here and department with `DeptId = 2` was updated once, so one old value of this record is also in the history table now.
 
@@ -62,7 +62,7 @@ select * from departmenthistory where deptid = 1;
 ----
 And will get this result:
 
-image::../media/2020-12-07-the-tale-about-hibernate-and-temporal-tables/db_result_2.png[]
+image::/media/2020-12-07-the-tale-about-hibernate-and-temporal-tables/db_result_2.png[]
 
 So, that works as advertised! Now let's use Hibernate with just a small piece of code to run a native query:
 [source,java]
@@ -128,7 +128,7 @@ We provide Hibernate with another (fake) DeptId, which is in fact the row count.
 ----
 If we run this query without hibernate, this is what we will see:
 
-image::../media/2020-12-07-the-tale-about-hibernate-and-temporal-tables/db_result_3.png[]
+image::/media/2020-12-07-the-tale-about-hibernate-and-temporal-tables/db_result_3.png[]
 
 There is a duplicate column for DeptId, and only the first one is used by Hibernate.
 

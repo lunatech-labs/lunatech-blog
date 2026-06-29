@@ -33,7 +33,7 @@ user-interface for managing data such as the following JavaBean.
 
 The CRUD module's default admin page lists the users like this:
 
-image:../media/2011-01-11-declarative-model-class-enhancement-play/crud-users-1.png[Default CRUD module rendering]
+image:/media/2011-01-11-declarative-model-class-enhancement-play/crud-users-1.png[Default CRUD module rendering]
 
 `User[1]` is the default `toString()` implementation’s output. You can
 fix this by overriding the `toString()` method in the `User` class, like
@@ -49,7 +49,7 @@ public String toString() {
 
 which changes the output to:
 
-image:../media/2011-01-11-declarative-model-class-enhancement-play/crud-users-2.png[CRUD module rendering with user names]
+image:/media/2011-01-11-declarative-model-class-enhancement-play/crud-users-2.png[CRUD module rendering with user names]
 
 What would be much more cool would be to achieve the same result by
 simply adding a `@CrudName` annotation to the model:
@@ -274,7 +274,7 @@ module.crudname=../crudname
 Restart the Play application (to load the plug-in), and load the admin
 page. Now the page lists the users' `name` properties:
 
-image:../media/2011-01-11-declarative-model-class-enhancement-play/crud-users-2.png[CRUD module rendering with user names]
+image:/media/2011-01-11-declarative-model-class-enhancement-play/crud-users-2.png[CRUD module rendering with user names]
 
 == Conclusion
 

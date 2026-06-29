@@ -139,7 +139,7 @@ serveur léger, ses modules Java EE 6 (JAX-RS, EJB 3.1, ...), etc...
 
 ===== Julien Viet
 
-image:../media/2008-12-05-mini-conférence-java-ee-le-14-janvier-2009-à-sophia-antipolis/portrait-julien.jpg[image]
+image:/media/2008-12-05-mini-conférence-java-ee-le-14-janvier-2009-à-sophia-antipolis/portrait-julien.jpg[image]
 
 http://www.julienviet.com/[Julien Viet] a rejoint la
 http://www.jboss.org[communauté JBoss] en 2001 peu de temps après s'est
@@ -170,7 +170,7 @@ en septembre 2008;
 
 ===== Nicolas Leroux
 
-image:../media/2008-12-05-mini-conférence-java-ee-le-14-janvier-2009-à-sophia-antipolis/portrait-nicolas.jpg[image]
+image:/media/2008-12-05-mini-conférence-java-ee-le-14-janvier-2009-à-sophia-antipolis/portrait-nicolas.jpg[image]
 
 Niçois d'origine, il est maintenant basé à Rotterdam, Pays-Bas où il
 travaille comme développeur senior à
@@ -194,7 +194,7 @@ http://www.parleys.com/display/PARLEYS/Home#talk=18972706;slide=1;title=Seam%20i
 
 ===== Stéphane Épardaud
 
-image:../media/2008-12-05-mini-conférence-java-ee-le-14-janvier-2009-à-sophia-antipolis/portrait-stef.jpg[image]
+image:/media/2008-12-05-mini-conférence-java-ee-le-14-janvier-2009-à-sophia-antipolis/portrait-stef.jpg[image]
 
 Senior développeur à http://www.lunatech-research.com[Lunatech Research]
 depuis 1998, aujourd'hui basé dans
@@ -223,7 +223,7 @@ open source auquels il contribue souvent.
 
 ===== Alexis Moussine-Pouchkine
 
-image:../media/2008-12-05-mini-conférence-java-ee-le-14-janvier-2009-à-sophia-antipolis/portrait-alexis.jpg[image]
+image:/media/2008-12-05-mini-conférence-java-ee-le-14-janvier-2009-à-sophia-antipolis/portrait-alexis.jpg[image]
 
 http://blogs.sun.com/alexismp[Alexis Moussine-Pouchkine] aime le bon vin
 et les architectures Java. Chez http://www.sun.com/[Sun Microsystems],

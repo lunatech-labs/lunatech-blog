@@ -14,7 +14,7 @@ http://www.typesafe.com/technology/scala[Scala],
 http://www.typesafe.com/technology/akka[Akka] middleware and the
 http://www.typesafe.com/technology/play[Play] web framework.
 
-image:../media/2012-05-31-typesafe-consultancy-partnership/typesafe-logo.png[Typesafe]
+image:/media/2012-05-31-typesafe-consultancy-partnership/typesafe-logo.png[Typesafe]
 
 Lunatech has substantial expertise with the
 http://www.typesafe.com/stack[Typesafe Stack]. We have a team of Play

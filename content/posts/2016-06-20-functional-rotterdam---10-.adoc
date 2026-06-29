@@ -26,4 +26,4 @@ Lisp isn’t a language, it’s a building material.
 
 Lunatech went to *Scala Days* last week In Berlin. Bart Schuller will give a recap of interesting things/talks happened there for us who couldn't attend. See you there !
 
-image:../media/2016-06-20-functional-rotterdam---10-/background.png[]
+image:/media/2016-06-20-functional-rotterdam---10-/background.png[]

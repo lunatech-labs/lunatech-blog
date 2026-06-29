@@ -10,35 +10,37 @@ It was a great experience, I had a ton of fun, I met nice people and I even mana
 
 One important aspect of this hackathon is that it's not a competition. We are here to help organisations, not to win a prize or boast on LinkedIn. This made the whole atmosphere relaxed and stimulating, encouraging collaboration instead of competition.
 
-image:../media/2019-08-20-hack-in-the-woods-programming-for-fun-and-good/team.png[]
+image:/media/2019-08-20-hack-in-the-woods-programming-for-fun-and-good/team.png[]
 
 Xavier knew some people from last year. After two beers we were in their team. A well balanced one, with devops, frontend and backend developers. They know each other from work, other friends, former colleagues. It was also something special to be together for so long for them. Same culture: work hard, party hard, be curious, question the status quo, fix the problem, deliver.
 
-image:../media/2019-08-20-hack-in-the-woods-programming-for-fun-and-good/meal.png[]
+image:/media/2019-08-20-hack-in-the-woods-programming-for-fun-and-good/meal.png[]
 
 Programming in the night, for the win. Good lads, we'll meet again.
 
 
 == The location
 
-image:../media/2019-08-20-hack-in-the-woods-programming-for-fun-and-good/tent.png[]
+image:/media/2019-08-20-hack-in-the-woods-programming-for-fun-and-good/tent.png[]
 
 
 The Domaine de Graux in Tournai is a beautiful place with lots of trees, ponds, pathways and animals, from pigs to Black Angus cows to, well, roosters:
 
-video::kd-um9-9N7A[]
+++++
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kd-um9-9N7A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+++++
 
 I followed the guided tour of the domain and it is impressive how far the owners go in a responsible and biodynamic approach to managing the domain.
 
 
-image:../media/2019-08-20-hack-in-the-woods-programming-for-fun-and-good/food.png[]
+image:/media/2019-08-20-hack-in-the-woods-programming-for-fun-and-good/food.png[]
 
 The BBQ on Saturday was excellent! I know I should have taken pictures of the pies!
 
 == The project
 
 
-image:../media/2019-08-20-hack-in-the-woods-programming-for-fun-and-good/project.png[]
+image:/media/2019-08-20-hack-in-the-woods-programming-for-fun-and-good/project.png[]
 
 
 From the projects document: _The preservation of bats is vital for our ecosystem. To measure the evolution of these populations, volunteers cover the country to capture their screams. Today the transfer of this data is often manual and incomplete. What is needed is a tool to streamline the transmission of these sounds to the analysts and to allow the volunteers to better identify the areas to cover._
@@ -49,14 +51,14 @@ About the technology, I was thinking about writing a separate blog post but read
 
 Here is the form that simplifies and normalises the input of the recording metadata:
 
-image:../media/2019-08-20-hack-in-the-woods-programming-for-fun-and-good/form.png[]
+image:/media/2019-08-20-hack-in-the-woods-programming-for-fun-and-good/form.png[]
 
 
 Resulting to the following summaries:
 
-image:../media/2019-08-20-hack-in-the-woods-programming-for-fun-and-good/sighting123.png[]
+image:/media/2019-08-20-hack-in-the-woods-programming-for-fun-and-good/sighting123.png[]
 
-image:../media/2019-08-20-hack-in-the-woods-programming-for-fun-and-good/app-2.png[]
+image:/media/2019-08-20-hack-in-the-woods-programming-for-fun-and-good/app-2.png[]
 
 So you see, nothing too complicated, but working enough as a prototype. And looking good yes, that's when you see you have _real_ frontend developers in your team. The cherry on the pie was to pre-fill this form with the data on the SD card. We wrote a small Python program to fetch the data and the metadata in the various folders and files, send it to the backend and open a browser tab on the right page to finish inputting the data by hand. Once again, nothing fancy, just finding the pain points and start addressing them.
 

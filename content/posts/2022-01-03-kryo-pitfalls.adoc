@@ -2,7 +2,7 @@
 nMoncho
 2022-01-03
 :title: Pitfalls in Kryo Serialization
-:imagesdir: ../media/2022-01-03-kryo-pitfalls
+:imagesdir: /media/2022-01-03-kryo-pitfalls
 :tags: [scala,java,serialization,benchmark]
 
 

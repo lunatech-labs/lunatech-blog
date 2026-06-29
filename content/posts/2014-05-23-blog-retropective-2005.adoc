@@ -20,16 +20,16 @@ describes a rare success in fighting wrong-headed J2EE web technology
 and managing to build a more HTTP-centric web application. While
 everyone else was building web applications with ugly URLs like:
 
-....
+----
 /customer.do?method=edit&id=42
-....
+----
 
 … or worse, we had worked out how to get Struts to work with something
 cleaner, like:
 
-....
+----
 /customer/edit/42
-....
+----
 
 In hindsight, this is a clear example of one reason why we would
 inevitably recognise the http://www.playframework.com[Play Framework] as
@@ -44,7 +44,7 @@ http://alistair.cockburn.us/Agile+software+development+book[2001 book on
 the topic] that we had used on the Struts project with the nice URLs
 (see above):
 
-image:../media/2005-10-07-information-radiators-dashboard-wall/information-radiator-small.jpg[An
+image:/media/2005-10-07-information-radiators-dashboard-wall/information-radiator-small.jpg[An
 information radiator]
 
 This kind of thing is a lot more common these days, with more Scrum
@@ -53,7 +53,7 @@ was less mainstream and featured a lot less hype back in 2005.
 
 == Business
 
-image:../media/2005-09-13-business-lunch-rules/business-lunch.jpg[business
+image:/media/2005-09-13-business-lunch-rules/business-lunch.jpg[business
 lunch]
 
 https://blog.lunatech.com/posts/2005-09-13-business-lunch-rules[Business lunch

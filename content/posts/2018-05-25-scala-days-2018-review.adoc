@@ -22,7 +22,7 @@ In the early afternoon the stands rose as they were being built, and the first 
 
 Check this out for more technical insight of the https://www.scala-lang.org/blog/2018/04/19/scala-3.html[Keynote]!
 
-image:../media/2018-05-25-scala-days-2018-review/scaladays.png[]
+image:/media/2018-05-25-scala-days-2018-review/scaladays.png[]
 
 Lunatech sponsored the communal event the first evening with nearly 40 of our employees joining the party. The organisation at Kosmos center was very efficient with an army of waiters so that the 900 people present were able to eat and drink without problems (very few organisations could have done better)
 
@@ -32,7 +32,7 @@ Apart from Lunatech, some prestigious sponsors such as Audi (and their recogn
 
 While the conferences took place in different rooms (a technical blog will enlighten you on the subject soon) the Lunateam answered the questions of many developers. Swags, t-shirts and gifts were distributed. Our winner of the day, randomly selected among the new subscribers of our newsletter left with a Mini Super-Nes Nintendo.
 
-image:../media/2018-05-25-scala-days-2018-review/prices.png[]
+image:/media/2018-05-25-scala-days-2018-review/prices.png[]
 
 The evening festivities continued with the installation of a beer stand. By modesty we will not disclose the amount of beer drunk that evening ;)
 

@@ -142,7 +142,7 @@ outjecting the `timeZones` list and using the following mark-up:
 This adds each time zone as its ID followed by a dash and the time
 zone's display name, and looks like this:
 
-image:../media/2008-12-20-getting-list-time-zones-java-and-seam/time-zones.png[HTML select screenshot]
+image:/media/2008-12-20-getting-list-time-zones-java-and-seam/time-zones.png[HTML select screenshot]
 
 == Shorten the two long names
 
@@ -165,7 +165,7 @@ label="#{tz.ID} - #{fn:replace(tz.displayName, '\\(South Australia/New South Wal
 
 which makes the `SELECT` less wide:
 
-image:../media/2008-12-20-getting-list-time-zones-java-and-seam/time-zones-short.png[HTML select screenshot]
+image:/media/2008-12-20-getting-list-time-zones-java-and-seam/time-zones-short.png[HTML select screenshot]
 
 If space is really short, just omit the display name entirely.
 

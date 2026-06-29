@@ -13,7 +13,7 @@ endif::[]
 The business lunch is something that is near and dear to my heart but, on reflection, what can I write that hasn't been said before? Nothing I suppose. But none the less, here are my ramblings on the business lunch and some tips to make the most out of the opportunity.
 
 
-image::../media/2005-09-13-business-lunch-rules/business-lunch.jpg[business lunch]
+image::/media/2005-09-13-business-lunch-rules/business-lunch.jpg[business lunch]
 
 The purpose of the lunch - The business lunch always has a purpose, or at least pretends to have one. So... why are you actually going to this lunch at the expense of valuable work time? Are you establishing a new relationship, maintaining an existing one, looking for new ideas/partners, or simply getting out of the office for creative or other reasons (more later in my yet to be written: *Meeting for the sake of meeting*). Understanding the purpose of the lunch brings us to…
 

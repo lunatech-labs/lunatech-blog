@@ -7,7 +7,7 @@ v1.0, 2006-08-22
 I just worked out how to use http://www.apple.com/macosx/features/applescript/[AppleScript] to create recurring daily to do items in http://www.apple.com/macosx/features/ical/[Apple iCal].
 
 ++++
-<p><img style="float:right; margin-left:1em" src='../media/2006-08-22-making-daily-recurring-do-items-apple-ical/ical.png' alt='iCal To Do list screenshot' />It is the one thing has always prevented my moving over to iCal. I would love to say that it is otherwise, but the fact is, I am terrible at keeping to a rhythm. No matter how firmly I seem to have a simple daily rhythm in grasp I always fall back into my old habits within a few weeks.</p>
+<p><img style="float:right; margin-left:1em" src='/media/2006-08-22-making-daily-recurring-do-items-apple-ical/ical.png' alt='iCal To Do list screenshot' />It is the one thing has always prevented my moving over to iCal. I would love to say that it is otherwise, but the fact is, I am terrible at keeping to a rhythm. No matter how firmly I seem to have a simple daily rhythm in grasp I always fall back into my old habits within a few weeks.</p>
 
 <p>To combat this I need a daily checklist. However, this feature is not available in iCal. Disappointed, I looked elsewhere and disliking everything I found, I scrapped my productivity boosting plan entirely and went back to occasionally forgetting my daily list in Omni Outliner.</p>
 

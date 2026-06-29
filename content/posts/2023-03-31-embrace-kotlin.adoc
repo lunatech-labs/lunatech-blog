@@ -2,7 +2,7 @@
 AnastasiiaL
 v1.0, 2023-03-31
 :title: Embrace Kotlin: Tips And Tricks for Scala Developers to Get Started
-:imagesdir: ../media/2023-03-31-embrace-kotlin
+:imagesdir: /media/2023-03-31-embrace-kotlin
 :lang: en
 :tags: [scala, kotlin]
 

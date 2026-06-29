@@ -10,34 +10,34 @@ Pub] in Rotterdam. The event was a great
 success with around 60 attendees making this a relatively large JBoss
 User Group.
 
-image:../media/2008-03-03-jbug-2008-02-photos/jbug-2008-02-photos-1.jpg[The ideal networking environment]
+image:/media/2008-03-03-jbug-2008-02-photos/jbug-2008-02-photos-1.jpg[The ideal networking environment]
 
 Everyone turned up in time to meet a few people and have a pint before
 the presentations started.
 
-image:../media/2008-03-03-jbug-2008-02-photos/jbug-2008-02-photos-2.jpg[The all-important bar]
+image:/media/2008-03-03-jbug-2008-02-photos/jbug-2008-02-photos-2.jpg[The all-important bar]
 
 Pete Muir and Koen Aers from JBoss were very happy to arrive at the bar,
 before Pete's presentation.
 
-image:../media/2008-03-03-jbug-2008-02-photos/jbug-2008-02-photos-3.jpg[Pete Muir and Koen Aers]
+image:/media/2008-03-03-jbug-2008-02-photos/jbug-2008-02-photos-3.jpg[Pete Muir and Koen Aers]
 
 Pete Muir gave a presentation about http://seamframework.org/[Seam].
 
-image:../media/2008-03-03-jbug-2008-02-photos/jbug-2008-02-photos-5.jpg[Pete's Seam presentation]
+image:/media/2008-03-03-jbug-2008-02-photos/jbug-2008-02-photos-5.jpg[Pete's Seam presentation]
 
 Extra television screens in the sports bar made sure everyone could see
 the slides.
 
-image:../media/2008-03-03-jbug-2008-02-photos/jbug-2008-02-photos-6.jpg[Television screens behind the bar]
+image:/media/2008-03-03-jbug-2008-02-photos/jbug-2008-02-photos-6.jpg[Television screens behind the bar]
 
-image:../media/2008-03-03-jbug-2008-02-photos/jbug-2008-02-photos-7.jpg[The audience watching the presentation]
+image:/media/2008-03-03-jbug-2008-02-photos/jbug-2008-02-photos-7.jpg[The audience watching the presentation]
 
 Tom Baeyens did a presentation about
 http://www.jboss.com/products/jbpm[jBPM]
 
-image:../media/2008-03-03-jbug-2008-02-photos/jbug-2008-02-photos-8.jpg[Tom's presentation]
+image:/media/2008-03-03-jbug-2008-02-photos/jbug-2008-02-photos-8.jpg[Tom's presentation]
 
 … and everyone had a good time.
 
-image:../media/2008-03-03-jbug-2008-02-photos/jbug-2008-02-photos-4.jpg[More networking]
+image:/media/2008-03-03-jbug-2008-02-photos/jbug-2008-02-photos-4.jpg[More networking]

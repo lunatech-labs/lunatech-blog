@@ -6,7 +6,7 @@ v1.0, 2013-04-09
 
 On Sunday, April 14, Lunatech will participate in Rotterdam Business Marathon
 
-image:../media/2013-04-09-rotterdam-business-marathon/marathon.jpg[Rotterdam
+image:/media/2013-04-09-rotterdam-business-marathon/marathon.jpg[Rotterdam
 Marathon 2013 - t-shirt,title="Rotterdam Marathon 2013 - t-shirt"]
 
 Coming Sunday nearly the half of Lunatech’s staff will participate in

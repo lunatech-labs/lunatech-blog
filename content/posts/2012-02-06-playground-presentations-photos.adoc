@@ -15,13 +15,13 @@ presentations.
 Nicolas Martignole, http://www.express-board.fr/[express-board.fr].
 link:play-2012-02-expressboard.pdf[slides] (PDF, 3.4 MB)
 
-link:../media/2012-02-06-playground-presentations-photos/play-2012-02-expressboard.pdf[image:../media/2012-02-06-playground-presentations-photos/play-2012-02-expressboard.png[slides]]
-image:../media/2012-02-06-playground-presentations-photos/play-2012-02-nicolas.jpg[Nicolas presenting]
+link:/media/2012-02-06-playground-presentations-photos/play-2012-02-expressboard.pdf[image:/media/2012-02-06-playground-presentations-photos/play-2012-02-expressboard.png[slides]]
+image:/media/2012-02-06-playground-presentations-photos/play-2012-02-nicolas.jpg[Nicolas presenting]
 
 == Connected GameStore
 
-Robert Bakker, BoosterMedia. link:../media/2012-02-06-playground-presentations-photos/play-2012-02-booster.pdf[slides] (PDF,
+Robert Bakker, BoosterMedia. link:/media/2012-02-06-playground-presentations-photos/play-2012-02-booster.pdf[slides] (PDF,
 3.4 MB)
 
-link:../media/2012-02-06-playground-presentations-photos/play-2012-02-booster.pdf[image:../media/2012-02-06-playground-presentations-photos/play-2012-02-booster.png[slides]]
-image:../media/2012-02-06-playground-presentations-photos/play-2012-02-robert.jpg[Robert presenting]
+link:/media/2012-02-06-playground-presentations-photos/play-2012-02-booster.pdf[image:/media/2012-02-06-playground-presentations-photos/play-2012-02-booster.png[slides]]
+image:/media/2012-02-06-playground-presentations-photos/play-2012-02-robert.jpg[Robert presenting]

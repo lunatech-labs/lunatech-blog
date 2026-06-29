@@ -16,7 +16,9 @@ Lunatech hosted the Dutch Clojure Meetup \#103 organised by Carlo Sciolla at ou
 
 The Clojure community grow in Netherlands, join their https://www.meetup.com/The-Dutch-Clojure-Meetup/[Meetup] or subscribe to their https://www.youtube.com/channel/UCkb1jQA-BMBwmYG1OkHILJw[YouTube Channel] for more.
 
-video::c5DifklnMI8[]
+++++
+<iframe width="560" height="315" src="https://www.youtube.com/embed/c5DifklnMI8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+++++
 
 To have a better idea, check the video link, a nice talk by https://www.linkedin.com/in/baruch-berger-a8a3735b/[Baruch Berger] on an original topic ;) Thanks to Adrien Haxaire Gustavo De Micheli and Celeste Franco for their help.
 

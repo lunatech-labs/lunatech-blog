@@ -13,7 +13,7 @@ and myself - the Nicolases ™ - gave a presentation about http://playframework.
 framework] with some really nice demos. One of
 the demo showed a video chat. 
 
-image:../media/2011-10-24-lunatech-rivieradev/rivieradev-2011.png[RivieraDEV]
+image:/media/2011-10-24-lunatech-rivieradev/rivieradev-2011.png[RivieraDEV]
 
 The presentation's video should be available pretty soon, stay tuned!
 
@@ -28,7 +28,7 @@ team.
 == Play framework presentation slides
 
 Our presentation is available here:
-link:../media/2011-10-24-lunatech-rivieradev/play-2011-10-rivieradev.pdf[Play! Framework: To infinity and
+link:/media/2011-10-24-lunatech-rivieradev/play-2011-10-rivieradev.pdf[Play! Framework: To infinity and
 beyond] (PDF).
 
 PS: I left my phone in Rotterdam, so although it was nice and quiet, I

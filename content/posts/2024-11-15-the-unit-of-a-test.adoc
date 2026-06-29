@@ -2,7 +2,7 @@
 eamelink
 v1.0, 2024-11-15
 :title: The Unit of a test
-:imagesdir: ../media/2024-11-15-the-unit-of-a-test
+:imagesdir: /media/2024-11-15-the-unit-of-a-test
 :lang: en
 :tags: [java, testing, quality, java-vs-world, java-over-java]
 
@@ -102,11 +102,11 @@ This test is now tied to specific implementation details, which makes it hard to
 
 (https://martinfowler.com/bliki/UnitTest.html)[Martin Fowler drew diagrams] similar to the ones below, that illustrate (https://leanpub.com/wewut)[Jay Fields]' concepts of Solitary and Sociable Unit tests:
 
-image::../media/2024-11-15-the-unit-of-a-test/sociable-and-solitary-tests.png["Diagram explaining sociable and solitary unit tests. Sociable tests test a structural unit including its collaborators. Solitary tests test a structural unit with collaborators replaced with test doubles.",600]
+image::/media/2024-11-15-the-unit-of-a-test/sociable-and-solitary-tests.png["Diagram explaining sociable and solitary unit tests. Sociable tests test a structural unit including its collaborators. Solitary tests test a structural unit with collaborators replaced with test doubles.",600]
 
 In our example, we could draw it with the following classes 
 
-image::../media/2024-11-15-the-unit-of-a-test/our-test-solitary.png["Diagram showing how using the solitary testing style causes the test to be tied to implementation details such as the interface between UserService and UserMapper",400]
+image::/media/2024-11-15-the-unit-of-a-test/our-test-solitary.png["Diagram showing how using the solitary testing style causes the test to be tied to implementation details such as the interface between UserService and UserMapper",400]
 
 Note that we took the solitary unit test approach here. The disadvantage is that now we've tied the test to the interface between the `UserService` class and it's collaborator `UserMapper`.
 
@@ -132,7 +132,7 @@ class UserServiceTest {
 
 Our test is now simpler and no longer tied to the interface of `UserMapper`. As a diagram, it would now look like the following:
 
-image::../media/2024-11-15-the-unit-of-a-test/our-test-sociable.png["Diagram showing how our updated test uses the sociable style for the UserMapper collaborator, and which illustrates that the 'unit of behaviour' is implemented by the combination of the UserService and UserMapper",400]
+image::/media/2024-11-15-the-unit-of-a-test/our-test-sociable.png["Diagram showing how our updated test uses the sociable style for the UserMapper collaborator, and which illustrates that the 'unit of behaviour' is implemented by the combination of the UserService and UserMapper",400]
 
 Here, we drew the dashed green line around both the `UserService` and the `UserMapper`, which together provide the _unit of behaviour_ we're trying to test.
 

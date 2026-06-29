@@ -9,6 +9,6 @@ November 2012, Peter Hilton will present http://oredev.org/2012/sessions/play-fr
 2] at http://oredev.org/[Øredev
 2012].
 
-http://oredev.org/[image:../media/2012-11-06-playframework-oredev-2012/oredev-logo.gif[Øredev]]
+http://oredev.org/[image:/media/2012-11-06-playframework-oredev-2012/oredev-logo.gif[Øredev]]
 
 

@@ -10,8 +10,8 @@ presented http://www.javapolis.com/confluence/display/JP07/Seam+in+Action[Seam I
 Action]
 at http://www.javapolis.com/[JavaPolis] in Antwerp.
 
-link:../media/2007-12-14-seam-action-javapolis-presentation/javapolis-2007-seam.pdf[image:../media/2007-12-14-seam-action-javapolis-presentation/javapolis-2007-seam.jpg[Seam In
+link:/media/2007-12-14-seam-action-javapolis-presentation/javapolis-2007-seam.pdf[image:/media/2007-12-14-seam-action-javapolis-presentation/javapolis-2007-seam.jpg[Seam In
 Action presentation slides (PDF)]]
 
-You can download the link:../media/2007-12-14-seam-action-javapolis-presentationjavapolis-2007-seam.pdf[presentation slides]
+You can download the link:/media/2007-12-14-seam-action-javapolis-presentationjavapolis-2007-seam.pdf[presentation slides]
 (PDF, 2.6 Mb).

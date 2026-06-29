@@ -9,7 +9,7 @@ Lunatech followed on from the 2007 developer events with bigger
     learning new ways to write about and teach technology in a variety of 
     technical blog posts by different people.
 
-image:../media/2008-01-17-jbug-2008-02/jbug-2008-02-paddys.jpg[Paddy
+image:/media/2008-01-17-jbug-2008-02/jbug-2008-02-paddys.jpg[Paddy
 Murphy’s]
 
 == Events

@@ -10,7 +10,7 @@ Hi! In this article, we will present an internal project called Annia. We will s
 
 For my internship at Lunatech Rotterdam, my assigned task was to design an internal project called Annia. The project has two purposes. First, Annia provides a phonebook for all Lunatech employees _(fig.1)_. Second, Annia offers a quick solution to see the commute time between the employee’s home and a customer’s office. In fact, it is an issue that appears each time Lunatech has a new client. The company tries to optimize the travel time of each collaborator. In next part, we will describe how the application is designed and how Annia solve each problem.
 
-image:../media/2018-09-06-a-journey-into-annias-project/annia-screen.jpg[]
+image:/media/2018-09-06-a-journey-into-annias-project/annia-screen.jpg[]
 
 _Figure 1: Phonebook feature_
 
@@ -20,7 +20,7 @@ Annia is composed of two parts : a backend that exposes a REST API built with Ko
 
 For the backend, we chose https://kotlinlang.org/docs/tutorials[Kotlin], a new and very promising language. Historically, Lunatech favors Java and Scala for projects. For that project, it was decided to experiment with Kotlin. In addition of Kotlin, we needed a framework to adapt it on the backend. I had the choice between three differents frameworks. As you can see, in the figure 2, we reduce the choice between Spring, Micronaut and Ktor. Micronaut was not chosen because it has a very small community and no documentation so very hard for me to learn how to use it. Ktor and Spring seems good but I prefer chose Ktor because it’s fully written in Kotlin and I think Ktor will become really good in the coming years.
 
-image:../media/2018-09-06-a-journey-into-annias-project/stats.jpg[]
+image:/media/2018-09-06-a-journey-into-annias-project/stats.jpg[]
 
 _Figure 2: Comparison between Spring, Micronaut and Ktor_
 
@@ -30,13 +30,13 @@ For the frontend, we had the choice between Vue.js, Angular.js and React.js. Ang
 
 == Global organisation of Annia
 
-image:../media/2018-09-06-a-journey-into-annias-project/archi.jpg[]
+image:/media/2018-09-06-a-journey-into-annias-project/archi.jpg[]
 
 _Figure 3: Global Architecture_
 
 The diagram above shows the general structure of Annia. The application interfaces with Zoho and to Google Maps by their APIs and we transform informations received for our use cases. Annia exposes 3 routes to interact with these APIs. First, a route to authenticate yourself through Google Authentication (only Lunatech employee are allowed). Another routes was set to interact with Zoho. You need to be authenticated to access all Zoho routes. You can interact with Zoho to retrieve all employees, to pick up one, or to update employee informations. Finally, we have a route pack to interact with Google Maps API. No authentication is needed to access these routes. You can choose a transit between two locations while specifying mode transport. It’s also possible to autofill an address and finally  transform it by its tuple (latitude, longitude). As you can see in the figure 4, a https://annia.lunatech.com/doc/[swagger documentation] exposes all routes availables for Annia and explain each one better than text above!
 
-image:../media/2018-09-06-a-journey-into-annias-project/swagger.png[]
+image:/media/2018-09-06-a-journey-into-annias-project/swagger.png[]
 _Figure 4 : Annia swagger documentation_
 
 The backend was not really complicated because we do not have a database. All the data are in Zoho so we transform informations to adapt it for our user cases. They are two users role, admin and regular user, they will be explain thereafter (fig 8 and 9). Let’s switch to the next part, we will explain first steps with Ktor and Kotlin.
@@ -106,12 +106,12 @@ The web application is simple (fig 10) In order, we have: Authentication page, P
 
 At this point, you can see a list of all the employees. Depends of your role, as said above, you can see informations from Zoho about each employee. On this page, you can call an employee if you click on their phone number. To explain the difference between admin and other, look at figures 8 and 9.
 
-image:../media/2018-09-06-a-journey-into-annias-project/seq1.png[]
+image:/media/2018-09-06-a-journey-into-annias-project/seq1.png[]
 
 _Figure 8: Sequence diagram Admin_
 
 
-image:../media/2018-09-06-a-journey-into-annias-project/seq2.png[]
+image:/media/2018-09-06-a-journey-into-annias-project/seq2.png[]
 _Figure 9: Sequence diagram Other_
 
 As said above, admin and other employee have not the same right. Their options are not the same for each call using Zoho API. An admin will be able to see all informations of each employee and update any of them. A regular user will be limited in some points. For example, this kind of user will not be allowed to see phone number of other employee if they don’t want to share it. Moreover, a not admin user will not receive the address of other employee and will be able to edit only his information.
@@ -121,7 +121,7 @@ If you click on your card, you can click on \`Calculate transit time\`, and then
 Finally, transit time between your home and the client is release. You can click on the different icon representing the different transport mode to see on the map the most efficient route. Annia is fully responsive so you can use it with your mobile phone!
 
 
-image:../media/2018-09-06-a-journey-into-annias-project/annia.jpg[]_Figure 10: Screenshots Annia_
+image:/media/2018-09-06-a-journey-into-annias-project/annia.jpg[]_Figure 10: Screenshots Annia_
 
 == Conclusion
 

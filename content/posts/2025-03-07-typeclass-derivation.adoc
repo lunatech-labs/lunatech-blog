@@ -2,7 +2,7 @@
 nMoncho
 2025-03-07
 :title: Mastering Typeclass Derivation with Scala 3
-:imagesdir: ../media/2025-03-07-typeclass-derivation
+:imagesdir: /media/2025-03-07-typeclass-derivation
 :tags: [scala, typeclass, metaprogramming, we-know-scala, scala-lujah]
 
 

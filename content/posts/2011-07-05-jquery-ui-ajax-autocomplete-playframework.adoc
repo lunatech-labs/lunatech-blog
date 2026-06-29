@@ -173,7 +173,7 @@ public static void autocompleteLabel(final String term) {
 The result is an input field that displays a list of location names that
 match the user input.
 
-image:../media/2011-07-05-jquery-ui-ajax-autocomplete-playframework/autocomplete.png[image]
+image:/media/2011-07-05-jquery-ui-ajax-autocomplete-playframework/autocomplete.png[image]
 
 [[entity]]
 == Autocomplete for selecting a JPA entity

@@ -14,7 +14,7 @@ ____
 In a way, the benefits of remote working are obvious, but perhaps not
 for everyone, and there are benefits that you might not expect.
 
-image::../media/2014-03-10-benefits-of-remote-working/remote-working.jpg[Near Peille in the South of France]
+image::/media/2014-03-10-benefits-of-remote-working/remote-working.jpg[Near Peille in the South of France]
 
 == More collaborations are possible
 

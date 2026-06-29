@@ -16,12 +16,12 @@ restore this disastrous reputation among developers, there are at least
 a few good ones that entertain while broadening the picture a little.
 
 
-image:../media/2008-02-18-marketing-books-developers/marketing-books-the-cluetrain-maniesto.png[The Cluetrain
-Manifesto] image:../media/2008-02-18-marketing-books-developers/marketing-books-gonzo-marketing.png[Gonzo Marketing:
+image:/media/2008-02-18-marketing-books-developers/marketing-books-the-cluetrain-maniesto.png[The Cluetrain
+Manifesto] image:/media/2008-02-18-marketing-books-developers/marketing-books-gonzo-marketing.png[Gonzo Marketing:
 Winning Through Worst Practices]
-image:../media/2008-02-18-marketing-books-developers/marketing-books-in-search-of-stupidity.png[In Search of Stupidity,
+image:/media/2008-02-18-marketing-books-developers/marketing-books-in-search-of-stupidity.png[In Search of Stupidity,
 over 20 years of high-tech marketing disasters]
-image:../media/2008-02-18-marketing-books-developers/marketing-books-rules-for-revolutionaries.png[Rules for
+image:/media/2008-02-18-marketing-books-developers/marketing-books-rules-for-revolutionaries.png[Rules for
 Revolutionaries]
 
 http://www.cluetrain.com/book.html[The Cluetrain Manifesto], also

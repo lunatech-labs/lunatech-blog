@@ -10,5 +10,5 @@ Next week, on 1-2 November 2012, Peter Hilton will give two presentations at htt
 and http://topconf.com/Conference/Abstracts/Transparentdevelopmentandtheprojectmanagement/tabid/141/language/en-US/Default.aspx[Transparent development and the project management
 renaissance].
 
-http://topconf.com/[image:../media/2012-10-29-playframework-topconf-2012/topconf-logo.png[Topconf]]
+http://topconf.com/[image:/media/2012-10-29-playframework-topconf-2012/topconf-logo.png[Topconf]]
 

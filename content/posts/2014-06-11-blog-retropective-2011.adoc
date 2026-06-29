@@ -11,7 +11,7 @@ v1.0, 2014-06-11
 As well as the technical stuff, there were also new events, for that
 unique combination of code, socialising, beer and (for a change) sun.
 
-image:../media/2011-10-24-lunatech-rivieradev/rivieradev-2011.png[RivieraDEV]
+image:/media/2011-10-24-lunatech-rivieradev/rivieradev-2011.png[RivieraDEV]
 
 == Programming
 

@@ -2,7 +2,7 @@
 peutit
 v2.0, 2026-06-10
 :title: The software-defined vehicle moves the work to the backend
-:imagesdir: ../media/2026-06-10-software-defined-vehicle-backend
+:imagesdir: /media/2026-06-10-software-defined-vehicle-backend
 :lang: en
 :tags: [eclipse-sdv, rust, kuksa, hawkbit, mqtt, axum, software-defined-vehicle, open-source]
 
@@ -164,7 +164,9 @@ image::01-fleet-map.png[Live fleet map with twenty vehicles moving across Paris,
 
 A full walkthrough: the live map, the vehicle drawer, the fleet table, an over-the-air campaign launch, and the state updates landing in real time.
 
-video::HokMqkx5VmI[youtube,width=960,height=540]
+++++
+<iframe width="960" height="540" src="https://www.youtube.com/embed/HokMqkx5VmI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+++++
 
 == Run it yourself
 

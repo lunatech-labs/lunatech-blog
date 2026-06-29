@@ -13,7 +13,7 @@ http://in.relation.to/Bloggers/Max[Max] told us that
 funny because of how it takes our statement out of context. This article
 is the context.
 
-image:../media/2008-03-17-seam-new-struts/seam-is-the-new-struts.png[Seam is the new Struts]
+image:/media/2008-03-17-seam-new-struts/seam-is-the-new-struts.png[Seam is the new Struts]
 
 When we say that Seam is the new Struts, we mean that Seam will take
 over Struts’ position as the default choice for Java web applications.

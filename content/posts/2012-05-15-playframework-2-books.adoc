@@ -12,8 +12,8 @@ but these days there isn’t just Java: now there’s Scala as well, which
 is why we are happy to announce both *Play for Scala* and *Play for
 Java*.
 
-image:../media/2012-05-15-playframework-2-books/play-for-scala-cover.jpg[Play for Scala cover]
-image:../media/2012-05-15-playframework-2-books/play-for-java-cover.jpg[Play for Java cover]
+image:/media/2012-05-15-playframework-2-books/play-for-scala-cover.jpg[Play for Scala cover]
+image:/media/2012-05-15-playframework-2-books/play-for-java-cover.jpg[Play for Java cover]
 
 [[meap]]
 == MEAP release

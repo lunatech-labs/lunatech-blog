@@ -10,4 +10,4 @@ This is an informal event where we share our experience of using functional prog
 
 Do join us by RSVPing on the http://www.meetup.com/Functional-Rotterdam/[meetup page]!
 
-image:../media/2016-01-04-functional-rotterdam---5th-edition/background.png[]
+image:/media/2016-01-04-functional-rotterdam---5th-edition/background.png[]

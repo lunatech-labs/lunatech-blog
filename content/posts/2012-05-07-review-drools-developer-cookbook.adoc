@@ -12,7 +12,7 @@ JBoss Rules implementation project.*
 
 == Introduction
 
-http://www.packtpub.com/drools-developers-using-jboss-cookbook/book[image:../media/2012-05-07-review-drools-developer-cookbook/drools-developers-cookbook-cover.jpg[Drools
+http://www.packtpub.com/drools-developers-using-jboss-cookbook/book[image:/media/2012-05-07-review-drools-developer-cookbook/drools-developers-cookbook-cover.jpg[Drools
 Developer’s Cookbook]]
 
 This book is the latest in a handful of books about the JBoss Rules

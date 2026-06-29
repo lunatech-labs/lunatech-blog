@@ -45,7 +45,7 @@ The delta between these two outcomes is not the AI model. It is the context.
 
 At Lunatech, we have formalized context into seven layers that together form what we call the Claude Context Pack:
 
-image::../media/2026-05-19-from-coding-to-orchestrating/context-layers.png[Context Layer]
+image::/media/2026-05-19-from-coding-to-orchestrating/context-layers.png[Context Layer]
 
 *System*:: What the system does, who uses it, and why it exists.
 *Code*:: Structure, modules, and dependencies.

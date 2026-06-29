@@ -8,7 +8,7 @@ In 2009, we continued to fight JSF, win (usually), write about it,
     and tell our war stories at JBoss User Group events. However, the most
     interesting blog posts were about other topics.
 
-image:../media/2009-12-21-chrimble-cocktail/chrimble-cocktail.jpg[Chrimble cocktail]
+image:/media/2009-12-21-chrimble-cocktail/chrimble-cocktail.jpg[Chrimble cocktail]
 
 == Programming
 

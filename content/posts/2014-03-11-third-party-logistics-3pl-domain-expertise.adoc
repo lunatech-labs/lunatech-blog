@@ -6,7 +6,7 @@ v1.0, 2014-03-11
 
 In 1996, Lunatech entered into a partnership with UPS Supply Chain Solutions (UPS-SCS), that led to the development of an innovative supply chain operations household-name global electronics and computer hardware vendors.
 
-image::../media/2014-03-11-third-party-logistics-3pl-domain-expertise/sky.jpg[3PL domain expertise]
+image::/media/2014-03-11-third-party-logistics-3pl-domain-expertise/sky.jpg[3PL domain expertise]
 
 Today, UPS still manages global supply chains electronics products,
 including warehousing and transport, using a custom IT solution
@@ -40,7 +40,7 @@ employ drivers, since shipping is not their core business, so instead
 they might hire a transport company to deliver the telephones - UPS
 brown trucks performing deliveries around the world.
 
-image::../media/2014-03-11-third-party-logistics-3pl-domain-expertise/ups-truck.jpg[Third-party logistics]
+image::/media/2014-03-11-third-party-logistics-3pl-domain-expertise/ups-truck.jpg[Third-party logistics]
 
 The next step in outsourcing supply chain operations is further
 outsourcing. Instead of managing their own warehouse, the vendor can
@@ -105,7 +105,7 @@ supplier essentially performs a management function, and uses other
 suppliers for the various logistics activities, we call this
 fourth-party logistics (4PL).
 
-image::../media/2014-03-11-third-party-logistics-3pl-domain-expertise/other-trucks.jpg[Fourth-party logistics]
+image::/media/2014-03-11-third-party-logistics-3pl-domain-expertise/other-trucks.jpg[Fourth-party logistics]
 
 In 2000, UPS introduced fourth-party logistics (4PL) to their customer’s
 supply chain, managing the complete supply chain from warehouse to

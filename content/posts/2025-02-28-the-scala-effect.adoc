@@ -2,7 +2,7 @@
 alex-molnar
 v1.0, 2025-03-04
 :title: The Scala effect: Java’s Evolution Inspired by Scala
-:imagesdir: ../media/2025-02-28-the-scala-effect
+:imagesdir: /media/2025-02-28-the-scala-effect
 :lang: en
 :tags: [jvm, scala, java, java8, java11, java17, java21, we-know-scala, scala-lujah]
 

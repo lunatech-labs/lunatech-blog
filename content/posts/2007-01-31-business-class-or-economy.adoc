@@ -11,7 +11,7 @@ than time to market, so we had to add an extra round of enhancements
 before the first release. I now realise what I forgot to ask - *do you
 want expensive software?*" 
 
-image:../media/2007-01-31-business-class-or-economy/business-class.jpg[Business class lounge]
+image:/media/2007-01-31-business-class-or-economy/business-class.jpg[Business class lounge]
 
 I started thinking about this recently when
 http://keith.harrison-broninski.info/[Keith Harrison-Broninski] gave an

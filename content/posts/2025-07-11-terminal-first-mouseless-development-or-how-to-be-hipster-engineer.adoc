@@ -2,7 +2,7 @@
 vitos-exe
 v1.0, 2025-07-11
 :title: Terminal-first Mouseless Development Or How To Be A Hipster Engineer
-:imagesdir: ../media/2025-07-11-terminal-first-mouseless-development-or-how-to-be-hipster-engineer
+:imagesdir: /media/2025-07-11-terminal-first-mouseless-development-or-how-to-be-hipster-engineer
 :lang: en
 :tags: [beyond-the-code, bash-to-the-feature, vim, tmux, cli, terminal, en]
 

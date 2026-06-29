@@ -2,7 +2,7 @@
 rkargul
 v1.0, 2025-04-17
 :title: GenAI: Optimizing Local Large Language Models Performance
-:imagesdir: ../media/2025-04-17-genai:-optimizing-local-large-language-models-performance
+:imagesdir: /media/2025-04-17-genai:-optimizing-local-large-language-models-performance
 :lang: en
 :tags: [gen-ai, llm, generative-ai, local-llm, ollama, quantization, model-optimization, neural-networks, model-inference, open-source]
 

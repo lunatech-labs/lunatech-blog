@@ -200,7 +200,7 @@ crud.pageSize=2000
 
 Finally, navigate to http://localhost:9000/localisedtimezones
 
-image:../media/2011-01-28-playframework-jquery-datatables/datatables-1.png[CRUD module table view]
+image:/media/2011-01-28-playframework-jquery-datatables/datatables-1.png[CRUD module table view]
 
 [[module]]
 == Add the DataTables module
@@ -288,7 +288,7 @@ Enable DataTables by adding a JQuery script section to the top of
 The three lines of JavaScript in the third `script` tag use jQuery to
 apply DataTables to the existing HTML table on the page.
 
-image:../media/2011-01-28-playframework-jquery-datatables/datatables-2.png[DataTables view]
+image:/media/2011-01-28-playframework-jquery-datatables/datatables-2.png[DataTables view]
 
 [[next]]
 == Next steps

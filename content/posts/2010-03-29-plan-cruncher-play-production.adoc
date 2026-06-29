@@ -70,7 +70,7 @@ production at http://plancruncher.com/ within a couple of weeks, after
 spending about two days each on design, coding and testing. It was fun
 as well.
 
-image:../media/2010-03-29-plan-cruncher-play-production/plancruncher.png[plancruncher.com]
+image:/media/2010-03-29-plan-cruncher-play-production/plancruncher.png[plancruncher.com]
 
 After the first release, we released a new version every day for a week
 or so, to incorporate initial user feedback, as

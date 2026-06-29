@@ -2,7 +2,7 @@
 VincentBrule
 v1.0, 2022-06-06
 :title: Introducing Cypress
-:imagesdir: ../media/2022-06-06-introduction-cypress
+:imagesdir: /media/2022-06-06-introduction-cypress
 :lang: en
 :tags: [test, cypress, web, js, ts]
 

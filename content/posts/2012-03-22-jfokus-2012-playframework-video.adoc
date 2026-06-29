@@ -13,5 +13,5 @@ started in 2007. Here is the video of the presentation.
 
 Video: http://parleys.com/d/3081[Parleys.com]
 
-http://parleys.com/d/3081[image:../media/2012-03-22-jfokus-2012-playframework-video/jfokus-video.jpg[Video on Parleys.com]]
+http://parleys.com/d/3081[image:/media/2012-03-22-jfokus-2012-playframework-video/jfokus-video.jpg[Video on Parleys.com]]
 

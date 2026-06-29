@@ -24,7 +24,7 @@ where http://www.adobe.com/products/photoshop/[Photoshop CS3], for
 example, is only really suitable for design professionals who can
 justify the time and expense, or similarly dedicated amateurs.
 
-image:../media/2008-05-27-how-draw-lolcats/lolcat-blog.jpg[bloggng - ur doin it wrong]
+image:/media/2008-05-27-how-draw-lolcats/lolcat-blog.jpg[bloggng - ur doin it wrong]
 
 Cat macros (or http://www.lolcats.com/[lolcats]), as popularised by
 http://en.wikipedia.org/wiki/I_Can_Has_Cheezburger%3F[I Can Has
@@ -57,7 +57,7 @@ caption.
 . Select the text layer, then _Layer > Layer style... > Stroke_ and
 choose these settings:
 
-image:../media/2008-05-27-how-draw-lolcats/slolcat-photoshop.png[Photoshop Layer Style]
+image:/media/2008-05-27-how-draw-lolcats/slolcat-photoshop.png[Photoshop Layer Style]
 
 [start=5]
 . Position the caption.
@@ -66,7 +66,7 @@ a JPEG.
 
 This gives the expected result.
 
-image:../media/2008-05-27-how-draw-lolcats/lolcat-photoshop-text.png[Photoshop text output]
+image:/media/2008-05-27-how-draw-lolcats/lolcat-photoshop-text.png[Photoshop text output]
 
 Drawing lolcats in Photoshop is pretty easy, but starting up Photoshop
 takes half the time, and it is too expensive to use for drawing lolcats.
@@ -90,7 +90,7 @@ right-hand inspector, and choose the following settings, and then select
 _Save as_ in the _Style Attributes_ section in the middle of the
 inspector and save a new _lolcat_ style.
 
-image:../media/2008-05-27-how-draw-lolcats/lolcat-comic-life.png[Comic Life lettering settings]
+image:/media/2008-05-27-how-draw-lolcats/lolcat-comic-life.png[Comic Life lettering settings]
 
 Now draw the lolcat:
 
@@ -114,7 +114,7 @@ the photo is automatically cropped scaled to fill the frame. For this to
 work well, the frame has to have the correct proportions, which is why
 you need to set the page size first.
 
-image:../media/2008-05-27-how-draw-lolcats/lolcat-comic-life-text.png[Comic Life text output]
+image:/media/2008-05-27-how-draw-lolcats/lolcat-comic-life-text.png[Comic Life text output]
 
 However, the text frame does not seem to fill the page well enough for a
 pixel-perfect export.
@@ -140,7 +140,7 @@ simple:
 . insert a text layer, and enter the caption
 . set the text attributes and add a _Stroke_ effect as follows:
 
-image:../media/2008-05-27-how-draw-lolcats/lolcat-drawit.png[Drawit layer settings]
+image:/media/2008-05-27-how-draw-lolcats/lolcat-drawit.png[Drawit layer settings]
 
 [start=4]
 . export as a JPEG.
@@ -157,7 +157,7 @@ pixels, which makes it a kind of export preview.
 This post on http://icanhascheezburger.com[icanhascheezburger.com]
 suggests the possibility of built-in Office functionality:
 
-image:../media/2008-05-27-how-draw-lolcats/lolcat-office-assistant.jpg[Office Assistant]
+image:/media/2008-05-27-how-draw-lolcats/lolcat-office-assistant.jpg[Office Assistant]
 
 However, plausible though the parody is, even Microsoft Word does not
 have so much feature bloat that it includes lolcat support. Perhaps it

@@ -2,7 +2,7 @@
 Sylke Sauerwald
 v1.0, 2024-10-10
 :title: LunaConf 2024: A Memorable Gathering
-:imagesdir: ../media/2024-10-10-lunaconf-2024
+:imagesdir: /media/2024-10-10-lunaconf-2024
 :lang: en
 :tags: [conference, event, lunatech]
 

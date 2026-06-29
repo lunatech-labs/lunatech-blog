@@ -11,7 +11,7 @@ with Peter Hilton and Nicolas Leroux who did a http://www.javapolis.com/confluen
 Action]
 presentation on the first day.
 
-image:../media/2007-12-09-lunatech-javapolis-2007/javapolis-2007-1.jpg[Seam In Action - the audience]
+image:/media/2007-12-09-lunatech-javapolis-2007/javapolis-2007-1.jpg[Seam In Action - the audience]
 
 We will also be hanging around the JBoss stand from time to time to
 promote the Benelux JBoss User Group, meet

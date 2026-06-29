@@ -2,7 +2,7 @@
 VincentBrule
 v1.0, 2021-10-30
 :title: Test de charge avec Gatling
-:imagesdir: ../media/2021-10-30-introduction-gatling
+:imagesdir: /media/2021-10-30-introduction-gatling
 :lang: fr
 :tags: [gatling, test de charge, opensource]
 

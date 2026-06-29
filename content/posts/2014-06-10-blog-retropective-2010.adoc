@@ -7,7 +7,7 @@ v1.0, 2014-06-10
 2010 was the year we really started getting into the Play Framework, 
     and stopped having to battle JSF. This was a Good Thing.
 
-image:../media/2010-03-29-plan-cruncher-play-production/plancruncher.png[Plan Cruncher]
+image:/media/2010-03-29-plan-cruncher-play-production/plancruncher.png[Plan Cruncher]
 
 Play gave us new topics to present and write about, as we explored the
 difference it made, compared to Java EE. Meanwhile, we also worked on

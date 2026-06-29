@@ -19,4 +19,4 @@ Café] - Metropolis, Antwerpen (next to the Devoxx venue)
 
 See you there...
 
-image:../media/2011-11-11-play-framework-meet-devoxx/lunatech-network-logo.png[Lunatech Network]
+image:/media/2011-11-11-play-framework-meet-devoxx/lunatech-network-logo.png[Lunatech Network]

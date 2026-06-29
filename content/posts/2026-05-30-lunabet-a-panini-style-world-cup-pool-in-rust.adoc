@@ -8,7 +8,7 @@ v1.0, 2026-05-30
 
 Every four years the same conversation happens in our Lunatech Slack: who is going to run the office pool for the World Cup? Every four years someone says "I will do it in a spreadsheet", and every four years that spreadsheet ends up as a corrupted Google Sheet with three formulas fighting over the same cell. So this time, between two cups of coffee, I decided to build the thing properly. The result is https://lunabet.eu[LunaBet], and the Lunatech-internal instance lives at https://lunatech.lunabet.eu[lunatech.lunabet.eu].
 
-image::../media/2026-05-30-lunabet-a-panini-style-world-cup-pool-in-rust/background.png[LunaBet landing page]
+image::/media/2026-05-30-lunabet-a-panini-style-world-cup-pool-in-rust/background.png[LunaBet landing page]
 
 == The story in one sentence
 
@@ -22,35 +22,35 @@ The interesting bit is that LunaBet is not a single-tenant Lunatech tool. Any or
 
 The login flow is a magic link, so there are no passwords to remember and no SSO to configure. Type your work email, click the link, and you are in.
 
-image::../media/2026-05-30-lunabet-a-panini-style-world-cup-pool-in-rust/02-login.png[Magic link sign-in]
+image::/media/2026-05-30-lunabet-a-panini-style-world-cup-pool-in-rust/02-login.png[Magic link sign-in]
 
 The matches page is the place where you spend most of your time during the tournament. Each match is a Panini-style sticker card with the two flags, the kick-off time, and a tiny inline form to predict the score. Bets close at kick-off, so no insider trading once the players are on the pitch.
 
-image::../media/2026-05-30-lunabet-a-panini-style-world-cup-pool-in-rust/04-matches.png[Matches page with the Panini stickers]
+image::/media/2026-05-30-lunabet-a-panini-style-world-cup-pool-in-rust/04-matches.png[Matches page with the Panini stickers]
 
 The leaderboard updates automatically as soon as a match is final. The 3D goal-shot scene at the top is rendered in the browser with Three.js, full goal cage with posts, crossbar and a translucent net, a parabolic top-corner shot, a flash and a bounce, the whole thing looping every few seconds. It is gratuitous and we love it.
 
-image::../media/2026-05-30-lunabet-a-panini-style-world-cup-pool-in-rust/05-leaderboard.png[Leaderboard with the 3D goal scene]
+image::/media/2026-05-30-lunabet-a-panini-style-world-cup-pool-in-rust/05-leaderboard.png[Leaderboard with the 3D goal scene]
 
 If you want skin in the game, you can join the pot for 2, 5 or 10 euros. The app never touches the money: you Lydia or bank-transfer the admin, the admin marks you as paid, and the pot is shared between the top three paid players at the end of the group stage. Higher stakes get a bigger slice of their position's share, which means a 10 euro player in third still walks away with something interesting.
 
-image::../media/2026-05-30-lunabet-a-panini-style-world-cup-pool-in-rust/06-stake.png[Choosing a stake tier]
+image::/media/2026-05-30-lunabet-a-panini-style-world-cup-pool-in-rust/06-stake.png[Choosing a stake tier]
 
 Admins get a small back office to mark payments as received and to settle the pot.
 
-image::../media/2026-05-30-lunabet-a-panini-style-world-cup-pool-in-rust/07-admin-stakes.png[Admin stakes management]
+image::/media/2026-05-30-lunabet-a-panini-style-world-cup-pool-in-rust/07-admin-stakes.png[Admin stakes management]
 
 Everything is bilingual, French and English, switchable from the topbar. The leaderboard in English looks like this:
 
-image::../media/2026-05-30-lunabet-a-panini-style-world-cup-pool-in-rust/08-leaderboard-en.png[English leaderboard]
+image::/media/2026-05-30-lunabet-a-panini-style-world-cup-pool-in-rust/08-leaderboard-en.png[English leaderboard]
 
 The transactional emails follow the same theme: navy header, a striped pitch, a red _stamp_ button. Magic-link emails are localized to the visitor's language at request time, while match reminders are bilingual side by side because we do not store a per-user language.
 
-image::../media/2026-05-30-lunabet-a-panini-style-world-cup-pool-in-rust/09-email-magic-link-fr.png[Magic link email, French version]
+image::/media/2026-05-30-lunabet-a-panini-style-world-cup-pool-in-rust/09-email-magic-link-fr.png[Magic link email, French version]
 
-image::../media/2026-05-30-lunabet-a-panini-style-world-cup-pool-in-rust/10-email-magic-link-en.png[Magic link email, English version]
+image::/media/2026-05-30-lunabet-a-panini-style-world-cup-pool-in-rust/10-email-magic-link-en.png[Magic link email, English version]
 
-image::../media/2026-05-30-lunabet-a-panini-style-world-cup-pool-in-rust/11-email-reminder.png[Bilingual match reminder]
+image::/media/2026-05-30-lunabet-a-panini-style-world-cup-pool-in-rust/11-email-reminder.png[Bilingual match reminder]
 
 == The stack, and why
 

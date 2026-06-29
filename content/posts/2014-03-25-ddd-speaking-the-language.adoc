@@ -6,7 +6,7 @@ v1.0, 2014-03-25
 
 It is an IT cliché to say that ‘you should speak the customer’s language’, which is like simply declaring that you should speak French to French people. Actually learning to speak French requires continued effort over a long period. Spending some time in France is a good idea as well.
 
-image::../media/2014-03-25-ddd-speaking-the-language/paris-skyline.jpg[Sacre Coeur - Paris]
+image::/media/2014-03-25-ddd-speaking-the-language/paris-skyline.jpg[Sacre Coeur - Paris]
 
 Like speaking French, using the language of our customer’s business
 domain is easier said than done. Despite working remotely, years of

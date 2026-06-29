@@ -57,7 +57,7 @@ and a single URL routing configuration. This configuration, like Grails'
 and Cake PHP's, reflects the structure of an HTTP request - HTTP method,
 URL path, and then the mapping:
 
-....
+----
 # Play! 'routes' configuration file…
 
 # Method   URL path         Controller
@@ -67,7 +67,7 @@ GET        /about           Application.about
 POST       /item            Item.addItem
 GET        /item/{id}       Item.getItem
 GET        /item/{id}.pdf   Item.getItemPdf
-....
+----
 
 In this example, there is more than one controller. We also see the use
 of an `id` URL parameter in the last two URLs.
@@ -123,7 +123,7 @@ similar lines, the server's console output avoids the pages full of
 irrelevant logging and pages of stack traces when there is an error,
 leaving more focused and more usable information for the web developer.
 
-....
+----
 $ play run phase
 ~        _            _ 
 ~  _ __ | | __ _ _  _| |
@@ -158,7 +158,7 @@ Caused by: java.lang.IllegalArgumentException: Person not found for account x
     at play.utils.Java.invokeStatic(Java.java:129)
     at play.mvc.ActionInvoker.invoke(ActionInvoker.java:127)
     ... 1 more
-....
+----
 
 Try to imagine a JSF web application producing a stack trace this short.
 In fact, Play! goes further: instead of showing the stack trace, the web
@@ -166,7 +166,7 @@ application shows the last line of code within the application that
 appears in the stack trace. After all, what you really want to know is
 where things first went wrong _in your own code_.
 
-image:../media/2010-03-15-play-framework-usability/play-exception.png[image,title="Play! error page"]
+image:/media/2010-03-15-play-framework-usability/play-exception.png[image,title="Play! error page"]
 
 This kind of usability does not happen by itself; the Play! framework
 goes to considerable effort to filter out duplicate and irrelevant

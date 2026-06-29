@@ -2,7 +2,7 @@
 TehreemFatima07
 v1.0, 2022-11-07
 :title: Struggles at the Beginning – Software Testers journal
-:imagesdir: ../media/2022-11-07-software-qa-blog
+:imagesdir: /media/2022-11-07-software-qa-blog
 :lang: en
 :tags: [Testing, QA Culture]
 

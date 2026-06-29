@@ -18,7 +18,7 @@ front-end development. http://whoisjw.tv/[Jeroen Wijering], developer of
 the widely-used http://www.longtailvideo.com/players/[JW Player] video
 player, presented HTML5 video.
 
-image:../media/2011-09-16-fronteers-lunatech/fronteers.png[Fronteers logo]
+image:/media/2011-09-16-fronteers-lunatech/fronteers.png[Fronteers logo]
 
 [[development]]
 == Front-end development

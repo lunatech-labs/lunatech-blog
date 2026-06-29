@@ -9,14 +9,14 @@ This week, on 25 May 2012, Peter
 Hilton will present *In search of the perfect programmer* at
 http://010dev.nl/[010DEV]. In Rotterdam, obviously.
 
-http://010dev.nl/[image:../media/2012-05-23-010dev-perfect-programmer/010dev-banner.jpg[010DEV]]
+http://010dev.nl/[image:/media/2012-05-23-010dev-perfect-programmer/010dev-banner.jpg[010DEV]]
 
 The perfect programmer is something a lot of people have an opinion
 about. Being able to code is the only non-optional skill, but here are
 plenty other things you can be sufficiently bad at to make your project
 fail. What is the ideal background for a programmer?
 
-image:../media/2012-05-23-010dev-perfect-programmer/perfect-programmer.jpg[In search of the perfect programmer]
+image:/media/2012-05-23-010dev-perfect-programmer/perfect-programmer.jpg[In search of the perfect programmer]
 
 These days, it’s somewhat obvious to people in the software development
 industry that good software gets built by multidisciplinary teams. The

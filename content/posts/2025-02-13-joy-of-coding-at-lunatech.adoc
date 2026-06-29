@@ -2,7 +2,7 @@
 Ana Rapanych
 v1.0, 2025-02-13
 :title: Recap of the Joy of Coding Meetup at Lunatech
-:imagesdir: ../media/2025-02-13-joy-of-coding-at-lunatech
+:imagesdir: /media/2025-02-13-joy-of-coding-at-lunatech
 :lang: en
 :tags: [documentation, automation, opentelemetry, monitoring, grafana, performance]
 

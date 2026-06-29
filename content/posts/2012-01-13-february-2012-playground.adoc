@@ -19,7 +19,7 @@ Pete Muir and Tom Baeyens
 (https://blog.lunatech.com/posts/2008-03-03-benelux-jboss-user-group-29-february-photos[February
 2008 event photos]).
 
-image:../media/2012-01-13-february-2012-playground/jbug-2008-02-photos-7.jpg[The audience watching the presentation]
+image:/media/2012-01-13-february-2012-playground/jbug-2008-02-photos-7.jpg[The audience watching the presentation]
 
 Three years on, it’s time to return to ‘Paddy’s’ for our next event…
 

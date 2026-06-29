@@ -12,7 +12,7 @@ It was such a fantastic place to be where you could be with people from industry
 
 It was difficult to pick among the tracks Nvidia had organised -  Autonomous Driving, Financial Market, Natural Language Processing etc. They were all good. However, I ended up attending one that matched well with my field of interest-: “Deep Learning for Autonomous Vehicles - Perception”. This was a full day hands-on training on Nvidia Drive platform constituting of hardware and software frameworks for autonomous driving.
 
-image:../media/2018-10-30-nvidia-gpu-technology-conference-in-munich/3.jpg[]
+image:/media/2018-10-30-nvidia-gpu-technology-conference-in-munich/3.jpg[]
 
 _Nvidia DLI Training session_
 
@@ -25,7 +25,7 @@ The software platform is called Nvidia Drive4, which includes its own OS called 
 There is one more aspect of software platform which is related to autonomous drive training and for that Nvidia provides a simulation platform called Constellation6. It is a VR platform where one can simulate various types of driving scenarios and train their AI system in that scenario. Constellation provides a safer and more scalable way for faster training of an autonomous driving system.
 
 
-image:../media/2018-10-30-nvidia-gpu-technology-conference-in-munich/8.jpg[]
+image:/media/2018-10-30-nvidia-gpu-technology-conference-in-munich/8.jpg[]
 
 _Concepts of Autonomous vehicles for children and people with wheelchair_
 
@@ -46,38 +46,38 @@ Day 2 started with keynote by Jensen Huang, CEO of Nvidia. One of the highlights
 * Machine and Deep Learning in Online Marketplaces, FinTech and Video Entertainment
 * Commercial Vehicle Automation
 
-image:../media/2018-10-30-nvidia-gpu-technology-conference-in-munich/5.jpg[]
+image:/media/2018-10-30-nvidia-gpu-technology-conference-in-munich/5.jpg[]
 
 _Zalando talk session about Deep Learning in Fashion_
 
 These sessions were very informative about how AI and Deep learning are changing many other domains. In one of the panel discussions, a company names https://www.perceptiveautomata.com/[Perceptive Automata] built an AI system which learns on human behaviour to understand intentions and apply the same to autonomous driving to react in similar way to how human would react for e.g. the system will see and understand that there is pedestrian who is standing near the zebra crossing but not looking in the direction so not interested in crossing the road. Another company called https://research.zalando.com/[Zalando], an ecommerce company, is trying Deep Learning based system to design trending fashion apparels.
 
-image:../media/2018-10-30-nvidia-gpu-technology-conference-in-munich/9.jpg[]
+image:/media/2018-10-30-nvidia-gpu-technology-conference-in-munich/9.jpg[]
 
 _Nvidia CEO during Inception Awards_
 
 Besides talks there were other experiences well. In the evening of day 2, there was an event called Inception Awards. For this event, European startups need to apply before GTC starts and based on selection process final 10 startups are selected. And during the event these 10 startups from Europe, pitched their startup ideas to Judges and GTC attendees for $100k and a Nvidia DGX 2 as the prize.
 
-image:../media/2018-10-30-nvidia-gpu-technology-conference-in-munich/4.jpg[]
+image:/media/2018-10-30-nvidia-gpu-technology-conference-in-munich/4.jpg[]
 
 _With Inception Awards finalist and Nvidia’s CEO_
 
 All the 10 startups had amazing ideas and technologies. The winner of the Inception Award was a startup named https://brighter.ai/[Brighter.ai] who are anonymizing the data collected by video cameras. There was also an interesting startup from Netherlands, https://www.serket-tech.com/[Serket Tech], who are using AI to do livestock health management. Though this startup could not win the award but received commendation from Nvidia CEO for their novel idea and implementation.
 
 
-image:../media/2018-10-30-nvidia-gpu-technology-conference-in-munich/7.jpg[]
+image:/media/2018-10-30-nvidia-gpu-technology-conference-in-munich/7.jpg[]
 
 _Inside of FEV AD Car_
 
 Nvidia, Continental, FEV and other companies working on autonomous driving vehicles like cars, trucks, road cleaning van etc. had their test vehicle present in the event. Attendees could take test ride in some of autonomous driving cars or see their demos. I took a ride in a FEV  autonomous driving car. It was good and smooth ride except for a moment the car took little diversion when it seemed the car was trying to avoid the direct sunlight. It was a good ride towards the future.
 
-image:../media/2018-10-30-nvidia-gpu-technology-conference-in-munich/1.jpg[]
+image:/media/2018-10-30-nvidia-gpu-technology-conference-in-munich/1.jpg[]
 
 _FEV Autonomous Driving Car_
 
 It’s almost like missing the whole point if one doesn’t talk about games when you talk about GPU. Next generations of gaming is full of VR. There were companies who had setup VR experience rooms. I tried one of them which was a VR setup for an environment close to water and mountain, where I tried to do a virtual hiking trip. Last year when I went to Scala world conference, I joined the hiking day trip. In that hiking trip of Lake District, I was almost lost together with a group after I opted for a difficult hiking route. But in this VR experience I was able to climb the mountain from steep side and was lost in amazing views and wasn’t literally lost like last time. Maybe I’d stick to VR hikes.\
 
-image:../media/2018-10-30-nvidia-gpu-technology-conference-in-munich/6.jpg[]
+image:/media/2018-10-30-nvidia-gpu-technology-conference-in-munich/6.jpg[]
 
 _Experiencing VR Hiking_
 
@@ -85,7 +85,7 @@ For academics, there was a poster presentation area where university scholars we
 
 There was an expo area where companies had their stalls and demos. Companies of all sizes and types had something to showcase there. There were few interesting ones I came across like a startup called https://bilberry.io/[BilBerry] which has AI based agriculture technology. There were VR based demos for medical surgery you could execute yourself. Multiple PoC designs of various kinds of vehicles for different purposes like school bus, autonomous rickshaw, logistics vehicle, sports car etc. There were other companies showcasing their software and hardware solutions like customised GPU workstations or cloud-based infrastructure.
 
-image:../media/2018-10-30-nvidia-gpu-technology-conference-in-munich/2.jpg[]
+image:/media/2018-10-30-nvidia-gpu-technology-conference-in-munich/2.jpg[]
 
 _GPU Gaming Desktop with customised Beer Tap_
 

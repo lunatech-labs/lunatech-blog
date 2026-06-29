@@ -80,7 +80,7 @@ a|
 
 |===
 
-image:../media/2010-07-02-panzano-sandwich-cruncher/panzano-bari.jpg[image]
+image:/media/2010-07-02-panzano-sandwich-cruncher/panzano-bari.jpg[image]
 
 Photo: the _Bari_, with Parma ham, green pesto and mozzarella.
 

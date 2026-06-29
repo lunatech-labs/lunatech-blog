@@ -49,7 +49,7 @@ containg the IDs retrieved by the FTS query. Results are displayed by a
 `searchDisplayController` in a `tableView`, ordered(`DESC`) based on
 their relevance ranking to the search query.
 
-image:../media/2013-01-24-ios-core-data-sqlite-full-text-search/FTSArchitecture.png[Global architecture]
+image:/media/2013-01-24-ios-core-data-sqlite-full-text-search/FTSArchitecture.png[Global architecture]
 
 == Pre-requisites:
 
@@ -197,16 +197,16 @@ was given.
 The screenshots below show the perfomance gain over the Core Data
 queries:
 
-image:../media/2013-01-24-ios-core-data-sqlite-full-text-search/FTSMATCH.png[FTS Match performance]
+image:/media/2013-01-24-ios-core-data-sqlite-full-text-search/FTSMATCH.png[FTS Match performance]
 
-image:../media/2013-01-24-ios-core-data-sqlite-full-text-search/FTSMatch_allocs.png[FTS Match memory usage]
+image:/media/2013-01-24-ios-core-data-sqlite-full-text-search/FTSMatch_allocs.png[FTS Match memory usage]
 
 SQLites Full-text search.
 
-image:../media/2013-01-24-ios-core-data-sqlite-full-text-search/CoreDataCD.png[Coredata CONTAINS\[\cd] performance]
+image:/media/2013-01-24-ios-core-data-sqlite-full-text-search/CoreDataCD.png[Coredata CONTAINS\[\cd] performance]
 
 
-image:../media/2013-01-24-ios-core-data-sqlite-full-text-search/CoreDataCD_allocs.png[Coredata CONTAINS\[cd\] memory usage]
+image:/media/2013-01-24-ios-core-data-sqlite-full-text-search/CoreDataCD_allocs.png[Coredata CONTAINS\[cd\] memory usage]
 
 
 Core Data with `contains[cd]` predicate.

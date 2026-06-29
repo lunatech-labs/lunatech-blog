@@ -17,7 +17,7 @@ to use a better language than Java, one will do, right?
 For example, the following joke task (now pulled) on the Kotlin
 project’s issue tracker suggests merging with Ceylon.
 
-image:../media/2011-08-24-scala-ceylon-kotlin-goals/merge-with-ceylon.png[Merge with Ceylon - Kotlin issue tracker]
+image:/media/2011-08-24-scala-ceylon-kotlin-goals/merge-with-ceylon.png[Merge with Ceylon - Kotlin issue tracker]
 
 As far as I can tell, the many discussions comparing the languages
 aren’t really going anywhere because language design is about tradeoffs.

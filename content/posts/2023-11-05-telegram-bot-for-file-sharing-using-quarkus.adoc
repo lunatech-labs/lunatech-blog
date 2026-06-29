@@ -2,7 +2,7 @@
 iarmush
 v1.0, 2023-11-05
 :title: Telegram bot for file sharing using Quarkus
-:imagesdir: ../media/2023-11-05-telegram-bot-for-file-sharing-using-quarkus
+:imagesdir: /media/2023-11-05-telegram-bot-for-file-sharing-using-quarkus
 :lang: en
 :tags: [java, telegram, quarkus]
 

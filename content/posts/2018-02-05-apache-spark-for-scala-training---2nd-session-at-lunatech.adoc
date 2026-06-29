@@ -6,7 +6,7 @@ v1.0, 2018-02-05
 
 After https://www.linkedin.com/in/xavier-tordoir-ba95b673/[Xavier Tordoir] from http://kensu.io[Kensu], https://www.linkedin.com/in/andypetrella/[Andy Petrella] joined our offices to do a second “Lightbend Spark for scala-Professional course”. As introduced 2 weeks ago this course allows Full Stack Developers and DevOps to dive into the world of modern Data Analytics.
 
-image:../media/2018-02-05-apache-spark-for-scala-training---2nd-session-at-lunatech/apache-course.png[]
+image:/media/2018-02-05-apache-spark-for-scala-training---2nd-session-at-lunatech/apache-course.png[]
 
 
 Some of the participants decided to take the dive. https://www.linkedin.com/in/mariadominguezroman/[Maria Dominguez] and https://www.linkedin.com/in/gopurohit/[Sandeep Purohit] both Software engineer at Lunatech followed this course with particular attention. Indeed Maria and Sandeep want to be Lightbend certified trainer as well. Maria explains why she decided to do this:

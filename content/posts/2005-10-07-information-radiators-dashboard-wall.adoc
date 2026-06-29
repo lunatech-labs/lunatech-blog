@@ -14,7 +14,7 @@ Many software project managers are keen on 'management dashboards' for project s
 
 Alistair Cockburn introduced information radiators in http://alistair.cockburn.us/Agile+software+development+book[Agile Software Development]: "`An information radiator displays information in a place where passersby can see it. [...] Hallways qualify very nicely as good places for information radiators. Web pages don't.`" Here is my example: a time-series of the amount of work remaining that I drew over the course of a four month development phase.
 
-image::../media/2005-10-07-information-radiators-dashboard-wall/information-radiator-small.jpg[An information radiator,align="center", 500, 500]
+image::/media/2005-10-07-information-radiators-dashboard-wall/information-radiator-small.jpg[An information radiator,align="center", 500, 500]
 
 In contrast, the 'dashboard' is a somewhat inappropriate metaphor that seems to be popular with managers who imagine themselves in some kind of 'driving seat' with interchangeable dumb engine parts under the bonnet. This is wrong thinking, because instead of engine parts, software development teams tend to contain intelligent people who have no problem understanding complex data, and do not need to be spoon-fed progress reports in meetings that only distract from making progress.
 
@@ -48,7 +48,7 @@ Another new feature is the number of bugs added each day, which shows the differ
 
 The next new feature is to use yellow stickies for planned future milestones, such as releases, that may move around. The risk there is that it is too much fun to add more and move them all around every day; this is what happens to project managers who spend too much time with project management software and just end up playing with the Gantt charts. Stickies mostly avoid this because they are so easy to move around, and you cannot be too precise about where they go when they are off the chart.
 
-image::../media/2005-10-07-information-radiators-dashboard-wall/information-radiator-stickies.jpg[Using stickies for roughly planned future events,align="center"]
+image::/media/2005-10-07-information-radiators-dashboard-wall/information-radiator-stickies.jpg[Using stickies for roughly planned future events,align="center"]
 
 In this example, there are thirteen working days left on the chart: the acceptance tests are planned for about two weeks after that.
 

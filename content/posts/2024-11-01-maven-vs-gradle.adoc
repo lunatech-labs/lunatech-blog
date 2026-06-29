@@ -2,7 +2,7 @@
 vanny96
 v1.0, 2024-11-01
 :title: Maven vs Gradle Navigating the World of Java Build Tools
-:imagesdir: ../media/2024-11-01-maven-vs-gradle
+:imagesdir: /media/2024-11-01-maven-vs-gradle
 :lang: en
 :tags: [java, maven, gradle, java-vs-world, java-over-java]
 

@@ -117,7 +117,7 @@ JAXB-annotated classes from an XML Schema. We started by getting our
 hands on the latest http://schemas.opengis.net/kml/2.2.0/[KML Schema]
 (yes both the XML and Atom schemas) and tried our luck:
 
-....
+----
 $ xjc.sh -d src/ -extension schemas/ogckml22.xsd
 parsing a schema...
 compiling a schema...
@@ -134,7 +134,7 @@ compiling a schema...
   line 261 of file:/home/stephane/src/kml-jaxb/schemas/ogckml22.xsd
 
 Failed to produce code.
-....
+----
 
 This error and a solution are
 http://acuriousanimal.blogspot.com/2008/08/using-jaxb-to-generate-kml-java-classes.html[already
@@ -165,7 +165,7 @@ conflicts in question by renaming the Java factory method for the
 
 After that we can run `xjc` again:
 
-....
+----
 xjc.sh -d src -extension -b custom-bindings.xjb schemas/ogckml22.xsd
 parsing a schema...
 compiling a schema...
@@ -175,7 +175,7 @@ net/opengis/kml/_2/...
 ...
 oasis/names/tc/ciq/xsdschema/xal/_2/...
 ...
-....
+----
 
 At that point it did generate all the JAXB classes, but with package
 names we were not very happy with so we changed the customisation file:
@@ -389,7 +389,7 @@ public Kml getPlacementsKML(Resource container){
 
 And we are done.
 
-link:../media/2008-10-17-generating-kml-restful-clients/generating-kml-restful-clients-1.png[image:../media/2008-10-17-generating-kml-restful-clients/generating-kml-restful-clients-1.png[image]]
+link:/media/2008-10-17-generating-kml-restful-clients/generating-kml-restful-clients-1.png[image:/media/2008-10-17-generating-kml-restful-clients/generating-kml-restful-clients-1.png[image]]
 
 == How to serve KML
 
@@ -515,7 +515,7 @@ web page:
 
 This gives us a nice Google Earth plugin view:
 
-link:../media/2008-10-17-generating-kml-restful-clients/generating-kml-restful-clients-2.png[image:../media/2008-10-17-generating-kml-restful-clients/generating-kml-restful-clients-2.png[image]]
+link:/media/2008-10-17-generating-kml-restful-clients/generating-kml-restful-clients-2.png[image:/media/2008-10-17-generating-kml-restful-clients/generating-kml-restful-clients-2.png[image]]
 
 == Google Maps for those on Linux or Mac OS
 
@@ -609,4 +609,4 @@ JavaScript.
 With all this, we finally manage to have our Google Maps fallback for
 Linux and Mac OS users:
 
-link:../media/2008-10-17-generating-kml-restful-clients/generating-kml-restful-clients-3.png[image:../media/2008-10-17-generating-kml-restful-clients/generating-kml-restful-clients-3.png[image]]
+link:/media/2008-10-17-generating-kml-restful-clients/generating-kml-restful-clients-3.png[image:/media/2008-10-17-generating-kml-restful-clients/generating-kml-restful-clients-3.png[image]]

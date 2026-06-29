@@ -30,7 +30,7 @@ Every year, companies spend billions maintaining systems that were obsolete a de
 
 The cost of inaction is rarely visible on a balance sheet. It manifests in three dimensions.
 
-image::../media/2026-05-05-the-cost-of-inaction/three-costs.png[The three hidden costs]
+image::/media/2026-05-05-the-cost-of-inaction/three-costs.png[The three hidden costs]
 
 
 The first is *technical*. Every year of postponement adds another layer of tech debt. Interfaces become more brittle, dependencies more tangled, and the pool of developers who understand the system shrinks. The longer you wait, the harder and more expensive the migration becomes. This is not linear -- it is exponential.

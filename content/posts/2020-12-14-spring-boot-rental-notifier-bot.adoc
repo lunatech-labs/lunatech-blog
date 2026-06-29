@@ -10,7 +10,7 @@ You can find the source on https://github.com/DariaPindus/RealEstateHelper[GitHu
 
 Here is what it looks like:
 
-image::../media/2020-12-14-spring-boot-rental-notifier-bot/bot-screenshot-merged.jpg[Screenshot, 600]
+image::/media/2020-12-14-spring-boot-rental-notifier-bot/bot-screenshot-merged.jpg[Screenshot, 600]
 
 == My use case
 
@@ -19,7 +19,7 @@ So I decided to create a Telegram bot that would send me updates once interestin
 
 Now let’s take a look at the User Stories Diagram that were completely or partially realized in this version:
 
-image::../media/2020-12-14-spring-boot-rental-notifier-bot/use-case-diagram.png[Use cases, 600]
+image::/media/2020-12-14-spring-boot-rental-notifier-bot/use-case-diagram.png[Use cases, 600]
 
 == Excursus: Why Telegram ?
 
@@ -43,13 +43,13 @@ Besides having an Admin user, I wanted to have endpoints to manually fetch or in
 
 == What about the architecture and the implementation?
 
-image::../media/2020-12-14-spring-boot-rental-notifier-bot/context-diagram.png[Context Diagram, 600]
+image::/media/2020-12-14-spring-boot-rental-notifier-bot/context-diagram.png[Context Diagram, 600]
 
 Currently the user interacts with the application through the Telegram messenger. Another external dependency is the data source (Pararuis) where the data is extracted from.
 
 And back to the technologies. My intention was to create an extensible server application that could be used for convenient real estate related notifications with possible analytic usage. Here is the component diagram for Rental Notifier:
 
-image::../media/2020-12-14-spring-boot-rental-notifier-bot/component-diagram.png[Component Diagram, 700]
+image::/media/2020-12-14-spring-boot-rental-notifier-bot/component-diagram.png[Component Diagram, 700]
 
 As I mentioned before, I aimed to design the application to be extensible for future needs.
 

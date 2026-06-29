@@ -23,13 +23,13 @@ The last web-based catalogue I designed didn't have a browse interface, but prob
 
 Something like this would have been an improvement:
 
-image::../media/2005-09-10-catalogue-searchbrowse/browse-interfaces-listedcategory.png[Category page example]
+image::/media/2005-09-10-catalogue-searchbrowse/browse-interfaces-listedcategory.png[Category page example]
 
 
 This is a page for some subset of the catalogue, instead of a page for a single item. This page allows for a link to a list of the items, a search 'in this category', links to similar subcategory pages, and use-case specific information, such as a breakdown of item count by status.
 
 >Another option would be to combine this with the table/list of items, and put the other sections in side-bars:
 
-image::../media/2005-09-10-catalogue-searchbrowse/browse-interfaces-listedalternative.png[An alternative category page design]
+image::/media/2005-09-10-catalogue-searchbrowse/browse-interfaces-listedalternative.png[An alternative category page design]
 
 This drops the traditional web-site navigation menu on the left, which shows higher-level less-specific navigation, than the specific content on the page. Instead, the right hand side shows navigation and functionality that is specific, i.e. context-sensitive, for the data shown on this page. This is clearly more useful than using a lot of space to repeat the same global navigation on each page. Also, it is probably not difficult to make this appear natural from the user's point of view, so that usability is good.

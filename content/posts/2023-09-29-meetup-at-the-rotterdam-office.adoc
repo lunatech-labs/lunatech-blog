@@ -2,7 +2,7 @@
 PeuTit
 v1.0, 2023-09-29
 :title: Meetup At The Rotterdam Office | Devoxx Try-out: Maintaining Maven at scale and Machine Learning in Java
-:imagedir: ../media/2023-09-29-meetup-at-the-rotterdam-office
+:imagedir: /media/2023-09-29-meetup-at-the-rotterdam-office
 :lang: en
 :tags: [java, ml, oss, devoxx, en]
 
@@ -12,7 +12,7 @@ Welcome to the **Devoxx Try-out**, this https://www.meetup.com/rotterdamjug/even
 
 == Maintaining Maven at Scale: Insights from the JUG Talk by Tim te Beek
 
-image::../media/2023-09-29-meetup-at-the-rotterdam-office/talk1.png[A picture taken during Tim's talk.]
+image::/media/2023-09-29-meetup-at-the-rotterdam-office/talk1.png[A picture taken during Tim's talk.]
 
 Meet **Tim te Beek**, a seasoned software engineer at [Moderne](https://www.moderne.io/), where the magic of automating software refactoring at scale happens. Tim is no stranger to open-source contributions within the Java ecosystem. His journey into the heart of Apache Maven sheds light on the importance of open-source contributions and the drive to give back to the community.
 
@@ -54,7 +54,7 @@ In conclusion, Tim te Beek's talk on maintaining Maven at scale offers a glimpse
 
 == Exploring Machine Learning in Java: Insights from the JUG Talk by Jago de Vreede
 
-image::../media/2023-09-29-meetup-at-the-rotterdam-office/talk2.png[A picture taken during Jago's talk.]
+image::/media/2023-09-29-meetup-at-the-rotterdam-office/talk2.png[A picture taken during Jago's talk.]
 
 **Jago de Vreede** is a full-stack software engineer at https://www.openvalue.eu/[OpenValue], renowned for taking Java to uncharted territories and undertaking unconventional Java-based projects, like an automated guitar. His passion for knowledge sharing has graced conferences worldwide.
 
@@ -72,7 +72,7 @@ Within the vast Java ecosystem, we encountered three noteworthy machine learning
 
 During the talk, Jago immersed the audience in a captivating live demonstration, where participants engage in the exhilarating task of classifying images as dogs, muffins, or mops. The interactive nature of this presentation breathed life into machine learning and showcases its practical applications.
 
-image::../media/2023-09-29-meetup-at-the-rotterdam-office/chihuahua.png[The sorting images meme with Chihuahua and Muffin.]
+image::/media/2023-09-29-meetup-at-the-rotterdam-office/chihuahua.png[The sorting images meme with Chihuahua and Muffin.]
 
 **Setting Up a Dataset for Machine Learning**
 

@@ -19,7 +19,7 @@ This example uses https://www.playframework.com/documentation/2.5.x/ScalaCompile
 
 == Tutorial 
 
-link:https://www.youtube.com/watch?v=-iPKaW1RuTI[image:../media/2016-10-03-play-framework---beginner-tutorial---make-a-post-request/play.png[]].
+link:https://www.youtube.com/watch?v=-iPKaW1RuTI[image:/media/2016-10-03-play-framework---beginner-tutorial---make-a-post-request/play.png[]].
 
 
 == After the tutorial

@@ -15,6 +15,6 @@ If you think it’s cold in Holland at the moment, then you should try
 Stockholm at this time of year. It’s not too late to book flights to
 Stockholm and register for the conference!
 
-image:../media/2012-02-07-playframework-jfokus-2012/Jfokus2012_450x200.jpg[Jfokus]
+image:/media/2012-02-07-playframework-jfokus-2012/Jfokus2012_450x200.jpg[Jfokus]
 
 

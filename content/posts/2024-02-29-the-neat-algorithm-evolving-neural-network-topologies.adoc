@@ -2,7 +2,7 @@
 thinkmorestupidless
 v1.0, 2024-02-29
 :title: The NEAT Algorithm: Evolving Neural Networks
-:imagesdir: ../media/2024-02-29-the-neat-algorithm-evolving-neural-network-topologies
+:imagesdir: /media/2024-02-29-the-neat-algorithm-evolving-neural-network-topologies
 :lang: en
 :tags: [artifical intelligence, machine learning, algorithm]
 
@@ -41,7 +41,9 @@ Rather than starting with a fixed topology created by a human, NEAT starts with 
 
 And if you don't believe me about the Mario thing, here's a video.
 
-video::qv6UVOQ0F44[youtube,width=960,height=540]
+++++
+<iframe width="960" height="540" src="https://www.youtube.com/embed/qv6UVOQ0F44" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+++++
 
 == How Does NEAT Do It?
 
@@ -227,7 +229,9 @@ What if there were a computer game in which you trained a set of soldiers - tell
 
 Well, in 2005 Stanley et al. did exactly this. And, helpfully, link:https://nn.cs.utexas.edu/downloads/papers/stanley.ieeetec05.pdf[they published a paper which outlined how they did it] - how they took the principles of the NEAT algorithm and applied them in a real-time setting.
 
-video::H2qSjyJ_0-4[youtube,width=960,height=540]
+++++
+<iframe width="960" height="540" src="https://www.youtube.com/embed/H2qSjyJ_0-4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+++++
 
 Combined with the fact that NEAT seems to perform well at evolving gaits for robots, this presents some interesting avenues for further exploration. Imagine, for instance, that a robot exploring a remote area (deep ocean, perhaps, or an exo-planet) which becomes damaged in some way (a robot with jointed legs loses one of its legs or a leg becomes otherwise disabled), NEAT allows it to evolve the most efficient gait possible with the remaining limbs. Yes, you could evolve networks for multiple scenarios beforehand, but it might not be feasible to explore all possible scenarios. Also, this way you can take into account any unexpected environmental factors that weren't known beforehand.
 
@@ -327,11 +331,15 @@ What he found by doing this was that **networks which had their evolution guided
 
 Here's a video that gives a lot more detail and isn't too long.
 
-video::-mxpn95uxS4[youtube,width=960,height=540]
+++++
+<iframe width="960" height="540" src="https://www.youtube.com/embed/-mxpn95uxS4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+++++
 
 And here's Ken Stanley delivering a longer presentation about the whole concept. It's more conceptual, but well worth a watch. I've scrubbed forward through the preamble for you. (you're welcome).
 
-video::JlSLJ8ciHDE[youtube,width=960,height=540,start=212]
+++++
+<iframe width="960" height="540" src="https://www.youtube.com/embed/JlSLJ8ciHDE?start=212" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+++++
 
 Some of the claims made may have been overstated. For instance, when tackling a maze like this:
 
@@ -350,7 +358,9 @@ image::hard-map-novelty.png[]
 
 Dr. Stanley points out how novelty search is far more capable of finding a feasible solution. This may be true, but it requires a more compelling comparison, for sure. That being said, there are many compelling examples out there of novelty search outperforming the traditional fitness function. For instance, this example of the evolution of a biped gait.
 
-video::lyZorMEvmjM[youtube,width=960,height=540]
+++++
+<iframe width="960" height="540" src="https://www.youtube.com/embed/lyZorMEvmjM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+++++
 
 It's pretty clear which is the most successful approach, here.
 

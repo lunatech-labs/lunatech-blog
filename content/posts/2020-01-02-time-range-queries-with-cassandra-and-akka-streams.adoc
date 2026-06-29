@@ -55,7 +55,7 @@ private val pstmt = session.prepare(
 
 In the previous snippet we're folding over a sequence of hours, 1pm to 3pm, and the using `concat` appends one source after another, giving results from the next stream once the previous has been exhausted.
 
-image:../media/2020-01-02-time-range-queries-with-cassandra-and-akka-streams/CassandraAkkaStreams-concat.jpeg[]
+image:/media/2020-01-02-time-range-queries-with-cassandra-and-akka-streams/CassandraAkkaStreams-concat.jpeg[]
 
 We don't have to concatenate results manually like we would do if we'd use a Seq or a List, or even direct Cassandra's ResultSet. Although convenient this feels more like rehash of the same idea, we still have hot partitions, just smaller and for a shorter period of time. Let's see if we can do better.
 
@@ -82,7 +82,7 @@ The key concept here is to use every bucket to distribute data evenly, every buc
 
 Since Cassandra ensures order for a partition, now the issue becomes how to merge the results from different partitions so the aggregated result is sorted as well. Imagine for a moment that if we query all buckets within a time range, some buckets can be empty, some with results. We cannot concatenate or zip the different queries to get what we want.
 
-image:../media/2020-01-02-time-range-queries-with-cassandra-and-akka-streams/CassandraAkkaStreams-buckets.jpeg[]
+image:/media/2020-01-02-time-range-queries-with-cassandra-and-akka-streams/CassandraAkkaStreams-buckets.jpeg[]
 
 There is another way to concatenate streams such that the aggregated result is sorted, enter `mergeSorted`:
 
@@ -123,7 +123,7 @@ The way `mergeSorted` works is by grabbing one element from each upstream and 
 
 We also need to defined how elements are ordered, which we provide by declaring the `implicit Ordering[Row]`, where we delegate to `Instant` implementation of `compareTo`.
 
-image:../media/2020-01-02-time-range-queries-with-cassandra-and-akka-streams/CassandraAkkaStreams-mergeSorted.jpeg[]
+image:/media/2020-01-02-time-range-queries-with-cassandra-and-akka-streams/CassandraAkkaStreams-mergeSorted.jpeg[]
 
 One interesting property of using deviceId for calculating buckets is that all recordings made from the same device will end up in the same partition, the downside from it is that if we only have one device is that we'll have a hot partition, although if that's the case we would be in presence of a bigger problem. We could otherwise use the reading timestamp to decide which bucket to use, avoiding the aforementioned problem.
 

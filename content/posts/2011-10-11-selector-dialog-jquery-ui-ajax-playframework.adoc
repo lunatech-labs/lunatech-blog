@@ -21,7 +21,7 @@ loading page content with jQuery UI, Ajax and Play].
 For this article, we use the simpler example of selecting a time zone
 from a table:
 
-image:../media/2011-10-11-selector-dialog-jquery-ui-ajax-playframework/jqueryui-dialog.png[Screen shot: input field and selector dialog]
+image:/media/2011-10-11-selector-dialog-jquery-ui-ajax-playframework/jqueryui-dialog.png[Screen shot: input field and selector dialog]
 
 This article’s examples and source code are available as part of the
 Play framework http://www.playframework.org/modules/jqueryui[jQuery UI

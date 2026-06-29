@@ -2,7 +2,7 @@
 eloots
 v1.0, 2023-06-09
 :title: Setting up a home energy monitoring system
-:imagesdir: ../media/2023-06-09-setting-up-a-home-energy-monitoring-system
+:imagesdir: /media/2023-06-09-setting-up-a-home-energy-monitoring-system
 :lang: en
 :tags: [raspberry pi, emqx, influxdb, smappee, telegraf, grafana, energy, monitoring]
 

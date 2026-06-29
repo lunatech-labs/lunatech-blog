@@ -34,7 +34,7 @@ components of the application and the messages flowing between them.
 
 [#img-PingPongActors]
 .The `PingPong` application
-image::../media/2020-02-12-using-dotty-union-types-with-akka-typed/PingPongActors.png[{in-between-width}]
+image::/media/2020-02-12-using-dotty-union-types-with-akka-typed/PingPongActors.png[{in-between-width}]
 
 The fact that the application uses Akka Typed implies a number of things:
 
@@ -49,7 +49,7 @@ Let's have a look at the protocol of the actors in our code:
 
 [#img-PingPongProtocol]
 .Protocol of `Pinger` and `PingPong` actors
-image::../media/2020-02-12-using-dotty-union-types-with-akka-typed/PingPongProtocol-1.png[{in-between-width}]
+image::/media/2020-02-12-using-dotty-union-types-with-akka-typed/PingPongProtocol-1.png[{in-between-width}]
 
 As can be seen, the `Pinger` actor "understands" the `SendPing` and
 `StopPingPong` messages while the `PingPong` actor understands the `Ping` message.
@@ -94,7 +94,7 @@ The following figure shows the updated protocol definition.
 
 [#img-PingPongUpdatedProtocol]
 .Full protocol of `Pinger` and `PingPong` actors
-image::../media/2020-02-12-using-dotty-union-types-with-akka-typed/PingPongProtocol-2.png[{in-between-width}]
+image::/media/2020-02-12-using-dotty-union-types-with-akka-typed/PingPongProtocol-2.png[{in-between-width}]
 
 
 The corresponding code looks as follows:
@@ -201,7 +201,7 @@ From the Dotty reference documentation, we find the following definition for
 Union types:
 
 [#img-DottyUnionTypes]
-image::../media/2020-02-12-using-dotty-union-types-with-akka-typed/Union types - definition.png[{in-between-width},align='center']
+image::/media/2020-02-12-using-dotty-union-types-with-akka-typed/Union types - definition.png[{in-between-width},align='center']
 
 Interesting... and this brings us to my original idea about using Union types
 together with Akka Typed: Union types give us the possibility to add the types
@@ -211,7 +211,7 @@ Here's how the `Pinger` actor's protocol looks now:
 
 [#img-PingPongProtocolUnionTypes]
 .Full protocol of `Pinger` and `PingPong` actors with Union types applied
-image::../media/2020-02-12-using-dotty-union-types-with-akka-typed/PingPongProtocol-3.png[{in-between-width}]
+image::/media/2020-02-12-using-dotty-union-types-with-akka-typed/PingPongProtocol-3.png[{in-between-width}]
 
 The `Pinger` actor's implementation now looks as this:
 

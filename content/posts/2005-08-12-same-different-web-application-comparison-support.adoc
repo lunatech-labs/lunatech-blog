@@ -19,7 +19,7 @@ My last catalogue web application's search interface presented a table of search
 
 At the time, it didn't occur to me that it might be useful to compare two items. To do that you would need to use several browser windows, and drag links from a search results window into other windows for the individual pages:
 
-image::../media/2005-08-12-same-different-web-application-comparison-support/differentthings.png[Diagram: each search result is a link to an item page{half-width}]
+image::/media/2005-08-12-same-different-web-application-comparison-support/differentthings.png[Diagram: each search result is a link to an item page{half-width}]
 
 
 Needless to say, I doubt that many users found that to be a handy approach, or found it at all. Indeed, over time we enhanced the interface until the search form let you specify any combination of about twenty attributes to display for each item as columns in the search results table.
@@ -28,12 +28,12 @@ It is now obvious to me that we ended up doing this to provide support for compa
 
 I thought of this as a customisation of the search, so I included the checkboxes on the search form.
 
-image::../media/2005-08-12-same-different-web-application-comparison-support/differentsearch.png[Diagram: search form checkboxes to select search results columns{half-width}]
+image::/media/2005-08-12-same-different-web-application-comparison-support/differentsearch.png[Diagram: search form checkboxes to select search results columns{half-width}]
 
 
 I now think it would be an improvement to separate the two sections of the search form - search criteria and checkboxes for search results display columns. Instead, first do the search, and then change the results display, if desired:
 
-image::../media/2005-08-12-same-different-web-application-comparison-support/differentresults.png[Diagram: checkboxes on search results page instead{half-width}]
+image::/media/2005-08-12-same-different-web-application-comparison-support/differentresults.png[Diagram: checkboxes on search results page instead{half-width}]
 
 Note that considerable benefits accrue from doing all this in the URL query string, so that you can make hyperlinks to specific searches, use browser bookmarks to save a 'view' or be able to e-mail a view's URL. For example, a search results page might have a URL like `/results?query=thing&column=name&column=owner&sort=owner`.
 

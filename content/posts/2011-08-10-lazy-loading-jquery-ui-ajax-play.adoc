@@ -163,7 +163,7 @@ ${location}#{ifnot location_isLast}, #{/ifnot}
 
 The result is an accordion, with content loaded from an Ajax request:
 
-image:../media/2011-08-10-lazy-loading-jquery-ui-ajax-play/jqueryui-accordion.png[image]
+image:/media/2011-08-10-lazy-loading-jquery-ui-ajax-play/jqueryui-accordion.png[image]
 
 [[tabs]]
 == Tabs for lazy-loading content
@@ -216,7 +216,7 @@ used for the accordion, since the content is the same.
 
 The result is a set of tabs:
 
-image:../media/2011-08-10-lazy-loading-jquery-ui-ajax-play/jqueryui-tabs.png[image]
+image:/media/2011-08-10-lazy-loading-jquery-ui-ajax-play/jqueryui-tabs.png[image]
 
 == Conclusion
 

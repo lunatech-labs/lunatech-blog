@@ -9,7 +9,7 @@ Java EE application framework whose many roles can make it hard to
 introduce and explain. It turns out that the European Union (EU) is a
 good metaphor for Seam, and not just for the humour-value.
 
-== image:../media/2007-12-11-european-union-metaphor-jboss-seam/seam-europe.png[image]A unified model
+== image:/media/2007-12-11-european-union-metaphor-jboss-seam/seam-europe.png[image]A unified model
 
 The EU is a political framework that allows for some integration between
 member states and provides a standard interface for interaction between

@@ -2,7 +2,7 @@
 leo-bogastry
 v1.0, 2023-06-07
 :title: JWT token validation in Ktor with Client Credentials Flow
-:imagesdir: ../media/2023-06-07-kotlin-ktor-keycloak
+:imagesdir: /media/2023-06-07-kotlin-ktor-keycloak
 :lang: en
 :tags: [kotlin, ktor, keycloak]
 

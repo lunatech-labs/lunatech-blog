@@ -11,7 +11,7 @@ This year again, an absolutely breathtaking program with the presence of Martin
 Besides attending presentation on stage, there is a possibility to meet people on the booths of prestigious sponsors such as Lightbend, Audi, Jet Brains, and of course Lunatech. Who will be *Platinum sponsor for the 3rd year in a row*. Impressive logistics has been put in place to allow more than 40 Lunatech-developers, from the Netherlands and France, to go to Berlin and take part of this event. Because at Lunatech we believe that knowledge and personal growth are very important, it's part of our company-DNA.
 
 
-image:../media/2018-05-10-lunatech-platinum-sponsor-scala-days/logos.png[]
+image:/media/2018-05-10-lunatech-platinum-sponsor-scala-days/logos.png[]
 
 
 In a demo at our booth, Willem Jan Glerum will show us a working IoT pipeline with real hardware. Multiple Raspberry Pi Zero's will be collecting sensor data around the booth. These real-time measurements will be processed with Scala services running on a local Kubernetes cluster. Come check it out at the Lunatech booth to get to know more!

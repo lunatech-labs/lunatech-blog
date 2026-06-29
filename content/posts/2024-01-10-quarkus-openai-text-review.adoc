@@ -2,7 +2,7 @@
 iarmush
 v1.0, 2024-01-10
 :title: Semantic Kernel SDK and Quarkus
-:imagesdir: ../media/2024-01-10-quarkus-openai-text-review
+:imagesdir: /media/2024-01-10-quarkus-openai-text-review
 :lang: en
 :tags: [java, quarkus, semantic-kernel, openai]
 

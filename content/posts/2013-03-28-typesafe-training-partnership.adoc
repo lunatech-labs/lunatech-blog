@@ -8,7 +8,7 @@ Lunatech is proud to announce our training partnership with Typesafe, and our
   first Typesafe training course: _Fast Track to Play with Scala_ in Rotterdam
   on 30-31 May 2013.
 
-image:../media/2013-03-28-typesafe-training-partnership/typesafe-blog.png[Typesafe]
+image:/media/2013-03-28-typesafe-training-partnership/typesafe-blog.png[Typesafe]
 
 Typesafe provides a variety of training courses on Typesafe stack
 technologies, together with Typesafe partners in different countries.

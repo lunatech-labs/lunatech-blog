@@ -4,7 +4,7 @@ v1.0, 2021-10-08
 :title: Devoxx France 2021, Edition spéciale 9 3/4
 :lang: fr
 :tags: [devoxx-fr, java, quarkus, cloud, covid-19, securité, conférence]
-:imagesdir: ../media/2021-10-08-devoxx-france-2021-edition-spéciale-9-3
+:imagesdir: /media/2021-10-08-devoxx-france-2021-edition-spéciale-9-3
 
 == Introduction
 

@@ -9,7 +9,7 @@ Last year I published https://blog.lunatech.com/posts/2010-11-23-10-devoxx-tips[
 tips]. You probably
 need these tips again this week, as well as updates for this year.
 
-image:../media/2011-11-14-devoxx-2011-tips/kulminator.jpg[image]
+image:/media/2011-11-14-devoxx-2011-tips/kulminator.jpg[image]
 
 == Kulminator closed!
 

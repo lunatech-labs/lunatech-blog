@@ -71,13 +71,13 @@ Most services prefer exactly once delivery but it is quite complex to achieve. S
 
 **At most once.** This is the default delivery semantic for the consumer. The configuration for `enable.auto.commit` is set to true by default.This can be problematic for a consumer that does some processing on the records. The consumer could shut down before processing records that have their offsets committed. When the consumer restarts, it will begin from the last committed offset. It will not process records with offsets within the point it failed to the last committed offset.
 
-image:../media/2019-08-27-message-reliability-in-kafka/1.png[]
+image:/media/2019-08-27-message-reliability-in-kafka/1.png[]
 
 _Possible processing error (lost records) when auto-commit is enabled._
 
 **At least once.** This is configured in the consumer client by setting `enable.auto.commit` to false and committing offsets manually. The consumer application then commits offsets after processing them. Offsets are committed using `consumer.commitSync` or `consumer.commitAsync`. Using the latter, a callback can be configured for successful or failed commits. The consumer client may reprocess records but it will not lose records. For instance if the consumer has finished processing a record and crashes before committing its offset. Or when the consumer application restarts, it will reprocess the formerly processed record.
 
-image:../media/2019-08-27-message-reliability-in-kafka/2.jpg[]
+image:/media/2019-08-27-message-reliability-in-kafka/2.jpg[]
 _Possible processing error (re-processed records) when auto-commit is disabled._
 
 **Exactly once.** Consumers can be configured to read messages produced with https://www.confluent.io/blog/transactions-apache-kafka/[transactions] using `isolation.level=read_committed`.

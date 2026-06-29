@@ -2,7 +2,7 @@
 shabab477
 v1.0, 2022-12-16
 :title: Using Kotlin to build the Lunaconf 2022 App
-:imagesdir: ../media/2022-12-17-using-kotlin-to-build-the-lunaconf-2022-app
+:imagesdir: /media/2022-12-17-using-kotlin-to-build-the-lunaconf-2022-app
 :lang: en
 :tags: [kotlin, android, jetpack, en]
 

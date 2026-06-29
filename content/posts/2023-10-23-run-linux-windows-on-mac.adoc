@@ -2,7 +2,7 @@
 leo-bogastry
 v1.0, 2023-10-25
 :title: Running Linux and Windows on a Mac M1/M2 laptop
-:imagesdir: ../media/2023-10-23-run-linux-windows-on-mac
+:imagesdir: /media/2023-10-23-run-linux-windows-on-mac
 :lang: en
 :tags: [macos, linux, windows, testing]
 

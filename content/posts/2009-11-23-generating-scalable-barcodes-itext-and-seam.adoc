@@ -33,7 +33,7 @@ removed for clarity and borders added for visibility):
 </p:cell>
 ----
 
-[.image-wrap]#image:../media/2009-11-23-generating-scalable-barcodes-itext-and-seam/small_barcode8.gif[image]#
+[.image-wrap]#image:/media/2009-11-23-generating-scalable-barcodes-itext-and-seam/small_barcode8.gif[image]#
 
 Aside from my bad cropping to extract the image from the example sheet,
 this seems about right.
@@ -52,7 +52,7 @@ reference:
 </p:cell> 
 ----
 
-[.image-wrap]#image:../media/2009-11-23-generating-scalable-barcodes-itext-and-seam/small_barcode6.gif[image]#
+[.image-wrap]#image:/media/2009-11-23-generating-scalable-barcodes-itext-and-seam/small_barcode6.gif[image]#
 
 You notice right away that the barcode is longer and the bars are
 shorter. The reason why this is so is that in both cases iText made a
@@ -78,7 +78,7 @@ Let's try our solution with a shorter product reference:
 </p:cell> 
 ----
 
-[.image-wrap]#image:../media/2009-11-23-generating-scalable-barcodes-itext-and-seam/small_barcode4.gif[image]#
+[.image-wrap]#image:/media/2009-11-23-generating-scalable-barcodes-itext-and-seam/small_barcode4.gif[image]#
 
 Obviously this doesn't work. But why? The answer is simple once you know
 how it works in iText: it's simply the opposite effect of scaling. When
@@ -98,7 +98,7 @@ enough for the barcode to fit, while still being zoomed in:
 </p:cell> 
 ----
 
-[.image-wrap]#image:../media/2009-11-23-generating-scalable-barcodes-itext-and-seam/small_barcode7.gif[image]#
+[.image-wrap]#image:/media/2009-11-23-generating-scalable-barcodes-itext-and-seam/small_barcode7.gif[image]#
 
 This is not good, since the barcode can disappear from screen depending
 on its width.
@@ -129,7 +129,7 @@ Yes we do. Let's try with a longer product name:
 </p:cell> 
 ----
 
-[.image-wrap]#image:../media/2009-11-23-generating-scalable-barcodes-itext-and-seam/small_barcode5.gif[image]#
+[.image-wrap]#image:/media/2009-11-23-generating-scalable-barcodes-itext-and-seam/small_barcode5.gif[image]#
 
 What you see here is that if the product name is too long it pushes the
 barcode outside of the cell which makes it disappear.
@@ -318,7 +318,7 @@ affect it.
 </p:cell> 
 ----
 
-[.image-wrap]#image:../media/2009-11-23-generating-scalable-barcodes-itext-and-seam/small_barcode1.gif[image]#
+[.image-wrap]#image:/media/2009-11-23-generating-scalable-barcodes-itext-and-seam/small_barcode1.gif[image]#
 
 It works as expected: the barcode is as high as possible while not being
 scaled length-wise.
@@ -342,7 +342,7 @@ Let's confirm that longer product names do not impact our barcode:
 </p:cell> 
 ----
 
-[.image-wrap]#image:../media/2009-11-23-generating-scalable-barcodes-itext-and-seam/small_barcode2.gif[image]#
+[.image-wrap]#image:/media/2009-11-23-generating-scalable-barcodes-itext-and-seam/small_barcode2.gif[image]#
 
 So far so good.
 
@@ -364,7 +364,7 @@ Now let's see what happens when the product code is super long:
 </p:cell> 
 ----
 
-[.image-wrap]#image:../media/2009-11-23-generating-scalable-barcodes-itext-and-seam/small_barcode3.gif[image]#
+[.image-wrap]#image:/media/2009-11-23-generating-scalable-barcodes-itext-and-seam/small_barcode3.gif[image]#
 
 This time the barcode is scaled length-wise to fit the cell's width and
 not overflow left and right. Notice that the barcode height is constant
@@ -411,7 +411,7 @@ label page looks like:
 </p:document>
 ----
 
-If you want you can look at the [.nobr]#link:../media/2009-11-23-generating-scalable-barcodes-itext-and-seam/barcode-sheet.pdf[final
+If you want you can look at the [.nobr]#link:/media/2009-11-23-generating-scalable-barcodes-itext-and-seam/barcode-sheet.pdf[final
 results in PDF]#.
 
 == Conclusion

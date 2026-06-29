@@ -8,7 +8,7 @@ Christmas at Lunatech came late for some of us this
 year: we got another five 27-inch Apple monitors. Sometimes bigger is
 better.
 
-image:../media/2012-01-10-late-christmas/monitors.jpg[27 inch Apple monitors]
+image:/media/2012-01-10-late-christmas/monitors.jpg[27 inch Apple monitors]
 
 If it’s not immediately obvious why, then you probably need to re-read
 http://www.joelonsoftware.com/articles/fog0000000043.html[The Joel

@@ -16,13 +16,13 @@ https://www.linkedin.com/in/milessabin/[Miles Sabin] presented “Adding kind-p
 
 In “Constant-time programming with FaCT”, Sunjay Cauligi presented how difficult it is to write secure code that does not leak secret information. Even if the programmers manage to achieve this, the compiler can optimise the code and outsmart the developers. So, the current main strategy is to write very non-readable low level code using the C language. At this point, Sunjay presented https://cseweb.ucsd.edu/~dstefan/pubs/cauligi:2017:fact.pdf[Fact] to the rescue. "With FaCT, developers write crypto code using standard, high-level language constructs; FaCT, in turn, compiles such high-level code into constant-time assembly.” Fact is not a standalone language and is being embedded into other languages such as Python and Haskell and WebAssembly.
 
-image:../media/2018-07-23-curry-on-2018-impressions/fact.jpeg[]
+image:/media/2018-07-23-curry-on-2018-impressions/fact.jpeg[]
 
 And now onto “Hackett: a metaprogrammable Haskell” by Alexis King. What if we could have the power of a pure and functional programming language, with a strong type system, like Haskell, combined with the Racket macro system? The result of this merge is called Hackett. "Hackett is Haskell implement in Racket". It is still in development but, with the recent attempts at solving the problem of interleaving macro-expansion with type checking, the future of Hackett sounds promising. Maybe more on this in the next Curry On? Hope so!
 
 The second day of Curry On started with a keynote by https://www.linkedin.com/in/felienne/[Felienne Hermans] with the curious title “How does code sound?”. She explained that, when initially introduced to programming, people don’t perform any better in a language like Java or Perl compared to a bogus randomly generated language. Amazing right? Turns out that teaching a code phonology, agreeing on a way of how a programming language should be read, can improve by a lot the ability of learning a language. How to read a variable assignment “val A = 1"? A is 1? A equals 1? How to read a loop? Each programming language could easily define it’s own phonology.
 
-image:../media/2018-07-23-curry-on-2018-impressions/random.png[]
+image:/media/2018-07-23-curry-on-2018-impressions/random.png[]
 
 
 https://www.linkedin.com/in/tylermcmullen/[Tyler McMullen] brought in a very interesting topic “Isolation without containers”. He navigated through the different ways software fault isolation is currently achieved using processors, containers and VM’s, to then introduce how WebAssembly can be a solution for isolation, without the overhead that the previous bring in. Curry On is introducing a new concept of talks, called chess-timer talks, where 20 minutes are for solo speaking and another 20 minutes are for discussion and the whole audience is invited to participate. Unfortunately, the 20 solo speaking minutes where not enough for Tyler to finish his talk.

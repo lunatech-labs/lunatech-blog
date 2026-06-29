@@ -50,7 +50,7 @@ The starting point is the code in the Play distribution's
 internationalise the application, and add several language
 localisations.
 
-image:../media/2010-04-12-how-localise-play-framework-web-application/yabe.png[image]
+image:/media/2010-04-12-how-localise-play-framework-web-application/yabe.png[image]
 
 To get started, see the instructions in the Play manual's
 http://www.playframework.org/documentation/1.0.2/i18n[Setting up i18n]
@@ -68,11 +68,11 @@ If you load a page in the application now, the Play console will show
 three warnings because you do not have any locale-specific message files
 yet:
 
-....
+----
 16:19:04,728 WARN  ~ Messages file missing for locale en
 16:19:04,729 WARN  ~ Messages file missing for locale nl
 16:19:04,729 WARN  ~ Messages file missing for locale fr
-....
+----
 
 [[utf8]]
 == UTF-8 message files
@@ -175,7 +175,7 @@ _Preferences » Content » Languages » Choose…_, add _French [fr]_ and
 _Dutch [nl]_ if they are not already in the list, change which one is at
 the top of the list, close the dialogue box and reload the page.
 
-image:../media/2010-04-12-how-localise-play-framework-web-application/languages.png[image]
+image:/media/2010-04-12-how-localise-play-framework-web-application/languages.png[image]
 
 [[model]]
 == Application model localisation
@@ -231,7 +231,7 @@ Users = Utilisateurs
 You will notice that this does not change the rounded purple navigation
 links:
 
-image:../media/2010-04-12-how-localise-play-framework-web-application/yabe-admin-links.png[image]
+image:/media/2010-04-12-how-localise-play-framework-web-application/yabe-admin-links.png[image]
 
 Those are defined `views/admin.html` which you can internationalise to
 use the same localisations simply by surrounding the existing text with
@@ -507,11 +507,11 @@ The end result of applying the above steps is a localised version of the
 French:
 link:/confluence/download/attachments/33259831/yabe-l10n-1.0.2.zip?version=1&modificationDate=1270572211397[yabe-l10n-1.0.2.zip^image:/confluence/images/icons/link_attachment_7.gif[image,width=7,height=7]^]
 
-image:../media/2010-04-12-how-localise-play-framework-web-application/yabe-beheer.png[image]
+image:/media/2010-04-12-how-localise-play-framework-web-application/yabe-beheer.png[image]
 
 The 'Yet Another Blog Engine' admin interface in Dutch (above) and
 French (below).
 
-image:../media/2010-04-12-how-localise-play-framework-web-application/yabe-administration.png[image]
+image:/media/2010-04-12-how-localise-play-framework-web-application/yabe-administration.png[image]
 
 

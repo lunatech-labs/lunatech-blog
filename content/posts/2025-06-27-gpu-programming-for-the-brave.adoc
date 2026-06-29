@@ -2,7 +2,7 @@
 boyuan-xiao-at-work
 v1.0, 2025-06-27
 :title: GPU Programming For The Brave
-:imagesdir: ../media/2025-06-27-gpu-programming-for-the-brave
+:imagesdir: /media/2025-06-27-gpu-programming-for-the-brave
 :lang: en
 :tags: [beyond-the-code, bash-to-the-feature, GPU programming, CUDA, parallel programming, AI, neural network]
 

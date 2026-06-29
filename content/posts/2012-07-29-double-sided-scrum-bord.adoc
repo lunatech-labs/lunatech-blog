@@ -10,7 +10,7 @@ game of compromise and adapting Scrum principles to the situation at
 hand. Constraints breed creativity, and that’s where interesting new
 ideas come from. Like the double-sided Scrum board.
 
-image:../media/2012-07-29-double-sided-scrum-bord/double-sided-scrum-board.jpg[A double-sided scrum board]
+image:/media/2012-07-29-double-sided-scrum-bord/double-sided-scrum-board.jpg[A double-sided scrum board]
 
 [[room]]
 == The Scrum Board doesn’t fit in the room

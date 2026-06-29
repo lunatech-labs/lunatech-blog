@@ -47,7 +47,7 @@ After using http://en.wikipedia.org/wiki/Icalendar[iCalendar]to publish and subs
 
 <p>Here is the end result viewed in <a href="http://www.apple.com/macosx/features/ical/">Apple iCal</a>, by 'subscribing' to the Servlet's URL:</p>
 
-<p><img src='../media/2006-04-19-dynamic-calendars-icalendar-feeds-using-ical4j/icalendar.png' alt='iCalendar feed example' /></p>
+<p><img src='/media/2006-04-19-dynamic-calendars-icalendar-feeds-using-ical4j/icalendar.png' alt='iCalendar feed example' /></p>
 
 <p>I do not really start at 9 a.m. each day and work through lunch; since our time sheet data does not include start and end times, I had to cheat by setting each day's first event's start time to 9 a.m. and using a <code>java.util.Calendar</code> to calculate when the next event should start, based on the entry's duration.</p>
 

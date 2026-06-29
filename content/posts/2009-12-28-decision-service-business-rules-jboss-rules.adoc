@@ -67,7 +67,7 @@ For this example, we shall use the following data model. This includes
 the input data for the user selections, the reference data for the items
 in the lists of available components, and additional output data.
 
-image:../media/2009-12-28-decision-service-business-rules-jboss-rules/decision-service-domain-model.png[Domain model diagram]
+image:/media/2009-12-28-decision-service-business-rules-jboss-rules/decision-service-domain-model.png[Domain model diagram]
 
 `Selection` has properties for the selected motherboard type and
 processor type. In addition, there is a separate `MemorySelection` for

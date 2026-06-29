@@ -9,7 +9,7 @@ In case you’re
 wondering how many whiteboards your Scrum team members need, the correct
 answer is ‘one each’.
 
-image:../media/2012-08-10-scrum-hardware-whiteboards/whiteboard.jpg[One person’s whiteboard]
+image:/media/2012-08-10-scrum-hardware-whiteboards/whiteboard.jpg[One person’s whiteboard]
 
 [[scrum]]
 == The Scrum board is not a whiteboard

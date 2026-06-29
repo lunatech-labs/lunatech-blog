@@ -2,7 +2,7 @@
 sachgar
 v1.0, 2023-02-15
 :title: Hackaton By CESI
-:imagesdir: ../media/2023-02-15-hackathon-by-cesi
+:imagesdir: /media/2023-02-15-hackathon-by-cesi
 :lang: en
 :tags: [hackathon, event, CESI, en]
 

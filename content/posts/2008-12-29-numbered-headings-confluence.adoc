@@ -17,7 +17,7 @@ With the use of a user macro we were able to add support however. The
 macro uses the "Automatic counters and numbering" CSS2 properties to get
 CSS generated numbering. The contents of the macro are:
 
-....
+----
 <style type="text/css">
 <!--
 div.numbered_headings h1 {
@@ -81,7 +81,7 @@ div.numbered_headings h6:before {
 <div class="numbered_headings">
 ${body}
 </div>
-....
+----
 
 == How to Install?
 
@@ -107,7 +107,7 @@ sections of your page that need headline numbers must be surrounded by
 the entire text. Note that this is possible in +++Rich Text+++ as well
 as +++Wiki Markup+++. We use the latter to demonstrate:
 
-....
+----
 h1. Example
 
 Below is an example of numbered headings.
@@ -121,11 +121,11 @@ h2. First Option
 
 h2. Second Option
 {numbered_headings}
-....
+----
 
 This should roughly come up as:
 
-image:../media/2008-12-29-numbered-headings-confluence/numbered-headings-example.png[Numbered Headings Example]
+image:/media/2008-12-29-numbered-headings-confluence/numbered-headings-example.png[Numbered Headings Example]
 
 == Caveats
 

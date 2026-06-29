@@ -60,7 +60,7 @@ https://cloud.google.com/billing/docs/how-to/modify-project[https://cloud.google
 
 We assume here you have a project named spark-kubernetes and the project id generated for you is spark-kubernetes-224613.
 
-image:../media/2019-01-14-running-the-spark-notebook-on-a-kubernetes-google-cloud-cluster/create-project.png[]
+image:/media/2019-01-14-running-the-spark-notebook-on-a-kubernetes-google-cloud-cluster/create-project.png[]
 
 
 ==== Install and configure gcloud
@@ -95,7 +95,7 @@ On the google cloud web dashboard, select Kubernetes Engine -> Clusters -> Creat
 
 I picked 'Standard cluster' with 3 nodes (2vCPU, 4 GB RAM per node), so I have a cluster with enough resources to run spark jobs, with a couple of spark executors.
 
-image:../media/2019-01-14-running-the-spark-notebook-on-a-kubernetes-google-cloud-cluster/create-cluster.png[]
+image:/media/2019-01-14-running-the-spark-notebook-on-a-kubernetes-google-cloud-cluster/create-cluster.png[]
 
 
 === 2.2 kubectl Install kubectl
@@ -168,7 +168,7 @@ $ ./bin/docker-image-tool.sh -r eu.gcr.io/spark-kubernetes-224613 -t test-tag pu
 
 Three docker container images should appear in your project:
 
-image:../media/2019-01-14-running-the-spark-notebook-on-a-kubernetes-google-cloud-cluster/registry.png[]
+image:/media/2019-01-14-running-the-spark-notebook-on-a-kubernetes-google-cloud-cluster/registry.png[]
 
 
 Only the spark image is of interest here, the others provide support for the python and R APIs.
@@ -391,7 +391,7 @@ scala>
 
 And the google cloud UI shows the sparkdriver and executors pods:
 
-image:../media/2019-01-14-running-the-spark-notebook-on-a-kubernetes-google-cloud-cluster/spark-workload.png[]
+image:/media/2019-01-14-running-the-spark-notebook-on-a-kubernetes-google-cloud-cluster/spark-workload.png[]
 
 
 We can test that a simple job executes in the cluster:
@@ -470,7 +470,7 @@ docker push eu.gcr.io/spark-kubernetes-224613/spark-notebook
 
 The result is visible on the registry page:
 
-image:../media/2019-01-14-running-the-spark-notebook-on-a-kubernetes-google-cloud-cluster/registry.png[]
+image:/media/2019-01-14-running-the-spark-notebook-on-a-kubernetes-google-cloud-cluster/registry.png[]
 
 
 ==== Create a spark-notebook deployment
@@ -511,7 +511,7 @@ kubectl create -f spark-notebook.yml
 
 The application is started after a little while:
 
-image:../media/2019-01-14-running-the-spark-notebook-on-a-kubernetes-google-cloud-cluster/spark-notebook-workload.png[]
+image:/media/2019-01-14-running-the-spark-notebook-on-a-kubernetes-google-cloud-cluster/spark-notebook-workload.png[]
 
 
 We need to expose the spark-notebook for us to use it, we could use a loadBalancer and expose it to the public, but it would require to configure some security.
@@ -534,7 +534,7 @@ kubectl port-forward sparkdriver-77b76546fd-5ms8b 9000:9000
 
 Open http://localhost:9000/ and you should have the spark-notebook server page:
 
-image:../media/2019-01-14-running-the-spark-notebook-on-a-kubernetes-google-cloud-cluster/mainpage.png[]
+image:/media/2019-01-14-running-the-spark-notebook-on-a-kubernetes-google-cloud-cluster/mainpage.png[]
 
 ==== Create and configure a notebook
 
@@ -542,7 +542,7 @@ The next step is to create a notebook, and configure it to use the kubernetes cl
 
 Create a new notebook:
 
-image:../media/2019-01-14-running-the-spark-notebook-on-a-kubernetes-google-cloud-cluster/new-notebook.png[]
+image:/media/2019-01-14-running-the-spark-notebook-on-a-kubernetes-google-cloud-cluster/new-notebook.png[]
 
 A new browser tab opens with an empty notebook. By default, spark is started in local mode. To override this behaviour, you must edit the notebook metadata (Menu Edit -> Edit Notebook Metadata).
 
@@ -580,11 +580,11 @@ val rdd = sc.parallelize(1 to 100000).count
 
 This will require spark to start executor pods in the kubernetes cluster, and here are the results:
 
-image:../media/2019-01-14-running-the-spark-notebook-on-a-kubernetes-google-cloud-cluster/notebook-run.png[]
+image:/media/2019-01-14-running-the-spark-notebook-on-a-kubernetes-google-cloud-cluster/notebook-run.png[]
 
 On the kubernetes UI, we see 2 executors running, as expected:
 
-image:../media/2019-01-14-running-the-spark-notebook-on-a-kubernetes-google-cloud-cluster/executor-pods.png[]
+image:/media/2019-01-14-running-the-spark-notebook-on-a-kubernetes-google-cloud-cluster/executor-pods.png[]
 
 
 == Takeaways

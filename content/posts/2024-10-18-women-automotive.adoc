@@ -2,7 +2,7 @@
 Kateryna Olenkovska
 v1.0, 2024-10-18
 :title: Why the Women Automotive Network Summit Should Be on Your Radar: Diversity, Inclusion and Networking
-:imagesdir: ../media/2024-10-18-women-automotive
+:imagesdir: /media/2024-10-18-women-automotive
 :lang: en
 :tags: [eclipse foundation, automotive industry, networking, conference]
 

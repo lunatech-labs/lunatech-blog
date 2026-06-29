@@ -2,7 +2,7 @@
 VincentBrule
 v1.0, 2023-07-15
 :title: Riviera DEV 2023
-:imagesdir: ../media/2023-07-15-riviera-dev
+:imagesdir: /media/2023-07-15-riviera-dev
 :lang: en
 :tags: [conference, nice]
 

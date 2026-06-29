@@ -11,9 +11,9 @@ on 18 May 2012, Peter Hilton will present http://2012.geecon.org/)[Play Framewor
 in Poznań, Poland. geecon is a Java developer conference in Poland,
 started in 2009.
 
-http://2012.geecon.org/[image:../media/2012-05-15-playframework-geecon-2012/geecon2012.png[Play Framework 2.0]]
+http://2012.geecon.org/[image:/media/2012-05-15-playframework-geecon-2012/geecon2012.png[Play Framework 2.0]]
 
-image:../media/2012-05-15-playframework-geecon-2012/geecon-2012-room.jpg[Before the start of the presentation, at
+image:/media/2012-05-15-playframework-geecon-2012/geecon-2012-room.jpg[Before the start of the presentation, at
 geecon]
 
 

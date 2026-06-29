@@ -108,4 +108,6 @@ There were many other things shown and discussed at the summit, including langua
 
 Tensorflow is getting more than just a deep-learning framework. It covers different models for various platforms, from servers to devices and mircocontrollers, with a very strong ecosystem for production grade deployment as well as research. If you want to go further, the complete content is available from the Tensorflow dev summit youtube channel:
 
-video::P4_rJfHpr7k[]
+++++
+<iframe width="560" height="315" src="https://www.youtube.com/embed/P4_rJfHpr7k" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+++++

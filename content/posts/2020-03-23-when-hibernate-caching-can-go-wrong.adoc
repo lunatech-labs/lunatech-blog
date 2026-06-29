@@ -22,7 +22,7 @@ To demonstrate certain things I've created a simple Java project where I am usin
 
 My data structure is also simple:
 
-image::../media/2020-03-23-when-hibernate-caching-can-go-wrong/entities.png[]
+image::/media/2020-03-23-when-hibernate-caching-can-go-wrong/entities.png[]
 
 
 In my application I have configured two caches. One is for entity caching: cachedEntities, and a query cache: queryCache.

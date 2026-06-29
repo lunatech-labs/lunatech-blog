@@ -32,7 +32,7 @@ strong and dismissive.
 *Twitter is a way to quickly and frequently communicate what you are
 doing*, according to Twitter's own web site.
 
-image:../media/2008-08-14-how-explain-twitter/twitter-what.png[What is Twitter?]
+image:/media/2008-08-14-how-explain-twitter/twitter-what.png[What is Twitter?]
 
 You even get a cute avian metaphor; Twitter posts are called 'tweets'.
 
@@ -49,7 +49,7 @@ behaviour.
 The analytical approach to explaining Twitter considers how it relates
 to established Internet-based communication channels.
 
-image:../media/2008-08-14-how-explain-twitter/twitter-2x2.png[public/private vs verbose/concise]
+image:/media/2008-08-14-how-explain-twitter/twitter-2x2.png[public/private vs verbose/concise]
 
 *Twitter is like IM but public, and like blogging but less verbose.*
 This is mostly saying what Twitter is not, of course, but at least it

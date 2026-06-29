@@ -2,7 +2,7 @@
 maniyalraj
 v1.0, 2025-05-02
 :title: AI plugins for code development
-:imagesdir: ../media/2025-05-02-ai-plugins-for-code-development
+:imagesdir: /media/2025-05-02-ai-plugins-for-code-development
 :lang: en
 :tags: [AI, IntelliJ AI Plugins,Local LLMs]
 

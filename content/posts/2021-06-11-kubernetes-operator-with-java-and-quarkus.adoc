@@ -23,7 +23,7 @@ https://github.com/fabric8io/kubernetes-client/tree/master/kubernetes-examples/s
 
 This simple hello world operator demonstrates how to create a stateful set via Kubernetes API and make sure that the data is loaded into each pod and consumed by the application before creating new pods.
 
-image::../media/2021-06-11-kubernetes-operator-with-java-and-quarkus/image-2021-04-18-22-56-52-151.png[width=40%, align="center"]
+image::/media/2021-06-11-kubernetes-operator-with-java-and-quarkus/image-2021-04-18-22-56-52-151.png[width=40%, align="center"]
 
 It performs the following operations with Kubernetes API using the java  https://github.com/kubernetes-client/java[kubernetes-client] and https://github.com/quarkiverse/quarkus-operator-sdk[quarkus-operator-sdk] :
 
@@ -211,7 +211,7 @@ public class HelloWorldController  implements ResourceController<HelloWorld> {
 
 When the custom resource HelloWorld is created or updated the operator receives an event. Based on this event it creates a stateful set according to custom object content.
 
-image::../media/2021-06-11-kubernetes-operator-with-java-and-quarkus/image-2021-04-18-22-37-49-046.png[width=50%, align="center"]
+image::/media/2021-06-11-kubernetes-operator-with-java-and-quarkus/image-2021-04-18-22-37-49-046.png[width=50%, align="center"]
 
 
 .HelloWorldController.java
@@ -716,7 +716,7 @@ spec:
 
 After some time we can validate that the replica set is deployed, and the data is injected into each pod.
 
-image::../media/2021-06-11-kubernetes-operator-with-java-and-quarkus/image-2021-04-30-15-48-45-405.png[width=40%, align="left"]
+image::/media/2021-06-11-kubernetes-operator-with-java-and-quarkus/image-2021-04-30-15-48-45-405.png[width=40%, align="left"]
 
 https://github.com/web1991t/k8-operator-quarkus-hello-world[Source code]
 

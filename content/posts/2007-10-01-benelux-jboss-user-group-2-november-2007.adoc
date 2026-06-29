@@ -27,7 +27,7 @@ In the second presentation, Peter Hilton and Nicolas Leroux described
 Lunatech's practical experience with JBoss Seam. We talked about
 strengths and limitations of JBoss Seam 1.2.1.
 
-* Slides: link:../media/2007-10-01-benelux-jboss-user-group-2-november-2007/jbug-2007-11.pdf[Practical experience with JBoss Seam]
+* Slides: link:/media/2007-10-01-benelux-jboss-user-group-2-november-2007/jbug-2007-11.pdf[Practical experience with JBoss Seam]
 
 *Refreshments:* Beer and pizza.
 
