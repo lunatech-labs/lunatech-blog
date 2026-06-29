@@ -1,3 +1,11 @@
+---
+tags:
+- "grafana"
+- "prometheus"
+- "exemplars"
+- "scala"
+- "docker-compose"
+---
 = Linking metrics and traces with Exemplars
 leo-bogastry
 v1.0, 2022-01-27

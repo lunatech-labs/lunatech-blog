@@ -1,3 +1,8 @@
+---
+tags:
+- "java"
+- "playframework"
+---
 = Why Play isn’t a Java web framework
 hilton
 v1.0, 2011-11-29

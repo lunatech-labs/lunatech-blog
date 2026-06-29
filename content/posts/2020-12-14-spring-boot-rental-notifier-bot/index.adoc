@@ -1,3 +1,10 @@
+---
+tags:
+- "java"
+- "spring boot"
+- "telegram"
+- "bot"
+---
 = Creating Telegram bot for rental notifications in Spring Boot
 DariaPindus
 v1.0, 2020-12-14

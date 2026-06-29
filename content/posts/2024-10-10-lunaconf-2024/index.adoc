@@ -1,3 +1,9 @@
+---
+tags:
+- "conference"
+- "event"
+- "lunatech"
+---
 = LunaConf 2024
 Sylke Sauerwald
 v1.0, 2024-10-10

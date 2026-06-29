@@ -1,3 +1,7 @@
+---
+tags:
+- "playframework"
+---
 = Turkish Play framework community
 PeterHilton
 v1.0, 2011-07-27

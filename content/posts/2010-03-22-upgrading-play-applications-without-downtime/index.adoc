@@ -1,3 +1,9 @@
+---
+tags:
+- "playframework"
+- "apache"
+- "web-applications"
+---
 = Upgrading Play 1.0 applications without downtime
 pepite
 v1.0, 2010-03-22

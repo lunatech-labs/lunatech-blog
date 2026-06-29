@@ -1,3 +1,9 @@
+---
+tags:
+- "java"
+- "xml"
+- "case-study"
+---
 = Basis Wetten Bestand
 kaas
 v1.0, 2005-04-10

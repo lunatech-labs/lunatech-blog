@@ -1,3 +1,7 @@
+---
+tags:
+- "web"
+---
 = The same but different - web application comparison support
 hilton
 v1.0, 2005-08-12

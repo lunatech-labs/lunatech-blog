@@ -1,3 +1,13 @@
+---
+tags:
+- "beyond-the-code"
+- "bash-to-the-feature"
+- "GPU programming"
+- "CUDA"
+- "parallel programming"
+- "AI"
+- "neural network"
+---
 = GPU Programming For The Brave
 boyuan-xiao-at-work
 v1.0, 2025-06-27

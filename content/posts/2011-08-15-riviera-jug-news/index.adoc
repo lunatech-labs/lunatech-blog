@@ -1,3 +1,8 @@
+---
+tags:
+- "event"
+- "java"
+---
 = Riviera JUG news
 FroMage
 v1.0, 2011-08-15

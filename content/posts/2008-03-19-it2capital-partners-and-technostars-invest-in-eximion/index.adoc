@@ -1,3 +1,7 @@
+---
+tags:
+- "ventures"
+---
 = IT2Capital Partners and Technostars invest in Eximion 
 Michael Pentowski
 v1.0, 2008-03-19

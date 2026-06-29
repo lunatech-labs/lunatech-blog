@@ -1,3 +1,8 @@
+---
+tags:
+- "playframework"
+- "jquery"
+---
 = Selector dialogue with jQuery UI, Ajax and Play
 hilton
 v1.0, 2011-10-11

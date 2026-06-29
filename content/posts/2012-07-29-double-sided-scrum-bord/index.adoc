@@ -1,3 +1,8 @@
+---
+tags:
+- "scrum"
+- "methodology"
+---
 = The double-sided Scrum board
 hilton
 v1.0, 2012-07-29

@@ -1,3 +1,9 @@
+---
+tags:
+- "java"
+- "jboss"
+- "seam"
+---
 = Seam in action - JavaPolis presentation
 hilton
 v1.0, 2007-12-14

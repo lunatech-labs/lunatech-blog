@@ -1,3 +1,7 @@
+---
+tags:
+- "fun"
+---
 = Panzano Sandwich Cruncher
 PeterHilton
 v1.0, 2010-07-02

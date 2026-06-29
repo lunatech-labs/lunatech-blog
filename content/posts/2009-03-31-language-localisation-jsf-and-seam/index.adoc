@@ -1,3 +1,9 @@
+---
+tags:
+- "java"
+- "jsf"
+- "seam"
+---
 = Language localisation in JSF and Seam
 PeterHilton
 v1.0, 2009-03-31

@@ -1,3 +1,8 @@
+---
+tags:
+- "opinion"
+- "book"
+---
 = Marketing books for developers
 hilton
 v1.0, 2008-02-18

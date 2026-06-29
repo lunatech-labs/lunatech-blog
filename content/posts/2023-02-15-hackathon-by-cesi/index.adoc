@@ -1,3 +1,10 @@
+---
+tags:
+- "hackathon"
+- "event"
+- "CESI"
+- "en"
+---
 = Hackathon by Cesi
 sachgar
 v1.0, 2023-02-15

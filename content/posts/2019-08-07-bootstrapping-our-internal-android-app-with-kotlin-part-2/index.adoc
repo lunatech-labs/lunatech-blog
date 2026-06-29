@@ -1,3 +1,8 @@
+---
+tags:
+- "ktor"
+- "kotlin"
+---
 = Bootstrapping Our Internal Android App With Kotlin (Part 2)
 VincentBrule
 v1.0, 2019-08-07

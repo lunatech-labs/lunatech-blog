@@ -1,3 +1,14 @@
+---
+tags:
+- "raspberry pi"
+- "emqx"
+- "influxdb"
+- "smappee"
+- "telegraf"
+- "grafana"
+- "energy"
+- "monitoring"
+---
 = Setting up a home energy monitoring system
 eloots
 v1.0, 2023-06-09

@@ -1,3 +1,8 @@
+---
+tags:
+- "scala"
+- "event"
+---
 = On the road again - Scala days Berlin 2016
 Antoine Laffez
 v1.0, 2016-05-16

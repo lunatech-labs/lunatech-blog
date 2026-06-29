@@ -1,3 +1,7 @@
+---
+tags:
+- "java"
+---
 = Processing EDIFACT messages with Smooks
 ludofischer
 v1.0, 2011-12-30

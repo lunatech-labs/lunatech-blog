@@ -1,3 +1,9 @@
+---
+tags:
+- "java"
+- "web-applications"
+- "struts"
+---
 = Web application post-submit messages
 hilton
 v1.0, 2006-01-09

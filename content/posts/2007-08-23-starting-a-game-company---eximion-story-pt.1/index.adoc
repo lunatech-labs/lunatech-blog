@@ -1,3 +1,7 @@
+---
+tags:
+- "ventures"
+---
 = Starting a game company - Eximion story pt.1 
 Michael Pentowski
 v1.0, 2007-08-23

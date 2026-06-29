@@ -1,3 +1,8 @@
+---
+tags:
+- "event"
+- "scala"
+---
 = Scala Days 2018 review
 Antoine Laffez
 v1.0, 2018-05-25

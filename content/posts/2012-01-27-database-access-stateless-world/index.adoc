@@ -1,3 +1,8 @@
+---
+tags:
+- "java"
+- "jpa"
+---
 = Database access in a stateless world
 ludofischer
 v1.0, 2012-01-27

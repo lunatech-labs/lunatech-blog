@@ -1,3 +1,9 @@
+---
+tags:
+- "event"
+- "jboss"
+- "seam"
+---
 = Seam meetup at Devoxx
 hilton
 v1.0, 2008-12-05

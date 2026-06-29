@@ -1,3 +1,8 @@
+---
+tags:
+- "fp"
+- "event"
+---
 = Functional Rotterdam-15
 vijaykiran
 v1.0, 2016-12-19

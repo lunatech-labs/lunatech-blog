@@ -1,3 +1,8 @@
+---
+tags:
+- "shapeless"
+- "scala"
+---
 = Shapeless - Introduction resources
 harrylaou
 v1.0, 2016-09-05

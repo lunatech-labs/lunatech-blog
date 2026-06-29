@@ -1,3 +1,9 @@
+---
+tags:
+- "java"
+- "jbug"
+- "event"
+---
 = Benelux JBoss User Group, 22 May 2009 slides
 PeterHilton
 v1.0, 2009-05-25

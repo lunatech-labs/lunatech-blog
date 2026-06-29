@@ -1,3 +1,11 @@
+---
+tags:
+- "Beginner"
+- "property binding"
+- "event binding"
+- "interpolation"
+- "template syntax"
+---
 = Data Binding in Angular: Templates, Interpolation, and Property/Event Binding
 jakeortega
 v1, 2025-10-15

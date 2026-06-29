@@ -1,3 +1,8 @@
+---
+tags:
+- "front-end"
+- "ux"
+---
 = Browsers don’t do layout
 dutchcelt
 v1.0, 2011-04-13

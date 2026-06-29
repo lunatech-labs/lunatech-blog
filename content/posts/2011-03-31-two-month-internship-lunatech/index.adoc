@@ -1,3 +1,7 @@
+---
+tags:
+- "opinion"
+---
 = A two month internship at Lunatech
 ludofischer
 v1.0, 2011-03-31

@@ -1,3 +1,13 @@
+---
+tags:
+- "hibernate"
+- "quarkus"
+- "mutiny"
+- "uni"
+- "concurrency"
+- "performance"
+- "reactive"
+---
 = Parallel execution: A Hibernate Reactive Gotcha
 eamelink
 v1.0, 2023-05-22

@@ -1,3 +1,29 @@
+---
+tags:
+- "beyond-the-code"
+- "bash-to-the-feature"
+- "ALGOL"
+- "Japronto"
+- "Apache Ant"
+- "Windows Phone"
+- "Google Glass"
+- "Microsoft Zune"
+- "Netscape Navigator"
+- "Adobe Flash"
+- "Visual Basic"
+- "Fortran"
+- "Smalltalk"
+- "Technology Adoption"
+- "Market Failure"
+- "Software History"
+- "Hardware History"
+- "Ecosystem Strategy"
+- "Innovation vs. Viability"
+- "Legacy Technology"
+- "Product Lifecycle"
+- "Developer Experience"
+- "User Adoption"
+---
 = Graveyard of technologies
 peretarrida
 v1.0, 2025-06-20

@@ -1,3 +1,11 @@
+---
+tags:
+- "cost of inaction"
+- "legacy modernization"
+- "tech debt"
+- "digital transformation"
+- "en"
+---
 = The Cost of Inaction: Why Standing Still Is the Most Expensive Decision in Tech
 pepite
 v1.0, 2026-05-07

@@ -1,3 +1,9 @@
+---
+tags:
+- "event"
+- "playframework"
+- "playground"
+---
 = December Play!ground in Rotterdam
 hilton
 v1.0, 2011-11-08

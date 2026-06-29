@@ -1,3 +1,8 @@
+---
+tags:
+- "opinion"
+- "fun"
+---
 = Using the iPhone as internet link while on vacation
 FroMage
 v1.0, 2009-11-13

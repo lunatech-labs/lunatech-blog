@@ -1,3 +1,8 @@
+---
+tags:
+- "event"
+- "clojure"
+---
 = Lunatech Hosts and Sponsors Clojure Meetup
 vijaykiran
 v1.0, 2013-04-28

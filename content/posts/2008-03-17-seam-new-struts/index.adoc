@@ -1,3 +1,9 @@
+---
+tags:
+- "java"
+- "seam"
+- "opinion"
+---
 = Seam is the new Struts
 hilton
 v1.0, 2008-03-17

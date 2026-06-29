@@ -1,3 +1,8 @@
+---
+tags:
+- "employment"
+- "opinion"
+---
 = How to get a job at Lunatech
 PeterHilton
 v1.0, 2010-08-05

@@ -1,3 +1,8 @@
+---
+tags:
+- "slick"
+- "playframework"
+---
 = Using Play framework database evolutions with Slick 1.0.1  
 hilton
 v1.0, 2013-08-29

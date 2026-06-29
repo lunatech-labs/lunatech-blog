@@ -1,3 +1,8 @@
+---
+tags:
+- "ventures"
+- "confluence"
+---
 = The Kalydo Portal Explains it All
 kaas
 v1.0, 2009-01-20

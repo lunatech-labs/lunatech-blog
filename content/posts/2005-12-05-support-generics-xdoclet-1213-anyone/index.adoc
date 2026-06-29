@@ -1,3 +1,7 @@
+---
+tags:
+- "java"
+---
 = Support for generics in XDoclet 1.2/1.3 anyone?
 Pepite
 v1.0, 2005-12-05

@@ -1,3 +1,7 @@
+---
+tags:
+- "event"
+---
 = 2 octobre 2009 @Sophia-Antipolis - Sophia fait sa Java
 FroMage
 v1.0, 2009-09-17

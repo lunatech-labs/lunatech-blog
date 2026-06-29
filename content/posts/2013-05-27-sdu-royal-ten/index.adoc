@@ -1,3 +1,7 @@
+---
+tags:
+- "event"
+---
 = Sdu Royal Ten - 10km business run
 wjkveen
 v1.0, 2013-05-27

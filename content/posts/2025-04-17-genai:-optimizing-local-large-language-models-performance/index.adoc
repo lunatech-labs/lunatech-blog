@@ -1,3 +1,16 @@
+---
+tags:
+- "gen-ai"
+- "llm"
+- "generative-ai"
+- "local-llm"
+- "ollama"
+- "quantization"
+- "model-optimization"
+- "neural-networks"
+- "model-inference"
+- "open-source"
+---
 = GenAI: Optimizing Local Large Language Models Performance
 rkargul
 v1.0, 2025-04-17

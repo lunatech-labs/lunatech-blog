@@ -1,3 +1,8 @@
+---
+tags:
+- "playframework"
+- "jquery"
+---
 = Ajax DataTables with the Play framework 1.2
 PeterHilton
 v1.0, 2011-02-07

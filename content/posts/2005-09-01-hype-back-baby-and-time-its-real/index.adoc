@@ -1,3 +1,7 @@
+---
+tags:
+- "opinion"
+---
 = The hype is back baby - and this time its for real!
 Keith Wallace
 v1.0, 2005-09-01

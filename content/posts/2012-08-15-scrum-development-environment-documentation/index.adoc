@@ -1,3 +1,8 @@
+---
+tags:
+- "scrum"
+- "methodology"
+---
 
 = Scrum project documentation - development environment set-up
 hilton

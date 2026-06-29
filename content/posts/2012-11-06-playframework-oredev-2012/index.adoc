@@ -1,3 +1,8 @@
+---
+tags:
+- "conference"
+- "playframework"
+---
 = Lunatech presents Play at Øredev 2012
 hilton
 v1.0, 2012-11-06

@@ -1,3 +1,10 @@
+---
+tags:
+- "jquery"
+- "ajax"
+- "javascript"
+- "playframework"
+---
 = jQuery UI Ajax autocomplete with Play 1.2
 PeterHilton
 v1.0, 2011-07-05

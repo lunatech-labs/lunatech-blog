@@ -1,3 +1,8 @@
+---
+tags:
+- "ios"
+- "full-text"
+---
 = iOS full-text search with Core Data and SQLite
 Wolfert
 v1.0, 2013-01-24

@@ -1,3 +1,7 @@
+---
+tags:
+- "opinion"
+---
 = Senior - To be, or not to be
 nMoncho
 2020-11-26

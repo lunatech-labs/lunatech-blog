@@ -1,3 +1,9 @@
+---
+tags:
+- "resteasy"
+- "java"
+- "rest"
+---
 = Automatic resource link discovery with RESTEasy and Atom links
 FroMage
 v1.0, 2010-04-19

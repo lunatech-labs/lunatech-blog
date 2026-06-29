@@ -1,3 +1,7 @@
+---
+tags:
+- "opinion"
+---
 = Who wants to start a company anyways?
 Michael Pentowski
 v1.0, 2005-12-01

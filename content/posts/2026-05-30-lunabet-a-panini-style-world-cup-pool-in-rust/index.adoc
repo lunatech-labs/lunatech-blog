@@ -1,3 +1,14 @@
+---
+tags:
+- "rust"
+- "axum"
+- "htmx"
+- "three.js"
+- "world cup"
+- "side project"
+- "ai orchestration"
+- "en"
+---
 = LunaBet: shipping a Panini-style World Cup pool in Rust, in an afternoon
 pepite
 v1.0, 2026-05-30

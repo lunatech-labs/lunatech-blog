@@ -1,3 +1,8 @@
+---
+tags:
+- "playframework"
+- "java"
+---
 = Declarative model class enhancement in Play 1.2
 PeterHilton
 v1.0, 2011-01-11

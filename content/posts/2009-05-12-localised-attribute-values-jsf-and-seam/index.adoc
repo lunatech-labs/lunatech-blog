@@ -1,3 +1,11 @@
+---
+tags:
+- "java"
+- "seam"
+- "jsf"
+- "localization"
+- "web-applications"
+---
 = Localised attribute values in JSF and Seam
 PeterHilton
 v1.0, 2009-05-12

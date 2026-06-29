@@ -1,3 +1,7 @@
+---
+tags:
+- "working-environment"
+---
 = The programmer’s private office
 hilton
 v1.0, 2008-07-22

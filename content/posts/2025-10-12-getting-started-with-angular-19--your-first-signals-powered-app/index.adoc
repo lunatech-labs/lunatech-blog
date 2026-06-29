@@ -1,3 +1,9 @@
+---
+tags:
+- "angular basics"
+- "signals"
+- "reactive state"
+---
 = Getting Started with Angular 19: Your First Signals-Powered App
 jakeortega
 v1.0, 2025-10-12

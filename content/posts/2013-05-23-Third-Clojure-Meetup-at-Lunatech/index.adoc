@@ -1,3 +1,8 @@
+---
+tags:
+- "event"
+- "clojure"
+---
 = Third Monthly Clojure Meetup at Lunatech
 vijaykiran
 v1.0, 2013-05-23

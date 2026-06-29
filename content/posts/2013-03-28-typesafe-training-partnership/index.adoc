@@ -1,3 +1,7 @@
+---
+tags:
+- "playframework"
+---
 = Typesafe training partnership
 hilton
 v1.0, 2013-03-28

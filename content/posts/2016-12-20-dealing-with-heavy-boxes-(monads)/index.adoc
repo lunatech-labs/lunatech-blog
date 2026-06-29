@@ -1,3 +1,8 @@
+---
+tags:
+- "fp"
+- "scala"
+---
 = Dealing with heavy boxes (monads)
 eamelink
 v1.0, 2016-12-20

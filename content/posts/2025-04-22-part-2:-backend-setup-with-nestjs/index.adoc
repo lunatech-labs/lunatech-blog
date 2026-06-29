@@ -1,3 +1,15 @@
+---
+tags:
+- "angular"
+- "nestjs"
+- "postgresql"
+- "typeorm"
+- "jwt"
+- "authentication"
+- "frontend"
+- "typescript"
+- "nodejs"
+---
 = Part 2: Backend Setup with NestJS
 jakeortega
 v1.0, 2025-04-22

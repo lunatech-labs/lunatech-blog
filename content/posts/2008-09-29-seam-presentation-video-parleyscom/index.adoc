@@ -1,3 +1,10 @@
+---
+tags:
+- "opinion"
+- "java"
+- "seam"
+- "jboss"
+---
 = Seam presentation video on parleys.com
 hilton
 v1.0, 2008-08-14

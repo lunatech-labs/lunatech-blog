@@ -1,3 +1,13 @@
+---
+tags:
+- "devoxx-fr"
+- "java"
+- "quarkus"
+- "cloud"
+- "covid-19"
+- "securité"
+- "conférence"
+---
 = Devoxx France 2021, Edition spéciale 9 3/4
 pinguedwinde
 v1.0, 2021-10-08

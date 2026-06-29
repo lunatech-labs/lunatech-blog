@@ -1,3 +1,8 @@
+---
+tags:
+- "java"
+- "drools"
+---
 = How to build a decision service using JBoss Rules Execution Server
 PeterHilton
 v1.0, 2010-01-04

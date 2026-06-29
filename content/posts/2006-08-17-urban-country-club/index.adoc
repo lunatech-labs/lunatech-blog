@@ -1,3 +1,7 @@
+---
+tags:
+- "fun"
+---
 = The Urban Country Club
 Michael Pentowski
 v1.0, 2006-08-17

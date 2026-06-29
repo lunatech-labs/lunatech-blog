@@ -1,3 +1,7 @@
+---
+tags:
+- "event"
+---
 = The Joy of Coding 2013
 annagos
 v1.0, 2013-03-07

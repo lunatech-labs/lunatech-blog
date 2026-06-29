@@ -1,3 +1,10 @@
+---
+tags:
+- "case-study"
+- "jboss"
+- "seam"
+- "jee"
+---
 = Sdu publishing system - technical upgrade
 vijaykiran
 v1.0, 2013-11-28

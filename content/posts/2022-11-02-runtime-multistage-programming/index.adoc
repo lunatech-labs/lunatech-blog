@@ -1,3 +1,8 @@
+---
+tags:
+- "slinc"
+- "scala"
+---
 = Custom JIT compilation with Runtime Multi-Stage Programming
 markehammons
 v1.0, 2022-11-02

@@ -1,3 +1,10 @@
+---
+tags:
+- "java"
+- "event"
+- "grails"
+- "groovy"
+---
 = Groovy and Grails meetup on Thursday May 7th
 BartSchuller
 v1.0, 2009-05-04

@@ -1,3 +1,14 @@
+---
+tags:
+- "concurrency"
+- "akka"
+- "Future"
+- "streaming"
+- "streams"
+- "multiprocessing"
+- "parallelism"
+- "scala"
+---
 = Calculating π concurrently
 eloots
 v1.0, 2021-04-28

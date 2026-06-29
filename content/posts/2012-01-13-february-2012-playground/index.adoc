@@ -1,3 +1,9 @@
+---
+tags:
+- "event"
+- "playframework"
+- "playground"
+---
 = February 2012 Play!ground at Paddy Murphy’s
 hilton
 v1.0, 2012-01-13

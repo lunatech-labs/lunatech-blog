@@ -1,3 +1,7 @@
+---
+tags:
+- "writing"
+---
 = How to write user-interface instructions
 hilton
 v1.0, 2007-03-08

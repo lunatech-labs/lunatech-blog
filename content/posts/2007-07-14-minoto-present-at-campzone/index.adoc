@@ -1,3 +1,7 @@
+---
+tags:
+- "ventures"
+---
 = Minoto present at CampZone 2007
 kaas
 v1.0, 2007-07-14

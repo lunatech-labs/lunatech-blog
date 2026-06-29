@@ -1,3 +1,7 @@
+---
+tags:
+- "fun"
+---
 = Late Christmas at Lunatech
 hilton
 v1.0, 2012-01-10

@@ -1,3 +1,9 @@
+---
+tags:
+- "cdci"
+- "playframework"
+- "sbt"
+---
 = Continuous Delivery on GitLab with Play, Scala, SBT and Heroku
 jasperdenkers
 v1.0, 2016-08-08

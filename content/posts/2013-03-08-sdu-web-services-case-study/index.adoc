@@ -1,3 +1,9 @@
+---
+tags:
+- "case-study"
+- "rest"
+- "xml"
+---
 = Sdu Uitgevers - Sdu Web Services
 targeter
 v1.0, 2013-03-08

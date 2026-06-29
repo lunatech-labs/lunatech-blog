@@ -1,3 +1,11 @@
+---
+tags:
+- "scala"
+- "typeclass"
+- "metaprogramming"
+- "we-know-scala"
+- "scala-lujah"
+---
 = Mastering Typeclass Derivation with Scala 3
 nMoncho
 2025-03-07

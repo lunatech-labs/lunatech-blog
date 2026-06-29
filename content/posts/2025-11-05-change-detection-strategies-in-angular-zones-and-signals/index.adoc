@@ -1,3 +1,11 @@
+---
+tags:
+- "Intermediate"
+- "change detection"
+- "Zone.js"
+- "OnPush"
+- "signals (intro)"
+---
 = Change Detection Strategies in Angular: Zones and Signals
 jakeortega
 2025-11-05

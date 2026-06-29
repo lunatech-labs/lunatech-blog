@@ -1,3 +1,7 @@
+---
+tags:
+- "git"
+---
 = We have moved on to git, why haven't you?
 FroMage
 v1.0, 2011-04-11

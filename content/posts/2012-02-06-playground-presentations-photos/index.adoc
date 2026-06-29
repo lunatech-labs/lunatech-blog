@@ -1,3 +1,9 @@
+---
+tags:
+- "event"
+- "playframework"
+- "playground"
+---
 = February Play!ground presentations and photos
 hilton
 v1.0, 2012-02-06

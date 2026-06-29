@@ -1,3 +1,9 @@
+---
+tags:
+- "java"
+- "web-applications"
+- "opinion"
+---
 = Bean validation in Java EE
 FroMage
 v1.0, 2008-03-20

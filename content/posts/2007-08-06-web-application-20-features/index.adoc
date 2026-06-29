@@ -1,3 +1,7 @@
+---
+tags:
+- "web-applications"
+---
 = Web application 2.0 features
 hilton
 v1.0, 2007-08-06

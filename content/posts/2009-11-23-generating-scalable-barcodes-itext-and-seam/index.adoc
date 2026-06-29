@@ -1,3 +1,11 @@
+---
+tags:
+- "java"
+- "pdf"
+- "itext"
+- "seam"
+- "jsf"
+---
 = Generating scalable barcodes with iText and Seam
 FroMage
 v1.0, 2009-11-23

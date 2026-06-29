@@ -1,3 +1,7 @@
+---
+tags:
+- "event"
+---
 = Friday's Internal Workshop
 Antoine Laffez
 v1.0, 2019-03-05

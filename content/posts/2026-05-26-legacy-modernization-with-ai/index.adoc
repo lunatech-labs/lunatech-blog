@@ -1,3 +1,11 @@
+---
+tags:
+- "legacy modernization"
+- "AI methodology"
+- "agentic coding"
+- "context pack"
+- "en"
+---
 = Legacy Modernization with AI: A Battle-Tested Methodology
 pepite
 v1.0, 2026-05-26

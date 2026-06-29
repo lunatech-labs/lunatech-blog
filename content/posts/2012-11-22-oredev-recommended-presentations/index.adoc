@@ -1,3 +1,7 @@
+---
+tags:
+- "conference"
+---
 = Øredev - recommended presentations
 hilton
 v1.0, 2012-11-22

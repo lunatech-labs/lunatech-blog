@@ -1,3 +1,9 @@
+---
+tags:
+- "java"
+- "jboss"
+- "seam"
+---
 = The European Union - a metaphor for JBoss Seam
 hilton
 v1.0, 2007-12-11

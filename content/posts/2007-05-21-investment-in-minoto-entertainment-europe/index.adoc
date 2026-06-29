@@ -1,3 +1,8 @@
+---
+tags:
+- "investment"
+- "startup"
+---
 = Investment in Minoto Entertainment
 kaas
 v1.0, 2007-05-21

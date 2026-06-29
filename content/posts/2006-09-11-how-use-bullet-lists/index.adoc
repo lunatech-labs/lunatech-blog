@@ -1,3 +1,7 @@
+---
+tags:
+- "writing"
+---
 = How to use bullet lists
 hilton
 v1.0, 2006-09-11

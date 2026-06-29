@@ -1,3 +1,7 @@
+---
+tags:
+- "fun"
+---
 = Last article from me
 FroMage
 v1.0, 2011-10-14

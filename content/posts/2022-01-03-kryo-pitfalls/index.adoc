@@ -1,3 +1,10 @@
+---
+tags:
+- "scala"
+- "java"
+- "serialization"
+- "benchmark"
+---
 = Pitfalls in Kryo Serialization
 nMoncho
 2022-01-03

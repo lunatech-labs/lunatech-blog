@@ -1,3 +1,11 @@
+---
+tags:
+- "azure"
+- "grafana"
+- "monitoring"
+- "alert"
+- "entraid"
+---
 = Create a Grafana Alert for expiring Microsoft Entra ID secrets
 vanny96
 v1.0, 2024-06-20

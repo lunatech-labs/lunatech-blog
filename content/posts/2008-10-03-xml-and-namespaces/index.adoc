@@ -1,3 +1,7 @@
+---
+tags:
+- "xml"
+---
 = XML and Namespaces
 bartschuller
 v1.0, 2008-10-03

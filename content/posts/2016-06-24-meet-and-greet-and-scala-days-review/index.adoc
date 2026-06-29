@@ -1,3 +1,9 @@
+---
+tags:
+- "scala"
+- "event"
+- "voxxeddays"
+---
 = Meet and Greet and Scala Days review
 Antoine Laffez
 v1.0, 2016-06-24

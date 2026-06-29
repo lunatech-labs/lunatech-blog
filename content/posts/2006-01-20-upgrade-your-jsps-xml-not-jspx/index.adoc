@@ -1,3 +1,9 @@
+---
+tags:
+- "java"
+- "web-applications"
+- "struts"
+---
 = Upgrade your JSPs to XML (but not to .jspx)
 bartschuller
 v1.0, 2006-01-20

@@ -1,3 +1,8 @@
+---
+tags:
+- "drools"
+- "java"
+---
 = Fact Type Hierarchies in Drools
 ufkes
 v1.0, 2012-03-21

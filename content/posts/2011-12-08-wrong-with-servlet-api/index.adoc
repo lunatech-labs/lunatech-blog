@@ -1,3 +1,8 @@
+---
+tags:
+- "java"
+- "servlet"
+---
 = What’s wrong with the Java Servlet API
 hilton
 v1.0, 2011-12-08

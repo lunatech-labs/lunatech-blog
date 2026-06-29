@@ -1,3 +1,7 @@
+---
+tags:
+- "collaboration"
+---
 = Benefits of remote working
 hilton
 v1.0, 2014-03-11

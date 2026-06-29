@@ -1,3 +1,9 @@
+---
+tags:
+- "scrum"
+- "methodology"
+- "event"
+---
 = The myth of the on-site customer
 PeterHilton
 v1.0, 2011-05-25

@@ -1,3 +1,7 @@
+---
+tags:
+- "event"
+---
 = Amsterdam Java Meetup, 21 September 2007
 hilton
 v1.0, 2007-08-06

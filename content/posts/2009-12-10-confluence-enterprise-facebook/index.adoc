@@ -1,3 +1,8 @@
+---
+tags:
+- "confluence"
+- "opinion"
+---
 = Confluence as an enterprise Facebook
 PeterHilton
 v1.0, 2009-12-10

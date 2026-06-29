@@ -1,3 +1,7 @@
+---
+tags:
+- "event"
+---
 = Reactive Summit Montreal 2018
 Antoine Laffez
 v1.0, 2018-10-19

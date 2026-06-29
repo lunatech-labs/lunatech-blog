@@ -1,3 +1,12 @@
+---
+tags:
+- "documentation"
+- "automation"
+- "opentelemetry"
+- "monitoring"
+- "grafana"
+- "performance"
+---
 = Recap of the Joy of Coding Meetup at Lunatech
 Ana Rapanych
 v1.0, 2025-02-13

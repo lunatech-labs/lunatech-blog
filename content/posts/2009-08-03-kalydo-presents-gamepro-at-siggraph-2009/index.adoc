@@ -1,3 +1,8 @@
+---
+tags:
+- "event"
+- "ventures"
+---
 = Kalydo presents GamePro at Siggraph 2009
 Michael Pentowski
 v1.0, 2009-08-03

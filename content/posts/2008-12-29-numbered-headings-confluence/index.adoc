@@ -1,3 +1,8 @@
+---
+tags:
+- "wiki"
+- "confluence"
+---
 = Numbered Headings in Confluence
 kaas
 v1.0, 2008-12-29

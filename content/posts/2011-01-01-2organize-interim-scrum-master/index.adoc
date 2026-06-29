@@ -1,3 +1,8 @@
+---
+tags:
+- "scrum"
+- "methodology"
+---
 = 2organize Scrum master
 PeterHilton
 v1.0, 2011-01-01

@@ -1,3 +1,10 @@
+---
+tags:
+- "voting"
+- "crypto"
+- "zero-knowledge"
+- "en"
+---
 = Introduction to e-voting schemes
 agoetschm
 v1.0, 2022-12-15

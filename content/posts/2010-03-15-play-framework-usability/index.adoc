@@ -1,3 +1,7 @@
+---
+tags:
+- "playframework"
+---
 = Play framework usability
 PeterHilton
 v1.0, 2010-03-15

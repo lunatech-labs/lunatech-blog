@@ -1,3 +1,8 @@
+---
+tags:
+- "java"
+- "jna"
+---
 = Java native libraries using JNA
 BartSchuller
 v1.0, 2009-12-06

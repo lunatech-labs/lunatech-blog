@@ -1,3 +1,9 @@
+---
+tags:
+- "fp"
+- "scala"
+- "monad"
+---
 = Side Effects and How To Deal With Them The Cool Way, Part 2 - Monads Introduction
 FrancoAra
 v1.0, 2016-10-31

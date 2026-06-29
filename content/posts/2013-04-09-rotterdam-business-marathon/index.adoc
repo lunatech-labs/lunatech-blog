@@ -1,3 +1,7 @@
+---
+tags:
+- "event"
+---
 = Rotterdam Business Marathon
 annagos
 v1.0, 2013-04-09

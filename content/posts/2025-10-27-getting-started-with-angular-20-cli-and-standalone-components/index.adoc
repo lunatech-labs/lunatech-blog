@@ -1,3 +1,9 @@
+---
+tags:
+- "Beginner"
+- "Angular CLI"
+- "standalone components"
+---
 = Getting Started with Angular 20 CLI and Standalone Components
 jakeortega
 v1, 2025-10-27

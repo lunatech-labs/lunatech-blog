@@ -1,3 +1,11 @@
+---
+tags:
+- "java"
+- "java-22"
+- "java-23"
+- "java-vs-world"
+- "java-over-java"
+---
 = Java 22 vs Java 23 and the Evolution of String Templates
 FrancescoScala
 v1.0, 2024-11-08

@@ -1,3 +1,7 @@
+---
+tags:
+- "event"
+---
 = Nvidia GPU Technology Conference In Munich
 Ravi Gupta
 v1.0, 2018-10-30

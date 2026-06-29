@@ -1,3 +1,9 @@
+---
+tags:
+- "java"
+- "javascript"
+- "maven"
+---
 = Unit-testing AJAX code with Maven
 FroMage
 v1.0, 2010-03-01

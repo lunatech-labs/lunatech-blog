@@ -1,3 +1,9 @@
+---
+tags:
+- "java"
+- "event"
+- "jbug"
+---
 = Benelux JBoss User Group, 27 February 2009
 pepite
 v1.0, 2009-02-03

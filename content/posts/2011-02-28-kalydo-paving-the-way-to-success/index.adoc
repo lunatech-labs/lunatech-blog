@@ -1,3 +1,7 @@
+---
+tags:
+- "ventures"
+---
 = Kalydo paving the way to success
 kaas
 v1.0, 2011-02-28

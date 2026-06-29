@@ -1,3 +1,8 @@
+---
+tags:
+- "event"
+- "front-end"
+---
 = Fronteers at Lunatech. WTF?
 hilton
 v1.0, 2011-09-16

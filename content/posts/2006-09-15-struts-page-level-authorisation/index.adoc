@@ -1,3 +1,9 @@
+---
+tags:
+- "struts"
+- "java"
+- "web-applications"
+---
 = Struts page-level authorisation
 hilton
 v1.0, 2006-09-15

@@ -1,3 +1,7 @@
+---
+tags:
+- "project-management"
+---
 = Meeting-avoidance for self-managing developers - Devoxx 2008
 hilton
 v1.0, 2008-12-05

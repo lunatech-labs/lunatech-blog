@@ -1,3 +1,11 @@
+---
+tags:
+- "seam"
+- "itext"
+- "drools"
+- "xml"
+- "case-study"
+---
 = Electronic government publications
 BartSchuller
 v1.0, 2010-01-25

@@ -1,3 +1,10 @@
+---
+tags:
+- "java"
+- "web-applications"
+- "xml"
+- "rest"
+---
 = Generating KML for RESTful clients
 FroMage
 v1.0, 2008-10-17

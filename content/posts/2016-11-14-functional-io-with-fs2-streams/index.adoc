@@ -1,3 +1,8 @@
+---
+tags:
+- "fp"
+- "scala"
+---
 = Functional IO with FS2 Streams
 haribageski
 v1.0, 2016-11-14

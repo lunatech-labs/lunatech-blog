@@ -1,3 +1,7 @@
+---
+tags:
+- "java"
+---
 = Paranoid configuration - tamper-proof text
 hilton
 v1.0, 2005-07-17

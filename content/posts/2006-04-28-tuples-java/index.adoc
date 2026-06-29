@@ -1,3 +1,7 @@
+---
+tags:
+- "java"
+---
 = Tuples in Java
 bartschuller
 v1.0, 2006-04-28

@@ -1,3 +1,8 @@
+---
+tags:
+- "slick"
+- "playframework"
+---
 = Mapping Slick query results to case classes 1.0.1
 hilton
 v1.0, 2013-11-21

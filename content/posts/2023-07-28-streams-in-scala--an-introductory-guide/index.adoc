@@ -1,3 +1,16 @@
+---
+tags:
+- "streams"
+- "scala-streams"
+- "LazyList"
+- "fs2"
+- "akka-streams"
+- "scala"
+- "zio-streams"
+- "call-by-name"
+- "reactive-stream"
+- "back-pressure"
+---
 = Streams in Scala - An Introductory Guide
 zanio
 v1.0, 2023-07-28

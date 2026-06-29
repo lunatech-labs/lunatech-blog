@@ -1,3 +1,7 @@
+---
+tags:
+- "event"
+---
 = Lightbend Spark for Scala-Professional by Kensu
 Antoine Laffez
 v1.0, 2018-01-12

@@ -1,3 +1,8 @@
+---
+tags:
+- "playframework"
+- "java"
+---
 = Play framework 1.0 cheat sheet
 PeterHilton
 v1.0, 2010-06-08

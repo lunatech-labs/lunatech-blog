@@ -1,3 +1,7 @@
+---
+tags:
+- "opinion"
+---
 = I liked it so much I bought the company
 Keith Wallace
 v1.0, 2005-10-03

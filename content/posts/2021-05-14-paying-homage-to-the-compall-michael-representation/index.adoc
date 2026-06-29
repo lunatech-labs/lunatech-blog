@@ -1,3 +1,10 @@
+---
+tags:
+- "scala"
+- "opaque-types"
+- "value-classes"
+- "extension-methods"
+---
 = Paying homage to the Compall-Michael pattern, and anticipating Scala 3 Opaque Types
 njlbenn
 v1.0, 2021-05-14

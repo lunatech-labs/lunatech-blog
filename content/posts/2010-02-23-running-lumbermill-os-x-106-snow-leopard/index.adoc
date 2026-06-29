@@ -1,3 +1,7 @@
+---
+tags:
+- "logging"
+---
 = Running Lumbermill on OS X 10.6 Snow Leopard
 PeterHilton
 v1.0, 2010-02-23

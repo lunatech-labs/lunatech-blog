@@ -1,3 +1,7 @@
+---
+tags:
+- "flash"
+---
 = How to fix disappearing Flash components
 targeter
 v1.0, 2010-01-18

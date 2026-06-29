@@ -1,3 +1,10 @@
+---
+tags:
+- "kafka"
+- "spark"
+- "streaming"
+- "scala"
+---
 = Lessons Learned Using Spark Structured Streaming
 idarlington
 v1.0, 2019-11-15

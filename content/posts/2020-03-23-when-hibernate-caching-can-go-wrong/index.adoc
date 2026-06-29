@@ -1,3 +1,9 @@
+---
+tags:
+- "hibernate"
+- "java"
+- "caching"
+---
 = When Hibernate caching can go wrong
 smthelusive
 v1.0, 2020-03-23

@@ -1,3 +1,11 @@
+---
+tags:
+- "conference"
+- "stockholm"
+- "sweden"
+- "java"
+- "jfokus"
+---
 = JFokus 2024
 jdijt
 v1.0, 2024-03-13

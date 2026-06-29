@@ -1,3 +1,8 @@
+---
+tags:
+- "event"
+- "mesosphere"
+---
 = New Partnership With Mesosphere And Dutch Mesos User Group
 Antoine Laffez
 v1.0, 2018-10-10

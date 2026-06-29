@@ -1,3 +1,8 @@
+---
+tags:
+- "java"
+- "playframework"
+---
 = Play 2.0 demo - live coding script
 hilton
 v1.0, 2011-12-08

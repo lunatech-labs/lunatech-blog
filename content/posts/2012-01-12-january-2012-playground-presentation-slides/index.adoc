@@ -1,3 +1,9 @@
+---
+tags:
+- "event"
+- "playframework"
+- "playground"
+---
 = January 2012 Play!ground presentation slides
 vijaykiran
 v1.0, 2012-01-12

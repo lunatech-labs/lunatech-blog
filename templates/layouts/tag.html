@@ -1,0 +1,17 @@
+---
+layout: default
+tagging: {collection: posts, link: /tags/:tag}
+---
+{#let tagged=site.collections.get(page.data.tagCollection)}
+<section class="p80-0">
+  <div class="wrapper-lg">
+    <h2>Posts tagged &ldquo;{page.data.tag}&rdquo;</h2>
+    <p class="subtitle">{tagged.size} article{#if tagged.size != 1}s{/if}</p>
+    <div class="card-list">
+      {#for post in tagged}
+        {#include partials/post-card cardPost=post /}
+      {/for}
+    </div>
+  </div>
+</section>
+{/let}

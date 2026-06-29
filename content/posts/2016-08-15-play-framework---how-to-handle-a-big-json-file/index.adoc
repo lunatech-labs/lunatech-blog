@@ -1,3 +1,8 @@
+---
+tags:
+- "playframework"
+- "scala"
+---
 = Play Framework - How to handle a big json file in play ( more than 22 root variables)
 harrylaou
 v1.0, 2016-08-15

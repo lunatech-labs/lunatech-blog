@@ -1,3 +1,8 @@
+---
+tags:
+- "playframework"
+- "java"
+---
 = Progress bars with jQuery UI, WebSocket & Play
 hilton
 v1.0, 2011-10-31

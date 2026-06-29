@@ -1,3 +1,11 @@
+---
+tags:
+- "AI"
+- "software engineering"
+- "legacy modernization"
+- "agentic coding"
+- "en"
+---
 = Software Will Cost Almost Nothing. What Happens Next?
 pepite
 v1.0, 2026-04-28

@@ -1,3 +1,10 @@
+---
+tags:
+- "ceylon"
+- "scala"
+- "kotlin"
+- "opinion"
+---
 
 = Own goals - Scala vs Ceylon vs Kotlin
 hilton

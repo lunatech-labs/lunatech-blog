@@ -1,3 +1,12 @@
+---
+tags:
+- "java"
+- "jpa"
+- "spring"
+- "data"
+- "specifications"
+- "dynamic query"
+---
 = Spring Data Specifications
 abensoussan
 v1.0, 2023-03-24

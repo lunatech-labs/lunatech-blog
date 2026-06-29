@@ -1,3 +1,10 @@
+---
+tags:
+- "java"
+- "jvm"
+- "java-vs-world"
+- "java-over-java"
+---
 = JVM vs JVM
 nikashamova
 v1.0, 2024-11-29

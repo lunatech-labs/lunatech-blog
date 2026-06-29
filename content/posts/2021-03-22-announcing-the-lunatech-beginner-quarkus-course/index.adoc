@@ -1,3 +1,9 @@
+---
+tags:
+- "quarkus"
+- "java"
+- "training"
+---
 = Announcing the Lunatech Beginner Quarkus Course
 njlbenn
 v1.0, 2021-03-22

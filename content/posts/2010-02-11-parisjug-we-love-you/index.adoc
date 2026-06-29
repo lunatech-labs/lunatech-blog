@@ -1,3 +1,10 @@
+---
+tags:
+- "jug"
+- "event"
+- "jax-doclets"
+- "playframework"
+---
 = Lunatech attending the 2nd Paris JUG anniversary
 pepite
 v1.0, 2010-02-11

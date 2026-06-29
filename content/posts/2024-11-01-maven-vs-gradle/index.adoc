@@ -1,3 +1,11 @@
+---
+tags:
+- "java"
+- "maven"
+- "gradle"
+- "java-vs-world"
+- "java-over-java"
+---
 = Maven vs Gradle Navigating the World of Java Build Tools
 vanny96
 v1.0, 2024-11-01

@@ -1,3 +1,9 @@
+---
+tags:
+- "dotty"
+- "akka"
+- "scala"
+---
 = Announcing the _Moving from Scala 2 to Scala 3_ course
 eloots
 v1.0, 2020-06-08

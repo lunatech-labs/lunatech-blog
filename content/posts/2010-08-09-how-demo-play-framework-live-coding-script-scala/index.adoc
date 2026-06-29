@@ -1,3 +1,8 @@
+---
+tags:
+- "playframework"
+- "java"
+---
 = How to demo the Play framework - live coding script (in Scala)
 fcanedo
 v1.0, 2010-08-09

@@ -1,3 +1,7 @@
+---
+tags:
+- "opinion"
+---
 = Business lunch rules
 Michael Pentowski
 v1.0, 2005-09-13

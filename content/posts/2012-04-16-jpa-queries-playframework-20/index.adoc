@@ -1,3 +1,9 @@
+---
+tags:
+- "playframework"
+- "java"
+- "jpa"
+---
 = Syntactically correct and type-safe JPA queries in Play 2.0
 leonardpunt
 v1.0, 2012-04-16

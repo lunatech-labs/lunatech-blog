@@ -1,3 +1,8 @@
+---
+tags:
+- "java"
+- "drools"
+---
 = Decision service architecture with JBoss Rules
 PeterHilton
 v1.0, 2009-12-10

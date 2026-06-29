@@ -1,3 +1,7 @@
+---
+tags:
+- "project-management"
+---
 = Information radiators: from dashboard to wall
 hilton
 v1.0, 2005-10-07

@@ -1,3 +1,8 @@
+---
+tags:
+- "java"
+- "web-applications"
+---
 = Introduction to ZTemplates
 killdashnine
 v1.0, 2008-10-29

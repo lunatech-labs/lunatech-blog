@@ -1,3 +1,8 @@
+---
+tags:
+- "scrum"
+- "methodology"
+---
 = Planning Scrum project documentation
 hilton
 v1.0, 2012-11-20

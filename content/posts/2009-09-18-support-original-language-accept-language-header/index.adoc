@@ -1,3 +1,9 @@
+---
+tags:
+- "localization"
+- "internationalization"
+- "web-applications"
+---
 = Support for original language in Accept-Language header
 fcanedo
 v1.0, 2009-09-18

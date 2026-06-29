@@ -1,3 +1,9 @@
+---
+tags:
+- "kubernetes"
+- "CI/CD"
+- "en"
+---
 = An intro to Argo CD
 tesfayenati
 v1.0, 2023-03-30

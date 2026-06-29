@@ -1,3 +1,8 @@
+---
+tags:
+- "java"
+- "drools"
+---
 = Logging rule activation with Drools
 hilton
 v1.0, 2011-09-26

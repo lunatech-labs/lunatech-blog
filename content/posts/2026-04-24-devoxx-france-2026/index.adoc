@@ -1,3 +1,11 @@
+---
+tags:
+- "devoxx-fr"
+- "ai"
+- "java"
+- "conference"
+- "en"
+---
 = Devoxx France 2026
 4nt0ineB
 v1.0, 2026-04-24

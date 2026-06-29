@@ -1,3 +1,9 @@
+---
+tags:
+- "web-applications"
+- "jboss"
+- "seam"
+---
 = Getting a list of time zones in Java and Seam
 hilton
 v1.0, 2008-12-20

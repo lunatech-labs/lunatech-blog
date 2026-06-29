@@ -1,3 +1,9 @@
+---
+tags:
+- "AI"
+- "IntelliJ AI Plugins"
+- "Local LLMs"
+---
 = AI plugins for code development
 maniyalraj
 v1.0, 2025-05-02

@@ -1,3 +1,9 @@
+---
+tags:
+- "gatling"
+- "load testing"
+- "opensource"
+---
 = Load testing with Gatling
 VincentBrule
 v1.0, 2021-10-30

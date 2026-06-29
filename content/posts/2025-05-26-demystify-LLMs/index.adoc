@@ -1,3 +1,26 @@
+---
+tags:
+- "LLM"
+- "natural language processing"
+- "transformers"
+- "machine learning"
+- "AI"
+- "language models"
+- "probabilistic text generation"
+- "statistical language models"
+- "n-gram"
+- "bigram"
+- "attention mechanisms"
+- "vector embeddings"
+- "tokenization"
+- "context windows"
+- "self-attention"
+- "neural networks"
+- "NLP fundamentals"
+- "AI architecture"
+- "language understanding"
+- "transformer architecture"
+---
 = A Quest to Tame Large Language Models
 lukewoodcock
 v1.0, 2025-05-26

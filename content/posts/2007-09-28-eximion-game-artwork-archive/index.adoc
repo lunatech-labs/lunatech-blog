@@ -1,3 +1,7 @@
+---
+tags:
+- "fun"
+---
 = Eximion game artwork archive
 hilton
 v1.0, 2007-09-28

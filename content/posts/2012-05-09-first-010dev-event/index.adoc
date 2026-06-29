@@ -1,3 +1,7 @@
+---
+tags:
+- "event"
+---
 = First 010DEV event
 hilton
 v1.0, 2012-05-09

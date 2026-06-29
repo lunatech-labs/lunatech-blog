@@ -1,3 +1,10 @@
+---
+tags:
+- "fold"
+- "iteration"
+- "functional"
+- "scala"
+---
 = Parcourir des collections avec foldLeft et foldRight
 ggarvanese
 v1.0, 2022-07-11

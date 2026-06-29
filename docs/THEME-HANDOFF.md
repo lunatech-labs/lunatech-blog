@@ -35,21 +35,22 @@ Source: `~/Lunatech/Internal/lunatech-blog-engine`
   tags; `{#rss site /}` adds the feed `<link>`. Use these instead of hand-rolling.
 
 ## Concrete TODO
-1. Layout chain: `default.html` (html/head/body, includes head partial, `{#seo}`,
-   Plausible, CSS/JS) -> `page.html` and `post.html` extend it. Override the local
-   `post` layout (we already pin the post URL there: see below) so it renders the
-   author block, date, reading time, tags, and the article body.
-2. Index: `content/index.html` already paginates (24/page) and lists posts. Restyle
-   into the hero + cards layout.
-3. CSS: port the SCSS to `public/css/main.css` (or keep SCSS via the web-bundler).
-4. Tag pages (`/tags/:tag`): OPEN ISSUE. `quarkus-roq-plugin-tagging` with a layout
-   carrying `tagging: posts` + `link: /tags/:tag` did NOT generate pages in 2.1.4.
-   Investigate (content-anchor page? derived-collection publish config?) or build
-   tag pages manually by grouping `site.collections.posts` by tag.
-5. Author pages (`/author/:name`): create `data/authors.yml` (handle -> name,
-   avatar, bio, links) and generate a page per author, e.g. a `from-data` collection
-   or grouping posts by author. Old URL was `/author/<github-handle>`.
-6. Analytics + meta: Plausible snippet in the head; confirm `{#seo}` output.
+1. DONE. Layout chain `default.html` -> `page.html` / `post.html` (post layout renders
+   author block, date, reading time, tags, cover, body). Partials: header, footer, hero,
+   post-card.
+2. DONE. `content/index.html` restyled into hero + featured/last + card grid + pagination.
+3. DONE. SCSS ported to `public/css/main.css` (plain CSS). Assets copied into `public/`.
+4. DONE. Tag pages `/tags/:tag` via `quarkus-roq-plugin-tagging`. Root cause of the earlier
+   failure: the plugin reads the TOP-LEVEL `tags` FM key, but our posts only had tags under
+   the AsciiDoc `:tags:` attribute. Fix: `bin/add-tags-frontmatter.py` promotes `:tags:` to a
+   real `tags:` YAML list on every post; `templates/layouts/tag.html` carries
+   `tagging: {collection: posts, link: /tags/:tag}` (link key reproduces old URLs). Theme tag
+   links use `{tag.slugify}` to match generated slugs. 0 dead tag links. Test: `ThemeTest`.
+5. DECIDED (2026-06-29): no author pages. Post-author names link to `github.com/<handle>`.
+   The old `/author/<github-handle>` URLs are intentionally not reproduced. (The tagging plugin
+   is hardcoded to the `tags` key and cannot be reused for authors.)
+6. DONE. Plausible snippet + `{#seo}` / `{#rss}` in `default.html`. (Minor gap: `{#seo}` omits
+   og:image for posts, since posts have no `page.image`.)
 
 ## Hard-won gotchas (do not relearn these)
 - `quarkus.roq.generator.batch` is a BUILD-TIME property. Static generation =

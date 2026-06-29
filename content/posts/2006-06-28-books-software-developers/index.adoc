@@ -1,3 +1,7 @@
+---
+tags:
+- "opinion"
+---
 = Books for software developers
 hilton
 v1.0, 2006-06-28

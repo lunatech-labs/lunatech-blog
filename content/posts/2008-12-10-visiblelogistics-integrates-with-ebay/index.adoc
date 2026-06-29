@@ -1,3 +1,7 @@
+---
+tags:
+- "ventures"
+---
 = VisibleLogistics integrates with eBay
 kaas
 v1.0, 2008-12-10

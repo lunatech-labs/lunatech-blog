@@ -1,3 +1,9 @@
+---
+tags:
+- "rust"
+- "java"
+- "scala"
+---
 = Rust by examples, for a Java developer
 mcsuka
 v1.0, 2023-04-13

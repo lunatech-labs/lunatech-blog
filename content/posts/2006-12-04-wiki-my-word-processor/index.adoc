@@ -1,3 +1,9 @@
+---
+tags:
+- "documentation"
+- "wiki"
+- "confluence"
+---
 = Wiki is my word-processor
 hilton
 v1.0, 2006-12-04

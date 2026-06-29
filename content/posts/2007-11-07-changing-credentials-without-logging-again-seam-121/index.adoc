@@ -1,3 +1,9 @@
+---
+tags:
+- "java"
+- "jboss"
+- "seam"
+---
 = Changing credentials without logging in again in Seam 1.2.1
 pepite
 v1.0, 2007-06-13

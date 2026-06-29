@@ -1,3 +1,8 @@
+---
+tags:
+- "fun"
+- "event"
+---
 = Hack In The Woods: Programming For Fun And Good
 adrienhaxaire
 v1.0, 2019-08-20

@@ -1,3 +1,7 @@
+---
+tags:
+- "event"
+---
 = Our first award!
 pepite
 v1.0, 2016-01-04

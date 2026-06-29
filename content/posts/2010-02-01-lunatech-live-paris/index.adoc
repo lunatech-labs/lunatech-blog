@@ -1,3 +1,10 @@
+---
+tags:
+- "jug"
+- "event"
+- "jax-doclets"
+- "playframework"
+---
 = Lunatech live from Paris
 FroMage
 v1.0, 2010-01-25

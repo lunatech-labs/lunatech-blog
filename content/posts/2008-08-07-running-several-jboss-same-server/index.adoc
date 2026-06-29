@@ -1,3 +1,9 @@
+---
+tags:
+- "java"
+- "jboss"
+- "seam"
+---
 = Running several JBoss AS on the same server
 pepite
 v1.0, 2007-08-07

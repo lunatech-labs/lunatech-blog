@@ -1,3 +1,8 @@
+---
+tags:
+- "opinion"
+- "book"
+---
 = Book review - Wikinomics
 hilton
 v1.0, 2007-07-02

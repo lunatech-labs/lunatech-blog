@@ -1,3 +1,7 @@
+---
+tags:
+- "fun"
+---
 = Chrimble cocktail
 PeterHilton
 v1.0, 2009-12-21

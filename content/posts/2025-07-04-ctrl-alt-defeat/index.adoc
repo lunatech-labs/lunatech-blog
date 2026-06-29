@@ -1,3 +1,10 @@
+---
+tags:
+- "beyond-the-code"
+- "bash-to-the-feature"
+- "AI"
+- "neural network"
+---
 = Ctrl+Alt+Defeat: Noob vs. Neural Net
 GlenODonovan
 v1.0, 2025-07-04

@@ -1,3 +1,9 @@
+---
+tags:
+- "k8"
+- "gcp"
+- "spark"
+---
 = Running The Spark-Notebook On A Kubernetes Google Cloud Cluster
 Xavier Tordoir
 v1.0, 2019-01-14

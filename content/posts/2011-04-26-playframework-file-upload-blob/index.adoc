@@ -1,3 +1,9 @@
+---
+tags:
+- "playframework"
+- "json"
+- "java"
+---
 = Play framework 1.2 file upload with play.db.jpa.Blob
 PeterHilton
 v1.0, 2011-04-26

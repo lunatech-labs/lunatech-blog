@@ -1,3 +1,8 @@
+---
+tags:
+- "event"
+- "playframework"
+---
 = Play!ground presentation slides & code
 hilton
 v1.0, 2011-10-03

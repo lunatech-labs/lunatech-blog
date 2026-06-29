@@ -1,3 +1,8 @@
+---
+tags:
+- "drools"
+- "event"
+---
 = Presentations - Drools and the perfect programmer at 42
 PeterHilton
 v1.0, 2010-03-16

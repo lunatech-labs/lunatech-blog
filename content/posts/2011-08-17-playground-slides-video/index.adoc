@@ -1,3 +1,8 @@
+---
+tags:
+- "event"
+- "playframework"
+---
 = August Play!ground presentation slides & video
 hilton
 v1.0, 2011-08-17

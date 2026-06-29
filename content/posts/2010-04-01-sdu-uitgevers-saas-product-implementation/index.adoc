@@ -1,3 +1,10 @@
+---
+tags:
+- "java"
+- "web-applications"
+- "saas"
+- "case-study"
+---
 = Sdu Uitgevers - SaaS product implementation
 fcanedo
 v1.0, 2010-04-01

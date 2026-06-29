@@ -1,3 +1,9 @@
+---
+tags:
+- "java"
+- "jbug"
+- "jboss"
+---
 = Benelux JBoss User Group, 8 June 2007 - first photos 
 evelienket
 v1.0, 2007-06-15

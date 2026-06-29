@@ -1,3 +1,7 @@
+---
+tags:
+- "event"
+---
 = RivieraDEV - the official pictures
 pepite
 v1.0, 2011-10-25

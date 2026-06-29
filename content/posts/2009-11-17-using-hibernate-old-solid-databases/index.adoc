@@ -1,3 +1,10 @@
+---
+tags:
+- "java"
+- "jpa"
+- "solid"
+- "hibernate"
+---
 = Using Hibernate on old Solid databases
 FroMage
 v1.0, 2009-11-17

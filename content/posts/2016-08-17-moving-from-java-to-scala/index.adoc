@@ -1,3 +1,8 @@
+---
+tags:
+- "java"
+- "scala"
+---
 = Moving From Java To Scala 
 JMCeron
 v1.0, 2016-08-17

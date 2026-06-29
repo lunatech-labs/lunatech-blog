@@ -1,3 +1,7 @@
+---
+tags:
+- "event"
+---
 = Dutch Clojure Meetup
 Antoine Laffez
 v1.0, 2018-07-05

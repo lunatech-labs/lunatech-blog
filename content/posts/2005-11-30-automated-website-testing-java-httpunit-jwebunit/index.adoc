@@ -1,3 +1,7 @@
+---
+tags:
+- "opinion"
+---
 = Automated website testing with Java - HttpUnit / JWebUnit
 lypanov
 v1.0, 2005-11-06

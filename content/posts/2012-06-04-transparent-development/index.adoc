@@ -1,3 +1,8 @@
+---
+tags:
+- "project-management"
+- "methodology"
+---
 = Transparent development and the project management
 hilton
 v1.0, 2012-06-04

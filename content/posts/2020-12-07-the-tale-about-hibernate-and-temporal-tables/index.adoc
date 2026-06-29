@@ -1,3 +1,10 @@
+---
+tags:
+- "hibernate"
+- "java"
+- "temporal"
+- "mssql"
+---
 = The tale about Hibernate and Temporal Tables
 smthelusive
 v1.0, 2020-12-07

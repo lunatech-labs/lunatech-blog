@@ -1,3 +1,7 @@
+---
+tags:
+- "scala"
+---
 = The Scala List extractor demystified
 fcanedo
 v1.0, 2011-11-25

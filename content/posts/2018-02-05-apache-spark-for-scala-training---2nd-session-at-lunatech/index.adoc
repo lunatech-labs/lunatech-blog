@@ -1,3 +1,9 @@
+---
+tags:
+- "event"
+- "scala"
+- "spark"
+---
 = Apache Spark for Scala Training - 2nd Session at Lunatech
 Antoine Laffez
 v1.0, 2018-02-05

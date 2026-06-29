@@ -1,3 +1,8 @@
+---
+tags:
+- "java"
+- "web-applications"
+---
 = Dynamic calendars - iCalendar feeds using iCal4J
 hilton
 v1.0, 2006-04-19

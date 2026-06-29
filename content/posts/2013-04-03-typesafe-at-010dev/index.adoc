@@ -1,3 +1,7 @@
+---
+tags:
+- "event"
+---
 = Typesafe at 010DEV
 hilton
 v1.0, 2013-04-03

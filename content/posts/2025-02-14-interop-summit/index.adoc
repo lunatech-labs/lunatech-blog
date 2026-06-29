@@ -1,3 +1,15 @@
+---
+tags:
+- "jvm"
+- "interop"
+- "scala"
+- "scala3"
+- "kotlin"
+- "gradle"
+- "groovy"
+- "we-know-scala"
+- "scala-lujah"
+---
 = Interop Summit. Why do we only import Java libraries?
 kolmar
 v1.0, 2025-02-14

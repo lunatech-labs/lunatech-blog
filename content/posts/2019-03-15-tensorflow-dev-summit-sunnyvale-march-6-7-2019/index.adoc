@@ -1,3 +1,8 @@
+---
+tags:
+- "event"
+- "tenserflow"
+---
 = Tensorflow Dev Summit, Sunnyvale March 6-7 2019
 Xavier Tordoir
 v1.0, 2019-03-15

@@ -1,3 +1,7 @@
+---
+tags:
+- "opinion"
+---
 = Moving from Spain to the Netherlands 
 JMCeron
 v1.0, 2016-08-29

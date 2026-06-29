@@ -1,3 +1,7 @@
+---
+tags:
+- "ventures"
+---
 = BitLogistics blog
 kaas
 v1.0, 2007-08-04

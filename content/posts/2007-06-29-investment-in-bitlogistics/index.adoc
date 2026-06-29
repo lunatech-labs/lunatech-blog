@@ -1,3 +1,7 @@
+---
+tags:
+- "ventures"
+---
 = Investment in BitLogistics Ltd. 
 Michael Pentowski
 v1.0, 2007-06-29

@@ -1,3 +1,7 @@
+---
+tags:
+- "opinion"
+---
 = Book review - Slack, Tom Demarco
 hilton
 v1.0, 2006-02-09

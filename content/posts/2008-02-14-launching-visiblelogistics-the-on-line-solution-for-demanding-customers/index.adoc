@@ -1,3 +1,7 @@
+---
+tags:
+- "ventures"
+---
 = Launching VisibleLogistics, the on-line solution for demanding customers
 Michael Pentowski
 v1.0, 2008-02-14

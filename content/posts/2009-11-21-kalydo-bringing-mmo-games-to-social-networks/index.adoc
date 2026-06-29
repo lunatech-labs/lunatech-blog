@@ -1,3 +1,8 @@
+---
+tags:
+- "event"
+- "ventures"
+---
 = Kalydo bringing MMO games to Social Networks
 Michael Pentowski
 v1.0, 2009-11-21

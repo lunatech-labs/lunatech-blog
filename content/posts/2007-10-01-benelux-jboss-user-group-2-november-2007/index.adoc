@@ -1,3 +1,8 @@
+---
+tags:
+- "jbug"
+- "event"
+---
 = Benelux JBoss User Group, 2 November 2007
 hilton
 v1.0, 2007-10-01

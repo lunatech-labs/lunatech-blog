@@ -1,3 +1,7 @@
+---
+tags:
+- "ui"
+---
 = Unforgiven - user-interface labels
 hilton
 v1.0, 2005-06-24

@@ -1,3 +1,7 @@
+---
+tags:
+- "java"
+---
 = Fun with PDF and hardware tokens
 fcanedo
 v1.0, 2005-12-05

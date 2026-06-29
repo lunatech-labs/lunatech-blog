@@ -1,3 +1,8 @@
+---
+tags:
+- "saas"
+- "case-study"
+---
 = VisibleLogistics - Supply Chain Visibility SaaS
 PeterHilton
 v1.0, 2009-05-11

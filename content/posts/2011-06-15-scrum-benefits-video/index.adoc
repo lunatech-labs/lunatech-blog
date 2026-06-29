@@ -1,3 +1,9 @@
+---
+tags:
+- "scrum"
+- "methodology"
+- "event"
+---
 = Three Scrum benefits (video)
 PeterHilton
 v1.0, 2011-06-15

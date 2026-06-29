@@ -1,3 +1,7 @@
+---
+tags:
+- "event"
+---
 = Lunatech presents at 010DEV
 hilton
 v1.0, 2012-05-23

@@ -1,3 +1,8 @@
+---
+tags:
+- "event"
+- "scala"
+---
 = Lunatech Platinum Sponsor Scala Days 2018 Berlin
 Antoine Laffez
 v1.0, 2018-05-10

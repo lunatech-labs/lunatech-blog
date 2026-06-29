@@ -1,4 +1,9 @@
-= JBoss Benelux User Group, 8 June 2007
+---
+tags:
+- "event"
+- "jbug"
+---
+= Boss Benelux User Group, 8 June 2007
 hilton
 v1.0, 2007-05-24
 :title: JBoss Benelux User Group, 8 June 2007

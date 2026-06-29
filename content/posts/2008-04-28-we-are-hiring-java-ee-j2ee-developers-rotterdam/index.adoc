@@ -1,3 +1,7 @@
+---
+tags:
+- "opinion"
+---
 = We are hiring Java EE / J2EE developers (Rotterdam)
 Michael Pentowski 
 v1.0, 2008-03-28

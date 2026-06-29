@@ -1,3 +1,8 @@
+---
+tags:
+- "playframework"
+- "jquery"
+---
 = Lazy loading page content with jQuery UI, Ajax and Play 1.2
 hilton
 v1.0, 2011-08-10

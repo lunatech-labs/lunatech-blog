@@ -1,3 +1,7 @@
+---
+tags:
+- "opinion"
+---
 = Spring fever
 Michael Pentowski
 v1.0, 2006-04-03

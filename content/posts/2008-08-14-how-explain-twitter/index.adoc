@@ -1,3 +1,8 @@
+---
+tags:
+- "opinion"
+- "fun"
+---
 = How to explain Twitter
 hilton
 v1.0, 2008-08-14

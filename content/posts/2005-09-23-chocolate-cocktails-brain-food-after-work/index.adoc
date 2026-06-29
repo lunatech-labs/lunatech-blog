@@ -1,3 +1,8 @@
+---
+tags:
+- "opinion"
+- "fun"
+---
 = Chocolate cocktails: brain food for after work
 hilton
 v1.0, 2005-09-23

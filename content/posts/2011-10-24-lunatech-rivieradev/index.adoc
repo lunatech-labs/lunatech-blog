@@ -1,3 +1,8 @@
+---
+tags:
+- "event"
+- "playframework"
+---
 = Lunatech at the RivieraDEV
 pepite
 v1.0, 2011-10-25

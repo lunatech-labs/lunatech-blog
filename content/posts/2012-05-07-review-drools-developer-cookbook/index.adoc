@@ -1,3 +1,8 @@
+---
+tags:
+- "drools"
+- "books"
+---
 = Review - Drools Developer’s Cookbook
 hilton
 v1.0, 2012-05-06

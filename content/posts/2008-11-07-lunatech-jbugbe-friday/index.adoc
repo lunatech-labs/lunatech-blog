@@ -1,3 +1,10 @@
+---
+tags:
+- "java"
+- "event"
+- "jbug"
+- "belgium"
+---
 = Lunatech at the JBug.be this Friday
 pepite
 v1.0, 2008-11-07

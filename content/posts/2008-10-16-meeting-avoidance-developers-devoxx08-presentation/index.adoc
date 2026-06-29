@@ -1,3 +1,7 @@
+---
+tags:
+- "project-management"
+---
 = Meeting-avoidance for developers - Devoxx08 presentation
 hilton
 v1.0, 2008-10-16

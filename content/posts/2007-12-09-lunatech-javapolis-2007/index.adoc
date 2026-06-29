@@ -1,3 +1,8 @@
+---
+tags:
+- "java"
+- "event"
+---
 = Lunatech at JavaPolis 2007
 hilton
 v1.0, 2007-12-09

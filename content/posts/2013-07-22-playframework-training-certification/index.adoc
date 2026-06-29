@@ -1,3 +1,7 @@
+---
+tags:
+- "playframework"
+---
 = Fast Track to Play training certification 
 hilton
 v1.0, 2013-07-22

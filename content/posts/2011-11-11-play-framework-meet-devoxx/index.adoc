@@ -1,3 +1,8 @@
+---
+tags:
+- "event"
+- "playframework"
+---
 = Play framework meet-up at Devoxx
 hilton
 v1.0, 2011-11-11

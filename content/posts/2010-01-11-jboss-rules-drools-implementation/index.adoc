@@ -1,3 +1,9 @@
+---
+tags:
+- "java"
+- "drools"
+- "case-study"
+---
 = JBoss Rules (Drools) implementation Execution Server
 PeterHilton
 v1.0, 2010-01-11

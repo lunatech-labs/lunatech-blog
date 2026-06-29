@@ -1,3 +1,9 @@
+---
+tags:
+- "scala"
+- "akka"
+- "cassandra"
+---
 = Time range queries with Cassandra and Akka Streams
 nMoncho
 2020-01-02

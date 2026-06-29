@@ -1,3 +1,9 @@
+---
+tags:
+- "java"
+- "jsf"
+- "jboss"
+---
 = Upgrading JSF applications to JBoss 4.2.0.GA
 pepite
 v1.0, 2007-06-14

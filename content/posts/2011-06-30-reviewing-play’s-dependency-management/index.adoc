@@ -1,3 +1,9 @@
+---
+tags:
+- "playframework"
+- "maven"
+- "java"
+---
 = Reviewing Play 1.2’s dependency management
 targeter
 v1.0, 2011-06-30

@@ -1,3 +1,7 @@
+---
+tags:
+- "java"
+---
 = Eclipse plug-in installation
 hilton
 v1.0, 2007-03-08

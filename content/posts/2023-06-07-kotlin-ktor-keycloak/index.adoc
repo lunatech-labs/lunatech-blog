@@ -1,3 +1,9 @@
+---
+tags:
+- "kotlin"
+- "ktor"
+- "keycloak"
+---
 = JWT token validation in Ktor with Client Credentials Flow
 leo-bogastry
 v1.0, 2023-06-07

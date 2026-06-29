@@ -1,3 +1,9 @@
+---
+tags:
+- "playframework"
+- "json"
+- "java"
+---
 = Play Framework 1.2 - Better JSON serialization with FlexJSON
 eamelink
 v1.0, 2011-04-20

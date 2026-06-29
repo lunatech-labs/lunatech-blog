@@ -1,3 +1,7 @@
+---
+tags:
+- "opinion"
+---
 = The geoweb - open standards for publishing geodata
 hilton
 v1.0, 2005-11-06
