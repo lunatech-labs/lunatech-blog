@@ -5,7 +5,8 @@ Idempotent migration transform for Lunatech blog posts (Asciidoctor engine -> Qu
 Re-runnable at any time: running it again after contributors add new posts only changes
 files that still contain a legacy construct. Already-migrated files are left untouched.
 
-Transforms applied to every *.adoc under the target directory (default: content/posts):
+Posts are Roq page bundles: content/posts/<slug>/index.adoc (with the post's own images
+co-located in the same folder). This script transforms every */index.adoc:
 
   1. Literal blocks `....`  ->  listing blocks `----`
      The pure-Java AsciiDoc engine Roq uses (Yupiik) throws a NullPointerException on
@@ -17,16 +18,12 @@ Transforms applied to every *.adoc under the target directory (default: content/
      dropped). Numeric id or a `vimeo` option -> Vimeo embed; otherwise YouTube.
      Honours width=, height= and start= options when present.
 
-  3. `../media/...`  ->  `/media/...`
-     Media moves to `static/media/` (served at `/media/...`). Relative `../media`
-     references (in `:imagesdir:` and inline `image::` macros) would resolve wrong from
-     a `/posts/<slug>/` page, so they are rewritten to absolute site paths.
-
 Usage:
     python3 bin/migrate-posts.py [POSTS_DIR]      # default POSTS_DIR=content/posts
     python3 bin/migrate-posts.py --check [DIR]    # report files that WOULD change, exit 1 if any
 
-This script does not touch the dotty post edge case or anything beyond the rules above.
+Note: callout markers (<1>...) in a source block also crash the Yupiik parser UNLESS a
+callout list follows the block - always add a `<N> description` list after such blocks.
 """
 import re
 import sys
@@ -75,8 +72,6 @@ def transform(text: str) -> str:
         if LITERAL_RE.match(line):
             out.append('----')
             continue
-        # absolute-ise media paths (covers :imagesdir: and inline image:: macros)
-        line = line.replace('../media/', '/media/').replace('../media', '/media')
         out.append(line)
     return '\n'.join(out)
 
@@ -90,7 +85,8 @@ def main() -> int:
         return 2
 
     changed = []
-    for f in sorted(posts_dir.glob('*.adoc')):
+    # posts are page bundles: content/posts/<slug>/index.adoc
+    for f in sorted(posts_dir.glob('*/index.adoc')):
         original = f.read_text(encoding='utf-8')
         migrated = transform(original)
         if migrated != original:

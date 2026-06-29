@@ -1,0 +1,63 @@
+= Dynamic calendars - iCalendar feeds using iCal4J
+hilton
+v1.0, 2006-04-19
+:title: Dynamic calendars - iCalendar feeds using iCal4J
+:tags: [java,web-applications]
+
+After using http://en.wikipedia.org/wiki/Icalendar[iCalendar]to publish and subscribe to various calendars from various computers, I starting thinking about http://en.wikipedia.org/wiki/RSS_%28file_format%29[RSS]. Although RSS was originally designed to share news headlines between web sites, it quickly became clear that you can combine RSS feeds and newsreader software to solve unrelated software problems, hence the great explosion of RSS use that has nothing to do with 'news'. iCalendar is going to be the same.
+
+++++
+
+<p>This is because now that most calendar applications mostly support multiple iCalendars, where it is straightforward to add another calendar by giving its URL, that these calendars become specialised Internet 'browsers' in the same way that RSS newsreaders are. These applications include <a href="http://www.apple.com/macosx/features/ical/">Apple iCal</a> (OSX), <a href="http://www.mozilla.org/projects/calendar/">Mozilla Calendar</a> (cross-platform) and <a href="http://korganizer.kde.org/">KOrganizer</a> (Linux); Microsoft Outlook 2003 does not support iCalendar subscriptions. This includes web-based iCalendar clients such as <a href="http://phpicalendar.net/">PHP iCalendar</a> and <a href="http://www.google.com/calendar/">Google Calendar</a>. The thin end of the wedge is to stretch 'calendar' to include public holidays or a concert schedule, but ultimately the generalised use case is to use a calendar application as a Browse-By-Date interface on any data.</p>
+
+<p>For example, one kind of date-focused historical data is an employee time sheet, which turns a calendar around by being about the past instead of the future. It is easy to imagine how time sheet entries would appear on a calendar, and how using an iCalendar-capable calendar application would make it largely unnecessary to build a custom search/browse user-interface for time sheets.</p>
+
+<h2>iCalendar timesheets in Java with iCal4J</h2>
+
+<p>This is an easy example to implement, if you have access to time sheet data, in a database perhaps. In Java you can use <a href="http://ical4j.sourceforge.net/">iCal4J</a> to generate an iCalendar document from a Java object model. The documentation is sparse, but in the end, the following works. First, create a calendar:</p>
+
+<pre>
+	final Calendar calendar = new Calendar();
+	calendar.getProperties().add(new ProdId("-//Ben Fortuna//iCal4j 1.0//EN"));
+	calendar.getProperties().add(Version.VERSION_2_0);
+	calendar.getProperties().add(CalScale.GREGORIAN);
+</pre>
+
+<p>Then create a list of events from your time sheet data, and add them to the calendar:</p>
+
+<pre>
+	final List events = new ArrayList();
+	for (Iterator i = minutesList.iterator(); i.hasNext();) {
+		final TimeSheetEntry entry = (TimeSheetEntry) i.next();
+		final VEvent event = new VEvent(new DateTime(entry.getStartTime()), entry.getName());
+		event.getProperties().add(new DtEnd(new DateTime(entry.getEndTime())));
+		event.getProperties().add(new Description(entry.getDescription()));
+		events.add(event);
+	}
+	calendar.getComponents().addAll(events);
+</pre>
+
+<p>Finally, use a Java Servlet to output the calendar as an iCalendar document:</p>
+
+<pre>
+	response.setContentType("text/calendar");
+	final CalendarOutputter output = new CalendarOutputter();
+	output.output(calendar, response.getOutputStream());
+</pre>
+
+<p>Here is the end result viewed in <a href="http://www.apple.com/macosx/features/ical/">Apple iCal</a>, by 'subscribing' to the Servlet's URL:</p>
+
+<p><img src='icalendar.png' alt='iCalendar feed example' /></p>
+
+<p>I do not really start at 9 a.m. each day and work through lunch; since our time sheet data does not include start and end times, I had to cheat by setting each day's first event's start time to 9 a.m. and using a <code>java.util.Calendar</code> to calculate when the next event should start, based on the entry's duration.</p>
+
+<h2>Other applications</h2>
+
+<p>Many other applications might make sense, in that browsing using an iCalendar client would be useful. However, although you could structure just about any data as an RSS or iCalendar document, the relevant question is whether it would be useful to be able to access that data from an RSS or iCalendar client. This is like asking whether you get anything you need for free; for example, our web-based time sheet application does not have full text search, but Apple iCal does, so the iCalendar feed is an easy way of getting search as well as browse.</p>
+
+<p>With more work, you could use an iCalendar client to edit the underlying calendar data. Apple iCal does not support editing a calendar you have subscribed to; <a href="http://www.mozilla.org/projects/calendar/">Mozilla Calendar</a> and <a href="http://korganizer.kde.org/">KOrganizer</a> do, but this is not always reliable.</p>
+
+<p>iCalendar also includes 'to do' items, so it might be useful to extend the time sheet example to add a to do item for each working day that has missing time sheet entries.</p>
+
+<p>The time sheet example works well, because the entries have the right kind of time scale to view in a calendar application - generally more than half an hour and less than a day. For more fine-grained data, such as a log file, you could use the calendar to break the data into one-hour chunks, and then put 60 minutes' worth of log file in the description of each event.</p>
+++++
