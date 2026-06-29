@@ -1,24 +1,33 @@
-.DS_store
-logs
-.bsp
-conf/overrides.conf
-project/project
-project/target
-target
-tmp
-.history
-dist
-/.idea
-/*.iml
-/out
-/.idea_modules
-/.classpath
-/.project
-/RUNNING_PID
-/.settings
-/*.ipr
-/*.iws
-.DS_Store
+# Maven / Quarkus
+target/
+.mvn/wrapper/maven-wrapper.jar
 
+# Web bundler (Roq) dependencies
+node_modules/
 
+# Auto-generated agent tooling artifacts (quarkus-agent MCP)
+AGENTS.md
+CLAUDE.md
+.mcp.json
+
+# Roq static output
+/dist/
+
+# IDE
 .idea
+*.iml
+*.ipr
+*.iws
+.vscode/
+.settings/
+.classpath
+.project
+
+# OS
+.DS_Store
+.DS_store
+
+# Misc
+logs/
+tmp/
+.history
