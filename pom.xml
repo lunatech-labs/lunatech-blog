@@ -48,6 +48,11 @@
             <version>${roq.version}</version>
         </dependency>
         <dependency>
+            <groupId>io.quarkiverse.roq</groupId>
+            <artifactId>quarkus-roq-plugin-sitemap</artifactId>
+            <version>${roq.version}</version>
+        </dependency>
+        <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-arc</artifactId>
         </dependency>

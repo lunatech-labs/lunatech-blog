@@ -1,0 +1,4 @@
+---
+link: /feed/
+---
+{#include fm/rss.html contentLimit=0 /}
