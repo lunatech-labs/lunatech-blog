@@ -57,7 +57,7 @@ browser's search engine list].)
 == How to use the plug-in
 
 The OpenSearch description
-(link:/media/2007-07-06-opensearch-plug-atlassian’s-confluence/opensearch-description-example2.xml[example opensearch.xml])
+(link:/media/2007-07-06-opensearch-plug-atlassian-s-confluence/opensearch-description-example2.xml[example opensearch.xml])
 describes the URL's with which you can do a search request and get
 results back in a standard format, RSS or Atom. Normally an OpenSearch
 client would read this file and use the URLs but you can also just try
@@ -112,11 +112,11 @@ the URL parameters can be used.
 To install the plug-in you need to:
 
 . Have a confluence installation.
-. Download the link:/media/2007-07-06-opensearch-plug-atlassian’s-confluence/plugins-opensearch-1.0.jar[plug-in]. (or the source,
+. Download the link:/media/2007-07-06-opensearch-plug-atlassian-s-confluence/plugins-opensearch-1.0.jar[plug-in]. (or the source,
 available on request)
 . Upload the Opensearch-plugin in your Confluence installation. (This is
 part of the administrators menu.)
-. Customize the link:/media/2007-07-06-opensearch-plug-atlassian’s-confluence/opensearch-description-example2.xml[opensearch.xml]
+. Customize the link:/media/2007-07-06-opensearch-plug-atlassian-s-confluence/opensearch-description-example2.xml[opensearch.xml]
 file.
 . Upload the opensearch.xml file as an attachment in a space of your
 Confluence installation that's public. Now everyone that can access your
@@ -141,7 +141,7 @@ To be able to add Confluence to your browser's search engine list you
 need to configure the following:
 
 . Make an OpenSearch description using this
-link:/media/2007-07-06-opensearch-plug-atlassian’s-confluence/opensearch-description-example1.xml[example opensearch.xml].
+link:/media/2007-07-06-opensearch-plug-atlassian-s-confluence/opensearch-description-example1.xml[example opensearch.xml].
 . Login Confluence as administrator
 . Attach the OpenSearch description file to a page
 . Select _Administration_

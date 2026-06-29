@@ -22,7 +22,7 @@ try to write some nice tutorials and articles about it. More to come on
 this web, so keep posted.
 
 In the meantime, you can download the
-link:/media/2008-05-19-nouvelles-technologies-de-développement-fpi-2008-nice/presentation-iut-2.pdf[presentation slides] in French (PDF, 0.5
+link:/media/2008-05-19-nouvelles-technologies-de-d-veloppement-fpi-2008-nice/presentation-iut-2.pdf[presentation slides] in French (PDF, 0.5
 Mb).
 
 You can send your comments nicolas+fip@lunatech.com.
