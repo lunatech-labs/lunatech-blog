@@ -32,12 +32,13 @@ jobs:
 
       - name: Generate static site
         # Point absolute links (canonical/OG/RSS/sitemap) at the preview host so
-        # the preview is self-consistent. Internal navigation is relative anyway.
+        # the preview is self-consistent. site.url is a build-time property, so it
+        # must be set on the package command. Internal navigation is relative anyway.
         run: |
           ./mvnw -B --no-transfer-progress clean package \
-            -Dquarkus.roq.generator.batch=true -DskipTests
-          java -jar target/quarkus-app/quarkus-run.jar \
+            -Dquarkus.roq.generator.batch=true -DskipTests \
             -Dsite.url=https://${PREVIEW_DOMAIN}
+          java -jar target/quarkus-app/quarkus-run.jar
 
       - name: Prepare output for Surge
         # Drop the production CNAME so Surge does not try to publish to the
