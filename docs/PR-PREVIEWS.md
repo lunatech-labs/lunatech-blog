@@ -8,8 +8,7 @@ Production (`blog.lunatech.com`) stays on GitHub Pages and is unaffected.
 
 ## One-time setup
 
-The workflow skips itself (and stays green) until the Surge credentials are
-configured as repository secrets.
+The workflow needs Surge credentials configured as repository secrets.
 
 1. Create a Surge account and get a token on any machine with Node installed:
    ```

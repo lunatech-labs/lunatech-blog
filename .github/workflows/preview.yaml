@@ -21,24 +21,9 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-      # Stay green until the SURGE_TOKEN secret is configured, then activate.
-      - name: Check Surge token
-        id: check
-        env:
-          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
-        run: |
-          if [ -n "$SURGE_TOKEN" ]; then
-            echo "ok=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "ok=false" >> "$GITHUB_OUTPUT"
-            echo "::notice::SURGE_TOKEN secret not set; skipping preview deploy."
-          fi
-
       - uses: actions/checkout@v4
-        if: steps.check.outputs.ok == 'true'
 
       - name: Set up JDK 21
-        if: steps.check.outputs.ok == 'true'
         uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -46,7 +31,6 @@ jobs:
           cache: maven
 
       - name: Generate static site
-        if: steps.check.outputs.ok == 'true'
         # Point absolute links (canonical/OG/RSS/sitemap) at the preview host so
         # the preview is self-consistent. Internal navigation is relative anyway.
         run: |
@@ -56,13 +40,11 @@ jobs:
             -Dsite.url=https://${PREVIEW_DOMAIN}
 
       - name: Prepare output for Surge
-        if: steps.check.outputs.ok == 'true'
         # Drop the production CNAME so Surge does not try to publish to the
         # custom domain; --domain below selects the per-PR subdomain.
         run: rm -f target/roq/CNAME
 
       - name: Deploy to Surge
-        if: steps.check.outputs.ok == 'true'
         env:
           SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
@@ -71,7 +53,6 @@ jobs:
           surge ./target/roq "$PREVIEW_DOMAIN" --token "$SURGE_TOKEN"
 
       - name: Comment preview URL on the PR
-        if: steps.check.outputs.ok == 'true'
         uses: actions/github-script@v7
         with:
           script: |
@@ -97,15 +78,7 @@ jobs:
     if: github.event.action == 'closed'
     runs-on: ubuntu-latest
     steps:
-      - name: Check Surge token
-        id: check
-        env:
-          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
-        run: |
-          if [ -n "$SURGE_TOKEN" ]; then echo "ok=true" >> "$GITHUB_OUTPUT"; else echo "ok=false" >> "$GITHUB_OUTPUT"; fi
-
       - name: Tear down Surge preview
-        if: steps.check.outputs.ok == 'true'
         env:
           SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
