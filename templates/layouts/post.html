@@ -1,5 +1,52 @@
 ---
-theme-layout: post
+layout: default
 link: /:collection/:year-:month-:day-:name
 ---
-{#insert /}
+{#let author=page.data.get('author')}
+<div id="progress-display">
+  <div id="progress-over"></div>
+  <div id="progress-impend"></div>
+</div>
+
+<div class="post">
+  <div class="wrapper">
+    <div class="grid">
+      <section class="post__content">
+        <h1 class="post__title">{page.title}</h1>
+        <hr class="post__line">
+        <div class="author">
+          <div class="flexbox">
+            {#if author}
+              <img class="author__avatar author__avatar-lg" src="https://github.com/{author}.png" onerror="this.onerror=null;this.src='/images/elty.jpg'" alt="">
+              <a class="author__text" href="https://github.com/{author}">{author}</a>
+            {#else}
+              <img class="author__avatar author__avatar-lg" src="/images/elty.jpg" alt="">
+              <span class="author__text">Elty</span>
+            {/if}
+          </div>
+          <div class="flexbox">
+            <span></span>
+            <p class="author__date">{page.date.format('dd MMM yyyy')}</p>
+            <span></span>
+            <div class="author__time">
+              <p id="progress-time">{page.readTime}</p>
+              <p>&nbsp;min read</p>
+            </div>
+          </div>
+        </div>
+        <div class="flexbox ff-wrap">
+          {#for tag in page.data.attributes.tagList}
+            <a class="tag" href="/tags/{tag.slugify}">{tag}</a>
+          {/for}
+        </div>
+        <div class="post__cover">
+          <img src="{page.url}background.png" alt="" onerror="this.parentNode.classList.add('post__cover--empty');this.remove();">
+        </div>
+        <article id="progress-measure">{#insert /}</article>
+      </section>
+    </div>
+  </div>
+</div>
+
+<span class="scroll-up material-symbols-outlined">expand_less</span>
+{/let}

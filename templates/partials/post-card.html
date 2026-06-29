@@ -1,0 +1,26 @@
+{#let author=cardPost.data.get('author')}
+<a class="card" href="{cardPost.url}">
+  <div class="card__cover">
+    <img src="{cardPost.url}background.png" alt="" onerror="this.parentNode.classList.add('card__cover--empty');this.remove();">
+  </div>
+  <div class="card__infos">
+    <div class="author">
+      {#if author}
+        <img class="author__avatar" src="https://github.com/{author}.png" onerror="this.onerror=null;this.src='/images/elty.jpg'" alt="">
+        <p class="author__text">{author}</p>
+      {#else}
+        <img class="author__avatar" src="/images/elty.jpg" alt="">
+        <p class="author__text">Elty</p>
+      {/if}
+      <span></span>
+      <p class="author__date">{cardPost.date.format('dd MMM yyyy')}</p>
+    </div>
+    <p class="card__title">{cardPost.title}</p>
+    <div class="flexbox ff-wrap">
+      {#for tag in cardPost.data.attributes.tagList}
+        <object class="card__tag"><a class="tag" href="/tags/{tag.slugify}">{tag}</a></object>
+      {/for}
+    </div>
+  </div>
+</a>
+{/let}
