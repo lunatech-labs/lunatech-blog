@@ -146,6 +146,29 @@ left shared assets where they were. Then there was the long tail: spaces and
 percent-encoding in filenames, a Kubernetes `image:` line that looked like an
 AsciiDoc macro, and a few links that were already dead. Budget for the tail.
 
+== Rough edges worth reporting upstream
+
+Roq is young and moving fast, and the friendly thing to do after a migration like
+this is to feed the sharp edges back. These are the items we plan to file (or send
+a pull request for):
+
+* The literal-block `NullPointerException` in the pure-Java AsciiDoc parser.
+* The same crash on callout markers that have no callout list.
+* The `video::` macro being dropped without a warning.
+* Aliases not working for non-ASCII paths, and a colon in a path breaking route
+  registration at startup.
+* The generator aborting on the aliases plugin's own redirect routes during a build.
+* No published BOM to align the Roq core and plugin versions, so each one has to be
+  pinned by hand.
+* No warning when an unrecognised front matter key (such as `permalink` or `url`)
+  is silently ignored.
+* Documenting the permalink placeholders and the `link` key, the build-time nature
+  of the generator flag, and the difference between `static/` and `public/`.
+
+None of these were blockers. They are the kind of thing you only find by putting a
+real, slightly messy corpus through a tool, which is exactly why writing it down is
+worth the effort.
+
 == Would we do it again
 
 Yes. Roq is a good fit for an AsciiDoc blog you want to make static, and its URL
