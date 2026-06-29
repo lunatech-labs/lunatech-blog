@@ -13,7 +13,7 @@ paginate:
 <section class="p80-0 bg-gray">
   <div class="wrapper-lg">
     <h2>Latest articles</h2>
-    <p class="subtitle">Our most recent posts</p>
+    <p class="subtitle">The newest editions</p>
     <div class="grid">
       <div class="featured">
         {#include partials/post-card cardPost=posts.get(0) /}
@@ -30,8 +30,8 @@ paginate:
 
 <section class="p80-0">
   <div class="wrapper-lg">
-    <h2>All blog posts</h2>
-    <p class="subtitle">Browse our archive</p>
+    <h2>The Collection</h2>
+    <p class="subtitle">Browse the categories</p>
     <div class="card-list">
       {#for post in posts}
         {#include partials/post-card cardPost=post /}
