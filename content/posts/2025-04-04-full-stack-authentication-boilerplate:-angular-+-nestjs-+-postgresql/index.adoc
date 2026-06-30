@@ -17,7 +17,7 @@ v1.0, 2025-04-04
 :lang: en
 :tags: [angular, nestjs, postgresql, typeorm, jwt, authentication, frontend, typescript, nodejs]
 
-= A practical series for backend developers building secure full-stack apps
+== A practical series for backend developers building secure full-stack apps
 
 For backend developers who want to ship full-stack projects—without wrestling with frontend complexity.
 

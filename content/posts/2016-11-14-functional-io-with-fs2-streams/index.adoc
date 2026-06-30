@@ -85,7 +85,7 @@ Note that the above code doesn't read anything. We postpone it as much as possib
 
 In addition, `Stream[F[_], O]` is also a `Monad`, so we can do almost everything that we can do with a `Seq`. That is one argument why the FS2 is much more powerful than a builder-function `F[_] => O`.
 
-= Pulling
+== Pulling
 
 Another very useful and powerful functionality that FS2 supports is pulling. Sometimes we don't want to map over all the elements of an FS2Stream , but halt the process of mapping and end up with a smaller FS2Stream. We can implement that with the method `pull` defined on FS2Stream:
 

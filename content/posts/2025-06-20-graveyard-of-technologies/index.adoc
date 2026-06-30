@@ -169,7 +169,7 @@ The entire environment was built from objects, offering unprecedented dynamism a
 
 Yet, Smalltalk struggled with adoption due to performance issues, steep learning curves, and limited tooling outside its own ecosystem. While it remains influential in academic and niche circles, it was overshadowed by more pragmatic object-oriented languages that better integrated with mainstream operating systems and development workflows.
 
-= Hardware Nightmares: When Innovation Meets Market Reality
+== Hardware Nightmares: When Innovation Meets Market Reality
 
 Windows Phone, Google Glass, Microsoft Zune, and Netscape Navigator represent fascinating case studies of hardware and platforms that, despite their technical innovations, faced significant challenges in achieving lasting market success. Each offers valuable lessons about the complex relationship between technological capability and commercial viability.
 
@@ -197,7 +197,7 @@ Zune introduced innovative wireless sharing capabilities and social music discov
 
 However, the Zune suffered from classic late-mover disadvantages. By 2006, the iPod had already established itself as the dominant music player, with a mature ecosystem including iTunes and strong brand loyalty. Microsoft's device offered improvements like wireless sharing and a larger screen, but these incremental benefits weren't enough to overcome Apple's head start. Microsoft also struggled with marketing and brand positioning, lacking the sleek design aesthetic that made Apple products desirable.
 
-= Conclusion: Lessons in Technology Adoption
+== Conclusion: Lessons in Technology Adoption
 
 The histories of these varied technologies illustrate a critical lesson: technical merit alone is insufficient to guarantee market success. Whether it's a programming language like ALGOL that lacked commercial focus, a framework like Japronto whose benchmark performance was impractical for real-world use, or hardware like the Zune and Windows Phone that couldn't overcome established ecosystems, the pattern is consistent.
 
