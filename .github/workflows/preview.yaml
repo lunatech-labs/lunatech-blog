@@ -78,6 +78,7 @@ jobs:
     name: Tear down preview
     if: github.event.action == 'closed'
     runs-on: ubuntu-latest
+    permissions: {}
     steps:
       - name: Tear down Surge preview
         env:
