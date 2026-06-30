@@ -8,7 +8,6 @@ tags:
 VincentBrule
 v1.0, 2022-07-02
 :title: Sunny Tech 2022 (FR)
-:imagesdir: /media/2022-07-02-sunny-tech
 :lang: fr
 :tags: [conférence, sunny tech, montpellier]
 

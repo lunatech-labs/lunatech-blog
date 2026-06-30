@@ -53,7 +53,7 @@ First, check that you have the following pre-requisites:
 * a Servlet container, e.g. http://tomcat.apache.org/[Apache Tomcat]
 * a http://www.jboss.org/drools/downloads.html[Drools 5.0 Binaries]
 download.
-* the link:/media/2010-01-04-how-build-decision-service-using-jboss-rules-execution-server/pc-configuration.zip[pc-configuration.zip] source files for this example
+* the link:pc-configuration.zip[pc-configuration.zip] source files for this example
 
 Expand (i.e. unzip) the Drools Execution Server WAR and deploy it to the
 Servlet container.

@@ -10,7 +10,6 @@ tags:
 VincentBrule
 v1.0, 2022-06-06
 :title: Présentation de Cypress
-:imagesdir: /media/2022-06-06-introduction-cypress
 :lang: fr
 :tags: [test, cypress, web, js, ts]
 

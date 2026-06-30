@@ -10,7 +10,6 @@ tags:
 PeuTit
 v1.0, 2023-09-29
 :title: Meetup At The Rotterdam Office | Devoxx Try-out: Maintaining Maven at scale and Machine Learning in Java
-:imagedir: /media/2023-09-29-meetup-at-the-rotterdam-office
 :lang: en
 :tags: [java, ml, oss, devoxx, en]
 

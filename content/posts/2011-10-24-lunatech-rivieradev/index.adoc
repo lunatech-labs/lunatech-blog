@@ -33,7 +33,7 @@ team.
 == Play framework presentation slides
 
 Our presentation is available here:
-link:/media/2011-10-24-lunatech-rivieradev/play-2011-10-rivieradev.pdf[Play! Framework: To infinity and
+link:play-2011-10-rivieradev.pdf[Play! Framework: To infinity and
 beyond] (PDF).
 
 PS: I left my phone in Rotterdam, so although it was nice and quiet, I

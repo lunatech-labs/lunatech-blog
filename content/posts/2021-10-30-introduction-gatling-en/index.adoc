@@ -8,7 +8,6 @@ tags:
 VincentBrule
 v1.0, 2021-10-30
 :title: Load testing with Gatling
-:imagesdir: /media/2021-10-30-introduction-gatling
 :lang: en
 :tags: [gatling, load testing, opensource]
 
