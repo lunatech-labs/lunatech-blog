@@ -5,8 +5,6 @@ tags:
 = Official Government Publications - ODF Plugfest presentation
 wjkveen
 v1.0, 2011-11-21
-:title: Official Government Publications - ODF Plugfest presentation
-:tags: [event]
 
 Last
 week Willem-Jan Veen, senior developer at Lunatech Research, gave a

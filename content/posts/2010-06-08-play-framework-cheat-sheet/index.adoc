@@ -6,8 +6,6 @@ tags:
 = Play framework 1.0 cheat sheet
 PeterHilton
 v1.0, 2010-06-08
-:title: Play framework 1.0 cheat sheet
-:tags: [playframework,java]
 
 Now that you are getting started with the
 http://www.playframework.org/[Play framework] 1.0, you need a handy

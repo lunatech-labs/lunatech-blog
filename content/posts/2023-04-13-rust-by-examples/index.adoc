@@ -7,9 +7,7 @@ tags:
 = Rust by examples, for a Java developer
 mcsuka
 v1.0, 2023-04-13
-:title: Rust by examples, for a Java developer
 :lang: en
-:tags: [rust, java, scala]
 
 :toc:
 

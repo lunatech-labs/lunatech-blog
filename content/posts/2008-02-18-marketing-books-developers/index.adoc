@@ -6,8 +6,6 @@ tags:
 = Marketing books for developers
 hilton
 v1.0, 2008-02-18
-:title: Marketing books for developers
-:tags: [opinion,book]
 
 To a software developer, 'marketing' is more likely to be a department
 that another kind of people belong to, than an activity that everyone

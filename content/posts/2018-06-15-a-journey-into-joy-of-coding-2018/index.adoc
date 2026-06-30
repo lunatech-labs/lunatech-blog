@@ -5,8 +5,6 @@ tags:
 = A journey into Joy of Coding  2018
 Antoine Laffez
 v1.0, 2018-06-15
-:title: A journey into Joy of Coding  2018
-:tags: [event]
 
 On the 8th of June, the "Joy of Coding conference” was held in De Doelen, Rotterdam. The format of this conference was completely different from conventional IT conferences. Unlike most of her sisters, Joy of Coding is not dedicated to a programming language or very precise topics such as JVM, Big-data, Cloud etc... This moment is 100% dedicated to developers. 250 of them had the chance to attend.
 

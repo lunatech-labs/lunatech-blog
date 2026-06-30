@@ -6,8 +6,6 @@ tags:
 = Riviera JUG news
 FroMage
 v1.0, 2011-08-15
-:title: Riviera JUG news
-:tags: [event,java]
 
 
 If you are one of the +600 people who came to one of

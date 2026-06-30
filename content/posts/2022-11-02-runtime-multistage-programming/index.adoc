@@ -6,9 +6,7 @@ tags:
 = Custom JIT compilation with Runtime Multi-Stage Programming
 markehammons
 v1.0, 2022-11-02
-:title: Custom JIT compilation with Runtime Multi-Stage Programming
 :lang: en
-:tags: [slinc, scala]
 
 For a while now I've been fiddling with a library called https://github.com/markehammons/slinc[Slinc], a way to link C code in Scala.
 Since my original version, I've been using context values, macros, and other tools to generate code for writing and reading representations of Structs into and out of native memory.

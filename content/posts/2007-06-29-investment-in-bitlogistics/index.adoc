@@ -5,8 +5,6 @@ tags:
 = Investment in BitLogistics Ltd. 
 Michael Pentowski
 v1.0, 2007-06-29
-:title: Investment in BitLogistics Ltd. 
-:tags: [ventures]
 
 BitLogistics Ltd, a provider solutions for
 monitoring and managing supply chains, has secured undisclosed amount of

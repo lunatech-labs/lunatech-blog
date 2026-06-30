@@ -6,8 +6,6 @@ tags:
 = A journey to ScalaCheck
 mariadroman
 v1.0, 2016-09-12
-:title: A journey to ScalaCheck
-:tags: [scala,test]
 
 From the Spanish good weather to the Dutch every-possible-weather-in-one-day, from Waterfall to Agile, from just testing to property based testing. The path I took when joining Lunatech was an interesting one.
 

@@ -7,8 +7,6 @@ tags:
 = Syntactically correct and type-safe JPA queries in Play 2.0
 leonardpunt
 v1.0, 2012-04-16
-:title: Syntactically correct and type-safe JPA queries in Play 2.0
-:tags: [playframework,java,jpa]
 
 When writing a Play 2.0 Java web application it is likely you’re not only persisting data, you also want to retrieve your persisted data. One of the options is using the Java Persistence API (JPA), version 2. When using JPA, there are several ways to read data from your database. In this article we’ll explain three different approaches, and we’ll discuss the syntax correctness and type-safety of the approaches.
 

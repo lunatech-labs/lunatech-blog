@@ -7,8 +7,6 @@ tags:
 = Play framework 1.2 file upload with play.db.jpa.Blob
 PeterHilton
 v1.0, 2011-04-26
-:title: Play framework 1.2 file upload with play.db.jpa.Blob
-:tags: [playframework,json,java]
 
 This article describes how to use the http://www.playframework.org/[Play framework]’s built-in features for
 handling HTTP file uploads and saving the data in files on the server’s

@@ -13,9 +13,7 @@ tags:
 = Part 3: Frontend Setup with Angular
 jakeortega
 v1.0, 2025-05-06
-:title: Part 3: Frontend Setup with Angular
 :lang: en
-:tags: [angular, nestjs, postgresql, typeorm, jwt, authentication, frontend, typescript, nodejs]
 
 Now that we’ve built our NestJS backend with secure JWT auth, it’s time
 to wire up the frontend. In this part, we’ll scaffold an *Angular* app,

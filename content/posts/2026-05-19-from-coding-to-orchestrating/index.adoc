@@ -9,9 +9,7 @@ tags:
 = From Coding to Orchestrating: The New Role of the Software Engineer
 pepite
 v1.0, 2026-05-19
-:title: From Coding to Orchestrating: The New Role of the Software Engineer
 :lang: en
-:tags: [software engineering, AI orchestration, context quality, spec-driven development, en]
 
 
 There is a widespread fantasy about AI in software development. It goes like this: you tell the AI to rewrite your entire banking system in Kotlin, press a button, go to lunch, and come back to a perfect application.

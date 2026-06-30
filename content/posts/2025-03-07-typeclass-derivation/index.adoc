@@ -9,8 +9,6 @@ tags:
 = Mastering Typeclass Derivation with Scala 3
 nMoncho
 2025-03-07
-:title: Mastering Typeclass Derivation with Scala 3
-:tags: [scala, typeclass, metaprogramming, we-know-scala, scala-lujah]
 
 
 == Polymorphism

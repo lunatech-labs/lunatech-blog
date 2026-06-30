@@ -6,8 +6,6 @@ tags:
 = Using the iPhone as internet link while on vacation
 FroMage
 v1.0, 2009-11-13
-:title: Support for original language in Accept-Language header
-:tags: [opinion,fun]
 
 This year I bit the bullet and got myself rid of a
 decade-old relationship with Nokia to get a phone with a good Internet

@@ -13,9 +13,7 @@ tags:
 = Part 2: Backend Setup with NestJS
 jakeortega
 v1.0, 2025-04-22
-:title: Part 2: Backend Setup with NestJS
 :lang: en
-:tags: [angular, nestjs, postgresql, typeorm, jwt, authentication, frontend, typescript, nodejs]
 
 With our project vision and stack laid out in Part 1, it’s time to build the
 backend.

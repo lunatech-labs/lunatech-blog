@@ -5,8 +5,6 @@ tags:
 = Paranoid configuration - tamper-proof text
 hilton
 v1.0, 2005-07-17
-:title: Paranoid configuration - tamper-proof text
-:tags: [java]
 ifdef::backend-html5[]
 :in-between-width: width='85%'
 :half-width: width='50%'

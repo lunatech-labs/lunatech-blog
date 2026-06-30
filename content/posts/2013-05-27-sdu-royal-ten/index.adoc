@@ -5,8 +5,6 @@ tags:
 = Sdu Royal Ten - 10km business run
 wjkveen
 v1.0, 2013-05-27
-:title: Sdu Royal Ten - 10km business run
-:tags: [event]
 
 On Sunday, May 26th, a Lunatech team participated in the Sdu Royal Ten business run
 

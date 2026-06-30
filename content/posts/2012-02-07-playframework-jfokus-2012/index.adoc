@@ -7,8 +7,6 @@ tags:
 = Lunatech presents Play at Jfokus 2012
 hilton
 v1.0, 2012-02-07
-:title: Lunatech presents Play at Jfokus 2012
-:tags: [event,playframework,scala]
 
 Next week,
 on 14 February 2012, Peter Hilton will present http://www.jfokus.se/jfokus/talks.jsp?lang=en#Play%20Framework%202.0[Play Framework

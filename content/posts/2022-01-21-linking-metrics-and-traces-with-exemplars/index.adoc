@@ -9,9 +9,7 @@ tags:
 = Linking metrics and traces with Exemplars
 leo-bogastry
 v1.0, 2022-01-27
-:title: Linking metrics and traces with Exemplars
 :lang: en
-:tags: [grafana, prometheus, exemplars, scala, docker-compose]
 
 What if you could easily link a metric with a trace? And what if I told you that you can do it visually?
 Meet Exemplars. They are displayed as diamonds in the graph shown below.

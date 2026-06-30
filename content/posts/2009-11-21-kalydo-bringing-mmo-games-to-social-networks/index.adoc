@@ -6,8 +6,6 @@ tags:
 = Kalydo bringing MMO games to Social Networks
 Michael Pentowski
 v1.0, 2009-11-21
-:title: Kalydo bringing MMO games to Social Networks
-:tags: [event,ventures]
 
 Game Entertainment Europe, publisher
 of Online games and Eximion, developer of the Kalydo 3D browser game

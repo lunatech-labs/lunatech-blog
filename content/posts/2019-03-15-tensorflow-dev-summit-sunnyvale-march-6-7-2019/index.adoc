@@ -6,8 +6,6 @@ tags:
 = Tensorflow Dev Summit, Sunnyvale March 6-7 2019
 Xavier Tordoir
 v1.0, 2019-03-15
-:title: Tensorflow Dev Summit, Sunnyvale March 6-7 2019
-:tags: [event,tenserflow]
 
 Having been working on some projects with Tensorflow at Lunatech, we could get an invite for the dev summit at the Google Event Center in Sunnyvale.
 

@@ -7,8 +7,6 @@ tags:
 = Benelux JBoss User Group, 27 February 2009
 pepite
 v1.0, 2009-02-03
-:title: Benelux JBoss User Group, 27 February 2009
-:tags: [java,event,jbug]
 
 We would like to invite you to our **fifth Benelux
 JBoss User Group meeting**: an evening of free technical sessions

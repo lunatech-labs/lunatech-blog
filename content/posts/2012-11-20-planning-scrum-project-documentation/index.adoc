@@ -6,8 +6,6 @@ tags:
 = Planning Scrum project documentation
 hilton
 v1.0, 2012-11-20
-:title: Planning Scrum project documentation
-:tags: [scrum,methodology]
 
 A Scrum team and external
 stakeholders must agree how much time to spend on documentation; ‘none’

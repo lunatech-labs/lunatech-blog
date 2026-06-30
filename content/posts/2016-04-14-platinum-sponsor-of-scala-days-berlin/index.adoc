@@ -5,8 +5,6 @@ tags:
 = Platinum sponsor of Scala Days Berlin
 fcanedo
 v1.0, 2016-04-14
-:title: Platinum sponsor of Scala Days Berlin
-:tags: [event]
 
 Lunatech is proud to be a http://event.scaladays.org/scaladays-berlin-2016#05-Sponsors[platinum sponsor for Scala Days Berlin 2016]. This year Lunatech is taking the whole team to Scala Days Berlin.
 

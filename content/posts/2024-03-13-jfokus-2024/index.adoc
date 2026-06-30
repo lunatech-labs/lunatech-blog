@@ -9,9 +9,7 @@ tags:
 = JFokus 2024
 jdijt
 v1.0, 2024-03-13
-:title: JFokus 2024
 :lang: en
-:tags: [conference, stockholm, sweden, java, jfokus]
 
 Recently myself and two other Lunatech colleagues had the opportunity to visit JFokus.
 JFokus is a conference that is held annually in the first week of February in Stockholm, Sweden. 

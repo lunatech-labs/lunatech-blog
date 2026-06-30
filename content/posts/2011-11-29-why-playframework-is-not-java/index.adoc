@@ -6,8 +6,6 @@ tags:
 = Why Play isn’t a Java web framework
 hilton
 v1.0, 2011-11-29
-:title: Why Play isn’t a Java web framework
-:tags: [java,playframework]
 
 Play isn’t really a Java
 web framework. Java’s involved, but that isn’t the whole story.

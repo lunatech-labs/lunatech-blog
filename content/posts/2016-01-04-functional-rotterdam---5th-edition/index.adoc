@@ -5,8 +5,6 @@ tags:
 = Functional Rotterdam - 5th Edition
 VijayKiran
 v1.0, 2016-01-04
-:title: Functional Rotterdam - 5th Edition
-:tags: [event]
 
 Every first Tuesday of the month, at Lunatech we are organize a meetup focussed on Functional Programming. Tomorrow is the 5th edition of the event. You can join the fun by going to our http://www.meetup.com/Functional-Rotterdam/[meetup page].
 

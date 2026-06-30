@@ -5,8 +5,6 @@ tags:
 = Books for software developers
 hilton
 v1.0, 2006-06-28
-:title: Books for software developers
-:tags: [opinion]
 
 Software developers' use of books varies widely, which is no surprise, but many programmers never read books of any kind. This is a mistake, because there are books we should all read: a good book is still the best way to quickly get a coherent detailed explanation of a complex topic, and no web site comes close to the books on this page.
 

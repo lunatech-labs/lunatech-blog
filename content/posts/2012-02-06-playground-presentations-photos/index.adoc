@@ -7,8 +7,6 @@ tags:
 = February Play!ground presentations and photos
 hilton
 v1.0, 2012-02-06
-:title: February Play!ground presentations and photos
-:tags: [event,playframework,playground]
 
 On
 3 February 2012, Lunatech hosted a Play!ground event at Paddy Murphy’s

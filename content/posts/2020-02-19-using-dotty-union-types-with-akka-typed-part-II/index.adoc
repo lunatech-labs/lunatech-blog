@@ -7,8 +7,6 @@ tags:
 = Using Dotty Union types with Akka Typed - Part II
 eloots
 v1.0, 2020-02-19
-:title: Using Dotty Union types with Akka Typed - Part II
-:tags: [dotty, akka, scala]
 
 == Introduction
 

@@ -14,9 +14,7 @@ tags:
 = Streams in Scala - An Introductory Guide
 zanio
 v1.0, 2023-07-28
-:title: Streams in Scala - An Introductory Guide
 :lang: en
-:tags: [streams, scala-streams, LazyList, fs2, akka-streams, scala, zio-streams, call-by-name, reactive-stream, back-pressure]
 
 
 == Why Streams

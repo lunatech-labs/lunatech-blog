@@ -8,8 +8,6 @@ tags:
 = Benelux JBoss User Group, 20 June 2008
 pepite
 v1.0, 2008-05-16
-:title: Benelux JBoss User Group, 20 June 2008
-:tags: [java,jboss,jbug,event]
 
 
 We would like to invite you to our fourth Benelux JBoss User

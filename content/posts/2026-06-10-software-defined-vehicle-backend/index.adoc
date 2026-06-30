@@ -12,9 +12,7 @@ tags:
 = The software-defined vehicle moves the work to the backend
 peutit
 v2.0, 2026-06-10
-:title: The software-defined vehicle moves the work to the backend
 :lang: en
-:tags: [eclipse-sdv, rust, kuksa, hawkbit, mqtt, axum, software-defined-vehicle, open-source]
 
 A modern car is a computer that happens to have wheels. The interesting code no longer lives in the engine bay. It lives on a server, talking to the vehicle over the network, deciding what the fleet knows and what each car runs next. The industry calls this the software-defined vehicle. The name hides where the real engineering goes: into the backend.
 

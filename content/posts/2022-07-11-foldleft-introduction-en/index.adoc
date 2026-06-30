@@ -8,9 +8,7 @@ tags:
 = Traversing collections with foldLeft and foldRight
 ggarvanese
 v1.0, 2022-07-11
-:title: Browsing collections with foldLeft and foldRight
 :lang: en
-:tags: [fold, iteration, functional, scala]
 
 
 Some time ago, I was asked to develop a small algorithm for my project. It involved going through all the frames of a video sequence to determine which manually applied label occupied the most frames within that sequence. This exercise allowed me to (re)discover a function that I rarely use on a daily basis, the foldLeft (and its corollary, the foldRight). 

@@ -7,8 +7,6 @@ tags:
 = Getting a list of time zones in Java and Seam
 hilton
 v1.0, 2008-12-20
-:title: Getting a list of time zones in Java and Seam
-:tags: [web-applications,jboss,seam]
 
 
 If you are building a web application

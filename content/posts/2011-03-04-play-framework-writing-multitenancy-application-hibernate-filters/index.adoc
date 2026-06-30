@@ -6,8 +6,6 @@ tags:
 = Play Framework 1.2 - Writing a Multitenancy Application with Hibernate Filters
 eamelink
 v1.0, 2011-03-04
-:title: Play Framework 1.2 - Writing a Multitenancy Application with Hibernate Filters
-:tags: [playframework,hibernate]
 
 This article describes a method to simplify the
 construction of a Play 1.2 application with multiple users that have

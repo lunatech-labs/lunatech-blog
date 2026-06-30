@@ -6,8 +6,6 @@ tags:
 = How to build a decision service using JBoss Rules Execution Server
 PeterHilton
 v1.0, 2010-01-04
-:title: How to build a decision service using JBoss Rules Execution Server
-:tags: [java,drools]
 
 This
 article shows you exactly how to get this working, with example rules -

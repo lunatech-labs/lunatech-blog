@@ -7,9 +7,7 @@ tags:
 = API Automation Testing Tools, a comparison
 TehreemFatima07
 v1.0, 2023-06-05
-:title: API Automation Testing Tools, a comparison
 :lang: en
-:tags: [api, test automation, testing techniques]
 
 
 Internal projects at Lunatech play a crucial role in fostering growth, innovation, and knowledge-sharing between employees. These projects serve as the sandbox where new joiners are given the opportunity to explore, learn, and contribute in a hands-on manner.

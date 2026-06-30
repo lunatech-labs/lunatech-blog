@@ -6,8 +6,6 @@ tags:
 = Chocolate cocktails: brain food for after work
 hilton
 v1.0, 2005-09-23
-:title: Chocolate cocktails: brain food for after work
-:tags: [opinion, fun]
 ifdef::backend-html5[]
 :in-between-width: width='85%'
 :half-width: width='50%'

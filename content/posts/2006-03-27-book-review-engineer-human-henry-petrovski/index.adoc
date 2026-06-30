@@ -5,8 +5,6 @@ tags:
 = Book review - To Engineer Is Human, Henry Petrovski
 hilton
 v1.0, 2006-03-27
-:title: Book review - To Engineer Is Human, Henry Petrovski
-:tags: [opinion]
 
 Taking a break from http://hilton.org.uk/computer_books.phtml[computer books] and other distractions, I recently read http://www.amazon.co.uk/exec/obidos/ASIN/0679734163/[To Engineer Is Human: The Role of Failure in Successful Design], by Henry Petroski. Since I occasionally get into arguments about whether software development is a kind of engineering (it isn't), I thought it would be interesting to read some more about civil engineering.
 

@@ -5,8 +5,6 @@ tags:
 = The programmer’s private office
 hilton
 v1.0, 2008-07-22
-:title: The programmer’s private office
-:tags: [working-environment]
 
 
 In http://blog.stackoverflow.com/index.php/2008/05/podcast-7/[StackOverflow Podcast

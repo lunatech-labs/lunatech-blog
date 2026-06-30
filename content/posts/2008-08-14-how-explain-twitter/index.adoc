@@ -6,8 +6,6 @@ tags:
 = How to explain Twitter
 hilton
 v1.0, 2008-08-14
-:title: How to explain Twitter
-:tags: [opinion,fun]
 
 After ignoring
 http://twitter.com/[Twitter] at first, my curiosity about a new

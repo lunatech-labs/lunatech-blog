@@ -40,8 +40,8 @@ link: /:collection/:year-:month-:day-:name
           </div>
         </div>
         <div class="flexbox ff-wrap">
-          {#for tag in page.data.attributes.tagList}
-            <a class="tag" href="/tags/{tag.slugify}">{tag}</a>
+          {#for tag in page.data.get('tags')}
+            <a class="tag" href="/tags/{tag.toLowerCase.slugify}">{tag}</a>
           {/for}
         </div>
         <div class="post__cover">

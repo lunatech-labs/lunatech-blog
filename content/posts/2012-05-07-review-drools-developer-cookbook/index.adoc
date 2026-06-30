@@ -6,8 +6,6 @@ tags:
 = Review - Drools Developer’s Cookbook
 hilton
 v1.0, 2012-05-06
-:title: Review - Drools Developer’s Cookbook
-:tags: [drools,books]
 
 This article is a review of http://www.packtpub.com/drools-developers-using-jboss-cookbook/book[Drools Developer’s Cookbook], a new book from Pack Publishing’s Open Source brand by http://lucazamador.wordpress.com/[Lucas Amador], based on Drools 5.2.0-Final.
 

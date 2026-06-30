@@ -7,8 +7,6 @@ tags:
 = Automatic resource link discovery with RESTEasy and Atom links
 FroMage
 v1.0, 2010-04-19
-:title: Automatic resource link discovery with RESTEasy and Atom links
-:tags: [resteasy,java,rest]
 
 
 This

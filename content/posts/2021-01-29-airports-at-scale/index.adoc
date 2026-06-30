@@ -9,8 +9,6 @@ tags:
 = Airports at Scale
 nMoncho
 v1.0, 2020-01-29
-:title: Airports at Scale
-:tags: [database, nosql, big data, modelling, programming]
 
 == Assessing NoSQL Databases
 

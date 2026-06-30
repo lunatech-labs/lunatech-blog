@@ -6,8 +6,6 @@ tags:
 = Moving From Java To Scala 
 JMCeron
 v1.0, 2016-08-17
-:title: Moving From Java To Scala 
-:tags: [java,scala]
 
 Sometime ago I came from Madrid to Rotterdam to join Lunatech’s international workforce. Apart from introducing me to Dutch summers (rain), this also gave me an opportunity to learn a new programming language: Scala. 
 

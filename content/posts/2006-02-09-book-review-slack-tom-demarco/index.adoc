@@ -5,8 +5,6 @@ tags:
 = Book review - Slack, Tom Demarco
 hilton
 v1.0, 2006-02-09
-:title: Book review - Slack, Tom Demarco
-:tags: [opinion]
 
 
 I have just read http://www.atlsysguild.com/GuildSite/TDM/Slackpage.html[Slack: getting past burnout, busywork and the myth of total efficiency], by Tom DeMarco, which I spotted on Joel Spoelsky's http://www.joelonsoftware.com/articles/FogCreekMBACurriculum.html[software management reading list]. *Slack* is an excellent book that makes its points clearly and briefly, avoiding hundreds of pages of management consultant waffle."

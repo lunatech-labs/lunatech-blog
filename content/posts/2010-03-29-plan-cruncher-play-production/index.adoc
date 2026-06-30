@@ -6,8 +6,6 @@ tags:
 = Plan Cruncher - Play! in production
 PeterHilton
 v1.0, 2010-03-29
-:title: Plan Cruncher - Play! in production
-:tags: [playframework,web-applications]
 
 
 At

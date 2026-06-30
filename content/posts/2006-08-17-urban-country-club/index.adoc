@@ -5,8 +5,6 @@ tags:
 = The Urban Country Club
 Michael Pentowski
 v1.0, 2006-08-17
-:title: The Urban Country Club
-:tags: [fun]
 
 
 I'd like to tell you about the http://www.urbancountryclub.nl/[Urban Country Club], but I am not sure if I can. It is an invite only network club in Rotterdam, where members can invite one new member, but only if they don't know them. Or something like that. That said, membership can't be too exclusive as they let me in. Perhaps they needed a token IT company as the rest of the people are very creative, coming from the arts, film, madvertising and the like.

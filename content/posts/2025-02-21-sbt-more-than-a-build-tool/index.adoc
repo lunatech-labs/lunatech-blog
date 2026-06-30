@@ -10,9 +10,7 @@ tags:
 = SBT: More than a Build Tool
 DockerIsBAd
 v1.0, 2025-02-21
-:title: SBT: More than a Build Tool
 :lang: en
-:tags: [sbt, build-tool, scala, jvm, we-know-scala, scala-lujah]
 
 == Introduction
 

@@ -5,8 +5,6 @@ tags:
 = Ant and manifests
 fanedo
 v1.0, 2007-04-20
-:title: Ant and manifests
-:tags: [java]
 
 
 When you build an exploded J2EE package such as a .war or .ear, you may need to create a manifest file. This can be quite tricky, since the format of the manifest file is such that it is easy to get it wrong. Furthermore, some errors may cause your application to fail in mysterious ways.

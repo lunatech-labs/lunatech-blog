@@ -12,9 +12,7 @@ tags:
 = LunaBet: shipping a Panini-style World Cup pool in Rust, in an afternoon
 pepite
 v1.0, 2026-05-30
-:title: LunaBet: shipping a Panini-style World Cup pool in Rust, in an afternoon
 :lang: en
-:tags: [rust, axum, htmx, three.js, world cup, side project, ai orchestration, en]
 
 
 Every four years the same conversation happens in our Lunatech Slack: who is going to run the office pool for the World Cup? Every four years someone says "I will do it in a spreadsheet", and every four years that spreadsheet ends up as a corrupted Google Sheet with three formulas fighting over the same cell. So this time, between two cups of coffee, I decided to build the thing properly. The result is https://lunabet.eu[LunaBet], and the Lunatech-internal instance lives at https://lunatech.lunabet.eu[lunatech.lunabet.eu].

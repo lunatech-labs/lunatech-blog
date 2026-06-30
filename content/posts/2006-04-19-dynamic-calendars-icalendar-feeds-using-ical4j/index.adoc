@@ -6,8 +6,6 @@ tags:
 = Dynamic calendars - iCalendar feeds using iCal4J
 hilton
 v1.0, 2006-04-19
-:title: Dynamic calendars - iCalendar feeds using iCal4J
-:tags: [java,web-applications]
 
 After using http://en.wikipedia.org/wiki/Icalendar[iCalendar]to publish and subscribe to various calendars from various computers, I starting thinking about http://en.wikipedia.org/wiki/RSS_%28file_format%29[RSS]. Although RSS was originally designed to share news headlines between web sites, it quickly became clear that you can combine RSS feeds and newsreader software to solve unrelated software problems, hence the great explosion of RSS use that has nothing to do with 'news'. iCalendar is going to be the same.
 

@@ -6,8 +6,6 @@ tags:
 = If Scala Is Functional, Why Cannot Java?!
 Andrea Guigliano
 v1.0, 2018-03-26
-:title: If Scala Is Functional, Why Cannot Java?!
-:tags: [fp,java]
 
 At work a lot of people use Java and the Object Oriented paradigm. The cool thing is that the very same people fill our functional programming Meetups. Most likely they would like to learn this programming paradigm that is little by little changing the Java-universe.
 

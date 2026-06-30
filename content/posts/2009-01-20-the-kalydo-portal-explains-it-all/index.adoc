@@ -6,8 +6,6 @@ tags:
 = The Kalydo Portal Explains it All
 kaas
 v1.0, 2009-01-20
-:title:The Kalydo Portal Explains it All
-:tags: [ventures,confluence]
 
 Should you have gotten lost somewhat in all the exciting stuff [Eximion](http://www.eximion.com/) has done lately, then
 go to their new portal site [http://portal.kalydo.com/](http://portal.kalydo.com/). Clarity. We love

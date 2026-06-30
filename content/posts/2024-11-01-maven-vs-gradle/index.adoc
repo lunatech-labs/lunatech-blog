@@ -9,9 +9,7 @@ tags:
 = Maven vs Gradle Navigating the World of Java Build Tools
 vanny96
 v1.0, 2024-11-01
-:title: Maven vs Gradle Navigating the World of Java Build Tools
 :lang: en
-:tags: [java, maven, gradle, java-vs-world, java-over-java]
 
 This is the first of a series of articles for Lunatech's *Java over Java* series. A seasonal occurrence
 where we pick a topic for a month and hold a series of presentations and articles about it. This season's topic

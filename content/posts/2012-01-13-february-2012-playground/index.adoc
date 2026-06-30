@@ -7,8 +7,6 @@ tags:
 = February 2012 Play!ground at Paddy Murphy’s
 hilton
 v1.0, 2012-01-13
-:title: February 2012 Play!ground at Paddy Murphy’s
-:tags: [event,playframework,playground]
 
 By
 popular demand, we have arranged a bigger location for next month’s

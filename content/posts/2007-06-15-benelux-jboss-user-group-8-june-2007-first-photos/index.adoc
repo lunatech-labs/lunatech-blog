@@ -7,8 +7,6 @@ tags:
 = Benelux JBoss User Group, 8 June 2007 - first photos 
 evelienket
 v1.0, 2007-06-15
-:title: Benelux JBoss User Group, 8 June 2007 - first photos
-:tags: [java,jbug,jboss]
 
 On 8 June, we hosted https://blog.lunatech.com/posts/2007-05-24-jboss-benelux-user-group-8-june-2007[our first JBoss User Group
 meeting] for this part

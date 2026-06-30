@@ -8,8 +8,6 @@ tags:
 = Pitfalls in Kryo Serialization
 nMoncho
 2022-01-03
-:title: Pitfalls in Kryo Serialization
-:tags: [scala,java,serialization,benchmark]
 
 
 For one of our projects we serialize information coming from IoT devices into a Kafka topic, which

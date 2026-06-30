@@ -6,8 +6,6 @@ tags:
 = JSF-Facelets custom date converter
 hilton
 v1.0, 2007-06-13
-:title: JSF-Facelets custom date converter
-:tags: [java,jsf]
 
 This article describes how to implement a custom
 converter in JavaServer Faces (JSF) and Facelets that formats dates

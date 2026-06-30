@@ -5,8 +5,6 @@ tags:
 = RivieraDEV - the official pictures
 pepite
 v1.0, 2011-10-25
-:title: RivieraDEV - the official pictures
-:tags: [event]
 
 Thanks to http://touilleur-express.fr[Nicolas
 Martignole] I can now show some pictures

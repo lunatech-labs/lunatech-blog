@@ -7,8 +7,6 @@ tags:
 = Seam in action - JavaPolis presentation
 hilton
 v1.0, 2007-12-14
-:title: Seam in action - JavaPolis presentation
-:tags: [java,jboss,seam]
 
 This week Peter Hilton
 and Nicolas Leroux, senior software developers at Lunatech Research,

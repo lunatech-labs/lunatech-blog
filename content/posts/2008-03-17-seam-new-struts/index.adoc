@@ -7,8 +7,6 @@ tags:
 = Seam is the new Struts
 hilton
 v1.0, 2008-03-17
-:title: Seam is the new Struts
-:tags: [java,seam,opinion]
 
 
 After Nicolas and I said that

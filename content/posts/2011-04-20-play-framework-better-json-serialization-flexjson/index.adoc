@@ -7,8 +7,6 @@ tags:
 = Play Framework 1.2 - Better JSON serialization with FlexJSON
 eamelink
 v1.0, 2011-04-20
-:title: Play Framework 1.2 - Better JSON serialization with FlexJSON
-:tags: [playframework,json,java]
 
 
 When writing rich interfaces, you often have to generate a JSON

@@ -6,8 +6,6 @@ tags:
 = How to demo the Play framework 1.2 - live coding script
 PeterHilton
 v1.0, 2010-06-08
-:title: How to demo the Play framework 1.2 - live coding script
-:tags: [playframework,java]
 
 If you want
 someone to know how fast and straightforward it is to build a Java web

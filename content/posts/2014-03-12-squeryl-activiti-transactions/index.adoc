@@ -7,8 +7,6 @@ tags:
 = Managing database transactions with Squeryl and Activiti
 eamelink
 v1.0, 2014-03-12
-:title: Managing database transactions with Squeryl and Activiti
-:tags: [scala,squeryl,activiti]
 
 There are different ways you can use database transactions with business processes in Activiti. This article explains the options when using Scala and Squeryl.
 

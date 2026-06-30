@@ -6,8 +6,6 @@ tags:
 = Struts URLs for perfectionists
 hilton
 v1.0, 2005-07-29
-:title: Struts URLs for perfectionists
-:tags: [java,struts]
 ifdef::backend-html5[]
 :in-between-width: width='85%'
 :half-width: width='50%'

@@ -7,8 +7,6 @@ tags:
 = Apache Spark for Scala Training - 2nd Session at Lunatech
 Antoine Laffez
 v1.0, 2018-02-05
-:title: Apache Spark for Scala Training - 2nd Session at Lunatech
-:tags: [event,scala,spark]
 
 After https://www.linkedin.com/in/xavier-tordoir-ba95b673/[Xavier Tordoir] from http://kensu.io[Kensu], https://www.linkedin.com/in/andypetrella/[Andy Petrella] joined our offices to do a second “Lightbend Spark for scala-Professional course”. As introduced 2 weeks ago this course allows Full Stack Developers and DevOps to dive into the world of modern Data Analytics.
 

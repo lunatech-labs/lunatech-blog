@@ -5,8 +5,6 @@ tags:
 = A Journey Into Google Cloud At Devoxx
 Xavier Tordoir
 v1.0, 2018-11-19
-:title: A Journey Into Google Cloud At Devoxx
-:tags: [event]
 
 Visiting Devoxx with Lunatech Team, Xavier Tordoir, Data scientist at Lunatech tried the Google Cloud platform exercises at Google booth:
 

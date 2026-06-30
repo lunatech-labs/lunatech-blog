@@ -6,8 +6,6 @@ tags:
 = Functional Rotterdam -10-
 Antoine Laffez
 v1.0, 2016-06-20
-:title: Functional Rotterdam -10-
-:tags: [fp,event]
 
 Just a reminder, this Thursday. the 23rd of June, Lunatech is hosting the monthly Functional Rotterdam even
 

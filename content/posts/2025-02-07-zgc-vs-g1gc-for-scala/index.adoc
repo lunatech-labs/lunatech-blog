@@ -12,9 +12,7 @@ tags:
 = ZGC vs G1GC for Scala
 utkuaydn
 v1.0, 2025-02-07
-:title: ZGC vs G1GC for Scala
 :lang: en
-:tags: [zgc, gen-zgc, g1, g1gc, scala, jvm, we-know-scala, scala-lujah]
 
 == Introduction
 

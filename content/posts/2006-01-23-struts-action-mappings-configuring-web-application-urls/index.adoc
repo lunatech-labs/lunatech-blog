@@ -7,8 +7,6 @@ tags:
 = Struts Action Mappings - configuring web application URLs
 hilton
 v1.0, 2006-01-23
-:title:  Struts Action Mappings - configuring web application URLs
-:tags: [java,web-applications,struts]
 
 
 

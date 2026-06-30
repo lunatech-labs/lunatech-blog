@@ -5,8 +5,6 @@ tags:
 = Lunatech blog retrospective - 2010
 hilton
 v1.0, 2014-06-10
-:title: Blog retrospective 2010
-:tags: [blog]
 
 2010 was the year we really started getting into the Play Framework, 
     and stopped having to battle JSF. This was a Good Thing.

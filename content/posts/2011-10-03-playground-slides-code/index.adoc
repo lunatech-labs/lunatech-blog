@@ -6,8 +6,6 @@ tags:
 = Play!ground presentation slides & code
 hilton
 v1.0, 2011-10-03
-:title: Play!ground presentation slides & code
-:tags: [event,playframework]
 
 
 On

@@ -6,8 +6,6 @@ tags:
 = Localized Play framework 1.0 validation messages
 PeterHilton
 v1.0, 2010-09-28
-:title: Localized Play framework 1.0 validation messages
-:tags: [playframework,java]
 
 My
 previous Play framework 1.0 article discussed https://blog.lunatech.com/posts/2010-08-30-playframework-builtin-validations[HTTP form data validation], but did not

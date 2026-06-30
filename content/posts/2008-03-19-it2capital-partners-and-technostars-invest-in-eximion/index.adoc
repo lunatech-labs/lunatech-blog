@@ -5,8 +5,6 @@ tags:
 = IT2Capital Partners and Technostars invest in Eximion 
 Michael Pentowski
 v1.0, 2008-03-19
-:title: IT2Capital Partners and Technostars invest in Eximion
-:tags: [ventures]
 
 http://www.eximion.nl/[Eximion] has successfully closed a significant
 investment round with http://www.technostars.nl/[TechnoStars] and IT2 Capital Partners

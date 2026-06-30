@@ -5,8 +5,6 @@ tags:
 = Eximion - Next generation web games have arrived!
 Michael Pentowski
 v1.0, 2007-06-28
-:title: Eximion - Next generation web games have arrived!
-:tags: [ventures]
 
 Who says gaming is all fun? Well,
 http://eximion.com/[Eximion], one of our portfolio companies does.

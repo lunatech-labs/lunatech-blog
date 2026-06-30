@@ -7,9 +7,7 @@ tags:
 = The NEAT Algorithm: Evolving Neural Networks
 thinkmorestupidless
 v1.0, 2024-02-29
-:title: The NEAT Algorithm: Evolving Neural Networks
 :lang: en
-:tags: [artifical intelligence, machine learning, algorithm]
 
 == Preface: On Searching the Archives
 

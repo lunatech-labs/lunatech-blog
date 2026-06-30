@@ -7,8 +7,6 @@ tags:
 = Meet and Greet and Scala Days review
 Antoine Laffez
 v1.0, 2016-06-24
-:title: Meet and Greet and Scala Days review
-:tags: [scala,event,voxxeddays]
 
 After the Voxxed days Luxembourg, the 22 of June (National holiday) an informal Meet & Greet, sponsored by Lunatech and YaJUG took place in the brasserie “Le Neumünster”. 
 

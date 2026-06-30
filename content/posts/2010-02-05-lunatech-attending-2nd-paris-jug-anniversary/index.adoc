@@ -8,8 +8,6 @@ tags:
 = Lunatech attending the 2nd Paris JUG anniversary
 pepite
 v1.0, 2010-02-05
-:title: Lunatech attending the 2nd Paris JUG anniversary
-:tags: [jug,event,jax-doclets,playframework]
 
 
 Stephane, Peter and myself will be attending the 2nd http://parisjug.org[Paris JUG] anniversary Tuesday the 9th of February 2010.

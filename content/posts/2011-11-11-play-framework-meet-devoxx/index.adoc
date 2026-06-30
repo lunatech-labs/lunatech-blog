@@ -6,8 +6,6 @@ tags:
 = Play framework meet-up at Devoxx
 hilton
 v1.0, 2011-11-11
-:title: Play framework meet-up at Devoxx
-:tags: [event,playframework]
 
 The Lunatech team
 will be at [Devoxx 2011](http://devoxx.com/display/DV11/Home) next week.

@@ -7,8 +7,6 @@ tags:
 = Upgrade your JSPs to XML (but not to .jspx)
 bartschuller
 v1.0, 2006-01-20
-:title: Upgrade your JSPs to XML (but not to .jspx)
-:tags: [java,web-applications,struts]
 
 
 Recently we were redesigning the views for a web application. The previous version used JSP files and Struts tiles. In trying to be as standards-compliant as possible, we decided that our pages should generate XHTML and so it made sense to write them as JSP documents, the fancy name for .jspx files.

@@ -6,8 +6,6 @@ tags:
 = Bootstrapping Our Internal Android App With Kotlin (Part 2)
 VincentBrule
 v1.0, 2019-08-07
-:title: Bootstrapping Our Internal Android App With Kotlin (Part 2)
-:tags: [ktor,kotlin]
 
 We are back for a second post to show you the progress of our Android application.
 

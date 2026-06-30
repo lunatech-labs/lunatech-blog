@@ -6,8 +6,6 @@ tags:
 = Fact Type Hierarchies in Drools
 ufkes
 v1.0, 2012-03-21
-:title: Fact Type Hierarchies in Drools
-:tags: [drools,java]
 
 
 Although Drools is Java-oriented and

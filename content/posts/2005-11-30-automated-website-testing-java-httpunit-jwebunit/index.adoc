@@ -5,8 +5,6 @@ tags:
 = Automated website testing with Java - HttpUnit / JWebUnit
 lypanov
 v1.0, 2005-11-06
-:title: Automated website testing with Java - HttpUnit / JWebUnit
-:tags: [opinion]
 ifdef::backend-html5[]
 :in-between-width: width='85%'
 :half-width: width='50%'

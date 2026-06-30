@@ -6,8 +6,6 @@ tags:
 = Numbered Headings in Confluence
 kaas
 v1.0, 2008-12-29
-:title: Numbered Headings in Confluence
-:tags: [wiki,confluence]
 
 As
 Confluence aficionados we usually write all of our documentation and

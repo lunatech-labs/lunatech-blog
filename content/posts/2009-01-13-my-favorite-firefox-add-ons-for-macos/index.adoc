@@ -6,8 +6,6 @@ tags:
 = My favorite FireFox add-ons for MacOS
 kaas
 v1.0, 2009-01-13
-:title: My favorite FireFox add-ons for MacOS
-:tags: [mac,firefox]
 
 Although as a company we deliver most stuff to run on Linux servers, I
 see more and more Macs show up in the office. Our developers either

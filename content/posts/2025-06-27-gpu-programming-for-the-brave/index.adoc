@@ -11,9 +11,7 @@ tags:
 = GPU Programming For The Brave
 boyuan-xiao-at-work
 v1.0, 2025-06-27
-:title: GPU Programming For The Brave
 :lang: en
-:tags: [beyond-the-code, bash-to-the-feature, GPU programming, CUDA, parallel programming, AI, neural network]
 
 == Introduction
 GPUs, some might call them graphic cards, have never been a stranger for video gamers. The evolution of GPUs significantly changed not just the video game industry, but also the field of parallel programming.

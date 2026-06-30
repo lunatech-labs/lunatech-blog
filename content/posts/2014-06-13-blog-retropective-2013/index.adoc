@@ -5,8 +5,6 @@ tags:
 = Lunatech blog retrospective - 2013
 hilton
 v1.0, 2014-06-13
-:title: Lunatech blog retrospective - 2013
-:tags: [opinion]
 
 2013 brought even more firsts for projects, consultancy, technology and events than the previous year.
 

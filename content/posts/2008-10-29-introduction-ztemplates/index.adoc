@@ -6,8 +6,6 @@ tags:
 = Introduction to ZTemplates
 killdashnine
 v1.0, 2008-10-29
-:title: Introduction to ZTemplates
-:tags: [java,web-applications]
 
 This article introduces
 http://ztemplates.org[ztemplates], a multi-tier open source web

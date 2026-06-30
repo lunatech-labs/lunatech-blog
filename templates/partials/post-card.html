@@ -22,8 +22,8 @@
     </div>
     <p class="card__title">{cardPost.title}</p>
     <div class="flexbox ff-wrap">
-      {#for tag in cardPost.data.attributes.tagList}
-        <object class="card__tag"><a class="tag" href="/tags/{tag.slugify}">{tag}</a></object>
+      {#for tag in cardPost.data.get('tags')}
+        <object class="card__tag"><a class="tag" href="/tags/{tag.toLowerCase.slugify}">{tag}</a></object>
       {/for}
     </div>
   </div>

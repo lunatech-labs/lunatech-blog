@@ -6,8 +6,6 @@ tags:
 = Lunatech at JavaPolis 2007
 hilton
 v1.0, 2007-12-09
-:title: Lunatech at JavaPolis 2007
-:tags: [java,event]
 
 Several
 Lunatech Research employees will be at

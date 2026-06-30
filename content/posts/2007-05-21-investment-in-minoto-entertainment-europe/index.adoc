@@ -6,8 +6,6 @@ tags:
 = Investment in Minoto Entertainment
 kaas
 v1.0, 2007-05-21
-:title: Investment in Minoto Entertainment
-:tags: [investment,startup]
 
 Minoto Entertainment Europe , a company in the
 gaming and entertainment industry, today announced that it has raised an

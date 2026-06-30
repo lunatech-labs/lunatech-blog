@@ -6,8 +6,6 @@ tags:
 = Back from FOSDEM - the NoSQL trend
 pepite
 v1.0, 2010-02-08
-:title: Back from FOSDEM - the NoSQL trend
-:tags: [fosdem,event]
 
 
 This week end, I went to

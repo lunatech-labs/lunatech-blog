@@ -8,9 +8,7 @@ tags:
 = Semantic Kernel SDK and Quarkus
 iarmush
 v1.0, 2024-01-10
-:title: Semantic Kernel SDK and Quarkus
 :lang: en
-:tags: [java, quarkus, semantic-kernel, openai]
 
 == What is it about?
 The goal of this blogpost is to create a simple service that uses the Semantic Kernel SDK to rectify grammatical, punctuation, and logical mistakes in the input text by invoking OpenAI.

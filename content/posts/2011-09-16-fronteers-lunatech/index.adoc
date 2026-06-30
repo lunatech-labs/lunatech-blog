@@ -6,8 +6,6 @@ tags:
 = Fronteers at Lunatech. WTF?
 hilton
 v1.0, 2011-09-16
-:title: Fronteers at Lunatech. WTF?
-:tags: [event,front-end]
 
 On 15 September, Lunatech hosted a
 http://fronteers.nl/[Fronteers] event for the first time. *Fronteers*

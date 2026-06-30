@@ -7,8 +7,6 @@ tags:
 = Creating an Android and iOS App with React Native
 izzyreal
 2020-01-20
-:title: Creating an Android and iOS App with React Native
-:tags: [android,ios,react-native]
 
 In this post I'll share my observations and some pros and cons I experienced while creating an app with React Native. I hope it's useful to anyone considering to use React Native, other cross-platform frameworks or fully native codebases.
 

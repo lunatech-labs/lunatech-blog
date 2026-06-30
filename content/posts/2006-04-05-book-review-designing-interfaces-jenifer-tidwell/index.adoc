@@ -5,8 +5,6 @@ tags:
 = Book review - Designing Interfaces, Jenifer Tidwell
 hilton
 v1.0, 2006-04-05
-:title: Book review - Designing Interfaces, Jenifer Tidwell
-:tags: [opinion]
 
 http://designinginterfaces.com/[*Designing Interfaces*] is a valuable source-book of modern user-interface design, whose pattern approach transcends the operating system-specific references of the 1980's and 1990's. *Designing Interfaces* is much less technology-specific than most O'Reilly books, and replaces the jargon of Human-Computer Interaction with clear language and well-chosen examples. This means that instead of targeting a specific breed of alpha geeks, this book has wide appeal for software developers.
 

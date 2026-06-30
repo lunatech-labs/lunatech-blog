@@ -6,8 +6,6 @@ tags:
 = Java Spotlight podcast - Play 2.0 & Akka 2.0
 hilton
 v1.0, 2012-03-07
-:title: Java Spotlight podcast - Play 2.0 & Akka 2.0
-:tags: [event,playframework]
 
 In this week's https://blogs.oracle.com/javaspotlight/[Java
 Spotlight podcast] from Oracle,

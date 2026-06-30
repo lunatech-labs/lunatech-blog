@@ -7,8 +7,6 @@ tags:
 = Bean validation in Java EE
 FroMage
 v1.0, 2008-03-20
-:title: Bean validation in Java EE
-:tags: [java,web-applications,opinion]
 
 This article talks about the process of
 validation in Java EE, more specifically about Hibernate Validation and

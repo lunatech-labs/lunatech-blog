@@ -5,8 +5,6 @@ tags:
 = WipidoTV.com - over 1 million served
 Michael Pentowski
 v1.0, 2008-08-07
-:title: WipidoTV.com - over 1 million served
-:tags: [ventures]
 
 http://www.wipido.com/[WipidoTV], our
 video streaming site, has reached its first major milestone, it streamed

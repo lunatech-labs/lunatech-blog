@@ -5,8 +5,6 @@ tags:
 = Embedded Journalism
 Michael Pentowski
 v1.0, 2008-01-21
-:title: Embedded Journalism
-:tags: [opinion]
 
 One of the
 cool startups we are involved with, http://www.wipido.com/[Wipido],

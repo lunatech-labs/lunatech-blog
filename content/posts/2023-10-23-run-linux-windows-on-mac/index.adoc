@@ -8,9 +8,7 @@ tags:
 = Running Linux and Windows on a Mac M1/M2 laptop
 leo-bogastry
 v1.0, 2023-10-25
-:title: Running Linux and Windows on a Mac M1/M2 laptop
 :lang: en
-:tags: [macos, linux, windows, testing]
 
 Recently, I encountered an error in the documentation of an open-source tool. I created a pull request with a proposed fix.
 However, I was then asked to test the fix in both Linux and Windows operating systems.

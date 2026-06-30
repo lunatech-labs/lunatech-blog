@@ -7,9 +7,7 @@ tags:
 = AI plugins for code development
 maniyalraj
 v1.0, 2025-05-02
-:title: AI plugins for code development
 :lang: en
-:tags: [AI, IntelliJ AI Plugins,Local LLMs]
 
 
 == Introduction

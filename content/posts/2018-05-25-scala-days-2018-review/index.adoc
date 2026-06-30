@@ -6,8 +6,6 @@ tags:
 = Scala Days 2018 review
 Antoine Laffez
 v1.0, 2018-05-25
-:title: Scala Days 2018 review
-:tags: [event,scala]
 
 == 900 people! 
 

@@ -8,9 +8,7 @@ tags:
 = Introduction to e-voting schemes
 agoetschm
 v1.0, 2022-12-15
-:title: Introduction to e-voting schemes
 :lang: en
-:tags: [voting, crypto, zero-knowledge, en]
 
 Given the availability of technology in our society as well as the need for tools supporting democratic decision making, it is not surprising that e-voting is a growing research field.
 But unlike suggested by their name, e-voting schemes are not only digitalized versions of traditional voting systems where paper ballots are counted by hand.

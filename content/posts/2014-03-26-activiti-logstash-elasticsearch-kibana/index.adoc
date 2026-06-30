@@ -8,8 +8,6 @@ tags:
 = Business process visibility with ALEK
 hilton
 v1.0, 2014-03-26
-:title: Business process visibility with ALEK
-:tags: [activiti,elasticsearch,kibana,logstash]
 
 The Elasticsearch, logstash and Kibana combination (a.k.a. ELK) seems to be popular in devops for system monitoring, but is equally applicable to all time-based data. This article demonstrates using Kibana to provide visibility for a business process implemented using the Activiti Business Process Management (BPM) platform.
 

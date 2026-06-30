@@ -12,9 +12,7 @@ tags:
 = Calculating π concurrently
 eloots
 v1.0, 2021-04-28
-:title: Comparing Concurrent Programming Alternatives
 :lang: en
-:tags: [concurrency, akka, Future, streaming, streams, multiprocessing, parallelism, scala]
 
 == Calculating π concurrently
 

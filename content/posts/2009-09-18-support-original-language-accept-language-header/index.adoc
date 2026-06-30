@@ -7,8 +7,6 @@ tags:
 = Support for original language in Accept-Language header
 fcanedo
 v1.0, 2009-09-18
-:title: Support for original language in Accept-Language header
-:tags: [localization,internationalization,web-applications]
 
 In most browers' preferences dialogs, you can find
 settings for which language to display if the content is available in

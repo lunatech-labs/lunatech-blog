@@ -7,9 +7,7 @@ tags:
 = Devoxx BE 2023
 nikashamova; yabets; jichay
 v1.0, 2023-10-13
-:title: Devoxx BE 2023
 :lang: en
-:tags: [java, devoxx, en]
 
 Recently a group of Lunatechies had the opportunity to attend the
 https://devoxx.be[Devoxx BE conference]. Here's what they had to say about the

@@ -6,8 +6,6 @@ tags:
 = Browsers don’t do layout
 dutchcelt
 v1.0, 2011-04-13
-:title: Browsers don’t do layout
-:tags: [front-end,ux]
 
 Good layout has been the bane of many front-enders
 existance for years and years. Positioning isn't layout and tables and

@@ -6,8 +6,6 @@ tags:
 = Play 2.0 demo - live coding script
 hilton
 v1.0, 2011-12-08
-:title: Play 2.0 demo - live coding script
-:tags: [java,playframework]
 
 The best way to introduce Play to an audience is to show them how it works in the
 kind of live-coding demo that lets people see for themselves how easy it is.

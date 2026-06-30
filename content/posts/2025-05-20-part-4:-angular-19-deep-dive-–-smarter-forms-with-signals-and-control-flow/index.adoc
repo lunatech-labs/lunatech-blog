@@ -13,9 +13,7 @@ tags:
 = Part 4: Angular 19 Deep Dive – Smarter Forms with Signals and Control Flow
 jakeortega
 v1.0, 2025-05-20
-:title: Part 4: Angular 19 Deep Dive – Smarter Forms with Signals and Control Flow
 :lang: en
-:tags: [angular, nestjs, postgresql, typeorm, jwt, authentication, frontend, typescript, nodejs]
 
 Welcome back to the Full-Stack Authentication Boilerplate (Angular +
 NestJS + PostgreSQL) series. So far, we’ve wired up the backend and

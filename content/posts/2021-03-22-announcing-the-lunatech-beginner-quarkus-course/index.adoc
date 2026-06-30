@@ -7,8 +7,6 @@ tags:
 = Announcing the Lunatech Beginner Quarkus Course
 njlbenn
 v1.0, 2021-03-22
-:title: Announcing the Lunatech Beginner Quarkus Course
-:tags: [quarkus, java, training]
 
 == Betting on Java for the cloud-native era
 

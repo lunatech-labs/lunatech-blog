@@ -8,8 +8,6 @@ tags:
 = jax-doclets version 0.7 released
 FroMage
 v1.0, 2010-04-22
-:title: jax-doclets version 0.7 released
-:tags: [resteasy,java,rest,documentation]
 
 Did you know we have an http://www.lunatech-labs.com[open-source web
 site]?

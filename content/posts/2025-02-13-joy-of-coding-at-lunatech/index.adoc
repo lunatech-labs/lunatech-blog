@@ -10,9 +10,7 @@ tags:
 = Recap of the Joy of Coding Meetup at Lunatech
 Ana Rapanych
 v1.0, 2025-02-13
-:title: Recap of the Joy of Coding Meetup at Lunatech
 :lang: en
-:tags: [documentation, automation, opentelemetry, monitoring, grafana, performance]
 
 == Introduction
 On February 12th, Lunatech had the privilege of hosting the Joy of Coding meetup at our office in Rotterdam.

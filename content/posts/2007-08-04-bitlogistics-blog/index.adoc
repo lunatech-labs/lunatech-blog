@@ -5,8 +5,6 @@ tags:
 = BitLogistics blog
 kaas
 v1.0, 2007-08-04
-:title: BitLogistics blog
-:tags: [ventures]
 
 BitLogistics Ltd. has started a public blog to visualize
 development of the new tools that it is building. The marketing team, as

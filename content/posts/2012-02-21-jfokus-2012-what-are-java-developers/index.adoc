@@ -6,8 +6,6 @@ tags:
 = Jfokus 2012 - what are Java developers up to?
 ludofischer
 v1.0, 2012-02-21
-:title: Jfokus 2012 - what are Java developers up to?
-:tags: [playframework,scala]
 
 A small Lunatech delegation (Peter Hilton and I) attended http://www.jfokus.se[Jfokus] in Stockholm on 13-14-15 February 2012.
 

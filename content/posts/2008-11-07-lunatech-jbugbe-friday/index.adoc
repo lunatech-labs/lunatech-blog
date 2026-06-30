@@ -8,8 +8,6 @@ tags:
 = Lunatech at the JBug.be this Friday
 pepite
 v1.0, 2008-11-07
-:title: Lunatech at the JBug.be this Friday
-:tags: [java,event,jbug,belgium]
 
 This Friday, Peter Hilton and Nicolas Leroux, senior software
 developers at Lunatech Research, will present \"Playing with Seam and

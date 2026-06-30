@@ -9,9 +9,7 @@ tags:
 = Présentation de Cypress
 VincentBrule
 v1.0, 2022-06-06
-:title: Présentation de Cypress
 :lang: fr
-:tags: [test, cypress, web, js, ts]
 
 Cet article est le début d’une série de trois articles consacrés à https://www.cypress.io[Cypress] :
 

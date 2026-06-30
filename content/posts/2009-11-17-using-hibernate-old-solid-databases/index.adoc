@@ -8,8 +8,6 @@ tags:
 = Using Hibernate on old Solid databases
 FroMage
 v1.0, 2009-11-17
-:title: Using Hibernate on old Solid databases
-:tags: [java,jpa,solid,hibernate]
 
 Lately I've had to program an application that accesses an old
 http://en.wikipedia.org/wiki/SolidDB[Solid database] that we use for

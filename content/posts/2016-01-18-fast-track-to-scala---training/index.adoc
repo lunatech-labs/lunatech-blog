@@ -5,8 +5,6 @@ tags:
 = Fast Track to Scala - Training
 fcanedo
 v1.0, 2016-01-18
-:title: Fast Track to Scala - Training
-:tags: [scala]
 
 On Feb 4 and 5th https://twitter.com/fcanedo/[Francisco Canedo], Senior Developer at Lunatech and a Typesafe certified trainer, will be teaching Typesafe’s Fast Track to Scala Course at our office.
 

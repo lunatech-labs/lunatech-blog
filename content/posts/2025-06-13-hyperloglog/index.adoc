@@ -12,9 +12,7 @@ v1.0, 2025-06-13
 :toc: left
 :toc-title: Table of Contents
 :toclevels: 3
-:title: A brief introduction to HyperLogLog++
 :lang: en
-:tags: [hyperloglog, algorithm, randomized-algorithm, beyond-the-code, bash-to-the-feature]
 
 This document demonstrates a fascinating technique that tackles a complex computational problem using an elegant probabilistic strategy.
 

@@ -5,8 +5,6 @@ tags:
 = Lunatech blog retrospective - 2006
 hilton
 v1.0, 2014-05-28
-:title: Lunatech blog retrospective - 2006
-:tags: [opinion]
 
 2006 brought another random collection of articles to the Lunatech Blog. Here is a selection of my favourites.
 

@@ -7,8 +7,6 @@ tags:
 = RESTful web services in Java EE with RESTEasy (JAX-RS)
 FroMage
 v1.0, 2008-03-20
-:title: RESTful web services in Java EE with RESTEasy (JAX-RS)
-:tags: [java,seam,rest]
 
 This article
 describes how we implemented

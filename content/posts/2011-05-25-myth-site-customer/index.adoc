@@ -7,8 +7,6 @@ tags:
 = The myth of the on-site customer
 PeterHilton
 v1.0, 2011-05-25
-:title: The myth of the on-site customer
-:tags: [scrum,methodology,event]
 
 On 24 May 2011, Peter Hilton gave a
 talk about agile software development at a http://talkabout-it.nl/detail/?id=9[Talk About IT event] in Amsterdam. Here are the

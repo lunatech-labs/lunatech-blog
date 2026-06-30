@@ -5,8 +5,6 @@ tags:
 = Snowcamp and Touraine Tech
 Antoine Laffez
 v1.0, 2018-01-09
-:title: Snowcamp and Touraine Tech
-:tags: [event]
 
 As you know, Lunatech tries every year to participate in a large number of events in France and abroad. To meet those who "make" IT: developers, enthusiasts and students to discover new tools, trends, and learn to master them.
 

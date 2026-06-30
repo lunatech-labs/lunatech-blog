@@ -6,8 +6,6 @@ tags:
 = Nouvelles technologies de développement - FPI 2008 in Nice
 pepite
 v1.0, 2008-05-19
-:title: Nouvelles technologies de développement - FPI 2008 in Nice
-:tags: [java,event]
 
 
 Last week Stephane Epardaud and Nicolas Leroux,

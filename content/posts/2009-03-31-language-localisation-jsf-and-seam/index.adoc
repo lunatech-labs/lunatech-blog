@@ -7,8 +7,6 @@ tags:
 = Language localisation in JSF and Seam
 PeterHilton
 v1.0, 2009-03-31
-:title: Language localisation in JSF and Seam
-:tags: [java,jsf,seam]
 
 This article introduces the mechanisms for
 http://en.wikipedia.org/wiki/Internationalization_and_localization[internationalising]

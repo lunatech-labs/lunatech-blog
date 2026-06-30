@@ -6,8 +6,6 @@ tags:
 = Integrating Play framework 1.2 with jQuery DataTables
 PeterHilton
 v1.0, 2011-01-28
-:title: Integrating Play framework 1.2 with jQuery DataTables
-:tags: [playframework,jquery]
 
 This article describes how to integrate
 http://www.datatables.net/[DataTables] with a http://playframework.com/[Play framework] web 1.2 application. DataTables is

@@ -7,8 +7,6 @@ tags:
 = Polynote, a better notebook for Scala
 VincentBrule
 2020-09-22
-:title: Polynote, a better notebook for Scala
-:tags: [scala,big-data,notebook]
 
 Polynote is a _polyglot_ notebook with first-class _Scala_ support. Nowadays, multiple solutions exist to use Scala inside a Notebook. I will explain why I switched from Jupyter to Polynote for all my notebooks.
 

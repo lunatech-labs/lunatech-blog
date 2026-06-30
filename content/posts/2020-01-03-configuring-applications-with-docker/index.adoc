@@ -6,8 +6,6 @@ tags:
 = Configuring Applications With Docker
 nMoncho
 2020-01-03
-:title: Configuring Applications With Docker
-:tags: [testing,docker]
 
 _But it worked on my machine!_I still remember when I was a young developer and someone introduced me to the environments where an application could be deployed: dev, test, acceptance, production. We as developers need to deal a lot with context, we deal with it on context switches, on variable scoping, and this is yet another context.
 

@@ -6,8 +6,6 @@ tags:
 = Defining database table columns with Slick 1.0.1   
 hilton
 v1.0, 2013-08-21
-:title: Defining database table columns with Slick 1.0.1  
-:tags: [slick,playframework]
 
 This tutorial shows you how to define different kinds of database \
     columns (a.k.a. _attributes_) in a [Slick](http://slick.typesafe.com) \

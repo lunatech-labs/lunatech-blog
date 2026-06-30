@@ -7,9 +7,7 @@ tags:
 = Quarkus Benelux in Rotterdam
 leo-bogastry
 v1.0, 2023-10-20
-:title: Quarkus Benelux in Rotterdam
 :lang: en
-:tags: [quarkus, java, web-applications]
 
 === Introduction
 Last Thursday, the https://www.meetup.com/quarkus-benelux/[Quarkus Benelux] meetup talks were hosted at our Rotterdam office.

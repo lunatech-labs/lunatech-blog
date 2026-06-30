@@ -6,8 +6,6 @@ tags:
 = Riviera DEV
 FroMage
 v1.0, 2011-08-15
-:title: Riviera DEV
-:tags: [event,java]
 
 Lunatech Research, with the http://rivierajug.org[Riviera
 JUG] and the http://inria.fr[INRIA] French

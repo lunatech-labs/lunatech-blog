@@ -7,8 +7,6 @@ tags:
 = How to localise a Play framework 1.0 web application
 PeterHilton
 v1.0, 2010-04-12
-:title: How to localise a Play framework 1.0 web application
-:tags: [playframework,web-applications,localization]
 
 
 

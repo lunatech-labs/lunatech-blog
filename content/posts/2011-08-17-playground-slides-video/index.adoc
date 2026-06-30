@@ -6,8 +6,6 @@ tags:
 = August Play!ground presentation slides & video
 hilton
 v1.0, 2011-08-17
-:title: August Play!ground presentation slides & video
-:tags: [event,playframework]
 
 
 On 12 August 2011, Lunatech hosted the first

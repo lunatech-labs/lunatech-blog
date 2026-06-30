@@ -7,8 +7,6 @@ tags:
 = JBoss Rules (Drools) implementation Execution Server
 PeterHilton
 v1.0, 2010-01-11
-:title: JBoss Rules (Drools) implementation Execution Server
-:tags: [java,drools,case-study]
 
 
 In 2009,

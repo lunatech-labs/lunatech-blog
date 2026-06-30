@@ -6,8 +6,6 @@ tags:
 = Shapeless - Computing deltas
 harrylaou
 v1.0, 2016-09-05
-:title: Shapeless - Computing deltas
-:tags: [shapeless,scala]
 
 == A real life exemple
 

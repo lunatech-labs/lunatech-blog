@@ -7,8 +7,6 @@ tags:
 = When Hibernate caching can go wrong
 smthelusive
 v1.0, 2020-03-23
-:title: When Hibernate caching can go wrong
-:tags: [hibernate,java,caching]
 
 == Why is this topic worth discussion
 

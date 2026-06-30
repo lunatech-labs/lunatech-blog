@@ -5,8 +5,6 @@ tags:
 = A functional programming puzzle
 FroMage
 v1.0, 2011-03-21
-:title: A functional programming puzzle
-:tags: [javascript]
 
 This article
 describes a functional programming puzzle that we had to solve in order

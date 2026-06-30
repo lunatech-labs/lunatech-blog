@@ -6,8 +6,6 @@ tags:
 = The DC/OS (Datacenter Operating System)-Part 1
 Pepite
 v1.0, 2017-10-01
-:title: The DC/OS (Datacenter Operating System)-Part 1
-:tags: [java, scala]
 
 DC/OS or Datacenter Operating System is an open-source project started by a company named Mesosphere. The project aimed to make infrastructure blueprints (for building and delivering data-driven services to run on any datacenter or cloud) accessible for everyone.
 

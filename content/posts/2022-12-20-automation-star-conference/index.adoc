@@ -6,9 +6,7 @@ tags:
 = AutomationSTAR 2022 Conference
 TehreemFatima07
 v1.0, 2022-12-20
-:title: AutomationSTAR 2022 Conference
 :lang: en
-:tags: [conference, automation testing]
 
 
 October 17 and 18 were the days for the Europe’s largest testing conference, https://automation.eurostarsoftwaretesting.com/[Automation STAR 2022]. About 100 passionate software testers gathered together at https://www.hilton.com/en/hotels/muchitw-hilton-munich-park/[Hilton Munich Park], for making automation testing experiences better.

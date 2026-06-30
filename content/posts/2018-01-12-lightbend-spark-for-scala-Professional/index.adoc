@@ -5,8 +5,6 @@ tags:
 = Lightbend Spark for Scala-Professional by Kensu
 Antoine Laffez
 v1.0, 2018-01-12
-:title: Lightbend Spark for Scala-Professional by Kensu
-:tags: [event]
 
 Many courses and trainings will take place this month at our Rotterdam offices. The first of the series is "Lightbend Spark for Scala-Professional".
 

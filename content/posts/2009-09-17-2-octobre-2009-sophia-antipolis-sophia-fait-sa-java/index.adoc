@@ -5,8 +5,6 @@ tags:
 = 2 octobre 2009 @Sophia-Antipolis - Sophia fait sa Java
 FroMage
 v1.0, 2009-09-17
-:title: 2 octobre 2009 @Sophia-Antipolis - Sophia fait sa Java
-:tags: [event]
 
 http://www.rivierajug.org/xwiki/bin/view/Main/20091002[2nd October 2009 @ Sophia-Antipolis - Sophia fait sa Java] The
 http://www.rivierajug.org[Riviera JUG] will host its fifth **free**

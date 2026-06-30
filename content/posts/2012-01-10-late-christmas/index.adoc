@@ -5,8 +5,6 @@ tags:
 = Late Christmas at Lunatech
 hilton
 v1.0, 2012-01-10
-:title: Late Christmas at Lunatech
-:tags: [fun]
 
 Christmas at Lunatech came late for some of us this
 year: we got another five 27-inch Apple monitors. Sometimes bigger is

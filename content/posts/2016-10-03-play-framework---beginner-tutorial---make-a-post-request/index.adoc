@@ -7,8 +7,6 @@ tags:
 = Play Framework - Beginner Tutorial - Make a post request and save the form data in Mongodb
 harrylaou
 v1.0, 2016-10-03
-:title: Play Framework - Beginner Tutorial - Make a post request and save the form data in Mongodb
-:tags: [playframework,scala,mongodb]
 
 == Before the tutorial 
 

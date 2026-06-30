@@ -5,8 +5,6 @@ tags:
 = Plan Cruncher - shorter business plans
 PeterHilton
 v1.0, 2010-03-03
-:title: Plan Cruncher - shorter business plans
-:tags: [ventures]
 
 Lunatech Ventures has just launched http://plancruncher.com/[Plan
 Cruncher], which helps you create a better

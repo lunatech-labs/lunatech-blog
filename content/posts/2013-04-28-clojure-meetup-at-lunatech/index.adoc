@@ -6,8 +6,6 @@ tags:
 = Lunatech Hosts and Sponsors Clojure Meetup
 vijaykiran
 v1.0, 2013-04-28
-:title: Lunatech Hosts and Sponsors Clojure Meetup
-:tags: [event,clojure]
 
 At http://lunatech.com[Lunatech] we have always been enthusiastic about
 learning and championing

@@ -9,8 +9,6 @@ tags:
 = Electronic government publications
 BartSchuller
 v1.0, 2010-01-25
-:title: Electronic government publications
-:tags: [seam,itext,drools,xml,case-study]
 
 
 On July 1, 2009,

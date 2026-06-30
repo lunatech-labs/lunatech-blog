@@ -6,8 +6,6 @@ tags:
 = Lunatech Advisory Board Member At Scala Center!
 Antoine Laffez
 v1.0, 2019-10-28
-:title: Lunatech Advisory Board Member At Scala Center!
-:tags: [event,scala]
 
 For the 10th year’s anniversary of Scala Lunatech got the opportunity to be a Platinum sponsor at https://scaladays.org/2019/lausanne/schedule[ScalaDays]. The event took place this year in the beautiful EPFL of Lausanne, Scala’s places of birth and home of the Scala Center. This was the right moment to meet the community and discuss our involvement.
 

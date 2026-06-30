@@ -8,8 +8,6 @@ tags:
 = Sdu publishing system - technical upgrade
 vijaykiran
 v1.0, 2013-11-28
-:title: Sdu publishing system - technical upgrade
-:tags: [case-study,jboss,seam,jee]
 
 Lunatech has been helping build and maintain several software systems and publication platforms for Sdu. Lunatech recently upgraded the platform and application to a more recent version of constituent technologies to make sure that the application is well-maintained and up-to-date.
 

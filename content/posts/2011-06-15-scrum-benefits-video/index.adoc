@@ -7,8 +7,6 @@ tags:
 = Three Scrum benefits (video)
 PeterHilton
 v1.0, 2011-06-15
-:title: Three Scrum benefits (video)
-:tags: [scrum,methodology,event]
 
 After
 the recent http://talkabout-it.nl/[Talk About IT] event in Amsterdam,

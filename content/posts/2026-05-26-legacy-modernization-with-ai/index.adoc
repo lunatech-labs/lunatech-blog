@@ -9,9 +9,7 @@ tags:
 = Legacy Modernization with AI: A Battle-Tested Methodology
 pepite
 v1.0, 2026-05-26
-:title: Legacy Modernization with AI: A Battle-Tested Methodology
 :lang: en
-:tags: [legacy modernization, AI methodology, agentic coding, context pack, en]
 
 
 In the previous articles, we established three things: inaction is expensive, AI is collapsing the cost of building software, and engineers are becoming orchestrators rather than instrumentalists. The natural question is: how do you put all of this together into a real engagement, with real stakes, real data, and zero tolerance for regression?

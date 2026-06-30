@@ -5,8 +5,6 @@ tags:
 = Kalydo paving the way to success
 kaas
 v1.0, 2011-02-28
-:title: Kalydo paving the way to success
-:tags: [ventures]
 
 Over 2 million installs; fast loading browser games;
 social integration; in the hundreds of thousands of users every day; at

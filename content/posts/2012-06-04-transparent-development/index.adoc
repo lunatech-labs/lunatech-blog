@@ -6,8 +6,6 @@ tags:
 = Transparent development and the project management
 hilton
 v1.0, 2012-06-04
-:title: Transparent development and the project management
-:tags: [project-management,methodology]
 
 
 In his http://www.reinventing-business.com/[Reinventing Business]

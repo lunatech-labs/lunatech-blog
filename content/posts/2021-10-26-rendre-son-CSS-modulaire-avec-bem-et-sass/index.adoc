@@ -7,9 +7,7 @@ tags:
 = Rendre son CSS modulaire avec BEM & SASS
 geoffroybouet 
 v1.0, 2021-10-26
-:title: Rendre son CSS modulaire avec BEM et SASS
 :lang: fr
-:tags: [css, sass, bem]
 
 == Introduction
 

@@ -6,8 +6,6 @@ tags:
 = 10 Devoxx tips
 PeterHilton
 v1.0, 2010-11-23
-:title: 10 Devoxx tips
-:tags: [playframework,event]
 
 Last week we were at http://devoxx.com/[Devoxx] in
 Antwerp. This means that there are now 51 weeks until Devoxx 2011, which

@@ -5,8 +5,6 @@ tags:
 = How to write user-interface instructions
 hilton
 v1.0, 2007-03-08
-:title: How to write user-interface instructions
-:tags: [writing]
 
 
 User-interface instructions are the step-by-step

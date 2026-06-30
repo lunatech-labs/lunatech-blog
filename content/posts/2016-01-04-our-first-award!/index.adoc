@@ -5,8 +5,6 @@ tags:
 = Our first award!
 pepite
 v1.0, 2016-01-04
-:title: Our first award!
-:tags: [event]
 
 Lunatech has been awarded by the “The National Business Success Award Institute” as branch winner 2015 in the category “ICT”.
 

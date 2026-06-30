@@ -7,9 +7,7 @@ tags:
 = Telegram bot for file sharing using Quarkus
 iarmush
 v1.0, 2023-11-05
-:title: Telegram bot for file sharing using Quarkus
 :lang: en
-:tags: [java, telegram, quarkus]
 
 
 == About what is it?

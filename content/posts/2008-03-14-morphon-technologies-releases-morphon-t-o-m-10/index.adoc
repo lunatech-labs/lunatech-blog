@@ -5,8 +5,6 @@ tags:
 = Morphon Technologies releases Morphon T-o-M 1.0 
 kaas
 v1.0, 2008-03-14
-:title: Morphon Technologies releases Morphon T-o-M 1.0 
-:tags: [ventures]
 
 After half a year of development and
 testing, Morphon Technologies released version 1.0 of Morphon T-o-M.

@@ -7,8 +7,6 @@ tags:
 = December Play!ground in Rotterdam
 hilton
 v1.0, 2011-11-08
-:title: December Play!ground in Rotterdam
-:tags: [event,playframework,playground]
 
 Following a break for
 Devoxx and busy projects, we are now planning the next http://www.playframework.org/[Play

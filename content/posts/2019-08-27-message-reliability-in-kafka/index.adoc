@@ -7,8 +7,6 @@ tags:
 = Message Reliability In Kafka
 idarlington
 v1.0, 2019-08-27
-:title: Message Reliability In Kafka
-:tags: [kafka,messaging,scala]
 
 == Outline
 

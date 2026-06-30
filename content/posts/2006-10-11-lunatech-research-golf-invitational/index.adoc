@@ -5,8 +5,6 @@ tags:
 = Lunatech Research Golf Invitational
 Michael Pentowski
 v1.0, 2006-10-11
-:title: Lunatech Research Golf Invitational
-:tags: [fun]
 
 We thought it was time to start another tradition alongside our world famous parties.  Someone, who shall remain anonymous,  came up with the concept of organizing a golf tournament. - On 22nd September 2006 the first annual Lunatech Research Golf Invitational was born.
 

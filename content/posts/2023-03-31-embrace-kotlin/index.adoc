@@ -6,9 +6,7 @@ tags:
 = Embrace Kotlin: Where to Get Started for Scala Developers
 AnastasiiaL
 v1.0, 2023-03-31
-:title: Embrace Kotlin: Tips And Tricks for Scala Developers to Get Started
 :lang: en
-:tags: [scala, kotlin]
 
 Recently I have been intrigued by the buzz surrounding Kotlin, another powerful language on the JVM.
 The growing popularity and claims of a seamless transition from Scala to Kotlin have piqued my curiosity, prompting me to dive in and explore the language myself.

@@ -6,8 +6,6 @@ tags:
 = Hack In The Woods: Programming For Fun And Good
 adrienhaxaire
 v1.0, 2019-08-20
-:title: Hack In The Woods: Programming For Fun And Good
-:tags: [fun,event]
 
 This summer I went to http://www.hackinthewoods.be/[Hack in the Woods], following the warm invitation from my colleague Xavier Tordoir who lives in Belgium and attended last year. Three days and three nights in the Belgian countryside to meet new people and work on projects for non profit and non governmental organisations, ranging from bats preservation to fighting leprosy.
 

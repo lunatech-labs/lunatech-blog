@@ -6,8 +6,6 @@ tags:
 = Summer Fast Track To Scala Training By Lunatech
 Antoine Laffez
 v1.0, 2016-06-06
-:title: Summer Fast Track To Scala Training By Lunatech
-:tags: [scala,event]
 
 On July 29th and 30th Sietse de Kaper (https://twitter.com/targeter[@Targeter]), Senior Software Engineer at Lunatech and Lightbend-certified trainer, will be teaching Lightbend’s Fast Track to Scala Course in our Rotterdam office. 
 

@@ -6,8 +6,6 @@ tags:
 = No fields are required
 hilton
 v1.0, 2007-11-15
-:title: No fields are required
-:tags: [ux,event]
 
 There is an accepted
 wisdom in software design that the way to gather good quality data is to

@@ -7,8 +7,6 @@ tags:
 = Logging debug messages with Drools
 hilton
 v1.0, 2011-09-02
-:title: Logging debug messages with Drools
-:tags: [java,drools]
 
 This article shows a neat way to
 log debug messages from rules in Drools Rule Language (DRL). This is a

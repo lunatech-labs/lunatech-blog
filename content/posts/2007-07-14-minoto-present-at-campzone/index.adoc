@@ -5,8 +5,6 @@ tags:
 = Minoto present at CampZone 2007
 kaas
 v1.0, 2007-07-14
-:title: Minoto present at CampZone 2007
-:tags: [ventures]
 
 http://www.me-eu.com/[Minoto Entertainment] will be
 present at http://www.campzone.nl/[CampZone 2007] to demonstrate the

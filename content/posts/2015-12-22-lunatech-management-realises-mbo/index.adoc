@@ -5,8 +5,6 @@ tags:
 = Lunatech management realises MBO
 pepite
 v1.0, 2015-12-22
-:title: Lunatech management realises MBO
-:tags: [event]
 
 Nicolas Leroux and Ray Kemp, jointly CEO, have successfully realized a management buy-out (“MBO”) of Lunatech Labs BV (“Lunatech”). Also, some staff members acquired a small stake in the company in this transaction. Lunatech is a Dutch IT service provider specialised in system integration, customised software implementation and web applications.
 

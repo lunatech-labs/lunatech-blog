@@ -5,8 +5,6 @@ tags:
 = JavaPolis 2005
 hilton
 v1.0, 2005-12-21
-:title: JavaPolis 2005
-:tags: [java]
 
 Last week I went to the http://www.javapolis.com/[Javapolis conference] in Antwerp, run by the BeJUG - Belgium's Java user group. There were a couple of thousand attendees, and we saw as many interesting Java technologies during the day as we drank Belgian beers in the evening.
 

@@ -5,8 +5,6 @@ tags:
 = Codebase review
 targeter
 v1.0, 2011-12-21
-:title: Codebase review
-:tags: [code-hosting]
 
 http://codebasehq.com[Codebase] is a project hosting solution by
 http://atechmedia.com/[aTech Media]. It tries to be a complete

@@ -8,8 +8,6 @@ tags:
 = Generating KML for RESTful clients
 FroMage
 v1.0, 2008-10-17
-:title: Generating KML for RESTful clients
-:tags: [java,web-applications,xml,rest]
 
 In this article we describe how to use
 https://jaxb.dev.java.net/[JAXB] to generate a

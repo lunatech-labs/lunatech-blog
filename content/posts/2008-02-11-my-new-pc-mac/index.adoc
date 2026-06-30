@@ -6,8 +6,6 @@ tags:
 = Benelux JBoss User Group, 29 February 2008
 hilton
 v1.0, 2008-02-11
-:title: Benelux JBoss User Group, 29 February 2008
-:tags: [opinion,mac]
 
 Until recently,
 my desktop PC was running Linux, like all of the other desktops at

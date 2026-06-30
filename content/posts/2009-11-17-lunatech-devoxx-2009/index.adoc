@@ -6,8 +6,6 @@ tags:
 = Lunatech at Devoxx 2009
 PeterHilton
 v1.0, 2009-11-17
-:title: Support for original language in Accept-Language header
-:tags: [event,playframework]
 
 Several Lunatech staff are at http://www.devoxx.com/[Devoxx]
 in Antwerp this week. Nicolas Leroux is presenting http://www.devoxx.com/display/DV09/Play+framework+in+practice[Play! framework in

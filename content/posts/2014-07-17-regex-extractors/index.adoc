@@ -6,8 +6,6 @@ tags:
 = Regex extractors
 fcanedo
 v1.0, 2014-07-17
-:title: Regex extractors
-:tags: [regex,scala]
 
 This article explains how to use regular expressions in Scala pattern matching.
 

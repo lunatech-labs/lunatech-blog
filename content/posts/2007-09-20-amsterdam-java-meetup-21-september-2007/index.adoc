@@ -5,8 +5,6 @@ tags:
 = Amsterdam Java Meetup, 21 September 2007
 hilton
 v1.0, 2007-08-06
-:title: Amsterdam Java Meetup, 21 September 2007
-:tags: [event]
 
 Although I generally avoid Amsterdam, I will be making an
 exception tomorrow to go to http://blog.interface21.com/main/2007/08/02/amsterdam-java-meetup-q307-september-21st/[The 7th Amsterdam Java

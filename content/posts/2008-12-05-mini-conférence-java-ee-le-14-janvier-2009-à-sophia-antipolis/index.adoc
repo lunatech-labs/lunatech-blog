@@ -7,8 +7,6 @@ tags:
 = Mini-conférence Java EE le 14 janvier 2009 à Sophia-Antipolis
 FroMage
 v1.0, 2008-12-05
-:title: Mini-conférence Java EE le 14 janvier 2009 à Sophia-Antipolis
-:tags: [java,event,france]
 
 
 http://www.lunatech-research.com[Lunatech

@@ -5,9 +5,7 @@ tags:
 = Lunatech presents at 010DEV
 hilton
 v1.0, 2012-05-23
-:title: Lunatech presents at 010DEV
 renaissance
-:tags: [event]
 
 This week, on 25 May 2012, Peter
 Hilton will present *In search of the perfect programmer* at

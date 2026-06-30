@@ -8,8 +8,6 @@ tags:
 = Sdu Uitgevers - SaaS product implementation
 fcanedo
 v1.0, 2010-04-01
-:title: Sdu Uitgevers - SaaS product implementation
-:tags: [java,web-applications,saas,case-study]
 
 
 Lunatech has built and continues to be responsible

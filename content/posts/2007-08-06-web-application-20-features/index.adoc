@@ -5,8 +5,6 @@ tags:
 = Web application 2.0 features
 hilton
 v1.0, 2007-08-06
-:title: Web application 2.0 features
-:tags: [web-applications]
 
 After
 you have built the initial version of a web application, it can be hard

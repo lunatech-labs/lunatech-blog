@@ -7,9 +7,7 @@ tags:
 = Load testing with Gatling
 VincentBrule
 v1.0, 2021-10-30
-:title: Load testing with Gatling
 :lang: en
-:tags: [gatling, load testing, opensource]
 
 In essence, load testing is the process of verifying whether an application can handle an expected load. It is done by injecting a defined number of users into the application.
 A typical example is to do a load test on your APIs to see if the maximum number of requests can be supported. 

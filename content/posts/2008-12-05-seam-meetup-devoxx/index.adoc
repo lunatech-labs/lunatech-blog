@@ -7,8 +7,6 @@ tags:
 = Seam meetup at Devoxx
 hilton
 v1.0, 2008-12-05
-:title: Seam meetup at Devoxx
-:tags: [event,jboss,seam]
 
 Next Wednesday,
 Lunatech Research is organising a http://www.devoxx.com/display/JV08/Seam+meetup[Seam

@@ -6,8 +6,6 @@ tags:
 = What’s wrong with the Java Servlet API
 hilton
 v1.0, 2011-12-08
-:title: What’s wrong with the Java Servlet API
-:tags: [java,servlet]
 
 
 Before

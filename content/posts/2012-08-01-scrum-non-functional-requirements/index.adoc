@@ -6,8 +6,6 @@ tags:
 = Scrum and non-functional requirements
 hilton
 v1.0, 2012-08-01
-:title: Scrum and non-functional requirements
-:tags: [scrum,methodology]
 
 Scrum doesn’t help you
 with non-functional requirements, but that doesn’t mean you’re supposed

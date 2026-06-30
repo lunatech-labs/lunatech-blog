@@ -6,8 +6,6 @@ tags:
 = iOS full-text search with Core Data and SQLite
 Wolfert
 v1.0, 2013-01-24
-:title: iOS full-text search with Core Data and SQLite
-:tags: [ios,full-text]
 
 This article will discuss the implementation of SQLite's FTS engine in an Core Data-based iOS application.
 

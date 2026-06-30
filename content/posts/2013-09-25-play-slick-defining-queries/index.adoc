@@ -6,8 +6,6 @@ tags:
 = Defining database queries with Slick 1.0.1  
 hilton
 v1.0, 2013-09-25
-:title:Defining database queries with Slick 1.0.1  
-:tags: [slick,playframework]
 
 This tutorial for using [Slick](http://slick.typesafe.com) with a \
     [Play Framework](http://www.playframework.com) application

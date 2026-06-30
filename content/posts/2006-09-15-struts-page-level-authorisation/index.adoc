@@ -7,8 +7,6 @@ tags:
 = Struts page-level authorisation
 hilton
 v1.0, 2006-09-15
-:title: Struts page-level authorisation
-:tags: [struts,java,web-applications]
 
 A common requirement for web applications is role-based authorisation, to determine which users can access which functionality and data. This article explains how to use http://struts.apache.org/[Struts]’ support for page-level authorisation.
 

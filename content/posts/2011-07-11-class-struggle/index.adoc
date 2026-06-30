@@ -6,8 +6,6 @@ tags:
 = Class Struggle
 dutchcelt
 v1.0, 2011-07-11
-:title: Class Struggle
-:tags: [front-end,ux]
 
 
 I'm irked by the fact that I keep running into web sites

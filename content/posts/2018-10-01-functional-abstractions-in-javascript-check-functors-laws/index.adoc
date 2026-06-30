@@ -6,8 +6,6 @@ tags:
 = Functional Abstractions In JavaScript: Check Functors Laws
 Andrea Guigliano
 v1.0, 2018-10-01
-:title: Functional Abstractions In JavaScript: Check Functors Laws
-:tags: [fp,javascript]
 
 
 JavaScript is a curious mix of programming paradigms. In this post we will focus on the functional traits of JavaScript (JS). In particular we will see how to check that a function satisfies the Functor’s laws.

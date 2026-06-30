@@ -6,8 +6,6 @@ tags:
 = Dealing with heavy boxes (monads)
 eamelink
 v1.0, 2016-12-20
-:title: Dealing with heavy boxes (monads)
-:tags: [fp,scala]
 
 At Lunatech we build a lot of REST API's involving dealing with `Future[A]`, `Future[Option[A]]`, `Try[A]`, `Option[A]`, `Form[A]` and so on. 
 Dealing with the outcome of these "boxes/effects" might become cumbersome and you'll end up with convoluted code. 

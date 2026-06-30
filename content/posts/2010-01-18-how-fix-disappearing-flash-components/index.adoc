@@ -5,8 +5,6 @@ tags:
 = How to fix disappearing Flash components
 targeter
 v1.0, 2010-01-18
-:title: How to fix disappearing Flash component
-:tags: [flash]
 
 While working on the video
 player for the http://www.minoto-video.com/[Minoto Video Platform], I

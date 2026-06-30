@@ -5,8 +5,6 @@ tags:
 = Starting a game company - Eximion story pt.2 
 Michael Pentowski
 v1.0, 2007-08-23
-:title: Starting a game company - Eximion story pt.2
-:tags: [ventures]
 
 Chris, from
 http://www.eximion.com/, has posted the second installment of

@@ -8,8 +8,6 @@ tags:
 = Benelux JBoss User Group, 29 February - photos
 hilton
 v1.0, 2008-03-03
-:title: Benelux JBoss User Group, 29 February - photos
-:tags: [java,jboss,jbug,event]
 
 Here are some photos from Friday's https://blog.lunatech.com/2008-01-17-jbug-2008-02[Benelux JBoss User
 Group] event at http://www.paddymurphys.nl/[Paddy Murphy's Irish

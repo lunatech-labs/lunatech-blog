@@ -5,8 +5,6 @@ tags:
 = Lunatech blog retrospective - 2009
 hilton
 v1.0, 2014-06-06
-:title: Lunatech blog retrospective - 2009
-:tags: [opinion]
 
 In 2009, we continued to fight JSF, win (usually), write about it, 
     and tell our war stories at JBoss User Group events. However, the most

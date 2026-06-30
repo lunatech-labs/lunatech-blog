@@ -7,9 +7,7 @@ tags:
 = Sunny Tech 2022
 VincentBrule
 v1.0, 2022-07-02
-:title: Sunny Tech 2022 (EN)
 :lang: en
-:tags: [conference, sunny tech, montpellier]
 
 == Sunny Tech ?
 https://sunny-tech.io/[Sunny Tech] took place from June 30 to July 1, under the sun of Montpellier.

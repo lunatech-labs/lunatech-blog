@@ -5,8 +5,6 @@ tags:
 = Eximion launches with first games type
 Michael Pentowski
 v1.0, 2007-06-21
-:title: Eximion launches with first games type
-:tags: [ventures]
 
 Who says gaming is all fun? Well,
 http://eximion.com/[Eximion], one of our portfolio companies does.

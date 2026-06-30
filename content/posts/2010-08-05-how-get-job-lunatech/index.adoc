@@ -6,8 +6,6 @@ tags:
 = How to get a job at Lunatech
 PeterHilton
 v1.0, 2010-08-05
-:title: How to get a job at Lunatech
-:tags: [employment,opinion]
 
 http://www.cloudera.com/blog/2010/07/how-to-get-a-job-at-cloudera/[How to Get a Job at
 Cloudera]

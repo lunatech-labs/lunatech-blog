@@ -6,8 +6,6 @@ tags:
 = JavaPolis 2006
 hilton
 v1.0, 2006-12-22
-:title: JavaPolis 2006
-:tags: [java,conference]
 
 Last week Nicolas Leroux and I attended the http://www.javapolis.com/confluence/display/JP06/Conference[JavaPolis 2006] conference in Antwerp, Belgium. It was a fantastic conference for us, not because there were better talks than last year, but because we met so many interesting people.
 

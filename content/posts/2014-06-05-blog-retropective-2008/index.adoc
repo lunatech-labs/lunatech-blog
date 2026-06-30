@@ -5,8 +5,6 @@ tags:
 = Lunatech blog retrospective - 2008
 hilton
 v1.0, 2014-06-05
-:title: Lunatech blog retrospective - 2008
-:tags: [opinion]
 
 Lunatech followed on from the 2007 developer events with bigger
     events in 2008. Meanwhile, we started 

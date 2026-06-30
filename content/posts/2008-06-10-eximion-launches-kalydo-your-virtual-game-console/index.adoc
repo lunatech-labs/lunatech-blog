@@ -5,8 +5,6 @@ tags:
 = EXIMION LAUNCHES KALYDO \xE2\x80\x93 YOUR VIRTUAL GAME CONSOLE
 Michael Pentowski
 v1.0, 2008-06-10
-:title: EXIMION LAUNCHES KALYDO \xE2\x80\x93 YOUR VIRTUAL GAME CONSOLE
-:tags: [ventures]
 
 
 Play a stunning

@@ -5,8 +5,6 @@ tags:
 = Geo Freedom Day 2011
 wjkveen
 v1.0, 2011-12-05
-:title: Geo Freedom Day 2011
-:tags: [event]
 
 Lunatech will be at the event http://geofreedomday.nl/[Geo Freedom Day
 2011]. The event is cool because we have done

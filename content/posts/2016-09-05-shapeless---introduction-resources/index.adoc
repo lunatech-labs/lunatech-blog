@@ -6,8 +6,6 @@ tags:
 = Shapeless - Introduction resources
 harrylaou
 v1.0, 2016-09-05
-:title: Shapeless - Introduction resources
-:tags: [shapeless,scala]
 
 
 == Where to start if you want to learn shapeless

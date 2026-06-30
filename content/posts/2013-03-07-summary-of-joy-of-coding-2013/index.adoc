@@ -5,8 +5,6 @@ tags:
 = The Joy of Coding 2013
 annagos
 v1.0, 2013-03-07
-:title: The Joy of Coding 2013
-:tags: [event]
 
 On Friday we attended the first edition of the [Joy of Coding](http://joyofcoding.org/) conference in Rotterdam, our hometown. As company we find it important to support local communities to enable knowledge-sharing and networking.  We were happy to sponsor the conference and to provide a programme application for both iPhone and Android.
 

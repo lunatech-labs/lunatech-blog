@@ -5,8 +5,6 @@ tags:
 = The hype is back baby - and this time its for real!
 Keith Wallace
 v1.0, 2005-09-01
-:title: The hype is back baby - and this time its for real!
-:tags: [opinion]
 ifdef::backend-html5[]
 :in-between-width: width='85%'
 :half-width: width='50%'

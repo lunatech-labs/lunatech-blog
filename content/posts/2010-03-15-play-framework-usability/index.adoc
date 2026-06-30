@@ -5,8 +5,6 @@ tags:
 = Play framework usability
 PeterHilton
 v1.0, 2010-03-15
-:title: Play framework usability
-:tags: [playframework]
 
 Perhaps the most
 striking thing about about the http://www.playframework.org/[Play! framework] 1.0 is that its biggest

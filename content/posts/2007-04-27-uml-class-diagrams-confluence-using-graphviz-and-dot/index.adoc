@@ -6,8 +6,6 @@ tags:
 = UML class diagrams in Confluence using Graphviz and DOT
 hilton
 v1.0, 2007-04-27
-:title: UML class diagrams in Confluence using Graphviz and DOT
-:tags: [wiki,confluence]
 
 One of the benefits of using Confluence
 for our intranet wiki is the popularity of its plug-in architecture. One

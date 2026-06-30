@@ -11,9 +11,7 @@ tags:
 = Terminal-first Mouseless Development Or How To Be A Hipster Engineer
 vitos-exe
 v1.0, 2025-07-11
-:title: Terminal-first Mouseless Development Or How To Be A Hipster Engineer
 :lang: en
-:tags: [beyond-the-code, bash-to-the-feature, vim, tmux, cli, terminal, en]
 
 In this article, I'm going to give you a slightly different view on
 something you do on a daily basis. A philosophy that encourages you to

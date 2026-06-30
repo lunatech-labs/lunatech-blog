@@ -5,8 +5,6 @@ tags:
 = Friday's Internal Workshop
 Antoine Laffez
 v1.0, 2019-03-05
-:title: Friday's Internal Workshop
-:tags: [event]
 
 Workshops are parts of our DNA. Certified trainers share their knowledge in internal workshops every Friday. Let's have a look of the schedule for ⬇️ March and April ⬇️Akka, Kafka, Cassandra and more...
 

@@ -5,8 +5,6 @@ tags:
 = Processing EDIFACT messages with Smooks
 ludofischer
 v1.0, 2011-12-30
-:title: Processing EDIFACT messages with Smooks
-:tags: [java]
 
 http://www.smooks.org[Smooks] is a
 set of tools written in the Java programming language to assist you in

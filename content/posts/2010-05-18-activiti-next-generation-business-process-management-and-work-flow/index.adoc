@@ -6,8 +6,6 @@ tags:
 = Activiti next-generation Business Process Management and work-flow
 PeterHilton
 v1.0, 2010-05-18
-:title: Activiti next-generation Business Process Management and work-flow
-:tags: [bpm,java]
 
 http://www.alfresco.com/media/releases/2010/05/activiti_bpm/[Yesterday's
 launch] of

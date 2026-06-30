@@ -8,9 +8,7 @@ tags:
 = Using Kotlin to build the Lunaconf 2022 App
 shabab477
 v1.0, 2022-12-16
-:title: Using Kotlin to build the Lunaconf 2022 App
 :lang: en
-:tags: [kotlin, android, jetpack, en]
 
 At Lunatech Labs we have a wide variety of https://github.com/orgs/lunatech-labs/repositories[internal projects for our employees to contribute to]. This helps us to experiment with 
 different technologies and also build internal products for our organization. This year we decided to build an Android

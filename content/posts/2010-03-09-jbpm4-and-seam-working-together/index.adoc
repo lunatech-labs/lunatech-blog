@@ -8,8 +8,6 @@ tags:
 = jBPM4 and Seam working together
 pepite
 v1.0, 2010-03-09
-:title: jBPM4 and Seam working together
-:tags: [jboss,jbpm,seam,jsf]
 
 
 So you wonder why there is

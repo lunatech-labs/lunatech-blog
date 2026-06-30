@@ -7,8 +7,6 @@ tags:
 = Side Effects and How To Deal With Them The Cool Way, Part 1 - Pure functions and functors
 FrancoAra
 v1.0, 2016-10-17
-:title: Side Effects and How To Deal With Them The Cool Way, Part 1 - Pure functions and functors
-:tags: [fp,scala,monad]
 
 == Introduction
 

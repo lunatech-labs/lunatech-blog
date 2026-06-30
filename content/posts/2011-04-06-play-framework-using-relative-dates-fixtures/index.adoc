@@ -6,8 +6,6 @@ tags:
 = Play Framework 1.2 - Using relative dates in fixtures
 eamelink
 v1.0, 2011-04-06
-:title: Play Framework 1.2 - Using relative dates in fixtures
-:tags: [playframework,hibernate]
 
 When writing
 Play 1.2 applications, you often use a set of fixtures to use as inital

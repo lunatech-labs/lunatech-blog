@@ -6,8 +6,6 @@ tags:
 = Lunatech Platinum Sponsor Scala Days 2018 Berlin
 Antoine Laffez
 v1.0, 2018-05-10
-:title: Lunatech Platinum Sponsor Scala Days 2018 Berlin
-:tags: [event,scala]
 
 In a few days the most well known Scala conference in Europe will be held: https://eu.scaladays.org/[Scala Days]. Berlin will be hosting the event in the https://convention.visitberlin.de/en/meetingguideberlin/locations/kosmos-eventlocation[Kosmos center]. People from all over the world will join for this highlights Scala event.
 

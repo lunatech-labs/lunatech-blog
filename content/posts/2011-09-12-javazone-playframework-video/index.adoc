@@ -6,8 +6,6 @@ tags:
 = JavaZone Play framework presentation video
 hilton
 v1.0, 2011-09-12
-:title: JavaZone Play framework presentation video
-:tags: [event,playframework]
 
 "Last week, Nicolas Leroux and Peter Hilton gave a [Play
 Framework](http://www.playframework.org/) presentation at

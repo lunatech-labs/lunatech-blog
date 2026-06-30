@@ -7,8 +7,6 @@ tags:
 = Wiki is my word-processor
 hilton
 v1.0, 2006-12-04
-:title: Wiki is my word-processor
-:tags: [documentation,wiki,confluence]
 
 Most commercial software development produces project documentation, which is a software developer’s main use for a word-processor. This year, our intranet wiki became my word-processor; this article explains why.
 

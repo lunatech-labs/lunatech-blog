@@ -6,9 +6,7 @@ tags:
 = Riviera DEV 2023
 VincentBrule
 v1.0, 2023-07-15
-:title: Riviera DEV 2023
 :lang: en
-:tags: [conference, nice]
 
 == Riviera DEV ?
 After a great edition on a lake, https://rivieradev.fr/[Riviera DEV] is back in the Skema school from 10th to 12th July in Nice Sophia Antipolis.

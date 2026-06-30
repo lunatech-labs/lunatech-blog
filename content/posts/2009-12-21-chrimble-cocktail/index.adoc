@@ -5,8 +5,6 @@ tags:
 = Chrimble cocktail
 PeterHilton
 v1.0, 2009-12-21
-:title: Chrimble cocktail
-:tags: [fun]
 
 This year's festive period led to a more seasonal kind of
 design task: create a cocktail for Chrimbletide. Here is the recipe.

@@ -5,8 +5,6 @@ tags:
 = Last article from me
 FroMage
 v1.0, 2011-10-14
-:title: Last article from me
-:tags: [fun]
 
 
 "Today is my last day as a Lunatech Research employee,

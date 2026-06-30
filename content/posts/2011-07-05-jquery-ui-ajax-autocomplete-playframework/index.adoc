@@ -8,8 +8,6 @@ tags:
 = jQuery UI Ajax autocomplete with Play 1.2
 PeterHilton
 v1.0, 2011-07-05
-:title: jQuery UI Ajax autocomplete with Play 1.2
-:tags: [jquery,ajax,javascript,playframework]
 
 
 When Matt Raible http://raibledesigns.com/rd/entry/my_comparing_jvm_web_frameworks[compared JVM web

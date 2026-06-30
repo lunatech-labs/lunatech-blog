@@ -4,9 +4,7 @@ draft: true
 = Migrating our blog to Quarkus Roq
 wjglerum
 v1.0, 2026-06-29
-:title: Migrating our blog to Quarkus Roq
 :lang: en
-:tags: [quarkus, roq, asciidoc, static-site, migration]
 
 This blog used to run on two repositories. One held the posts: 457 AsciiDoc
 files going back to 2005. The other was a Play Framework application that, at

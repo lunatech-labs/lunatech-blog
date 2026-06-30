@@ -5,8 +5,6 @@ tags:
 = XML and Namespaces
 bartschuller
 v1.0, 2008-10-03
-:title: XML and Namespaces
-:tags: [xml]
 
 This article
 explains namespaces in XML: when to use namespaces, and how to declare a

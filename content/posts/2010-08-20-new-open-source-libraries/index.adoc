@@ -6,8 +6,6 @@ tags:
 = New open-source libraries
 FroMage
 v1.0, 2010-08-20
-:title: New open-source libraries
-:tags: [java,playframework]
 
 
 Today we’ve released three new OSS

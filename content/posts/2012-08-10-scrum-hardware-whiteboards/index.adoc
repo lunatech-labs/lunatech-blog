@@ -6,9 +6,7 @@ tags:
 = Essential Scrum hardware - lots of whiteboards
 hilton
 v1.0, 2012-08-10
-:title: Essential Scrum hardware - lots of whiteboards
 environment set-up
-:tags: [scrum,methodology]
 
 In case you’re
 wondering how many whiteboards your Scrum team members need, the correct

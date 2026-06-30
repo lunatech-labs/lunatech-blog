@@ -8,8 +8,6 @@ tags:
 = The tale about Hibernate and Temporal Tables
 smthelusive
 v1.0, 2020-12-07
-:title: The tale about Hibernate and Temporal Tables
-:tags: [hibernate, java, temporal, mssql]
 
 == Foreword
 

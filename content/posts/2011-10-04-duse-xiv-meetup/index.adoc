@@ -6,8 +6,6 @@ tags:
 = Duse XIV at Lunatech Research
 fcanedo
 v1.0, 2011-10-04
-:title: Duse XIV at Lunatech Research
-:tags: [scala,event]
 
 Lunatech Research is
 proudly hosting the fourteenth Duse meetup, a fun gathering of

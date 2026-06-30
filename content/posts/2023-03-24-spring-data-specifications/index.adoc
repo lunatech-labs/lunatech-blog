@@ -10,9 +10,7 @@ tags:
 = Spring Data Specifications
 abensoussan
 v1.0, 2023-03-24
-:title: Spring Data Specifications
 :lang: en
-:tags: [java, jpa, spring, data, specifications, dynamic query]
 
 
 == Introduction

@@ -8,9 +8,7 @@ tags:
 = JVM vs JVM
 nikashamova
 v1.0, 2024-11-29
-:title: JVM vs JVM
 :lang: en
-:tags: [java, jvm, java-vs-world, java-over-java]
 
 == Introduction
 

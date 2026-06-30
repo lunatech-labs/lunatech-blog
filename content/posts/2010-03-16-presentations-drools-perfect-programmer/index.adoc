@@ -6,8 +6,6 @@ tags:
 = Presentations - Drools and the perfect programmer at 42
 PeterHilton
 v1.0, 2010-03-16
-:title: Presentations - Drools and the perfect programmer at 42
-:tags: [drools,event]
 
 This
 afternoon, I gave two presentations for the nice folks at

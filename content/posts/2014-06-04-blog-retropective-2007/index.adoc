@@ -5,8 +5,6 @@ tags:
 = Lunatech blog retrospective - 2007
 hilton
 v1.0, 2014-06-04
-:title: Lunatech blog retrospective - 2007
-:tags: [opinion]
 
 2007’s blog posts were about events, one way or another. The technical
 articles weren’t directly about the events, but reflect the Java EE web

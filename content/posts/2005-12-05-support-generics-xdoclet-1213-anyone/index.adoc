@@ -5,8 +5,6 @@ tags:
 = Support for generics in XDoclet 1.2/1.3 anyone?
 Pepite
 v1.0, 2005-12-05
-:title: Support for generics in XDoclet 1.2/1.3 anyone?
-:tags: [java]
 
 We moved to the latest Java 1.5, and if there is something we love about this new version, it is certainly the use of generics. However, http://xdoclet.sourceforge.net/xdoclet/[XDoclet] support for generics is non-existent. The XDoclet team, did release a new version that allows you to generate classes containing generics, but there is no generics support. So I fixed it.
 

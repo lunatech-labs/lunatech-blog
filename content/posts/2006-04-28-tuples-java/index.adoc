@@ -5,8 +5,6 @@ tags:
 = Tuples in Java
 bartschuller
 v1.0, 2006-04-28
-:title: Tuples in Java
-:tags: [java]
 
 Every once in a while, a java programmer wonders *how do I return multiple values from my method?* Perl and lisp can return lists, but java is constrained to return just one object. Here's how that limitation can be overcome. Note that this requires a Java 5 implementation.
 

@@ -7,8 +7,6 @@ tags:
 = Unit-testing AJAX code with Maven
 FroMage
 v1.0, 2010-03-01
-:title: Unit-testing AJAX code with Maven
-:tags: [java,javascript,maven]
 
 This article
 presents a way to use http://maven.apache.org[Maven] to write

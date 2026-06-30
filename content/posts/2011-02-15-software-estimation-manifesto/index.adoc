@@ -6,8 +6,6 @@ tags:
 = The Software Estimation Manifesto
 PeterHilton
 v1.0, 2011-02-07
-:title: The Software Estimation Manifesto
-:tags: [estimation,methodology]
 
 Making estimates for how long a software
 development task will take is the closest that commercial software

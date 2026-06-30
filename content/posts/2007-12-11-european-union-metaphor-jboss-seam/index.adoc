@@ -7,8 +7,6 @@ tags:
 = The European Union - a metaphor for JBoss Seam
 hilton
 v1.0, 2007-12-11
-:title: The European Union - a metaphor for JBoss Seam
-:tags: [java,jboss,seam]
 
 http://www.jboss.com/products/seam[JBoss Seam] is a
 Java EE application framework whose many roles can make it hard to

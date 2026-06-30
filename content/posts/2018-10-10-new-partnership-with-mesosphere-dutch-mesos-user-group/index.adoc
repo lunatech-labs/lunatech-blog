@@ -6,8 +6,6 @@ tags:
 = New Partnership With Mesosphere And Dutch Mesos User Group
 Antoine Laffez
 v1.0, 2018-10-10
-:title: New Partnership With Mesosphere And Dutch Mesos User Group
-:tags: [event,mesosphere]
 
 As our expertise in Mesos was growing, Lunatech and Mesosphere signed a strategic partnership. We are very glad to increase our knowledge in DC/OS field. That's why we were hosted the first Dutch Mesos User Group in our Rotterdam offices:
 

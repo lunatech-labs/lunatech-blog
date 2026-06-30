@@ -8,8 +8,6 @@ tags:
 = Continuous Integration on GitLab with Scala and SBT
 jasperdenkers
 v1.0, 2016-08-01
-:title: Continuous Integration on GitLab with Scala and SBT
-:tags: [cdci,scala,sbt,giblab]
 
 With Continuous Integration (CI) we aim to be able to test the changes we make to our projects automatically and externally. An usual setup involves e.g. GitHub and Jenkins and requires quite some configuration.
 

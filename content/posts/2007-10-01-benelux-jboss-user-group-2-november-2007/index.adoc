@@ -6,8 +6,6 @@ tags:
 = Benelux JBoss User Group, 2 November 2007
 hilton
 v1.0, 2007-10-01
-:title: Benelux JBoss User Group, 2 November 2007
-:tags: [jbug,event]
 
 Since the [first
 event](/2007/06/15/benelux-jboss-user-group-8-june-2007-first-photos)

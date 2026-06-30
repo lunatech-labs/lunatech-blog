@@ -5,8 +5,6 @@ tags:
 = Meeting-avoidance for self-managing developers - Devoxx 2008
 hilton
 v1.0, 2008-12-05
-:title: Meeting-avoidance for self-managing developers - Devoxx 2008
-:tags: [project-management]
 
 This week, Peter Hilton will be
 presenting http://www.devoxx.com/display/JV08/Meeting-avoidance+for+self-managing+developers[Meeting-avoidance for self-managing

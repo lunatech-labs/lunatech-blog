@@ -5,8 +5,6 @@ tags:
 = Moving from Spain to the Netherlands 
 JMCeron
 v1.0, 2016-08-29
-:title: Moving from Spain to the Netherlands 
-:tags: [opinion]
 
 Last week, I started talking about the main things I've faced when learning Scala, after being a Java developers for a few years. Today, I will talk about how it was to move from Spain to the Netherlands, in order to join Lunatech.
 
