@@ -10,8 +10,7 @@ v1.0, 2013-04-03
 
 At yesterday’s 010DEV developer meet-up, Typesafe and Lunatech presented Play and Akka to a room full of developers.
 
-image:typesafe-at-010dev.jpg[James
-Ward and Nicolas Leroux]
+image:typesafe-at-010dev.jpg[James Ward and Nicolas Leroux]
 
 *Photo: James Ward (left) and Nicolas Leroux (right) present Play
 Framework 2.1. Roland Kuhn (far-left) waits to present Akka.*

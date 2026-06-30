@@ -17,6 +17,6 @@ developers.
 
 link:/media/2008-12-05-meeting-avoidance-self-managing-developers-devoxx-2008/meeting-avoidance.pdf[Slides] (PDF, 1.6 MB)
 
-link:/media/2008-12-05-meeting-avoidance-self-managing-developers-devoxx-2008/meeting-avoidance.pdf[image:meeting-avoidance.png[slides]]
+image:meeting-avoidance.png[slides,link=/media/2008-12-05-meeting-avoidance-self-managing-developers-devoxx-2008/meeting-avoidance.pdf]
 
 

@@ -18,5 +18,5 @@ started in 2007. Here is the video of the presentation.
 
 Video: http://parleys.com/d/3081[Parleys.com]
 
-http://parleys.com/d/3081[image:jfokus-video.jpg[Video on Parleys.com]]
+image:jfokus-video.jpg[Video on Parleys.com,link=http://parleys.com/d/3081]
 

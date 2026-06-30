@@ -23,8 +23,7 @@ dist/lib/lumbermill.jar* then there is a problem after you select the
 _New Server Mill_ menu option, and enter a port number under _Please
 enter the port to listen on_
 
-image:lumbermill-1.png[Lumbermill - attempting to create a New Server
-Mill]
+image:lumbermill-1.png[Lumbermill - attempting to create a New Server Mill]
 
 … the window doesn't open - nothing happens. Instead of opening the log
 output window, Lumbermill silently fails with the following

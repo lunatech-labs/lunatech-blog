@@ -102,7 +102,7 @@ Elasticsearch for each log statement. For example:
 You can then modify Kibana’s default logstash dashboard by adding panels
 that show values for the various facets.
 
-link:kibana.png[image:kibana-small.png[Example Kibana dashboard panels]]
+image:kibana-small.png[Example Kibana dashboard panels,link=kibana.png]
 
 In this example the first panel shows a timeline of log events, grouped
 into one-second intervals, a pie chart of currencies and a map of

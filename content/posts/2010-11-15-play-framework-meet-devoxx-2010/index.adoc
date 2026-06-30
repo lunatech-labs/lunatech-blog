@@ -16,8 +16,7 @@ evening for a http://www.playframework.org/[Play framework] meet-up,
 to talk to us about Play (Nicolas and Peter are both committers on the
 project), get free drinks and meet other developers.
 
-image:devoxx-2010-play-meetup.jpg[About 60 people turned up at the Play
-framework meet-up at Axxes Café, sponsored by Lunatech and Zenexity] +
+image:devoxx-2010-play-meetup.jpg[About 60 people turned up at the Play framework meet-up at Axxes Café, sponsored by Lunatech and Zenexity] +
 About 60 people turned up at the Play framework meet-up at Axxes Café,
 sponsored by Lunatech and Zenexity
 

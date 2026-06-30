@@ -48,8 +48,7 @@ http://alistair.cockburn.us/Agile+software+development+book[2001 book on
 the topic] that we had used on the Struts project with the nice URLs
 (see above):
 
-image:/posts/2005-10-07-information-radiators-dashboard-wall/information-radiator-small.jpg[An
-information radiator]
+image:/posts/2005-10-07-information-radiators-dashboard-wall/information-radiator-small.jpg[An information radiator]
 
 This kind of thing is a lot more common these days, with more Scrum
 projects than you can shake a stick at, but agile software development
@@ -57,8 +56,7 @@ was less mainstream and featured a lot less hype back in 2005.
 
 == Business
 
-image:/posts/2005-09-13-business-lunch-rules/business-lunch.jpg[business
-lunch]
+image:/posts/2005-09-13-business-lunch-rules/business-lunch.jpg[business lunch]
 
 https://blog.lunatech.com/posts/2005-09-13-business-lunch-rules[Business lunch
 rules] is my favourite, though, because these instructions for how to

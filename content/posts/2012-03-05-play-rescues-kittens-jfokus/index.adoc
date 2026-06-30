@@ -49,8 +49,7 @@ ____
 Fortunately, lots of people turned by the time I started (photo by
 @iamgoddog):
 
-image:jfokus-audience.jpg[Audience for my Play framework 2.0 talk, photo
-by @iamgoddog]
+image:jfokus-audience.jpg[Audience for my Play framework 2.0 talk, photo by @iamgoddog]
 
 The presentation was on Valentine’s day, so a good day to say that you
 love Play:
@@ -114,8 +113,7 @@ At some point, I somehow ended up talking about kittens (photo:
 http://www.flickr.com/photos/jameswragg/4688532009/[James Wragg]), which
 may have been slightly confusing and perhaps a little contrived…
 
-image:jfokus-kittens.jpg[Found: kittens! Photo:
-www.flickr.com/photos/jameswragg/4688532009]
+image:jfokus-kittens.jpg[Found: kittens! Photo: www.flickr.com/photos/jameswragg/4688532009]
 
 ____
 @apnylle: "I was somehow distracted while writing this code and wrote

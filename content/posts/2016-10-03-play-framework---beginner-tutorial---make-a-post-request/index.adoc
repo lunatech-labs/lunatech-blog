@@ -25,7 +25,7 @@ This example uses https://www.playframework.com/documentation/2.5.x/ScalaCompile
 
 == Tutorial 
 
-link:https://www.youtube.com/watch?v=-iPKaW1RuTI[image:play.png[]].
+image:play.png[,link=https://www.youtube.com/watch?v=-iPKaW1RuTI].
 
 
 == After the tutorial

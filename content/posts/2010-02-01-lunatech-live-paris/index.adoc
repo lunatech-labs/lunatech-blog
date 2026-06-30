@@ -26,7 +26,7 @@ open-source software, we got not one but two quickies at the
 http://www.parisjug.org/xwiki/bin/view/Meeting/20100209[February 9
 event]:
 
-http://www.parisjug.org/xwiki/bin/view/Meeting/20100209[image:juggyannif02.jpg[image]]
+image:juggyannif02.jpg[image,link=http://www.parisjug.org/xwiki/bin/view/Meeting/20100209]
 
 * Stéphane Épardaud will be presenting
 http://www.lunatech-labs.com/open-source/jax-doclets[jax-doclets], our

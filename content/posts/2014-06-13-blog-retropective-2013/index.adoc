@@ -10,8 +10,7 @@ v1.0, 2014-06-13
 
 2013 brought even more firsts for projects, consultancy, technology and events than the previous year.
 
-image:/posts/2013-05-27-sdu-royal-ten/sdu-royal-ten.jpg[Sdu Royal
-Ten - 10km business run]
+image:/posts/2013-05-27-sdu-royal-ten/sdu-royal-ten.jpg[Sdu Royal Ten - 10km business run]
 
 If there’s a pattern to what was new in 2013, it is perhaps increasing
 diversity. There were more approaches to running software projects,

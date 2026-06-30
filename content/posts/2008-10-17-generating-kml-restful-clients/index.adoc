@@ -396,7 +396,7 @@ public Kml getPlacementsKML(Resource container){
 
 And we are done.
 
-link:generating-kml-restful-clients-1.png[image:generating-kml-restful-clients-1.png[image]]
+image:generating-kml-restful-clients-1.png[image,link=generating-kml-restful-clients-1.png]
 
 == How to serve KML
 
@@ -522,7 +522,7 @@ web page:
 
 This gives us a nice Google Earth plugin view:
 
-link:generating-kml-restful-clients-2.png[image:generating-kml-restful-clients-2.png[image]]
+image:generating-kml-restful-clients-2.png[image,link=generating-kml-restful-clients-2.png]
 
 == Google Maps for those on Linux or Mac OS
 
@@ -616,4 +616,4 @@ JavaScript.
 With all this, we finally manage to have our Google Maps fallback for
 Linux and Mac OS users:
 
-link:generating-kml-restful-clients-3.png[image:generating-kml-restful-clients-3.png[image]]
+image:generating-kml-restful-clients-3.png[image,link=generating-kml-restful-clients-3.png]

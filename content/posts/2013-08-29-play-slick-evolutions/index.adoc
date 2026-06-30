@@ -110,8 +110,7 @@ drop table "COCKTAIL";
 After Slick creates this Script, Play will see that there is a new
 Evolutions script and offer to run it:
 
-image:evolutions.png[Play offers to
-run the evolutions script]
+image:evolutions.png[Play offers to run the evolutions script]
 
 Now you have a database for your application to use at runtime.
 
@@ -139,8 +138,7 @@ insert into COCKTAIL values (3, 'Piña colada');
 In DEV mode, Play will detect the change on the next request and offer
 to run the new script.
 
-image:evolutions-test-data.png[Updated
-evolutions script]
+image:evolutions-test-data.png[Updated evolutions script]
 
 As you can see, Play will first run a `Downs` section that drops the
 table. This is the `Downs` section from the previous version of the

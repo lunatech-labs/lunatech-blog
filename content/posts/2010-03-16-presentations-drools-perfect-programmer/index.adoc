@@ -14,10 +14,8 @@ afternoon, I gave two presentations for the nice folks at
 http://www.42.nl/[42] for their Knowledge Transfer meeting, at
 Rotterdam's natural history museum. Here are the slides.
 
-link:/media/2010-03-16-presentations-drools-perfect-programmer/perfect-programmer.pdf[image:perfect-programmer.png[In search of
-the perfect programmer]]
-link:/media/2010-03-16-presentations-drools-perfect-programmer/decision-service.pdf[image:decision-service.png[How to build a
-decision service using JBoss Rules (a.k.a. Drools)]]
+image:perfect-programmer.png[In search of the perfect programmer,link=/media/2010-03-16-presentations-drools-perfect-programmer/perfect-programmer.pdf]
+image:decision-service.png[How to build a decision service using JBoss Rules (a.k.a. Drools),link=/media/2010-03-16-presentations-drools-perfect-programmer/decision-service.pdf]
 
 link:/media/2010-03-16-presentations-drools-perfect-programmer/perfect-programmer.pdf[In search of the perfect programmer] (PDF,
 4.2 MB) is a short presentation, to get things started. This is a

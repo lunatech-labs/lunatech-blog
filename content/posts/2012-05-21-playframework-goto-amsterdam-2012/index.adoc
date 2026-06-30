@@ -13,8 +13,7 @@ on 24 May 2012, Peter Hilton will present http://gotocon.com/amsterdam-2012/pres
 2.0]
 at http://2012.geecon.org/[GOTO Amsterdam 2012].
 
-http://gotocon.com/amsterdam-2012/[image:gotoamst.jpg[Play Framework
-2.0]]
+image:gotoamst.jpg[Play Framework 2.0,link=http://gotocon.com/amsterdam-2012/]
 
 image:gotoamsterdam-2012-photo.jpg[Introduction session photo]
 

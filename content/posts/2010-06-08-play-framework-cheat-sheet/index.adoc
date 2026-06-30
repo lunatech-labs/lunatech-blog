@@ -15,7 +15,7 @@ quick reference. Here is a link:/media/2010-06-08-play-framework-cheat-sheet/pla
 sheet] (A4 PDF, 53 KB), with the essential
 commands, tags and extensions." ---
 
-link:/media/2010-06-08-play-framework-cheat-sheet/play-cheat-sheet.pdf[image:play-cheat-sheet.png[Cheat sheet]]
+image:play-cheat-sheet.png[Cheat sheet,link=/media/2010-06-08-play-framework-cheat-sheet/play-cheat-sheet.pdf]
 
 If you want to know why we like Play, then read about
 link:https://blog.lunatech.com/posts/2010-03-15/play-framework-usability[Play framework usability].

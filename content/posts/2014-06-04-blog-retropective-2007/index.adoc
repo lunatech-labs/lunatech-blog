@@ -34,8 +34,7 @@ out on internal experimental projects. One Friday, we formed several
 teams of two people and tried implementing a simple web-based expense
 claim form, each with a different web framework.
 
-link:expense-ui.png[image:expense-ui-small.png[User interface mock-up
-for the expense form assignment]]
+image:expense-ui-small.png[User interface mock-up for the expense form assignment,link=expense-ui.png]
 
 The candidates for our next web framework, chosen on various whims,
 were: JSF/JBoss Seam, Wicket, Tapestry, GWT/EJB3 and UCW/Common Lisp
@@ -63,8 +62,7 @@ JavaPolis 2006, we decided to take Tom Baeyens up on his suggestion to
 create a JBoss User Group (JBUG) and host some developer events in
 Rotterdam.
 
-image:/posts/2007-06-15-benelux-jboss-user-group-8-june-2007-first-photos/jbug-2007-06-photos-04.jpg[Tom
-Baeyens from JBoss (left) talks about Java Process Description Language]
+image:/posts/2007-06-15-benelux-jboss-user-group-8-june-2007-first-photos/jbug-2007-06-photos-04.jpg[Tom Baeyens from JBoss (left) talks about Java Process Description Language]
 
 https://blog.lunatech.com/posts/2007-05-24-jboss-benelux-user-group-8-june-2007[JBoss
 Benelux User Group, 8 June 2007] was the first JBUG event in Rotterdam,

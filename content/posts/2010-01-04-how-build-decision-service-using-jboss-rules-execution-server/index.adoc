@@ -36,8 +36,7 @@ http://downloads.jboss.com/drools/docs/5.0.1.26597.FINAL/drools-guvnor/html/ch01
 Server] as part of the standard distribution. We will configure this to
 provide a decision service using the following architecture.
 
-image:decision-service-architecture-3.png[Decision service architecture
-diagram]
+image:decision-service-architecture-3.png[Decision service architecture diagram]
 
 The Execution Server is a standard web application WAR that includes the
 JBoss Rules rules engine library. We will configure it by adding a

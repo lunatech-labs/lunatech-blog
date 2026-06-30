@@ -93,8 +93,7 @@ staff were not impressed by the error
 http://www.37signals.com/svn/posts/337-screens-around-town-zune-php-developers-network-planet-argon-and-amex["Your
 Employer Name cannot contain any numbers"]:
 
-image:features-inputvalidation.png[Over-zealous input validation,
-American Express]
+image:features-inputvalidation.png[Over-zealous input validation, American Express]
 
 Draconian validation may seem justified in the name of data quality, but
 even if it does achieve that it will probably do so at the price of
@@ -282,8 +281,7 @@ changed, rather than make the change in some database and manually send
 an e-mail. (Or, more likely, just send an e-mail and not update the
 database.)
 
-image:features-notifications.png[Enable/disable notifications icons in
-Confluence]
+image:features-notifications.png[Enable/disable notifications icons in Confluence]
 
 For example, if you use a wiki for reference information, you probably
 need to know when there is a new version. Each page in
@@ -406,6 +404,5 @@ that all become editable when you click any of them.
 For example, when you are logged in to http://www.flickr.com/[Flickr],
 you can edit a photo's description simply by clicking it:
 
-http://www.flickr.com/photos/peterhilton/286597393/[image:features-editinplace.jpg[In-line
-editing on Flickr]]
+image:features-editinplace.jpg[In-line editing on Flickr,link=http://www.flickr.com/photos/peterhilton/286597393/]
 

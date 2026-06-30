@@ -13,5 +13,5 @@ Next week, on 17 October 2012, Peter Hilton will present http://jaxlondon.com/20
 2] at http://jaxlondon.com/[JAX
 London 2012].
 
-http://jaxlondon.com/[image:jaxlondon-logo.png[JAX London]]
+image:jaxlondon-logo.png[JAX London,link=http://jaxlondon.com/]
 

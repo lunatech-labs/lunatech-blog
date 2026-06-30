@@ -168,8 +168,7 @@ to complexity in the IT system that consolidates status updates from
 multiple transporters into a single view that has a single notion of
 `shipment' versus `parcel'.
 
-image::vcsplus-shipment-details.png[Supply chain visibility software
-developed by Lunatech for UPS]
+image::vcsplus-shipment-details.png[Supply chain visibility software developed by Lunatech for UPS]
 
 _Screen shot: supply chain visibility software developed by Lunatech for
 UPS._

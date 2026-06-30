@@ -14,8 +14,7 @@ I have completed Typesafe’s certification process and can now deliver
 their Play training course. I even have a nice certificate to hang on
 the wall:
 
-image:fttps-certificate.png[Trainer
-certificate]
+image:fttps-certificate.png[Trainer certificate]
 
 Lunatech can provide this training course both as a public training
 course, in partnership with a training organiser that arranges the

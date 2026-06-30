@@ -21,13 +21,9 @@ restore this disastrous reputation among developers, there are at least
 a few good ones that entertain while broadening the picture a little.
 
 
-image:marketing-books-the-cluetrain-maniesto.png[The Cluetrain
-Manifesto] image:marketing-books-gonzo-marketing.png[Gonzo Marketing:
-Winning Through Worst Practices]
-image:marketing-books-in-search-of-stupidity.png[In Search of Stupidity,
-over 20 years of high-tech marketing disasters]
-image:marketing-books-rules-for-revolutionaries.png[Rules for
-Revolutionaries]
+image:marketing-books-the-cluetrain-maniesto.png[The Cluetrain Manifesto] image:marketing-books-gonzo-marketing.png[Gonzo Marketing: Winning Through Worst Practices]
+image:marketing-books-in-search-of-stupidity.png[In Search of Stupidity, over 20 years of high-tech marketing disasters]
+image:marketing-books-rules-for-revolutionaries.png[Rules for Revolutionaries]
 
 http://www.cluetrain.com/book.html[The Cluetrain Manifesto], also
 http://www.cluetrain.com/book/[available on-line], is a good place to

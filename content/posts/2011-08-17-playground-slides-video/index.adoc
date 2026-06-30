@@ -20,11 +20,11 @@ from the presentations.
 Nicolas Leroux & Peter Hilton, Lunatech. link:/media/2011-08-17-playground-slides-video/play-2011-08.pdf[slides]
 (PDF, 1.9 MB)
 
-link:/media/2011-08-17-playground-slides-video/play-2011-08.pdf[image:play-2011-08.png[slides]]
+image:play-2011-08.png[slides,link=/media/2011-08-17-playground-slides-video/play-2011-08.pdf]
 
 == Play Framework & Scala
 
 Erik Bakker, Lunatech. link:/media/2011-08-17-playground-slides-video/play-2011-08-scala.pdf[slides] (PDF, 126 KB)
 and http://embed.minoto-video.com/15/oEnJiaNdXK2o[video] (33:26)
 
-link:/media/2011-08-17-playground-slides-video/play-2011-08-scala.pdf[image:play-2011-08-scala.png[slides]]
+image:play-2011-08-scala.png[slides,link=/media/2011-08-17-playground-slides-video/play-2011-08-scala.pdf]

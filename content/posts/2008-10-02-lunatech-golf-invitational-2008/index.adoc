@@ -36,7 +36,7 @@ Before dinner, the awards were handed out during the drinks reception:
 * Pascal won the closest to the pin
 * Rogier Van den Heuvel won the stableford AND strokeplay (see note)
 
-link:golf-2008.jpg[image:golf-2008.jpg[golf2008.jpg]]
+image:golf-2008.jpg[golf2008.jpg,link=golf-2008.jpg]
 
 As said earlier, Ferdinand was playing well and on hole 10 he gave up
 after having a bad hole but only being 10 meters from the hole. Had he

@@ -12,8 +12,7 @@ In 2012 we got better toys, our customers started using Scrum seriously,
     and we started talking to the outside world about Play a lot more than we 
     had before.
 
-image:/posts/2012-01-10-late-christmas/monitors.jpg[Last Christmas
-presents]
+image:/posts/2012-01-10-late-christmas/monitors.jpg[Last Christmas presents]
 
 At this point, we had already been using the Play Framework for a couple
 of years. In 2012, we lost our early-adopter advantage, because Play

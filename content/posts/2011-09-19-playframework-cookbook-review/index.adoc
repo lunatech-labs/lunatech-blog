@@ -23,8 +23,7 @@ at every level. Every Play developer should have a copy of this book.*
 
 == Introduction
 
-http://www.packtpub.com/play-framework-cookbook/book[image:play-framework-cookbook.png[Play
-Framework Cookbook]]__Play Framework Cookbook__ is a significant book,
+image:play-framework-cookbook.png[Play Framework Cookbook,link=http://www.packtpub.com/play-framework-cookbook/book]__Play Framework Cookbook__ is a significant book,
 because it is the first Play framework book in print from a major
 publisher, following the http://the-play-book.co.uk/[Introducing the
 Play! Framework] e-book (also available as a

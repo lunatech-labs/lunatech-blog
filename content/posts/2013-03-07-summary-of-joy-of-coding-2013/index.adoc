@@ -10,8 +10,7 @@ v1.0, 2013-03-07
 
 On Friday we attended the first edition of the [Joy of Coding](http://joyofcoding.org/) conference in Rotterdam, our hometown. As company we find it important to support local communities to enable knowledge-sharing and networking.  We were happy to sponsor the conference and to provide a programme application for both iPhone and Android.
 
-image:joc2013.jpg[Joy of Coding 2013 -
-venue,title="Joy of Coding 2013 - venue"]
+image:joc2013.jpg[Joy of Coding 2013 - venue,title="Joy of Coding 2013 - venue"]
 
 The conference venue was not what you usually expect from a software
 conference. The industrial interior of the Maassilo, an old grain silo,

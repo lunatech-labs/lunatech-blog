@@ -13,7 +13,7 @@ This week, on 25 May 2012, Peter
 Hilton will present *In search of the perfect programmer* at
 http://010dev.nl/[010DEV]. In Rotterdam, obviously.
 
-http://010dev.nl/[image:010dev-banner.jpg[010DEV]]
+image:010dev-banner.jpg[010DEV,link=http://010dev.nl/]
 
 The perfect programmer is something a lot of people have an opinion
 about. Being able to code is the only non-optional skill, but here are

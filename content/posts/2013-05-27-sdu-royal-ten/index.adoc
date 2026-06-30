@@ -10,8 +10,7 @@ v1.0, 2013-05-27
 
 On Sunday, May 26th, a Lunatech team participated in the Sdu Royal Ten business run
 
-image:sdu-royal-ten.jpg[The Hague
-Sdu Royal Ten Team photo]
+image:sdu-royal-ten.jpg[The Hague Sdu Royal Ten Team photo]
 
 All team members completed the 10km route in less than one hour; Bart
 Schuller had the fastest time, with 47:26 with an average speed of

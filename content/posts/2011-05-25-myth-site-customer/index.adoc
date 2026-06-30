@@ -14,8 +14,7 @@ On 24 May 2011, Peter Hilton gave a
 talk about agile software development at a http://talkabout-it.nl/detail/?id=9[Talk About IT event] in Amsterdam. Here are the
 link:/media/2011-05-25-myth-site-customer/myth-on-site-customer.pdf[presentation slides] (PDF, 1.4 MB).
 
-link:/media/2011-05-25-myth-site-customer/myth-on-site-customer.pdf[image:myth-on-site-customer.png[presentation
-slides]]
+image:myth-on-site-customer.png[presentation slides,link=/media/2011-05-25-myth-site-customer/myth-on-site-customer.pdf]
 
 The talk described how although agile software development methods
 advocate putting the customer (product owner) in the same room as the
