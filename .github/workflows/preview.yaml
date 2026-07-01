@@ -21,24 +21,17 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - name: Set up JDK 25
-        uses: actions/setup-java@v4
+      - name: Generate Roq site
+        # Generate only (no Pages upload) and point absolute links
+        # (canonical/OG/RSS/sitemap) at the preview host so the preview is
+        # self-consistent. Output lands in target/roq for the Surge deploy.
+        uses: quarkiverse/quarkus-roq@v1
         with:
-          distribution: temurin
+          github-pages: 'false'
           java-version: '25'
-          cache: maven
-
-      - name: Generate static site
-        # Point absolute links (canonical/OG/RSS/sitemap) at the preview host so
-        # the preview is self-consistent. site.url is a build-time property, so it
-        # must be set on the package command. Internal navigation is relative anyway.
-        run: |
-          ./mvnw -B --no-transfer-progress clean package \
-            -Dquarkus.roq.generator.batch=true -DskipTests \
-            -Dsite.url=https://${PREVIEW_DOMAIN}
-          java -jar target/quarkus-app/quarkus-run.jar
+          site-url: https://${{ env.PREVIEW_DOMAIN }}
 
       - name: Deploy to Surge
         env:

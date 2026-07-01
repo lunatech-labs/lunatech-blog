@@ -21,27 +21,15 @@ jobs:
     name: Build static site (Roq)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - name: Set up JDK 25
-        uses: actions/setup-java@v4
+      - name: Generate Roq site
+        # Sets up JDK, builds and generates the site (batch mode), resolves
+        # site.url from the Pages custom domain, and uploads the Pages artifact.
+        uses: quarkiverse/quarkus-roq@v1
         with:
-          distribution: temurin
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           java-version: '25'
-          cache: maven
-
-      - name: Generate static site
-        # Bake the generator into the build (batch is a build-time property),
-        # then run the app once to emit the static site to target/roq.
-        run: |
-          ./mvnw -B --no-transfer-progress clean package \
-            -Dquarkus.roq.generator.batch=true -DskipTests
-          java -jar target/quarkus-app/quarkus-run.jar
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: target/roq
 
   deploy:
     name: Deploy to GitHub Pages
@@ -53,4 +41,4 @@ jobs:
     steps:
       - name: Deploy
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
