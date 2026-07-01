@@ -27,7 +27,7 @@ jobs:
         # Generate only (no Pages upload) and point absolute links
         # (canonical/OG/RSS/sitemap) at the preview host so the preview is
         # self-consistent. Output lands in target/roq for the Surge deploy.
-        uses: quarkiverse/quarkus-roq@v1
+        uses: quarkiverse/quarkus-roq@6ee673e6b6a4e36902901ad66fbaafbb4f683f61 # v1
         with:
           github-pages: 'false'
           java-version: '25'

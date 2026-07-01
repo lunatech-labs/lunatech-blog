@@ -26,7 +26,7 @@ jobs:
       - name: Generate Roq site
         # Sets up JDK, builds and generates the site (batch mode), resolves
         # site.url from the Pages custom domain, and uploads the Pages artifact.
-        uses: quarkiverse/quarkus-roq@v1
+        uses: quarkiverse/quarkus-roq@6ee673e6b6a4e36902901ad66fbaafbb4f683f61 # v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           java-version: '25'
