@@ -18,7 +18,7 @@ After these tasks are evaluated, they are then communicated to a leader node (an
 
 https://docs.mesosphere.com/1.9/[DC/OS Documentation]
 
-## Differentiating Apache Mesos, Mesosphere and DC/OS
+== Differentiating Apache Mesos, Mesosphere and DC/OS
 
 *Mesos -* an open-source cluster resource manager, the Kernel of DC/OS.
 
@@ -71,7 +71,7 @@ $ git clone https://github.com/dcos/dcos-vagrant
 $ cd dcos-vagrant
 ----
 
-## DC/OS setup guidelines
+== DC/OS setup guidelines
 
 Install `vagrant-hostmanager`, a plugin that makes it possible for you to access virtual machines from your computer via ssh.
 
@@ -113,7 +113,7 @@ Edit the `VagrantConf.yaml` file and lower the memory for the private agent node
 
 Run `$ vagrant up` and wait until the command completes successfully. NOTE: You can ignore the countless warning logs as they are just part of the logic defined in the deploy script to repeatedly access one of the machines still being prepared.
 
-## Visualizing your provisioned DC/OS cluster
+== Visualizing your provisioned DC/OS cluster
 If all is well, you should be able to access http://m1.dcos/in your web browser (Safari, Chrome, etc...)
 
 image::https://prismic-io.s3.amazonaws.com/lunatech%2F4f2c172b-0730-4fbb-bd7e-168f5ba59380_1visualizecluster.png[alt=Visualizer,width=1024]
@@ -127,7 +127,7 @@ Alternatively, you can install the dcos CLI tool to perform the same said tasks 
 ----
 ci/dcos-install-cli.sh
 ----
-## Making snapshots of your working cluster
+== Making snapshots of your working cluster
 
 If you intend to make changes to your cluster, the first thing we would recommend is to save the working state. If you installed VirtualBox you should be able to open the application and see which virtual machines you have running.
 
@@ -135,12 +135,12 @@ The first thing to do once you open the application is to shutdown/power off eve
 
 In the top right corner, you should see a button `Snapshots` if you click on this one you can save the current state of each machine. Making Snapshots in http://www.techrepublic.com/article/how-to-use-snapshots-in-virtualbox/[VirtualBox]
 
-## Destroying your cluster
+== Destroying your cluster
 If you're interested to continue with part 2 and 3 of this tutorial, it's best not to destroy your cluster. Just keep in mind that after you are through with reading through this guide, you will most likely want to clean your computer.
 
 To do so, simply run the command `vagrant destroy` -f from within the `dcos-vagrant` project repository you cloned.
 
-## Coming soon
+== Coming soon
 
 * Part 2 - Running services on your DC/OS cluster
 
