@@ -300,7 +300,6 @@ A static item is a value which is valid for the entire duration of your program.
 ----
 fn return_match_borrow(pattern: &str, lines: &'static Vec<&str>) -> Option<&'static str> {
 ----
-----
 
 To me, ownership and lifetimes are the most cumbersome part of Rust development, but this is the price to pay to avoid garbage collection.
 ``Object`` in Java or ``AnyRef`` Scala are passed on as references and we do not need to worry about who owns them. Execution is as efficient as it can be, and Rust does not have much performance advantage over Java.
