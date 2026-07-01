@@ -8,13 +8,9 @@ v1.0, 2023-06-05
 
 
 Internal projects at Lunatech play a crucial role in fostering growth, innovation, and knowledge-sharing between employees. These projects serve as the sandbox where new joiners are given the opportunity to explore, learn, and contribute in a hands-on manner.
-++++
-</br>
-++++
+
 *Lunagraph* is one of the internal projects that will revolutionize how we handle three crucial elements: People, Clients, and Projects. This innovative solution serves as the "source of truth" for these key elements, providing a reliable and consolidated platform that offers immense value to our internal clients.
-++++
-</br>
-++++
+
 Lunagraph’s vision is to provide reliable service to internal clients with a single API integration, previously many apps were used for this integration. One of the task for this project is to have automated testing of APIs for faster test maintenance and refactoring.
 
 === What is an API Testing?
@@ -57,9 +53,7 @@ _Advantage: *Newman* is a command-line Collection Runner for Postman that enable
 
 Selenium is a very popular test automation tool for testing web (browser automation) and mobile applications which are powered by the cloud. It is not great at asserting if an individual API works correctly or not.
 
-++++
-</br>
-++++
+
 
 Selenium tests perform UI actions on a website such as
 
@@ -69,9 +63,7 @@ Selenium tests perform UI actions on a website such as
 
 API tests can verify and validate the system earlier in the development cycle. Even when there's not a single fragment of UI in place, we can still utilise the API tests to test the APIs thoroughly. This is because Selenium is a browser automation tool, and it doesn't work well when there are no “buttons to press”.
 
-++++
-</br>
-++++
+
 Key features of the Selenium include:
 
 - Selenium supports making HTTP requests to APIs using programming languages like Java, Python, C#, etc. Libraries like HttpClient or HttpURLConnection can be used to send requests and receive responses.
@@ -116,9 +108,7 @@ _Limitation: Selenium tests are useless when the GUI is not there._
 
 Playwright is a Node.js library to automate Chromium, Firefox, and WebKit with a single API. Playwright enables cross-browser web automation that is evergreen, capable, reliable, and fast.
 
-++++
-</br>
-++++
+
 Key features of the Playwright include:
 
 - Cross-browser (Chromium, WebKit (the browser engine for Safari), and Firefox)
@@ -159,15 +149,11 @@ _Limitation: Playwright can also be used for API automation even if there is no 
 
 Pact is a tool specifically designed for *contract testing* of APIs. It allows users to create consumer-driven contracts that define the expectations between API consumers and providers.
 
-++++
-</br>
-++++
+
 
 *Contract testing* focuses on the compatibility and agreement between API consumer and provider, while Integration testing verifies the collaboration and correctness of interconnected components within a system.
 
-++++
-</br>
-++++
+
 
 Key features of Pact includes:
 
@@ -221,9 +207,7 @@ _Limitation: Pact is for testing the contract used for communication, and not fo
 
 Cypress is a popular and user-friendly testing framework for end-to-end (E2E) testing of web applications. It is particularly popular among developers and testers familiar with JavaScript, as it does not require additional libraries, dependencies, or drivers to install. Cypress is executed in the same run loop as that of the application. Behind Cypress is a Node.js server process.
 
-++++
-</br>
-++++
+
 Key Features of the Cypress include:
 
 - It provides various assertions and built-in commands to validate API responses. It can verify the response status code, headers, and body content to ensure the API behaves as expected.
