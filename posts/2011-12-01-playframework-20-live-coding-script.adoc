@@ -4,11 +4,8 @@ v1.0, 2011-12-08
 :title: Play 2.0 demo - live coding script
 :tags: [java,playframework]
 
---- layout: article drupal-format: Unfiltered HTML, with syntax
-highlighter title: "Play 2.0 demo - live coding script" tags:
-playframework author: Peter Hilton summary: "The best way to introduce
-Play to an audience is to show them how it works in the kind of
-live-coding demo that lets people see for themselves how easy it is.
+The best way to introduce Play to an audience is to show them how it works in the
+kind of live-coding demo that lets people see for themselves how easy it is.
 Here is a Play 2.0 (Java) version of last year’s [Play 1.x live coding
 script](https://blog.lunatech.com/posts/2010-06-14-how-demo-play-framework-live-coding-script),
 in which you will code a simple but functional to-do list application,

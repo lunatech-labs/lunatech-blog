@@ -6,7 +6,7 @@ v1.0, 2024-11-15
 :lang: en
 :tags: [java, aop, aspectj,spring-aop, java-vs-world, java-over-java]
 
-###  Overview
+== Overview
 
 
 Imaging you're developing a simple program, and you want to log every time a method is called. One option to do that is calling
@@ -103,7 +103,7 @@ By addressing these issues, AOP enhances code modularity, making the codebase ea
 at Join Points.
 
 
-### AspectJ
+== AspectJ
 
 AspectJ is an aspect-oriented extension to Java and one of the most robust implementations of AOP. It allows developers to modularize cross-cutting concerns and works seamlessly with any Java class. AspectJ supports compile-time, post-compile-time, and load-time weaving.
 
@@ -143,7 +143,7 @@ AspectJ offers flexibility with annotations or an XML-based configuration for ma
 AspectJ provides an extensive and fine-grained join point model, allowing developers to intercept and manipulate almost any point in a program's execution. This includes Method executions, Constructor calls, etc.
 
 
-### Spring AOP
+== Spring AOP
 
 Spring AOP is a lightweight implementation of AOP, designed specifically for use with Spring's IoC (Inversion of Control) container. It supports runtime weaving and is particularly well-suited for managing cross-cutting concerns in Spring-based applications.
 
@@ -184,7 +184,7 @@ public class UserService {
 
 Spring AOP integrates easily into Spring projects and relies on proxies for weaving, offering developers a clean and Spring-friendly approach to AOP.
 
-### Quarkus
+== Quarkus
 
 Quarkus, known for its Kubernetes-native Java stack, also supports AOP but in a simplified and efficient way compared to traditional implementations.
 
@@ -232,7 +232,7 @@ Quarkus brings AOP into the modern world of cloud-native, containerized Java app
 
 
 
-### Final Note
+== Final Note
 
 - **AspectJ**: Best suited for complex, large-scale enterprise applications where flexibility and deep integration into the application’s lifecycle are required. The learning curve is steeper, and performance may be a consideration, but its capabilities in fine-grained join points and weaving techniques make it ideal for scenarios where AOP is deeply integrated into the system's architecture.
 

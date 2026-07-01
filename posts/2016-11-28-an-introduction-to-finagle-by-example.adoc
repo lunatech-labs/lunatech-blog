@@ -170,7 +170,7 @@ val serviceWithCountFilter = countFilter.andThen(service)
 
 You may notice the way to chain filter and service together is by using andThen method. Actually andThen method can not only chain filter with service but also chain multiple filters, like filter1 andThen filter2 andThen myservice
 
-## Client
+== Client
 
 This is the part that I like the most in finagle. Finagle http client is designed to maximize success and minimize latency. Each request will flow through various modules. These modules are logically separated into three stacks: Client stack, Endpoint stack, connection stack.
 
@@ -220,7 +220,7 @@ image::https://prismic-io.s3.amazonaws.com/lunatech/aea2e38205fabfd9b748a93d987d
 
 Pretty simple right. Your apis talk to each other directly.
 
-## Protocol-agnostic
+== Protocol-agnostic
 
 Finagle is a protocol-agnostic RPC system. It means Finagle supports every protocol if people implement it. For example: finagle-thrift is using thrift protocol. finagle-mysql implements the mysql protocol.Now, let's look at this scenario
 
@@ -399,6 +399,6 @@ object Client {
 }
 ----
 
-## Conclusion
+== Conclusion
 
 Finagle is a very flexible asychronous, protocol-agnostic RPC framework. It can help you to build high performance micro service with any protocol. It is worth to take a look at Finch the web framework based on Finagle. You can find more detail introduction from https://blog.twitter.com/2011/finagle-a-protocol-agnostic-rpc-system[Twitter blog] and more detailed example from http://twitter.github.io/scala_school/searchbird.html[Twitter scala school].
