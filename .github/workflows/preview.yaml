@@ -40,11 +40,6 @@ jobs:
             -Dsite.url=https://${PREVIEW_DOMAIN}
           java -jar target/quarkus-app/quarkus-run.jar
 
-      - name: Prepare output for Surge
-        # Drop the production CNAME so Surge does not try to publish to the
-        # custom domain; --domain below selects the per-PR subdomain.
-        run: rm -f target/roq/CNAME
-
       - name: Deploy to Surge
         env:
           SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
