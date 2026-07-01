@@ -1,7 +1,7 @@
-= Boss Benelux User Group, 8 June 2007
+= JBoss Benelux User Group, 8 June 2007
 hilton
 v1.0, 2007-05-24
-:title: Boss Benelux User Group, 8 June 2007
+:title: JBoss Benelux User Group, 8 June 2007
 :tags: [event,jbug]
 
 Lunatech Research will host a first JBoss Benelux User Group meeting on
