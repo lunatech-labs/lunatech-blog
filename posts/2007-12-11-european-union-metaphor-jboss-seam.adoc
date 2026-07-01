@@ -24,45 +24,12 @@ technology that JBoss Seam integrates (left) and an EU member state
 
 [width="100%",cols="34%,33%,33%",]
 |===
-a|
-EJB
-
-JAAS
-
-Ajax
-
-jBPM
-
-JBoss Rules
-
-Facelets
-
-a|
-inefficient - bureaucratic
-
-extra security everywhere
-
-a football team
-
-led by Tom Baeyens
-
-for people who like rules
-
-where looks really matter
-
-a|
-France
-
-UK
-
-Netherlands
-
-Belgium
-
-Germany
-
-Italy
-
+| EJB | inefficient - bureaucratic | France
+| JAAS | extra security everywhere | UK
+| Ajax | a football team | Netherlands
+| jBPM | led by Tom Baeyens | Belgium
+| JBoss Rules | for people who like rules | Germany
+| Facelets | where looks really matter | Italy
 |===
 
 == Improvements
