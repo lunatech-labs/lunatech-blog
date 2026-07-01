@@ -125,11 +125,11 @@ Act like you are a {{$from}} and writing a {{$messageType}} to a {{$to}}.
 Your goal is to proofread text, make it sound smooth and polite, and correct grammatical and punctuation errors.
 
 Additional requirements for the text:
-+++++
+----
 Be brief, use short phrases, conciseness is very important: {{$isConcise}}
 Be creative, use more beautiful and elegant, upper-level English literary words, but keep the meaning the same: {{$isCreative}}
 Be official, the next text will be stored as an official document or part of the documentation: {{$isOfficial}}
-+++++
+----
 
 {{$input}}
 ----

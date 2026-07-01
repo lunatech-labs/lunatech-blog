@@ -122,6 +122,7 @@ count
  46505
  39536
 -------
+----
 
 Looks good (the extra line in the first command is due to the header), let’s move onto our next step.
 
@@ -134,6 +135,7 @@ Implementing the web layer (ie. Controllers) and User Interface (HTML) is also d
 Where I want to focus our attention is on the repository, where most of the code in this implementation resides:
 
 [source,java]
+----
 public interface CountryRepository extends JpaRepository<Country, Long> {
     Optional<Country> findByCode(String code);
     @Query(value = "SELECT c.name as name, count(*) as count " +
@@ -142,6 +144,8 @@ public interface CountryRepository extends JpaRepository<Country, Long> {
                    "GROUP BY c.name ORDER BY count DESC LIMIT ?1",
            nativeQuery = true)
     List<ReportRow> queryTopAirports(int limit);
+}
+----
 
 This interface has two interesting things, *JpaRepository* and *queryToAirports*.
 
