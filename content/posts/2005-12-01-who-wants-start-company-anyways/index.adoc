@@ -4,13 +4,6 @@ author: "Michael Pentowski"
 tags:
 - "opinion"
 ---
-ifdef::backend-html5[]
-:in-between-width: width='85%'
-:half-width: width='50%'
-:half-size:
-:thumbnail: width='60'
-endif::[]
-
 I read a lot of articles with tips for young entrepreneurs, ten steps to a successful company, how to write business plans, etc etc etc.  But I often ponder - Why would anyone in their right mind want to start a company. I mean, really.
 
 ++++

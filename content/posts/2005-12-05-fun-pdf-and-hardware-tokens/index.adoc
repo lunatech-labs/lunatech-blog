@@ -4,13 +4,6 @@ author: "fcanedo"
 tags:
 - "java"
 ---
-ifdef::backend-html5[]
-:in-between-width: width='85%'
-:half-width: width='50%'
-:half-size:
-:thumbnail: width='60'
-endif::[]
-
 Recently we delivered a custom-built solution to electronically sign Adobe PDF documents with a hardware token. In short, the system receives PDF files and returns a signed copy. These PDF documents can then be authenticated by the Acrobat Reader, which informs the reader that the document is indeed from the author in question and that the document has not changed since signing it.
 
 ++++

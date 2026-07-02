@@ -21,7 +21,7 @@ Both the Scala 2 and the Dotty version of the `Pinger` actor suffer from the sam
 
 [#img-PingerProtocol]
 .The `Pinger` actor protocol
-image::PingerProtocol.png[{half-width}]
+image::PingerProtocol.png[]
 
 === Solutions and insights
 

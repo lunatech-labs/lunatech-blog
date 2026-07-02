@@ -4,13 +4,6 @@ author: "hilton"
 tags:
 - "ui"
 ---
-ifdef::backend-html5[]
-:in-between-width: width='85%'
-:half-width: width='50%'
-:half-size:
-:thumbnail: width='60'
-endif::[]
-
 If you are in IT, *format* is what you do to storage media, or perhaps a data representation standard, but to most people, *format* is an immutable property of what things look like.
 
 This, of course, was the culprit in that sorry digital camera tale - 'I was on my way back from holiday, and I thought it would make my photos look different'. I have now heard this three times from people who lost all of their photos (in which case you need http://www.digitalfilerecovery.com/[Media Investigator]. One had even used computers enough to realise what was happening, just when it was already <too> late: perhaps a progress message like "`formatting...`" was enough to make him switch context from *photos* to *electronic storage*.

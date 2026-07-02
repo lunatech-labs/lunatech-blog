@@ -4,13 +4,6 @@ author: "hilton"
 tags:
 - "web-applications"
 ---
-ifdef::backend-html5[]
-:in-between-width: width='85%'
-:half-width: width='50%'
-:half-size:
-:thumbnail: width='60'
-endif::[]
-
 ++++
 <div id="top"></div>
 ++++

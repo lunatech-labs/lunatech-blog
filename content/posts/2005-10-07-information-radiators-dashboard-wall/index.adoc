@@ -4,13 +4,6 @@ author: "hilton"
 tags:
 - "project-management"
 ---
-ifdef::backend-html5[]
-:in-between-width: width='85%'
-:half-width: width='50%'
-:half-size:
-:thumbnail: width='60'
-endif::[]
-
 Many software project managers are keen on 'management dashboards' for project status information. I have never really liked the idea, but it was not until I put an 'information radiator' on the wall that I worked out why.
 
 Alistair Cockburn introduced information radiators in http://alistair.cockburn.us/Agile+software+development+book[Agile Software Development]: "`An information radiator displays information in a place where passersby can see it. [...] Hallways qualify very nicely as good places for information radiators. Web pages don't.`" Here is my example: a time-series of the amount of work remaining that I drew over the course of a four month development phase.

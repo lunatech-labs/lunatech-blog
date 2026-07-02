@@ -4,13 +4,6 @@ author: "Michael Pentowski"
 tags:
 - "opinion"
 ---
-ifdef::backend-html5[]
-:in-between-width: width='85%'
-:half-width: width='50%'
-:half-size:
-:thumbnail: width='60'
-endif::[]
-
 The business lunch is something that is near and dear to my heart but, on reflection, what can I write that hasn't been said before? Nothing I suppose. But none the less, here are my ramblings on the business lunch and some tips to make the most out of the opportunity.
 
 

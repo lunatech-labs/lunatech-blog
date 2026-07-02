@@ -5,13 +5,6 @@ tags:
 - "opinion"
 - "fun"
 ---
-ifdef::backend-html5[]
-:in-between-width: width='85%'
-:half-width: width='50%'
-:half-size:
-:thumbnail: width='60'
-endif::[]
-
 While some things are best done serially, such as coding first and drinking beer later. For other things, superior results can be achieved through parallelisation. This article illustrates the Bacchanalian possibilities of chocolate, alcohol and a cocktail shaker.
 
 There have been many other chocolate-alcohol drinks, but most fail because they barely taste of chocolate and are way too sweet. If that is what you like, then just drink the chocolate liqueur neat on the rocks and read no further.

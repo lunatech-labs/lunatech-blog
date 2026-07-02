@@ -6,14 +6,6 @@ tags:
 - "xml"
 - "case-study"
 ---
-ifdef::backend-html5[]
-:in-between-width: width='85%'
-:half-width: width='50%'
-:half-size:
-:thumbnail: width='60'
-endif::[]
-
-
 In the relatively short timeframe of about two years, the Dutch government wanted a content management system through which laws could be consolidated, and a front-end web system such that the general public could view past, current and future law.
 
 Together with the people working at the state publisher, Lunatech designed and built a flexible system that could handle the complex content structures, and requested functionality within the set boundaries of performance and scalability.

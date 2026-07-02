@@ -4,13 +4,6 @@ author: "hilton"
 tags:
 - "web-applications"
 ---
-ifdef::backend-html5[]
-:in-between-width: width='85%'
-:half-width: width='50%'
-:half-size:
-:thumbnail: width='60'
-endif::[]
-
 Each year some web application and web site user-interface features have become de-facto standards, whilst other newer ideas become common enough for common solutions to start emerging. This means that it is increasingly possible to use design patterns to describe aspects of web application user-interface design. Books like http://useit.com/homepageusability/[Homepage Usability] cover web page elements such as a top-left site logo that links to the home page, or a simple search box on every page. Similarly, pattern collections such as the one at http://www.welie.com/patterns/[www.welie.com] describe detailed user-interface element patterns for specific things you can put on a web page. More in flux, however, are the larger scale structural and navigational patterns that correspond to the standard use of wizards and dialogue boxes in traditional graphical user-interface applications: not things on the pages, but how the pages themselves relate to each other in the web site structure.
 
 ++++

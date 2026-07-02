@@ -4,13 +4,6 @@ author: "hilton"
 tags:
 - "opinion"
 ---
-ifdef::backend-html5[]
-:in-between-width: width='85%'
-:half-width: width='50%'
-:half-size:
-:thumbnail: width='60'
-endif::[]
-
 Geographic Informations Systems (GIS) are nothing new, but in the past involved expensive software only available to professionals solving serious problems. Maps on web pages are nothing new either, but the maps themselves are usually small bitmaps - low-resolution data that is miles from serious GIS data sets. O'Reilly's recent book http://www.oreilly.com/catalog/webmapping/[Web Mapping Illustrated], however, is a fast introduction to open-source digital mapping for geeks that describes software and standards that may soon become mainstream and change maps on the web the same way that http://en.wikipedia.org/wiki/RSS_%28file_format%29[RSS] changed news feeds on the web.
 
 ++++

@@ -4,13 +4,6 @@ author: "Keith Wallace"
 tags:
 - "opinion"
 ---
-ifdef::backend-html5[]
-:in-between-width: width='85%'
-:half-width: width='50%'
-:half-size:
-:thumbnail: width='60'
-endif::[]
-
 I have to admit a slight dislike for Amsterdam - wrong of me I know as a foreigner in this fine Kingdom - but true all the same.  What is it I don't like about the city I hear you murmuring, somewhat impassively?  Well,  I could say its the transient nature of its international community.  I do have an issue with that to be sure.  But the pinnacle of truth is harder to spot.  I guess I just like the civilisation of the courtly city of the Hague and the work-happy attitudes of Europe's biggest port.  It leaves little love for the city of marketeers and social benefits. However, yesterday I experienced one of those moments that makes me comprehend the enjoyment many derive from this liberal paradise.
 
 It started as any other trip on the Dutch railways.  I had to walk through the rubble of Rotterdam CS, past the army of smokers hanging loosely at its doors.  I strolled purposefully towards my train, which was of course delayed.  Only twenty minutes.  I'd made provision for that, anyone using the train normally does.

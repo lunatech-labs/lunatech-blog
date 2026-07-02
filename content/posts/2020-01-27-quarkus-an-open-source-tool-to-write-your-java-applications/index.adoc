@@ -11,7 +11,7 @@ We offer you to share our point of view and let you discover this framework.
 
 Ready for a trip?
 
-image::quarkus_home.png[Quarkus {in-between-width}]
+image::quarkus_home.png[Quarkus]
 
 == A bit of history
 
@@ -80,4 +80,4 @@ Congratulations to Emmanuel and the other talents working on this project.
 
 To be continued…
 
-image::emmnanuel_bernard_quarkus.png[Quarkus's Emmanuel Bernard {in-between-width}]
+image::emmnanuel_bernard_quarkus.png[Quarkus's Emmanuel Bernard]

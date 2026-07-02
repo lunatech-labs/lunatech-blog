@@ -4,13 +4,6 @@ author: "Keith Wallace"
 tags:
 - "opinion"
 ---
-ifdef::backend-html5[]
-:in-between-width: width='85%'
-:half-width: width='50%'
-:half-size:
-:thumbnail: width='60'
-endif::[]
-
 When I was growing up one advertisement spoke to me more than the average sale. Not so much for the style or content - more the underlying message. It was truly American - it basked in the wonders of the American Dream.
 
 The company was Remington. The man Victor Kiam.

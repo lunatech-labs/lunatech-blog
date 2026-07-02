@@ -4,13 +4,6 @@ author: "lypanov"
 tags:
 - "opinion"
 ---
-ifdef::backend-html5[]
-:in-between-width: width='85%'
-:half-width: width='50%'
-:half-size:
-:thumbnail: width='60'
-endif::[]
-
 The http://jwebunit.sourceforge.net/[JWebUnit] API provides several abstractions over the lower level API provided by http://httpunit.sourceforge.net/[HttpUnit]. For moments in which JWebUnit's partially mirrored coverage of the HttpUnit API is simply not enough, there are methods providing access to the underlying lower low level library.
 
 ++++

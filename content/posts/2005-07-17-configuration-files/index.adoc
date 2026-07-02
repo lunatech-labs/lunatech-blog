@@ -4,14 +4,6 @@ author: "hilton"
 tags:
 - "java"
 ---
-ifdef::backend-html5[]
-:in-between-width: width='85%'
-:half-width: width='50%'
-:half-size:
-:thumbnail: width='60'
-endif::[]
-
-
 Obviously, you cannot put store a file's hash in the file itself. Having thought about it for a while, I like the sound of the following approach.
 
 

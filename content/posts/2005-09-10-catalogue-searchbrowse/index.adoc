@@ -4,13 +4,6 @@ author: "hilton"
 tags:
 - "web"
 ---
-ifdef::backend-html5[]
-:in-between-width: width='85%'
-:half-width: width='50%'
-:half-size:
-:thumbnail: width='60'
-endif::[]
-
 Search interfaces are relatively straightforward to design, not because they're simple, but because it is mostly a solved problem. Designing a browse interface is harder, because what makes sense for one set of information probably doesn't for another. I've been thinking about a better browse interface for the last web-based 'catalogue' I designed.
 
 In http://http://www.jnd.org/books.html[Things That Make Us Smart], Donald Norman tells us that spatial 'navigation' only works:
