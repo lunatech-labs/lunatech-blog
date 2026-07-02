@@ -1,12 +1,11 @@
 ---
+title: "LunaConf 2024"
+author: "Sylke Sauerwald"
 tags:
 - "conference"
 - "event"
 - "lunatech"
 ---
-= LunaConf 2024
-Sylke Sauerwald
-v1.0, 2024-10-10
 :lang: en
 
 After 2 years of waiting (the celebration of our 30 years of LT fell in between 😊), we held our Lunatech conference this year on the 4th of October in our wonderful office in Rotterdam on the 22nd and 23rd floor. We welcomed our colleagues from France, who arrived the evening before when we entertained them with food, wine and music; we had speakers from various countries and expertise, clients, guests and ex-employees from Lunatech. 

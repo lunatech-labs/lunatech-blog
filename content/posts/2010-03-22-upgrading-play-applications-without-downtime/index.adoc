@@ -1,14 +1,11 @@
 ---
+title: "Upgrading Play 1.0 applications without downtime"
+author: "pepite"
 tags:
 - "playframework"
 - "apache"
 - "web-applications"
 ---
-= Upgrading Play 1.0 applications without downtime
-pepite
-v1.0, 2010-03-22
-
-
 You have your Play 1.0 application deployed on production. It is a real
 success and you have loads of users. You are really happy, and because
 Play! is quite fast you do not have any performance issues yet :)

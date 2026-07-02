@@ -1,12 +1,10 @@
 ---
+title: "Kalydo presents GamePro at Siggraph 2009"
+author: "Michael Pentowski"
 tags:
 - "event"
 - "ventures"
 ---
-= Kalydo presents GamePro at Siggraph 2009
-Michael Pentowski
-v1.0, 2009-08-03
-
 We are rather
 proud to announce that one of our colleagues, Michiel Roza, is going to
 present at the renowned http://www.siggraph.org/s2009/[Siggraph

@@ -1,12 +1,10 @@
 ---
+title: "2organize Scrum master"
+author: "PeterHilton"
 tags:
 - "scrum"
 - "methodology"
 ---
-= 2organize Scrum master
-PeterHilton
-v1.0, 2011-01-01
-
 Lunatech’s expert first assisted the product owner with writing the
 product backlog, ensuring that the development team had a clear overview
 of the prioritised functional requirements. In addition, Lunatech

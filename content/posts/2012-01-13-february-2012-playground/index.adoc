@@ -1,13 +1,11 @@
 ---
+title: "February 2012 Play!ground at Paddy Murphy’s"
+author: "hilton"
 tags:
 - "event"
 - "playframework"
 - "playground"
 ---
-= February 2012 Play!ground at Paddy Murphy’s
-hilton
-v1.0, 2012-01-13
-
 By
 popular demand, we have arranged a bigger location for next month’s
 February Play!ground event, for http://www.playframework.org/[Play

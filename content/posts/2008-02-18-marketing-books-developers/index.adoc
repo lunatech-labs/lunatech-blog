@@ -1,12 +1,10 @@
 ---
+title: "Marketing books for developers"
+author: "hilton"
 tags:
 - "opinion"
 - "book"
 ---
-= Marketing books for developers
-hilton
-v1.0, 2008-02-18
-
 To a software developer, 'marketing' is more likely to be a department
 that another kind of people belong to, than an activity that everyone
 should participate it. This could be because people outside The

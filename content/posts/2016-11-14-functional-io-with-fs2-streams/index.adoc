@@ -1,12 +1,10 @@
 ---
+title: "Functional IO with FS2 Streams"
+author: "haribageski"
 tags:
 - "fp"
 - "scala"
 ---
-= Functional IO with FS2 Streams
-haribageski
-v1.0, 2016-11-14
-
 One of the main principles of functional programming is to avoid side-effects. For the most part, working with immutable instances would be sufficient to satisfy that principle. But sometimes it's needed to do some side effects e.g. when we want to read from file. One straight-forward way of doing it is to get a `BufferedSource`, and process it using an iterator as shown below.
 
 [source,scala]

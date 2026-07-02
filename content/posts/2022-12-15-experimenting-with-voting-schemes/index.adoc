@@ -1,13 +1,12 @@
 ---
+title: "Introduction to e-voting schemes"
+author: "agoetschm"
 tags:
 - "voting"
 - "crypto"
 - "zero-knowledge"
 - "en"
 ---
-= Introduction to e-voting schemes
-agoetschm
-v1.0, 2022-12-15
 :lang: en
 
 Given the availability of technology in our society as well as the need for tools supporting democratic decision making, it is not surprising that e-voting is a growing research field.

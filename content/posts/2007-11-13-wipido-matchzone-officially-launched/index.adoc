@@ -1,11 +1,9 @@
 ---
+title: "Wipido Matchzone officially launched"
+author: "Michael Pentowski"
 tags:
 - "ventures"
 ---
-= Wipido Matchzone officially launched 
-Michael Pentowski
-v1.0, 2007-11-13
-
 On 16 November 2007 well-known female gamer
 http://www.wipido.com/video/45[Aurora Angel]http://www.wipido.com/, will kick off the
 [Wipido Matchzone] by challenging gamers in a

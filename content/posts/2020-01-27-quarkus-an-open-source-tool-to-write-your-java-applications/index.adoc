@@ -1,12 +1,10 @@
 ---
+title: "Quarkus - an open-source tool to write your Java applications"
+author: "nicmarti"
 tags:
 - "java"
 - "framework"
 ---
-= Quarkus - an open-source tool to write your Java applications
-nicmarti
-v1.0, 2020-01-27
-
 We are in 2020, Java is one of the most widely used languages for developing applications. And above all, there is https://quarkus.io/[Quarkus].
 
 We offer you to share our point of view and let you discover this framework.

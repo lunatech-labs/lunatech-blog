@@ -1,15 +1,12 @@
 ---
+title: "Own goals - Scala vs Ceylon vs Kotlin"
+author: "hilton"
 tags:
 - "ceylon"
 - "scala"
 - "kotlin"
 - "opinion"
 ---
-
-= Own goals - Scala vs Ceylon vs Kotlin
-hilton
-v1.0, 2011-08-24
-
 For various reasons, there is a lot of
 discussion going on about new programming languages that run on the Java
 Virtual Machine (JVM). Some of the discussion about

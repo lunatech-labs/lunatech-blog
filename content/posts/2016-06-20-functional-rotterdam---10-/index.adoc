@@ -1,12 +1,10 @@
 ---
+title: "Functional Rotterdam -10-"
+author: "Antoine Laffez"
 tags:
 - "fp"
 - "event"
 ---
-= Functional Rotterdam -10-
-Antoine Laffez
-v1.0, 2016-06-20
-
 Just a reminder, this Thursday. the 23rd of June, Lunatech is hosting the monthly Functional Rotterdam even
 
 At *Lunatech Office Baan 74, Rotterdam*

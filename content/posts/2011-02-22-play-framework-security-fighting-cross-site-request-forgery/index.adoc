@@ -1,12 +1,10 @@
 ---
+title: "Play Framework 1.2 Security - Fighting Cross Site Request Forgery"
+author: "eamelink"
 tags:
 - "playframework"
 - "security"
 ---
-= Play Framework 1.2 Security - Fighting Cross Site Request Forgery
-eamelink
-v1.0, 2011-02-22
-
 Play Framework 1.2 has built-in protection against cross-site
 request forgery (CSRF). Unfortunately, it is not enabled by default and
 the developer of a Play application has to take steps to be fully

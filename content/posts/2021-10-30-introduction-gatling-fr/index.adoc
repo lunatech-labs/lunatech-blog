@@ -1,12 +1,11 @@
 ---
+title: "Test de charge avec Gatling"
+author: "VincentBrule"
 tags:
 - "gatling"
 - "test de charge"
 - "opensource"
 ---
-= Test de charge avec Gatling
-VincentBrule
-v1.0, 2021-10-30
 :lang: fr
 
 Test de charge, ou Load Testing en anglais, désigne le fait d’injecter un nombre d’utilisateurs défini dans son application afin de voir si elle résiste à la charge. 

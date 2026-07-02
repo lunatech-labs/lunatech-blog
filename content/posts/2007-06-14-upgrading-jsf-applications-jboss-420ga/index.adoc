@@ -1,13 +1,11 @@
 ---
+title: "Upgrading JSF applications to JBoss 4.2.0.GA"
+author: "pepite"
 tags:
 - "java"
 - "jsf"
 - "jboss"
 ---
-= Upgrading JSF applications to JBoss 4.2.0.GA
-pepite
-v1.0, 2007-06-14
-
 JBoss 4.2.0.GA comes
 with JavaServer Faces (JSF) 1.2 - a newer JSF version than JBoss
 4.0.5.GA. They chose the SUN implementation. (I think that MyFaces will

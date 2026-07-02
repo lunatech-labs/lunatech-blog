@@ -1,12 +1,10 @@
 ---
+title: "Presentations - Drools and the perfect programmer at 42"
+author: "PeterHilton"
 tags:
 - "drools"
 - "event"
 ---
-= Presentations - Drools and the perfect programmer at 42
-PeterHilton
-v1.0, 2010-03-16
-
 This
 afternoon, I gave two presentations for the nice folks at
 http://www.42.nl/[42] for their Knowledge Transfer meeting, at

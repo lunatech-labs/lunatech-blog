@@ -1,13 +1,10 @@
 ---
+title: "August Play!ground presentation slides & video"
+author: "hilton"
 tags:
 - "event"
 - "playframework"
 ---
-= August Play!ground presentation slides & video
-hilton
-v1.0, 2011-08-17
-
-
 On 12 August 2011, Lunatech hosted the first
 Play!ground in the Netherlands - an event for developers interested in
 the http://www.playframework.org/[Play framework]. Here are the slides

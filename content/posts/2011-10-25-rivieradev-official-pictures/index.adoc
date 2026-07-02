@@ -1,11 +1,9 @@
 ---
+title: "RivieraDEV - the official pictures"
+author: "pepite"
 tags:
 - "event"
 ---
-= RivieraDEV - the official pictures
-pepite
-v1.0, 2011-10-25
-
 Thanks to http://touilleur-express.fr[Nicolas
 Martignole] I can now show some pictures
 from the http://rivieradev.fr[RivieraDEV] event.

@@ -1,13 +1,12 @@
 ---
+title: "Akka Licence Change (One Year Later)"
+author: "njlbenn; eamelink; thinkmorestupidless"
 tags:
 - "akka"
 - "pekko"
 - "BSL"
 - "apache licence"
 ---
-= Akka Licence Change (One Year Later)
-njlbenn; eamelink; thinkmorestupidless
-v1.0, 2023-10-27
 :lang: en
 
 ****

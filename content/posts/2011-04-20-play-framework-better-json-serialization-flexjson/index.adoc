@@ -1,14 +1,11 @@
 ---
+title: "Play Framework 1.2 - Better JSON serialization with FlexJSON"
+author: "eamelink"
 tags:
 - "playframework"
 - "json"
 - "java"
 ---
-= Play Framework 1.2 - Better JSON serialization with FlexJSON
-eamelink
-v1.0, 2011-04-20
-
-
 When writing rich interfaces, you often have to generate a JSON
 representation of your data to be used in your HTML templates. http://www.playframework.org/[Play framework] 1.2 comes bundled with
 Google’s JSON library http://code.google.com/p/google-gson/[Gson], but

@@ -1,15 +1,12 @@
 ---
+title: "Benelux JBoss User Group, 20 June 2008"
+author: "pepite"
 tags:
 - "java"
 - "jboss"
 - "jbug"
 - "event"
 ---
-= Benelux JBoss User Group, 20 June 2008
-pepite
-v1.0, 2008-05-16
-
-
 We would like to invite you to our fourth Benelux JBoss User
 Group meeting: an afternoon of free technical sessions presented by
 JBoss developers.

@@ -1,12 +1,10 @@
 ---
+title: "JBoss Benelux User Group, 8 June 2007"
+author: "hilton"
 tags:
 - "event"
 - "jbug"
 ---
-= JBoss Benelux User Group, 8 June 2007
-hilton
-v1.0, 2007-05-24
-
 Lunatech Research will host a first JBoss Benelux User Group meeting on
 8 June 2007, with a presentation by Tom Baeyens, founder and lead for
 JBoss jBPM.

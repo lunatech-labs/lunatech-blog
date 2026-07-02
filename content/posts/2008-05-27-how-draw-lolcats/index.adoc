@@ -1,11 +1,9 @@
 ---
+title: "How to draw lolcats"
+author: "hilton"
 tags:
 - "fun"
 ---
-= How to draw lolcats
-hilton
-v1.0, 2008-05-27
-
 In his
 excellent book http://www.jnd.org/books.html#434[The Invisible
 Computer], Donald Norman explains the

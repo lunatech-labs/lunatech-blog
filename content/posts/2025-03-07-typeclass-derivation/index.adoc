@@ -1,4 +1,6 @@
 ---
+title: "Mastering Typeclass Derivation with Scala 3"
+author: "nMoncho"
 tags:
 - "scala"
 - "typeclass"
@@ -6,11 +8,6 @@ tags:
 - "we-know-scala"
 - "scala-lujah"
 ---
-= Mastering Typeclass Derivation with Scala 3
-nMoncho
-2025-03-07
-
-
 == Polymorphism
 
 When learning about programming we stumble upon the concept of Polymorphism, and

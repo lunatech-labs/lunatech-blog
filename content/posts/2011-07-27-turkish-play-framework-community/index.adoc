@@ -1,11 +1,9 @@
 ---
+title: "Turkish Play framework community"
+author: "PeterHilton"
 tags:
 - "playframework"
 ---
-= Turkish Play framework community
-PeterHilton
-v1.0, 2011-07-27
-
 Last week a new Play framework discussion group was announced on Google
 Groups. There is already a
 https://groups.google.com/forum/#!forum/play-framework[play-framework]

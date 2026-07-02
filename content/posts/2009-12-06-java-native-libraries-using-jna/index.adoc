@@ -1,12 +1,10 @@
 ---
+title: "Java native libraries using JNA"
+author: "BartSchuller"
 tags:
 - "java"
 - "jna"
 ---
-= Java native libraries using JNA
-BartSchuller
-v1.0, 2009-12-06
-
 Java and native code: most Java programmers have a
 strong dislike for it: it kills portability, it is messy and a lot of
 hassle. Then again: when you need it, you need it. Luckily JNA can make

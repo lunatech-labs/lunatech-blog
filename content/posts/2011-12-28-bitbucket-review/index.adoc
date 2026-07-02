@@ -1,12 +1,9 @@
 ---
+title: "BitBucket review"
+author: "targeter"
 tags:
 - "code-hosting"
 ---
-= BitBucket review
-targeter
-v1.0, 2011-12-28
-
-
 http://www.bitbucket.org[BitBucket] is a source code repository
 hosting solution by http://www.atlassian.com[Atlassian]. Besides
 repository hosting, it also offers issue tracking and wikis. We are

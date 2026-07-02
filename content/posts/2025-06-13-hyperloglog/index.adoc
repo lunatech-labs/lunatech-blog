@@ -1,4 +1,6 @@
 ---
+title: "HyperLogLog++"
+author: "andeliero"
 tags:
 - "hyperloglog"
 - "algorithm"
@@ -6,9 +8,6 @@ tags:
 - "beyond-the-code"
 - "bash-to-the-feature"
 ---
-= HyperLogLog++
-andeliero
-v1.0, 2025-06-13
 :toc: left
 :toc-title: Table of Contents
 :toclevels: 3

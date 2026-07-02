@@ -1,12 +1,10 @@
 ---
+title: "Third Monthly Clojure Meetup at Lunatech"
+author: "vijaykiran"
 tags:
 - "event"
 - "clojure"
 ---
-= Third Monthly Clojure Meetup at Lunatech
-vijaykiran
-v1.0, 2013-05-23
-
 Third Monthly Rotterdam/The Hague Clojure Meetup at Lunatech
 
 Yesterday it was time for yet another monthly meetup of

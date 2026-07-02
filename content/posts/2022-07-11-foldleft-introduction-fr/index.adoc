@@ -1,13 +1,12 @@
 ---
+title: "Parcourir des collections avec foldLeft et foldRight"
+author: "ggarvanese"
 tags:
 - "fold"
 - "iteration"
 - "functional"
 - "scala"
 ---
-= Parcourir des collections avec foldLeft et foldRight
-ggarvanese
-v1.0, 2022-07-11
 :lang: fr
 
 Il y a quelques temps, j'ai été chargé de développer un petit algorithme pour mon projet. Il s'agissait de parcourir toutes les images d'une séquence vidéo afin de déterminer quel label apposé manuellement occupait le plus d'images au sein de cette séquence. Cet exercice m'a permis de (re)découvrir une fonction que je n'utilise que trop rarement au quotidien, le foldLeft (et son corollaire, le foldRight). 

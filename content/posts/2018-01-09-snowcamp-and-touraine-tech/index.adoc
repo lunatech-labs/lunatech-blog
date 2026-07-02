@@ -1,11 +1,9 @@
 ---
+title: "Snowcamp and Touraine Tech"
+author: "Antoine Laffez"
 tags:
 - "event"
 ---
-= Snowcamp and Touraine Tech
-Antoine Laffez
-v1.0, 2018-01-09
-
 As you know, Lunatech tries every year to participate in a large number of events in France and abroad. To meet those who "make" IT: developers, enthusiasts and students to discover new tools, trends, and learn to master them.
 
 The first conference of the year will take place in Grenoble, a breeding ground for innovation. http://snowcamp.io/fr/[Snowcamp] will take place from January 24th to 27th organised by developers from the Grenoble Area. It was created in 2016 on the initiative of the AlpesJug bringing together volunteer and passionate geeks. 

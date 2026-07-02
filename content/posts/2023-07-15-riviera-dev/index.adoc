@@ -1,11 +1,10 @@
 ---
+title: "Riviera DEV 2023"
+author: "VincentBrule"
 tags:
 - "conference"
 - "nice"
 ---
-= Riviera DEV 2023
-VincentBrule
-v1.0, 2023-07-15
 :lang: en
 
 == Riviera DEV ?

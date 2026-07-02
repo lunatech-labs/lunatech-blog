@@ -1,12 +1,10 @@
 ---
+title: "Kalydo bringing MMO games to Social Networks"
+author: "Michael Pentowski"
 tags:
 - "event"
 - "ventures"
 ---
-= Kalydo bringing MMO games to Social Networks
-Michael Pentowski
-v1.0, 2009-11-21
-
 Game Entertainment Europe, publisher
 of Online games and Eximion, developer of the Kalydo 3D browser game
 platform have signed an agreement to bring downloadable MMO games to

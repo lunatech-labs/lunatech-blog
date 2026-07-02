@@ -1,11 +1,9 @@
 ---
+title: "Fast Track to Scala - Training"
+author: "fcanedo"
 tags:
 - "scala"
 ---
-= Fast Track to Scala - Training
-fcanedo
-v1.0, 2016-01-18
-
 On Feb 4 and 5th https://twitter.com/fcanedo/[Francisco Canedo], Senior Developer at Lunatech and a Typesafe certified trainer, will be teaching Typesafe’s Fast Track to Scala Course at our office.
 
 This course is designed to give experienced developers the know-how to confidently start programming in Scala. The course ensures you will have a solid understanding of the fundamentals of the language, the tooling and the development process as well as a good appreciation of the more advanced features. If you already have Scala programming experience, then this course could be a useful refresher, yet no previous knowledge of Scala is assumed.

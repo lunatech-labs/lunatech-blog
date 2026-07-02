@@ -1,13 +1,10 @@
 ---
+title: "Plan Cruncher - Play! in production"
+author: "PeterHilton"
 tags:
 - "playframework"
 - "web-applications"
 ---
-= Plan Cruncher - Play! in production
-PeterHilton
-v1.0, 2010-03-29
-
-
 At
 Lunatech, we recently decided to build a small web application to
 implement one of our ideas for generating business plan summaries. We

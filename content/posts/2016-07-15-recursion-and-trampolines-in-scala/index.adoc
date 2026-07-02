@@ -1,12 +1,10 @@
 ---
+title: "Recursion and Trampolines in Scala"
+author: "eamelink"
 tags:
 - "scala"
 - "recursion"
 ---
-= Recursion and Trampolines in Scala
-eamelink
-v1.0, 2016-07-15
-
 Recursion is beautiful. As an example, let's consider this perfectly acceptable example of defining the functions even and odd in Scala, whose semantics you can guess:
 
 [source,scala]

@@ -1,12 +1,10 @@
 ---
+title: "Using the Scala console with Play and Slick 1.0.1"
+author: "hilton"
 tags:
 - "slick"
 - "playframework"
 ---
-= Using the Scala console with Play and Slick 1.0.1    
-hilton
-v1.0, 2013-08-13
-
 This tutorial shows you how to use a 
 [Play Framework](http://www.playframework.com) application’s Scala console to experiment with [Slick](http://slick.typesafe.com).
 

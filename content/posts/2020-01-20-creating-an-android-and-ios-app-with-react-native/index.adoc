@@ -1,13 +1,11 @@
 ---
+title: "Creating an Android and iOS App with React Native"
+author: "izzyreal"
 tags:
 - "android"
 - "ios"
 - "react-native"
 ---
-= Creating an Android and iOS App with React Native
-izzyreal
-2020-01-20
-
 In this post I'll share my observations and some pros and cons I experienced while creating an app with React Native. I hope it's useful to anyone considering to use React Native, other cross-platform frameworks or fully native codebases.
 
 In my spare time I've been working on an app for the volunteer work that I do at https://buurtbuik.nl/[BuurtBuik]. We have over 6 locations, each hosting a weekly free meal made from food waste.

@@ -1,9 +1,8 @@
 ---
+title: "Migrating our blog to Quarkus Roq"
+author: "wjglerum"
 draft: true
 ---
-= Migrating our blog to Quarkus Roq
-wjglerum
-v1.0, 2026-06-29
 :lang: en
 
 This blog used to run on two repositories. One held the posts: 457 AsciiDoc

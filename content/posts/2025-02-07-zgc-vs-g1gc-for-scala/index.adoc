@@ -1,4 +1,6 @@
 ---
+title: "ZGC vs G1GC for Scala"
+author: "utkuaydn"
 tags:
 - "zgc"
 - "gen-zgc"
@@ -9,9 +11,6 @@ tags:
 - "we-know-scala"
 - "scala-lujah"
 ---
-= ZGC vs G1GC for Scala
-utkuaydn
-v1.0, 2025-02-07
 :lang: en
 
 == Introduction

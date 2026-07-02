@@ -1,4 +1,6 @@
 ---
+title: "Part 2: Backend Setup with NestJS"
+author: "jakeortega"
 tags:
 - "angular"
 - "nestjs"
@@ -10,9 +12,6 @@ tags:
 - "typescript"
 - "nodejs"
 ---
-= Part 2: Backend Setup with NestJS
-jakeortega
-v1.0, 2025-04-22
 :lang: en
 
 With our project vision and stack laid out in Part 1, it’s time to build the

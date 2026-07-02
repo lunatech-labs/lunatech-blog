@@ -1,12 +1,9 @@
 ---
+title: "Launching VisibleLogistics, the on-line solution for demanding customers"
+author: "Michael Pentowski"
 tags:
 - "ventures"
 ---
-= Launching VisibleLogistics, the on-line solution for demanding customers
-Michael Pentowski
-v1.0, 2008-02-14
-
-
 Launching http://www.visiblelogistics.com/[VisibleLogistics], the
 on-line solution for demanding customers. 
 

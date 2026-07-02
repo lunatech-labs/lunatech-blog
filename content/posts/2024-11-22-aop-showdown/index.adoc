@@ -1,4 +1,6 @@
 ---
+title: "AspectJ vs Spring AOP vs Quarkus: Aop Showdown"
+author: "tesfayenati"
 tags:
 - "java"
 - "aop"
@@ -7,9 +9,6 @@ tags:
 - "java-vs-world"
 - "java-over-java"
 ---
-= AspectJ vs Spring AOP vs Quarkus: Aop Showdown
-tesfayenati
-v1.0, 2024-11-15
 :lang: en
 
 == Overview

@@ -1,12 +1,11 @@
 ---
+title: "Telegram bot for file sharing using Quarkus"
+author: "iarmush"
 tags:
 - "java"
 - "telegram"
 - "quarkus"
 ---
-= Telegram bot for file sharing using Quarkus
-iarmush
-v1.0, 2023-11-05
 :lang: en
 
 

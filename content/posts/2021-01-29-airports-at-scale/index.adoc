@@ -1,4 +1,6 @@
 ---
+title: "Airports at Scale"
+author: "nMoncho"
 tags:
 - "database"
 - "nosql"
@@ -6,10 +8,6 @@ tags:
 - "modelling"
 - "programming"
 ---
-= Airports at Scale
-nMoncho
-v1.0, 2020-01-29
-
 == Assessing NoSQL Databases
 
 In a https://blog.lunatech.com/2018/11/lunatech-airport-assessment/[previous blog post], I explained the assessment we were using at Lunatech, detailing a solution using a common tech stack, Java with Spring Boot and PostgreSQL. An idea mentioned was that it would’ve been possible to also develop a solution using a NoSQL database, and since we did receive such solutions, this got me thinking: could every NoSQL category easily solve each requirement? What would be the advantages of using them over SQL? More importantly, do they fit in the problem and domain?

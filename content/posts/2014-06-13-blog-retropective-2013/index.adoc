@@ -1,11 +1,9 @@
 ---
+title: "Lunatech blog retrospective - 2013"
+author: "hilton"
 tags:
 - "opinion"
 ---
-= Lunatech blog retrospective - 2013
-hilton
-v1.0, 2014-06-13
-
 2013 brought even more firsts for projects, consultancy, technology and events than the previous year.
 
 image:/posts/2013-05-27-sdu-royal-ten/sdu-royal-ten.jpg[Sdu Royal Ten - 10km business run]

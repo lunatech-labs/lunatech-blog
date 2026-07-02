@@ -1,11 +1,9 @@
 ---
+title: "Morphon Technologies releases Morphon T-o-M 1.0"
+author: "kaas"
 tags:
 - "ventures"
 ---
-= Morphon Technologies releases Morphon T-o-M 1.0 
-kaas
-v1.0, 2008-03-14
-
 After half a year of development and
 testing, Morphon Technologies released version 1.0 of Morphon T-o-M.
 This first version supports the bulk signing of Adobe PDF documents in

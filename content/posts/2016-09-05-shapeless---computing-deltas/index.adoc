@@ -1,12 +1,10 @@
 ---
+title: "Shapeless - Computing deltas"
+author: "harrylaou"
 tags:
 - "shapeless"
 - "scala"
 ---
-= Shapeless - Computing deltas
-harrylaou
-v1.0, 2016-09-05
-
 == A real life exemple
 
 This is the code and some personal notes from the https://www.youtube.com/watch?v=JKaCCYZYBWo[Shapeless? - Easy!] talk where https://twitter.com/valentinkasas[Valentin Kasas] explains in a great way an advanced example of a real life use case (with https://gist.github.com/vil1/29f2d155679c703edfbe402f067962f6[slides]).

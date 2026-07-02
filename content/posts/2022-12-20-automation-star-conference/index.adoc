@@ -1,11 +1,10 @@
 ---
+title: "AutomationSTAR 2022 Conference"
+author: "TehreemFatima07"
 tags:
 - "conference"
 - "automation testing"
 ---
-= AutomationSTAR 2022 Conference
-TehreemFatima07
-v1.0, 2022-12-20
 :lang: en
 
 

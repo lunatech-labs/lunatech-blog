@@ -1,12 +1,10 @@
 ---
+title: "Literal data structures in Scala"
+author: "PeterHilton"
 tags:
 - "java"
 - "scala"
 ---
-= Literal data structures in Scala
-PeterHilton
-v1.0, 2010-07-19
-
 Here is an example of a striking
 difference in verbosity between Java and Scala. Some languages make it
 easy to concisely declare data structures in your code. Perl, Python,

@@ -1,13 +1,11 @@
 ---
+title: "Three Scrum benefits (video)"
+author: "PeterHilton"
 tags:
 - "scrum"
 - "methodology"
 - "event"
 ---
-= Three Scrum benefits (video)
-PeterHilton
-v1.0, 2011-06-15
-
 After
 the recent http://talkabout-it.nl/[Talk About IT] event in Amsterdam,
 Hugo Messer interviewed me and asked, ‘What are the three biggest

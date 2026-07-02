@@ -1,13 +1,11 @@
 ---
+title: "Announcing the _Moving from Scala 2 to Scala 3_ course"
+author: "eloots"
 tags:
 - "dotty"
 - "akka"
 - "scala"
 ---
-= Announcing the _Moving from Scala 2 to Scala 3_ course
-eloots
-v1.0, 2020-06-08
-
 == Moving From Scala 2 to Scala 3
 
 After some early peeks at https://dotty.epfl.ch[the Dotty website] on a few

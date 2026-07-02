@@ -1,11 +1,9 @@
 ---
+title: "Lunatech blog retrospective - 2011"
+author: "hilton"
 tags:
 - "opinion"
 ---
-= Lunatech blog retrospective - 2011
-hilton
-v1.0, 2014-06-11
-
 2011 brought new things to Lunatech - widespread git use, more 
     JavaScript and functional programming, Scala, specialist front-end 
     development and, of course, a lot more Play Framework.

@@ -1,11 +1,9 @@
 ---
+title: "Lunatech feeds Happy Melly"
+author: "hilton"
 tags:
 - "case-study"
 ---
-= Lunatech feeds Happy Melly  
-hilton
-v1.0, 2013-08-05
-
 Lunatech has started working with http://www.happymelly.com/[Happy Melly] to build a collaboration platform for their new business. Although we’re building software, CEO Jurgen Appelo thinks we’re more like food.
 
 Jurgen writes that you should

@@ -1,12 +1,10 @@
 ---
+title: "Benelux JBoss User Group, 2 November 2007 - photos"
+author: "hilton"
 tags:
 - "jbug"
 - "event"
 ---
-= Benelux JBoss User Group, 2 November 2007 - photos
-hilton
-v1.0, 2007-11-11
-
 Here are a few photos from last week's https://2007-10-01-benelux-jboss-user-group-2-november-2007[JBoss User Group
 event].
 

@@ -1,4 +1,6 @@
 ---
+title: "Graveyard of technologies"
+author: "peretarrida"
 tags:
 - "beyond-the-code"
 - "bash-to-the-feature"
@@ -24,9 +26,6 @@ tags:
 - "Developer Experience"
 - "User Adoption"
 ---
-= Graveyard of technologies
-peretarrida
-v1.0, 2025-06-20
 :lang: en
 == Software: When Technical Excellence Isn't Enough
 

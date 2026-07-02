@@ -1,4 +1,6 @@
 ---
+title: "Streams in Scala - An Introductory Guide"
+author: "zanio"
 tags:
 - "streams"
 - "scala-streams"
@@ -11,9 +13,6 @@ tags:
 - "reactive-stream"
 - "back-pressure"
 ---
-= Streams in Scala - An Introductory Guide
-zanio
-v1.0, 2023-07-28
 :lang: en
 
 

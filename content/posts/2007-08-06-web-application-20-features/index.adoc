@@ -1,11 +1,9 @@
 ---
+title: "Web application 2.0 features"
+author: "hilton"
 tags:
 - "web-applications"
 ---
-= Web application 2.0 features
-hilton
-v1.0, 2007-08-06
-
 After
 you have built the initial version of a web application, it can be hard
 to know what to add in version 2.0, tricky to know how add value and

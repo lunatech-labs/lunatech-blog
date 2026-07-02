@@ -1,11 +1,9 @@
 ---
+title: "Eclipse plug-in installation"
+author: "hilton"
 tags:
 - "java"
 ---
-= Eclipse plug-in installation
-hilton
-v1.0, 2007-03-08
-
 We have found it useful to install plug-ins separately from where Eclipse is installed, so you do not lose the plug-ins when you inevitably delete your Eclipse installation to start again, or install a new version. This works better than relying on Eclipse's self-upgrade working, and is simple when you know how. Here's how.
 
 The idea for installing plug-ins is to keep each plug-in in its own

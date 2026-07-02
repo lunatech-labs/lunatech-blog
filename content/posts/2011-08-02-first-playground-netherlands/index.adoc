@@ -1,11 +1,9 @@
 ---
+title: "First Play!ground in the Netherlands"
+author: "pepite"
 tags:
 - "playframework"
 ---
-= First Play!ground in the Netherlands
-pepite
-v1.0, 2011-08-02
-
 Join us for the first Play!ground in the Netherlands. We love the Play
 framework so much that we decided it was time to organise an event to
 share our passion.

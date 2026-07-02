@@ -1,11 +1,9 @@
 ---
+title: "Play framework usability"
+author: "PeterHilton"
 tags:
 - "playframework"
 ---
-= Play framework usability
-PeterHilton
-v1.0, 2010-03-15
-
 Perhaps the most
 striking thing about about the http://www.playframework.org/[Play! framework] 1.0 is that its biggest
 advantage over other Java web application development frameworks does

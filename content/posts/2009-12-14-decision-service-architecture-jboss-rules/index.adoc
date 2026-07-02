@@ -1,12 +1,10 @@
 ---
+title: "Decision service architecture with JBoss Rules"
+author: "PeterHilton"
 tags:
 - "java"
 - "drools"
 ---
-= Decision service architecture with JBoss Rules
-PeterHilton
-v1.0, 2009-12-10
-
 This article describes an
 architecture for implementing a decision service with http://www.jboss.org/drools/[JBoss
 Rules], a http://en.wikipedia.org/wiki/Business_rules_engine[business rules

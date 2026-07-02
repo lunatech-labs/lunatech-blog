@@ -1,13 +1,11 @@
 ---
+title: "February Play!ground presentations and photos"
+author: "hilton"
 tags:
 - "event"
 - "playframework"
 - "playground"
 ---
-= February Play!ground presentations and photos
-hilton
-v1.0, 2012-02-06
-
 On
 3 February 2012, Lunatech hosted a Play!ground event at Paddy Murphy’s
 Irish pub in Rotterdam - an event for developers interested in the http://www.playframework.org/[Play

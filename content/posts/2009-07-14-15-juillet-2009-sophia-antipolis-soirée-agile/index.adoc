@@ -1,11 +1,9 @@
 ---
+title: "15 juillet 2009 @Sophia-Antipolis - soirée Agile"
+author: "pepite"
 tags:
 - "event"
 ---
-= 15 juillet 2009 @Sophia-Antipolis - soirée Agile
-pepite
-v1.0, 2009-07-14
-
 Lunatech Research is proud to present the 4th Riviera JUG
 event. It will be an Agile event and we are please to announce that we
 will meet at Amadeus in Sophia-Antipolis, France. 

@@ -1,14 +1,11 @@
 ---
+title: "JBoss Rules (Drools) implementation Execution Server"
+author: "PeterHilton"
 tags:
 - "java"
 - "drools"
 - "case-study"
 ---
-= JBoss Rules (Drools) implementation Execution Server
-PeterHilton
-v1.0, 2010-01-11
-
-
 In 2009,
 http://www.bbned.nl/[BBned] hired Lunatech to assist with their first
 http://www.jboss.org/drools/[JBoss Rules] (Drools) implementation.

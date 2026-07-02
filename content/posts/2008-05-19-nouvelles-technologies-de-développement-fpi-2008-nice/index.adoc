@@ -1,13 +1,10 @@
 ---
+title: "Nouvelles technologies de développement - FPI 2008 in Nice"
+author: "pepite"
 tags:
 - "java"
 - "event"
 ---
-= Nouvelles technologies de développement - FPI 2008 in Nice
-pepite
-v1.0, 2008-05-19
-
-
 Last week Stephane Epardaud and Nicolas Leroux,
 senior software developers at Lunatech Research, presented \"Nouvelles
 technologies de développement en JEE\" at the Forum des Professions

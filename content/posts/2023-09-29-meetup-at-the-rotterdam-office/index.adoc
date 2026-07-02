@@ -1,4 +1,6 @@
 ---
+title: "Meetup At The Rotterdam Office | Devoxx Try-out: Maintaining Maven at scale and Machine Learning in Java"
+author: "PeuTit"
 tags:
 - "java"
 - "ml"
@@ -6,9 +8,6 @@ tags:
 - "devoxx"
 - "en"
 ---
-= Meetup At The Rotterdam Office | Devoxx Try-out: Maintaining Maven at scale and Machine Learning in Java
-PeuTit
-v1.0, 2023-09-29
 :lang: en
 
 Did you miss your chance to snag Devoxx tickets this time around? Are you eager to get a sneak peek into the Devoxx experience? We've got just the solution for you!

@@ -1,12 +1,10 @@
 ---
+title: "Lunatech at JavaPolis 2007"
+author: "hilton"
 tags:
 - "java"
 - "event"
 ---
-= Lunatech at JavaPolis 2007
-hilton
-v1.0, 2007-12-09
-
 Several
 Lunatech Research employees will be at
 http://www.javapolis.com/[JavaPolis] in Antwerp this week, starting

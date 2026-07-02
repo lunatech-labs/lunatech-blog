@@ -1,12 +1,10 @@
 ---
+title: "Using Dotty Union types with Akka Typed"
+author: "eloots"
 tags:
 - "dotty"
 - "akka"
 ---
-= Using Dotty Union types with Akka Typed
-eloots
-v1.1, 2020-02-19
-
 == Introduction
 
 I've been using _Akka Typed_ for some time, and when I read the blog article

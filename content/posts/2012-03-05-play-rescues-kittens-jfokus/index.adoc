@@ -1,12 +1,10 @@
 ---
+title: "Play rescues kittens at Jfokus"
+author: "hilton"
 tags:
 - "event"
 - "playframework"
 ---
-= Play rescues kittens at Jfokus
-hilton
-v1.0, 2012-03-05
-
 A few weeks ago, on 14
 February 2012, Peter Hilton presented http://www.playframework.org/2.0[Play Framework
 2.0] at

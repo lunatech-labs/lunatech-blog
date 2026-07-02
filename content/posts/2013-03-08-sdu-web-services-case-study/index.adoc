@@ -1,13 +1,11 @@
 ---
+title: "Sdu Uitgevers - Sdu Web Services"
+author: "targeter"
 tags:
 - "case-study"
 - "rest"
 - "xml"
 ---
-= Sdu Uitgevers - Sdu Web Services
-targeter
-v1.0, 2013-03-08
-
 Sdu Uitgevers hired Lunatech to design and develop a way to
 unlock publications for use in their customers' IT infrastructure. The main
 goals were easy integration and full flexibility for customers. The result is

@@ -1,11 +1,9 @@
 ---
+title: "How to fix disappearing Flash components"
+author: "targeter"
 tags:
 - "flash"
 ---
-= How to fix disappearing Flash components
-targeter
-v1.0, 2010-01-18
-
 While working on the video
 player for the http://www.minoto-video.com/[Minoto Video Platform], I
 ran into a serious issue with Flash player and the ComboBox component

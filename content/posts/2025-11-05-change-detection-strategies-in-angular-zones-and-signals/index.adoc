@@ -1,4 +1,6 @@
 ---
+title: "Change Detection Strategies in Angular: Zones and Signals"
+author: "jakeortega"
 tags:
 - "Intermediate"
 - "change detection"
@@ -6,9 +8,6 @@ tags:
 - "OnPush"
 - "signals (intro)"
 ---
-= Change Detection Strategies in Angular: Zones and Signals
-jakeortega
-2025-11-05
 :lang: en
 
 Understand Angular’s change detection mechanism and how to optimize performance using the OnPush strategy. Learn how to use Signals for more granular reactivity. This article provides a practical mental model and shows how to apply it with Zone.js, OnPush, and Signals, along with a clear path toward building zoneless applications when you’re ready.

@@ -1,4 +1,6 @@
 ---
+title: "Recap of the Joy of Coding Meetup at Lunatech"
+author: "Ana Rapanych"
 tags:
 - "documentation"
 - "automation"
@@ -7,9 +9,6 @@ tags:
 - "grafana"
 - "performance"
 ---
-= Recap of the Joy of Coding Meetup at Lunatech
-Ana Rapanych
-v1.0, 2025-02-13
 :lang: en
 
 == Introduction

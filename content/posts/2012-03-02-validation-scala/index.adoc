@@ -1,13 +1,10 @@
 ---
+title: "Validation in Scala"
+author: "bastschuller"
 tags:
 - "scala"
 - "validation"
 ---
-= Validation in Scala
-bastschuller
-v1.0, 2012-03-02
-
-
 When you start your journey in the land of
 Scala, you’ll often receive the friendly advice to not wander in the
 woods of http://code.google.com/p/scalaz/[Scalaz] (pronounced

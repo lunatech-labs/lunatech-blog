@@ -1,13 +1,10 @@
 ---
+title: "How to get a job interview at Lunatech"
+author: "PeterHilton"
 tags:
 - "employment"
 - "opinion"
 ---
-= How to get a job interview at Lunatech
-PeterHilton
-v1.0, 2010-08-16
-
-
 Our previous article on https://blog.lunatech.com/posts/2010-08-05-how-get-job-lunatech[how to get a job at Lunatech] explained
 why going through a recruiter makes it less likely that you will get an
 interview. Having explained how not to get an interview, this article

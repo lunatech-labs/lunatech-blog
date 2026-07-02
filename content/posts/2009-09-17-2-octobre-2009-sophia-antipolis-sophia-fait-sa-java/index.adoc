@@ -1,11 +1,9 @@
 ---
+title: "2 octobre 2009 @Sophia-Antipolis - Sophia fait sa Java"
+author: "FroMage"
 tags:
 - "event"
 ---
-= 2 octobre 2009 @Sophia-Antipolis - Sophia fait sa Java
-FroMage
-v1.0, 2009-09-17
-
 http://www.rivierajug.org/xwiki/bin/view/Main/20091002[2nd October 2009 @ Sophia-Antipolis - Sophia fait sa Java] The
 http://www.rivierajug.org[Riviera JUG] will host its fifth **free**
 conference the 2nd October of 2009 in collaboration with http://www.polytechnice.fr[Polytech Nice] and http://www.telecom-valley.fr[Telecom Valley] at

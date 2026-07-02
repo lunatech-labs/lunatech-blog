@@ -1,12 +1,10 @@
 ---
+title: "Lunatech presents Play Framework at JavaZone 2011"
+author: "hilton"
 tags:
 - "event"
 - "playframework"
 ---
-= Lunatech presents Play Framework at JavaZone 2011
-hilton
-v1.0, 2011-09-05
-
 On
 Thursday this week, Nicolas Leroux and Peter Hilton will be presenting
 the http://www.playframework.org/[Play Framework] at the http://jz11.java.no/[JavaZone

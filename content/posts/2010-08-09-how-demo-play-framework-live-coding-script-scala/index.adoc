@@ -1,12 +1,10 @@
 ---
+title: "How to demo the Play framework - live coding script (in Scala)"
+author: "fcanedo"
 tags:
 - "playframework"
 - "java"
 ---
-= How to demo the Play framework - live coding script (in Scala)
-fcanedo
-v1.0, 2010-08-09
-
 If you want someone to know how fast and
 straightforward it is to build a Scala web application with the http://www.playframework.org/[Play framework], then *show*, don't *tell*.
 The most compelling way to do this is to download Play and start coding

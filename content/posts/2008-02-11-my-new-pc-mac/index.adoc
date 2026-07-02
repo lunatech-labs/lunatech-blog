@@ -1,12 +1,10 @@
 ---
+title: "Benelux JBoss User Group, 29 February 2008"
+author: "hilton"
 tags:
 - "opinion"
 - "mac"
 ---
-= Benelux JBoss User Group, 29 February 2008
-hilton
-v1.0, 2008-02-11
-
 Until recently,
 my desktop PC was running Linux, like all of the other desktops at
 Lunatech. Since it was time to get a new PC with powerful hardware, I

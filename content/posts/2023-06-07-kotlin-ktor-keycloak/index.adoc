@@ -1,12 +1,11 @@
 ---
+title: "JWT token validation in Ktor with Client Credentials Flow"
+author: "leo-bogastry"
 tags:
 - "kotlin"
 - "ktor"
 - "keycloak"
 ---
-= JWT token validation in Ktor with Client Credentials Flow
-leo-bogastry
-v1.0, 2023-06-07
 :lang: en
 
 At Lunatech we build many tools that facilitate internal processes like keeping track of employees' vacations, share internal events and workshops and even one just for the days Lunatech offers us lunch ;) So, it's only natural that we end up creating integrations between these applications.

@@ -1,12 +1,9 @@
 ---
+title: "Navigation design patterns - details page"
+author: "hilton"
 tags:
 - "web-applications"
 ---
-= Navigation design patterns - details page
-hilton
-v1.0, 2005-12-18
-
-
 For database-backed web applications, the Details Page is the fundamental web application /https://blog.lunatech.com/2005-11-21-navigation-patterns[navigation design pattern]. A Details Page provides a mechanism for both presentation and selection, and may be the focus of a data-centric site's structure.
 
 ++++

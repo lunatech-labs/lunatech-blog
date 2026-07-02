@@ -1,14 +1,11 @@
 ---
+title: "Benelux JBoss User Group, 22 May 2009 slides"
+author: "PeterHilton"
 tags:
 - "java"
 - "jbug"
 - "event"
 ---
-= Benelux JBoss User Group, 22 May 2009 slides
-PeterHilton
-v1.0, 2009-05-25
-
-
 Last Friday’s Benelux JBoss User Group was
 well-attended, and the weather played along with our plan to have a
 barbeque and drinks outside in the garden at the Lunatech office in

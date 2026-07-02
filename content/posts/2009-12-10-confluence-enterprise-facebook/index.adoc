@@ -1,12 +1,10 @@
 ---
+title: "Confluence as an enterprise Facebook"
+author: "PeterHilton"
 tags:
 - "confluence"
 - "opinion"
 ---
-= Confluence as an enterprise Facebook
-PeterHilton
-v1.0, 2009-12-10
-
 Large
 organisations are starting to consider deploying an internal
 http://www.facebook.com/[Facebook] clone, in their quest for

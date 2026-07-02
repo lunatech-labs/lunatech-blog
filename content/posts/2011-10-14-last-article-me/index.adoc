@@ -1,12 +1,9 @@
 ---
+title: "Last article from me"
+author: "FroMage"
 tags:
 - "fun"
 ---
-= Last article from me
-FroMage
-v1.0, 2011-10-14
-
-
 "Today is my last day as a Lunatech Research employee,
 so this is my last blog entry on this site.
 

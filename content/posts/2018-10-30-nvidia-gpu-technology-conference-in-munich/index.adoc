@@ -1,11 +1,9 @@
 ---
+title: "Nvidia GPU Technology Conference In Munich"
+author: "Ravi Gupta"
 tags:
 - "event"
 ---
-= Nvidia GPU Technology Conference In Munich
-Ravi Gupta
-v1.0, 2018-10-30
-
 Nvidia holds https://www.nvidia.com/en-eu/gtc/[European GTC], its “all about GPU” conference, in Munich every year, in the month of October. So when I learned I could attend my first GTC, thanks to https://lunatech.com/[Lunatech] (my employer), I was really excited because I have always been interested in the field of GPUs, how it’s progressing and how it’s affecting the computing world especially the cutting edge fields like Artificial Intelligence, Deep Learning, Autonomous Driving etc.
 
 It was such a fantastic place to be where you could be with people from industry and academia alike at one venue. I was especially eager to learn and get first hand  experiences of latest works being done in the domain of Autonomous Driving and Deep learning. I enjoyed every bit of the three days (9-11 Oct) spent there. I got to attend really enjoyable and enlightening hands on trainings, talks, panel discussions, demos, expos etc. I would love to share my experience with you all.

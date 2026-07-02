@@ -1,12 +1,9 @@
 ---
+title: "How to write user-interface instructions"
+author: "hilton"
 tags:
 - "writing"
 ---
-= How to write user-interface instructions
-hilton
-v1.0, 2007-03-08
-
-
 User-interface instructions are the step-by-step
 instructions for doing something like testing software or installing a Windows application. These kinds of instructions are often hard to use.
 They are frequently incomplete and ambiguous, which makes it easy to get lost in a long sequence of steps, and slows you down by forcing you to make guesses at certain steps. This happens because the writer underestimates how much detail is required, or is just lazy.

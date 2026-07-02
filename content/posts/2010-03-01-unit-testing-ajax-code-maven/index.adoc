@@ -1,13 +1,11 @@
 ---
+title: "Unit-testing AJAX code with Maven"
+author: "FroMage"
 tags:
 - "java"
 - "javascript"
 - "maven"
 ---
-= Unit-testing AJAX code with Maven
-FroMage
-v1.0, 2010-03-01
-
 This article
 presents a way to use http://maven.apache.org[Maven] to write
 fully-automated http://en.wikipedia.org/wiki/JavaScript[JavaScript]

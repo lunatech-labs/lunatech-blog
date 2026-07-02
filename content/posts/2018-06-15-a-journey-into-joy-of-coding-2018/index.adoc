@@ -1,11 +1,9 @@
 ---
+title: "A journey into Joy of Coding  2018"
+author: "Antoine Laffez"
 tags:
 - "event"
 ---
-= A journey into Joy of Coding  2018
-Antoine Laffez
-v1.0, 2018-06-15
-
 On the 8th of June, the "Joy of Coding conference” was held in De Doelen, Rotterdam. The format of this conference was completely different from conventional IT conferences. Unlike most of her sisters, Joy of Coding is not dedicated to a programming language or very precise topics such as JVM, Big-data, Cloud etc... This moment is 100% dedicated to developers. 250 of them had the chance to attend.
 
 An almost poetic introduction by John Skeet, alternating between art and songs, was followed by talks that were all more exciting than the previous (complete schedule http://joyofcoding.org/2018/schedule.html[here]). Some talks are already on-line like "https://monospacedmonologues.com/2018/06/teaching-a-machine-to-code/[Teaching a Machine to Code]" by https://twitter.com/SamirTalwar[Samir Talwar]. I really hope that videos will be published on the website or links on the https://twitter.com/JoyOfCoding?lang=en[J.O.C official Twitter].

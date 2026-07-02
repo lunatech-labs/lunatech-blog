@@ -1,4 +1,6 @@
 ---
+title: "Software Will Cost Almost Nothing. What Happens Next?"
+author: "pepite"
 tags:
 - "AI"
 - "software engineering"
@@ -6,9 +8,6 @@ tags:
 - "agentic coding"
 - "en"
 ---
-= Software Will Cost Almost Nothing. What Happens Next?
-pepite
-v1.0, 2026-04-28
 :lang: en
 
 Every industrial revolution until now replaced muscle. The steam engine, the assembly line, the tractor -- each one amplified physical labor and made goods cheaper to produce. But the revolution we are living through right now is fundamentally different. For the first time, what is being replaced is the ability to produce structured intellectual output: code, documentation, test plans, architecture decisions, migration scripts, compliance reports. All of these can now be produced by AI agents.

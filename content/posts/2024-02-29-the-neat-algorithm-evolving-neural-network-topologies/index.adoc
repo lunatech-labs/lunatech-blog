@@ -1,12 +1,11 @@
 ---
+title: "The NEAT Algorithm: Evolving Neural Networks"
+author: "thinkmorestupidless"
 tags:
 - "artifical intelligence"
 - "machine learning"
 - "algorithm"
 ---
-= The NEAT Algorithm: Evolving Neural Networks
-thinkmorestupidless
-v1.0, 2024-02-29
 :lang: en
 
 == Preface: On Searching the Archives

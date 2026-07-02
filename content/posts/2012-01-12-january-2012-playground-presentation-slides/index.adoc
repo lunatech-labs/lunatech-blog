@@ -1,14 +1,11 @@
 ---
+title: "January 2012 Play!ground presentation slides"
+author: "vijaykiran"
 tags:
 - "event"
 - "playframework"
 - "playground"
 ---
-= January 2012 Play!ground presentation slides
-vijaykiran
-v1.0, 2012-01-12
-
-
 On 6 January 2012, Lunatech hosted the Play!ground in the Netherlands -
 an event for developers interested in the http://www.playframework.org/[Play
 framework]. Here are the slides from the

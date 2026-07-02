@@ -1,12 +1,10 @@
 ---
+title: "Fronteers at Lunatech. WTF?"
+author: "hilton"
 tags:
 - "event"
 - "front-end"
 ---
-= Fronteers at Lunatech. WTF?
-hilton
-v1.0, 2011-09-16
-
 On 15 September, Lunatech hosted a
 http://fronteers.nl/[Fronteers] event for the first time. *Fronteers*
 is an industry association for front-end developers in the Netherlands

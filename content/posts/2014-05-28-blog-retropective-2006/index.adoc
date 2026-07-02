@@ -1,11 +1,9 @@
 ---
+title: "Lunatech blog retrospective - 2006"
+author: "hilton"
 tags:
 - "opinion"
 ---
-= Lunatech blog retrospective - 2006
-hilton
-v1.0, 2014-05-28
-
 2006 brought another random collection of articles to the Lunatech Blog. Here is a selection of my favourites.
 
 In many ways, commercial Java development back in 2006 wasn’t that

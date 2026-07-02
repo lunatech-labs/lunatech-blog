@@ -1,13 +1,11 @@
 ---
+title: "Announcing the Lunatech Beginner Quarkus Course"
+author: "njlbenn"
 tags:
 - "quarkus"
 - "java"
 - "training"
 ---
-= Announcing the Lunatech Beginner Quarkus Course
-njlbenn
-v1.0, 2021-03-22
-
 == Betting on Java for the cloud-native era
 
 In the last 18 months, one of the frameworks creating the most buzz is https://quarkus.io/[Quarkus]. We at Lunatech think that this is more than just the usual hype about a new framework. More and more of our clients have been asking about this framework and have been working with us to either develop proofs-of-concepts for migrating some existing applications or have already adopted the framework for some greenfield projects.

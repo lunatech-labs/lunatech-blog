@@ -1,13 +1,10 @@
 ---
+title: "Shapeless - Introduction resources"
+author: "harrylaou"
 tags:
 - "shapeless"
 - "scala"
 ---
-= Shapeless - Introduction resources
-harrylaou
-v1.0, 2016-09-05
-
-
 == Where to start if you want to learn shapeless
 
 Recently I decided to have a better look at https://github.com/milessabin/shapeless[shapeless], the generic programming library for scala. In the previous couple of years I had bookmarked several links and have recently read all of them. In this blog post I present the most useful ones for someone who want to be introduced to the library.

@@ -1,12 +1,11 @@
 ---
+title: "Devoxx BE 2023"
+author: "nikashamova; yabets; jichay"
 tags:
 - "java"
 - "devoxx"
 - "en"
 ---
-= Devoxx BE 2023
-nikashamova; yabets; jichay
-v1.0, 2023-10-13
 :lang: en
 
 Recently a group of Lunatechies had the opportunity to attend the

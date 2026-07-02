@@ -1,11 +1,9 @@
 ---
+title: "NN Rotterdam Marathon 2018"
+author: "Antoine Laffez"
 tags:
 - "event"
 ---
-= NN Rotterdam Marathon 2018
-Antoine Laffez
-v1.0, 2018-04-16
-
 The 2018 Edition of the NN Rotterdam Marathon took place on the 8th of April under sunny and warm weather. The NN Marathon is the biggest, fastest, and best marathon in the Netherlands. 13.000 participants, more than 950.000 spectators and 1 Lunatech team for this 38th edition.
 
 image:marathon-rotterdam.png[]

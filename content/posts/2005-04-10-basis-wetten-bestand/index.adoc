@@ -1,12 +1,11 @@
 ---
+title: "Basis Wetten Bestand"
+author: "kaas"
 tags:
 - "java"
 - "xml"
 - "case-study"
 ---
-= Basis Wetten Bestand
-kaas
-v1.0, 2005-04-10
 ifdef::backend-html5[]
 :in-between-width: width='85%'
 :half-width: width='50%'

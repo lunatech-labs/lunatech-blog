@@ -1,12 +1,10 @@
 ---
+title: "Getting started with Play and Slick 1.0.1"
+author: "hilton"
 tags:
 - "slick"
 - "playframework"
 ---
-= Getting started with Play and Slick 1.0.1  
-hilton
-v1.0, 2013-08-08
-
 When you start building a new Play Scala web application, you probably
 need to choose a database platform and a data access library to go with
 it. You also need to work out how to integrate that with your Play

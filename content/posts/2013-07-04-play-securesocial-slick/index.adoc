@@ -1,12 +1,10 @@
 ---
+title: "Play 2, SecureSocial and Slick"
+author: "targeter"
 tags:
 - "playframework"
 - "scala"
 ---
-= Play 2, SecureSocial and Slick 
-targeter
-v1.0, 2013-07-04
-
 If you want to have any kind of login on your Play 2  app, and don’t want to spend the time coding one yourself, the http://securesocial.ws[SecureSocial] module is the way to go. This article will show you how to combine it with http://slick.typesafe.com/[Slick], a Scala persistence API, to store your user’s authentication details. 
 
 == SecureSocial

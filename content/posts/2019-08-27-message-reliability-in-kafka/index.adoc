@@ -1,13 +1,11 @@
 ---
+title: "Message Reliability In Kafka"
+author: "idarlington"
 tags:
 - "kafka"
 - "messaging"
 - "scala"
 ---
-= Message Reliability In Kafka
-idarlington
-v1.0, 2019-08-27
-
 == Outline
 
 - Introduction to message delivery semantics in Kafka

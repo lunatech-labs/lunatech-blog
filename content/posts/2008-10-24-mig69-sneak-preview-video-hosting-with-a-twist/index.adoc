@@ -1,11 +1,9 @@
 ---
+title: "Mig69 sneak preview - Video Hosting with a twist"
+author: "Michael Pentowski"
 tags:
 - "ventures"
 ---
-= Mig69 sneak preview - Video Hosting with a twist
-Michael Pentowski
-v1.0, 2008-10-24
-
 Minoto Interactive has
 released a sneak preview of http://www.mig69.com/[mig69.com], it's
 answer to high quality video hosting. Mig69 has unique business model,

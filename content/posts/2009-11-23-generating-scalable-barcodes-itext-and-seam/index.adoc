@@ -1,4 +1,6 @@
 ---
+title: "Generating scalable barcodes with iText and Seam"
+author: "FroMage"
 tags:
 - "java"
 - "pdf"
@@ -6,11 +8,6 @@ tags:
 - "seam"
 - "jsf"
 ---
-= Generating scalable barcodes with iText and Seam
-FroMage
-v1.0, 2009-11-23
-
-
 This article explains how to use Seam's JSF
 mapping for iText to generate a sheet of product barcodes with scalable
 barcodes.

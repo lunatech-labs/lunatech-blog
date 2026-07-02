@@ -1,4 +1,6 @@
 ---
+title: "GenAI: Optimizing Local Large Language Models Performance"
+author: "rkargul"
 tags:
 - "gen-ai"
 - "llm"
@@ -11,9 +13,6 @@ tags:
 - "model-inference"
 - "open-source"
 ---
-= GenAI: Optimizing Local Large Language Models Performance
-rkargul
-v1.0, 2025-04-17
 :lang: en
 
 Local large language models (LLMs) are becoming more capable and accessible than ever — but to truly unlock their power, you need to know how to optimize them.

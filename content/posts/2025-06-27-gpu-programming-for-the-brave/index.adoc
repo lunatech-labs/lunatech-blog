@@ -1,4 +1,6 @@
 ---
+title: "GPU Programming For The Brave"
+author: "boyuan-xiao-at-work"
 tags:
 - "beyond-the-code"
 - "bash-to-the-feature"
@@ -8,9 +10,6 @@ tags:
 - "AI"
 - "neural network"
 ---
-= GPU Programming For The Brave
-boyuan-xiao-at-work
-v1.0, 2025-06-27
 :lang: en
 
 == Introduction

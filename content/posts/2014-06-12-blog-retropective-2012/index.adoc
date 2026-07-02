@@ -1,11 +1,9 @@
 ---
+title: "Lunatech blog retrospective - 2012"
+author: "hilton"
 tags:
 - "opinion"
 ---
-= Lunatech blog retrospective - 2012
-hilton
-v1.0, 2014-06-12
-
 In 2012 we got better toys, our customers started using Scrum seriously, 
     and we started talking to the outside world about Play a lot more than we 
     had before.

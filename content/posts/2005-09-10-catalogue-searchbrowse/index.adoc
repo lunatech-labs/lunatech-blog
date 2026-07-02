@@ -1,10 +1,9 @@
 ---
+title: "Catalogue search/browse"
+author: "hilton"
 tags:
 - "web"
 ---
-= Catalogue search/browse
-hilton
-v1.0, 2005-09-10
 ifdef::backend-html5[]
 :in-between-width: width='85%'
 :half-width: width='50%'

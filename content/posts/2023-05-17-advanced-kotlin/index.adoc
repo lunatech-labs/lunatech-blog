@@ -1,11 +1,10 @@
 ---
+title: "Exploring Advanced Kotlin Features: A Deep Dive for Scala Developers"
+author: "AnastasiiaL"
 tags:
 - "scala"
 - "kotlin"
 ---
-= Exploring Advanced Kotlin Features: A Deep Dive for Scala Developers
-AnastasiiaL
-v1.0, 2023-05-17
 :lang: en
 
 Recently, I shared my experience with trying out Kotlin coming from a Scala background. I talked about the syntax and some concept similarities.

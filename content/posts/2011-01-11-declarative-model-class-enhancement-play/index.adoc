@@ -1,12 +1,10 @@
 ---
+title: "Declarative model class enhancement in Play 1.2"
+author: "PeterHilton"
 tags:
 - "playframework"
 - "java"
 ---
-= Declarative model class enhancement in Play 1.2
-PeterHilton
-v1.0, 2011-01-11
-
 The Play framework is
 a web application development framework that is not only surprisingly
 usable and flexible, it is also extremely extensible. This article shows

@@ -1,11 +1,9 @@
 ---
+title: "How to use bullet lists"
+author: "hilton"
 tags:
 - "writing"
 ---
-= How to use bullet lists
-hilton
-v1.0, 2006-09-11
-
 Bullet http://en.wikipedia.org/wiki/List_%28composition%29[lists] are much used and abused, especially in business and technical writing. However, if you follow some simple rules of thumb, bullet lists can improve your writing's readability and reduce duplication, instead of being a poor substitute for well-formed prose.
 
 ++++

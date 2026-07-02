@@ -1,4 +1,6 @@
 ---
+title: "Part 1: Introduction and Stack Breakdown for the Angular + NestJS Auth Boilerplate"
+author: "jakeortega"
 tags:
 - "angular"
 - "nestjs"
@@ -10,9 +12,6 @@ tags:
 - "typescript"
 - "nodejs"
 ---
-= Part 1: Introduction and Stack Breakdown for the Angular + NestJS Auth Boilerplate
-jakeortega
-v1.0, 2025-04-04
 :lang: en
 
 Welcome to the first part in this series on building a full-stack

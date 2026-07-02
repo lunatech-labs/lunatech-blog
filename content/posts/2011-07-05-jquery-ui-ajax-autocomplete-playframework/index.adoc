@@ -1,15 +1,12 @@
 ---
+title: "jQuery UI Ajax autocomplete with Play 1.2"
+author: "PeterHilton"
 tags:
 - "jquery"
 - "ajax"
 - "javascript"
 - "playframework"
 ---
-= jQuery UI Ajax autocomplete with Play 1.2
-PeterHilton
-v1.0, 2011-07-05
-
-
 When Matt Raible http://raibledesigns.com/rd/entry/my_comparing_jvm_web_frameworks[compared JVM web
 frameworks]
 last December, he gave the (http://www.playframework.org/)[Play framework] (version 1.2) *null points*

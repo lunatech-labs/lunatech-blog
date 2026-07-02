@@ -1,11 +1,9 @@
 ---
+title: "Good bug reports come in four parts"
+author: "hilton"
 tags:
 - "documentation"
 ---
-= Good bug reports come in four parts 
-hilton
-v1.0, 2013-04-19
-
 This article explains which information you need for a complete bug report, because good bug reports come in four parts and incomplete bug reports can waste a lot of time on communication overhead.
 
 If you’re testing a software application and writing bug reports for a

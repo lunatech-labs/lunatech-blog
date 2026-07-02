@@ -1,11 +1,9 @@
 ---
+title: "OpenSearch plug-in for Atlassian’s Confluence"
+author: "evelienket"
 tags:
 - "java"
 ---
-= OpenSearch plug-in for Atlassian’s Confluence
-evelienket
-v1.0, 2007-07-06
-
 With this OpenSearch plug-in developed for http://www.atlassian.com/software/confluence/[Atlassian's
 Confluence], you make it
 possible to search your Confluence site from the outside with an

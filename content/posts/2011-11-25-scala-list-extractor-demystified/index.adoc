@@ -1,11 +1,9 @@
 ---
+title: "The Scala List extractor demystified"
+author: "fcanedo"
 tags:
 - "scala"
 ---
-= The Scala List extractor demystified
-fcanedo
-v1.0, 2011-11-25
-
 This article explains
 and demystifies Scala list extraction, which is a technique for
 extracting lists from larger lists.

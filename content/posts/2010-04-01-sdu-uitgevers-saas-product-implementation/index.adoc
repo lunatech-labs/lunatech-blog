@@ -1,15 +1,12 @@
 ---
+title: "Sdu Uitgevers - SaaS product implementation"
+author: "fcanedo"
 tags:
 - "java"
 - "web-applications"
 - "saas"
 - "case-study"
 ---
-= Sdu Uitgevers - SaaS product implementation
-fcanedo
-v1.0, 2010-04-01
-
-
 Lunatech has built and continues to be responsible
 for maintaining several of Sdu's web-based law and jurisprudence
 document search applications. These applications divide the vast amount

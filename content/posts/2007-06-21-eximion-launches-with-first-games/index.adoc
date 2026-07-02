@@ -1,11 +1,9 @@
 ---
+title: "Eximion launches with first games type"
+author: "Michael Pentowski"
 tags:
 - "ventures"
 ---
-= Eximion launches with first games type
-Michael Pentowski
-v1.0, 2007-06-21
-
 Who says gaming is all fun? Well,
 http://eximion.com/[Eximion], one of our portfolio companies does.
 Those who thought Holland only produced tulips and wooden shoes should

@@ -1,13 +1,10 @@
 ---
+title: "What’s wrong with the Java Servlet API"
+author: "hilton"
 tags:
 - "java"
 - "servlet"
 ---
-= What’s wrong with the Java Servlet API
-hilton
-v1.0, 2011-12-08
-
-
 Before
 Play, Java web frameworks were based on the Java Servlet API, the part
 of the Java Enterprise Edition (Java EE) stack that provides the HTTP

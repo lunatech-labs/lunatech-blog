@@ -1,12 +1,10 @@
 ---
+title: "Java Spotlight podcast - Play 2.0 & Akka 2.0"
+author: "hilton"
 tags:
 - "event"
 - "playframework"
 ---
-= Java Spotlight podcast - Play 2.0 & Akka 2.0
-hilton
-v1.0, 2012-03-07
-
 In this week's https://blogs.oracle.com/javaspotlight/[Java
 Spotlight podcast] from Oracle,
 Peter Hilton talks about Play 2.0. Peter joins Jonas Bonér, who talks

@@ -1,12 +1,10 @@
 ---
+title: "Play framework meet-up at Devoxx 2010"
+author: "PeterHilton"
 tags:
 - "playframework"
 - "event"
 ---
-= Play framework meet-up at Devoxx 2010
-PeterHilton
-v1.0, 2010-11-15
-
 Peter Hilton and Nicolas
 Leroux joined thousands of Java developers at http://devoxx.com/display/Devoxx2K10/Home[Devoxx 2010], for technical talks,
 networking and Belgian beer. About 60 people went to our Wednesday

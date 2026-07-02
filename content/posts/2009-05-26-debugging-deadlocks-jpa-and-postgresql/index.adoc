@@ -1,13 +1,11 @@
 ---
+title: "Debugging deadlocks in JPA and PostgreSQL"
+author: "FroMage"
 tags:
 - "java"
 - "jpa"
 - "postgres"
 ---
-= Debugging deadlocks in JPA and PostgreSQL
-FroMage
-v1.0, 2009-05-26
-
 In this article I describe a recent problem
 I had with PostgreSQL, where a deadlock caused my application to crash
 for unclear reasons. Naturally I also describe how to debug such

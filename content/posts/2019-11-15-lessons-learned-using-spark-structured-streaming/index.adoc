@@ -1,14 +1,12 @@
 ---
+title: "Lessons Learned Using Spark Structured Streaming"
+author: "idarlington"
 tags:
 - "kafka"
 - "spark"
 - "streaming"
 - "scala"
 ---
-= Lessons Learned Using Spark Structured Streaming
-idarlington
-v1.0, 2019-11-15
-
 Recently, I had to update a Spark application using Spark Streaming to Spark Structured Streaming. During this process, there were some parts I couldn’t find documentation or examples on. I decided to write about those parts, someone(probably future me) will find them useful.
 
 == Reading from Kafka

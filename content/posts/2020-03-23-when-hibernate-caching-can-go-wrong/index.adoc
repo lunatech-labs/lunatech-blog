@@ -1,13 +1,11 @@
 ---
+title: "When Hibernate caching can go wrong"
+author: "smthelusive"
 tags:
 - "hibernate"
 - "java"
 - "caching"
 ---
-= When Hibernate caching can go wrong
-smthelusive
-v1.0, 2020-03-23
-
 == Why is this topic worth discussion
 
 It all started from us trying to setup Hibernate ehcache in our big project with a lot of entities to improve the performance. Eventually that took a lot of time because we ran into a bunch of issues and to solve some of them we had to do a bit of refactoring, and for others we spent a lot of time setting it up properly. Yes, you will find many things in documentation, but it's not always on the surface and not always seen immediately.

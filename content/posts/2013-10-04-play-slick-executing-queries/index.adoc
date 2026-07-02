@@ -1,12 +1,10 @@
 ---
+title: "Executing database queries with Slick 1.0.1"
+author: "hilton"
 tags:
 - "slick"
 - "playframework"
 ---
-= Executing database queries with Slick 1.0.1
-hilton
-v1.0, 2013-10-04
-
 This tutorial shows you how to execute database queries in a
     [Slick](http://slick.typesafe.com) application by building on the
     [previous Slick tutorials](https://blog.lunatech.com/tags/slick).

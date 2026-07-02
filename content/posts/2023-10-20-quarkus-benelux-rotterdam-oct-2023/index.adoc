@@ -1,12 +1,11 @@
 ---
+title: "Quarkus Benelux in Rotterdam"
+author: "leo-bogastry"
 tags:
 - "quarkus"
 - "java"
 - "web-applications"
 ---
-= Quarkus Benelux in Rotterdam
-leo-bogastry
-v1.0, 2023-10-20
 :lang: en
 
 === Introduction

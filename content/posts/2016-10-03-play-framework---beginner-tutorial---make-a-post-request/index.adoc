@@ -1,13 +1,11 @@
 ---
+title: "Play Framework - Beginner Tutorial - Make a post request and save the form data in Mongodb"
+author: "harrylaou"
 tags:
 - "playframework"
 - "scala"
 - "mongodb"
 ---
-= Play Framework - Beginner Tutorial - Make a post request and save the form data in Mongodb
-harrylaou
-v1.0, 2016-10-03
-
 == Before the tutorial 
 
 You should : 

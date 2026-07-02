@@ -1,13 +1,10 @@
 ---
+title: "Transparent development and the project management"
+author: "hilton"
 tags:
 - "project-management"
 - "methodology"
 ---
-= Transparent development and the project management
-hilton
-v1.0, 2012-06-04
-
-
 In his http://www.reinventing-business.com/[Reinventing Business]
 presentation at http://2012.geecon.org[geecon] last month, Bruce
 Eckel suggested that improving how companies operate requires

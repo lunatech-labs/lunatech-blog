@@ -1,4 +1,6 @@
 ---
+title: "Localised attribute values in JSF and Seam"
+author: "PeterHilton"
 tags:
 - "java"
 - "seam"
@@ -6,10 +8,6 @@ tags:
 - "localization"
 - "web-applications"
 ---
-= Localised attribute values in JSF and Seam
-PeterHilton
-v1.0, 2009-05-12
-
 There are various features for /2009/03/31/jsf-seam-localization[Language localisation in JSF and
 Seam]. However, these features do not provide any way to localise text in an attribute value that contains a
 placeholder in a Facelets view, without writing extra code. This article

@@ -1,4 +1,6 @@
 ---
+title: "Data Binding in Angular: Templates, Interpolation, and Property/Event Binding"
+author: "jakeortega"
 tags:
 - "Beginner"
 - "property binding"
@@ -6,9 +8,6 @@ tags:
 - "interpolation"
 - "template syntax"
 ---
-= Data Binding in Angular: Templates, Interpolation, and Property/Event Binding
-jakeortega
-v1, 2025-10-15
 :lang: en
 
 Data binding is the heartbeat of Angular templates. Learn how data flows between components and templates using interpolation, property binding, event binding, and two-way binding. This topic also introduces new Angular 20 template features like template literals. We’ll keep the focus practical: clear patterns, minimal surprises, and maintainable code that scales.

@@ -1,13 +1,10 @@
 ---
+title: "Fact Type Hierarchies in Drools"
+author: "ufkes"
 tags:
 - "drools"
 - "java"
 ---
-= Fact Type Hierarchies in Drools
-ufkes
-v1.0, 2012-03-21
-
-
 Although Drools is Java-oriented and
 provides the ability to handle facts in an object-oriented manner thanks
 to the ReteOO optimized algorithm, there is always room for improvement.

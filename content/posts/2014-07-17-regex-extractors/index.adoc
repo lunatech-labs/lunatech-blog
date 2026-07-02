@@ -1,12 +1,10 @@
 ---
+title: "Regex extractors"
+author: "fcanedo"
 tags:
 - "regex"
 - "scala"
 ---
-= Regex extractors
-fcanedo
-v1.0, 2014-07-17
-
 This article explains how to use regular expressions in Scala pattern matching.
 
 Sometimes the best way to decompose string data is with capturing groups

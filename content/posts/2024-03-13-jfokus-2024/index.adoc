@@ -1,4 +1,6 @@
 ---
+title: "JFokus 2024"
+author: "jdijt"
 tags:
 - "conference"
 - "stockholm"
@@ -6,9 +8,6 @@ tags:
 - "java"
 - "jfokus"
 ---
-= JFokus 2024
-jdijt
-v1.0, 2024-03-13
 :lang: en
 
 Recently myself and two other Lunatech colleagues had the opportunity to visit JFokus.

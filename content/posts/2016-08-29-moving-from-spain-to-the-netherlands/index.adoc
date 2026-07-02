@@ -1,11 +1,9 @@
 ---
+title: "Moving from Spain to the Netherlands"
+author: "JMCeron"
 tags:
 - "opinion"
 ---
-= Moving from Spain to the Netherlands 
-JMCeron
-v1.0, 2016-08-29
-
 Last week, I started talking about the main things I've faced when learning Scala, after being a Java developers for a few years. Today, I will talk about how it was to move from Spain to the Netherlands, in order to join Lunatech.
 
 Food. Oh boy, the food. Spain is known for its Iberian ham, and you have a lot of different hams on every supermarket you visit. Usually, there is a big fridge, full of brands of ham, and also meat: pork, chicken, beef. And beef is also classified depending on the part of the animal it comes from, there are more than 10 possible kinds of beef and I don't even know which one to choose when I go to buy something.

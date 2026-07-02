@@ -1,11 +1,9 @@
 ---
+title: "Lunatech blog retrospective - 2009"
+author: "hilton"
 tags:
 - "opinion"
 ---
-= Lunatech blog retrospective - 2009
-hilton
-v1.0, 2014-06-06
-
 In 2009, we continued to fight JSF, win (usually), write about it, 
     and tell our war stories at JBoss User Group events. However, the most
     interesting blog posts were about other topics.

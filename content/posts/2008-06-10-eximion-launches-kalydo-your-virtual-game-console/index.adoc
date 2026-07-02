@@ -1,12 +1,9 @@
 ---
+title: "EXIMION LAUNCHES KALYDO \\xE2\\x80\\x93 YOUR VIRTUAL GAME CONSOLE"
+author: "Michael Pentowski"
 tags:
 - "ventures"
 ---
-= EXIMION LAUNCHES KALYDO \xE2\x80\x93 YOUR VIRTUAL GAME CONSOLE
-Michael Pentowski
-v1.0, 2008-06-10
-
-
 Play a stunning
 3D game in your browser, anywhere any time. Spectacular games that load
 quick and easy, on any PC. Sign up now for the beta and be the first to

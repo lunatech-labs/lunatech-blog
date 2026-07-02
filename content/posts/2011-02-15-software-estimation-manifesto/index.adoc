@@ -1,12 +1,10 @@
 ---
+title: "The Software Estimation Manifesto"
+author: "PeterHilton"
 tags:
 - "estimation"
 - "methodology"
 ---
-= The Software Estimation Manifesto
-PeterHilton
-v1.0, 2011-02-07
-
 Making estimates for how long a software
 development task will take is the closest that commercial software
 developers come to performing a black art. And a black art it is,

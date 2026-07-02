@@ -1,14 +1,11 @@
 ---
+title: "Automatic resource link discovery with RESTEasy and Atom links"
+author: "FroMage"
 tags:
 - "resteasy"
 - "java"
 - "rest"
 ---
-= Automatic resource link discovery with RESTEasy and Atom links
-FroMage
-v1.0, 2010-04-19
-
-
 This
 article describes how to use http://www.jboss.org/resteasy/[RESTEasy]
 to inject http://tools.ietf.org/html/rfc4287[Atom] links in your

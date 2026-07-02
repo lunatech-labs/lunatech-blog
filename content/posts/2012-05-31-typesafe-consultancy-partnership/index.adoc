@@ -1,12 +1,11 @@
 ---
+title: "Typesafe consultancy partnership"
+author: "hilton"
 tags:
 - "playframeworkt"
 - "scala"
 - "typesafe"
 ---
-= Typesafe consultancy partnership
-hilton
-v1.0, 2012-05-31
 renaissance
 
 As you may have seen

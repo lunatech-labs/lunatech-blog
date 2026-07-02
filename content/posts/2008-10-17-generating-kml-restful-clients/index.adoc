@@ -1,14 +1,12 @@
 ---
+title: "Generating KML for RESTful clients"
+author: "FroMage"
 tags:
 - "java"
 - "web-applications"
 - "xml"
 - "rest"
 ---
-= Generating KML for RESTful clients
-FroMage
-v1.0, 2008-10-17
-
 In this article we describe how to use
 https://jaxb.dev.java.net/[JAXB] to generate a
 http://www.opengeospatial.org/standards/kml/[KML] object

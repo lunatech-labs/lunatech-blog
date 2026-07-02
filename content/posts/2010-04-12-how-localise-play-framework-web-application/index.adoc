@@ -1,15 +1,11 @@
 ---
+title: "How to localise a Play framework 1.0 web application"
+author: "PeterHilton"
 tags:
 - "playframework"
 - "web-applications"
 - "localization"
 ---
-= How to localise a Play framework 1.0 web application
-PeterHilton
-v1.0, 2010-04-12
-
-
-
 This article is about
 web application
 http://en.wikipedia.org/wiki/Internationalization_and_localization[internationalisation]

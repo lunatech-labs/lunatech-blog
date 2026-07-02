@@ -1,4 +1,6 @@
 ---
+title: "LunaBet: shipping a Panini-style World Cup pool in Rust, in an afternoon"
+author: "pepite"
 tags:
 - "rust"
 - "axum"
@@ -9,9 +11,6 @@ tags:
 - "ai orchestration"
 - "en"
 ---
-= LunaBet: shipping a Panini-style World Cup pool in Rust, in an afternoon
-pepite
-v1.0, 2026-05-30
 :lang: en
 
 

@@ -1,13 +1,10 @@
 ---
+title: "Lunatech at the RivieraDEV"
+author: "pepite"
 tags:
 - "event"
 - "playframework"
 ---
-= Lunatech at the RivieraDEV
-pepite
-v1.0, 2011-10-25
-
-
 I just came back from
 http://rivieradev.fr[RivieraDEV], located on the French Riviera.
 Lunatech sponsored this nice and sunny conference. There were load of

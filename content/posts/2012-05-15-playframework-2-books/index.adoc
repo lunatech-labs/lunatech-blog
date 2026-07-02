@@ -1,12 +1,10 @@
 ---
+title: "Play framework 2 books"
+author: "hilton"
 tags:
 - "playframework"
 - "books"
 ---
-= Play framework 2 books
-hilton
-v1.0, 2012-05-15
-
 For the last six months we’ve been
 working on a not-so-secret project to write http://www.lunatech-research.com/books[books about Play
 2]. Ideally, one book about the

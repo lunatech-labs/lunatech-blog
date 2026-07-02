@@ -1,4 +1,6 @@
 ---
+title: "The Scala effect: Java’s Evolution Inspired by Scala"
+author: "alex-molnar"
 tags:
 - "jvm"
 - "scala"
@@ -10,9 +12,6 @@ tags:
 - "we-know-scala"
 - "scala-lujah"
 ---
-= The Scala effect: Java’s Evolution Inspired by Scala
-alex-molnar
-v1.0, 2025-03-04
 :lang: en
 
 == Contents

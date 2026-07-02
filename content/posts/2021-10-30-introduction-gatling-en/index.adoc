@@ -1,12 +1,11 @@
 ---
+title: "Load testing with Gatling"
+author: "VincentBrule"
 tags:
 - "gatling"
 - "load testing"
 - "opensource"
 ---
-= Load testing with Gatling
-VincentBrule
-v1.0, 2021-10-30
 :lang: en
 
 In essence, load testing is the process of verifying whether an application can handle an expected load. It is done by injecting a defined number of users into the application.

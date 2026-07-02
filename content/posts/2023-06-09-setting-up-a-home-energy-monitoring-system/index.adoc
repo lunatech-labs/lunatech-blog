@@ -1,4 +1,6 @@
 ---
+title: "Setting up a home energy monitoring system"
+author: "eloots"
 tags:
 - "raspberry pi"
 - "emqx"
@@ -9,9 +11,6 @@ tags:
 - "energy"
 - "monitoring"
 ---
-= Setting up a home energy monitoring system
-eloots
-v1.0, 2023-06-09
 :lang: en
 
 [id=introduction]

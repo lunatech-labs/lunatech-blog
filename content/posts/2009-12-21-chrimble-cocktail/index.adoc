@@ -1,11 +1,9 @@
 ---
+title: "Chrimble cocktail"
+author: "PeterHilton"
 tags:
 - "fun"
 ---
-= Chrimble cocktail
-PeterHilton
-v1.0, 2009-12-21
-
 This year's festive period led to a more seasonal kind of
 design task: create a cocktail for Chrimbletide. Here is the recipe.
 ---

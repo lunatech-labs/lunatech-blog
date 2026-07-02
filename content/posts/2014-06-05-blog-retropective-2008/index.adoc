@@ -1,11 +1,9 @@
 ---
+title: "Lunatech blog retrospective - 2008"
+author: "hilton"
 tags:
 - "opinion"
 ---
-= Lunatech blog retrospective - 2008
-hilton
-v1.0, 2014-06-05
-
 Lunatech followed on from the 2007 developer events with bigger
     events in 2008. Meanwhile, we started 
     learning new ways to write about and teach technology in a variety of 

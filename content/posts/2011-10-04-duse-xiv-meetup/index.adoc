@@ -1,12 +1,10 @@
 ---
+title: "Duse XIV at Lunatech Research"
+author: "fcanedo"
 tags:
 - "scala"
 - "event"
 ---
-= Duse XIV at Lunatech Research
-fcanedo
-v1.0, 2011-10-04
-
 Lunatech Research is
 proudly hosting the fourteenth Duse meetup, a fun gathering of
 developers interested in Scala.

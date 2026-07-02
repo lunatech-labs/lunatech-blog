@@ -1,14 +1,11 @@
 ---
+title: "Seam is the new Struts"
+author: "hilton"
 tags:
 - "java"
 - "seam"
 - "opinion"
 ---
-= Seam is the new Struts
-hilton
-v1.0, 2008-03-17
-
-
 After Nicolas and I said that
 ‘(http://seamframework.org/)[Seam] is the next Struts’ in our https://blog.lunatech.com/2007-12-14-javapolis-2007-seam)[JavaPolis
 presentation],

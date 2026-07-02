@@ -1,12 +1,10 @@
 ---
+title: "How to explain Twitter"
+author: "hilton"
 tags:
 - "opinion"
 - "fun"
 ---
-= How to explain Twitter
-hilton
-v1.0, 2008-08-14
-
 After ignoring
 http://twitter.com/[Twitter] at first, my curiosity about a new
 communication channel led me to start using it this year. The easy thing

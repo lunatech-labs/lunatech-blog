@@ -1,4 +1,6 @@
 ---
+title: "Parallel execution: A Hibernate Reactive Gotcha"
+author: "eamelink"
 tags:
 - "hibernate"
 - "quarkus"
@@ -8,9 +10,6 @@ tags:
 - "performance"
 - "reactive"
 ---
-= Parallel execution: A Hibernate Reactive Gotcha
-eamelink
-v1.0, 2023-05-22
 :lang: en
 
 https://hibernate.org/reactive/[Hibernate Reactive] is a reactive API for Hibernate, enabling you to create applications that use Hibernate for persistence, but that don't rely on JDBC and that - unlike regular Hibernate and JDBC - work without blocking any threads.

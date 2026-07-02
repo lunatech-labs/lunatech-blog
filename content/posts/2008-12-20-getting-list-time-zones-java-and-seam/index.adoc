@@ -1,14 +1,11 @@
 ---
+title: "Getting a list of time zones in Java and Seam"
+author: "hilton"
 tags:
 - "web-applications"
 - "jboss"
 - "seam"
 ---
-= Getting a list of time zones in Java and Seam
-hilton
-v1.0, 2008-12-20
-
-
 If you are building a web application
 with a user-interface for editing dates that supports time zones, then
 you are going to need a list of time zones. You need this if you want to

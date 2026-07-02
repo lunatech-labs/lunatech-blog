@@ -1,12 +1,10 @@
 ---
+title: "Dealing with heavy boxes (monads)"
+author: "eamelink"
 tags:
 - "fp"
 - "scala"
 ---
-= Dealing with heavy boxes (monads)
-eamelink
-v1.0, 2016-12-20
-
 At Lunatech we build a lot of REST API's involving dealing with `Future[A]`, `Future[Option[A]]`, `Try[A]`, `Option[A]`, `Form[A]` and so on. 
 Dealing with the outcome of these "boxes/effects" might become cumbersome and you'll end up with convoluted code. 
 One way to deal with this is: "Monad Transformers". Erik Bakker has done a https://www.youtube.com/watch?v=hGMndafDcc8[talk] on that a few years ago. 

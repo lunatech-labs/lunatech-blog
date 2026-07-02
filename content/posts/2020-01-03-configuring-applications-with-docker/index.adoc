@@ -1,12 +1,10 @@
 ---
+title: "Configuring Applications With Docker"
+author: "nMoncho"
 tags:
 - "testing"
 - "docker"
 ---
-= Configuring Applications With Docker
-nMoncho
-2020-01-03
-
 _But it worked on my machine!_I still remember when I was a young developer and someone introduced me to the environments where an application could be deployed: dev, test, acceptance, production. We as developers need to deal a lot with context, we deal with it on context switches, on variable scoping, and this is yet another context.
 
 We need to code our application so it can modify its parameters or behaviour based on the place it’s running, this type of input has roughly three forms: arguments, files and environment variables.[1] For which Docker provides several alternatives to accommodate for these different inputs. With Docker we can configure applications in two moments: during _build time_, or at _runtime_. The former includes the configuration right into the image, the latter is given when the container is instantiated. The code for this blogpost can be found https://github.com/nMoncho/docker-app-config[here].

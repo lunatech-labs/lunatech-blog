@@ -1,4 +1,6 @@
 ---
+title: "Introducing Cypress"
+author: "VincentBrule"
 tags:
 - "test"
 - "cypress"
@@ -6,9 +8,6 @@ tags:
 - "js"
 - "ts"
 ---
-= Introducing Cypress
-VincentBrule
-v1.0, 2022-06-06
 :lang: en
 
 This article is the beginning of a series of three articles dedicated to https://www.cypress.io[Cypress]:

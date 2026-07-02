@@ -1,11 +1,10 @@
 ---
+title: "Embrace Kotlin: Where to Get Started for Scala Developers"
+author: "AnastasiiaL"
 tags:
 - "scala"
 - "kotlin"
 ---
-= Embrace Kotlin: Where to Get Started for Scala Developers
-AnastasiiaL
-v1.0, 2023-03-31
 :lang: en
 
 Recently I have been intrigued by the buzz surrounding Kotlin, another powerful language on the JVM.

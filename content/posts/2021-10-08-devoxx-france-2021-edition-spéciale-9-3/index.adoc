@@ -1,4 +1,6 @@
 ---
+title: "Devoxx France 2021, Edition spéciale 9 3/4"
+author: "pinguedwinde"
 tags:
 - "devoxx-fr"
 - "java"
@@ -8,9 +10,6 @@ tags:
 - "securité"
 - "conférence"
 ---
-= Devoxx France 2021, Edition spéciale 9 3/4
-pinguedwinde
-v1.0, 2021-10-08
 :lang: fr
 
 == Introduction

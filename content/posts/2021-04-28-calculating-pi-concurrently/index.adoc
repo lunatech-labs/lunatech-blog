@@ -1,4 +1,6 @@
 ---
+title: "Calculating π concurrently"
+author: "eloots"
 tags:
 - "concurrency"
 - "akka"
@@ -9,9 +11,6 @@ tags:
 - "parallelism"
 - "scala"
 ---
-= Calculating π concurrently
-eloots
-v1.0, 2021-04-28
 :lang: en
 
 == Calculating π concurrently

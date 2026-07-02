@@ -1,12 +1,10 @@
 ---
+title: "Lunatech Invitational Golf Event 2011"
+author: "PeterHilton"
 tags:
 - "ventures"
 - "event"
 ---
-= Lunatech Invitational Golf Event 2011 
-PeterHilton
-v1.0, 2011-06-28
-
 The Lunatech Golf Invitational 2011 was
 held on Friday, 10 June, 2011. Although it was the first rainy day in
 weeks, this could not affect the mood of the participants. After some

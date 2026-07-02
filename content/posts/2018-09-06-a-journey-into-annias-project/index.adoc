@@ -1,12 +1,10 @@
 ---
+title: "A Journey Into Annia's Project!"
+author: "VincentBrule"
 tags:
 - "ktor"
 - "kotlin"
 ---
-= A Journey Into Annia's Project!
-VincentBrule
-v1.0, 2018-09-06
-
 Hi! In this article, we will present an internal project called Annia. We will start by presenting the design and goals of Annia. In addition, we will explain technicals choices to resolve these purposes.
 
 == Introduction

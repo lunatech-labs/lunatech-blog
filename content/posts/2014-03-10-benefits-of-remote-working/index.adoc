@@ -1,11 +1,9 @@
 ---
+title: "Benefits of remote working"
+author: "hilton"
 tags:
 - "collaboration"
 ---
-= Benefits of remote working
-hilton
-v1.0, 2014-03-11
-
 Last week I discussed remote working with http://www.lisettesutherland.com/about/`[Lisette Sutherland], who interviewed me for her forthcoming book. We talked about my experiences as a software developer at Lunatech and started by considering the benefits of remote working.
 
 ____

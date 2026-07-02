@@ -1,11 +1,9 @@
 ---
+title: "Curry on 2018 impressions"
+author: "Andrea Giugliano"
 tags:
 - "event"
 ---
-= Curry on 2018 impressions
-Andrea Giugliano
-v1.0, 2018-07-23
-
 Once again https://lunatech.com/[Lunatech] gave me the opportunity to attending a great conference: http://www.curry-on.org/2018/[Curry On], which took place in Amsterdam from the 16th to the 17th of July. What’s so special about this conference is that it successfully brings industry and academia together, which is reflected in the variety of speakers and topics of the talks.
 
 In this article I intend to breakdown my favourite talks. The thing is, the quality of the talks were really good! Unfortunately, for the sake of the length of this article, I can only pick a few.

@@ -1,11 +1,10 @@
 ---
+title: "Struggles at the Beginning – Software Testers journal"
+author: "TehreemFatima07"
 tags:
 - "Testing"
 - "QA Culture"
 ---
-= Struggles at the Beginning – Software Testers journal
-TehreemFatima07
-v1.0, 2022-11-07
 :lang: en
 
 We’ve all been there; either onboarded to a new project or a new company, and joined a team that either has never tested its product or which has no set testing standards. As a Software Tester, you’re and should be used to being the new kid on the block, always with a mind full of questions.

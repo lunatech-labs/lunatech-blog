@@ -1,11 +1,9 @@
 ---
+title: "Processing EDIFACT messages with Smooks"
+author: "ludofischer"
 tags:
 - "java"
 ---
-= Processing EDIFACT messages with Smooks
-ludofischer
-v1.0, 2011-12-30
-
 http://www.smooks.org[Smooks] is a
 set of tools written in the Java programming language to assist you in
 parsing a variety of formats such as XML, CSV, fixed width formats and

@@ -1,12 +1,11 @@
 ---
+title: "Sunny Tech 2022"
+author: "VincentBrule"
 tags:
 - "conférence"
 - "sunny tech"
 - "montpellier"
 ---
-= Sunny Tech 2022
-VincentBrule
-v1.0, 2022-07-02
 :lang: fr
 
 == Sunny Tech ?

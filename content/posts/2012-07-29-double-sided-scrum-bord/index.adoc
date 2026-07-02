@@ -1,12 +1,10 @@
 ---
+title: "The double-sided Scrum board"
+author: "hilton"
 tags:
 - "scrum"
 - "methodology"
 ---
-= The double-sided Scrum board
-hilton
-v1.0, 2012-07-29
-
 In theory, Scrum is a
 collection of simple practices. It sounds easy, but Reality Scrum™ is a
 game of compromise and adapting Scrum principles to the situation at

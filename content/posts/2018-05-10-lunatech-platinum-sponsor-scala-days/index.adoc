@@ -1,12 +1,10 @@
 ---
+title: "Lunatech Platinum Sponsor Scala Days 2018 Berlin"
+author: "Antoine Laffez"
 tags:
 - "event"
 - "scala"
 ---
-= Lunatech Platinum Sponsor Scala Days 2018 Berlin
-Antoine Laffez
-v1.0, 2018-05-10
-
 In a few days the most well known Scala conference in Europe will be held: https://eu.scaladays.org/[Scala Days]. Berlin will be hosting the event in the https://convention.visitberlin.de/en/meetingguideberlin/locations/kosmos-eventlocation[Kosmos center]. People from all over the world will join for this highlights Scala event.
 
 This year again, an absolutely breathtaking program with the presence of Martin Odersky, Adriaan Moors, Miles Sabin and many more. The greatest Scala speakers will discuss topics such as Akka, Lagom, Apache Spark and Kafka. Tuesday 15th from 18:00-20:00 Welcome Reception will be sponsored by Lunatech.

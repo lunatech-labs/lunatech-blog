@@ -1,13 +1,10 @@
 ---
+title: "Play!ground presentation slides & code"
+author: "hilton"
 tags:
 - "event"
 - "playframework"
 ---
-= Play!ground presentation slides & code
-hilton
-v1.0, 2011-10-03
-
-
 On
 30 September 2011, Lunatech hosted the second Play!ground event for
 http://www.playframework.org/[Play framework] users. Here are the

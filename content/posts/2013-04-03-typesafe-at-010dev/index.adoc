@@ -1,11 +1,9 @@
 ---
+title: "Typesafe at 010DEV"
+author: "hilton"
 tags:
 - "event"
 ---
-= Typesafe at 010DEV
-hilton
-v1.0, 2013-04-03
-
 At yesterday’s 010DEV developer meet-up, Typesafe and Lunatech presented Play and Akka to a room full of developers.
 
 image:typesafe-at-010dev.jpg[James Ward and Nicolas Leroux]

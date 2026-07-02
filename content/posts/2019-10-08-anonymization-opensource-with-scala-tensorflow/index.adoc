@@ -1,12 +1,10 @@
 ---
+title: "Anonymization Opensource With Scala Tensorflow"
+author: "VincentBrule"
 tags:
 - "ktor"
 - "kotlin"
 ---
-= Anonymization Opensource With Scala Tensorflow
-VincentBrule
-v1.0, 2019-10-08
-
 Today, I present https://github.com/lunatech-labs/lunatech-scala-anonymization[my first open source contribution.] This project is an adaptation of this https://github.com/understand-ai/anonymizer[GitHub Python repository] allowing to anonymize an image, i.e. detect faces and license plates in an image in order to blur them. The initial code is in Python/Tensorflow and we wanted to adapt it to Scala with https://github.com/eaplatanios/tensorflow_scala[Scala API for Tensorflow].
 
 In this blog post, we will explore, step by step, how to achieve the final result that you can see in the image above.

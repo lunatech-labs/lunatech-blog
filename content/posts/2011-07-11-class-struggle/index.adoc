@@ -1,13 +1,10 @@
 ---
+title: "Class Struggle"
+author: "dutchcelt"
 tags:
 - "front-end"
 - "ux"
 ---
-= Class Struggle
-dutchcelt
-v1.0, 2011-07-11
-
-
 I'm irked by the fact that I keep running into web sites
 that use mark-up class names that follow the content language. The web
 and its mark-up are open to the world, to both humans and machines. For
@@ -62,7 +59,8 @@ through the use of the English word
 'http://dictionary.reference.com/browse/lead+story[lead]'.
 . The class name isn’t tied to the location of the article but does
 classify the type of article it is, or rather its hierarchy. +
- This is also a way to highlight a
+
+This is also a way to highlight a
 http://en.wikipedia.org/wiki/Sticky_content[sticky] article without the
 need to use the word 'sticky' that is a CMS feature. Transposing web app
 features to class names is also a common mistake.

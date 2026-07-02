@@ -1,11 +1,9 @@
 ---
+title: "Version tags with Ant"
+author: "fanedo"
 tags:
 - "java"
 ---
-= Version tags with Ant
-fanedo
-v1.0, 2007-04-16
-
 When you release a software application, it is nice to put the version number somewhere for identification purposes. One of our custom applications puts a line with the version number, URL of the page, any GET parameters and user ID of the logged in user at the bottom of every page. This helps tremendously when the customer logs a support issue. The version number helps especially when there are multiple versions of your application out in the wild.
 
 In Java - any language for that matter - this is pretty easy to do, just

@@ -1,13 +1,11 @@
 ---
+title: "RESTful web services in Java EE with RESTEasy (JAX-RS)"
+author: "FroMage"
 tags:
 - "java"
 - "seam"
 - "rest"
 ---
-= RESTful web services in Java EE with RESTEasy (JAX-RS)
-FroMage
-v1.0, 2008-03-20
-
 This article
 describes how we implemented
 http://en.wikipedia.org/wiki/Representational_State_Transfer[RESTful]

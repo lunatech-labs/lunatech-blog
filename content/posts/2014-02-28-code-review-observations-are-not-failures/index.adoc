@@ -1,11 +1,9 @@
 ---
+title: "Code review observations are not failures"
+author: "hilton"
 tags:
 - "collaboration"
 ---
-= Code review observations are not failures
-hilton
-v1.0, 2014-02-28
-
 Although we have had some success in introducing code review to teams, not everyone is clear about what it’s for, or how it’s supposed to work. Code review deserves some explanation.
 
 We mostly think about code review as a way to reduce code defects and

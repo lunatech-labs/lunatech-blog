@@ -1,12 +1,10 @@
 ---
+title: "10 Devoxx tips"
+author: "PeterHilton"
 tags:
 - "playframework"
 - "event"
 ---
-= 10 Devoxx tips
-PeterHilton
-v1.0, 2010-11-23
-
 Last week we were at http://devoxx.com/[Devoxx] in
 Antwerp. This means that there are now 51 weeks until Devoxx 2011, which
 means that this is the perfect time to start preparing. Here are ten top

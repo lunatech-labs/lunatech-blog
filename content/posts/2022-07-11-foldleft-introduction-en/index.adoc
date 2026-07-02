@@ -1,13 +1,12 @@
 ---
+title: "Traversing collections with foldLeft and foldRight"
+author: "ggarvanese"
 tags:
 - "fold"
 - "iteration"
 - "functional"
 - "scala"
 ---
-= Traversing collections with foldLeft and foldRight
-ggarvanese
-v1.0, 2022-07-11
 :lang: en
 
 

@@ -1,4 +1,6 @@
 ---
+title: "Electronic government publications"
+author: "BartSchuller"
 tags:
 - "seam"
 - "itext"
@@ -6,11 +8,6 @@ tags:
 - "xml"
 - "case-study"
 ---
-= Electronic government publications
-BartSchuller
-v1.0, 2010-01-25
-
-
 On July 1, 2009,
 the Dutch Electronic Disclosure Act came into force. The current
 official published versions of Staatscourant, Staatsblad and

@@ -1,12 +1,10 @@
 ---
+title: "The DC/OS (Datacenter Operating System)-Part 1"
+author: "Pepite"
 tags:
 - "java"
 - "scala"
 ---
-= The DC/OS (Datacenter Operating System)-Part 1
-Pepite
-v1.0, 2017-10-01
-
 DC/OS or Datacenter Operating System is an open-source project started by a company named Mesosphere. The project aimed to make infrastructure blueprints (for building and delivering data-driven services to run on any datacenter or cloud) accessible for everyone.
 
 It is a system that consists of Linux machines or nodes that communicate with one another, effectively sub-dividing large applications into small tasks that can be executed independently from one another in a more resource efficient manner. It is structured in such a way that each node performs a certain role. The roles these nodes can play include the master node, the private agent node, and the public agent node.

@@ -1,13 +1,10 @@
 ---
+title: "Jfokus 2012 Play Framework 2.0 presentation video"
+author: "hilton"
 tags:
 - "event"
 - "playframework"
 ---
-= Jfokus 2012 Play Framework 2.0 presentation video
-hilton
-v1.0, 2012-03-22
-
-
 On 14 February 2012, Peter Hilton presented http://www.jfokus.se/jfokus/talks.jsp?lang=en#Play%20Framework%202.0[Play Framework
 2.0]
 at http://www.jfokus.se/jfokus/?lang=en&#page=page-1[Jfokus 2012] in

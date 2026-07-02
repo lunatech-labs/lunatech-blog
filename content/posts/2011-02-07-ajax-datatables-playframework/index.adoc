@@ -1,12 +1,10 @@
 ---
+title: "Ajax DataTables with the Play framework 1.2"
+author: "PeterHilton"
 tags:
 - "playframework"
 - "jquery"
 ---
-= Ajax DataTables with the Play framework 1.2
-PeterHilton
-v1.0, 2011-02-07
-
 This article is a
 follow-on to http://blog.lunatech.com/posts/2011-01-28-playframework-jquery-datatables[Integrating Play framework with jQuery DataTables], which describes
 how to integrate http://www.datatables.net/[DataTables] with a http://playframework.com/[Play framework] 1.2 web application. This time, we

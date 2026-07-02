@@ -1,12 +1,10 @@
 ---
+title: "Scrum project documentation - development environment set-up"
+author: "hilton"
 tags:
 - "scrum"
 - "methodology"
 ---
-
-= Scrum project documentation - development environment set-up
-hilton
-v1.0, 2012-08-15
 environment set-up
 
 A software development team needs ‘development environment set-up

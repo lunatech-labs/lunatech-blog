@@ -1,12 +1,11 @@
 ---
+title: "An intro to Argo CD"
+author: "tesfayenati"
 tags:
 - "kubernetes"
 - "CI/CD"
 - "en"
 ---
-= An intro to Argo CD
-tesfayenati
-v1.0, 2023-03-30
 :lang: en
 
 https://argo-cd.readthedocs.io/en/stable/[Argo CD] is a declarative, https://www.gitops.tech/[GitOps] continuous delivery tool for Kubernetes.

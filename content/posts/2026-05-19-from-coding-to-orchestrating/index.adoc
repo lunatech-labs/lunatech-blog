@@ -1,4 +1,6 @@
 ---
+title: "From Coding to Orchestrating: The New Role of the Software Engineer"
+author: "pepite"
 tags:
 - "software engineering"
 - "AI orchestration"
@@ -6,9 +8,6 @@ tags:
 - "spec-driven development"
 - "en"
 ---
-= From Coding to Orchestrating: The New Role of the Software Engineer
-pepite
-v1.0, 2026-05-19
 :lang: en
 
 

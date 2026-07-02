@@ -1,4 +1,6 @@
 ---
+title: "Part 4: Angular 19 Deep Dive – Smarter Forms with Signals and Control Flow"
+author: "jakeortega"
 tags:
 - "angular"
 - "nestjs"
@@ -10,9 +12,6 @@ tags:
 - "typescript"
 - "nodejs"
 ---
-= Part 4: Angular 19 Deep Dive – Smarter Forms with Signals and Control Flow
-jakeortega
-v1.0, 2025-05-20
 :lang: en
 
 Welcome back to the Full-Stack Authentication Boilerplate (Angular +

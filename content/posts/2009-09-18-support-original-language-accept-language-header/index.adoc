@@ -1,13 +1,11 @@
 ---
+title: "Support for original language in Accept-Language header"
+author: "fcanedo"
 tags:
 - "localization"
 - "internationalization"
 - "web-applications"
 ---
-= Support for original language in Accept-Language header
-fcanedo
-v1.0, 2009-09-18
-
 In most browers' preferences dialogs, you can find
 settings for which language to display if the content is available in
 more than one language. What happens is, that your browser and the

@@ -1,11 +1,10 @@
 ---
+title: "Custom JIT compilation with Runtime Multi-Stage Programming"
+author: "markehammons"
 tags:
 - "slinc"
 - "scala"
 ---
-= Custom JIT compilation with Runtime Multi-Stage Programming
-markehammons
-v1.0, 2022-11-02
 :lang: en
 
 For a while now I've been fiddling with a library called https://github.com/markehammons/slinc[Slinc], a way to link C code in Scala.

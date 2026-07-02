@@ -1,13 +1,11 @@
 ---
+title: "Side Effects and How To Deal With Them The Cool Way, Part 2 - Monads Introduction"
+author: "FrancoAra"
 tags:
 - "fp"
 - "scala"
 - "monad"
 ---
-= Side Effects and How To Deal With Them The Cool Way, Part 2 - Monads Introduction
-FrancoAra
-v1.0, 2016-10-31
-
 In part 1 of this series we learnt how to decouple the code that deals with side effects from our pure functions by using functors (Any type constructor which implements the map function). Now lets see how we can extend our functors so that we can sequence computations that each fall under the indeterminism of side effects.
 
 == Function Composition And a Slight Issue

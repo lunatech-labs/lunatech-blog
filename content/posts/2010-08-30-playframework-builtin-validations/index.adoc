@@ -1,12 +1,10 @@
 ---
+title: "Play framework 1.0 built-in validations"
+author: "PeterHilton"
 tags:
 - "playframework"
 - "java"
 ---
-= Play framework 1.0 built-in validations
-PeterHilton
-v1.0, 2010-08-30
-
 The Play
 framework (version 1.0) provides flexible and easy-to-use functionality
 for http://www.playframework.org/documentation/1.0.3/validation[HTTP request data

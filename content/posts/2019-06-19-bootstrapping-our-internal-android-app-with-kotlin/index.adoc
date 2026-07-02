@@ -1,12 +1,10 @@
 ---
+title: "Bootstrapping Our Internal Android App With Kotlin"
+author: "VincentBrule"
 tags:
 - "ktor"
 - "kotlin"
 ---
-= Bootstrapping Our Internal Android App With Kotlin
-VincentBrule
-v1.0, 2019-06-19
-
 In Lunatech, we are experts on Scala and Java. Since last year, we started to expand our field of competence with Kotlin. Our first Kotlin project, https://lunatech.com/posts/2018-09-06-a-journey-into-annias-project[Annia], an internal phone book, is made with the https://ktor.io/[Ktor] framework for all the backend part.
 
 A few weeks ago we’ve started a new project with Kotlin for an Android application, to centralise our internal services inside one place.

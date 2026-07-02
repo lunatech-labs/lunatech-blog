@@ -1,10 +1,9 @@
 ---
+title: "Information radiators: from dashboard to wall"
+author: "hilton"
 tags:
 - "project-management"
 ---
-= Information radiators: from dashboard to wall
-hilton
-v1.0, 2005-10-07
 ifdef::backend-html5[]
 :in-between-width: width='85%'
 :half-width: width='50%'

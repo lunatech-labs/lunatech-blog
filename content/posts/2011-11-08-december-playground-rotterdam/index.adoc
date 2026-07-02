@@ -1,13 +1,11 @@
 ---
+title: "December Play!ground in Rotterdam"
+author: "hilton"
 tags:
 - "event"
 - "playframework"
 - "playground"
 ---
-= December Play!ground in Rotterdam
-hilton
-v1.0, 2011-11-08
-
 Following a break for
 Devoxx and busy projects, we are now planning the next http://www.playframework.org/[Play
 Framework] event, for software developers

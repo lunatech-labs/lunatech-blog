@@ -1,12 +1,10 @@
 ---
+title: "A journey to ScalaCheck"
+author: "mariadroman"
 tags:
 - "scala"
 - "test"
 ---
-= A journey to ScalaCheck
-mariadroman
-v1.0, 2016-09-12
-
 From the Spanish good weather to the Dutch every-possible-weather-in-one-day, from Waterfall to Agile, from just testing to property based testing. The path I took when joining Lunatech was an interesting one.
 
 I want to share some of that and show how my journey to https://gist.github.com/mariadroman/816d5b6848592aaacfa722c372dbccba[ScalaCheck] started. I will prove that it's not complicated to start with and it can uncover deeply hidden bugs in your code.

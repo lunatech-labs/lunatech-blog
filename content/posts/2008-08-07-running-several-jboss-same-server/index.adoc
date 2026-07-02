@@ -1,13 +1,11 @@
 ---
+title: "Running several JBoss AS on the same server"
+author: "pepite"
 tags:
 - "java"
 - "jboss"
 - "seam"
 ---
-= Running several JBoss AS on the same server
-pepite
-v1.0, 2007-08-07
-
 This article shows you how to run multiple JBoss
 Application servers on the same machine. This might be really useful if
 you wish to execute two different versions of the JBoss Application

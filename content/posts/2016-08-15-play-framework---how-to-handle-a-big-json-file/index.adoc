@@ -1,12 +1,10 @@
 ---
+title: "Play Framework - How to handle a big json file in play ( more than 22 root variables)"
+author: "harrylaou"
 tags:
 - "playframework"
 - "scala"
 ---
-= Play Framework - How to handle a big json file in play ( more than 22 root variables)
-harrylaou
-v1.0, 2016-08-15
-
 It is not a good practice to have such a big json with many root variables. Nevertheless, we might need to call a rest api that will give a json like this
 
 [source,json]

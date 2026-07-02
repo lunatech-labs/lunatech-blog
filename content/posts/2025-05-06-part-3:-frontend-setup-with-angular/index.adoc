@@ -1,4 +1,6 @@
 ---
+title: "Part 3: Frontend Setup with Angular"
+author: "jakeortega"
 tags:
 - "angular"
 - "nestjs"
@@ -10,9 +12,6 @@ tags:
 - "typescript"
 - "nodejs"
 ---
-= Part 3: Frontend Setup with Angular
-jakeortega
-v1.0, 2025-05-06
 :lang: en
 
 Now that we’ve built our NestJS backend with secure JWT auth, it’s time

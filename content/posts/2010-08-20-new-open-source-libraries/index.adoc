@@ -1,13 +1,10 @@
 ---
+title: "New open-source libraries"
+author: "FroMage"
 tags:
 - "java"
 - "playframework"
 ---
-= New open-source libraries
-FroMage
-v1.0, 2010-08-20
-
-
 Today we’ve released three new OSS
 libraries for the http://www.playframework.org/[Play! Framework] in
 our OSS section:

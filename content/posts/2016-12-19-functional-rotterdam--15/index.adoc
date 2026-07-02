@@ -1,12 +1,10 @@
 ---
+title: "Functional Rotterdam-15"
+author: "vijaykiran"
 tags:
 - "fp"
 - "event"
 ---
-= Functional Rotterdam-15
-vijaykiran
-v1.0, 2016-12-19
-
 https://www.meetup.com/Functional-Rotterdam/[Functional Rotterdam] is a meetup held monthly in our Lunatech office about Programming Languages, Scala, Computer programming, Haskell, Functional Programming and Clojure, organized by https://twitter.com/vijaykiran[Vijay Kiran], Team Manager at Lunatech. https://twitter.com/ItsMeijers[Thomas Meijers], Software Engineer at Lunatech, presented Free of Interpretation. The presentation was filmed by https://twitter.com/CelesFranco87[Celeste Franco] (thanks!!).
 
 One of Scala's main selling points is its interoperability with Java.

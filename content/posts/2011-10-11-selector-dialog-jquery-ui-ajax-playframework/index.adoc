@@ -1,12 +1,10 @@
 ---
+title: "Selector dialogue with jQuery UI, Ajax and Play"
+author: "hilton"
 tags:
 - "playframework"
 - "jquery"
 ---
-= Selector dialogue with jQuery UI, Ajax and Play
-hilton
-v1.0, 2011-10-11
-
 This article
 shows you how to use a http://jqueryui.com/[jQuery UI] component and
 Ajax to implement a dialogue box (a.k.a. ‘a dialog’) that contains a

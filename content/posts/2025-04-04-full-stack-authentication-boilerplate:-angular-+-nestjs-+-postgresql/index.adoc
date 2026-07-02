@@ -1,4 +1,6 @@
 ---
+title: "Full-Stack Authentication Boilerplate: Angular + NestJS + PostgreSQL"
+author: "jakeortega"
 tags:
 - "angular"
 - "nestjs"
@@ -10,9 +12,6 @@ tags:
 - "typescript"
 - "nodejs"
 ---
-= Full-Stack Authentication Boilerplate: Angular + NestJS + PostgreSQL
-jakeortega
-v1.0, 2025-04-04
 :lang: en
 
 == A practical series for backend developers building secure full-stack apps

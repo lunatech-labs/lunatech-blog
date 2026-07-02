@@ -1,4 +1,6 @@
 ---
+title: "Terminal-first Mouseless Development Or How To Be A Hipster Engineer"
+author: "vitos-exe"
 tags:
 - "beyond-the-code"
 - "bash-to-the-feature"
@@ -8,9 +10,6 @@ tags:
 - "terminal"
 - "en"
 ---
-= Terminal-first Mouseless Development Or How To Be A Hipster Engineer
-vitos-exe
-v1.0, 2025-07-11
 :lang: en
 
 In this article, I'm going to give you a slightly different view on

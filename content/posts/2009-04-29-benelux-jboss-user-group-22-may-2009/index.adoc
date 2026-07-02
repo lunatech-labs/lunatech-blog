@@ -1,14 +1,11 @@
 ---
+title: "Benelux JBoss User Group, 22 May 2009"
+author: "pepite"
 tags:
 - "java"
 - "event"
 - "jbug"
 ---
-= Benelux JBoss User Group, 22 May 2009
-pepite
-v1.0, 2009-04-29
-
-
 We would like to invite you to our **sixth Benelux JBoss User
 Group meeting**: an evening of free technical sessions presented by
 JBoss and Lunatech developers.

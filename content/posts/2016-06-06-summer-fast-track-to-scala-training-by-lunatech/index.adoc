@@ -1,12 +1,10 @@
 ---
+title: "Summer Fast Track To Scala Training By Lunatech"
+author: "Antoine Laffez"
 tags:
 - "scala"
 - "event"
 ---
-= Summer Fast Track To Scala Training By Lunatech
-Antoine Laffez
-v1.0, 2016-06-06
-
 On July 29th and 30th Sietse de Kaper (https://twitter.com/targeter[@Targeter]), Senior Software Engineer at Lunatech and Lightbend-certified trainer, will be teaching Lightbend’s Fast Track to Scala Course in our Rotterdam office. 
 
 Scala is the technology of choice for a vibrant open-source ecosystem, including popular platforms and frameworks such as Spark, Kafka, Akka, Finagle, Cats, and Play, to name just a few. We estimate that currently more than half a million developers are using Scala.

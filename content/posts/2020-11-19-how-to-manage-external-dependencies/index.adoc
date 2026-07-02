@@ -1,12 +1,10 @@
 ---
+title: "How to Manage External Dependencies"
+author: "nMoncho"
 tags:
 - "scala"
 - "java"
 ---
-= How to Manage External Dependencies
-nMoncho
-2020-11-19
-
 A few months ago we deployed the awesome https://github.com/scala-steward-org/scala-steward[Scala Steward] at one of our current projects, and even if I can’t recommend it enough I have to admit the process of getting all our dependencies up to date was somewhat painful. In this article I would like to share our experience and some tips or guidelines on how to manage external dependencies. These are by no means best practices but just my opinion on the subject (and would like to see how they stand months or years from now).
 
 _Note: I would like to thank Chris Kipp (https://twitter.com/ckipp01[@ckipp01]) and Martin Kok for providing the proofreading of this article. The image comes from https://www.flickr.com/photos/26325011@N00/352461415[“Epicurious HTML graph”] by https://www.flickr.com/photos/26325011@N00[Noah Sussman] is licensed under https://creativecommons.org/licenses/by/2.0/?ref=ccsearch&atype=rich[CC BY 2.0]_

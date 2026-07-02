@@ -1,13 +1,11 @@
 ---
+title: "Guardrail With Http4s Tutorial"
+author: "kkreuning"
 tags:
 - "http4s"
 - "scala"
 - "gardrail"
 ---
-= Guardrail With Http4s Tutorial
-kkreuning
-v1.0, 2018-03-26
-
 This article is an introduction on how to use Twilio’s https://guardrail.dev/[Guardrail] to safely generate and maintain a https://http4s.org/[http4s] REST API server. I wanted to write this article as a reference for my future self and others who are interested in this technology.
 
 == **TL;DR - I Just Want The Code!**

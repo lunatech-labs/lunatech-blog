@@ -1,4 +1,6 @@
 ---
+title: "Legacy Modernization with AI: A Battle-Tested Methodology"
+author: "pepite"
 tags:
 - "legacy modernization"
 - "AI methodology"
@@ -6,9 +8,6 @@ tags:
 - "context pack"
 - "en"
 ---
-= Legacy Modernization with AI: A Battle-Tested Methodology
-pepite
-v1.0, 2026-05-26
 :lang: en
 
 

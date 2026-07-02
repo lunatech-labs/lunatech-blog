@@ -1,12 +1,10 @@
 ---
+title: "VisibleLogistics - Supply Chain Visibility SaaS"
+author: "PeterHilton"
 tags:
 - "saas"
 - "case-study"
 ---
-= VisibleLogistics - Supply Chain Visibility SaaS
-PeterHilton
-v1.0, 2009-05-11
-
 Lunatech Research is the technology team
 behind http://bitlogistics.com/[BitLogistics], and have developed
 their http://www.visiblelogistics.com/[VisibleLogistics] platform - a

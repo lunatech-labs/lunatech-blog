@@ -1,12 +1,10 @@
 ---
+title: "Lunatech Airport Assessment"
+author: "nMoncho"
 tags:
 - "recruitment"
 - "airport"
 ---
-= Lunatech Airport Assessment
-nMoncho
-2018-11-07
-
 As part of the recruitment team our goal is to assess candidates on multiple dimensions using an exercise, code produced being just a single of those dimensions.
 For several years we used a single exercise on this process, which we had to retire due to a number of reasons; in this article I will build the assessment like we’d intend to receive it, giving a glimpse on how we recruit at Lunatech.
 

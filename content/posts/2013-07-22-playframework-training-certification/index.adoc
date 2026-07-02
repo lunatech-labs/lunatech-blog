@@ -1,11 +1,9 @@
 ---
+title: "Fast Track to Play training certification"
+author: "hilton"
 tags:
 - "playframework"
 ---
-= Fast Track to Play training certification 
-hilton
-v1.0, 2013-07-22
-
 Lunatech can provide Play framework training, with a certified trainer for Typesafe’s [Fast Track to Play With Scala](http://typesafe.com/how/training/fasttracktoplaywithscala) training course.
 
 I have completed Typesafe’s certification process and can now deliver

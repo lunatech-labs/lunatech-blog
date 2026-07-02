@@ -1,14 +1,12 @@
 ---
+title: "Creating Telegram bot for rental notifications in Spring Boot"
+author: "DariaPindus"
 tags:
 - "java"
 - "spring boot"
 - "telegram"
 - "bot"
 ---
-= Creating Telegram bot for rental notifications in Spring Boot
-DariaPindus
-v1.0, 2020-12-14
-
 During my relocation to Rotterdam everything went smoothly except for one thing - the rental process. There seemed to be not a lot of new offers and keeping track of interesting ones was a bit messy (we even created an Excel table, where we wrote down apartments and all details we were interested in). So using my passion for automation, to improve the onboarding process, and to refresh my knowledge on some technologies, I decided to create a customizable Telegram bot to get notifications on new rental offers in a handy way.
 
 You can find the source on https://github.com/DariaPindus/RealEstateHelper[GitHub], and you can also subscribe to the bot using @rental_notifier_bot

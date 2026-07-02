@@ -1,11 +1,9 @@
 ---
+title: "XML and Namespaces"
+author: "bartschuller"
 tags:
 - "xml"
 ---
-= XML and Namespaces
-bartschuller
-v1.0, 2008-10-03
-
 This article
 explains namespaces in XML: when to use namespaces, and how to declare a
 namespace.

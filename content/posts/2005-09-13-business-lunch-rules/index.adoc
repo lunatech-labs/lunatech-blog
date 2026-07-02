@@ -1,10 +1,9 @@
 ---
+title: "Business lunch rules"
+author: "Michael Pentowski"
 tags:
 - "opinion"
 ---
-= Business lunch rules
-Michael Pentowski
-v1.0, 2005-09-13
 ifdef::backend-html5[]
 :in-between-width: width='85%'
 :half-width: width='50%'

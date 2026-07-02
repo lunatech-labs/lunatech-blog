@@ -1,11 +1,9 @@
 ---
+title: "Dutch Clojure Meetup"
+author: "Antoine Laffez"
 tags:
 - "event"
 ---
-= Dutch Clojure Meetup
-Antoine Laffez
-v1.0, 2018-07-05
-
 Lunatech hosted the Dutch Clojure Meetup \#103 organised by Carlo Sciolla at our Rotterdam offices.  Clojure is an exciting programming language for the JVM. In this Meetup you will learn : 
 
 - Teaching each other Clojure

@@ -1,4 +1,6 @@
 ---
+title: "Présentation de Cypress"
+author: "VincentBrule"
 tags:
 - "test"
 - "cypress"
@@ -6,9 +8,6 @@ tags:
 - "js"
 - "ts"
 ---
-= Présentation de Cypress
-VincentBrule
-v1.0, 2022-06-06
 :lang: fr
 
 Cet article est le début d’une série de trois articles consacrés à https://www.cypress.io[Cypress] :

@@ -1,11 +1,9 @@
 ---
+title: "We have moved on to git, why haven't you?"
+author: "FroMage"
 tags:
 - "git"
 ---
-= We have moved on to git, why haven't you?
-FroMage
-v1.0, 2011-04-11
-
 We have moved from a historical mix
 of http://en.wikipedia.org/wiki/Concurrent_Versions_System[CVS] and
 http://en.wikipedia.org/wiki/Apache_Subversion[SVN] to

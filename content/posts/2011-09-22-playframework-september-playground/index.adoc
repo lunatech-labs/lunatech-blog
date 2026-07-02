@@ -1,13 +1,10 @@
 ---
+title: "September Play!ground in Rotterdam"
+author: "hilton"
 tags:
 - "event"
 - "playframework"
 ---
-= September Play!ground in Rotterdam
-hilton
-v1.0, 2011-09-22
-
-
 Following the success
 of the August event, we are pleased to announce another http://www.playframework.org/[Play
 Framework] event, for software developers

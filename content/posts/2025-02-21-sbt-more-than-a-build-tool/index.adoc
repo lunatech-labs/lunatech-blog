@@ -1,4 +1,6 @@
 ---
+title: "SBT: More than a Build Tool"
+author: "DockerIsBAd"
 tags:
 - "sbt"
 - "build-tool"
@@ -7,9 +9,6 @@ tags:
 - "we-know-scala"
 - "scala-lujah"
 ---
-= SBT: More than a Build Tool
-DockerIsBAd
-v1.0, 2025-02-21
 :lang: en
 
 == Introduction

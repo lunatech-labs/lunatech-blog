@@ -1,13 +1,11 @@
 ---
+title: "Continuous Delivery on GitLab with Play, Scala, SBT and Heroku"
+author: "jasperdenkers"
 tags:
 - "cdci"
 - "playframework"
 - "sbt"
 ---
-= Continuous Delivery on GitLab with Play, Scala, SBT and Heroku
-jasperdenkers
-v1.0, 2016-08-08
-
 Last week we talked about Continuous Integration (CI) with Scala and SBT on GitLab. This week we are going to take a step further and implement Continuous Delivery (CD) on GitLab with Play and Heroku.
 
 Let’s first recap last week’s post. To enable CI, we used the .gitlab-ci.yml file. Builds are run in Docker and to make sure we could execute our tests, we used a Java Docker image and made sure SBT was installed. The definition in our .gitlab-ci.yml file contained only a single stage: the test stage. This week we are going to extend our pipeline with a deploy stage.

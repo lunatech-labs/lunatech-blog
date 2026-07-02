@@ -1,13 +1,11 @@
 ---
+title: "Web application post-submit messages"
+author: "hilton"
 tags:
 - "java"
 - "web-applications"
 - "struts"
 ---
-= Web application post-submit messages
-hilton
-v1.0, 2006-01-09
-
 What's the right way to do confirmation messages in a web application after the user has done a database insert or update - like 'Customer details updated' after a permanent change? This article describes on approach that works well with Struts.
 
 image::postsubmit.png[post submit]

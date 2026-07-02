@@ -1,12 +1,10 @@
 ---
+title: "Integrating Play framework 1.2 with jQuery DataTables"
+author: "PeterHilton"
 tags:
 - "playframework"
 - "jquery"
 ---
-= Integrating Play framework 1.2 with jQuery DataTables
-PeterHilton
-v1.0, 2011-01-28
-
 This article describes how to integrate
 http://www.datatables.net/[DataTables] with a http://playframework.com/[Play framework] web 1.2 application. DataTables is
 a jQuery plug-in for adding sorting, paging and search functionality to

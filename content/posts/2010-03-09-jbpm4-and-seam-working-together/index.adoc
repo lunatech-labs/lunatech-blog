@@ -1,15 +1,12 @@
 ---
+title: "jBPM4 and Seam working together"
+author: "pepite"
 tags:
 - "jboss"
 - "jbpm"
 - "seam"
 - "jsf"
 ---
-= jBPM4 and Seam working together
-pepite
-v1.0, 2010-03-09
-
-
 So you wonder why there is
 no integration between Seam and jBPM4? Actually it is quite simple to
 build you own integration layer. This article describes a simple way to

@@ -1,14 +1,12 @@
 ---
+title: "Kubernetes Operator with Java and Quarkus"
+author: "web1991t"
 tags:
 - "quarkus"
 - "kubernetes"
 - "java"
 - "kubernetes-operator"
 ---
-= Kubernetes Operator with Java and Quarkus
-web1991t
-v1.0, 2021-06-11
-
 == The goal of this blog post
 A Kubernetes Operator, referred to as an operator in the remainder of this article, can be used for various purposes. The most common ones are managing database clusters, preparing database schemas, and restoring backups.
 Even though Kubernetes provides extensive support for multiple container management operations, it doesn't cover all potential cases related to application management. Some applications need the manual intervention of a human operator. A Kubernetes operator is an application that runs in the cluster and manages resources.

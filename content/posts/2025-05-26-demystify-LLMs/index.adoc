@@ -1,4 +1,6 @@
 ---
+title: "A Quest to Tame Large Language Models"
+author: "lukewoodcock"
 tags:
 - "LLM"
 - "natural language processing"
@@ -21,9 +23,6 @@ tags:
 - "language understanding"
 - "transformer architecture"
 ---
-= A Quest to Tame Large Language Models
-lukewoodcock
-v1.0, 2025-05-26
 :toc: left
 :toc-title: Table of Contents
 :toclevels: 3

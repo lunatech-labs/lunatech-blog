@@ -1,13 +1,10 @@
 ---
+title: "Review - Play Framework Cookbook"
+author: "hilton"
 tags:
 - "book"
 - "playframework"
 ---
-= Review - Play Framework Cookbook
-hilton
-v1.0, 2011-09-19
-
-
 This article is
 a review of http://www.packtpub.com/play-framework-cookbook/book[Play Framework
 Cookbook] - a new

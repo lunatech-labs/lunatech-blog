@@ -1,13 +1,10 @@
 ---
+title: "Back from FOSDEM - the NoSQL trend"
+author: "pepite"
 tags:
 - "fosdem"
 - "event"
 ---
-= Back from FOSDEM - the NoSQL trend
-pepite
-v1.0, 2010-02-08
-
-
 This week end, I went to
 http://fosdem.org[FOSDEM]. Even if it was a bit too geeky for my
 taste, it was certainly worth going. I attended quite a few talks and

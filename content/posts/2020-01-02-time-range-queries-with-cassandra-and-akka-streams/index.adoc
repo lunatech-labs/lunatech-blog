@@ -1,13 +1,11 @@
 ---
+title: "Time range queries with Cassandra and Akka Streams"
+author: "nMoncho"
 tags:
 - "scala"
 - "akka"
 - "cassandra"
 ---
-= Time range queries with Cassandra and Akka Streams
-nMoncho
-2020-01-02
-
 Apache Cassandra and Akka Streams, a match made in heaven. In this blogpost I hope to explain how the two seamlessly work together by using a real-life example. For a client we'd to use Cassandra as our data store to serve REST requests, one special requirement was that it had to support sorted time range queries over the entire data set or for a specific data producer (in our case, an IoT device recording temperature and atmospheric pressure).
 
 Cassandra data modelling is different from Relational modelling, in the former we design our tables around the queries we want to perform disregarding any data normalisation (duplication is in fact encouraged) whereas in the latter we normalise each table, avoid duplication like the plague, and let the DMBS handle how to efficiently query a table. From this fact we must also consider: 1

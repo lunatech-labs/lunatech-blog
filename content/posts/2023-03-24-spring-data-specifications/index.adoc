@@ -1,4 +1,6 @@
 ---
+title: "Spring Data Specifications"
+author: "abensoussan"
 tags:
 - "java"
 - "jpa"
@@ -7,9 +9,6 @@ tags:
 - "specifications"
 - "dynamic query"
 ---
-= Spring Data Specifications
-abensoussan
-v1.0, 2023-03-24
 :lang: en
 
 

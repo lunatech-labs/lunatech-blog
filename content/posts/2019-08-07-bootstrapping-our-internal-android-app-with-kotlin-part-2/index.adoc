@@ -1,12 +1,10 @@
 ---
+title: "Bootstrapping Our Internal Android App With Kotlin (Part 2)"
+author: "VincentBrule"
 tags:
 - "ktor"
 - "kotlin"
 ---
-= Bootstrapping Our Internal Android App With Kotlin (Part 2)
-VincentBrule
-v1.0, 2019-08-07
-
 We are back for a second post to show you the progress of our Android application.
 
 To read the first article, follow the https://lunatech.com/posts/2019-06-19-bootstrapping-our-internal-android-app-with-kotlin[guide].

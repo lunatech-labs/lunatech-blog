@@ -1,13 +1,11 @@
 ---
+title: "Seam in action - JavaPolis presentation"
+author: "hilton"
 tags:
 - "java"
 - "jboss"
 - "seam"
 ---
-= Seam in action - JavaPolis presentation
-hilton
-v1.0, 2007-12-14
-
 This week Peter Hilton
 and Nicolas Leroux, senior software developers at Lunatech Research,
 presented http://www.javapolis.com/confluence/display/JP07/Seam+in+Action[Seam In

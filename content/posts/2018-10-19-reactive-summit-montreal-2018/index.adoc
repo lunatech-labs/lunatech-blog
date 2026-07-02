@@ -1,12 +1,9 @@
 ---
+title: "Reactive Summit Montreal 2018"
+author: "Antoine Laffez"
 tags:
 - "event"
 ---
-= Reactive Summit Montreal 2018
-Antoine Laffez
-v1.0, 2018-10-19
-
-
 Lunatech is heading off to Canada, with a delegation of 6 people, including our Lunatech International's CEO, Nicolas Leroux and our General Manager France, Nicolas Martignole. Organized by https://www.lightbend.com/[Lightbend], the https://www.reactivesummit.org/[Reactive Summit] Montreal, which will take place from October 22nd to 24th will welcome international speakers:  Lightbend's CTO, Victor Klang will talk about "The Convergence of Stream Processing and Microservice Architecture" in its Monday's keynote October 22nd in the main "ballroom".
 
 There will be plenty of talks about Akka including:

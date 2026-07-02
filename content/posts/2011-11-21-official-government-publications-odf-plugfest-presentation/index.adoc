@@ -1,11 +1,9 @@
 ---
+title: "Official Government Publications - ODF Plugfest presentation"
+author: "wjkveen"
 tags:
 - "event"
 ---
-= Official Government Publications - ODF Plugfest presentation
-wjkveen
-v1.0, 2011-11-21
-
 Last
 week Willem-Jan Veen, senior developer at Lunatech Research, gave a
 presentation about Dutch official government publications in ODF at (http://plugfest.opendocsociety.org/doku.php?id=plugfests:201111_gouda:info[ODF

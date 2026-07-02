@@ -1,11 +1,9 @@
 ---
+title: "Rotterdam Business Marathon"
+author: "annagos"
 tags:
 - "event"
 ---
-= Rotterdam Business Marathon
-annagos
-v1.0, 2013-04-09
-
 On Sunday, April 14, Lunatech will participate in Rotterdam Business Marathon
 
 image:marathon.jpg[Rotterdam Marathon 2013 - t-shirt,title="Rotterdam Marathon 2013 - t-shirt"]

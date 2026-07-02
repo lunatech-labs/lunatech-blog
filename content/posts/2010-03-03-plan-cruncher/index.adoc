@@ -1,11 +1,9 @@
 ---
+title: "Plan Cruncher - shorter business plans"
+author: "PeterHilton"
 tags:
 - "ventures"
 ---
-= Plan Cruncher - shorter business plans
-PeterHilton
-v1.0, 2010-03-03
-
 Lunatech Ventures has just launched http://plancruncher.com/[Plan
 Cruncher], which helps you create a better
 business plan. The Plan Cruncher web application was designed and built

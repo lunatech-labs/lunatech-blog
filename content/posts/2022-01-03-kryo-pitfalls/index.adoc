@@ -1,15 +1,12 @@
 ---
+title: "Pitfalls in Kryo Serialization"
+author: "nMoncho"
 tags:
 - "scala"
 - "java"
 - "serialization"
 - "benchmark"
 ---
-= Pitfalls in Kryo Serialization
-nMoncho
-2022-01-03
-
-
 For one of our projects we serialize information coming from IoT devices into a Kafka topic, which
 is later processed by several application that aggregate the information for different use cases
 (e.g. notify user when room temperature has drop below a threshold). In the Java ecosystem we have

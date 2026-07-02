@@ -1,11 +1,9 @@
 ---
+title: "URL-centric web application design"
+author: "hilton"
 tags:
 - "web-applications"
 ---
-= URL-centric web application design
-hilton
-v1.0, 2012-01-09
-
 One good way to start
 building a web application is to plan its HTTP interface - its URLs.
 This URL-centric design is an alternative to a data model-centric design

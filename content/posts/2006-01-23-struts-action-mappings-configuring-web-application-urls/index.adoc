@@ -1,15 +1,11 @@
 ---
+title: "Struts Action Mappings - configuring web application URLs"
+author: "hilton"
 tags:
 - "java"
 - "web-applications"
 - "struts"
 ---
-= Struts Action Mappings - configuring web application URLs
-hilton
-v1.0, 2006-01-23
-
-
-
 In the article on https://blog.lunatech.com/2005-07-29-struts-urls[Struts URLs for Perfectionists] I described one way of defining the action mappings for a Struts web application. One of Struts' double-edged swords is that there are several ways to do this, each with its pros and cons. This article considers a few alternatives.
 
 ++++

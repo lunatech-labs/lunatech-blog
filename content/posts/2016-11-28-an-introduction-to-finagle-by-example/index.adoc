@@ -1,12 +1,10 @@
 ---
+title: "An Introduction to Finagle by example"
+author: "Pepite"
 tags:
 - "finagle"
 - "scala"
 ---
-= An Introduction to Finagle by example
-Pepite
-v1.0, 2016-11-28
-
 It is a challenging task to build a large-scale web application, there are fundamental characteristics to take into account: for example, efficiency, safety and robustness. Finagle is a asynchronous, Netty based JVM RPC system made by Twitter which makes it easy to build high available clients and servers in Java and Scala. And it can even simplify your application architecture. Here I want to show you how powerful Finagle is.
 
 == Quickstart

@@ -1,11 +1,9 @@
 ---
+title: "Curry on Amsterdam 2018"
+author: "leo-bogastry"
 tags:
 - "event"
 ---
-= Curry on Amsterdam 2018
-leo-bogastry
-v1.0, 2018-07-19
-
 Curry On Amsterdam 2018 was a pretty busy venue! With more than 40 speakers choosing talks to attend was hard. This conference series is a meeting point between academy and industry, and indeed the discussions where interesting and involving.
 
 The conference opened with the presentation of https://webassembly.org/[Web Assembly] by JanVitek and Heather Miller. These guys are trying to make C++ compile to a new back end, which looks much more the JavaScript one. Although in its early age, this project has strong foundations: the software has a https://github.com/WebAssembly/spec/blob/master/papers/pldi2017.pdf[formal specification] that comes with a proof of soundness (i.e., the specification does not leave any undefined behaviour).

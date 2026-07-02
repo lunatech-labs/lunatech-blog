@@ -1,12 +1,10 @@
 ---
+title: "Riviera DEV"
+author: "FroMage"
 tags:
 - "event"
 - "java"
 ---
-= Riviera DEV
-FroMage
-v1.0, 2011-08-15
-
 Lunatech Research, with the http://rivierajug.org[Riviera
 JUG] and the http://inria.fr[INRIA] French
 research institute are organising the http://rivieradev.fr[Riviera

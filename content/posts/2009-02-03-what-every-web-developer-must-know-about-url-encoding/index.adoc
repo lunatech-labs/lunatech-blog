@@ -1,13 +1,10 @@
 ---
+title: "What every web developer must know about URL encoding"
+author: "FroMage"
 tags:
 - "java"
 - "web-applications"
 ---
-
-= What every web developer must know about URL encoding
-FroMage
-v1.0, 2009-02-03
-
 This article describes common
 misconceptions about *Uniform Resource Locator*
 (http://en.wikipedia.org/wiki/URL[URL]) encoding, then attempts to

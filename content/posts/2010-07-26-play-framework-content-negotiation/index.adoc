@@ -1,12 +1,10 @@
 ---
+title: "Play framework 1.0 content negotiation"
+author: "PeterHilton"
 tags:
 - "playframework"
 - "java"
 ---
-= Play framework 1.0 content negotiation
-PeterHilton
-v1.0, 2010-07-26
-
 One thing that the http://www.playframework.org/[Play
 framework] 1.0 has in common with other
 RESTful architectures is the direct use of HTTP functionality, instead

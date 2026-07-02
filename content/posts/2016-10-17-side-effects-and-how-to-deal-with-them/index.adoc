@@ -1,13 +1,11 @@
 ---
+title: "Side Effects and How To Deal With Them The Cool Way, Part 1 - Pure functions and functors"
+author: "FrancoAra"
 tags:
 - "fp"
 - "scala"
 - "monad"
 ---
-= Side Effects and How To Deal With Them The Cool Way, Part 1 - Pure functions and functors
-FrancoAra
-v1.0, 2016-10-17
-
 == Introduction
 
 Functional programming has become very popular, and one of the concepts that have gained popularity with it is the concept of "side effects", but what are really side effects and why functional programming is so good at handling them? 

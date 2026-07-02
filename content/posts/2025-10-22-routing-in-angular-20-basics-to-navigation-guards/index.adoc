@@ -1,4 +1,6 @@
 ---
+title: "Routing in Angular 20: Basics to Navigation Guards"
+author: "jakeortega"
 tags:
 - "Beginner"
 - "angular router"
@@ -6,9 +8,6 @@ tags:
 - "route guards"
 - "async redirects"
 ---
-= Routing in Angular 20: Basics to Navigation Guards
-jakeortega
-v1, 2025-10-22
 :lang: en
 
 Master client-side routing with Angular’s Router. Learn route configuration, navigation, guards, and Angular 20’s asynchronous redirect improvements.

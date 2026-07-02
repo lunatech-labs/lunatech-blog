@@ -1,12 +1,10 @@
 ---
+title: "Benelux JBoss User Group, 2 November 2007"
+author: "hilton"
 tags:
 - "jbug"
 - "event"
 ---
-= Benelux JBoss User Group, 2 November 2007
-hilton
-v1.0, 2007-10-01
-
 Since the [first
 event](/2007/06/15/benelux-jboss-user-group-8-june-2007-first-photos)
 was so much fun, Lunatech Research hosted the second JBoss Benelux User

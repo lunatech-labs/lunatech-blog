@@ -1,11 +1,9 @@
 ---
+title: "Øredev - recommended presentations"
+author: "hilton"
 tags:
 - "conference"
 ---
-= Øredev - recommended presentations
-hilton
-v1.0, 2012-11-22
-
 While http://blog.lunatech.com/2012/11/14/oredev-2012-playframework-video[I was at
 Øredev]
 earlier this month I took the opportunity to talk to the other speakers

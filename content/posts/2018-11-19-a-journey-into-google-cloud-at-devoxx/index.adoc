@@ -1,11 +1,9 @@
 ---
+title: "A Journey Into Google Cloud At Devoxx"
+author: "Xavier Tordoir"
 tags:
 - "event"
 ---
-= A Journey Into Google Cloud At Devoxx
-Xavier Tordoir
-v1.0, 2018-11-19
-
 Visiting Devoxx with Lunatech Team, Xavier Tordoir, Data scientist at Lunatech tried the Google Cloud platform exercises at Google booth:
 
 Google was a sponsor of Devoxx 2018 and their booth was dedicated to the Google cloud platform. A few Chromebooks were available there to run through various tutorials, hands-on with the UI and tools. Between 10 and 30 minutes sessions would allow to solve one specific problem to pick from a list of about 25, including storage, VMs and containers, compute, SQL, BigData or AI.

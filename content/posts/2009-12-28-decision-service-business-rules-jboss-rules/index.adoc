@@ -1,12 +1,10 @@
 ---
+title: "Decision service business rules in JBoss Rules"
+author: "PeterHilton"
 tags:
 - "java"
 - "drools"
 ---
-= Decision service business rules in JBoss Rules
-PeterHilton
-v1.0, 2009-12-28
-
 This article describes the
 kinds of business rules that you might implement in a decision service,
 with a simple example; this is essentially a functional design.

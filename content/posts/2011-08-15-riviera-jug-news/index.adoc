@@ -1,13 +1,10 @@
 ---
+title: "Riviera JUG news"
+author: "FroMage"
 tags:
 - "event"
 - "java"
 ---
-= Riviera JUG news
-FroMage
-v1.0, 2011-08-15
-
-
 If you are one of the +600 people who came to one of
 the http://rivierajug.org[Riviera JUG] meetings, you will know that
 Lunatech Research is one of the key sponsors of this Java User Group.

@@ -1,12 +1,10 @@
 ---
+title: "Introduction to ZTemplates"
+author: "killdashnine"
 tags:
 - "java"
 - "web-applications"
 ---
-= Introduction to ZTemplates
-killdashnine
-v1.0, 2008-10-29
-
 This article introduces
 http://ztemplates.org[ztemplates], a multi-tier open source web
 application framework for Java. ztemplates is licensed under the http://www.apache.org/licenses/LICENSE-2.0[Apache

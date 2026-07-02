@@ -1,12 +1,9 @@
 ---
+title: "Devoxx 2011 tips"
+author: "hilton"
 tags:
 - "event"
 ---
-= Devoxx 2011 tips
-hilton
-v1.0, 2011-11-14
-
-
 Last year I published https://blog.lunatech.com/posts/2010-11-23-10-devoxx-tips[10 Devoxx
 tips]. You probably
 need these tips again this week, as well as updates for this year.

@@ -1,12 +1,9 @@
 ---
+title: "I wish I could write like Joel…"
+author: "Michael Pentowski"
 tags:
 - "opinion"
 ---
-= I wish I could write like Joel…
-Michael Pentowski
-v1.0, 2006-04-03
-
-
 Why is it that some people have no problems taking their thoughts and putting them into writing? I wish I was one of these persons, I wish I could write like http://www.joelonsoftware.com/[Joel].
 
 ++++

@@ -1,12 +1,10 @@
 ---
+title: "Using Play framework database evolutions with Slick 1.0.1"
+author: "hilton"
 tags:
 - "slick"
 - "playframework"
 ---
-= Using Play framework database evolutions with Slick 1.0.1  
-hilton
-v1.0, 2013-08-29
-
 This tutorial for using [Slick](http://slick.typesafe.com) with a \
     [Play Framework](http://www.playframework.com) application
     shows you how to create your database and apply data model.

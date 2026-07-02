@@ -1,12 +1,10 @@
 ---
+title: "Making daily recurring To Do items in Apple iCal"
+author: "lypanov"
 tags:
 - "applescript"
 - "ical"
 ---
-= Making daily recurring To Do items in Apple iCal
-lypanov
-v1.0, 2006-08-22
-
 I just worked out how to use http://www.apple.com/macosx/features/applescript/[AppleScript] to create recurring daily to do items in http://www.apple.com/macosx/features/ical/[Apple iCal].
 
 ++++

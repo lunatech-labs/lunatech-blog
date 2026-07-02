@@ -1,11 +1,9 @@
 ---
+title: "Eximion game artwork archive"
+author: "hilton"
 tags:
 - "fun"
 ---
-= Eximion game artwork archive
-hilton
-v1.0, 2007-09-28
-
 One of
 http://www.lunatech-ventures.com/[Lunatech Ventures] cool investments
 at the moment is http://www.eximion.com/[Eximion] - next generation

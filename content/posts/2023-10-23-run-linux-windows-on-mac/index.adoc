@@ -1,13 +1,12 @@
 ---
+title: "Running Linux and Windows on a Mac M1/M2 laptop"
+author: "leo-bogastry"
 tags:
 - "macos"
 - "linux"
 - "windows"
 - "testing"
 ---
-= Running Linux and Windows on a Mac M1/M2 laptop
-leo-bogastry
-v1.0, 2023-10-25
 :lang: en
 
 Recently, I encountered an error in the documentation of an open-source tool. I created a pull request with a proposed fix.

@@ -1,12 +1,10 @@
 ---
+title: "Activiti next-generation Business Process Management and work-flow"
+author: "PeterHilton"
 tags:
 - "bpm"
 - "java"
 ---
-= Activiti next-generation Business Process Management and work-flow
-PeterHilton
-v1.0, 2010-05-18
-
 http://www.alfresco.com/media/releases/2010/05/activiti_bpm/[Yesterday's
 launch] of
 http://www.activiti.org/[Activiti] starts a new generation of business

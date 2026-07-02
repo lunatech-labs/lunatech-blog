@@ -1,13 +1,12 @@
 ---
+title: "Bootiful ZIO"
+author: "chriseteka"
 tags:
 - "scala"
 - "zio"
 - "zlayer"
 - "service-pattern"
 ---
-= Bootiful ZIO
-chriseteka
-v1.0, 2022-04-05
 :lang: en
 > Spring Booting with ZIO's ZLayer
 

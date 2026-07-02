@@ -1,11 +1,9 @@
 ---
+title: "Wipido - Show your gaming skills, record your frags."
+author: "Michael Pentowski"
 tags:
 - "ventures"
 ---
-= Wipido - Show your gaming skills, record your frags.
-Michael Pentowski
-v1.0, 2007-09-21
-
 Today we have (quietly)
 lifted the covers off our latest venture …
 http://www.wipido.com/[Wipido.com]. Create a gamerprofile on Wipido

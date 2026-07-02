@@ -1,13 +1,12 @@
 ---
+title: "Semantic Kernel SDK and Quarkus"
+author: "iarmush"
 tags:
 - "java"
 - "quarkus"
 - "semantic-kernel"
 - "openai"
 ---
-= Semantic Kernel SDK and Quarkus
-iarmush
-v1.0, 2024-01-10
 :lang: en
 
 == What is it about?

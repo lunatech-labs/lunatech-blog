@@ -1,13 +1,11 @@
 ---
+title: "Changing credentials without logging in again in Seam 1.2.1"
+author: "pepite"
 tags:
 - "java"
 - "jboss"
 - "seam"
 ---
-= Changing credentials without logging in again in Seam 1.2.1
-pepite
-v1.0, 2007-06-13
-
 This article explains how to do
 programmatic log in, in a Seam 1.2.1 application. If like us, you want
 to allow your users to change their credentials once they are logged in

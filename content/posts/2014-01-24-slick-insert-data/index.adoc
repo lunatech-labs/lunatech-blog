@@ -1,12 +1,10 @@
 ---
+title: "Inserting database table rows with Slick 1.0.1"
+author: "hilton"
 tags:
 - "slick"
 - "playframework"
 ---
-= Inserting database table rows with Slick 1.0.1
-hilton
-v1.0, 2014-02-28
-
 This tutorial shows you how to execute database inserts in a http://slick.typesafe.com/[Slick] application by building on the previous http://blog.lunatech.com/tags/slick[previous tutorials].
 
 Inserting data with Slick turns out not to be as complex as querying,

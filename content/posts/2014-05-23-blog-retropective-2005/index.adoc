@@ -1,11 +1,9 @@
 ---
+title: "Lunatech blog retrospective - 2005"
+author: "hilton"
 tags:
 - "opinion"
 ---
-= Lunatech blog retrospective - 2005
-hilton
-v1.0, 2014-05-23
-
 Looking back nine years on this blog, there are a mix of articles that stand the test of time, ones that were good at the time, and 
     a few that… weren’t. Here is a small selection.
 

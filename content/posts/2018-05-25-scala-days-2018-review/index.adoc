@@ -1,12 +1,10 @@
 ---
+title: "Scala Days 2018 review"
+author: "Antoine Laffez"
 tags:
 - "event"
 - "scala"
 ---
-= Scala Days 2018 review
-Antoine Laffez
-v1.0, 2018-05-25
-
 == 900 people! 
 
 This is the memorable amount of these https://eu.scaladays.org/[Scala Days] Berlin. The European edition of Scala Days was held from May 14th to 17th at the https://www.kosmos-berlin.de/[Kosmos center]. Located 20 minutes walk from the famous Alexanderplatz, this former cinema became the center of the European Scala community for a few days. Organised by https://www.linkedin.com/company/heise-zeitschriften-verlag/[Heise Developer], https://www.linkedin.com/company/dpunkt.verlag/[Dpunkt] and http://lighbend.com[Lightbend], this event was able to bring together the greatest International speakers. Note that the event was totally sold out 1 month before the start.

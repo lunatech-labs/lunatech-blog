@@ -1,13 +1,11 @@
 ---
+title: "Language localisation in JSF and Seam"
+author: "PeterHilton"
 tags:
 - "java"
 - "jsf"
 - "seam"
 ---
-= Language localisation in JSF and Seam
-PeterHilton
-v1.0, 2009-03-31
-
 This article introduces the mechanisms for
 http://en.wikipedia.org/wiki/Internationalization_and_localization[internationalising]
 a web application built using JavaServer Faces (JSF) application and the

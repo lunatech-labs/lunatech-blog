@@ -1,11 +1,9 @@
 ---
+title: "A functional programming puzzle"
+author: "FroMage"
 tags:
 - "javascript"
 ---
-= A functional programming puzzle
-FroMage
-v1.0, 2011-03-21
-
 This article
 describes a functional programming puzzle that we had to solve in order
 to implement a JavaScript templating system. It is a very simple problem

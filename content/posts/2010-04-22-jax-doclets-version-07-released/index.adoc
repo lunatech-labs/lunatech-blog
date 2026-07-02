@@ -1,14 +1,12 @@
 ---
+title: "jax-doclets version 0.7 released"
+author: "FroMage"
 tags:
 - "resteasy"
 - "java"
 - "rest"
 - "documentation"
 ---
-= jax-doclets version 0.7 released
-FroMage
-v1.0, 2010-04-22
-
 Did you know we have an http://www.lunatech-labs.com[open-source web
 site]?
 

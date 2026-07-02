@@ -1,12 +1,10 @@
 ---
+title: "Lunatech presents Play at Topconf 2012"
+author: "hilton"
 tags:
 - "conference"
 - "playframework"
 ---
-= Lunatech presents Play at Topconf 2012
-hilton
-v1.0, 2012-10-29
-
 Next week, on 1-2 November 2012, Peter Hilton will give two presentations at http://topconf.com/[Topconf
 2012]. The presentations are http://topconf.com/Conference/Abstracts/PlayFramework2/tabid/140/language/en-US/Default.aspx[Play Framework
 2]

@@ -1,13 +1,11 @@
 ---
+title: "Lunatech presents at Scala Stockholm"
+author: "hilton"
 tags:
 - "event"
 - "playframework"
 - "scala"
 ---
-= Lunatech presents at Scala Stockholm
-hilton
-v1.0, 2012-02-08
-
 On 15 February 2012, Peter Hilton
 will present Play to the http://www.meetup.com/Scala-Stockholm/events/46249872/[Scala-Stockholm user
 group].

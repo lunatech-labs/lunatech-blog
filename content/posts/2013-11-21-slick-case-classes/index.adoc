@@ -1,12 +1,10 @@
 ---
+title: "Mapping Slick query results to case classes 1.0.1"
+author: "hilton"
 tags:
 - "slick"
 - "playframework"
 ---
-= Mapping Slick query results to case classes 1.0.1
-hilton
-v1.0, 2013-11-21
-
 This tutorial shows you how to handle database query results in a Slick application by building on the previous Slick tutorials.
 
 By default, Slick query results are collections of Scala tuples, whose

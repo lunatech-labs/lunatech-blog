@@ -1,4 +1,6 @@
 ---
+title: "Interop Summit. Why do we only import Java libraries?"
+author: "kolmar"
 tags:
 - "jvm"
 - "interop"
@@ -10,9 +12,6 @@ tags:
 - "we-know-scala"
 - "scala-lujah"
 ---
-= Interop Summit. Why do we only import Java libraries?
-kolmar
-v1.0, 2025-02-14
 :lang: en
 
 == Short history of the Java platform

@@ -1,13 +1,10 @@
 ---
+title: "Book review - Wikinomics"
+author: "hilton"
 tags:
 - "opinion"
 - "book"
 ---
-= Book review - Wikinomics
-hilton
-v1.0, 2007-07-02
-
-
 http://www.wikinomics.com/[Wikinomics] is a book about the mass
 web-based collaboration that has emerged in the last few years. It
 explains well-known phenomena such as Wikipedia and Flickr, as well as

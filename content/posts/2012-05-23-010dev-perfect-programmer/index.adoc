@@ -1,10 +1,9 @@
 ---
+title: "Lunatech presents at 010DEV"
+author: "hilton"
 tags:
 - "event"
 ---
-= Lunatech presents at 010DEV
-hilton
-v1.0, 2012-05-23
 renaissance
 
 This week, on 25 May 2012, Peter

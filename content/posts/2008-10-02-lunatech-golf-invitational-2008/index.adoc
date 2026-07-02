@@ -1,11 +1,9 @@
 ---
+title: "Lunatech Golf Invitational 2008"
+author: "Michael Pentowski"
 tags:
 - "ventures"
 ---
-= Lunatech Golf Invitational 2008
-Michael Pentowski
-v1.0, 2008-10-02
-
 On September 26th, 2008, the http://www.lunatech-ventures.com/event/register/lunatech_invitational_2008[Lunatech Golf
 Invitational]
 was held at the http://www.rottebergen.nl/[Golfbaan Rottebergen].

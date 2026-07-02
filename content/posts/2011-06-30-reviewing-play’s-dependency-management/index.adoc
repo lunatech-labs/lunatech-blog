@@ -1,14 +1,11 @@
 ---
+title: "Reviewing Play 1.2’s dependency management"
+author: "targeter"
 tags:
 - "playframework"
 - "maven"
 - "java"
 ---
-= Reviewing Play 1.2’s dependency management
-targeter
-v1.0, 2011-06-30
-
-
 Play version 1.2
 introduced http://www.playframework.org/documentation/1.2.1/dependency[dependency
 management]

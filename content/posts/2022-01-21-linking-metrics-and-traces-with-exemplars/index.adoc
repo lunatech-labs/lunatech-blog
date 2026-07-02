@@ -1,4 +1,6 @@
 ---
+title: "Linking metrics and traces with Exemplars"
+author: "leo-bogastry"
 tags:
 - "grafana"
 - "prometheus"
@@ -6,9 +8,6 @@ tags:
 - "scala"
 - "docker-compose"
 ---
-= Linking metrics and traces with Exemplars
-leo-bogastry
-v1.0, 2022-01-27
 :lang: en
 
 What if you could easily link a metric with a trace? And what if I told you that you can do it visually?

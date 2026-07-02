@@ -1,11 +1,9 @@
 ---
+title: "Third-party Logistics (3PL) domain expertise"
+author: "hilton"
 tags:
 - "case-study"
 ---
-= Third-party Logistics (3PL) domain expertise
-hilton
-v1.0, 2014-03-11
-
 In 1996, Lunatech entered into a partnership with UPS Supply Chain Solutions (UPS-SCS), that led to the development of an innovative supply chain operations household-name global electronics and computer hardware vendors.
 
 image::sky.jpg[3PL domain expertise]

@@ -1,12 +1,10 @@
 ---
+title: "Duse XIV - Exploring Lightweight Event Sourcing"
+author: "eamelink"
 tags:
 - "scala"
 - "event"
 ---
-= Duse XIV - Exploring Lightweight Event Sourcing 
-eamelink
-v1.0, 2011-10-07
-
 The
 slides for Erik Rozendaal's presentation ‘Exploring Lightweight Event
 Sourcing’, presented at http://blog.lunatech.com/2011/10/04/duse-xiv-meetup[Duse XIV,

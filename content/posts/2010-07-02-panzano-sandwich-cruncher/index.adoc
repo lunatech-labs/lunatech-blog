@@ -1,11 +1,9 @@
 ---
+title: "Panzano Sandwich Cruncher"
+author: "PeterHilton"
 tags:
 - "fun"
 ---
-= Panzano Sandwich Cruncher
-PeterHilton
-v1.0, 2010-07-02
-
 Panzano is an Italian deli that sells the best
 sandwiches in Rotterdam, and even delivers, which makes it the perfect
 catering for a business lunch. However, you cannot order on-line and,

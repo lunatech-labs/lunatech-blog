@@ -1,14 +1,12 @@
 ---
+title: "Using Hibernate on old Solid databases"
+author: "FroMage"
 tags:
 - "java"
 - "jpa"
 - "solid"
 - "hibernate"
 ---
-= Using Hibernate on old Solid databases
-FroMage
-v1.0, 2009-11-17
-
 Lately I've had to program an application that accesses an old
 http://en.wikipedia.org/wiki/SolidDB[Solid database] that we use for
 “hysterical raisins” (as my co-worker on the project calls it), and

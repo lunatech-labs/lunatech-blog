@@ -1,12 +1,10 @@
 ---
+title: "Browsers don’t do layout"
+author: "dutchcelt"
 tags:
 - "front-end"
 - "ux"
 ---
-= Browsers don’t do layout
-dutchcelt
-v1.0, 2011-04-13
-
 Good layout has been the bane of many front-enders
 existance for years and years. Positioning isn't layout and tables and
 floats are nasty hacks. Browsers totally suck at layout.

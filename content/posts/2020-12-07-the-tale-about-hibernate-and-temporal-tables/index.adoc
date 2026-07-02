@@ -1,14 +1,12 @@
 ---
+title: "The tale about Hibernate and Temporal Tables"
+author: "smthelusive"
 tags:
 - "hibernate"
 - "java"
 - "temporal"
 - "mssql"
 ---
-= The tale about Hibernate and Temporal Tables
-smthelusive
-v1.0, 2020-12-07
-
 == Foreword
 
 Earlier this year, I was involved in solving an issue on a project that was using https://hibernate.org[Hibernate] + https://hibernate.org/orm/envers[Envers] and Microsoft SQL Server as the database. The choice of database was mainly driven by a project requirement to have history data which is provided by temporal tables. In the Java code that is used to query the database, there is an entity class for historical data named `VersionedRecord`, which is a `@MappedSuperclass`, and a couple of entities are extending it.
