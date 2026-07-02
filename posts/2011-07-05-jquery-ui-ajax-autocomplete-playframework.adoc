@@ -101,7 +101,7 @@ having to put the URL in the static JavaScript code, and so we can use
 the Play template syntax for generating the URL from a controller action
 reference.
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 <input name="location" class="autocomplete" data-url="@{Application.autocompleteLabel()}”>
 ----
@@ -112,7 +112,7 @@ elements with the `autocomplete` class: for each one, the code extracts
 the URL from the data attribute and transforms the input element into an
 autocomplete widget whose data source is the URL.
 
-[source,brush:,js;,gutter:,false]
+[source,js]
 ----
 $('input.autocomplete').each( function() {
    var $input = $(this);
@@ -128,7 +128,7 @@ The server-side is a Play controller action that returns a list of
 suggestions. The first part, for this example, is some test data - a
 list of ‘location’ names extracted from the JDK’s time zone list:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 public static List<String> locations() {
    final List<String> result = new ArrayList<String>();
@@ -153,7 +153,7 @@ Note that we limit the total number of results to a maximum of 10, to
 avoid slowing down the autocomplete by loading and rendering more
 suggestions than the user is reasonably likely to choose from.
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 public static int AUTOCOMPLETE_MAX = 10;
 
@@ -191,7 +191,7 @@ controller action with a parameter of type `models.Location`, which the
 JPA binder will load based on the supplied ID. The class autocomplete
 controller names only differ to separate them from the previous example.
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 <input name="location.id" class="autocomplete-relation" data-url="@{Application.autocompleteLabelAndValue()}">
 ----
@@ -211,7 +211,7 @@ location’s name (label) instead of its ID (value), and sets the `select`
 event to copy the name and label in the appropriate form control values
 when a suggestion is selected.
 
-[source,brush:,js;,gutter:,false]
+[source,js]
 ----
 $('input.autocomplete-relation').each( function() {
    var $input = $(this);
@@ -244,7 +244,7 @@ Also, the following JavaScript disables the redundant visible text input
 fields on form submit, to avoid sending the additional label with the
 form data.
 
-[source,brush:,js;,gutter:,false]
+[source,js]
 ----
 // On form submit, suppress autocomplete fields that only contain a label.
 $('form').submit(function() {
@@ -261,7 +261,7 @@ The jQuery UI autocomplete component supports both kinds of response. To
 make this easier to render, we add a simple wrapper class whose
 structure results in the correct JSON structure in the response.
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 public class AutocompleteValue {
 
@@ -277,7 +277,7 @@ public class AutocompleteValue {
 The new controller action, with the same logic but a different response
 structure is now as follows.
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 public static void autocompleteLabelAndValue(final String term) {
    final List<AutocompleteValue> response = new ArrayList<AutocompleteValue>();

@@ -124,8 +124,10 @@ and replace it with `<h1>Tasks</h1>`.
 *Edit* `app/controllers/Application.scala` - Change the `index` method
 to the following (omitting a parenthesis).
 
-\{% highlight scala %} def index \{ val items = "Things" render(items }
-\{% endhighlight %}
+[source,scala]
+----
+def index { val items = "Things" render(items }
+----
 
 *Open* http://localhost:9000/ - Show the Scala compilation error.
 
@@ -150,8 +152,11 @@ remove the parameter and put the declaration back.
 
 *Edit* `app/controllers/Application.scala` - Add a new method.
 
-\{% highlight scala %} import play.libs.Images … def captcha =
-Images.captcha \{% endhighlight %}
+[source,scala]
+----
+import play.libs.Images … def captcha =
+Images.captcha
+----
 
 *Edit* `conf/routes` - Add `GET /captcha Application.captcha`
 

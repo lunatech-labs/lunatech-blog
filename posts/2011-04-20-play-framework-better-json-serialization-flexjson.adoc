@@ -32,7 +32,7 @@ that you cannot serialize objects that have circular references. In a
 Play application, structures like these are very common. Consider the
 following two classes:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 @Entity
 public class Post extends Model {
@@ -44,7 +44,7 @@ public class Post extends Model {
 }
 ----
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 @Entity
 public class Author extends Model {
@@ -57,7 +57,7 @@ public class Author extends Model {
 Trying to serialize an instance of either of them with Gson will fail
 with the following error:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 IllegalStateException occured : circular reference error Offending field: author Offending object: com.google.gson.ObjectTypePair@1
 ----
@@ -108,7 +108,7 @@ With FlexJSON, it is very easy to specify which fields you want to
 serialize, even with nested objects. Take for example this serializer
 for a details view of a post:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 JSONSerializer postDetailsSerializer = new JSONSerializer().include(
                 "title",
@@ -122,7 +122,7 @@ fields of nested objects to include simply by adding a dot to the field
 followed by the field of the nested object. To serialize a post object,
 we can now use
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 postDetailsSerializer.serialize(post);
 ----
@@ -130,7 +130,7 @@ postDetailsSerializer.serialize(post);
 To have a JSON view of a post without the content, we can simply create
 another serializer:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 JSONSerializer postListSerializer = new JSONSerializer().include(
                 "title",
@@ -154,7 +154,7 @@ create a
 http://www.playframework.org/documentation/1.2/templates#Createcustomextensions[custom
 Java object extension]:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 /**
  * Extensions for the template system.
@@ -181,7 +181,7 @@ public class SerializerExtensions extends JavaExtensions {
 With this code in place, we can easily convert a single model or a
 collection of models into JSON, while in a Play template:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 <script type="text/javascript">
   var post = ${post.serializeWith('postDetailsSerializer').raw()};
@@ -190,7 +190,7 @@ collection of models into JSON, while in a Play template:
 
 This works equally for a collection of posts:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 <script type="text/javascript">
   var posts = ${posts.serializeWith('postListSerializer').raw()};
@@ -200,7 +200,7 @@ This works equally for a collection of posts:
 The Java extension gets the relevant serializers from the `Serializers`
 class, which holds static references:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 public class Serializers {
     public static final JSONSerializer postListSerializer;

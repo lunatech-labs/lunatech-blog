@@ -74,7 +74,7 @@ predicted.
 
 The widget is based on an empty HTML div element.
 
-[source,brush:,html;,gutter:,false]
+[source,html]
 ----
 <div id="progressbar" data-url="@@{jqueryui.ProgressSocket.progress(processId)}"></div>
 ----
@@ -88,7 +88,7 @@ The `progressbar.js` JavaScript applies the jQuery UI dialog plug-in to
 the `div` element and opens a web socket connection. Finally, the
 JavaScript uses web socket messages to update the progress bar value.
 
-[source,brush:,javascript;,gutter:,false]
+[source,javascript]
 ----
 $(function() {
 
@@ -114,7 +114,7 @@ stream that the job will publish progress to. The implementation in this
 example simply waits for short intervals, publishing progress to the
 event stream after each one.
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 package models.jqueryui;
 
@@ -160,7 +160,7 @@ asynchronous long-running job, and stores a reference to the job in a
 ‘registry’ singleton. This action then renders the same page with a
 `processId` argument that indicates that a job has been started.
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 package controllers.jqueryui;
 
@@ -190,7 +190,7 @@ stream. When the job publishes a completion percentage to its event
 stream, the controller sends the data in a web socket message to the
 browser client.
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 package controllers.jqueryui;
 

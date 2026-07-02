@@ -39,7 +39,7 @@ Now, let's configure our Apache web server to have a load balancer.
 
 In Apache, I have the following configuration:
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 <VirtualHost mysuperwebapp.com:80>
   ServerName mysuperwebapp.com

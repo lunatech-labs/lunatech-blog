@@ -16,7 +16,7 @@ using Play 2.0, Java and Ebean.
 Download Play 2.0. This version of the script is based on the _2.0-beta_
 release.
 
-[source,brush:,plain;,gutter:,false]
+[source,text]
 ----
 $ wget http://download.playframework.org/releases/play-2.0-beta.zip
 $ unzip -q play-2.0-beta.zip
@@ -28,7 +28,7 @@ path more permanently.*
 
 Create the application:
 
-[source,brush:,plain;,gutter:,false]
+[source,text]
 ----
 $ play new tasks
 
@@ -46,7 +46,7 @@ Which template do you want to use for this new application?
 
 See which files were generated:
 
-[source,brush:,plain;,gutter:,false]
+[source,text]
 ----
 $ find tasks -type f
 tasks/.gitignore
@@ -65,7 +65,7 @@ tasks/public/stylesheets/main.css
 
 Run the application:
 
-[source,brush:,plain;,gutter:,false]
+[source,text]
 ----
 $ cd tasks
 $ play run
@@ -78,7 +78,7 @@ Open the welcome page: http://localhost:9000/
 Edit `app/views/index.scala.html` and replace the contents with the
 following (with a bogus variable name):
 
-[source,brush:,html;,gutter:,false]
+[source,html]
 ----
 @(items: String)
 
@@ -95,7 +95,7 @@ Reload the page, which shows a template compilation error:
 In the console, type Control-D to stop the application, then start the
 Play console and compile the application:
 
-[source,brush:,plain;,gutter:,false]
+[source,text]
 ----
 $ play
 [tasks] $ compile
@@ -106,7 +106,7 @@ application.*
 
 Start the application again:
 
-[source,brush:,plain;,gutter:,false]
+[source,text]
 ----
 [tasks] $ run
 ----
@@ -117,7 +117,7 @@ In `app/views/index.scala.html` fix the error: change `@item` to
 Edit `app/controllers/Application.java` and change the `index()` method
 body to the following line (with a missing semi-colon):
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 return ok(index.render("Things"))
 ----
@@ -131,7 +131,7 @@ Reload the page, which shows the heading ‘Things’.
 
 In `public/stylesheets/main.css`, add some CSS to make things less ugly:
 
-[source,brush:,css;,gutter:,false]
+[source,css]
 ----
 body { font-family:"Helvetica Neue"; padding:2em; background: #B2EB5A url("/assets/images/play20header.png") no-repeat top center ; }
 body:before { content:'Play 2.0 task list demo'; color:rgba(255,255,255,0.7); font-size:150%; text-transform:uppercase; letter-spacing:0.4em; }
@@ -148,7 +148,7 @@ p.error { margin:0; color:#c00; }
 In `app/controllers/Application.java` replace `"Things"` with a
 `String items` method parameter.
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 public static Result index(final String items) {
    return ok(index.render(items));
@@ -158,7 +158,7 @@ public static Result index(final String items) {
 In `conf/routes`, replace the first route with (with a bogus lower-case
 `string` type):
 
-[source,brush:,scala;,gutter:,false]
+[source,scala]
 ----
 GET /   controllers.Application.index(i: string)
 ----
@@ -177,7 +177,7 @@ Reload the web page.
 Undo the last changes in `app/controllers/Application.java` – remove the
 `index` method parameter:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 public static Result index() {
    return ok(index.render("Tasks"));
@@ -186,7 +186,7 @@ public static Result index() {
 
 Undo the change in `conf/routes` – remove the method parameter:
 
-[source,brush:,scala;,gutter:,false]
+[source,scala]
 ----
 GET /   controllers.Application.index()
 ----
@@ -198,7 +198,7 @@ GET /   controllers.Application.index()
 In the console, type Control-D to stop the application, and create the
 IntelliJ project:
 
-[source,brush:,plain;,gutter:,false]
+[source,text]
 ----
 [tasks] $ gen-idea
 ----
@@ -214,7 +214,7 @@ IntelliJ IDEA.
 Create a new `models.Task` class in `app/models/Task.java`, either by
 hand or using IntelliJ IDEA:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 package models;
 
@@ -243,7 +243,7 @@ enhancement in Play 1.*
 In `app/controllers/Application.java`, import `models.Task` and replace
 `"Things"` with a call to the finder:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 return ok(index.render(Task.find.orderBy("title").findList()));
 ----
@@ -256,14 +256,14 @@ Open http://localhost:9000/, which shows a Java compilation error:
 In `app/views/index.scala.html` change the type in the template
 parameter declaration:
 
-[source,brush:,scala;,gutter:,false]
+[source,scala]
 ----
 @(tasks: List[models.Task])
 ----
 
 Also, change the HTML block to:
 
-[source,brush:,html;,gutter:,false]
+[source,html]
 ----
 <h1>@tasks.size task@(if(tasks.size != 1) "s")</h1>
 <ul>
@@ -279,7 +279,7 @@ Reload the page, which shows a data source error:
 In `conf/application.conf`, uncomment the default values for the
 in-memory database and Ebean configuration:
 
-[source,brush:,perl;,gutter:,false]
+[source,perl]
 ----
 db.default.driver=org.h2.Driver
 db.default.url=jdbc:h2:mem:play
@@ -303,7 +303,7 @@ Open http://localhost:9000/: there are no tasks.
 
 In `app/views/index.scala.html`, add a form after the list.
 
-[source,brush:,html;,gutter:,false]
+[source,html]
 ----
 <form method="post" action="@routes.Application.add()">
    <input name="title" placeholder="Enter a task description…">
@@ -314,7 +314,7 @@ In `app/views/index.scala.html`, add a form after the list.
 In `app/controllers/Application.java`, import `play.data.Form` and add
 the `add` method:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 public static Result add() {
    final Form<Task> taskForm = form(Task.class).bindFromRequest();
@@ -326,7 +326,7 @@ public static Result add() {
 
 In `conf/routes`, add the new HTTP mapping:
 
-[source,brush:,scala;,gutter:,false]
+[source,scala]
 ----
 POST /  controllers.Application.add()
 ----
@@ -338,21 +338,21 @@ the _Add_ button.
 
 In `app/views/index.scala.html`, inside the `<li>`, add a link:
 
-[source,brush:,html;,gutter:,false]
+[source,html]
 ----
 <a href="@routes.Application.delete(task.id)">delete</a>
 ----
 
 In `conf/routes`, add the new HTTP mapping:
 
-[source,brush:,scala;,gutter:,false]
+[source,scala]
 ----
 GET /delete/:id controllers.Application.delete(id: Long)
 ----
 
 In `app/controllers/Application.java`, add the `delete` method:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 public static Result delete(final Long id) {
    Task.find.ref(id).delete();
@@ -368,7 +368,7 @@ URLs.
 In `app/models/Task.java`, import `play.data.validation.Constraints` and
 annotate the `title` field with `@Constraints.Required`.
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 @Constraints.Required
 public String title;
@@ -377,7 +377,7 @@ public String title;
 In `app/controllers/Application.java`, import `java.util.List` and
 extract the list of tasks to a new method:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 private static List<Task> tasks() {
    return Task.find.orderBy("title").findList();
@@ -386,7 +386,7 @@ private static List<Task> tasks() {
 
 Add validation to the `add` method:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 public static Result add() {
    final Form<Task> taskForm = form(Task.class).bindFromRequest();
@@ -405,7 +405,7 @@ structured than the Play 1.2 validation data.*
 
 Change the `index` method to add an empty form to the template call:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 return ok(index.render(tasks(), form(Task.class)));
 ----
@@ -413,14 +413,14 @@ return ok(index.render(tasks(), form(Task.class)));
 In `app/views/index.scala.html`, add the new form parameter on the first
 line:
 
-[source,brush:,scala;,gutter:,false]
+[source,scala]
 ----
 @(tasks: List[models.Task], form:play.data.Form[models.Task])
 ----
 
 After the form’s submit button, add a line to display error messages:
 
-[source,brush:,html;,gutter:,false]
+[source,html]
 ----
 <p class="error">@form("title").errors.map(_.message).map(Messages(_))</p>
 ----

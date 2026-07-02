@@ -21,7 +21,7 @@ same URL, according to which media types are requested by the HTTP
 client. The client specifies acceptable content types using media types
 in the `Accept` header, such as requiring an XML response with:
 
-[source,brush:,plain;,gutter:,false]
+[source,text]
 ----
  Accept: application/xml
 ----
@@ -29,7 +29,7 @@ in the `Accept` header, such as requiring an XML response with:
 A client may specify more than one media type, and also specify that any
 media type is acceptable with a catch-all wild-card media type (`*/*`):
 
-[source,brush:,plain;,gutter:,false]
+[source,text]
 ----
  Accept: application/xml, image/png, */*
 ----
@@ -130,7 +130,7 @@ If you want to serve a response with a particular media type you can set
 the format before calling the `render` method. For example, to serve a
 http://en.wikipedia.org/wiki/Vcard[vCard], you can do:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
  request.format = "vcf";
 ----
@@ -154,7 +154,7 @@ static void setFormat() {
 Now, a request with a `Accept: text/x-vcard` header will render an
 `index.vcf` template, such as:
 
-[source,brush:,plain;,gutter:,false]
+[source,text]
 ----
  BEGIN:VCARD
 VERSION:3.0
@@ -183,7 +183,7 @@ controller method. With the same `index()` method as above, the
 following route will handle a request for `/index.xml`, setting the
 format to `xml` and rendering the `index.xml` template.
 
-[source,brush:,plain;,gutter:,false]
+[source,text]
 ----
  GET    /index.xml          Application.index(format:'xml')
 ----
@@ -191,7 +191,7 @@ format to `xml` and rendering the `index.xml` template.
 Play can also extract the format directly from the URL, with a route
 such as the following.
 
-[source,brush:,plain;,gutter:,false]
+[source,text]
 ----
  GET    /index.{format}     Application.index
 ----

@@ -72,7 +72,7 @@ Edit the example `pc.properties` configuration file and edit its
 contents so that the `dir` property refers to the same directory, using
 an absolute path that starts with a slash:
 
-[source,brush:java;,gutter:false]
+[source,java]
 ----
 name=pc
 newInstance=true
@@ -90,7 +90,7 @@ Alternatively, run the following Ant script after checking the two
 pre-requisites and editing the `deploy.dir` and `drools-server.war`
 properties.
 
-[source,brush:xml;,gutter:false]
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="pc-configuration" default="install">
@@ -146,7 +146,7 @@ http://localhost:8080/drools-server/knowledgebase/pc
 
 This should generate the response:
 
-[source,brush:xml;,gutter:false]
+[source,xml]
 ----
 <knowledgebase-response/>
 ----
@@ -154,7 +154,7 @@ This should generate the response:
 as well as the following via standard output in the Servlet container
 (in `logs/catalina.out` for Tomcat):
 
-[source,brush:java;,gutter:false]
+[source,java]
 ----
 com.lunatech.configuration.Log: Processors inserted
 com.lunatech.configuration.Log: Motherboards inserted
@@ -164,7 +164,7 @@ com.lunatech.configuration.Log: Memory inserted
 To get a more interesting response, send one of the example XML files in
 the request:
 
-[source,brush:xml;,gutter:false]
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <knowledgebase-request>
@@ -184,7 +184,7 @@ http://localhost:8080/drools-server/knowledgebase/pc
 
 which generates the response:
 
-[source,brush:xml;,gutter:false]
+[source,xml]
 ----
 <knowledgebase-response>
 <outFacts>
@@ -218,7 +218,7 @@ compare the results to the business rules defined in the `pc.drl` file.
 The Execution Server's REST interface also supports JSON, as an
 alternative to XML. With the request:
 
-[source,brush:java;,gutter:false]
+[source,java]
 ----
 {
 "knowledgebase-request":{
@@ -238,7 +238,7 @@ use the command:
 
 to generate the response:
 
-[source,brush:java;,gutter:false]
+[source,java]
 ----
 {
 "knowledgebase-response":{

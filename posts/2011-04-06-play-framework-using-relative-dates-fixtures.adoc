@@ -32,7 +32,7 @@ custom binder to parse a `String` that contains a textual relative time
 into a `DateTime`. A binder for a `DateTime` must implement
 `TypeBinder<DateTime>`:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 @Global
 public class DateTimeBinder implements TypeBinder<DateTime> {
@@ -46,7 +46,7 @@ public class DateTimeBinder implements TypeBinder<DateTime> {
 To parse our `String` format into a `DateTime`, we use a regular
 expression:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 Pattern pattern = Pattern.compile("(year|month|week|day|hour|minute|second|now)\\s?(\\+|-)\\s?(.*)");
     Matcher matcher = pattern.matcher(value);
@@ -64,7 +64,7 @@ we add or subtract that `Period` from the `base` to get our final
 
 The method to parse the `base` into a `DateTime` is as follows:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 private static DateTime getStartDateTime(String timeBase) {
     DateTime now = new DateTime();
@@ -93,7 +93,7 @@ private static DateTime getStartDateTime(String timeBase) {
 
 And to construct the final `DateTime` we use the following code:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 DateTime startDateTime = getStartDateTime(matcher.group(1));
 DateTime result;
@@ -115,7 +115,7 @@ automatic chaining of binders, so we have to put it all in a single
 binder. Together, this gives us the final version of our Joda-Time
 `DateTime` binder that supports relative and absolute datetimes:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 package utils.play;
 

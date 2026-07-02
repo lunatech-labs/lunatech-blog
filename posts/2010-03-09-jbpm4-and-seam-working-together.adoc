@@ -16,7 +16,7 @@ Download the latest jBPM 4.3 package and unzip it. In your Seam project,
 copy the jBPM library jar files. Setup an XA datasource for jBPM and one
 for your application. The jBPM XA datasource should look like this:
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <datasources>
@@ -54,7 +54,7 @@ maintain the state of business processes.
 Because we do not want jBPM3 anymore, we need to override the default
 Seam jBPM component. So let's do that:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 @Name("com.lunatech.bpm.jbpm")
 @Scope(ScopeType.APPLICATION)
@@ -119,7 +119,7 @@ public class Jbpm {
 We also need a package-info.java file to indivate the namespace we are
 using:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 @Namespace(value = "http://jboss.com/products/seam/jbpm4", prefix = "com.lunatech.bpm")
 @AutoCreate
@@ -140,7 +140,7 @@ xmlns:bpm="http://jboss.com/products/seam/jbpm4"
 
 and add the following lines, to define our business process:
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 <bpm:jbpm >
       <bpm:process-definitions>
@@ -152,7 +152,7 @@ and add the following lines, to define our business process:
 We are now able to inject our jBPM engine into Seam. So, in our
 controller, we can start a business process:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 ProcessEngine processEngine = Jbpm.instance().getProcessEngine();
 ExecutionService executionService = processEngine.getExecutionService();
@@ -170,7 +170,7 @@ each other? Well let's have a look.
 
 Let's first review our jBPM business process:
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 <process name="confirm_registration" key="confirm_registration">
   <start>
@@ -210,7 +210,7 @@ did not work for me, so I updated the jbpm.jar with this file (using
 
 Here is the content of the file:
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 <bindings>
   <activity binding="org.jbpm.jpdl.internal.activity.StartBinding" />
@@ -256,7 +256,7 @@ enlighten me ;)
 Anyway, we now need to define our SeamComponentBinding and our
 SeamComponentActivity.
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 public class SeamComponentBinding extends JpdlBinding {
 
@@ -284,7 +284,7 @@ public class SeamComponentBinding extends JpdlBinding {
 SeamComponentBinding, instantiate our SeamComponentActivity with the
 right state (our `var` and `expression` attribute).
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 public class SeamComponentActivity extends JpdlActivity implements EventListener {
 
@@ -338,7 +338,7 @@ therefore interact with the business process.
 
 For example, here is the code to approve a membership:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 public void approveMembership() throws Exception {
  ProcessEngine processEngine = Jbpm.instance().getProcessEngine();
