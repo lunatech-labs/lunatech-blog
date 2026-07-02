@@ -250,7 +250,7 @@ the download URL.
 [source,groovy]
 ----
 #{list items:models.User.findAll(), as:'user'}
-link:@{downloadUserPhoto(user.id)}[image:@{Application.userPhoto(user.id)}[image]]
+image:@{Application.userPhoto(user.id)}[image,link=@{downloadUserPhoto(user.id)}]
 #{/list}
 ----
 
