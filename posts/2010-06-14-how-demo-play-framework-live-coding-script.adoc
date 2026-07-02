@@ -113,7 +113,7 @@ and replace it with `<h1>Tasks</h1>`.
 *Edit* `public/stylesheets/main.css` - Add some CSS to make things less
 ugly:
 
-[source,brush:,css;,gutter:,false]
+[source,css]
 ----
 html { border-top: 5px solid #67A927;  }
 body { font-family:"Helvetica Neue"; padding:2em; background: #F7F7F7 url(/public/playmanual/logo.png) no-repeat 98% 20%; }
@@ -137,7 +137,7 @@ p.error { margin:0; color:#c00; }
 *Edit* `app/controllers/Application.java` - Change the `index()` method
 body to the following (omitting a semi-colon).
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 final String items = "Things"
 render(items);
@@ -203,7 +203,7 @@ configuration.
 
 *Edit* `app/models` - create class:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 @Entity
 public class Task extends play.db.jpa.Model {
@@ -221,7 +221,7 @@ ____
 *Edit* `app/controllers/Application.java` - Change the `index()` method
 body to
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 List tasks = Task.findAll();
 render(tasks);
@@ -229,7 +229,7 @@ render(tasks);
 
 *Edit* `app/views/Application/index.html` - After the heading, add:
 
-[source,brush:,html;,gutter:,false]
+[source,html]
 ----
 <ul>
 #{list tasks, as:'task'}
@@ -249,7 +249,7 @@ render(tasks);
 
 *Edit* `app/views/Application/index.html` - After the list, add:
 
-[source,brush:,html;,gutter:,false]
+[source,html]
 ----
 #{form @add()}
 <p>
@@ -261,7 +261,7 @@ render(tasks);
 
 *Edit* `app/controllers/Application.java` - Add the method:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 public static void add(final Task task) {
    task.save();
@@ -277,7 +277,7 @@ public static void add(final Task task) {
 *Edit* `app/views/Application/index.html` - Inside the `<li>` add a
 link:
 
-[source,brush:,html;,gutter:,false]
+[source,html]
 ----
 <a href="@{delete(task.id)}">delete</a>
 ----
@@ -292,7 +292,7 @@ ____
 *Edit* `app/controllers/Application.java` - Add the method, noting the
 `id` parameter:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 public static void delete(final Long id) {
    Task task = Task.findById(id);
@@ -315,7 +315,7 @@ path parameter.
 
 *Edit* `app/views/Application/index.html` - Change the heading to:
 
-[source,brush:,html;,gutter:,false]
+[source,html]
 ----
 <h1>${tasks.size()} Task${tasks.pluralize()}</h1>
 ----
@@ -338,7 +338,7 @@ ____
 to the add method's `Shipment` parameter, replace the first line of the
 method body (`Task.save();`) with the following.
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 if (validation.hasErrors()) {
    validation.keep();
@@ -351,7 +351,7 @@ else {
 *Edit* `app/views/Application/index.html` - immediately after the `form`
 tag, add:
 
-[source,brush:,html;,gutter:,false]
+[source,html]
 ----
 #{errors}
     <p class="error">${error}</p>
@@ -386,7 +386,7 @@ ____
 
 *Edit* `app/views/Application/index.html` - Replace the errors tag with:
 
-[source,brush:,html;,gutter:,false]
+[source,html]
 ----
 #{ifErrors}
     <p class="error">Validation failed</p>
@@ -396,7 +396,7 @@ ____
 … and after the text input and button, before the closing `form` tag,
 add:
 
-[source,brush:,html;,gutter:,false]
+[source,html]
 ----
 <p class="error">#{error 'task.title'/}</p>
 ----

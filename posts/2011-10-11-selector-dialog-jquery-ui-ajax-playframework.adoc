@@ -61,7 +61,7 @@ room to show a more sophisticated search/browse interface.
 The widget is based on a text input, and a button that will open the
 dialogue.
 
-[source,brush:,html;,gutter:,false]
+[source,html]
 ----
 <input name="location">
 <button data-url="@{jqueryui.Dialog.timeZones()}">Select Time Zone</button>
@@ -72,7 +72,7 @@ click handler uses the jQuery UI dialog plug-in to open a dialog box,
 and loads the dialog contents from the resource given by the data-url
 attribute value, via an Ajax request.
 
-[source,brush:,javascript;,gutter:,false]
+[source,javascript]
 ----
 $(function() {
 
@@ -109,7 +109,7 @@ The server-side resource that is used to populate the dialog contents is
 simply a server-side view: the controller renders all of the data as an
 HTML table.
 
-[source,brush:,html;,gutter:,false]
+[source,html]
 ----
 <table>
    <tr><th>#</th><th>Time zone</th><th title="UTC offset (minutes)">Offset</th></tr>

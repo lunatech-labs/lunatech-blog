@@ -135,7 +135,7 @@ So, for some reason you want to use the jbpm-persistence-jpa library in
 your Play application. Since you're a naive optimist, you start by
 simply specifying the dependency in `dependencies.yml`:
 
-[source,brush:,plain;,gutter:,false]
+[source,text]
 ----
 # Application dependencies
 
@@ -146,7 +146,7 @@ require:
 
 After running `play dependencies`, you'll get the following warning:
 
-[source,brush:,plain;,gutter:,false]
+[source,text]
 ----
 ~ *****************************************************************************
 ~ WARNING: These dependencies are missing, your application may not work properly (use --verbose for details),
@@ -159,7 +159,7 @@ After running `play dependencies`, you'll get the following warning:
 
 Ok, fair enough. It's not in Maven Central. Let's list the JBoss repo:
 
-[source,brush:,plain;,gutter:,false]
+[source,text]
 ----
 # Application dependencies
 
@@ -180,7 +180,7 @@ anything from the JBoss repository. Okay, this is what I warned you
 about: you actually need to tell Play what artifacts you want from the
 JBoss repo:
 
-[source,brush:,plain;,gutter:,false]
+[source,text]
 ----
 # Application dependencies
 
@@ -200,7 +200,7 @@ Go ahead, I dare you: run `play dependencies`. Yup. Same error. By now
 you probably want to run `play dependencies --verbose` by default.
 Somewhere in the output, you'll see something like this:
 
-[source,brush:,plain;,gutter:,false]
+[source,text]
 ----
 :::: WARNINGS
     io problem while parsing ivy file: http://repository.jboss.org/nexus/content/groups/public-jboss/org/jbpm/jbpm-persistence-jpa/5.0.0/jbpm-persistence-jpa-5.0.0.pom: Impossible to load parent for file:/Users/sietse/.ivy2/cache/org.jbpm/jbpm-persistence-jpa/ivy-5.0.0.xml.original. Parent=org.jbpm#jbpm;5.0.0]]> 
@@ -214,7 +214,7 @@ end, it turns out it has problems because _it never even tries to load
 it_. This just seems brain-dead to me. Thankfully, this transitive
 dependency is in the same groupId, so we can fix this with a wildcard:
 
-[source,brush:,plain;,gutter:,false]
+[source,text]
 ----
 # Application dependencies
 
@@ -233,7 +233,7 @@ repositories:
 This time, after waiting for Ivy to download the new transitive deps, we
 get a slightly different error:
 
-[source,brush:,plain;,gutter:,false]
+[source,text]
 ----
 ~ *****************************************************************************
 ~ WARNING: These dependencies are missing, your application may not work properly (use --verbose for details),
@@ -251,7 +251,7 @@ list them separately. We got lucky this time: they're all in a single
 groupId, `org.drools`, so we can just add the whole groupId with a
 wildcard:
 
-[source,brush:,plain;,gutter:,false]
+[source,text]
 ----
 # Application dependencies
 

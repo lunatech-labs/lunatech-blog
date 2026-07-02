@@ -65,7 +65,7 @@ Defining the
 type]# is as simple (the length of the code speaks for itself) as
 follows:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 import java.io.Serializable;
 import java.sql.PreparedStatement;
@@ -156,7 +156,7 @@ and from `String` objects.
 
 Once you have this type you need to name it in your `package-info.java`:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 @TypeDefs( { @TypeDef(name = "timestamp", typeClass = TimestampType.class) })
 package com.lunatech.solid;
@@ -170,7 +170,7 @@ import org.hibernate.annotations.TypeDefs;
 Once that is done you can use the custom type in your entities as
 follows:
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 @Entity
 public class Foo {

@@ -21,7 +21,7 @@ the log message generally includes parameters.
 Define a DRL ‘function’ for logging via Log4J that you can use in your
 rules. This is implemented in the following Java class.
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 package com.lunatech.drools;
 
@@ -50,14 +50,14 @@ public class RuleFunctions {
 To use this, first declare the function at the top of the DRL file in
 the import section.
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 import function com.lunatech.drools.RuleFunctions.log;
 ----
 
 Then you can replace a logging statement such as:
 
-[source,brush:,plain;,gutter:,false]
+[source,text]
 ----
 rule "Total price"
 when
@@ -70,7 +70,7 @@ end
 
 with:
 
-[source,brush:,plain;,gutter:,false]
+[source,text]
 ----
 rule "Total price"
 when

@@ -58,7 +58,7 @@ cookbook, which covers the basic cases. First, edit
 `conf/application.conf` and uncomment (in the default configuration
 file) or add a line with three supported languages:
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 # Localisations for English, Dutch and French.
 application.langs=en,nl,fr
@@ -97,7 +97,7 @@ localisation, because it means that you can write localised language
 messages in 'plain text'. For example, this means that for a Greek
 localisation, instead of:
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 hello.morning = \u0152\u222b\u0152\u00b1\u0152\u00aa\u0152\u2211\u0152\u00ba\u0152\u2260\u0153\u00c5\u0152\u00b1
 hello.informal = \u0152\u2265\u0152\u00b5\u0152\u03c0\u0152\u00b1 \u0153\u00c9\u0152\u00f8\u0153\u00d6
@@ -105,7 +105,7 @@ hello.informal = \u0152\u2265\u0152\u00b5\u0152\u03c0\u0152\u00b1 \u0153\u00c9\u
 
 you can use Greek letters instead of those Unicode character escapes:
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 hello.morning = καλημέρα
 hello.informal = γεια σου
@@ -122,7 +122,7 @@ The simple case is a text string that does not change, and that is not
 interrupted by other markup. For example, the first such text in the
 `yabe/app/views/main.html` template, in the `tools` list:
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 <ul id="tools">
     <li>
@@ -134,7 +134,7 @@ interrupted by other markup. For example, the first such text in the
 To internationalise this, we replace the text with a message look-up,
 using the `&{'key'`} syntax:
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 <ul id="tools">
     <li>
@@ -146,21 +146,21 @@ using the `&{'key'`} syntax:
 To add the localisations, add the corresponding line in each of the
 three message files. In `conf/messages.en`
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 views.main.tools.login = Log in to write something
 ----
 
 In `conf/messages.nl`
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 views.main.tools.login = Inloggen om iets te schrijven
 ----
 
 In `conf/messages.fr`
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 views.main.tools.login = Connectez-vous pour écrire quelque chose
 ----
@@ -194,7 +194,7 @@ with messages such as the following.
 
 In `conf/messages.nl`
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 post = artikel
 Post = Artikel
@@ -212,7 +212,7 @@ Users = Gebruikers
 
 In `conf/messages.fr`
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 post = article
 Post = Article
@@ -237,7 +237,7 @@ Those are defined `views/admin.html` which you can internationalise to
 use the same localisations simply by surrounding the existing text with
 `&{'…'`} as follows:
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 <a href="@{Posts.list()}">&{'Posts'}</a>
 …
@@ -258,14 +258,14 @@ To localise a message that contains a single parameter, use a
 http://java.sun.com/javase/6/docs/api/java/util/Formatter.html#syntax[Java
 format string] to insert the parameter value in the message:
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 views.Application.listTagged.title = Posts tagged with %s
 ----
 
 and in the template, add the parameter like this:
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 &{'views.Application.listTagged.title', tag}
 ----
@@ -273,14 +273,14 @@ and in the template, add the parameter like this:
 When a message contains multiple parameters, add an index to the format
 string to allow for different word order in another language:
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 views.Admin.index.welcome = Welcome %1s, <span>you have written %2s posts so far</span>
 ----
 
 … with a list in the template:
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 &{'views.Admin.index.welcome', user, posts.size()}
 ----
@@ -288,14 +288,14 @@ views.Admin.index.welcome = Welcome %1s, <span>you have written %2s posts so far
 In this example, we would also like to use the correct plural form for
 the word 'post', so make that word a parameter too:
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 views.Admin.index.welcome = Welcome %1s, <span>you have written %2s %3s so far</span>
 ----
 
 … and use the `pluralize` extension in the template
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 &{'views.Admin.index.welcome', user, posts.size(), posts.pluralize(messages.get('post'), messages.get('posts'))}
 ----
@@ -314,7 +314,7 @@ means that we must localise the messages in
 
 In `conf/messages.nl`
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 # play/modules/crud (administration)
 crud.title = Beheer
@@ -367,7 +367,7 @@ secure.signin = Nu inloggen
 
 In `conf/messages.fr`
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 # play/modules/crud (administration)
 crud.title = Administration
@@ -439,7 +439,7 @@ All three cases turn out to be straightforward in Play.
 The first case happens when you want to use a phrase with a parameter in
 an attribute value in the template, such as:
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 <a href="@{Application.show(_post.id)}" title="By Bob">
 ----
@@ -448,7 +448,7 @@ This is a problem in JSF, because you would normally use an XML tag to
 perform the parameter replacement, which you cannot do in an attribute
 value. The Play syntax simply avoids this problem, and you can just do:
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 <a href="@{Application.show(_post.id)}" title="&{'views.tags.display.author', _post.author.fullname}">
 ----
@@ -460,14 +460,14 @@ the value, while needing to be able to use the result in an XML
 attribute value. In Play the formatting extensions do not get in the way
 of the message parameter syntax, so you can do:
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 <span>&{'views.tags.display.author', _post.author.fullname, comment.postedAt.format('yyyy-MM-dd')}"}</span>
 ----
 
 You can, of course, localise the format pattern as well:
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 <span>&{'views.tags.display.author', _post.author.fullname, comment.postedAt.format(messages.get('views.dateFormat'))}"}</span>
 ----
@@ -480,12 +480,12 @@ link's mark-up cannot be in the message file. Play on the other hand,
 lets you use plain HTML in your templates, so you can just put the
 mark-up in your message with a parameter for the URL:
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 logIn = <a href="%s">Log in</a> to write something
 ----
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 &{'logIn', '/admin'}
 ----
@@ -494,7 +494,7 @@ Our application was using the `<a href="@{Admin.index()}">` syntax in
 the hyperlink to get the framework to generate the URL based on the
 routes file. To do this in the message parameter, do:
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 &{'logIn', actionBridge.Admin.index()}
 ----

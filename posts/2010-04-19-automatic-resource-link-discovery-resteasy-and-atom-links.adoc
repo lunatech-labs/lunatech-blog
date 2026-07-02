@@ -34,7 +34,7 @@ them directly on the resource representations — which allows more
 fine-grained links, and the ability to have links on multiple resources.
 Here is an example of such a link annotated with a relation:
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 <atom:link href="http://localhost/books" rel="list"/>
 ----
@@ -50,7 +50,7 @@ that the user is going to receive. On the server, we look at the current
 user permissions and only give him links to actions he is allowed to
 execute, to pages he is allowed to view:
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 <h:commandLink action="#{Controller.deleteBook(book)}" 
   rendered="#{s:hasPermission(book, 'delete')}">Delete Book</h:commandLink>
@@ -111,7 +111,7 @@ Now when we get the following resource on our client, we know we are
 allowed to `update` but not `remove` (because the relation is absent)
 the given book:
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <book xmlns:atom="http://www.w3.org/2005/Atom" title="foo" author="bar">
@@ -168,7 +168,7 @@ resources.
 everything in order to get the Atom links injected in your book store:
 
 [[d0e586]]
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 @Path("/")
 @Consumes({"application/xml", "application/json"})
@@ -207,7 +207,7 @@ public interface BookStore {
 [#d0e586]## And this is the definition of the Book resource:
 
 [[d0e586]]
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 @Mapped(namespaceMap = 
  @XmlNsMap(jsonName = "atom", 
@@ -231,7 +231,7 @@ public class Book {
 representation:
 
 [[d0e586]]
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <book xmlns:atom="http://www.w3.org/2005/Atom" title="foo" author="bar">
@@ -247,7 +247,7 @@ representation:
 [#d0e586]## And in JSON format:
 
 [[d0e586]]
-[source,brush:,javascript;,gutter:,false]
+[source,javascript]
 ----
 {
  "book":
@@ -330,7 +330,7 @@ the URI template.
 a list of comments:
 
 [[d0e791]]
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
@@ -354,7 +354,7 @@ Given the previous book store service augmented with
 comments:
 
 [[d0e791]]
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 @Path("/")
 @Consumes({"application/xml", "application/json"})
@@ -434,7 +434,7 @@ The previous example of `Comment` service could be declared
 as such:
 
 [[d0e874]]
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 @Path("/")
 @Consumes({"application/xml", "application/json"})
@@ -520,7 +520,7 @@ For example, if you want to support the Seam annotation
 can add a `package-info.java` file like this:
 
 [[d0e999]]
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 @LinkELProvider(SeamELProvider.class)
 package org.jboss.resteasy.links.test;
@@ -531,7 +531,7 @@ import org.jboss.resteasy.links.*;
 [#d0e999]## With the following provider implementation:
 
 [[d0e999]]
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 package org.jboss.resteasy.links.test;
 
@@ -577,7 +577,7 @@ public class SeamELProvider implements ELProvider {
 And then use it as such:
 
 [[d0e999]]
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 @Path("/")
 @Consumes({"application/xml", "application/json"})
@@ -650,7 +650,7 @@ Here is an example of such a resource facade for a
 collection of `Comment`s:
 
 [[d0e1036]]
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
@@ -681,7 +681,7 @@ public class ScrollableCollection implements ResourceFacade<Comment> {
 This will produce such an XML collection:
 
 [[d0e1036]]
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <collection xmlns:atom="http://www.w3.org/2005/Atom" totalRecords="2" start="0">
@@ -723,7 +723,7 @@ http://www.lunatech-labs.com/open-source/jax-doclets[jax-doclets]
 support is coming soon, as well as support in the JavaScript Client API,
 which should allow you do do this soon:
 
-[source,brush:,javascript;,gutter:,false]
+[source,javascript]
 ----
 // this line is already supported
 var book = BookStore.getBook("foo");

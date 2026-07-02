@@ -25,7 +25,7 @@ start by identifying a ‘product details’ resource - information about a
 product, as well as links to related operations. Two related operations
 such as ‘get product details’ and ‘add comment to product details’.
 
-[source,brush:,plain;,gutter:,false]
+[source,text]
 ----
 GET /product/5010255079763
 POST /product/5010255079763/comments

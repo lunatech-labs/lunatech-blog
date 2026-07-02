@@ -11,7 +11,7 @@ extracting lists from larger lists.
 In Scala code, you'll often come across list extraction, as in, for
 example, a pattern in a variable definition:
 
-[source,brush:,scala;,gutter:,false]
+[source,scala]
 ----
 scala> val head :: tail = List(1,2,3) // <--
 head: Int = 1
@@ -20,7 +20,7 @@ tail: List[Int] = List(2, 3)
 
 or the second pattern (case) in this simple implementation of map:
 
-[source,brush:,scala;,gutter:,false]
+[source,scala]
 ----
 def map[A, B](list: List[A])(func: A => B): List[B] = list match {
   case Nil => Nil
@@ -60,7 +60,7 @@ deconstructing objects in pattern matching. This means that there must
 be a `::` object defined somewhere with an `unapply` method, whose
 definition is:
 
-[source,brush:,scala;,gutter:,false]
+[source,scala]
 ----
 object :: {
   def unapply[A](value: List[A]): Option[(A, List[A])] = { … }
@@ -85,7 +85,7 @@ be able to both construct and deconstruct an instance. Without having to
 type any boilerplate. For example, you could do the following in the
 http://www.scala-lang.org/node/2097[Scala REPL]:
 
-[source,brush:,scala;,gutter:,false]
+[source,scala]
 ----
 scala> case class Person(handle: String, name: String) // define the class
 defined class Person

@@ -122,7 +122,7 @@ work has now been completed and is included in the current Rhino trunk
 for 1.7R3, which means we have to build our own Rhino jar in order to
 use those goodies:
 
-[source,brush:,bash;,gutter:,false]
+[source,bash]
 ----
 $ cvs -d ':pserver:anonymous@cvs-mirror.mozilla.org:/cvsroot' co mozilla/js/rhino rhino
 $ cd rhino
@@ -149,7 +149,7 @@ In order to fit our needs, I created a
 support for HTTP script URLs and a fixed XmlHttpRequest object) in
 [.nobr]#https://github.com/[github]# which you can use to build testlol:
 
-[source,brush:,bash;,gutter:,false]
+[source,bash]
 ----
 $ git clone git://github.com/FroMage/testlol.git
 $ cd testlol
@@ -173,7 +173,7 @@ In order to test our AJAX code, we need to:
 
 The following directory structure is proposed:
 
-[source,brush:,plain;,gutter:,false]
+[source,text]
 ----
 /
 +- src
@@ -195,7 +195,7 @@ The following directory structure is proposed:
 This Maven POM will cause all your JS unit tests run in the
 _integration-test_ phase:
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" 
@@ -301,7 +301,7 @@ _integration-test_ phase:
 Let's make a very simple JAX-RS resource which responds to the `GET`
 method with "ok":
 
-[source,brush:,java;,gutter:,false]
+[source,java]
 ----
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -320,7 +320,7 @@ While we wait for a [.nobr]#http://jcp.org/en/jsr/detail?id=315[Servlet
 3.0]# implementation of RESTEasy, we still have to write the following
 `web.xml` file to enable RESTEasy and the JavaScript API I am writing:
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 <!DOCTYPE web-app PUBLIC
   "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
@@ -378,7 +378,7 @@ testing JavaScript, so loading a JavaScript file would have been
 sufficient), I need an HTML file which loads the relevant JavaScript API
 I am testing:
 
-[source,brush:,xml;,gutter:,false]
+[source,xml]
 ----
 <html>
  <head>
@@ -391,7 +391,7 @@ I am testing:
 
 Then I can write my tests using testlol:
 
-[source,brush:,jscript;,gutter:,false]
+[source,javascript]
 ----
 /* Load the test.html file */
 Envjs('http://localhost:9095/test.html', {
