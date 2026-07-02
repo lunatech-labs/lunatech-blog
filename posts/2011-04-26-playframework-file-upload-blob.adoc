@@ -48,21 +48,29 @@ serving plain text.
 To store file uploads in your model, add a property of type
 `play.db.jpa.Blob`
 
-\{% highlight java %} package models; import play.db.jpa.Blob; import
+[source,java]
+----
+package models; import play.db.jpa.Blob; import
 play.db.jpa.Model; import javax.persistence.Entity; @Entity public class
-User extends Model \{ public String name; public Blob photo; } \{%
-endhighlight %}
+User extends Model { public String name; public Blob photo; }
+----
 
 To upload files, add a form to your view template:
 
-\{% highlight groovy %} #\{form @addUser(),
-enctype:'multipart/form-data'} #\{/form} \{% endhighlight %}
+[source,groovy]
+----
+#{form @addUser(),
+enctype:'multipart/form-data'} #{/form}
+----
 
 Then, in the controller, add an action that saves the upload in a new
 model object:
 
-\{% highlight java %} public static void addUser(User user) \{
-user.save(); index(); } \{% endhighlight %}
+[source,java]
+----
+public static void addUser(User user) {
+user.save(); index(); }
+----
 
 This code does not appear to do anything other than save the JPA entity,
 because the file upload is handled automatically by Play. First, before
@@ -75,20 +83,29 @@ To save attachments in a different folder, specify a different path in
 the `application.conf` file. This can be an absolute path, or a relative
 path to a folder inside the Play application folder:
 
-\{% highlight java %} attachments.path=photos \{% endhighlight %}
+[source,java]
+----
+attachments.path=photos
+----
 
 To display the uploaded images, add image tags to a view:
 
-\{% highlight groovy %} #\{list items:models.User.findAll(), as:'user'}
-image:@%7BuserPhoto(user.id)%7D[image] #\{/list} \{% endhighlight %}
+[source,groovy]
+----
+#{list items:models.User.findAll(), as:'user'}
+image:@{userPhoto(user.id)}[image] #{/list}
+----
 
 Finally, add a controller method to load the model object and render the
 image:
 
-\{% highlight java %} public static void userPhoto(long id) \{ final
+[source,java]
+----
+public static void userPhoto(long id) { final
 User user = User.findById(id); notFoundIfNull(user);
 response.setContentTypeIfNotSet(user.photo.type());
-renderBinary(user.photo.get()); } \{% endhighlight %}
+renderBinary(user.photo.get()); }
+----
 
 [[update]]
 == Update the upload
@@ -96,8 +113,11 @@ renderBinary(user.photo.get()); } \{% endhighlight %}
 If you provide a `user.id` form (request) parameter, you can update an
 entry the same way you save one:
 
-\{% highlight java %} public static void updateUser(User user) \{
-user.save(); index(); } \{% endhighlight %}
+[source,java]
+----
+public static void updateUser(User user) {
+user.save(); index(); }
+----
 
 If a file upload is included, this will be saved as a new file, whose
 name is a new UUID. This means that the original file will now be
@@ -132,16 +152,22 @@ the `attachments/` folder is not deleted automatically. You can delete
 the file manually via a reference to a `java.io.File` property, as in
 the following action method.
 
-\{% highlight java %} public static void deleteUser(long id) \{ final
+[source,java]
+----
+public static void deleteUser(long id) { final
 User user = User.findById(id); user.photo.getFile().delete();
-user.delete(); index(); } \{% endhighlight %}
+user.delete(); index(); }
+----
 
 Alternatively, you could encapsulate the file deletion in the model, by
 overriding the delete method in `User.java` to delete the file after the
 database entity has been successfully deleted.
 
-\{% highlight java %} @Override public void _delete() \{
-super._delete(); photo.getFile().delete(); } \{% endhighlight %}
+[source,java]
+----
+@Override public void _delete() {
+super._delete(); photo.getFile().delete(); }
+----
 
 [[filename]]
 == Upload a file and save the file name
@@ -160,27 +186,35 @@ in the first example.
 Add the new action method to the controller, to instantiate a new model
 instance and its `Blog` property:
 
-\{% highlight java %} public static void addUserWithFileName(File photo)
-throws FileNotFoundException \{ final User user = new User();
+[source,java]
+----
+public static void addUserWithFileName(File photo)
+throws FileNotFoundException { final User user = new User();
 user.photoFileName = photo.getName(); user.photo = new Blob();
 user.photo.set(new FileInputStream(photo),
-MimeTypes.getContentType(photo.getName())); user.save(); index(); } \{%
-endhighlight %}
+MimeTypes.getContentType(photo.getName())); user.save(); index(); }
+----
 
 To make this work, first add the new `photoFileName` property to the
 model:
 
-\{% highlight java %} @Entity public class User extends Model \{ public
-String photoFileName; public Blob photo; } \{% endhighlight %}
+[source,java]
+----
+@Entity public class User extends Model { public
+String photoFileName; public Blob photo; }
+----
 
 Next, in the template, display the saved file name with the image, and
 change the form to use the new controller, and so that its file upload
 control’s name is just `photo` instead of `user.photo`:
 
-\{% highlight groovy %} #\{list items:models.User.findAll(), as:'user'}
-image:@%7BuserPhoto(user.id)%7D[image,title="${user.photoFileName}"]
-#\{/list} #\{form @addUserWithFileName(), enctype:'multipart/form-data'}
-#\{/form} \{% endhighlight %}
+[source,groovy]
+----
+#{list items:models.User.findAll(), as:'user'}
+image:@{userPhoto(user.id)}[image,title="${user.photoFileName}"]
+#{/list} #{form @addUserWithFileName(), enctype:'multipart/form-data'}
+#{/form}
+----
 
 [[download]]
 === Download the file as an attachment
@@ -200,18 +234,23 @@ pass the file name as a parameter to the `renderBinary` method, which
 causes Play to set the `Content-Disposition` response header, providing
 a file name.
 
-\{% highlight java %} public static void downloadUserPhoto(long id) \{
+[source,java]
+----
+public static void downloadUserPhoto(long id) {
 final User user = User.findById(id); notFoundIfNull(user);
 response.setContentTypeIfNotSet(user.photo.type());
-renderBinary(user.photo.get(), user.photoFileName); } \{% endhighlight
-%}
+renderBinary(user.photo.get(), user.photoFileName); }
+----
 
 Now update the list of photos in the view template to include a link to
 the download URL.
 
-\{% highlight groovy %} #\{list items:models.User.findAll(), as:'user'}
-link:@%7BdownloadUserPhoto(user.id)%7D[image:@%7BApplication.userPhoto(user.id)%7D[image]]
-#\{/list} \{% endhighlight %}
+[source,groovy]
+----
+#{list items:models.User.findAll(), as:'user'}
+link:@{downloadUserPhoto(user.id)}[image:@{Application.userPhoto(user.id)}[image]]
+#{/list}
+----
 
 [[contenttype]]
 === Support custom content types
@@ -227,8 +266,10 @@ Since Play 1.2 you can add your own types to the `conf/application.conf`
 file. For example, to add a MIME type for GIMP images with the `.xcf`
 extension, add the line:
 
-\{% highlight java %} mimetype.xcf=application/x-gimp-image \{%
-endhighlight %}
+[source,java]
+----
+mimetype.xcf=application/x-gimp-image
+----
 
 Note that with the code examples above, this only works if you use the
 `addUserWithFileName` action above, which explicitly looks up the MIME

@@ -324,25 +324,25 @@ crud.index.title = Kies het te bewerken object
 crud.index.objectType = Type object
 crud.index.action = 
 crud.index.add = Voeg toe
-crud.add = &{{ "{%s" }}} toevoegen
-crud.list.title = &{{ "{%s" }}}
-crud.list.size = %d &{{ "{%s" }}}
+crud.add = &{%s} toevoegen
+crud.list.title = &{%s}
+crud.list.size = %d &{%s}
 crud.list.totalSize = %d totaal
 crud.pagination.previous = « Vorige
 crud.pagination.next = Volgende »
 crud.pagination.last = Laatste »»
 crud.pagination.first = «« Eerste
-crud.show.title = &{{ "{%s" }}} bewerken
+crud.show.title = &{%s} bewerken
 crud.save = Opslaan
 crud.saveAndContinue = Opslaan en verder bewerken
 crud.cancel = Annuleren
 crud.hasErrors = Corrigeer fouten a.u.b.
-crud.blank.title = &{{ "{%s" }}} toevoegen
+crud.blank.title = &{%s} toevoegen
 crud.saveAndAddAnother = Opslaan en nogmaals creëren
-crud.delete = &{{ "{%s" }}} verwijderen
-crud.created = &{{ "{%s" }}} is aangemaakt
-crud.saved = &{{ "{%s" }}} is opgeslagen
-crud.deleted = &{{ "{%s" }}} is verwijderd
+crud.delete = &{%s} verwijderen
+crud.created = &{%s} is aangemaakt
+crud.saved = &{%s} is opgeslagen
+crud.deleted = &{%s} is verwijderd
 crud.delete.error = Kan dit object niet verwijderen
 crud.search = Zoeken
 crud.none = (Geen)
@@ -377,25 +377,25 @@ crud.index.title = Choisissez l'objet à modifier
 crud.index.objectType = Type objet
 crud.index.action = XXX
 crud.index.add = Ajouter
-crud.add = Ajouter &{{ "{%s" }}}
-crud.list.title = &{{ "{%s" }}}
-crud.list.size = %d &{{ "{%s" }}}
+crud.add = Ajouter &{%s}
+crud.list.title = &{%s}
+crud.list.size = %d &{%s}
 crud.list.totalSize = %d total
 crud.pagination.previous = « Précédent
 crud.pagination.next = Suivant »
 crud.pagination.last = Dernier »»
 crud.pagination.first = «« Premier
-crud.show.title = Modifier &{{ "{%s" }}}
+crud.show.title = Modifier &{%s}
 crud.save = Enregistrer
 crud.saveAndContinue = Enregistrer et continuez à modifier
 crud.cancel = Annuler
 crud.hasErrors = Corrigez les erreurs s.v.p.
-crud.blank.title = Ajouter &{{ "{%s" }}}
+crud.blank.title = Ajouter &{%s}
 crud.saveAndAddAnother = Enregistrer et ajouter un autre
-crud.delete = Supprimer &{{ "{%s" }}}
-crud.created = &{{ "{%s" }}} a été crée
-crud.saved = &{{ "{%s" }}} est enregistré
-crud.deleted = &{{ "{%s" }}} est supprimé
+crud.delete = Supprimer &{%s}
+crud.created = &{%s} a été crée
+crud.saved = &{%s} est enregistré
+crud.deleted = &{%s} est supprimé
 crud.delete.error = Ne peut pas supprimer l’objet
 crud.search = Chercher
 crud.none = (aucun)
@@ -441,7 +441,7 @@ an attribute value in the template, such as:
 
 [source,brush:,xml;,gutter:,false]
 ----
-<a href="@\{Application.show(_post.id)}" title="By Bob">
+<a href="@{Application.show(_post.id)}" title="By Bob">
 ----
 
 This is a problem in JSF, because you would normally use an XML tag to
@@ -450,7 +450,7 @@ value. The Play syntax simply avoids this problem, and you can just do:
 
 [source,brush:,xml;,gutter:,false]
 ----
-<a href="@\{Application.show(_post.id)}" title="&{'views.tags.display.author', _post.author.fullname}">
+<a href="@{Application.show(_post.id)}" title="&{'views.tags.display.author', _post.author.fullname}">
 ----
 
 The second case is when you want to format a value, such as a date, for

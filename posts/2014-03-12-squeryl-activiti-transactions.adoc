@@ -237,7 +237,6 @@ can use the following code:
 inTransaction {
   startProcess()
 }
-{% endhighlight %}
 
 ----
 

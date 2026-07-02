@@ -375,7 +375,7 @@ Now we get the field name, but not as a formatted label.
 ____
 
 *Edit* `conf/messages` - Change the placeholder in `validation.required`
-to `&{{ "{%s" }}`}, and add the line `task.name = Task name`
+to `&{%s`}, and add the line `task.name = Task name`
 
 *Open* http://localhost:9000/ - Show the new validation error.
 
