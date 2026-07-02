@@ -104,7 +104,7 @@ page that follows you will have to fill out the following:
 
 You can use the `numbered_headings` macro as demonstrated below. All
 sections of your page that need headline numbers must be surrounded by
-`{numbered_headings}` tags. Usually you will simply include them around
+\{numbered_headings} tags. Usually you will simply include them around
 the entire text. Note that this is possible in +++Rich Text+++ as well
 as +++Wiki Markup+++. We use the latter to demonstrate:
 
