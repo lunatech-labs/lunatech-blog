@@ -51,4 +51,3 @@ jobs:
         run: |
           clever login --token $CLEVER_TOKEN --secret $CLEVER_SECRET
           clever restart --alias ${{ inputs.clever_cloud_application }}
-          clever logout
