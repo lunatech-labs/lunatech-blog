@@ -74,7 +74,7 @@ a time - 524, 80 and 366 in the photo, above.
 Just don’t forget to read the board from right to left, since you’re
 looking at the back.
 
-[.image-wrap]#image:double-sided-scrum-board-annotated.jpg?version=2&modificationDate=1343381700790[image]#
+[.image-wrap]#image:double-sided-scrum-board-annotated.jpg[image]#
 
 This double-sided Scrum board shows:
 

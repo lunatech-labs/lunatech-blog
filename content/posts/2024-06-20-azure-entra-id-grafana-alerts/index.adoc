@@ -114,6 +114,7 @@ image::infinity_plugin.png[Infinity Plugin, 600]
 . On the top right, click "+ Add new data source"
 . Pick Infinity as your Data source
 . Configure the "Authentication" blade section
+
 |===
 |Property |Value
 

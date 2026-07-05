@@ -501,7 +501,7 @@ routes file. To do this in the message parameter, do:
 The end result of applying the above steps is a localised version of the
 'Yet Another Blog Engine' example that works in English, Dutch and
 French:
-link:/confluence/download/attachments/33259831/yabe-l10n-1.0.2.zip?version=1&modificationDate=1270572211397[yabe-l10n-1.0.2.zip^image:/confluence/images/icons/link_attachment_7.gif[image,width=7,height=7]^]
+link:/confluence/download/attachments/33259831/yabe-l10n-1.0.2.zip?version=1&modificationDate=1270572211397[yabe-l10n-1.0.2.zip]
 
 image:yabe-beheer.png[image]
 

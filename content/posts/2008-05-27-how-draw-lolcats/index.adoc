@@ -55,7 +55,7 @@ caption.
 . Select the text layer, then _Layer > Layer style... > Stroke_ and
 choose these settings:
 
-image:slolcat-photoshop.png[Photoshop Layer Style]
+image:lolcat-photoshop.png[Photoshop Layer Style]
 
 [start=5]
 . Position the caption.

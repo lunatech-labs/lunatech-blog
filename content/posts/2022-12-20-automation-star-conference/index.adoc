@@ -52,7 +52,7 @@ Pain of browser automation was explained in a very cool way by *Jecelyn Yeen*. S
 If usability testing is part of the project then there are more chances of developing a successful product. *Kimberly Snoyl* has delivered the talk focusing on the importance of UX testing, because sometimes products are not user-friendly and users get frustrated easily while using it. To make processes simpler and better for the users, Kimberly is exploring the idea to create a tool which can automate some of the following 10 Usability Heuristics:
 
 .Usability Heuristics
-image::how _to_test_ux.png[alt="Figure 1: Usability Heuristics"]
+image::how__to_test_ux.png[alt="Figure 1: Usability Heuristics"]
 
 Her idea for creating a UX Automation tool won the EuroSTAR 2022 RisingSTAR award, because it solved the major problems in UX Testing, which are also listed below:
 

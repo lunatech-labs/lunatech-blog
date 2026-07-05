@@ -87,17 +87,17 @@ ${body}
 == How to Install?
 
 To install the User Macro above you will have to be logged in to
-Confluence as a +++Confluence Administrator+++. Then:
+Confluence as a Confluence Administrator. Then:
 
-. Go to +++Confluence Admin+++.
-. Select +++User Macros+++ from the menu on the left.
-. Click +++Create a User Macro+++ to create a new user macro. On the
+. Go to Confluence Admin.
+. Select User Macros from the menu on the left.
+. Click Create a User Macro to create a new user macro. On the
 page that follows you will have to fill out the following:
 * *Macro Name:* the name of the macro, we are using
 "`numbered_headings`" (omit the quotation marks).
 * *Macro has a body:* must be checked and you will have to select
-+++Convert macro body wiki markup to HTML+++.
-* *Output:* select +++Macro generates HTML markup+++.
+Convert macro body wiki markup to HTML.
+* *Output:* select Macro generates HTML markup.
 * *Template:* the contents of the macro as listed above.
 
 == Using the Macro
@@ -105,8 +105,8 @@ page that follows you will have to fill out the following:
 You can use the `numbered_headings` macro as demonstrated below. All
 sections of your page that need headline numbers must be surrounded by
 \{numbered_headings} tags. Usually you will simply include them around
-the entire text. Note that this is possible in +++Rich Text+++ as well
-as +++Wiki Markup+++. We use the latter to demonstrate:
+the entire text. Note that this is possible in Rich Text as well
+as Wiki Markup. We use the latter to demonstrate:
 
 ----
 h1. Example
