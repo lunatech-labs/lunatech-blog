@@ -32,6 +32,13 @@ paginate:
   <div class="wrapper-lg">
     <h2>The Collection</h2>
     <p class="subtitle">Browse the categories</p>
+    <div class="tag-slider">
+      <a class="tag" href="/tags/java">java</a>
+      <a class="tag" href="/tags/event">event</a>
+      <a class="tag" href="/tags/playframework">playframework</a>
+      <a class="tag" href="/tags/scala">scala</a>
+      <a class="tag" href="/tags/opinion">opinion</a>
+    </div>
     <div class="card-list">
       {#for post in posts}
         {#if page.paginator.currentIndex != 1 || post_index >= 4}
