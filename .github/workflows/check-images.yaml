@@ -15,21 +15,27 @@ jobs:
           fetch-depth: 0
       - shell: bash
         run: |
-          changed_files=$(git diff --name-only origin/${GITHUB_BASE_REF})
-          echo "Changed files: $changed_files"
-          files=$(echo "$changed_files" | grep -E '.+\.png$' || true)
-          
-          if [ -n "$files" ]; then
-            big_files=$(echo "$files" | xargs -I{} du -h --threshold=1M {} 2>/dev/null | cut -f2)
-          
-            if [ -n "$big_files" ]; then
-              for file in $big_files; do
-                echo "::warning title=Big image,file=$file::The image '$file' is bigger than 1MB. Consider reducing its pixel size to match the actual size on the website, or use pngcrush or similar to maximize the compression"
-              done
-              exit 1
-            else
-              echo "No image files larger than 1MB found."
+          # Only added/copied/modified/renamed PNGs; deleted paths are skipped
+          # so `du` is never asked to stat a file that no longer exists (which
+          # would otherwise abort the step under `set -eo pipefail`).
+          changed_files=$(git diff --name-only --diff-filter=ACMR "origin/${GITHUB_BASE_REF}" -- '*.png')
+          echo "Changed PNG files:"
+          echo "$changed_files"
+
+          big_files=""
+          for file in $changed_files; do
+            # A renamed-and-deleted-in-a-later-commit path may still be absent.
+            [ -f "$file" ] || continue
+            if [ -n "$(find "$file" -size +1M -print -quit)" ]; then
+              big_files="$big_files $file"
             fi
+          done
+
+          if [ -n "$big_files" ]; then
+            for file in $big_files; do
+              echo "::warning title=Big image,file=$file::The image '$file' is bigger than 1MB. Consider reducing its pixel size to match the actual size on the website, or use pngcrush or similar to maximize the compression"
+            done
+            exit 1
           else
-            echo "No image files changed in this PR."
+            echo "No changed image files larger than 1MB found."
           fi
