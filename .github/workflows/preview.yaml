@@ -15,7 +15,8 @@ env:
 jobs:
   deploy:
     name: Build and deploy preview
-    if: github.event.action != 'closed'
+    # Fork PRs get no secrets and a read-only token, so skip the preview there
+    if: github.event.action != 'closed' && github.event.pull_request.head.repo.fork == false
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -64,7 +65,7 @@ jobs:
 
   teardown:
     name: Tear down preview
-    if: github.event.action == 'closed'
+    if: github.event.action == 'closed' && github.event.pull_request.head.repo.fork == false
     runs-on: ubuntu-latest
     permissions: {}
     steps:

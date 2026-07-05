@@ -3,6 +3,10 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  schedule:
+    # Daily rebuild so future-dated posts publish once their date passes
+    # (the site is generated with quarkus.roq.site.future=false)
+    - cron: '0 6 * * *'
   workflow_dispatch:
 
 # Allow the workflow to publish to GitHub Pages
