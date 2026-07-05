@@ -6,9 +6,12 @@ Quarkus Roq as a static site on GitHub Pages, in a single repo.
 
 It complements the focused docs:
 - `UPSTREAM-ISSUES.md`: bugs and gaps worth reporting upstream.
-- `URL-CHANGES.md`: the 9 posts whose URLs changed.
-- `THEME-HANDOFF.md`: the theme port plan and status.
+- `URL-CHANGES.md`: the posts and asset paths whose URLs changed.
 - `PR-PREVIEWS.md`: how PR preview deploys work.
+
+The one-shot conversion scripts mentioned below (`bin/*.py`) did their job
+during the migration and have been removed; retrieve them from git history if
+ever needed.
 
 Versions at migration time: Roq 2.1.4, Quarkus 3.37, Java 21.
 
@@ -37,8 +40,8 @@ Versions at migration time: Roq 2.1.4, Quarkus 3.37, Java 21.
   which are silently ignored). Post URLs are pinned in
   `templates/layouts/post.html`: `link: /:collection/:year-:month-:day-:name`,
   which reproduces the old `/posts/YYYY-MM-DD-slug` paths. Do not remove it.
-- Roq slugifies non-ASCII paths, so 9 posts with accented or special-character
-  slugs changed URL (see `URL-CHANGES.md`). Aliases do not work for non-ASCII
+- Roq slugifies non-ASCII paths, so posts with accented or special-character
+  slugs changed URL (see `URL-CHANGES.md` for the full list of 36). Aliases do not work for non-ASCII
   paths in 2.1.4, so those redirects 404 in both static and live mode. Decision:
   accept the new URLs.
 

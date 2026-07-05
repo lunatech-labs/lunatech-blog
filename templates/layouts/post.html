@@ -16,17 +16,12 @@ link: /:collection/:year-:month-:day-:name
         <hr class="post__line">
         <div class="author">
           <div class="flexbox">
-            {#if author}
-              {#if author.contains(' ')}
-                <img class="author__avatar author__avatar-lg" src="/images/elty.jpg" alt="">
-                <span class="author__text">{author}</span>
-              {#else}
-                <img class="author__avatar author__avatar-lg" src="https://github.com/{author}.png" onerror="this.onerror=null;this.src='/images/elty.jpg'" alt="">
-                <a class="author__text" href="https://github.com/{author}">{author}</a>
-              {/if}
+            {#if author && !author.contains(' ')}
+              <img class="author__avatar author__avatar-lg" src="https://github.com/{author}.png" onerror="this.onerror=null;this.src='/images/elty.jpg'" alt="">
+              <a class="author__text" href="https://github.com/{author}">{author}</a>
             {#else}
               <img class="author__avatar author__avatar-lg" src="/images/elty.jpg" alt="">
-              <span class="author__text">Elty</span>
+              <span class="author__text">{author ?: 'Elty'}</span>
             {/if}
           </div>
           <div class="flexbox">
