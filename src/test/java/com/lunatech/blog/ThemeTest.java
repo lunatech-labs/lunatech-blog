@@ -40,4 +40,20 @@ public class ThemeTest {
                 .body(containsString("Posts tagged"))
                 .body(containsString("class=\"card\""));
     }
+
+    @Test
+    void feedIsCappedAndUnescaped() {
+        String feed = RestAssured.when().get("/feed/")
+                .then().statusCode(200)
+                .extract().asString();
+        org.junit.jupiter.api.Assertions.assertEquals(30,
+                feed.split("<item>", -1).length - 1,
+                "feed should carry exactly the 30 most recent posts");
+        org.junit.jupiter.api.Assertions.assertTrue(
+                feed.contains("<content:encoded><![CDATA[ <div"),
+                "post HTML must not be entity-escaped inside CDATA");
+        org.junit.jupiter.api.Assertions.assertTrue(
+                feed.contains("href=\"https://blog.lunatech.com/feed/\" rel=\"self\""),
+                "feed self link must point at the feed's own URL");
+    }
 }

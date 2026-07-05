@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   {#seo page site /}
-  {#rss site /}
+  <link rel="alternate" type="application/rss+xml" title="{site.title}" href="{site.url('/feed/').absolute}"/>
 
   <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
