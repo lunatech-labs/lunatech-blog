@@ -110,7 +110,7 @@ filter by a particular value. This means that you can select a process
 step by filtering on available values, by selecting the magnifying glass
 icon in the actions column in the panel:
 
-image::kibana-process-steps.png[/media/2014-03-26-activiti-logstash-elasticsearch-kibana/Process steps]
+image::kibana-process-steps.png[Process steps]
 
 Together with selecting a specific time interval, selecting facet values
 like this is what makes a Kibana dashboard into an interactive business

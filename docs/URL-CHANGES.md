@@ -20,6 +20,28 @@ keeps a byte-identical URL.
 
 Total changed: 36.
 
+## The /media/ asset namespace
+
+The old site served every post asset from `/media/<slug>/<file>`. Post assets
+now live in the post bundle and are served from `/posts/<slug>/<file>`, so the
+mapping is mechanical: replace `/media/` with `/posts/` (and apply the slug
+rename table below for the 36 renamed posts).
+
+External deep links to old `/media/` image URLs (hotlinks, cached RSS entries,
+image search results) break after cutover; GitHub Pages cannot redirect them.
+Decision: accept this for images.
+
+Downloadable documents are the exception: the PDF, zip, jar, and xlsx files in
+post bundles are also copied verbatim into `public/media/<slug>/`, so their
+old URLs (for example the Play Framework cheat sheet at
+`/media/2010-06-08-play-framework-cheat-sheet/play-cheat-sheet.pdf`) keep
+working. The bundle copy stays canonical; the `public/media/` copy is a frozen
+legacy-URL shim for historical posts. Two posts are excluded (the 2007
+OpenSearch Confluence jar and the 2008 FPI Nice PDF): their old slugs contain
+non-ASCII characters that Roq slugifies even for `public/` files, so the old
+URL cannot be reproduced; those files remain available at their new bundle
+URLs only.
+
 ## Non-ASCII characters (9)
 
 Apostrophes, accents, an ellipsis, an en-dash and a colon. Roq drops or
