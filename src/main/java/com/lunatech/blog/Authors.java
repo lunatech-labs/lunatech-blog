@@ -1,10 +1,5 @@
 package com.lunatech.blog;
 
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.time.Duration;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -14,15 +9,16 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.jboss.logging.Logger;
 
 import io.quarkiverse.roq.frontmatter.runtime.model.DocumentPage;
 import io.quarkiverse.roq.frontmatter.runtime.model.Site;
 import io.quarkus.runtime.StartupEvent;
-import io.vertx.core.json.JsonObject;
 import jakarta.enterprise.event.Observes;
 import jakarta.inject.Named;
 import jakarta.inject.Singleton;
+import jakarta.ws.rs.WebApplicationException;
 
 /**
  * Resolves post author values (GitHub handles) to profile display names via
@@ -49,6 +45,9 @@ public class Authors {
     @ConfigProperty(name = "github.token")
     Optional<String> token;
 
+    @RestClient
+    GitHubUsers gitHub;
+
     void prefetch(@Observes StartupEvent event, Site site) {
         if (!enabled) {
             return;
@@ -68,13 +67,9 @@ public class Authors {
             }
         }
         long start = System.currentTimeMillis();
-        try (HttpClient http = HttpClient.newBuilder()
-                .connectTimeout(Duration.ofSeconds(10))
-                .followRedirects(HttpClient.Redirect.NORMAL)
-                .build()) {
-            for (String handle : handles) {
-                names.put(handle, fetchName(http, handle));
-            }
+        String authorization = token.map(t -> "Bearer " + t).orElse(null);
+        for (String handle : handles) {
+            names.put(handle, fetchName(handle, authorization));
         }
         LOG.infof("Resolved %d author handle(s) via the GitHub users API in %d ms (token %s)",
                 handles.size(), System.currentTimeMillis() - start,
@@ -97,26 +92,15 @@ public class Authors {
                 .collect(Collectors.joining(", "));
     }
 
-    private String fetchName(HttpClient http, String handle) {
+    private String fetchName(String handle, String authorization) {
         try {
-            HttpRequest.Builder request = HttpRequest.newBuilder(URI.create("https://api.github.com/users/" + handle))
-                    .header("Accept", "application/vnd.github+json")
-                    .timeout(Duration.ofSeconds(10))
-                    .GET();
-            token.ifPresent(t -> request.header("Authorization", "Bearer " + t));
-            HttpResponse<String> response = http.send(request.build(), HttpResponse.BodyHandlers.ofString());
-            if (response.statusCode() == 200) {
-                String name = new JsonObject(response.body()).getString("name");
-                if (name != null && !name.isBlank()) {
-                    return name;
-                }
-            } else {
-                LOG.warnf("GitHub users API returned %d for '%s'; keeping the handle as byline",
-                        response.statusCode(), handle);
+            String name = gitHub.user(handle, authorization).name();
+            if (name != null && !name.isBlank()) {
+                return name;
             }
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            LOG.warnf("GitHub user lookup interrupted at '%s'; keeping the handle as byline", handle);
+        } catch (WebApplicationException e) {
+            LOG.warnf("GitHub users API returned %d for '%s'; keeping the handle as byline",
+                    e.getResponse().getStatus(), handle);
         } catch (Exception e) {
             LOG.warnf("GitHub user lookup failed for '%s' (%s); keeping the handle as byline",
                     handle, e.toString());
