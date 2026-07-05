@@ -19,8 +19,7 @@ image:play-2011-09-slides.png[slides,link=http://spinscale.github.com/play-advan
 
 == jQuery UI module
 
-Peter Hilton, Lunatech. https://github.com/hilton/jqueryui-module[source
-code] (GitHub)
+Peter Hilton, Lunatech. https://github.com/hilton/jqueryui-module[source code] (GitHub)
 
 image:play-2011-09-jqueryui.png[code,link=https://github.com/hilton/jqueryui-module]
 
@@ -28,7 +27,6 @@ image:play-2011-09-jqueryui.png[code,link=https://github.com/hilton/jqueryui-mod
 
 Peter Hilton (left) also took the opportunity to get Alexander Reelsen
 (right) to autograph his copy of the
-https://blog.lunatech.com/posts/2011-09-19-playframework-cookbook-review[Play
-Framework Cookbook].
+https://blog.lunatech.com/posts/2011-09-19-playframework-cookbook-review[Play Framework Cookbook].
 
 image:play-2011-09-alexander.jpg[Peter Hilton and Alexander Reelsen,link=https://blog.lunatech.com/posts/2011-09-19-playframework-cookbook-review]

@@ -43,8 +43,7 @@ Software development involves two kinds of requirements: functional
 requirements, which are about features like being able to send e-mail,
 and non-functional requirements, which include those qualities such as
 reliability, usability, performance and security. Wikipedia has a
-http://en.wikipedia.org/wiki/Non-functional_requirement#Examples[long
-list of non-functional requirements] , which all contribute to overall
+http://en.wikipedia.org/wiki/Non-functional_requirement#Examples[long list of non-functional requirements] , which all contribute to overall
 software quality.
 
 On a Scrum project, there is a serious risk that non-functional
@@ -92,5 +91,4 @@ sprint, and ‘performance improvements’ in every release.
 
 * a.k.a. The Root of all Evil
 
-https://plus.google.com/107170847819841716154/posts/Q1fe53bufso[Comments
-on Google+]
+https://plus.google.com/107170847819841716154/posts/Q1fe53bufso[Comments on Google+]

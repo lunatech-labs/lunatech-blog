@@ -5,15 +5,12 @@ tags:
 - "employment"
 - "opinion"
 ---
-http://www.cloudera.com/blog/2010/07/how-to-get-a-job-at-cloudera/[How to Get a Job at
-Cloudera]
+http://www.cloudera.com/blog/2010/07/how-to-get-a-job-at-cloudera/[How to Get a Job at Cloudera]
 is an excellent article that explains to job candidates how to be more
 interesting than just a CV in the mail, and why going through a
 recruitment agency puts you at a big disadvantage. You could just read
 the article with Lunatech in mind, because the same things are true here
-as well, and because we are also interviewing people for our http://www.lunatech-research.com/content/java-ee-developer-vacancies[Java EE
-developer
-vacancies]
+as well, and because we are also interviewing people for our http://www.lunatech-research.com/content/java-ee-developer-vacancies[Java EE developer vacancies]
 at the moment. However, it is worth re-telling the story from our point
 of view, which is what this article is." ---
 
@@ -115,8 +112,7 @@ necessarily the best places to work as a programmer. Let’s face it: the
 more a company spends on job adverts and recruiter fees, the less likely
 they are to make sure that each developer has a seriously powerful
 workstation with
-http://www.codinghorror.com/blog/2004/06/multiple-monitors-and-productivity.html[enough
-monitors].
+http://www.codinghorror.com/blog/2004/06/multiple-monitors-and-productivity.html[enough monitors].
 
 [[Conclusion]]
 == Conclusion

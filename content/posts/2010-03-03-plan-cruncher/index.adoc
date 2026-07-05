@@ -4,8 +4,7 @@ author: "PeterHilton"
 tags:
 - "ventures"
 ---
-Lunatech Ventures has just launched http://plancruncher.com/[Plan
-Cruncher], which helps you create a better
+Lunatech Ventures has just launched http://plancruncher.com/[Plan Cruncher], which helps you create a better
 business plan. The Plan Cruncher web application was designed and built
 by http://www.lunatech-research.com/[Lunatech Research] for Lunatech
 Ventures, in a typical example of the close collaboration between our
@@ -17,8 +16,7 @@ Plan Cruncher creates a standard one-page summary of a business plan for
 a start-up company that is looking for external investment. You do this
 by choosing icons that represent some of the standard answers that a
 business plan must provide.These icons fulfill the same purpose as the
-icons for the http://creativecommons.org/about/licenses/[Creative
-Commons licenses] - they serve as abbreviations for fairly
+icons for the http://creativecommons.org/about/licenses/[Creative Commons licenses] - they serve as abbreviations for fairly
 straightforward ideas such as 'advertising revenue model', which are
 backed up by a long detailed description (in your actual business plan).
 

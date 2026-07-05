@@ -18,8 +18,7 @@ process the same way our customer does.
 This is one of several ways that actually doing domain-driven design
 turns out to be significantly harder in practice than you might first
 expect. Our diligence in gaining
-http://blog.lunatech.com/2014/03/11/third-party-logistics-3pl-domain-expertise[supply
-chain experience] during the last eighteen years has taught us to speak
+http://blog.lunatech.com/2014/03/11/third-party-logistics-3pl-domain-expertise[supply chain experience] during the last eighteen years has taught us to speak
 the language in more than one way.
 
 In this case our customer actually is in France, North of Paris. We even

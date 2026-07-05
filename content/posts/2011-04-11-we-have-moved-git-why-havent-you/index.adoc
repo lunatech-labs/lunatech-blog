@@ -117,8 +117,7 @@ Whenever I'm working on a new feature or bug report, I frequently get
 interrupted by some other issue more important, and I have to switch
 away from my current unstable state to a stable release and do some
 hacking. This was hard with SVN, and with git I started with
-http://www.kernel.org/pub/software/scm/git/docs/git-stash.html[git
-stash] which allows you to remove all your uncommitted changes in some
+http://www.kernel.org/pub/software/scm/git/docs/git-stash.html[git stash] which allows you to remove all your uncommitted changes in some
 pile somewhere, to get back to a clean repo. But what if you get
 interrupted *twice*? At that point I stopped using that strategy and
 went for local branches.
@@ -149,8 +148,7 @@ a new project and import the code we extracted, thus losing all VCS
 history in the process.
 
 With git I wondered if something smarter was possible, and it turns out
-http://stackoverflow.com/questions/359424/detach-subdirectory-into-separate-git-repository[there
-is much better]. With git you can extract pieces of a project to a new
+http://stackoverflow.com/questions/359424/detach-subdirectory-into-separate-git-repository[there is much better]. With git you can extract pieces of a project to a new
 project, while keeping all history and only the relevant parts of that
 history. The process takes more than one command, but it works. Just the
 fact that this is even possible with git is a huge bonus for git.
@@ -213,8 +211,7 @@ them while working on the feature. Now your commit history has a mix of
 feature and fixes and you want to reorder then so that all the feature
 commits are applied in sequence, after all fixes. With git you can
 reorder commits, with
-http://www.kernel.org/pub/software/scm/git/docs/git-rebase.html[git
-rebase -i].
+http://www.kernel.org/pub/software/scm/git/docs/git-rebase.html[git rebase -i].
 
 _Rebasing_ also allows you to do quite incredible things before you push
 your changes upstream, like merging commits, splitting them or changing
@@ -245,8 +242,7 @@ and magic: `git foo` is available and will call your method.
 
 Unfortunately there is little documentation for this feature, aside from
 a little for
-http://www.kernel.org/pub/software/scm/git/docs/git-sh-setup.html[Shell
-extensions], but even with just that I managed to add two commands that
+http://www.kernel.org/pub/software/scm/git/docs/git-sh-setup.html[Shell extensions], but even with just that I managed to add two commands that
 integrate with my http://www.atlassian.com/software/jira[issue tracker]:
 
 * git jirabranch: creates a new branch for a given JIRA issue, marks

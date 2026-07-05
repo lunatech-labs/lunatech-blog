@@ -7,8 +7,7 @@ tags:
 ---
 This article introduces
 http://ztemplates.org[ztemplates], a multi-tier open source web
-application framework for Java. ztemplates is licensed under the http://www.apache.org/licenses/LICENSE-2.0[Apache
-2.0 license]. It uses Java
+application framework for Java. ztemplates is licensed under the http://www.apache.org/licenses/LICENSE-2.0[Apache 2.0 license]. It uses Java
 annotations, thus meaning at least Java 1.5 or higher is required.
 ztemplates has a lot of features, but we will only introduce the basics
 in this post. This article will not describe how to set-up a project.
@@ -35,8 +34,7 @@ it a framework.
 
 The controller tier matches
 http://ztemplates.org/Wiki.jsp?page=Url[URLs]. They are used to invoke
-the so-called http://ztemplates.org/Wiki.jsp?page=ActionPojo[action
-POJO's]. The action http://en.wikipedia.org/wiki/POJO[POJO's] match a
+the so-called http://ztemplates.org/Wiki.jsp?page=ActionPojo[action POJO's]. The action http://en.wikipedia.org/wiki/POJO[POJO's] match a
 certain URL using a http://ztemplates.org/Wiki.jsp?page=ZMatch[@ZMatch]
 annotation. These URLs can be parameterized as well, giving ultimate
 freedom in your URI scheme. So basically you are able to match a URL to

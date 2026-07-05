@@ -27,12 +27,9 @@ page layout is in my view more important than 3D transforms, <video>,
 <canvas> or any other fancy-pants media manipulation stuff.
 
 Stephen Hay has also been
-http://www.the-haystack.com/presentations/fronteers09/[banging on about
-this] for some time now and has given
-http://www.slideshare.net/stephenhay/realworld-responsive-design-breaking-development-2011[presentations
-on the problem]. It looks like he'll be
-http://blogs.msdn.com/b/ie/archive/2011/04/12/native-html5-first-ie10-platform-preview-available-for-download.aspx[granted
-his wish].
+http://www.the-haystack.com/presentations/fronteers09/[banging on about this] for some time now and has given
+http://www.slideshare.net/stephenhay/realworld-responsive-design-breaking-development-2011[presentations on the problem]. It looks like he'll be
+http://blogs.msdn.com/b/ie/archive/2011/04/12/native-html5-first-ie10-platform-preview-available-for-download.aspx[granted his wish].
 
 IE10 will include all the things we need for high-powered CSS layouts:
 

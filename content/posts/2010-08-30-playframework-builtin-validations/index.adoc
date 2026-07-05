@@ -7,16 +7,14 @@ tags:
 ---
 The Play
 framework (version 1.0) provides flexible and easy-to-use functionality
-for http://www.playframework.org/documentation/1.0.3/validation[HTTP request data
-validation],
+for http://www.playframework.org/documentation/1.0.3/validation[HTTP request data validation],
 for validating form data. This article provides an overview of the
 framework's built-in validation rules.
 
 [[overview]]
 == Validation overview
 
-The http://www.playframework.org/documentation/1.0.3/validation[Play
-validation guide] describes three ways to validate form (HTTP request)
+The http://www.playframework.org/documentation/1.0.3/validation[Play validation guide] describes three ways to validate form (HTTP request)
 data in a Play web application.
 
 . In the controller method, call methods on the controller's

@@ -35,10 +35,8 @@ component or the Flash player, instead of in my coding.
 
 When I Googled for "flash invisible combobox" and similar terms, all I
 found was
-[.nobr]#http://www.kirupa.com/forum/showthread.php?t=328920[one person
-with the same problem]#, but no solution. A
-[.nobr]#http://stackoverflow.com/questions/1999335/flash-cs4-combobox-not-showing-when-embedded[question
-I posted on Stack Overflow]# got no response, and earned me the
+[.nobr]#http://www.kirupa.com/forum/showthread.php?t=328920[one person with the same problem]#, but no solution. A
+[.nobr]#http://stackoverflow.com/questions/1999335/flash-cs4-combobox-not-showing-when-embedded[question I posted on Stack Overflow]# got no response, and earned me the
 Tumbleweed badge.
 
 == The culprit
@@ -51,8 +49,7 @@ was an attribute in the `<embed>` tag that made the bug appear:
 to Google for a solution.
 
 First let me explain what the `wmode` attribute does (described in
-[.nobr]#http://kb2.adobe.com/cps/127/tn_12701.html[Adobe's embed tag
-documentation]#). It determines how the movie interacts with other
+[.nobr]#http://kb2.adobe.com/cps/127/tn_12701.html[Adobe's embed tag documentation]#). It determines how the movie interacts with other
 elements on the HTML page. If it is set to `opaque` or `window`, it
 floats above all other things on the page. This is not an option for us,
 since a lot of our publishers use DHTML (i.e. JavaScript) menus for
@@ -61,8 +58,7 @@ their navigation, and they would no longer work.
 == The fix
 
 Eventually, I found
-[.nobr]#http://rufuswhite.blogspot.com/2007/09/youre-having-laugh.html[this
-blog post]# explaining the problem, and a possible workaround in the
+[.nobr]#http://rufuswhite.blogspot.com/2007/09/youre-having-laugh.html[this blog post]# explaining the problem, and a possible workaround in the
 comments. The problem is that for some reason the Flash player decides
 not to dispatch `RENDER` events anymore. The solution is to dispatch
 that event manually on key moments, to allow the component to re-render

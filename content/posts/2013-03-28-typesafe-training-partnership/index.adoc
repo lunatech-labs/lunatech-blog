@@ -12,8 +12,7 @@ image:typesafe-blog.png[Typesafe]
 
 Typesafe provides a variety of training courses on Typesafe stack
 technologies, together with Typesafe partners in different countries.
-The http://typesafe.com/training/fasttracktoplaywithscala[Fast Track To
-Play With Scala] course has previously been given in San Francisco, New
+The http://typesafe.com/training/fasttracktoplaywithscala[Fast Track To Play With Scala] course has previously been given in San Francisco, New
 York, London and Zurich. This year, we’re adding Rotterdam to the list.
 
 == Play training at Lunatech
@@ -40,8 +39,7 @@ Next week, Lunatech is going to give away a place on the 30-31 May Play
 framework training course. The training course place will be the prize
 in a contest at next Tuesday’s http://010dev.nl[010DEV] event.
 
-The http://010dev.nl/post/social-tech-event-typesafe-night-010dev[010DEV
-Typesafe Night] event includes a Play framework presentation by James
+The http://010dev.nl/post/social-tech-event-typesafe-night-010dev[010DEV Typesafe Night] event includes a Play framework presentation by James
 Ward (Typesafe) and Nicolas Leroux (Lunatech), as well as an Akka
 presentation by Akka tech lead Roland Kuhn (Typesafe).
 

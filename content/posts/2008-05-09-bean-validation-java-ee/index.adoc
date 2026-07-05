@@ -18,8 +18,7 @@ will incorporate our (or similar) solutions.
 
 If you are writing your database persistence interface in Java, chances
 are you will be using the
-http://java.sun.com/javaee/overview/faq/persistence.jsp[Java persistence
-API]. It abstracts database tables as Java classes (_entities_ in the
+http://java.sun.com/javaee/overview/faq/persistence.jsp[Java persistence API]. It abstracts database tables as Java classes (_entities_ in the
 local jargon), database table columns as object _properties_ (in the
 Java Bean sense), and database table rows as instances of those classes.
 The mapping between Java classes and the database model is done using
@@ -31,10 +30,8 @@ http://java.sun.com/javaee/5/docs/api/javax/persistence/package-summary.html[API
 properties, for instance
 http://java.sun.com/javaee/5/docs/api/javax/persistence/Column.html#unique()[column]
 or
-http://java.sun.com/javaee/5/docs/api/javax/persistence/UniqueConstraint.html[multi-column
-unicity], or
-http://java.sun.com/javaee/5/docs/api/javax/persistence/Column.html#nullable()[nullability
-of columns].
+http://java.sun.com/javaee/5/docs/api/javax/persistence/UniqueConstraint.html[multi-column unicity], or
+http://java.sun.com/javaee/5/docs/api/javax/persistence/Column.html#nullable()[nullability of columns].
 
 If you try to save (_persist_ or _merge_ in the local jargon) entities
 in which those constraints have been violated, you will get an ugly
@@ -44,8 +41,7 @@ what you asked for).
 When I say ugly exception I mean an exception which has no clear
 semantics as to what the exception class is, how to get to it (they nest
 exceptions in
-http://download.java.net/jdk7/docs/api/java/sql/SQLException.html#getNextException()[non-standard
-way]), how to get to the name of the violated constraint(s) (which
+http://download.java.net/jdk7/docs/api/java/sql/SQLException.html#getNextException()[non-standard way]), how to get to the name of the violated constraint(s) (which
 incidentally cannot be named by hand in the annotation), and does not
 allow an application to specify a message to display to signal errors of
 a particular constraint.
@@ -59,8 +55,7 @@ http://www.hibernate.org[Hibernate] provides ways to do
 http://www.hibernate.org/412.html[custom validation] for entities and
 properties. Work is under way to standardise Hibernate Validation in
 http://jcp.org/en/jsr/detail?id=303[JSR-303] which is discussed openly
-and actively http://forum.hibernate.org/viewforum.php?f=26[in this
-forum]. We will discuss this JSR further in this article.
+and actively http://forum.hibernate.org/viewforum.php?f=26[in this forum]. We will discuss this JSR further in this article.
 
 We should start with a simple example of how to define and edit an
 entity with JPA, Hibernate and our framework of choice:
@@ -71,8 +66,7 @@ http://www.seamframework.org/[Seam].
 Here we start simple by having only one interesting property:
 `emailAddress` which should not be null, and should be a valid email
 address. Hibernate Validation declares validation constraints using
-http://java.sun.com/j2se/1.5.0/docs/guide/language/annotations.html[Java
-annotations], which can be put on entity bean property fields or
+http://java.sun.com/j2se/1.5.0/docs/guide/language/annotations.html[Java annotations], which can be put on entity bean property fields or
 _getter_ methods, much in the same way that you define your database
 mappings in JPA.
 
@@ -121,8 +115,7 @@ each field (the `<s:validateAll>` tag), and place the validation
 messages after each invalid field (the `afterInvalidField` facet). This
 will use the validation constraints we defined in the Entity to validate
 the values during the
-http://java.sun.com/javaee/5/docs/tutorial/doc/bnaqq.html#bnaqu[_Process
-Validations_] JSF phase.
+http://java.sun.com/javaee/5/docs/tutorial/doc/bnaqq.html#bnaqu[_Process Validations_] JSF phase.
 
 *edit.xhtml*
 
@@ -259,8 +252,7 @@ provide a meaningful error message when the validation fails. It can be
 overridden by the annotation user, and holds a default value for the
 message. The use of curly braces in a message means that the message
 should be loaded from a localised
-http://download.java.net/jdk7/docs/api/java/util/ResourceBundle.html[resource
-bundle] rather than embedding localised messages in the code.
+http://download.java.net/jdk7/docs/api/java/util/ResourceBundle.html[resource bundle] rather than embedding localised messages in the code.
 
 As for the actual class containing the validation logic, we will simply
 extend the `EmailValidator` class to add a check on the domain-part of
@@ -439,8 +431,7 @@ annotation would require silly syntax such as
 `@Unique(type = Person.class, property = "emailAddress")`, and really
 this is inelegant too [#Hibernatevalidation-footback1]##
 ^link:#Hibernatevalidation-foot1[1]^.
-* Give up, but we _http://en.wikiquote.org/wiki/Galaxy_Quest[never give
-up]_.
+* Give up, but we _http://en.wikiquote.org/wiki/Galaxy_Quest[never give up]_.
 * Extend the Hibernate Validation API to provide us with the required
 information. It is fairly easy to extend Hibernate Validation so that
 the `Validator.isValid` method takes an extra two parameters (the bean
@@ -597,8 +588,7 @@ standardising Bean Validation, which is something that will prove very
 useful once people understand its full potential.
 
 The main differences we see with Hibernate Validation are
-http://in.relation.to/Bloggers/BeanValidationSneakPeekPartIIIGroupsAndPartialValidation[validation
-groups and partial validation], which provides a way to declare several
+http://in.relation.to/Bloggers/BeanValidationSneakPeekPartIIIGroupsAndPartialValidation[validation groups and partial validation], which provides a way to declare several
 "layers" or "sets and subsets" of validation, that can be enabled or
 disabled when validating programmatically. The JSR also defines an
 entire reflection framework to access the validation constraints at
@@ -614,8 +604,7 @@ We http://forum.hibernate.org/viewtopic.php?p=2381895#2381895[proposed]
 a framework for conditional validation which provides several types of
 conditions:
 
-* http://en.wikipedia.org/wiki/Unified_Expression_Language[Unified
-Expression Language] (UEL) conditions
+* http://en.wikipedia.org/wiki/Unified_Expression_Language[Unified Expression Language] (UEL) conditions
 * Validation Annotations conditions
 * Programmatic conditions
 
@@ -669,8 +658,7 @@ Now that we are familiar with the difference between referencing and
 defining a validation condition, let us look at more complex validation
 conditions, such as the `@ValidationConditionOnUEL` which defines a
 validation condition based on a
-http://en.wikipedia.org/wiki/Unified_Expression_Language[Unified
-Expression Language] (UEL) expression. This is very useful for checks on
+http://en.wikipedia.org/wiki/Unified_Expression_Language[Unified Expression Language] (UEL) expression. This is very useful for checks on
 properties located anywhere within the bean, multiple properties, or
 even sub-properties. With this we can accomplish our minimum requirement
 of having at least one of the `postAddress` or `emailAddress` properties
@@ -910,8 +898,7 @@ validation exceptions will be resolved.
 http://download.java.net/jdk7/docs/api/java/lang/annotation/Annotation.html[Annotation]
 _reification_ (reflection) of the annotation instance does not include
 pointers to the annotated object such as its type and value. Perhaps a
-question to ask the http://groups.csail.mit.edu/pag/jsr308/[new
-annotation JSR] project.
+question to ask the http://groups.csail.mit.edu/pag/jsr308/[new annotation JSR] project.
 
 == About the author
 

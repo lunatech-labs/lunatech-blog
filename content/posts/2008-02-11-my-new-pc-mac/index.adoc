@@ -27,8 +27,7 @@ seconds.
 
 == A better operating system
 
-However, the real improvement is running http://www.apple.com/macosx/[OS
-X 10.5] (Leopard) instead of Gnome or KDE. Gnome and KDE are not bad,
+However, the real improvement is running http://www.apple.com/macosx/[OS X 10.5] (Leopard) instead of Gnome or KDE. Gnome and KDE are not bad,
 but OS X is so far ahead that it just seemed stupid to have a better
 operating system at home than the one I use for most of the day at work.
 

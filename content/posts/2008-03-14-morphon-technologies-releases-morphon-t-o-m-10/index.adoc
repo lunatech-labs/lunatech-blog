@@ -11,5 +11,4 @@ an existing workflow, using a variety of hardware cryptographic devices
 and can communicate with the certificate authority's TSP and OCSP
 servers. 
 
-More information is available on the http://www.morphon.com/[Morphon
-homepage].
+More information is available on the http://www.morphon.com/[Morphon homepage].

@@ -4,8 +4,7 @@ author: "wjkveen"
 tags:
 - "event"
 ---
-Lunatech will be at the event http://geofreedomday.nl/[Geo Freedom Day
-2011]. The event is cool because we have done
+Lunatech will be at the event http://geofreedomday.nl/[Geo Freedom Day 2011]. The event is cool because we have done
 GeoMap related development for our Logistics division in the past and
 want to continue monitoring the progress in the field.
 

@@ -288,10 +288,8 @@ Play with DataTables’ JavaScript API. However, you can take this further
 by supporting additional DataTables features, such as:
 
 . multi-column sorting (mentioned above)
-. http://www.datatables.net/examples/api/multi_filter.html[individual
-column filtering] - ‘advanced search’
-. http://www.datatables.net/examples/server_side/pipeline.html[pipelining
-data] to fetch more than one page at a time, to reduce the number of
+. http://www.datatables.net/examples/api/multi_filter.html[individual column filtering] - ‘advanced search’
+. http://www.datatables.net/examples/server_side/pipeline.html[pipelining data] to fetch more than one page at a time, to reduce the number of
 Ajax requests.
 
 

@@ -41,8 +41,7 @@ compared to, for example, a traditional XSLT processor.
 In the case of an UN/EDIFACT document, Smooks offers two solutions. Both
 require specifying a mapping from the EDI message segments to SAX events
 using a custom XML format (see the official Smooks documentation for
-http://www.smooks.org/mediawiki/index.php?title=V1.5:edi-to-java[an
-example of the syntax]). Then you can either process the SAX events in
+http://www.smooks.org/mediawiki/index.php?title=V1.5:edi-to-java[an example of the syntax]). Then you can either process the SAX events in
 your customary way, or use the ECJ, the EDI Java compiler supplied by
 Smooks, to generate Java classes that allow you to access the content of
 the EDI messages as fields. Smooks also provides a complete set of

@@ -108,8 +108,7 @@ between it and a mouse. Additionally, you rely on muscle memory in the
 form of keybindings and not on visual navigation to perform actions.
 This way you reduce mental overhead, stay in the flow state, and perform basic
 actions much faster. For example,
-https://blog.superhuman.com/keyboard-vs-mouse/?utm_source=chatgpt.com[the
-research by SuperHuman] showed that some basic operations that we
+https://blog.superhuman.com/keyboard-vs-mouse/?utm_source=chatgpt.com[the research by SuperHuman] showed that some basic operations that we
 perform every day can be done from 2 to 5 seconds faster if performed
 with a keyboard rather than a mouse. And we perform those actions a lot, so
 think about the amount of time you could save in a day.

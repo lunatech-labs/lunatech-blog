@@ -7,10 +7,7 @@ tags:
 ---
 We are rather
 proud to announce that one of our colleagues, Michiel Roza, is going to
-present at the renowned http://www.siggraph.org/s2009/[Siggraph
-convention] this week. This wednesday,
+present at the renowned http://www.siggraph.org/s2009/[Siggraph convention] this week. This wednesday,
 August 5, Michiel will be talking about GamePro, the Realtime Visual
-Performance Profiler he developed during his graduation at Eximion. http://kalydo.blogspot.com/2009/08/kalydo-presents-gamepro-at-siggraph.html[Go
-to the Kalydo blog to read
-more]…
+Performance Profiler he developed during his graduation at Eximion. http://kalydo.blogspot.com/2009/08/kalydo-presents-gamepro-at-siggraph.html[Go to the Kalydo blog to read more]…
 

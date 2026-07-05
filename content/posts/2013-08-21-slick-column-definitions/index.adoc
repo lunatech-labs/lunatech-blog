@@ -9,8 +9,7 @@ This tutorial shows you how to define different kinds of database \
     columns (a.k.a. _attributes_) in a [Slick](http://slick.typesafe.com) \
     application.
 
-https://blog.lunatech.com/posts/2013-08-13-play-slick-scala-console[Using the
-Scala console with Play and Slick] shows how to use a
+https://blog.lunatech.com/posts/2013-08-13-play-slick-scala-console[Using the Scala console with Play and Slick] shows how to use a
 http://www.playframework.com[Play Framework] application’s Scala console
 to inspect the SQL that Slick generates for a database table definition.
 The example used a trivial table definition, with simple columns.
@@ -36,8 +35,7 @@ Source code: https://github.com/lunatech-labs/play-slick-examples.
 
 A trivial table definition with a single `String` column results in a
 `VARCHAR NOT NULL` column. To see this, use the instructions for
-https://blog.lunatech.com/posts/2013-13-play-slick-scala-console[using the
-Scala console with Play and Slick] to start a Play application on the
+https://blog.lunatech.com/posts/2013-13-play-slick-scala-console[using the Scala console with Play and Slick] to start a Play application on the
 console. Then paste the following console transcript into the Play
 application’s Scala console.
 
@@ -263,8 +261,6 @@ numeric type, with `O.DBType("DECIMAL(13,2)")`.
 Now you have used Slick to define the usual types of table columns, you
 can:
 
-* https://blog.lunatech.com/posts/2013-08-29/play-slick-evolutions[create the
-table in a database]
-* https://blog.lunatech.com/posts/2013-11-21-slick-case-classes[define custom
-column types]
+* https://blog.lunatech.com/posts/2013-08-29/play-slick-evolutions[create the table in a database]
+* https://blog.lunatech.com/posts/2013-11-21-slick-case-classes[define custom column types]
 * define join queries.

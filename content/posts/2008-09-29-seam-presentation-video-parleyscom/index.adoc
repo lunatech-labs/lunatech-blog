@@ -8,7 +8,6 @@ tags:
 - "jboss"
 ---
 http://parleys.com/[parleys.com] now
-has the full video of the http://parleys.com/display/PARLEYS/Home#title=Seam%20in%20Action%20-%20Part%202;talk=18972706;slide=1[Seam In
-Action]
+has the full video of the http://parleys.com/display/PARLEYS/Home#title=Seam%20in%20Action%20-%20Part%202;talk=18972706;slide=1[Seam In Action]
 presentation that Nicolas Leroux and Peter Hilton gave at JavaPolis
 2007.

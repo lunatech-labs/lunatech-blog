@@ -37,8 +37,7 @@ behind the Play! framework during the drinking event. More about that in
 a forthcoming post.
 
 So, what else did we do during those two days? Guillaume and I had the
-chance to do an interview for http://lescastcodeurs.com/[les cast
-codeurs], I had a long talk with Habib Guergachi and Guillaume Bort from
+chance to do an interview for http://lescastcodeurs.com/[les cast codeurs], I had a long talk with Habib Guergachi and Guillaume Bort from
 Zenexity about their visions and how Lunatech and Zenexity could work
 together, and finally we did a presentation for http://octo.com[Octo's]
 developers.

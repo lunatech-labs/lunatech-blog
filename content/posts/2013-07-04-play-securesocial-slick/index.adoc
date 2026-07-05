@@ -39,8 +39,7 @@ Let’s start with the model class. SecureSocial uses `securesocial.core.Identit
 
 If you are the kind of person that prefers code, take a look at the
 actual
-https://github.com/jaliss/securesocial/blob/master/module-code/app/securesocial/core/SocialUser.scala[source
-code].
+https://github.com/jaliss/securesocial/blob/master/module-code/app/securesocial/core/SocialUser.scala[source code].
 
 This trait is easy to implement if we use a case class:
 
@@ -62,8 +61,7 @@ case class User(uid: Option[Long] = None,
 Now that we have our model class, we’re going to have to find a way to
 store instances of it. This is managed by an implementation of the
 `UserService` trait. The
-https://github.com/jaliss/securesocial/tree/master/samples/scala/demo[sample
-application] has an
+https://github.com/jaliss/securesocial/tree/master/samples/scala/demo[sample application] has an
 https://github.com/jaliss/securesocial/blob/master/samples/scala/demo/app/service/InMemoryUserService.scala[implementation]
 that stores these in memory, but for a real-world application you want
 to store this information somewhere else, like in a database. So, it’s

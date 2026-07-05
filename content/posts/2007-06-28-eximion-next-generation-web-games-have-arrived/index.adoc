@@ -31,5 +31,4 @@ the next generation of casual web gaming. There is lots of work to do
 still for the folks at Eximion, but the feedback they have been getting
 is very positive. More games and improvements will be rolling out fast
 and furious. The efforts have not gone unnoticed, they recently made the
-list of the http://www.bizz.nl/1605-de-25-innovatietoppers.html[top 25
-innovative young companies in the Netherlands].
+list of the http://www.bizz.nl/1605-de-25-innovatietoppers.html[top 25 innovative young companies in the Netherlands].

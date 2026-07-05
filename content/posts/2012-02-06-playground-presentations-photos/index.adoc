@@ -8,8 +8,7 @@ tags:
 ---
 On
 3 February 2012, Lunatech hosted a Play!ground event at Paddy Murphy’s
-Irish pub in Rotterdam - an event for developers interested in the http://www.playframework.org/[Play
-framework]. Here are the slides from the
+Irish pub in Rotterdam - an event for developers interested in the http://www.playframework.org/[Play framework]. Here are the slides from the
 presentations.
 
 == Express-board

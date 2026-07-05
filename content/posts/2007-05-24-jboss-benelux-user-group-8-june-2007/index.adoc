@@ -16,12 +16,9 @@ JBoss jBPM.
 *Location:* link:/contact/[Lunatech Research, Rotterdam]
 
 *Programme:* The programme will begin with a presentation on
-http://www28.cplan.com/cc158/session_details.jsp?isid=285612&ilocation_id=158-1&ilanguage=english[Java
-Process Description Language] by Tom Baeyens, founder and lead for
+http://www28.cplan.com/cc158/session_details.jsp?isid=285612&ilocation_id=158-1&ilanguage=english[Java Process Description Language] by Tom Baeyens, founder and lead for
 http://jbpm.org/[JBoss jBPM], which he also presented at JavaOne. For
-more about jPDL, see http://processdevelopments.blogspot.com/[Tom's
-blog] and his longer article about http://jbpm.org/pvm[The Process
-Virtual Machine].
+more about jPDL, see http://processdevelopments.blogspot.com/[Tom's blog] and his longer article about http://jbpm.org/pvm[The Process Virtual Machine].
 
 We are still working on the programme, and are planning to include
 another presentations-and-discussion session about EJB 3 and/or JBoss

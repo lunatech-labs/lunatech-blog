@@ -21,8 +21,7 @@ James and Nicolas live-coded a Play framework application that used the
 meetup.com API to select a competition winner from the list of
 attendees. http://www.meetup.com/010DEV/members/68836872/[Robert Bakker]
 won a free place on the
-http://lunatech.com/training/play-2-training[Fast Track to Play with
-Scala] training course at Lunatech on 30-31 May 2013.
+http://lunatech.com/training/play-2-training[Fast Track to Play with Scala] training course at Lunatech on 30-31 May 2013.
 
 Locus Publicus remains a popular choice of venue, with the facilities
 this kind of event needs: a projector, a bar and a great beer selection.

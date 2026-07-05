@@ -6,8 +6,7 @@ tags:
 - "playframework"
 ---
 This article is
-a review of http://www.packtpub.com/play-framework-cookbook/book[Play Framework
-Cookbook] - a new
+a review of http://www.packtpub.com/play-framework-cookbook/book[Play Framework Cookbook] - a new
 book about the http://www.playframework.org/[Play framework] from
 http://www.packtpub.com/[Packt Publishing] under the Packt Open Source
 brand.
@@ -20,18 +19,15 @@ at every level. Every Play developer should have a copy of this book.*
 
 image:play-framework-cookbook.png[Play Framework Cookbook,link=http://www.packtpub.com/play-framework-cookbook/book]__Play Framework Cookbook__ is a significant book,
 because it is the first Play framework book in print from a major
-publisher, following the http://the-play-book.co.uk/[Introducing the
-Play! Framework] e-book (also available as a
-http://www.lulu.com/product/paperback/introducing-the-play-framework/14926666[paperback
-from Lulu]. Packt describe themselves as an on-demand publisher, and
+publisher, following the http://the-play-book.co.uk/[Introducing the Play! Framework] e-book (also available as a
+http://www.lulu.com/product/paperback/introducing-the-play-framework/14926666[paperback from Lulu]. Packt describe themselves as an on-demand publisher, and
 have beat the other major publishers to market with this book, as they
 did with their
 http://www.packtpub.com/jboss-drools-business-rules/book[Drools]
 http://www.packtpub.com/drools-jboss-rules-50-developers-guide/book[books]
 two years ago. Perhaps
 http://hilton.org.uk/computer_books.phtml[O’Reilly] is no longer
-http://macdevcenter.com/pub/a/mac/2002/05/14/oreilly_wwdc_keynote.html[watching
-the alpha geeks]
+http://macdevcenter.com/pub/a/mac/2002/05/14/oreilly_wwdc_keynote.html[watching the alpha geeks]
 (http://video.google.com/videoplay?docid=-3436067109364123518[video]
 from 9:15).
 
@@ -135,8 +131,7 @@ insight into how modules can provide powerful extensions to Play’s core
 functionality.
 
 However, it does seem a little odd to provide recipes for just five
-modules from the 95 http://www.playframework.org/modules[Play framework
-modules] available at the time of writing, because a cookbook for how to
+modules from the 95 http://www.playframework.org/modules[Play framework modules] available at the time of writing, because a cookbook for how to
 use the many modules is worth a whole book by itself, especially since
 many of the modules do not have extensive documentation.
 
@@ -253,8 +248,7 @@ assume Java knowledge.
 uses Java on the JVM any more.
 * _Play Modules Cookbook_ - because there are more Play modules than
 there are recipes in _Play Framework Cookbook_.
-* _Programming Play 2.0_ - because http://www.playframework.org/2.0[Play
-2.0] will introduce significant changes +
+* _Programming Play 2.0_ - because http://www.playframework.org/2.0[Play 2.0] will introduce significant changes +
 (*Update: we decided to fix this ourselves and write
 http://www.lunatech-research.com/books[our own books about Play 2]*)
 

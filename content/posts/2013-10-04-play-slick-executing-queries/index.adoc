@@ -32,8 +32,7 @@ Source code: https://github.com/lunatech-labs/play-slick-examples.
 == Creating a Play application with a database table
 
 First, follow the instructions in
-https://blog.lunatech.com/posts/2013-08-08-play-slick-getting-started[Getting
-started with Play and Slick], to create a new application, configure a
+https://blog.lunatech.com/posts/2013-08-08-play-slick-getting-started[Getting started with Play and Slick], to create a new application, configure a
 database and set-up https://github.com/freekh/play-slick[play-slick].
 
 In addition, add a database table mapping. For this example, keep things
@@ -212,8 +211,7 @@ The implicit `DBSessionRequest` parameter is a wrapper for the
 
 Now you can execute queries, you can:
 
-* https://blog.lunatech.com/posts/2013-11-21-slick-case-classes[map query
-result tuples to case classes]
+* https://blog.lunatech.com/posts/2013-11-21-slick-case-classes[map query result tuples to case classes]
 * define join queries
 * define aggregate and group-by queries
 * https://blog.lunatech.com/posts/2014-01-24-slick-insert-data[insert], update

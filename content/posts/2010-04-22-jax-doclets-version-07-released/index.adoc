@@ -7,8 +7,7 @@ tags:
 - "rest"
 - "documentation"
 ---
-Did you know we have an http://www.lunatech-labs.com[open-source web
-site]?
+Did you know we have an http://www.lunatech-labs.com[open-source web site]?
 
 We release all our open-source projects there, as a way to give back to
 the open-source community we use and abuse every day and without which

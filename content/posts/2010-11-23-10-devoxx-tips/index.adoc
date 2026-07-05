@@ -19,8 +19,7 @@ vous pouvez pas venir à Devoxx l’année prochaine.
 ____
 
 Nicolas Martignole,
-http://lescastcodeurs.com/2010/11/les-cast-codeurs-podcast-episode-31-special-devoxx-2010/[Les
-Cast Codeurs Podcast 31] (at 45:58):
+http://lescastcodeurs.com/2010/11/les-cast-codeurs-podcast-episode-31-special-devoxx-2010/[Les Cast Codeurs Podcast 31] (at 45:58):
 
 Make sure you can actually go to Devoxx, and change jobs if your
 employer won't let you (via @lescastcodeurs). If you have to choose
@@ -42,8 +41,7 @@ http://moo.com/[moo.com] - I am looking forward to some good Devoxx
 designs for next year. If you cannot afford business cards, then just
 print your Twitter name on little address stickers or something. Also
 recommended:
-http://thedailywtf.com/Articles/JustInTime-Business-Cards.aspx[Just-In-Time
-Business Cards] (tick the swag box).
+http://thedailywtf.com/Articles/JustInTime-Business-Cards.aspx[Just-In-Time Business Cards] (tick the swag box).
 
 [[early]]
 == 3. Arrive in town early
@@ -69,8 +67,7 @@ Java Knights on the Tuesday evening). Take a map, because Kulminator is
 hard to find.
 
 *2011 update: Kulminator is
-https://plus.google.com/photos/101174951617223562800/albums/5673423416237350737[closed
-for Devoxx week!]*
+https://plus.google.com/photos/101174951617223562800/albums/5673423416237350737[closed for Devoxx week!]*
 
 Alternatively, make plans to meet up with random people. The best way to
 do this is to organise an event yourself, especially if you can get some

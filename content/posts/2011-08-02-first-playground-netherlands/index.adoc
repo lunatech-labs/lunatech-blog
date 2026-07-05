@@ -14,8 +14,7 @@ Play!ground is a fun event, so expect to enjoy yourself as well!
 
 * *When*: Friday, 12 August 2011 starting at 16h00
 * *Where*:
-http://maps.google.nl/maps?f=l&hl=en&q=lunatech+research&near=&sll=52.372797,4.893749&sspn=5.689092,7.624512&ie=UTF8&om=1&ll=52.335339,4.724121&spn=2.003392,5.685425&z=8&iwloc=A&cid=51919412,4455850,9500097742604493715&source=embed[Lunatech
-Office, Heemraadssingel 70, 3021DD, Rotterdam]
+http://maps.google.nl/maps?f=l&hl=en&q=lunatech+research&near=&sll=52.372797,4.893749&sspn=5.689092,7.624512&ie=UTF8&om=1&ll=52.335339,4.724121&spn=2.003392,5.685425&z=8&iwloc=A&cid=51919412,4455850,9500097742604493715&source=embed[Lunatech Office, Heemraadssingel 70, 3021DD, Rotterdam]
 
 == Programme
 

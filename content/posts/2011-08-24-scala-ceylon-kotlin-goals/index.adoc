@@ -32,8 +32,7 @@ what the projects’ goals are.
 You might think that the Scala language is designed to get the largest
 number of PhD students involved in the project. A more reliable source
 is the
-http://www.artima.com/scalazine/articles/goals_of_scala.html[interview
-with Martin Odersky], inventor of Scala, in which he says:
+http://www.artima.com/scalazine/articles/goals_of_scala.html[interview with Martin Odersky], inventor of Scala, in which he says:
 
 ____
 The first thing we cared about was to have as clean an integration of
@@ -83,8 +82,7 @@ To summarise: Scala’s goal is to let you write a certain kind of code.
 == Ceylon goals
 
 Compared to the Scala goals above, the goals listed in the
-http://in.relation.to/Bloggers/IntroductionToCeylonPart1[Introduction to
-Ceylon] are broader:
+http://in.relation.to/Bloggers/IntroductionToCeylonPart1[Introduction to Ceylon] are broader:
 
 ____
 * to be easy to learn and understand for Java and C# developers,
@@ -113,8 +111,7 @@ been if its designers had been able to predict the future.
 [[kotlin]]
 == Kotlin goals
 
-The http://confluence.jetbrains.net/display/Kotlin/Welcome[Kotlin
-documentation page] also includes a list of design goals:
+The http://confluence.jetbrains.net/display/Kotlin/Welcome[Kotlin documentation page] also includes a list of design goals:
 
 ____
 * to create a *Java-compatible* language,
@@ -131,8 +128,7 @@ ____
 Since Kotlin comes from JetBrains, you might think that this all has
 something to do with IntelliJ IDEA, their IDE. According to their own
 explanation of
-http://blog.jetbrains.com/kotlin/2011/08/why-jetbrains-needs-kotlin/[Why
-JetBrains needs Kotlin], you’re not wrong:
+http://blog.jetbrains.com/kotlin/2011/08/why-jetbrains-needs-kotlin/[Why JetBrains needs Kotlin], you’re not wrong:
 
 ____
 Although we’ve developed support for several JVM-targeted programming
@@ -168,8 +164,7 @@ functional programming as a project goal. At least, that is the
 impression you get from a first glance at the goals lists. However, this
 is merely a difference in emphasis, instead of an actual difference in
 what we can expect from the languages. Dmitry Jemerov from the Kotlin
-team http://twitter.com/#!/intelliyole/status/106337531699802112[wrote
-in] to say that functional programming (FP) is 'more of a "duh" than an
+team http://twitter.com/#!/intelliyole/status/106337531699802112[wrote in] to say that functional programming (FP) is 'more of a "duh" than an
 explicit goal - so obvious for us that FP support is needed’. This is
 somewhat unexpected: we seem to have progressed from a period in which
 it went without saying that new languages be object-oriented to a time

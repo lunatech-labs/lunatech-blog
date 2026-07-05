@@ -15,56 +15,39 @@ month we have presented to an average of 50 people per month the
 following technologies:
 
 * 21/06/2011 :
-[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/201106%2Dgwt%2Dandroid[Soirée
-GWT et Android]#
+[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/201106%2Dgwt%2Dandroid[Soirée GWT et Android]#
 * 06/05/2011 :
-[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/201105%2Denvers%2Dtorquebox[Soirée
-Envers et CDI]#
+[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/201105%2Denvers%2Dtorquebox[Soirée Envers et CDI]#
 * 11/03/2011 :
-[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/201103%2Dfiles%2Dmessages[Soirée
-files de messages]#
+[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/201103%2Dfiles%2Dmessages[Soirée files de messages]#
 * 18/02/2011 :
-[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/201102%2Dfull%2Dtext%2Dsearch[Apache
-Lucene/Solr et ElasticSearch]#
+[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/201102%2Dfull%2Dtext%2Dsearch[Apache Lucene/Solr et ElasticSearch]#
 * 06/01/2011 :
-[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/201101%2Doutils[Soirée
-outils de productivité]#
+[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/201101%2Doutils[Soirée outils de productivité]#
 * 29/11/2010 :
-[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/201012%2Dnetbeans[Soirée
-NetBeans]#
+[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/201012%2Dnetbeans[Soirée NetBeans]#
 * 24/11/2010 :
-[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/201011%2Dcloud[Soirée
-nuages (cloud)]#
+[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/201011%2Dcloud[Soirée nuages (cloud)]#
 * 22/06/2010 :
-[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/201006%2Dbpm[Soirée
-BPM]#
+[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/201006%2Dbpm[Soirée BPM]#
 * 28/05/2010 :
-[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/201005%2Dcloud[Soirée
-cloud et coups de cœurs]#
+[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/201005%2Dcloud[Soirée cloud et coups de cœurs]#
 * 20/04/2010 :
-[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/201004%2Dbuild[Soirée
-outils de build]#
+[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/201004%2Dbuild[Soirée outils de build]#
 * 18/03/2010 :
-[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/201003%2Drestful[Soirée
-RESTful]#
+[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/201003%2Drestful[Soirée RESTful]#
 * 05/02/2010 :
-[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/201002%2Dgoogle[Soirée
-Technologies Google]#
+[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/201002%2Dgoogle[Soirée Technologies Google]#
 * 09/12/2009 :
-[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/20091209%2Dintegration%2Dcontinue[Soirée
-intégration continue]#.
+[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/20091209%2Dintegration%2Dcontinue[Soirée intégration continue]#.
 * 6/11/2009 :
-[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/20091106%2Ddistributed%2Dcomputing[Soirée
-programmation distribuée]#.
+[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/20091106%2Ddistributed%2Dcomputing[Soirée programmation distribuée]#.
 * 15/07/2009 :
-[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/200907XX[Soirée
-Agile]#.
+[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/200907XX[Soirée Agile]#.
 * 19/06/2009 :
-[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/20090619%2Dria[Soirée
-RIA]#.
+[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/20090619%2Dria[Soirée RIA]#.
 * 10/04/2009 :
-[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/20090410%2Dsoa[Soirée
-SOA]#.
+[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/20090410%2Dsoa[Soirée SOA]#.
 
 All this with the help of local, national and international speakers who
 make these events so rewarding.
@@ -77,14 +60,11 @@ name of http://rivieradev.fr[Riviera DEV] on the 20/21 of October.
 Here are our past larger conferences:
 
 * 09/07/2010 :
-[.wikiexternallink]#http://www.sophiaconf2010.fr/programme/vendredi-9-juillet.html[SophiaConf
-2010]#
+[.wikiexternallink]#http://www.sophiaconf2010.fr/programme/vendredi-9-juillet.html[SophiaConf 2010]#
 * 02/10/2009 :
-[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/20091002[Sophia
-fait sa Java]#.
+[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/20091002[Sophia fait sa Java]#.
 * 14/01/2009 :
-[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/20090114%2Djug%2Dminiconf[Mini-conf
-Java EE]#.
+[.wikilink]#http://rivierajug.org//xwiki/bin/view/Main/20090114%2Djug%2Dminiconf[Mini-conf Java EE]#.
 
 Lunatech Research remains committed more than ever to this great
 community, because we love sharing knowledge and the attendees also love

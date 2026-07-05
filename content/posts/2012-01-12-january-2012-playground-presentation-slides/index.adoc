@@ -7,8 +7,7 @@ tags:
 - "playground"
 ---
 On 6 January 2012, Lunatech hosted the Play!ground in the Netherlands -
-an event for developers interested in the http://www.playframework.org/[Play
-framework]. Here are the slides from the
+an event for developers interested in the http://www.playframework.org/[Play framework]. Here are the slides from the
 presentations.
 
 == Persistence with Scala and Squeryl

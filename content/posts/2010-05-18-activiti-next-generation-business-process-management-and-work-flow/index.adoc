@@ -5,8 +5,7 @@ tags:
 - "bpm"
 - "java"
 ---
-http://www.alfresco.com/media/releases/2010/05/activiti_bpm/[Yesterday's
-launch] of
+http://www.alfresco.com/media/releases/2010/05/activiti_bpm/[Yesterday's launch] of
 http://www.activiti.org/[Activiti] starts a new generation of business
 process management (BPM) software that will disrupt the existing BPM
 engine landscape. Activiti promises to be the ideal choice for using BPM

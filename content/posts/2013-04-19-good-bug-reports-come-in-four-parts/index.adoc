@@ -96,8 +96,7 @@ huge difference in how long it takes to follow idiot-proof instructions
 and how long it takes to work it out for yourself.
 
 This level of detail is described in, er… detail, in
-https://blog.lunatech.com/posts/2007-03-08-how-write-user-interface-instructions[How
-to write user-interface instructions].
+https://blog.lunatech.com/posts/2007-03-08-how-write-user-interface-instructions[How to write user-interface instructions].
 
 For example, this is going to save time:
 

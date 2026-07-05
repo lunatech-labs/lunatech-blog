@@ -5,8 +5,7 @@ tags:
 - "fun"
 ---
 In his
-excellent book http://www.jnd.org/books.html#434[The Invisible
-Computer], Donald Norman explains the
+excellent book http://www.jnd.org/books.html#434[The Invisible Computer], Donald Norman explains the
 computer changing from something you might have one of at home (a
 multi-purpose PC) to an unseen component in special-purpose devices from
 washing machines and refrigerators to portable telephones and music
@@ -27,8 +26,7 @@ justify the time and expense, or similarly dedicated amateurs.
 image:lolcat-blog.jpg[bloggng - ur doin it wrong]
 
 Cat macros (or http://www.lolcats.com/[lolcats]), as popularised by
-http://en.wikipedia.org/wiki/I_Can_Has_Cheezburger%3F[I Can Has
-Cheezburger?], are fairly simple to produce, but there are still
+http://en.wikipedia.org/wiki/I_Can_Has_Cheezburger%3F[I Can Has Cheezburger?], are fairly simple to produce, but there are still
 http://community.livejournal.com/cat_macros/profile[rules] that make it
 harder:
 

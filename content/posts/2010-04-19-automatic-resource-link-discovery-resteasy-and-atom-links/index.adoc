@@ -28,8 +28,7 @@ resource” or “list of comments for this resource”.
 
 This process is self-discovery, just like the good old web, which is
 what REST is modeled on. Even then some people put
-http://tools.ietf.org/html/draft-nottingham-http-link-header-06[links in
-the HTTP response headers] — which is better because it allows you to
+http://tools.ietf.org/html/draft-nottingham-http-link-header-06[links in the HTTP response headers] — which is better because it allows you to
 parse the links without parsing the response, while others prefer to put
 them directly on the resource representations — which allows more
 fine-grained links, and the ability to have links on multiple resources.
@@ -94,8 +93,7 @@ relations.
 === Links in RESTEasy
 
 http://www.jboss.org/resteasy/[RESTEasy] already had support for
-http://www.jboss.org/file-access/default/members/resteasy/freezone/docs/1.2.GA/userguide/html/LinkHeader.html[Link
-headers] (which contain Atom link equivalents) for a while, but for this
+http://www.jboss.org/file-access/default/members/resteasy/freezone/docs/1.2.GA/userguide/html/LinkHeader.html[Link headers] (which contain Atom link equivalents) for a while, but for this
 we needed resource-level links, and not response-level links, since our
 responses contained more than one resource on multiple levels.
 

@@ -60,5 +60,4 @@ I have been involved in the organisation of the Joy of Coding conference
 and I must admit it is extremely satisfying to receive so much positive
 feedback from both attendees and speakers. That said, there is always
 room for improvement and we are carefully listening to all remarks. You
-can be sure we will work hard to make http://joyofcoding.org/[Joy of
-Coding] better next year.
+can be sure we will work hard to make http://joyofcoding.org/[Joy of Coding] better next year.

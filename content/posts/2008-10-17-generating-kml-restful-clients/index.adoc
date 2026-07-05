@@ -10,9 +10,7 @@ tags:
 In this article we describe how to use
 https://jaxb.dev.java.net/[JAXB] to generate a
 http://www.opengeospatial.org/standards/kml/[KML] object
-representation that can be used to feed data to http://maps.google.com[Google
-Maps] and http://earth.google.com[Google
-Earth]. We then show how to integrate KML
+representation that can be used to feed data to http://maps.google.com[Google Maps] and http://earth.google.com[Google Earth]. We then show how to integrate KML
 generation into our /2008/03/20/restful-web-sevices-resteasy-jax-rs[RESTful
 API] and how to create
 a mashup with those technologies. 
@@ -20,8 +18,7 @@ a mashup with those technologies.
 == Introduction
 
 We have already described how to
-link:/2008/03/20/restful-web-sevices-resteasy-jax-rs[integrate with
-JAX-RS] using the JBoss http://jboss.org/resteasy[RESTEasy]
+link:/2008/03/20/restful-web-sevices-resteasy-jax-rs[integrate with JAX-RS] using the JBoss http://jboss.org/resteasy[RESTEasy]
 implementation. In that last article we showed how straightforward it
 was with a good API to implement RESTful web services that serve XML
 representations of our data. We have always been fervent supporters of
@@ -68,10 +65,8 @@ format: http://code.google.com/apis/kml/documentation/[KML].
 
 I have worked with many APIs over the years, not so many in JavaScript I
 admit, but still quite a few, and I have to say Google's JavaScript APIs
-for http://code.google.com/apis/maps/documentation/reference.html[Google
-Maps] and
-http://code.google.com/apis/earth/documentation/reference/index.html[Google
-Earth] are good. They are not just good: they are very good. They are so
+for http://code.google.com/apis/maps/documentation/reference.html[Google Maps] and
+http://code.google.com/apis/earth/documentation/reference/index.html[Google Earth] are good. They are not just good: they are very good. They are so
 well designed that even though I am not too fond of JavaScript I end up
 not complaining at a single thing about these APIs (with an exception I
 will mention later).
@@ -140,8 +135,7 @@ Failed to produce code.
 ----
 
 This error and a solution are
-http://acuriousanimal.blogspot.com/2008/08/using-jaxb-to-generate-kml-java-classes.html[already
-known] but we were not too happy about modifying a schema. So We have
+http://acuriousanimal.blogspot.com/2008/08/using-jaxb-to-generate-kml-java-classes.html[already known] but we were not too happy about modifying a schema. So We have
 looked for https://jaxb.dev.java.net/guide/[other solutions] and found
 that it is possible to either insert some JAXB annotations in the schema
 or create an external _binding customisation_ file, which would be used
@@ -270,8 +264,7 @@ As soon as we started using this generated code we noticed that there
 were many `JAXBElement` and no `@XmlRootElement`, which is definitely
 not how we were used to working with JAXB, and tends to get in the way
 of clean code. There turns out to be
-http://weblogs.java.net/blog/kohsuke/archive/2006/03/why_does_jaxb_p.html[a
-reason for this] and a solution (for some elements):
+http://weblogs.java.net/blog/kohsuke/archive/2006/03/why_does_jaxb_p.html[a reason for this] and a solution (for some elements):
 
 [source,xml=nogutter]
 ----
@@ -445,8 +438,7 @@ public interface RESTResources {
 
 The implementation of the EJB bean is of course left to the reader, but
 We have already given the full code for the KML generation and in our
-link:/2008/03/20/restful-web-sevices-resteasy-jax-rs[previous article on
-RESTEasy] We have given the rest, so it is not that hard.
+link:/2008/03/20/restful-web-sevices-resteasy-jax-rs[previous article on RESTEasy] We have given the rest, so it is not that hard.
 
 We can now open links such as
 `http://visiblelogistics.com/rest/resource/AWC/Package1/placements` in

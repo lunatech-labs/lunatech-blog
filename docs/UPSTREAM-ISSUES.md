@@ -25,6 +25,18 @@ The Java AsciiDoc plugin renders nothing for `video::ID[youtube]` and emits no
 warning. Either support it or warn on unsupported macros.
 - Impact: 7 posts. Workaround: passthrough `<iframe>`.
 
+### 3b. Link macros broken by a newline inside the bracket text
+When a link macro's bracket text wraps across a source line break
+(`http://example.com/[Joy of` + newline + `Coding] better`), the parser emits a
+broken anchor whose href and text contain the raw markup
+(`<a href="http://example.com/[Joy">http://example.com/[Joy</a> of Coding]`).
+Asciidoctor folds the newline to a space and renders the link correctly.
+The same happens for a link macro on the continuation line of a table cell
+(`|text` + newline + `http://...[label]`): the macro is emitted literally.
+- Impact: 192 of our 457 posts (548 links) before we joined the macros onto one
+  line in the sources. Related to the inline `image:` macros dropped when their
+  bracket text wraps (fixed the same way during migration).
+
 ### 4. Aliases plugin does not work for non-ASCII alias paths
 `quarkus-roq-plugin-aliases`: an alias whose path contains non-ASCII characters
 (apostrophe, accents, ellipsis) returns 404 in both static generation and live

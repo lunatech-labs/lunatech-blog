@@ -126,7 +126,6 @@ of `::`. It's just that `::`'s toString method insists that it's a
 Scala gives you features that help you (and library makers) to build
 powerful and concise APIs. Although I wouldn't recommend that everyone
 start using punctuation characters to name their classes. Learn more
-from http://www.artima.com/shop/programming_in_scala[_Programming in
-Scala_] chapter _Case Classes and Pattern Matching_.
+from http://www.artima.com/shop/programming_in_scala[_Programming in Scala_] chapter _Case Classes and Pattern Matching_.
 
 

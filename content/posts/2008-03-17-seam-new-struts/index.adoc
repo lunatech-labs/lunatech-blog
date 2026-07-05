@@ -7,8 +7,7 @@ tags:
 - "opinion"
 ---
 After Nicolas and I said that
-‘(http://seamframework.org/)[Seam] is the next Struts’ in our https://blog.lunatech.com/2007-12-14-javapolis-2007-seam)[JavaPolis
-presentation],
+‘(http://seamframework.org/)[Seam] is the next Struts’ in our https://blog.lunatech.com/2007-12-14-javapolis-2007-seam)[JavaPolis presentation],
 http://in.relation.to/Bloggers/Max[Max] told us that
 ‘http://in.relation.to/Bloggers/Gavin[Gavin] will hate that’, which is
 funny because of how it takes our statement out of context. This article
@@ -48,8 +47,7 @@ this library-use expansion has been the increase in what Java EE covers,
 which matters because libraries that implement an official Java EE API
 are more respectable, especially in corporate IT and because more people
 are involved via the
-http://en.wikipedia.org/wiki/Java_Community_Process[Java Community
-Process]. This is why JavaServer Faces (JSF) is already popular, and why
+http://en.wikipedia.org/wiki/Java_Community_Process[Java Community Process]. This is why JavaServer Faces (JSF) is already popular, and why
 its eventual success is inevitable, despite its initial design flaws.
 
 Seam is one of several frameworks, including
@@ -114,8 +112,7 @@ with Eclipse plug-ins. The de-facto set of plug-ins for Java web
 application development is now so big that it is simply easier to avoid
 version management issues by using a combined download and use one of
 the annual
-http://en.wikipedia.org/wiki/Eclipse_%28software%29#Simultaneous_releases[simultaneous
-releases].
+http://en.wikipedia.org/wiki/Eclipse_%28software%29#Simultaneous_releases[simultaneous releases].
 
 Another aspect of Seam that will stimulate mass adoption is that it does
 not prescribe one true coding style, architecture or pattern, which will

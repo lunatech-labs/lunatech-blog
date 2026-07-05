@@ -152,8 +152,7 @@ need arise in a given situation.
 
 We can easily use these serializers from our view templates, if we
 create a
-http://www.playframework.org/documentation/1.2/templates#Createcustomextensions[custom
-Java object extension]:
+http://www.playframework.org/documentation/1.2/templates#Createcustomextensions[custom Java object extension]:
 
 [source,java]
 ----

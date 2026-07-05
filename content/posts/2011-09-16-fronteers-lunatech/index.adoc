@@ -25,8 +25,7 @@ image:fronteers.png[Fronteers logo]
 == Front-end development
 
 What is front-end development?
-http://www.guardian.co.uk/help/insideguardian/2009/sep/28/blogpost[Inside
-the Guardian blog] helpfully explains:
+http://www.guardian.co.uk/help/insideguardian/2009/sep/28/blogpost[Inside the Guardian blog] helpfully explains:
 
 ____
 In our visually and tecnhologically sophisticated society, access to

@@ -10,8 +10,7 @@ previous Play framework 1.0 article discussed https://blog.lunatech.com/posts/20
 cover validation messages. This article describes how to customise and
 localise validation error messages with Play.
 
-The http://www.playframework.org/documentation/1.0.3/validation[Play
-validation guide] describes three ways to validate form (HTTP request)
+The http://www.playframework.org/documentation/1.0.3/validation[Play validation guide] describes three ways to validate form (HTTP request)
 data in a Play web application.
 
 . In the controller method, call methods on the controller's
@@ -58,8 +57,7 @@ validation.required = Please enter a value
 
 You can also provide localisations in other languages, as described in
 the earlier article
-link:/2010/04/12/how-localise-play-framework-web-application[How to
-localise a Play framework web application].
+link:/2010/04/12/how-localise-play-framework-web-application[How to localise a Play framework web application].
 
 [[parameters]]
 == Validation message parameters
@@ -109,8 +107,7 @@ validations have parameters.
 
 The validation messages in `$PLAY_HOME/resources/messages` use the
 default message key for each of Play’s
-link:https://blog.lunatech.com/posts/2010-08-30-playframework-builtin-validations[built-in
-validations]. You can specify a different message key. For example:
+link:https://blog.lunatech.com/posts/2010-08-30-playframework-builtin-validations[built-in validations]. You can specify a different message key. For example:
 
 [source,java]
 ----

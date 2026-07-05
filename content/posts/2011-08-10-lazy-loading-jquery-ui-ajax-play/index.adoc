@@ -9,21 +9,18 @@ This article
 
 This
 article shows you how to use http://jqueryui.com/[jQuery UI]
-components to load page content using Ajax from a http://www.playframework.org/[Play
-framework] 1.2 web application. This can
+components to load page content using Ajax from a http://www.playframework.org/[Play framework] 1.2 web application. This can
 be useful as a way of improving web page performance by delaying loading
 of some page content that might not be needed at first, or ever.
 
 This follows on from the earlier article
-https://blog.lunatech.com/posts/2011-07-05-jquery-ui-ajax-autocomplete-playframework[jQuery
-UI Ajax autocomplete with Play] by providing examples of more jQuery UI
+https://blog.lunatech.com/posts/2011-07-05-jquery-ui-ajax-autocomplete-playframework[jQuery UI Ajax autocomplete with Play] by providing examples of more jQuery UI
 components. As before, the lesson is that Play framework does not need
 to have its own built-in user-interface components because it works so
 well with existing JavaScript-based user-interface component libraries.
 
 This article’s examples and source code are available as part of the
-Play framework http://www.playframework.org/modules/jqueryui[jQuery UI
-module].
+Play framework http://www.playframework.org/modules/jqueryui[jQuery UI module].
 
 == Architecture
 

@@ -4,8 +4,7 @@ author: "evelienket"
 tags:
 - "java"
 ---
-With this OpenSearch plug-in developed for http://www.atlassian.com/software/confluence/[Atlassian's
-Confluence], you make it
+With this OpenSearch plug-in developed for http://www.atlassian.com/software/confluence/[Atlassian's Confluence], you make it
 possible to search your Confluence site from the outside with an
 OpenSearch client. Atlassian's Confluence is an enterprise wiki for
 sharing knowledge that comes with its own search engine. By using
@@ -51,8 +50,7 @@ The browsers 'Search Engine List' (Mozilla 5) or 'Instant Search Box'
 (IE 7) is also using the OpenSearch standard. To be able to add your
 Confluence to the search engine list of your browser you do _not_ need
 this plug-in, but you need to make an OpenSearch description and add it
-to your site. (See link:#cc[How to configure Confluence for the
-browser's search engine list].)
+to your site. (See link:#cc[How to configure Confluence for the browser's search engine list].)
 
 == How to use the plug-in
 

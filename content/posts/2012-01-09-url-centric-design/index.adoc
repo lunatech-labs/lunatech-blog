@@ -45,10 +45,8 @@ depends on your background. In the past, enterprise application
 development has focused more on data models, while consumer software is
 often more user-interfaction oriented. However, the relatively recent
 trends towards
-http://en.wikipedia.org/wiki/Service-oriented_architecture[service-oriented
-architecture] and
-http://en.wikipedia.org/wiki/Representational_state_transfer[REST
-architecture] have encouraged more application architects to think in
+http://en.wikipedia.org/wiki/Service-oriented_architecture[service-oriented architecture] and
+http://en.wikipedia.org/wiki/Representational_state_transfer[REST architecture] have encouraged more application architects to think in
 terms of APIs.
 
 URL-centric design only starts to seem like an obvious approach when you
@@ -116,5 +114,4 @@ devices, such as a combination of desktop and mobile web interfaces. The
 same interface can also be the basis of an REST API used in a
 service-oriented architecture.
 
-https://plus.google.com/107170847819841716154/posts/PGerfjon2sZ[Comments
-on Google+]
+https://plus.google.com/107170847819841716154/posts/PGerfjon2sZ[Comments on Google+]

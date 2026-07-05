@@ -72,8 +72,7 @@ by choice or even for pleasure, and those for whom writing will only
 ever be 'work'. I blame schools. No wonder people who love or hate
 writing wind each other up, a situation hardly helped by contributions
 like Steve Yegge's judgement that
-http://steve.yegge.googlepages.com/you-should-write-blogs[You Should
-Write Blogs], and other such evangelism.
+http://steve.yegge.googlepages.com/you-should-write-blogs[You Should Write Blogs], and other such evangelism.
 
 [[Theconstructivisthypothesis]]
 == The constructivist hypothesis

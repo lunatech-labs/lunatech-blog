@@ -6,8 +6,7 @@ tags:
 - "books"
 ---
 For the last six months we’ve been
-working on a not-so-secret project to write http://www.lunatech-research.com/books[books about Play
-2]. Ideally, one book about the
+working on a not-so-secret project to write http://www.lunatech-research.com/books[books about Play 2]. Ideally, one book about the
 http://www.playframework.org/[Play framework] would have been enough,
 but these days there isn’t just Java: now there’s Scala as well, which
 is why we are happy to announce both *Play for Scala* and *Play for

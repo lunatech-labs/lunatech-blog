@@ -4,9 +4,7 @@ author: "hilton"
 tags:
 - "working-environment"
 ---
-In http://blog.stackoverflow.com/index.php/2008/05/podcast-7/[StackOverflow Podcast
-#] 7, http://www.joelonsoftware.com/[Joel
-Spoelsky] points out that 'I have yet to
+In http://blog.stackoverflow.com/index.php/2008/05/podcast-7/[StackOverflow Podcast #] 7, http://www.joelonsoftware.com/[Joel Spoelsky] points out that 'I have yet to
 find another company except for Microsoft and Apple, I think, that has
 private offices for developers'. Personally, I agree with Joel that that
 it is valuable for a developer to have a private office, but then I

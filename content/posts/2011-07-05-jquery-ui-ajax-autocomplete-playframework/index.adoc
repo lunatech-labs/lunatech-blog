@@ -7,11 +7,9 @@ tags:
 - "javascript"
 - "playframework"
 ---
-When Matt Raible http://raibledesigns.com/rd/entry/my_comparing_jvm_web_frameworks[compared JVM web
-frameworks]
+When Matt Raible http://raibledesigns.com/rd/entry/my_comparing_jvm_web_frameworks[compared JVM web frameworks]
 last December, he gave the (http://www.playframework.org/)[Play framework] (version 1.2) *null points*
-for ‘components’. Aside from http://ptrthomas.wordpress.com/2010/12/04/comparing-jvm-web-frameworks-a-response-to-matt-raible/[other
-criticism]
+for ‘components’. Aside from http://ptrthomas.wordpress.com/2010/12/04/comparing-jvm-web-frameworks-a-response-to-matt-raible/[other criticism]
 of Raible’s comparison or the lack of definition of what a ‘component’
 is in this context, it is worth mentioning that this evaluation is
 either inaccurate, misleading or both. It is accurate to say that Play
@@ -37,8 +35,7 @@ show you how easy it is, and to provide some simple jQuery code examples
 for Java developers who are less familiar with it.
 
 This article’s examples and source code are available as part of the
-Play framework http://www.playframework.org/modules/jqueryui[jQuery UI
-module].
+Play framework http://www.playframework.org/modules/jqueryui[jQuery UI module].
 
 == Architecture
 

@@ -13,8 +13,7 @@ http://www.jboss.org/drools[Drools] use.
 == Problem
 
 One of the reasons that you want to
-https://blog.lunatech.com/posts/2011-09-02-logging-debug-drools[log debug
-messages] from your rules is that you just want to see which rules are
+https://blog.lunatech.com/posts/2011-09-02-logging-debug-drools[log debug messages] from your rules is that you just want to see which rules are
 activated, how many times and in which order. This is frequently part of
 debugging a set of rules and part of understanding how a particular rule
 set works: you may need to see which rules were activated in order to

@@ -5,9 +5,7 @@ tags:
 - "conference"
 - "playframework"
 ---
-On 7 November 2012, Peter Hilton presented http://oredev.org/2012/sessions/play-framework-2[Play Framework
-2] at http://oredev.org/2012/[Øredev
-2012] in Malmö. Øredev is a cross-platform
+On 7 November 2012, Peter Hilton presented http://oredev.org/2012/sessions/play-framework-2[Play Framework 2] at http://oredev.org/2012/[Øredev 2012] in Malmö. Øredev is a cross-platform
 developer conference in Sweden, started in 2005. Here is the video of
 the presentation.
 

@@ -194,8 +194,7 @@ Again, more progress but we are still not done.
 == JSF converters
 
 Using `MessageFormat` date formatting is not what you want if you are
-already using a link:/2007/06/13/facelets-date-converter[JSF-Facelets
-custom date converter] that formats dates as 'today' and 'yesterday',
+already using a link:/2007/06/13/facelets-date-converter[JSF-Facelets custom date converter] that formats dates as 'today' and 'yesterday',
 for example. The problem here is that `MessageFormat` is not integrated
 with JSF and Seam. This is where things might get less pretty.
 

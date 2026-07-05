@@ -6,8 +6,7 @@ tags:
 - "playframework"
 ---
 Following the success
-of the August event, we are pleased to announce another http://www.playframework.org/[Play
-Framework] event, for software developers
+of the August event, we are pleased to announce another http://www.playframework.org/[Play Framework] event, for software developers
 and technical managers.
 
 This event is the perfect opportunity to learn practical techniques,
@@ -18,8 +17,7 @@ developers. We also expect to have some fun.
 
 * 16:00, Friday, 30 September 2011
 * Lunatech Office -
-http://maps.google.com/maps?q=Lunatech+Research,rotterdam[Heemraadssingel
-70, 3021DD, Rotterdam]
+http://maps.google.com/maps?q=Lunatech+Research,rotterdam[Heemraadssingel 70, 3021DD, Rotterdam]
 
 == Programme
 
@@ -31,15 +29,13 @@ link:/author/peter-hilton[Peter Hilton], Lunatech
 * 17:15 - break
 * 17:30 - technical presetation,
 https://twitter.com/#!/spinscale[Alexander Reelsen], author of
-http://blog.lunatech.com/2011/09/19/playframework-cookbook-review[Play
-Framework Cookbook]
+http://blog.lunatech.com/2011/09/19/playframework-cookbook-review[Play Framework Cookbook]
 * 18:15 - drinks, networking
 
 The programme will begin with a presentation of how to integrate jQuery
 UI widgets in a Play application. User-interface ‘components’ must be
 important, because when Matt Raible
-http://raibledesigns.com/rd/entry/my_comparing_jvm_web_frameworks[compared
-JVM web frameworks] last December, he gave the
+http://raibledesigns.com/rd/entry/my_comparing_jvm_web_frameworks[compared JVM web frameworks] last December, he gave the
 http://www.playframework.org/[Play framework] _null points_ for
 ‘components’. Although it is accurate to say that Play does not have
 ‘components’, in the sense that Play does not ship with a UI component
@@ -52,8 +48,7 @@ For the second presentation, Alexander Reelsen is flying over from
 Munich. This presentation about Play’s internals will look behind the
 curtain to reveal how some of Play’s magic works. We also hope that
 Alexander will sign our copies of his
-http://blog.lunatech.com/2011/09/19/playframework-cookbook-review[excellent
-book].
+http://blog.lunatech.com/2011/09/19/playframework-cookbook-review[excellent book].
 
 As always, beer and networking are an essential part of the programme.
 

@@ -7,8 +7,7 @@ tags:
 Lunatech has started working with http://www.happymelly.com/[Happy Melly] to build a collaboration platform for their new business. Although we’re building software, CEO Jurgen Appelo thinks we’re more like food.
 
 Jurgen writes that you should
-http://www.noop.nl/2013/07/treat-your-suppliers-like-potato-wedges.html[Treat
-Your Suppliers Like Potato Wedges], in which he explains the benefits of
+http://www.noop.nl/2013/07/treat-your-suppliers-like-potato-wedges.html[Treat Your Suppliers Like Potato Wedges], in which he explains the benefits of
 not planning ahead when it comes to suppliers, even for important things
 like food. And your business’ software.
 

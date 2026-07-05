@@ -12,8 +12,7 @@ image:/posts/2009-12-21-chrimble-cocktail/chrimble-cocktail.jpg[Chrimble cocktai
 
 == Programming
 
-link:/posts/2009-02-03-what-every-web-developer-must-know-about-url-encoding[What
-every web developer must know about URL encoding] is probably the most
+link:/posts/2009-02-03-what-every-web-developer-must-know-about-url-encoding[What every web developer must know about URL encoding] is probably the most
 popular article on the Lunatech blog, and still getting a lot of
 attention years later. This is not just because Stéphane’s article does
 what it says on the tin (it explains in detailed what every web
@@ -24,16 +23,14 @@ development, which is already more than twenty years old, and these
 issues aren’t going away any time soon, so it’s never too late to catch
 up.
 
-link:/posts/2009-09-18-support-original-language-accept-language-header[Support
-for original language in Accept-Language header] continues along similar
+link:/posts/2009-09-18-support-original-language-accept-language-header[Support for original language in Accept-Language header] continues along similar
 lines, in which Francisco writes about an HTTP request header that is
 perhaps less important to most people, who aren’t constantly doing
 (natural) language negotiation In Real Life. Lunatech is perhaps
 different, though, having a disproportionate number of staff who are
 tri-lingual.
 
-link:/posts/2009-11-23-generating-scalable-barcodes-itext-and-seam[Generating
-scalable barcodes with iText and Seam], by comparison, is a much more
+link:/posts/2009-11-23-generating-scalable-barcodes-itext-and-seam[Generating scalable barcodes with iText and Seam], by comparison, is a much more
 practical kind of article and even has pictures (or bar codes) as well
 as code. This is still my favourite kind of blog post, because software
 library documentation and books can never go into detail on every
@@ -45,8 +42,7 @@ done it before and can’t find a description on-line.
 
 == Architecture
 
-link:/posts/2009-12-14-decision-service-architecture-jboss-rules[Decision
-service architecture with JBoss Rules] was a rare digression into the
+link:/posts/2009-12-14-decision-service-architecture-jboss-rules[Decision service architecture with JBoss Rules] was a rare digression into the
 higher-level territory of software architecture, which we don’t usually
 bother talking about because it always sounds so vague. (That’s probably
 not a good thing.) It’s worth doing for niche enterprise libraries and
@@ -65,5 +61,4 @@ to try a new cocktail every year as well as a new programming language.
 It’s just too bad I didn’t get around to writing the follow-up blog
 post: _Do TDD-ers drink mocktails?_
 
-_Photo: https://www.flickr.com/photos/orijinal/4726603759[Jaysin
-Trevino]_
+_Photo: https://www.flickr.com/photos/orijinal/4726603759[Jaysin Trevino]_

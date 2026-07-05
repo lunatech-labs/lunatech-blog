@@ -9,8 +9,7 @@ tags:
 This article
 describes how we implemented
 http://en.wikipedia.org/wiki/Representational_State_Transfer[RESTful]
-web services in our http://seamframework.org/[Seam]-based http://java.sun.com/javaee[Java
-EE] web application." ---
+web services in our http://seamframework.org/[Seam]-based http://java.sun.com/javaee[Java EE] web application." ---
 
 == Introduction
 
@@ -35,15 +34,11 @@ where they could bypass all the security and validation that we have
 built in the layers above our database in our web application.
 
 We are using
-http://java.sun.com/javaee/overview/faq/persistence.jsp[Java
-persistence] to map database rows and tables to _POJOs_ (Plain Old Java
+http://java.sun.com/javaee/overview/faq/persistence.jsp[Java persistence] to map database rows and tables to _POJOs_ (Plain Old Java
 Objects using
-http://java.sun.com/j2se/1.5.0/docs/guide/language/annotations.html[Java
-annotations] to describe the database mapping). These are called
-http://java.sun.com/javaee/5/docs/tutorial/doc/bnbpy.html[_Entity Java
-Beans_] in the _EJB 3_
-(http://java.sun.com/javaee/5/docs/tutorial/doc/bnblr.html[Enterprise
-Java Beans 3]) jargon.
+http://java.sun.com/j2se/1.5.0/docs/guide/language/annotations.html[Java annotations] to describe the database mapping). These are called
+http://java.sun.com/javaee/5/docs/tutorial/doc/bnbpy.html[_Entity Java Beans_] in the _EJB 3_
+(http://java.sun.com/javaee/5/docs/tutorial/doc/bnblr.html[Enterprise Java Beans 3]) jargon.
 
 Our two main such entities are:
 
@@ -81,12 +76,10 @@ are implemented:
 
 * Web interface tier: Java https://facelets.dev.java.net[Facelets]
 * Business logic tier:
-http://java.sun.com/javaee/5/docs/tutorial/doc/bnbly.html#bnbma[stateful
-session beans] which pass along the web interface requests to the
+http://java.sun.com/javaee/5/docs/tutorial/doc/bnbly.html#bnbma[stateful session beans] which pass along the web interface requests to the
 persitence tier
 * Persistence tier:
-http://java.sun.com/javaee/5/docs/tutorial/doc/bnbly.html#bnbmb[stateless
-session beans] (_DAO_:
+http://java.sun.com/javaee/5/docs/tutorial/doc/bnbly.html#bnbmb[stateless session beans] (_DAO_:
 http://en.wikipedia.org/wiki/Data_Access_Object[Data Access Objects])
 which provide access to the database layer through entity beans
 
@@ -108,8 +101,7 @@ security is done in the first two tiers.
 Validation is another troublesome subject: we need to make sure that the
 data provided by the user (via the web site or using a web service) is
 valid. The
-http://java.sun.com/javaee/5/docs/api/javax/persistence/package-summary.html[Java
-Persistence API] describes a number of validation annotations which can
+http://java.sun.com/javaee/5/docs/api/javax/persistence/package-summary.html[Java Persistence API] describes a number of validation annotations which can
 be put on persisted properties, such as the traditional SQL (Structured
 Query Language) constraints `NOT NULL` or `UNIQUE`. In fact they _only_
 provide constraints which can be mapped in SQL. For higher-level
@@ -336,8 +328,7 @@ haven't tried it because it uses an older version of JAX-RS.
 Finally there is yet another framework for RESTful web services for Java
 called http://www.restlet.org[Restlet] but we did not favour it because
 at the time of this writing, it is using a custom architecture, even
-though proper JAX-RS support is http://stephankoo.wordpress.com/[in the
-works].
+though proper JAX-RS support is http://stephankoo.wordpress.com/[in the works].
 
 [[terminology]]
 == Terminology and architecture

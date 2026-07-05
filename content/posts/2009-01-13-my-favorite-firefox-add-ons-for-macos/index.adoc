@@ -42,8 +42,7 @@ does exactly what I need.
 * http://mozilla.zeniko.ch/fission.html[*Fission*]: +
 A plugin that will use the address bar to show progress, just like
 Safari.
-* https://addons.mozilla.org/en-US/firefox/addon/3818[*Resizeable
-Textarea*]: +
+* https://addons.mozilla.org/en-US/firefox/addon/3818[*Resizeable Textarea*]: +
 Somehow those textarea's are always the wrong size. This little add-on
 makes it possible to resize them, just like Safari.
 

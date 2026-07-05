@@ -18,8 +18,7 @@ to publish official versions of various government documents. In 2010,
 Lunatech worked with Sdu to build one of the platforms using enterprise
 Java Seam 2 framework, running on the JBoss 4.x application server
 (JBoss AS). Read our
-http://blog.lunatech.com/2010/01/25/electronic-government-publications[Case
-study].
+http://blog.lunatech.com/2010/01/25/electronic-government-publications[Case study].
 
 This technical case study gives an overview of the approach we followed
 in making the upgrade project successful.
@@ -71,8 +70,7 @@ version of JBoss platform was minimal.
 
 http://ant.apache.org[Apache Ant] was previously used as the build
 system, being more or less standard when the application was first
-built. Lunatech migrated the build to use http://maven.apache.org[Apache
-Maven], now an industry-standard software configuration management tool
+built. Lunatech migrated the build to use http://maven.apache.org[Apache Maven], now an industry-standard software configuration management tool
 for Java projects.
 
 More complex cases such as upgrading Seam 2 to Seam 3 (CDI/Weld) needed

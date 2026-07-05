@@ -68,8 +68,7 @@ longer to implement features, or that you build fewer of them. Feature
 simplicity is getting plenty of press these days, with
 http://www.37signals.com/[37Signals] recommending that you
 http://gettingreal.37signals.com/ch02_Build_Less.php[Build Less] and
-http://www.37signals.com/svn/posts/187-apple-phone-my-prediction[execute
-on the basics beautifully] as Apple have done with the iPod, to
+http://www.37signals.com/svn/posts/187-apple-phone-my-prediction[execute on the basics beautifully] as Apple have done with the iPod, to
 successfully compete with the feature-rich competition.
 
 The commercial appeal of these successful examples is that they
@@ -87,5 +86,4 @@ In the end, if your design is good enough to show how expensive software
 could be better, and your implementation has polish, then you should pay
 more attention to software's non-functional requirements.
 
-_Photo: https://www.flickr.com/photos/21065622@N08/4899883747/[Matt @
-PEK]_
+_Photo: https://www.flickr.com/photos/21065622@N08/4899883747/[Matt @ PEK]_

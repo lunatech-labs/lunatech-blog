@@ -6,8 +6,7 @@ tags:
 ---
 Lunatech is looking to hire some clever Java EE
 developers for our Rotterdam office. If you are interested in joining a
-great company, please have a look at our http://www.lunatech-research.com/about/employment/developer-j2ee[job
-posting].
+great company, please have a look at our http://www.lunatech-research.com/about/employment/developer-j2ee[job posting].
 
 It is hard to find qualified and motivated Java developers, but we know
 you are out there. If you have ever considered working in Rotterdam, the

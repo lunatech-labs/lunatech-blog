@@ -239,8 +239,7 @@ Combined with the fact that NEAT seems to perform well at evolving gaits for rob
 
 === Hyper-Cube Encoding NEAT (HyperNEAT)
 
-In their 2009 paper, breezily titled link:https://axon.cs.byu.edu/~dan/778/papers/NeuroEvolution/stanley3**.pdf[A Hypercube-Based Indirect Encoding for Evolving Large-Scale
-Neural Networks], Stanley, D'Ambrosio and Gauci introduced algorithm based on NEAT which addresses some of the issues with vanilla NEAT and provides help in creating networks which solve problems that have a spatial/geometric component.
+In their 2009 paper, breezily titled link:https://axon.cs.byu.edu/~dan/778/papers/NeuroEvolution/stanley3**.pdf[A Hypercube-Based Indirect Encoding for Evolving Large-Scale Neural Networks], Stanley, D'Ambrosio and Gauci introduced algorithm based on NEAT which addresses some of the issues with vanilla NEAT and provides help in creating networks which solve problems that have a spatial/geometric component.
 
 I've previously talked about NEAT as mimicking biological evolution. This is true in the general sense but strictly speaking it's not quite accurate. Think about it this way - the human body has more structures than the genome that encodes it. There's no _direct encoding_ between the genotype and the phenotype.
 

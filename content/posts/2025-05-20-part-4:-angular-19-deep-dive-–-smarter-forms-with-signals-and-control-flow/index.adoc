@@ -642,5 +642,4 @@ token parsing, and role-based access control.
 ==== Further Reading
 
 * https://angular.dev[Angular 19 Signals Guide (angular.dev)]
-* https://angular.dev/reference/forms/using-signals[Reactive Forms
-vs. Signals—How to Choose]
+* https://angular.dev/reference/forms/using-signals[Reactive Forms vs. Signals—How to Choose]

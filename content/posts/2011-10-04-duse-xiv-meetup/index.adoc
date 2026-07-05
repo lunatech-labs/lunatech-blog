@@ -13,8 +13,7 @@ developers interested in Scala.
 
 * 18:00, Wednesday, 5 October 2011
 * Lunatech Office -
-http://maps.google.com/maps?q=Lunatech+Research,rotterdam[Heemraadssingel
-70, 3021DD, Rotterdam]
+http://maps.google.com/maps?q=Lunatech+Research,rotterdam[Heemraadssingel 70, 3021DD, Rotterdam]
 
 == Programme
 
@@ -22,8 +21,7 @@ http://maps.google.com/maps?q=Lunatech+Research,rotterdam[Heemraadssingel
 * 18:30 - 21:00: Presentation Event Sourcing & Discussion
 
 The number of attendants is limited to 30, please register at the
-http://dutch-scala-enthusiasts.ning.com/events/duse-xiv-event-souring-the-best-of-ddd-and-cqrs-combined[Duse
-website].
+http://dutch-scala-enthusiasts.ning.com/events/duse-xiv-event-souring-the-best-of-ddd-and-cqrs-combined[Duse website].
 
 == The outline of the presentation:
 

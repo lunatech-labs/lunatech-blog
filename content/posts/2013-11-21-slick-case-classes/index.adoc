@@ -29,8 +29,7 @@ Source code: https://github.com/lunatech-labs/play-slick-examples.
 == Defining a table mapping to a tuple
 
 To continue from previous tutorials, start with the table mapping from
-http://blog.lunatech.com/2013/08/08/play-slick-getting-started[Getting
-started with Play and Slick]. In your Play application, this is a
+http://blog.lunatech.com/2013/08/08/play-slick-getting-started[Getting started with Play and Slick]. In your Play application, this is a
 database model in:
 
 [source,scala,linenums]
@@ -52,8 +51,7 @@ columns and a projection called `*`.
 
 Use this table mapping to define a `finder' method in your application’s
 model layer, as explained in
-http://blog.lunatech.com/2013/10/04/play-slick-executing-queries[Executing
-database queries with Slick]. In `app/models/Cocktail.scala`:
+http://blog.lunatech.com/2013/10/04/play-slick-executing-queries[Executing database queries with Slick]. In `app/models/Cocktail.scala`:
 
 [source,scala,linenums]
 ----

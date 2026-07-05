@@ -32,8 +32,7 @@ Source code: https://github.com/lunatech-labs/play-slick-examples.
 
 Before you can generate SQL, you need a database table mapping that you
 can use to define queries. First, follow the instructions in
-https://blog.lunatech.com/posts/2013-08-13-play-slick-scala-console[Using the
-Scala console with Play and Slick], and paste the following table
+https://blog.lunatech.com/posts/2013-08-13-play-slick-scala-console[Using the Scala console with Play and Slick], and paste the following table
 mapping into the Scala console.
 
 [source,scala,linenums]
@@ -354,9 +353,7 @@ sql: String = select x2.x3, x2.x4 from
 
 Now you can define simple queries, you can:
 
-* https://blog.lunatech.com/posts/2013-10-04-play-slick-executing-queries[execute
-database queries]
-* https://blog.lunatech.com/posts/2013-11-21-slick-case-classes[map query
-result tuples to case classes]
+* https://blog.lunatech.com/posts/2013-10-04-play-slick-executing-queries[execute database queries]
+* https://blog.lunatech.com/posts/2013-11-21-slick-case-classes[map query result tuples to case classes]
 * https://blog.lunatech.com/posts/2014-01-24-slick-insert-data[insert], update
 and delete data.

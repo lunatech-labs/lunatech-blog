@@ -22,8 +22,7 @@ Yes of course, Hibernate supports
 Wait a minute no. Not including Solid. Unless… Unless someone wrote
 support for Solid in Hibernate more than three years ago, went through
 the trouble of
-[.nobr]#http://opensource.atlassian.com/projects/hibernate/browse/HHH-1864[sending
-a patch to Hibernate]# to share his good work and it sat there sad,
+[.nobr]#http://opensource.atlassian.com/projects/hibernate/browse/HHH-1864[sending a patch to Hibernate]# to share his good work and it sat there sad,
 lonely and simply ignored like so many other bug reports and patches on
 Hibernate's bug tracking system (really a lot, and I'm only talking
 about those I know because I hit the same bugs). To be fair, Solid
@@ -36,8 +35,7 @@ Does it still work then? Hell yeah it does. It's written for Hibernate
 version of Solid we use.
 
 Just download that
-[.nobr]#http://opensource.atlassian.com/projects/hibernate/secure/attachment/12480/SolidDialect.java[Hibernate
-Solid dialect]#, save it in your JAR and tell Hibernate to use it in
+[.nobr]#http://opensource.atlassian.com/projects/hibernate/secure/attachment/12480/SolidDialect.java[Hibernate Solid dialect]#, save it in your JAR and tell Hibernate to use it in
 your `persistence.xml` by setting the `hibernate.dialect` property to
 the fully-qualified name of the Solid Dialect.
 
@@ -51,8 +49,7 @@ classpath so that Hibernate can use it.
 At that point you must know there is at least one known bug in the Solid
 JDBC driver, related to timestamps. It turns out that the Solid JDBC
 driver
-[.nobr]#http://javaforu.blogspot.com/2007_01_01_archive.html#6829767297139374995[has
-a bug]# in the `ResultSet.getTimestamp` and
+[.nobr]#http://javaforu.blogspot.com/2007_01_01_archive.html#6829767297139374995[has a bug]# in the `ResultSet.getTimestamp` and
 `PreparedStatement.setTimestamp` which makes it impossible to use
 timestamps using JPA with Hibernate without some trickery.
 
@@ -64,8 +61,7 @@ type mappings in Hibernate so this is what we will do.
 == Defining a custom Hibernate type to fix a Solid JDBC bug
 
 Defining the
-[.nobr]#http://docs.jboss.org/hibernate/stable/annotations/reference/en/html_single/#d0e3340[custom
-type]# is as simple (the length of the code speaks for itself) as
+[.nobr]#http://docs.jboss.org/hibernate/stable/annotations/reference/en/html_single/#d0e3340[custom type]# is as simple (the length of the code speaks for itself) as
 follows:
 
 [source,java]

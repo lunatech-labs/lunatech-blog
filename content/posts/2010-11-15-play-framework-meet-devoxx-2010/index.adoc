@@ -20,8 +20,7 @@ sponsored by Lunatech and Zenexity
 == Recommended evening meet-ups
 
 *Monday 20:00*:
-http://in.relation.to/Bloggers/SeamInfinispanAndArquillianSocialAtDevoxxPlusYourJBossPlanner[Seam,
-Infinispan and Arquillian Social],
+http://in.relation.to/Bloggers/SeamInfinispanAndArquillianSocialAtDevoxxPlusYourJBossPlanner[Seam, Infinispan and Arquillian Social],
 http://hilton.org.uk/antwerp/kulminator[Kulminator]. The Seam team are a
 great crowd that you should definitely meet, and Kulminator is the only
 place for serious beer drinkers.
@@ -42,11 +41,9 @@ Java User Groups in France. You probably need to be able to speak French
 for this one.
 
 *Thursday 19:00*:
-http://www.devoxx.com/display/Devoxx2K10/Women+in+IT+an+unconference[Duchess
-BOF], location TBA.
+http://www.devoxx.com/display/Devoxx2K10/Women+in+IT+an+unconference[Duchess BOF], location TBA.
 
-*Thursday 22:00*: http://www.mulkers.com/devoxx/devoxx-sound.jpg[The
-Sound of Devoxx Party], Café Marmite, Trofbrug 8. This dodgy small dance
+*Thursday 22:00*: http://www.mulkers.com/devoxx/devoxx-sound.jpg[The Sound of Devoxx Party], Café Marmite, Trofbrug 8. This dodgy small dance
 bar is great fun, especially as it gets more crowded and louder the
 later you stay. Kudos to http://www.mulkers.com/[Robin Mulkers] for
 picking the venue.

@@ -62,8 +62,7 @@ covered in the course. The topics and Dotty features that we cover in the course
 * https://dotty.epfl.ch/docs/reference/contextual/multiversal-equality.html[Multiversal Equality]
 
 Very important to note is that all these materials are open-sourced! You can find
-them in https://github.com/lunatech-labs/lunatech-scala-2-to-scala3-course[this
-public repository] on Github. This means that you can benefit from this at no extra
+them in https://github.com/lunatech-labs/lunatech-scala-2-to-scala3-course[this public repository] on Github. This means that you can benefit from this at no extra
 cost but the effort you put into studying the course materials! _(Of course, should
 you wish to have this course taught to you in-class, feel free to reach out to us
 and we're happy to talk!)_.

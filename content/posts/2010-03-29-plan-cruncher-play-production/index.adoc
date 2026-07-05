@@ -18,9 +18,7 @@ http://plancruncher.com/[http://plancruncher.com/].
 == Plan Cruncher is born
 
 On 11 February, I presented an idea for ‘Business plan symbology’ at the
-http://www.meetup.com/Bootstrapping-and-agility/calendar/12317827/[Lean
-Start-up] event organised by http://www.lunatech-ventures.com/[Lunatech
-Ventures]. Basically, the idea is that if you choose a few standard
+http://www.meetup.com/Bootstrapping-and-agility/calendar/12317827/[Lean Start-up] event organised by http://www.lunatech-ventures.com/[Lunatech Ventures]. Basically, the idea is that if you choose a few standard
 icons that apply to your start-up idea, then you can put together a
 standard one-page summary of your business plan, with standard text,
 that avoids the length of normal business plans.
@@ -86,8 +84,7 @@ application is stateless, you can use this to release a new version,
 without users noticing the switch from one instance to the next. What’s
 more, we can deploy a new version of Plan Cruncher (on both instances)
 in about ten seconds, because Play! application start-up is so fast.
-link:/2010/03/22/upgrading-your-play-applications-without-downtime[Upgrading
-your Play! applications without downtime] explains how this works.
+link:/2010/03/22/upgrading-your-play-applications-without-downtime[Upgrading your Play! applications without downtime] explains how this works.
 
 [[next]]
 == What’s next
@@ -98,8 +95,7 @@ application like this, which is another reason why we are glad we did
 not start with PHP.
 
 We are certainly considering localisation, after attention from blogs in
-http://venturebeat.com/2010/03/11/visualize-your-business-plan-with-plancruncher/[the
-US], http://web.rambler.ru/post/biznes-plan/[Russia],
+http://venturebeat.com/2010/03/11/visualize-your-business-plan-with-plancruncher/[the US], http://web.rambler.ru/post/biznes-plan/[Russia],
 http://www.web2null.de/plancruncher[Germany],
 http://www.workingcapital.telecomitalia.it/2010/03/plan-cruncher-un-tool-online-per-riassumere-in-icone-il-vostro-business-plan/[Italy],
 http://www.2v.lv/index.php/dienas-internets/2719-atrasts-internet-biznesa-plnu-vizualizators-jaunajiem-uzmjiem-plancrunchercom[Latvia]

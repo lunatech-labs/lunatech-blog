@@ -28,8 +28,7 @@ mostly Java instead. Servlet API is also more familiar than HTTP.
 
 Every presentation namedrops ‘command objects’ and separating methods
 that modify state from those that do not (a tribute to the popularity of
-discussing http://martinfowler.com/bliki/CQRS.html[Command Query
-Responsibility Segregation], which has been the object of an excellent
+discussing http://martinfowler.com/bliki/CQRS.html[Command Query Responsibility Segregation], which has been the object of an excellent
 workshop by Greg Young). Anything from the Domain Driven Design camp
 seemed also to enjoy good buzzword status, as well as toting the
 benefits of ‘immutability’, which goes to show how some of the concepts
@@ -50,8 +49,7 @@ studied at university, and a bit of functional concepts are in most
 curricula.
 
 Whether that or other reasons, I did not witness anyone running away
-when I announced that the core of http://www.playframework.org/2.0[Play
-2.0] is written in Scala. I think this is a good, because many of the
+when I announced that the core of http://www.playframework.org/2.0[Play 2.0] is written in Scala. I think this is a good, because many of the
 functional programming concepts are just a slightly more rigorous
 generalization of object oriented practices.
 

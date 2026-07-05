@@ -91,5 +91,4 @@ more steps, each with their own commands, or automate it more.
 * Note: when we say ‘documentation’ we’re not talking about
 word-processors and paper - we mean a project wiki. Obviously.
 
-https://plus.google.com/107170847819841716154/posts/7CdQQN661q2[Comments
-on Google+]
+https://plus.google.com/107170847819841716154/posts/7CdQQN661q2[Comments on Google+]

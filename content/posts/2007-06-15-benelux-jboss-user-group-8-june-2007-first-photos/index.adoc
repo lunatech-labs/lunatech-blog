@@ -6,8 +6,7 @@ tags:
 - "jbug"
 - "jboss"
 ---
-On 8 June, we hosted https://blog.lunatech.com/posts/2007-05-24-jboss-benelux-user-group-8-june-2007[our first JBoss User Group
-meeting] for this part
+On 8 June, we hosted https://blog.lunatech.com/posts/2007-05-24-jboss-benelux-user-group-8-june-2007[our first JBoss User Group meeting] for this part
 of the world. The event was extremely sociable, and there were two great
 presentations, so we all met lots of people, had some fun and learned
 about some JBoss-related technology. Here are some photos from the
@@ -30,8 +29,7 @@ enjoy a presentation, along with Bart Schuller from Lunatech (right).
 image:jbug-2007-06-photos-04.jpg[Tom Baeyens from JBoss (left) talks about jPDL]
 
 Tom Baeyens from JBoss (left) talks about
-http://www28.cplan.com/cc158/session_details.jsp?isid=285612&ilocation_id=158-1&ilanguage=english[Java
-Process Description Language].
+http://www28.cplan.com/cc158/session_details.jsp?isid=285612&ilocation_id=158-1&ilanguage=english[Java Process Description Language].
 
 image:jbug-2007-06-photos-05.jpg[Lunatech's meeting room is fine for a small group; we may need somewhere bigger next time]
 

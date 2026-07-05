@@ -26,8 +26,7 @@ disturb other people when we have our Daily Scrum.
 The only problem is that team members can’t see the Scrum board from
 where they sit. Fortunately, we’re using
 http://www.atlassian.com/software/jira/overview[JIRA]
-http://www.atlassian.com/software/greenhopper/overview[with
-GreenHopper].
+http://www.atlassian.com/software/greenhopper/overview[with GreenHopper].
 
 [[tools]]
 == Software tools
@@ -101,7 +100,6 @@ also an opportunity to layer information: the Scrum Board can also
 consist of sticky ‘links’ to the JIRA issues that contain more detailed
 information.
 
-https://plus.google.com/107170847819841716154/posts/ja13Pf1t7hC[Comments
-on Google+]
+https://plus.google.com/107170847819841716154/posts/ja13Pf1t7hC[Comments on Google+]
 
 

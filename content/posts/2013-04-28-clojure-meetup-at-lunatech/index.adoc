@@ -26,8 +26,7 @@ last month with http://cgrand.net[Christophe Grand] as keynote speaker.
 Last wednesday we hosted the second meetup where we discussed various
 Clojure-related topics. The meetup has regular features such as _Library
 of the month_ and
-http://www.ehrdclj.org/blog/this-month-in-clojure-april[_This Month in
-Clojure_]. There was also a main talk about http://pedestal.io[Pedestal]
+http://www.ehrdclj.org/blog/this-month-in-clojure-april[_This Month in Clojure_]. There was also a main talk about http://pedestal.io[Pedestal]
 by yours truly.
 
 We plan to host the event every month and if you are interested in

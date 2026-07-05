@@ -15,8 +15,7 @@ shows you how.
 This is actually very important for agile software development, when you
 keeping to a useful minimum amount of documentation lets you put more
 energy into producing working code. As I explained in an earlier article
-on link:/posts/2006-12-04-wiki-wordprocessing[using a wiki for project
-documentation], keeping design documentation in a collaborative on-line
+on link:/posts/2006-12-04-wiki-wordprocessing[using a wiki for project documentation], keeping design documentation in a collaborative on-line
 environment like a wiki makes it far more useful than it would be on
 paper, which is why print-oriented tools are not appropriate. The same
 applies to the diagrams; vector drawing programs are overkill for design
@@ -27,15 +26,13 @@ more important than fine control over high-resolution output.
 
 Atlassian http://www.atlassian.com/software/confluence/[Confluence]
 comes with a
-http://confluence.atlassian.com/display/CONF20/Flowchart+Macro[Flowchart
-Macro], which uses http://graphviz.org/[Graphviz] to generate diagrams
+http://confluence.atlassian.com/display/CONF20/Flowchart+Macro[Flowchart Macro], which uses http://graphviz.org/[Graphviz] to generate diagrams
 from a code representation in the DOT language. The
 http://graphviz.org/doc/info/lang.html[DOT reference] is sparse and
 lacks examples, so you are better off with the other
 http://www.graphviz.org/Documentation.php[Graphviz documentation], which
 includes a DOT tutorial in PDF format, and a new
-http://www.graphviz.org/doc/schema/attributes.xml[Node, Edge and Graph
-Attributes] schema reference.
+http://www.graphviz.org/doc/schema/attributes.xml[Node, Edge and Graph Attributes] schema reference.
 
 Here is a simple example to start with.
 

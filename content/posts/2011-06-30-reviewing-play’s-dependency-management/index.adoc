@@ -7,8 +7,7 @@ tags:
 - "java"
 ---
 Play version 1.2
-introduced http://www.playframework.org/documentation/1.2.1/dependency[dependency
-management]
+introduced http://www.playframework.org/documentation/1.2.1/dependency[dependency management]
 to the framework. I'm a big fan of dependency management, and I think
 it's a necessary tool for any software project. Play's approach is
 pretty elegant and easy to use, but there's a few catches and things I
@@ -68,8 +67,7 @@ Play wouldn't be Play if it didn't introduce some features to make your
 life easier.
 
 One of the things Play brings to the table is
-http://www.playframework.org/documentation/1.2.1/dependency#Dynamicrevisions[more
-flexible version definitions]. Where other tools only allow (and force)
+http://www.playframework.org/documentation/1.2.1/dependency#Dynamicrevisions[more flexible version definitions]. Where other tools only allow (and force)
 you to specify one specific version, Play also allows you to specify +
 a minimum and/or maximum version to use. This not only allows you to
 automatically use the most up-to-date version of a library, it also
@@ -286,8 +284,7 @@ stuff done, I just want to use the library. That's the whole goal of
 dependency management – figuring that stuff out for me.
 
 My suggestion to the play devs
-(http://play.lighthouseapp.com/projects/57987-play-framework/tickets/952-make-contains-property-for-repositories-in-dependenciesyml-optional[ticket
-here]): please make the `contains` property an _optional_ performance
+(http://play.lighthouseapp.com/projects/57987-play-framework/tickets/952-make-contains-property-for-repositories-in-dependenciesyml-optional[ticket here]): please make the `contains` property an _optional_ performance
 improvement. When I list an additional repository, just use it to try
 and resolve artifacts that couldn't be resolved using any of the other
 repositories. It would make life so much easier.

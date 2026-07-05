@@ -21,11 +21,9 @@ this is a book for programmers that contains lots of code and promises
 to demonstrate a selection of practical techniques.
 
 This is a marked difference to Packt’s previous Drools books:
-http://www.packtpub.com/jboss-drools-business-rules/book[JBoss Drools
-Business Rules] is a much less technical book for business analysts
+http://www.packtpub.com/jboss-drools-business-rules/book[JBoss Drools Business Rules] is a much less technical book for business analysts
 (that don’t write code) and
-http://www.packtpub.com/drools-jboss-rules-50-developers-guide/book[Drools
-JBoss Rules 5.0 Developer’s Guide] is a shallow overview of the various
+http://www.packtpub.com/drools-jboss-rules-50-developers-guide/book[Drools JBoss Rules 5.0 Developer’s Guide] is a shallow overview of the various
 components of Drools 5.0, which was a significant change from previous
 versions.
 
@@ -186,8 +184,7 @@ material for Drools Planner and jBPM5.
 == Conclusion
 
 My criticisms about the last Packt book I read
-(link:/2011/09/19/playframework-cookbook-review[Play Framework
-Cookbook]) apply here too: more typos than I’m used to in a print book,
+(link:/2011/09/19/playframework-cookbook-review[Play Framework Cookbook]) apply here too: more typos than I’m used to in a print book,
 bad typography and code sample formatting, and difficulties with the
 cookbook format. None of these are critical problems, and in fact
 they’re a moot point if other publishers have not managed to publish

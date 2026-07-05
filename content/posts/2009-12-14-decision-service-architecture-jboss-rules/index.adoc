@@ -6,20 +6,16 @@ tags:
 - "drools"
 ---
 This article describes an
-architecture for implementing a decision service with http://www.jboss.org/drools/[JBoss
-Rules], a http://en.wikipedia.org/wiki/Business_rules_engine[business rules
-engine]. This is a
+architecture for implementing a decision service with http://www.jboss.org/drools/[JBoss Rules], a http://en.wikipedia.org/wiki/Business_rules_engine[business rules engine]. This is a
 high-level description, without code, for architects who are considering
 using JBoss Rules or implementing a decision service.
 
 This article is part 1 of a series:
 
 . Decision service architecture with JBoss Rules - this article
-. link:/2009/12/28/decision-service-business-rules-jboss-rules[Decision
-service business rules in JBoss Rules] - how to implement the decision
+. link:/2009/12/28/decision-service-business-rules-jboss-rules[Decision service business rules in JBoss Rules] - how to implement the decision
 service logic
-. link:/2010/01/04/how-build-decision-service-using-jboss-rules-execution-server[How
-to build a decision service using JBoss Rules Execution Server] - how to
+. link:/2010/01/04/how-build-decision-service-using-jboss-rules-execution-server[How to build a decision service using JBoss Rules Execution Server] - how to
 get this working, with example rules - a RESTful decision service with
 no Java code required.
 
@@ -30,8 +26,7 @@ A decision service is some kind of software component that acts as a
 business logic black box: other parts of a system present it with data,
 it makes potentially-complex business 'decisions' and returns some
 result. Typically, this is a component of a
-http://en.wikipedia.org/wiki/Service-oriented_architecture[service-oriented
-architecture] that encapsulates the business logic required to make
+http://en.wikipedia.org/wiki/Service-oriented_architecture[service-oriented architecture] that encapsulates the business logic required to make
 business decisions, and which is called by applications that do not
 contain this logic themselves. In such an architecture, this
 communication typically uses web services.
@@ -62,10 +57,8 @@ accessing remote data, such as a particular customer's purchase history.
 == JBoss Rules
 
 http://www.jboss.org/drools/[JBoss Rules] (also known as Drools), part
-of the http://www.jboss.com/products/platforms/brms/[JBoss Enterprise
-Business Rules Management System], is a business rules platform built
-around a http://en.wikipedia.org/wiki/Business_rules_engine[rules
-engine]. There are many different usage scenarios for this kind of
+of the http://www.jboss.com/products/platforms/brms/[JBoss Enterprise Business Rules Management System], is a business rules platform built
+around a http://en.wikipedia.org/wiki/Business_rules_engine[rules engine]. There are many different usage scenarios for this kind of
 platform: building a decision service is perhaps the simplest.
 
 There are several reasons why JBoss Rules is an especially useful
@@ -79,8 +72,7 @@ also possible to implement complex business logic as a large number of
 small independent rules, which also makes them easier to read and test.
 
 In addition, JBoss Rules provides both an
-http://downloads.jboss.com/drools/docs/5.0.1.26597.FINAL/drools-guvnor/html/ch01.html#d0e1095[Execution
-Server] that you can use as a simple/prototype decision service out of
+http://downloads.jboss.com/drools/docs/5.0.1.26597.FINAL/drools-guvnor/html/ch01.html#d0e1095[Execution Server] that you can use as a simple/prototype decision service out of
 the box, as well as a flexible Java API (programming interface) for
 integrating the rules engine into your own application.
 
@@ -98,8 +90,7 @@ architecture, without writing any Java code. The Execution Service is
 included in the JBoss Rules distribution as _drools-server-5.0.1.war_ -
 a web application that you can run in any Servlet container, such as
 Apache Tomcat. This web application provides a default
-http://java.sun.com/developer/technicalArticles/WebServices/restful/[RESTful
-web services] interface to your business rules, which you write using
+http://java.sun.com/developer/technicalArticles/WebServices/restful/[RESTful web services] interface to your business rules, which you write using
 the Drools Rule Language.
 
 image:decision-service-architecture-3.png[image]

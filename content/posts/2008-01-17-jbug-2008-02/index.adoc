@@ -11,8 +11,7 @@ The third JBoss Benelux User Group event will be in Rotterdam, on 29
 February 2008. This event will be a bit different: the JBoss User Group
 is growing and our previous meeting room has become too small, so we
 arranged something special this time: we will meet in Paddy Murphy's
-Irish Pub in Rotterdam. https://blog.lunatech.com/2008-03-03-jbug-2008-02-photos[Photos of the
-event] are now on-line.
+Irish Pub in Rotterdam. https://blog.lunatech.com/2008-03-03-jbug-2008-02-photos[Photos of the event] are now on-line.
 
 *Date:* Friday, 29 February 2008
 

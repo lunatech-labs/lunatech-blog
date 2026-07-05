@@ -86,8 +86,7 @@ On the other hand, there is probably always someone with an address or
 name format that you did not expect, and they are likely to be annoyed
 if you reject their input. For example, http://37signals.com/[37signals]
 staff were not impressed by the error
-http://www.37signals.com/svn/posts/337-screens-around-town-zune-php-developers-network-planet-argon-and-amex["Your
-Employer Name cannot contain any numbers"]:
+http://www.37signals.com/svn/posts/337-screens-around-town-zune-php-developers-network-planet-argon-and-amex["Your Employer Name cannot contain any numbers"]:
 
 image:features-inputvalidation.png[Over-zealous input validation, American Express]
 
@@ -156,8 +155,7 @@ user-interface in your web application.
 
 For example, http://www.apple.com/macosx/features/ical/[iCal], which can
 subscribe to an iCalendar feed, has a better calendar user-interface
-than the average on-line calendar. http://calendar.google.com/[Google
-Calendar], meanwhile, provides a public or private 'calendar address'
+than the average on-line calendar. http://calendar.google.com/[Google Calendar], meanwhile, provides a public or private 'calendar address'
 that allows you to view calendars in an iCalendar client such as iCal.
 
 === KML URLs for geographic data
@@ -168,8 +166,7 @@ user-interface. If you have geographic data, generate dynamic
 http://en.wikipedia.org/wiki/Keyhole_Markup_Language[KML] documents that
 people can use to view the data in Google Earth or on a map.
 
-For example, a http://www.tagzania.com/user/hilton/cafe/[Tagzania
-category] has a KML icon that provides the same data via KML.
+For example, a http://www.tagzania.com/user/hilton/cafe/[Tagzania category] has a KML icon that provides the same data via KML.
 
 === Export data to a file
 
@@ -244,8 +241,7 @@ Tags are the poster child of Web 2.0 and, ironically, the least flashy
 and most useful of many of these features. Useful and not-flashy
 especially applies to http://del.icio.us/[del.icio.us] which is the best
 source of ideas for how to use tags. For example, tags on
-http://www.flickr.com/photos/jonathanmarks/165128804/[a photo in
-Flickr]:
+http://www.flickr.com/photos/jonathanmarks/165128804/[a photo in Flickr]:
 
 image:features-tags.png[Tags in Flickr]
 
@@ -315,8 +311,7 @@ image:features-recentupdates.png[Recent updates in Confluence]
 
 One special case is a wiki: if you cannot customise the home page the
 way you can with
-http://confluence.atlassian.com/display/CONF25/Customising+the+Dashboard[Confluence's
-dashboard], then use the wiki's Recent Updates page as your home page.
+http://confluence.atlassian.com/display/CONF25/Customising+the+Dashboard[Confluence's dashboard], then use the wiki's Recent Updates page as your home page.
 By extension, on a company intranet, which should be a wiki, make a list
 recent changes half of its home page.
 
@@ -387,8 +382,7 @@ user-interface for turning on notifications.
 === In-line editing
 
 Make some data editable using an Ajax click-to-edit control, such as the
-http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/form-validation-specialized-input/inline-edit-box[Dojo
-Inline Edit Box], rather than using a separate edit page.
+http://dojotoolkit.org/book/dojo-book-0-9/part-2-dijit/form-validation-specialized-input/inline-edit-box[Dojo Inline Edit Box], rather than using a separate edit page.
 
 This can make it more convenient to make edits to simple data that does
 not need a complex interface, such as a short piece of text like a

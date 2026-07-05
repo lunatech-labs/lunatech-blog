@@ -372,8 +372,7 @@ until the database transaction is committed and then perform the side
 effects.
 
 We have a library for this -
-https://github.com/lunatech-labs/lunatech-squeryl-tools[Lunatech Squeryl
-Tools].
+https://github.com/lunatech-labs/lunatech-squeryl-tools[Lunatech Squeryl Tools].
 
 === The problem
 

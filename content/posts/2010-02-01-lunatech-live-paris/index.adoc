@@ -17,8 +17,7 @@ present many open-source technologies made by or with French people.
 Since Lunatech Labs is active in open-source Java software, and Lunatech
 employees just tend to get involved in and out of work with third-party
 open-source software, we got not one but two quickies at the
-http://www.parisjug.org/xwiki/bin/view/Meeting/20100209[February 9
-event]:
+http://www.parisjug.org/xwiki/bin/view/Meeting/20100209[February 9 event]:
 
 image:juggyannif02.jpg[image,link=http://www.parisjug.org/xwiki/bin/view/Meeting/20100209]
 

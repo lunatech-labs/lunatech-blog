@@ -11,10 +11,8 @@ better.
 image:monitors.jpg[27 inch Apple monitors]
 
 If it’s not immediately obvious why, then you probably need to re-read
-http://www.joelonsoftware.com/articles/fog0000000043.html[The Joel
-Test], and point 9 in particular:
+http://www.joelonsoftware.com/articles/fog0000000043.html[The Joel Test], and point 9 in particular:
 
 Do you use the best tools money can buy?
 
-https://plus.google.com/107170847819841716154/posts/eftbNGrsvhU[Comments
-on Google+]
+https://plus.google.com/107170847819841716154/posts/eftbNGrsvhU[Comments on Google+]

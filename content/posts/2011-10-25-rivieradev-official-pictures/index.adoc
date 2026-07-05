@@ -4,8 +4,7 @@ author: "pepite"
 tags:
 - "event"
 ---
-Thanks to http://touilleur-express.fr[Nicolas
-Martignole] I can now show some pictures
+Thanks to http://touilleur-express.fr[Nicolas Martignole] I can now show some pictures
 from the http://rivieradev.fr[RivieraDEV] event.
 
 image:rivieradev-1.jpg[image]

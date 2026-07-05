@@ -6,14 +6,10 @@ tags:
 - "event"
 - "france"
 ---
-http://www.lunatech-research.com[Lunatech
-Research] et l'http://www.iut.unice.fr[IUT de Nice
-Sophia-Antipolis] organisent une
+http://www.lunatech-research.com[Lunatech Research] et l'http://www.iut.unice.fr[IUT de Nice Sophia-Antipolis] organisent une
 mini-conférence **gratuite** sur http://java.sun.com/javaee/[Java EE]
-le **mercredi 14 janvier 2009** sur le site de l'http://portail.unice.fr/jahia/Jahia/site/iut/pid/9941[IUT de
-Sophia-Antipolis]
-http://maps.google.fr/maps?q=IUT+Sophia-Antipolis+650,+Route+des+Colles+06560+Valbonne@43.616365,7.071826[Google
-Maps].
+le **mercredi 14 janvier 2009** sur le site de l'http://portail.unice.fr/jahia/Jahia/site/iut/pid/9941[IUT de Sophia-Antipolis]
+http://maps.google.fr/maps?q=IUT+Sophia-Antipolis+650,+Route+des+Colles+06560+Valbonne@43.616365,7.071826[Google Maps].
 
 
 Nous attendons de nombreux développeurs et étudiants de Nice et
@@ -23,8 +19,7 @@ http://jboss.org/resources/jbugs.html[JBug] ou
 http://java.sun.com/community/usergroups/[JUG].
 
 S'il vous plaît prenez le temps de vous
-http://www.lunatech-research.com/event/register/miniconf-sophia[inscrire
-en ligne]. L'inscription est gratuite et même si elle n'est pas
+http://www.lunatech-research.com/event/register/miniconf-sophia[inscrire en ligne]. L'inscription est gratuite et même si elle n'est pas
 obligatoire, elle est recommandée pour nous permettre de prévoir les
 rafraîchissements d'usage.
 
@@ -33,8 +28,7 @@ plus amples informations.
 
 == Audience
 
-Nous attendons aussi bien des étudiants de l'http://www.iut.unice.fr[IUT
-Nice-Sophia-Antipolis] et de http://www.polytechnice.fr/[Polytech Nice],
+Nous attendons aussi bien des étudiants de l'http://www.iut.unice.fr[IUT Nice-Sophia-Antipolis] et de http://www.polytechnice.fr/[Polytech Nice],
 que des professionnels novices et confirmés. Toutes nos présentations
 sont accessibles aux débutants tout en restant intéressantes pour les
 développeurs expérimentés de par la nouveauté des technologies
@@ -87,12 +81,10 @@ incrémentale. Nous présentons ainsi JSF
 https://facelets.dev.java.net/[Facelets] pour l'interface web, EJB
 (http://java.sun.com/products/ejb/[Enterprise Java Beans]) et
 http://www.seamframework.org[Seam] pour le middle-tier, JPA
-(http://java.sun.com/developer/technicalArticles/J2EE/jpa/[Java
-Persistence API]) pour le storage-tiers,
+(http://java.sun.com/developer/technicalArticles/J2EE/jpa/[Java Persistence API]) pour le storage-tiers,
 http://www.hibernate.org/412.html[Hibernate Validation] et
 http://jcp.org/en/jsr/detail?id=303[Bean Validation] pour les
-contraintes DB de haut-niveau, JAXB (https://jaxb.dev.java.net/[Java API
-for XML Binding]) pour la sérialisation XML,
+contraintes DB de haut-niveau, JAXB (https://jaxb.dev.java.net/[Java API for XML Binding]) pour la sérialisation XML,
 https://jsr311.dev.java.net/[JAX-RS] (Java API for
 http://en.wikipedia.org/wiki/REST[RESTful] services) pour les web
 services, http://www.hibernate.org/410.html[Hibernate Search] pour le
@@ -146,15 +138,13 @@ http://www.julienviet.com/[Julien Viet] a rejoint la
 http://www.jboss.org[communauté JBoss] en 2001 peu de temps après s'est
 fait embaucher par la http://www.jboss.com[compagnie JBoss]. À JBoss,
 Julien a commencé comme contributeur au projet
-http://www.jboss.com/products/platforms/application[JBoss Application
-Server] en 2002. En 2004, il fonde le projet open-source
+http://www.jboss.com/products/platforms/application[JBoss Application Server] en 2002. En 2004, il fonde le projet open-source
 http://www.jboss.org/jbossportal[JBoss Portal] et en reste à la tête
 jusqu'à août 2008.
 
 Il est membre du groupe d'experts
 _http://jcp.org/en/jsr/detail?id=286[JSR 286 Portlet 2.0]_ et de la
-spécification _http://jcp.org/en/jsr/detail?id=283[JSR 283 Content
-Repository] for Java Technology API 2.0_.
+spécification _http://jcp.org/en/jsr/detail?id=283[JSR 283 Content Repository] for Java Technology API 2.0_.
 
 Aujourd'hui Julien est _portal product manager_ à
 http://www.exoplatform.com/[eXo platform].
@@ -204,15 +194,12 @@ hacks http://en.wikipedia.org/wiki/Java_(programming_language)[Java],
 http://en.wikipedia.org/wiki/C_(programming_language)[C],
 http://en.wikipedia.org/wiki/Perl[Perl] ou
 http://en.wikipedia.org/wiki/Scheme_(programming_language)[Scheme].
-Baigné dans les http://en.wikipedia.org/wiki/Web_standards[standards
-web] et les http://en.wikipedia.org/wiki/Database[bases de données], il
+Baigné dans les http://en.wikipedia.org/wiki/Web_standards[standards web] et les http://en.wikipedia.org/wiki/Database[bases de données], il
 a implémente entre autres un éditeur
 http://en.wikipedia.org/wiki/XML[XML]
 http://en.wikipedia.org/wiki/WYSIWYG[WYSIWYG], une
-http://www-sop.inria.fr/teams/mimosa/Stephane.Epardaud/lurc/[librairie
-de multi-threading] en C, un
-http://www-sop.inria.fr/teams/mimosa/Stephane.Epardaud/ulm/[langage pour
-agents mobiles] en Scheme (compilateur, machine virtuelle), des services
+http://www-sop.inria.fr/teams/mimosa/Stephane.Epardaud/lurc/[librairie de multi-threading] en C, un
+http://www-sop.inria.fr/teams/mimosa/Stephane.Epardaud/ulm/[langage pour agents mobiles] en Scheme (compilateur, machine virtuelle), des services
 http://en.wikipedia.org/wiki/Web_2.0[Web 2.0]] comme
 http://www.visiblelogistics.com[VisibleLogistics]. Présentations au
 http://www.cs.indiana.edu/scheme2004/[Scheme Workshop 2004], à l'IUT de

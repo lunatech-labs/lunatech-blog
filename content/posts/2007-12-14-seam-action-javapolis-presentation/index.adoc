@@ -8,8 +8,7 @@ tags:
 ---
 This week Peter Hilton
 and Nicolas Leroux, senior software developers at Lunatech Research,
-presented http://www.javapolis.com/confluence/display/JP07/Seam+in+Action[Seam In
-Action]
+presented http://www.javapolis.com/confluence/display/JP07/Seam+in+Action[Seam In Action]
 at http://www.javapolis.com/[JavaPolis] in Antwerp.
 
 image:javapolis-2007-seam.jpg[Seam In Action presentation slides (PDF),link=javapolis-2007-seam.pdf]

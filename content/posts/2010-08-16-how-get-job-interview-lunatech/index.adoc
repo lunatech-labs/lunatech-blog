@@ -89,8 +89,7 @@ things to ask about in an interview.
 == Stack Overflow profile
 
 You do not have to actually _be_
-http://msmvps.com/blogs/jon_skeet/archive/2009/01/15/stack-overflow-reputation-and-being-a-micro-celebrity.aspx[Jon
-Skeet] to have a http://stackoverflow.com/[Stack Overflow] profile that
+http://msmvps.com/blogs/jon_skeet/archive/2009/01/15/stack-overflow-reputation-and-being-a-micro-celebrity.aspx[Jon Skeet] to have a http://stackoverflow.com/[Stack Overflow] profile that
 tells us more than the average CV. Like a programming blog, Stack
 Overflow activity usually provides a far more useful picture of
 someone's interests and written communication skills than a CV does. Any
@@ -131,8 +130,7 @@ especially when the interesting facts are well-hidden. One of the other
 items on our list can get you an interview invitation more quickly; we
 are looking for URLs at the top of the CV. An impressive professional CV
 is one that shows commercial software development experience that
-matches http://www.lunatech-research.com/content/employment[what we are
-looking for].
+matches http://www.lunatech-research.com/content/employment[what we are looking for].
 
 == Conclusion
 

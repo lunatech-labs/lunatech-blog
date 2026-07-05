@@ -5,8 +5,7 @@ tags:
 - "jbug"
 - "event"
 ---
-Here are a few photos from last week's https://2007-10-01-benelux-jboss-user-group-2-november-2007[JBoss User Group
-event].
+Here are a few photos from last week's https://2007-10-01-benelux-jboss-user-group-2-november-2007[JBoss User Group event].
 
 This time we had plenty of food and drink:
 

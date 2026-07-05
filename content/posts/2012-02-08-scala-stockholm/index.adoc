@@ -7,8 +7,7 @@ tags:
 - "scala"
 ---
 On 15 February 2012, Peter Hilton
-will present Play to the http://www.meetup.com/Scala-Stockholm/events/46249872/[Scala-Stockholm user
-group].
+will present Play to the http://www.meetup.com/Scala-Stockholm/events/46249872/[Scala-Stockholm user group].
 
 Peter Hilton will open the meeting with a short presentation on his view
 about Scala's role as language on the JVM which we will discuss with

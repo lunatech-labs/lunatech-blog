@@ -5,8 +5,7 @@ tags:
 - "project-management"
 ---
 Peter Hilton will be presenting
-a http://www.devoxx.com/display/JV08/Meeting-avoidance+for+self-managing+developers[Meeting-avoidance for self-managing
-developers]
+a http://www.devoxx.com/display/JV08/Meeting-avoidance+for+self-managing+developers[Meeting-avoidance for self-managing developers]
 presentation at this year's
 http://www.devoxx.com/display/JV08/Home[Devoxx08]
 formerly-known-as-JavaPolis conference. See you there!

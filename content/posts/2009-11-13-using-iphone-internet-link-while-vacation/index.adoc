@@ -21,8 +21,7 @@ doesn't require you to touch or even look at the phone. My second Nokia
 phone had a modem in it, so it did tethering. Around 2005 it had
 [.nobr]#http://en.wikipedia.org/wiki/SyncML[SyncML]# and let me sync my
 contacts with GMail (that was a bit later). Ever since the first phone I
-could [.nobr]#http://en.wikipedia.org/wiki/Nokia_PC_Suite[sync the phone
-contacts]# with the computer using Windows first, then
+could [.nobr]#http://en.wikipedia.org/wiki/Nokia_PC_Suite[sync the phone contacts]# with the computer using Windows first, then
 [.nobr]#http://www.gammu.org[Linux]#. Since I hated typing on the phone
 I sent my SMS using Linux, by connecting with the phone. Ever since 2000
 I was able to send my [.nobr]#http://en.wikipedia.org/wiki/VCard[vCard]#
@@ -118,8 +117,7 @@ contacts.
 
 If you're looking for how to chose which calendars to sync with your
 iPhone, try
-[.nobr]#http://google.com/support/mobile/bin/answer.py?hl=en&answer=139206[this
-page]#.
+[.nobr]#http://google.com/support/mobile/bin/answer.py?hl=en&answer=139206[this page]#.
 
 == [#Freeapplicationsyoumusthave]####Free applications you must have
 
@@ -222,8 +220,7 @@ that disables all these in the hope that your phone lasts more than one
 day without you even calling.
 * I hear there's an iPod part in there. I have my own iPod with a much
 bigger disk space and I use it with Linux (I hear iPhones just
-[.nobr]#http://marcansoft.com/blog/2009/01/using-amarok-and-other-itunesdb-compatible-software-with-the-iphone-2x/[don't
-play nice]#). But yesterday I clicked on an mp3 podcast on a web site
+[.nobr]#http://marcansoft.com/blog/2009/01/using-amarok-and-other-itunesdb-compatible-software-with-the-iphone-2x/[don't play nice]#). But yesterday I clicked on an mp3 podcast on a web site
 and expected the file to be added to the iPod so I could listen to it in
 the car (which talks to iPods). I was completely amazed not to see the
 iPod app show up but instead a lame

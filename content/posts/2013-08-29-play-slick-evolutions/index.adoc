@@ -14,11 +14,9 @@ generally assume that the database already exists at runtime. The
 database, with its tables and other objects, is an application
 dependency that we expect to be set-up as part of application
 installation. You automate this by providing SQL scripts that
-http://www.playframework.com/documentation/2.1.x/Evolutions[Play
-Evolutions] uses to create the database.
+http://www.playframework.com/documentation/2.1.x/Evolutions[Play Evolutions] uses to create the database.
 
-https://blog.lunatech.com/posts/2013-08-13-play-slick-scala-console[Using the
-Scala console with Play and Slick] shows you how to use Slick to
+https://blog.lunatech.com/posts/2013-08-13-play-slick-scala-console[Using the Scala console with Play and Slick] shows you how to use Slick to
 generate the SQL DDL statements that create tables in your database,
 which you can use to write your SQL database creation scripts. Most of
 the rest is more about using Play evolutions than about Slick, but using
@@ -41,8 +39,7 @@ Source code: https://github.com/lunatech-labs/play-slick-examples.
 == Creating an initial Evolutions script
 
 In
-https://blog.lunatech.com/posts/2013-08-08-play-slick-getting-started[Getting
-started with Play and Slick] we started with a simple database table
+https://blog.lunatech.com/posts/2013-08-08-play-slick-getting-started[Getting started with Play and Slick] we started with a simple database table
 mapping:
 
 
@@ -73,8 +70,7 @@ https://github.com/freekh/play-slick[play-slick] to generate it:
 
 [arabic]
 . follow the
-https://blog.lunatech.com/2013-08-08-play-slick-getting-started[getting
-started instructions] to set-up your application
+https://blog.lunatech.com/2013-08-08-play-slick-getting-started[getting started instructions] to set-up your application
 . add the table mapping in `app/models/database/Cocktails.scala`
 . tell Slick where the table mappings are with the following addition to
 the Play configuration in `conf/application.conf`:
@@ -340,7 +336,6 @@ they are generated, so that you get SQL diffs when you make changes.
 Now you have created an initial database and populated it with test
 data, you can:
 
-* https://blog.lunatech.com/posts/2013-10-04-play-slick-executing-queries[execute
-database queries]
+* https://blog.lunatech.com/posts/2013-10-04-play-slick-executing-queries[execute database queries]
 * https://blog.lunatech.com/posts/2014-01-24-slick-insert-data[insert], update
 and delete data.

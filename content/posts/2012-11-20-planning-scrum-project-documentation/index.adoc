@@ -69,8 +69,7 @@ entity and attribute means, what it’s for, and what its data looks like.
 
 A Scrum development team needs some basic system and functional design
 documentation. System documentation, such as a
-http://blog.lunatech.com/2012/08/15/scrum-development-environment-documentation[development
-environment set-up guide], smoothes over the disruption caused by team
+http://blog.lunatech.com/2012/08/15/scrum-development-environment-documentation[development environment set-up guide], smoothes over the disruption caused by team
 member changes. Functional design documentation, such as a functional
 overview or data dictionary, makes communication more effective by
 defining what the software is about and what the jargon means.
@@ -174,8 +173,7 @@ business value and cost.
 
 * Fifty pages if you're lucky, usually more.
 
-https://plus.google.com/107170847819841716154/posts/TscaYXPM3jm[Comments
-on Google+]
+https://plus.google.com/107170847819841716154/posts/TscaYXPM3jm[Comments on Google+]
 
 _link:/author/peter-hilton[Peter Hilton] is a senior software developer
 at Lunatech Research, currently coaching a Scrum team for one of

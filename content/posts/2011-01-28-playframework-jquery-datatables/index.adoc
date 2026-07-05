@@ -304,6 +304,5 @@ Also, if you have enough data that serving all of it as single HTML
 table is too big, you will want to use DataTables’ server-side
 processing support to load the data from an Ajax request. This is
 described in the follow-on to this article:
-http://blog.lunatech.com/2011/02/07/ajax-datatables-playframework[Ajax
-DataTables with the Play framework].
+http://blog.lunatech.com/2011/02/07/ajax-datatables-playframework[Ajax DataTables with the Play framework].
 

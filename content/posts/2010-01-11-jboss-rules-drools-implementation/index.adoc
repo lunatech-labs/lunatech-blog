@@ -31,8 +31,7 @@ preparing an order for network services, which allows BBned to offer a
 flexible range of services rather than limiting customers to fixed
 choices.
 
-The http://www.jboss.com/products/platforms/brms/[JBoss Business Rules
-Management System] is the ideal technology platform for implementing
+The http://www.jboss.com/products/platforms/brms/[JBoss Business Rules Management System] is the ideal technology platform for implementing
 this kind of decision service: it provides a mature implementation of a
 high-performance rules engine that developers can use to execute
 business rules written in the Drools Rule Language. For BBned, this

@@ -9,12 +9,10 @@ tags:
 This article is about
 web application
 http://en.wikipedia.org/wiki/Internationalization_and_localization[internationalisation]
-(internationalization, `I18N`) and http://en.wikipedia.org/wiki/Language_localisation[language
-localisation]
+(internationalization, `I18N`) and http://en.wikipedia.org/wiki/Language_localisation[language localisation]
 (localization, `L10N`). This article shows you how to localise a Play
 framework 1.0 web application, with an example based on the 'Yet Another
-Blog Engine' example application, used in the http://www.playframework.org/documentation/1.0.1/guide1[Play
-tutorial].
+Blog Engine' example application, used in the http://www.playframework.org/documentation/1.0.1/guide1[Play tutorial].
 
 [[i18n]]
 == Internationalisation and localisation
@@ -255,8 +253,7 @@ As well as simple messages, our application includes messages that
 contain a variable, such as _Posts tagged with Play_
 
 To localise a message that contains a single parameter, use a
-http://java.sun.com/javase/6/docs/api/java/util/Formatter.html#syntax[Java
-format string] to insert the parameter value in the message:
+http://java.sun.com/javase/6/docs/api/java/util/Formatter.html#syntax[Java format string] to insert the parameter value in the message:
 
 [source,xml]
 ----
@@ -427,8 +424,7 @@ the localisations back to the module.
 In 2008 I was localising an application that was built using Seam 2 and
 JavaServer Faces (JSF) 1.2. There turned out to have three special cases
 that were awkward to implement in JSF, which I reported as
-https://javaserverfaces-spec-public.dev.java.net/issues/show_bug.cgi?id=517[javaserverfaces-spec-public
-issue 517].
+https://javaserverfaces-spec-public.dev.java.net/issues/show_bug.cgi?id=517[javaserverfaces-spec-public issue 517].
 
 . Parameterised message used in an attribute value
 . Formatted message parameter

@@ -27,10 +27,8 @@ its own culture - norms and values, if you like.
 Java EE is the land of the architectural pattern. I’m not sure which
 country that is, but it would have to be one where people eat a lot of
 pasta, with its many
-http://en.wikipedia.org/wiki/Spaghetti_code#Other_related_terms[related
-code-style metaphors]. What’s more, the
-http://www.joelonsoftware.com/articles/fog0000000018.html[architecture
-astronauts] who live there have made the endless layers of lasagne
+http://en.wikipedia.org/wiki/Spaghetti_code#Other_related_terms[related code-style metaphors]. What’s more, the
+http://www.joelonsoftware.com/articles/fog0000000018.html[architecture astronauts] who live there have made the endless layers of lasagne
 architecture their national dish.
 
 Play, on the other hand, is from somewhere else. Play 1.0 was written in

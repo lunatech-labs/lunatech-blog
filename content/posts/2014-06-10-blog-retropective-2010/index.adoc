@@ -15,8 +15,7 @@ and wrote about business topics.
 
 == Technology
 
-https://blog.lunatech.com/posts/2010-06-14-how-demo-play-framework-live-coding-script[How
-to demo the Play framework - live coding script] is a variation on the
+https://blog.lunatech.com/posts/2010-06-14-how-demo-play-framework-live-coding-script[How to demo the Play framework - live coding script] is a variation on the
 tutorial style that gives explicit step-by-step instructions for
 creating a new application and using basic features. This could also
 have been called `The Play Framework kata', because it’s both a
@@ -36,8 +35,7 @@ it’s a useful technique for trying out a single line of code that seems
 to be broken in a complex application. And if you practise this, it’s
 even faster.
 
-https://blog.lunatech.com/posts/2010-03-15-play-framework-usability[Play
-framework usability], on the other hand, is a think-piece that later
+https://blog.lunatech.com/posts/2010-03-15-play-framework-usability[Play framework usability], on the other hand, is a think-piece that later
 became part of a presentation that I gave several times. Blog posts like
 this serve a different purpose: instead of being focused helping a
 smart-but-busy reader complete a task, which is how you write a
@@ -49,17 +47,14 @@ on projects and, ultimately, even a book.
 
 == Business
 
-https://blog.lunatech.com/posts/2010-08-05-how-get-job-lunatech[How to get a
-job at Lunatech] and
-https://blog.lunatech.com/posts/2010-08-16-how-get-job-interview-lunatech[How
-to get a job interview at Lunatech] combined two different angles in a
+https://blog.lunatech.com/posts/2010-08-05-how-get-job-lunatech[How to get a job at Lunatech] and
+https://blog.lunatech.com/posts/2010-08-16-how-get-job-interview-lunatech[How to get a job interview at Lunatech] combined two different angles in a
 pair of blog posts about recruitment, from our side of the table. The
 first offered our perspective on why giving your CV to a recruiter is a
 bad idea and the second gives job seekers specific advice on how to get
 a meeting (i.e. a job interview) with a company like ours.
 
-https://blog.lunatech.com/posts/2010-03-03-plan-cruncher[Plan Cruncher: shorter
-business plans] applies similar ideas to the challenge of getting a
+https://blog.lunatech.com/posts/2010-03-03-plan-cruncher[Plan Cruncher: shorter business plans] applies similar ideas to the challenge of getting a
 different kind of meeting: how entrepreneurs can pitch their start-up to
 potential investors. Plan Cruncher is an idea I had and a concept that I
 developed in this article as a result of reading bad business plans from
@@ -67,8 +62,7 @@ otherwise interesting start-ups, and from sitting in on pitch meetings
 whose main purpose was to discover basic information that was missing
 from the business plan.
 
-https://blog.lunatech.com/posts/2010-03-29-plan-cruncher-play-production[Plan
-Cruncher - Play! in production] - was the inevitable software
+https://blog.lunatech.com/posts/2010-03-29-plan-cruncher-play-production[Plan Cruncher - Play! in production] - was the inevitable software
 implementation that followed soon after. We built it as a Play Framework
 demonstration application, but it turned out to be a popular application
 and still gets plenty of traffic years later. It turns out that writing

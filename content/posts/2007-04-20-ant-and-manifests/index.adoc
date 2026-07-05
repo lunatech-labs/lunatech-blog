@@ -7,8 +7,7 @@ tags:
 When you build an exploded J2EE package such as a .war or .ear, you may need to create a manifest file. This can be quite tricky, since the format of the manifest file is such that it is easy to get it wrong. Furthermore, some errors may cause your application to fail in mysterious ways.
 
 If you look at the
-http://java.sun.com/j2se/1.4.2/docs/guide/jar/jar.html[JAR File
-Specification], you will see that lines in a manifest can not be any
+http://java.sun.com/j2se/1.4.2/docs/guide/jar/jar.html[JAR File Specification], you will see that lines in a manifest can not be any
 longer than 72 bytes. That's *bytes*, not characters.
 
 It was the line length that tripped me up a while ago. I was getting
@@ -82,5 +81,4 @@ several lines, if you do not want to.
 
 If you need to read or create manifest files in your Java code, have a
 look at the
-http://java.sun.com/j2se/1.5.0/docs/api/java/util/jar/package-summary.html[java.util.jar
-package].
+http://java.sun.com/j2se/1.5.0/docs/api/java/util/jar/package-summary.html[java.util.jar package].

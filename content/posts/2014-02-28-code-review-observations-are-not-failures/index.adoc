@@ -56,8 +56,7 @@ everything that the local expert in a technology we hardly use knows.
 
 A code review observation can be a detail that makes the difference
 between the code getting slightly better instead of slightly worse. The
-http://programmer.97things.oreilly.com/wiki/index.php/The_Boy_Scout_Rule[Boy
-Scout Rule] applies to all of the small things that aren’t quite right
+http://programmer.97things.oreilly.com/wiki/index.php/The_Boy_Scout_Rule[Boy Scout Rule] applies to all of the small things that aren’t quite right
 yet - spelling mistakes, UI inconsistencies, missing comments, awkward
 variable names, hard-to-read code. Most importantly, there’s no `trash
 ownership' - it’s irrelevant if it’s not `your' empty beer bottle by the
@@ -85,8 +84,7 @@ worthing finding out what’s wrong with it sooner, rather than later.
 I suspect that if you’re not doing code review on your current project,
 it’s at least partly because you don’t like it much. Either way, you’re
 missing out, so perhaps it’s worth thinking about
-http://programmer.97things.oreilly.com/wiki/index.php/Code_Reviews[other
-approaches] and whether changing the way you think about it will make it
+http://programmer.97things.oreilly.com/wiki/index.php/Code_Reviews[other approaches] and whether changing the way you think about it will make it
 more appealing. Meanwhile, the next questions are:
 
 * What are bad reasons for not doing code review?

@@ -26,8 +26,7 @@ this new feature meant making sure that not only was the JavaScript code
 produced by the web services (in our case, produced by a
 [.nobr]#http://en.wikipedia.org/wiki/Java_Servlet[Servlet]#, and thus
 running in a
-[.nobr]#http://en.wikipedia.org/wiki/Servlet_container#Servlet_containers[Servlet
-container]#), I also wanted to make sure that the JavaScript code was
+[.nobr]#http://en.wikipedia.org/wiki/Servlet_container#Servlet_containers[Servlet container]#), I also wanted to make sure that the JavaScript code was
 valid, contained all the functions required and that the functions
 worked. Since the generated functions use
 [.nobr]#http://en.wikipedia.org/wiki/Ajax_%28programming%29[AJAX]# to
@@ -44,15 +43,13 @@ JavaScript generator Servlet
 RESTEasy implementation language)
 * A JavaScript interpreter that also can do AJAX
 * A JavaScript interpreter that supports
-[.nobr]#http://en.wikipedia.org/wiki/JavaScript#Versions[JavaScript
-1.8]# (since I use a feature introduced in that version: native
+[.nobr]#http://en.wikipedia.org/wiki/JavaScript#Versions[JavaScript 1.8]# (since I use a feature introduced in that version: native
 [.nobr]#http://www.json.org/[JSON]#)
 
 == [#Unit-testingAJAXcodewithMaven-Choosingthepropertools]####Choosing the proper tools
 
 There are many diverse and good
-[.nobr]#http://en.wikipedia.org/wiki/List_of_ECMAScript_engines[JavaScript
-interpreters]#, but only one of them is both done in Java and allows us
+[.nobr]#http://en.wikipedia.org/wiki/List_of_ECMAScript_engines[JavaScript interpreters]#, but only one of them is both done in Java and allows us
 to interact with it in Java:
 [.nobr]#http://www.mozilla.org/rhino/[Rhino]#.
 
@@ -62,10 +59,8 @@ that it supports AJAX, even though
 [.nobr]#http://webtest.canoo.com/webtest/manual/WebTestHome.html[Canoo]#
 (although in fact its underlying HTML engine
 [.nobr]#http://htmlunit.sourceforge.net[HtmlUnit]#), which
-[.nobr]#http://htmlunit.sourceforge.net/javascript.html[uses Rhino as
-JavaScript engine]#,
-[.nobr]#http://htmlunit.sourceforge.net/javascript-howto.html[claims to
-support AJAX]# (which could be an HtmlUnit addition). HtmlUnit (through
+[.nobr]#http://htmlunit.sourceforge.net/javascript.html[uses Rhino as JavaScript engine]#,
+[.nobr]#http://htmlunit.sourceforge.net/javascript-howto.html[claims to support AJAX]# (which could be an HtmlUnit addition). HtmlUnit (through
 Canoo) is available as a [.nobr]#http://maven.apache.org[Maven]# plugin
 for unit tests, but it is really aimed at HTML rendering and testing,
 and requires the tests to be written in a procedural form of XML which
@@ -73,8 +68,7 @@ we do not particularly like.
 
 There is another project mentioning the addition of AJAX to Rhino, which
 is [.nobr]#http://www.envjs.com/[Env.js]#: a
-[.nobr]#http://ejohn.org/blog/bringing-the-browser-to-the-server/[JavaScript
-implementation of AJAX and other browser-related additions to Rhino]#
+[.nobr]#http://ejohn.org/blog/bringing-the-browser-to-the-server/[JavaScript implementation of AJAX and other browser-related additions to Rhino]#
 (Rhino implements JavaScript the language, and not the browser APIs and
 objects that are usually browser additions). A quick search for a Maven
 plugin comes up with [.nobr]#http://github.com/bodil/testlol[testlol]#
@@ -87,8 +81,7 @@ Now about the server part, I am testing RESTEasy, and it already has
 several tests that deploy RESTEasy in
 [.nobr]#http://www.mortbay.org/[Jetty]# for integration tests in Maven
 using the
-[.nobr]#http://docs.codehaus.org/display/JETTY/Maven+Jetty+Plugin[Maven
-Jetty plugin]#, so I will be using this setup as well.
+[.nobr]#http://docs.codehaus.org/display/JETTY/Maven+Jetty+Plugin[Maven Jetty plugin]#, so I will be using this setup as well.
 
 Our winners are thus:
 
@@ -104,22 +97,17 @@ Our winners are thus:
 The latest Rhino version released is
 [.nobr]#http://www.mozilla.org/rhino/download.html[1.7R2]# which has
 been out since March 2009, and is available on
-[.nobr]#http://repo1.maven.org/maven2/rhino/js/[Maven's central
-repository]# but the trick is that we are using the
+[.nobr]#http://repo1.maven.org/maven2/rhino/js/[Maven's central repository]# but the trick is that we are using the
 [.nobr]#https://developer.mozilla.org/En/Using_native_JSON[JSON]# native
 parser that has been specified in
-[.nobr]#http://en.wikipedia.org/wiki/JavaScript#Versions[JavaScript
-1.8.1]# and
-[.nobr]#http://en.wikipedia.org/wiki/ECMAScript#ECMAScript.2C_5th_Edition[ECMAScript
-5.0]# (the underlying specification of JavaScript).
+[.nobr]#http://en.wikipedia.org/wiki/JavaScript#Versions[JavaScript 1.8.1]# and
+[.nobr]#http://en.wikipedia.org/wiki/ECMAScript#ECMAScript.2C_5th_Edition[ECMAScript 5.0]# (the underlying specification of JavaScript).
 
 Alas, Rhino 1.7R2
-[.nobr]#https://developer.mozilla.org/en/Rhino_Overview[only implements
-JavaScript 1.7]#, while the summer of 2009 saw a
+[.nobr]#https://developer.mozilla.org/en/Rhino_Overview[only implements JavaScript 1.7]#, while the summer of 2009 saw a
 [.nobr]#http://code.google.com/soc/[Google Summer Of Code]# for Rhino
 that aimed at
-[.nobr]#http://raphscallion.com/blog/entries/2009/07/28/gsoc_update.html[providing
-Rhino with ECMAScript 5.0]# (including the JSON native object). This
+[.nobr]#http://raphscallion.com/blog/entries/2009/07/28/gsoc_update.html[providing Rhino with ECMAScript 5.0]# (including the JSON native object). This
 work has now been completed and is included in the current Rhino trunk
 for 1.7R3, which means we have to build our own Rhino jar in order to
 use those goodies:
@@ -318,8 +306,7 @@ public class MyResource{
 }
 ----
 
-While we wait for a [.nobr]#http://jcp.org/en/jsr/detail?id=315[Servlet
-3.0]# implementation of RESTEasy, we still have to write the following
+While we wait for a [.nobr]#http://jcp.org/en/jsr/detail?id=315[Servlet 3.0]# implementation of RESTEasy, we still have to write the following
 `web.xml` file to enable RESTEasy and the JavaScript API I am writing:
 
 [source,xml]

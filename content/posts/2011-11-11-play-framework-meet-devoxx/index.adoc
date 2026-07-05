@@ -14,8 +14,7 @@ So if you want to talk about Play and meet other players, please join
 us:
 
 * Where:
-http://maps.google.nl/maps?q=51.2458,4.416(AXXES%20Cafe)&z=17&t=k[AXXES
-Café] - Metropolis, Antwerpen (next to the Devoxx venue)
+http://maps.google.nl/maps?q=51.2458,4.416(AXXES%20Cafe)&z=17&t=k[AXXES Café] - Metropolis, Antwerpen (next to the Devoxx venue)
 * When: Thursday 17 of November, starting at 20:00
 
 See you there...

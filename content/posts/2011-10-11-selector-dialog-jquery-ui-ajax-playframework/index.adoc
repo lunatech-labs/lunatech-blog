@@ -14,10 +14,8 @@ you need to select something for a list of thousands of values, such as
 selecting a person from a table of ten thousand employees.
 
 This follows on from two earlier articles about jQuery UI components:
-http://blog.lunatech.com/2011/07/05/jquery-ui-ajax-autocomplete-playframework[jQuery
-UI Ajax autocomplete with Play] and
-http://blog.lunatech.com/2011/08/10/lazy-loading-jquery-ui-ajax-play[Lazy
-loading page content with jQuery UI, Ajax and Play].
+http://blog.lunatech.com/2011/07/05/jquery-ui-ajax-autocomplete-playframework[jQuery UI Ajax autocomplete with Play] and
+http://blog.lunatech.com/2011/08/10/lazy-loading-jquery-ui-ajax-play[Lazy loading page content with jQuery UI, Ajax and Play].
 
 For this article, we use the simpler example of selecting a time zone
 from a table:
@@ -25,8 +23,7 @@ from a table:
 image:jqueryui-dialog.png[Screen shot: input field and selector dialog]
 
 This article’s examples and source code are available as part of the
-Play framework http://www.playframework.org/modules/jqueryui[jQuery UI
-module].
+Play framework http://www.playframework.org/modules/jqueryui[jQuery UI module].
 
 == Architecture
 

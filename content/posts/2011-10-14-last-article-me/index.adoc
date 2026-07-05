@@ -34,8 +34,7 @@ projects, use only cool and/or new technologies to make the best
 products in the most rewarding way possible.
 
 With Nicolas Leroux, we've promoted
-http://en.wikipedia.org/wiki/Software_craftsmanship[software
-craftmanship] back before it became a _thing_ (“Artisan Développeur” in
+http://en.wikipedia.org/wiki/Software_craftsmanship[software craftmanship] back before it became a _thing_ (“Artisan Développeur” in
 French), but a good company to work for is more than just that. Lunatech
 has always been very accommodating with its employees. As long as the
 job is done well (and it is always), work hours are flexible, location,
@@ -103,10 +102,8 @@ Ceylon team certainly kick ass.
 
 All this to say, I cannot recommend a better place to work for than
 Lunatech. If you're in the Netherlands and are a talented developer,
-then http://www.lunatech-research.com/content/employment[you want to
-work there]. If you're studying and want the best place to work for,
-http://www.lunatech-research.com/content/internships[you need to apply
-for an internship there].
+then http://www.lunatech-research.com/content/employment[you want to work there]. If you're studying and want the best place to work for,
+http://www.lunatech-research.com/content/internships[you need to apply for an internship there].
 
 It's a weird feeling to be both sad to leave and exited to start a new
 job. This is my last blog entry here, but there are many more to come

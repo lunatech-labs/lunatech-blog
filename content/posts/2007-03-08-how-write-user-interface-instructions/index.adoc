@@ -90,8 +90,7 @@ not just what the text is.
 == Do not leave out any steps
 
 It may seem redundant to include the following step (from the
-link:/2007/03/08/eclipse-plugin-installation[Eclipse plug-in
-installation] instructions) because it is obvious what you need to do:
+link:/2007/03/08/eclipse-plugin-installation[Eclipse plug-in installation] instructions) because it is obvious what you need to do:
 
 . On the _Feature licence_ wizard page, select _I accept the terms in
 the licence agreement_, and click _Next_.

@@ -140,5 +140,4 @@ Printing will work just fine.
 
 This macro is based on a comment by
 http://confluence.atlassian.com/display/~tmb[Tiffany Bartlett] on
-http://confluence.atlassian.com/display/DEVNET/Numbered+Sections+Macro[Numbered
-Sections Macro].
+http://confluence.atlassian.com/display/DEVNET/Numbered+Sections+Macro[Numbered Sections Macro].

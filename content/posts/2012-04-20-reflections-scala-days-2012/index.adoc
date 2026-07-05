@@ -21,8 +21,7 @@ walk in near the end of the first talk.
 http://en.wikipedia.org/wiki/Guy_L._Steele,_Jr.[Guy Steele] was
 comparing Scala and Fortress. I knew Fortress only from it’s connections
 to Fortran, which I came into contact with at University - I don’t want
-to talk about it. Next stop was https://twitter.com/#!/jboner[Jonas
-Bonér] with a short talk about Akka 2.0. It’s really nice to see how the
+to talk about it. Next stop was https://twitter.com/#!/jboner[Jonas Bonér] with a short talk about Akka 2.0. It’s really nice to see how the
 Akka team built upon the concepts of Akka 1 but generalized and
 simplified things. Global state exchanged for an explicit Actor System
 of which multiple can co-exist, no more distinction between local and
@@ -80,8 +79,7 @@ for dealing with it.
 After an extended coffee break - where the attacks on the cookies may
 have been an indication of the nutritional value of the sandwiches from
 the lunch - the last session started for me with the second talk in the
-session, about the developments on the http://scala-ide.org/[Eclipse
-Scala IDE]. https://twitter.com/#!/jaguarul[Iulian Dragos] concurrently
+session, about the developments on the http://scala-ide.org/[Eclipse Scala IDE]. https://twitter.com/#!/jaguarul[Iulian Dragos] concurrently
 adjusted his microphone for 30 minutes, and demonstrated the new
 features of the upcoming 2.1 version of the Scala IDE. This release is
 marking the shift from building towards a stable but not very feature
@@ -94,8 +92,7 @@ Lunatech.
 
 After absorbing all these facts, opinions and ideas about Scala and
 Scala tech, it was time for a London site-seeing tour with a typical red
-double-decker bus and dinner at http://www.lincolnsinn.org.uk/[Lincoln’s
-Inn].
+double-decker bus and dinner at http://www.lincolnsinn.org.uk/[Lincoln’s Inn].
 
 The next day was supposed to start with a fifteen minute welcome talk,
 but since no-one seemed to know who was supposed to give that,
@@ -106,8 +103,7 @@ http://jonasboner.com/2008/10/06/real-world-scala-dependency-injection-di/[Cakes
 are no longer served by the
 http://stackoverflow.com/a/7861070/59174[Bakery of Doom], instead
 unification of the compiler and the new
-http://alots.wordpress.com/2012/03/06/getting-into-the-new-scalas-2-10-reflection-api/[reflections
-API] give rise to supercakes: cakes on top of cakes, and this
+http://alots.wordpress.com/2012/03/06/getting-into-the-new-scalas-2-10-reflection-api/[reflections API] give rise to supercakes: cakes on top of cakes, and this
 unification paves the path for
 http://docs.scala-lang.org/sips/pending/self-cleaning-macros.html[Macros],
 which is a great new experimental feature in 2.10. Macros can do some of

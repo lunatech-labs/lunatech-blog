@@ -14,12 +14,9 @@ not part of the web’s stateless request-response paradigm, but is now
 possible with new HTML5 features.
 
 This follows on from earlier jQuery UI component articles:
-https://blog.lunatech.com/posts/2011-07-05-jquery-ui-ajax-autocomplete-playframework[jQuery
-UI Ajax autocomplete with Play],
-https://blog.lunatech.com/posts/2011-08-10-lazy-loading-jquery-ui-ajax-play[Lazy
-loading page content with jQuery UI, Ajax and Play] and
-https://blog.lunatech.com/2011-10-11-selector-dialog-jquery-ui-ajax-playframework[Selector
-dialogue with jQuery UI, Ajax and Play]. The examples and source code
+https://blog.lunatech.com/posts/2011-07-05-jquery-ui-ajax-autocomplete-playframework[jQuery UI Ajax autocomplete with Play],
+https://blog.lunatech.com/posts/2011-08-10-lazy-loading-jquery-ui-ajax-play[Lazy loading page content with jQuery UI, Ajax and Play] and
+https://blog.lunatech.com/2011-10-11-selector-dialog-jquery-ui-ajax-playframework[Selector dialogue with jQuery UI, Ajax and Play]. The examples and source code
 for all of these articles are available as part of the Play framework
 http://www.playframework.org/modules/jqueryui[jQuery UI module].
 
@@ -30,10 +27,8 @@ image:jqueryui-progress.png[Progress bar example]
 
 Note that this time we are not using a time zones example, although the
 recent
-http://blog.joda.org/2011/10/today-time-zone-database-was-closed.html[time
-zone database debacle] seems to have been
-http://blog.joda.org/2011/10/time-zone-database-rebooted.html[largely
-resolved].
+http://blog.joda.org/2011/10/today-time-zone-database-was-closed.html[time zone database debacle] seems to have been
+http://blog.joda.org/2011/10/time-zone-database-rebooted.html[largely resolved].
 
 == Architecture
 

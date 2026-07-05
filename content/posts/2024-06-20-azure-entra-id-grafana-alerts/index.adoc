@@ -21,8 +21,7 @@ surprise on more than one occasion as suddenly our applications stopped working 
 expiring.
 
 Unfortunately Azure doesn't seem to provide a built-in alert system for the expiring secrets, and the
-solutions we found online were not quite to our liking (https://www.thelazyadministrator.com/2023/12/16/automated-alerts-on-azure-entra-id-application-secret-expirations/[this excellent guide suggests a solution making
-use of powershell scripts] ) as we were hoping to fire the alerts from our Grafana instance since all
+solutions we found online were not quite to our liking (https://www.thelazyadministrator.com/2023/12/16/automated-alerts-on-azure-entra-id-application-secret-expirations/[this excellent guide suggests a solution making use of powershell scripts] ) as we were hoping to fire the alerts from our Grafana instance since all
 the contact points were already configured.
 
 After a long investigation and some https://github.com/yesoreyeram/grafana-plugins/pull/13[open source contributions],
@@ -191,8 +190,7 @@ To do so:
 
 |Parser
 |Backend
-|We need to use this parser because it's the
-https://github.com/grafana/grafana-infinity-datasource/discussions/189[only one that supports alerts]
+|We need to use this parser because it's the only one that supports alerts (see https://github.com/grafana/grafana-infinity-datasource/discussions/189)
 
 |Source
 |URL
@@ -209,7 +207,7 @@ https://github.com/grafana/grafana-infinity-datasource/discussions/189[only one 
 |URL
 |https://graph.microsoft.com/v1.0/applications
 |This will return _all_ the applications in the tenant. If you want to perform some filtering consider
-using the https://learn.microsoft.com/en-us/graph/filter-query-parameter?tabs=http[$filter query parameter]
+using the $filter query parameter (see https://learn.microsoft.com/en-us/graph/filter-query-parameter)
 or add extra conditions to the "Filter" section down below
 
 |Parsing options & Result fields

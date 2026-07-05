@@ -11,13 +11,11 @@ with a simple example; this is essentially a functional design.
 
 This article is part 2 of a series:
 
-. link:https://blog.lunatech.com/posts/2009-12-14-decision-service-architecture-jboss-rules[Decision
-service architecture with JBoss Rules] - what a decision service is and
+. link:https://blog.lunatech.com/posts/2009-12-14-decision-service-architecture-jboss-rules[Decision service architecture with JBoss Rules] - what a decision service is and
 gave a high-level technical overview how you can use the JBoss Rules
 Execution Server to build one
 . Decision service business rules in JBoss Rules - this article
-. link:/2010/01/04/how-build-decision-service-using-jboss-rules-execution-server[How
-to build a decision service using JBoss Rules Execution Server] - how to
+. link:/2010/01/04/how-build-decision-service-using-jboss-rules-execution-server[How to build a decision service using JBoss Rules Execution Server] - how to
 get this working, with example rules - a RESTful decision service with
 no Java code required.
 
@@ -382,7 +380,6 @@ a condition that only matches on the 'first' one.
 Once you have written some business rules for your decision service, the
 next step is obviously to run them and test them. The simplest way to do
 this is to configure the JBoss Rules
-http://downloads.jboss.com/drools/docs/5.0.1.26597.FINAL/drools-guvnor/html/ch01.html#d0e1095[Execution
-Server] to load the rules file, so that you can execute the rules using
+http://downloads.jboss.com/drools/docs/5.0.1.26597.FINAL/drools-guvnor/html/ch01.html#d0e1095[Execution Server] to load the rules file, so that you can execute the rules using
 its web services interface.
 

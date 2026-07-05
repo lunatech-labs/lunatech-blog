@@ -12,8 +12,7 @@ application.
 
 The newest option, at the time of writing, is to use Slick to access an
 SQL database. The
-http://slick.typesafe.com/doc/1.0.1/gettingstarted.html[Slick 1.0.1
-getting started documentation] is straightforward. However, the Slick
+http://slick.typesafe.com/doc/1.0.1/gettingstarted.html[Slick 1.0.1 getting started documentation] is straightforward. However, the Slick
 documentation example shows database-specific imports, a JDBC URL in the
 Scala code and a Slick `threadLocalSession`.
 
@@ -238,11 +237,7 @@ define table mappings and generate SQL strings.
 Now that you can generate SQL for a table definition and a query, you
 can:
 
-* https://blog.lunatech.com/posts/2013-08-13-play-slick-scala-console[use the
-Scala console to inspect the same generated SQL]
-* https://blog.lunatech.com/posts/2013-08-29-play-slick-evolutions[create the
-table in a database]
-* https://blog.lunatech.com/posts/2013-08-21-slick-column-definitions[extend
-the table definition]
-* https://blog.lunatech.com/posts/2013-10-04-play-slick-executing-queries[extend
-the query].
+* https://blog.lunatech.com/posts/2013-08-13-play-slick-scala-console[use the Scala console to inspect the same generated SQL]
+* https://blog.lunatech.com/posts/2013-08-29-play-slick-evolutions[create the table in a database]
+* https://blog.lunatech.com/posts/2013-08-21-slick-column-definitions[extend the table definition]
+* https://blog.lunatech.com/posts/2013-10-04-play-slick-executing-queries[extend the query].

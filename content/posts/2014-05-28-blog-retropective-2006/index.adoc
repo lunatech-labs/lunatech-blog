@@ -26,16 +26,14 @@ techniques are of course less relevant now that we use Scala for our new
 development projects, but also remind us that you don’t have to fully
 adopt a technology to get some benefit from the good parts.
 
-https://blog.lunatech.com/posts/2006-06-28-books-software-developers[Books for
-software developers], on the other hand, looked backwards at great books
+https://blog.lunatech.com/posts/2006-06-28-books-software-developers[Books for software developers], on the other hand, looked backwards at great books
 that provide valuable inspiration in both technical and non-technical
 skills. All of these books are still worth reading, with only _Effective
 Java_ being less relevant than it was eight years ago.
 
 == Tips for writers
 
-https://blog.lunatech.com/posts/2006-09-11-how-use-bullet-lists[How to use
-bullet lists] was my first attempt to show people how to improve their
+https://blog.lunatech.com/posts/2006-09-11-how-use-bullet-lists[How to use bullet lists] was my first attempt to show people how to improve their
 writing by making syntax more consistent. It seems logical from a
 programmer’s perspective, which is why it was satisfying to publish, but
 this kind of article is probably entirely futile: I doubt that anyone
@@ -44,8 +42,7 @@ much software development documentation is hard to read and could easily
 be improved. Perhaps this is because programmers prefer arguments about
 white-space than about words.
 
-https://blog.lunatech.com/posts/2006-12-04-wiki-my-word-processor[Wiki is my
-word-processor] is the result of too much experience of how
+https://blog.lunatech.com/posts/2006-12-04-wiki-my-word-processor[Wiki is my word-processor] is the result of too much experience of how
 word-processors are more of a problem than a solution in software
 development. Word-processors gave technical writers too many things
 (mostly formatting) to fiddle to have time to write readable text. This

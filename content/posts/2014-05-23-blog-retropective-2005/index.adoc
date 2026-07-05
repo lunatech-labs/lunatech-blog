@@ -14,8 +14,7 @@ Java web applications with Struts 1.2 and Hibernate, running on JBoss
 
 == Technology
 
-https://blog.lunatech.com/posts/2005-07-29-struts-urls[Struts URLs for
-perfectionists] is my favourite technology article from 2005, because it
+https://blog.lunatech.com/posts/2005-07-29-struts-urls[Struts URLs for perfectionists] is my favourite technology article from 2005, because it
 describes a rare success in fighting wrong-headed J2EE web technology
 and managing to build a more HTTP-centric web application. While
 everyone else was building web applications with ugly URLs like:
@@ -37,11 +36,9 @@ a Good Thing when it arrived some years later.
 
 == Agile software development
 
-https://blog.lunatech.com/posts/2005-10-07-information-radiators-dashboard-wall[Information
-radiators: from dashboard to wall] describes an example of an agile
+https://blog.lunatech.com/posts/2005-10-07-information-radiators-dashboard-wall[Information radiators: from dashboard to wall] describes an example of an agile
 software development technique in Alistair Cockburn’s
-http://alistair.cockburn.us/Agile+software+development+book[2001 book on
-the topic] that we had used on the Struts project with the nice URLs
+http://alistair.cockburn.us/Agile+software+development+book[2001 book on the topic] that we had used on the Struts project with the nice URLs
 (see above):
 
 image:/posts/2005-10-07-information-radiators-dashboard-wall/information-radiator-small.jpg[An information radiator]
@@ -54,12 +51,10 @@ was less mainstream and featured a lot less hype back in 2005.
 
 image:/posts/2005-09-13-business-lunch-rules/business-lunch.jpg[business lunch]
 
-https://blog.lunatech.com/posts/2005-09-13-business-lunch-rules[Business lunch
-rules] is my favourite, though, because these instructions for how to
+https://blog.lunatech.com/posts/2005-09-13-business-lunch-rules[Business lunch rules] is my favourite, though, because these instructions for how to
 have an effective business lunch are timeless in a way that Struts and
 agile software development aren’t. In this article, Michael sets the
 rules for not only how to use that expense account effectively, but with
 class.
 
-_Photo: https://www.flickr.com/photos/94150506@N08/8931329670[Lena
-Vasiljeva]_
+_Photo: https://www.flickr.com/photos/94150506@N08/8931329670[Lena Vasiljeva]_

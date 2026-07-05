@@ -414,8 +414,7 @@ label page looks like:
 </p:document>
 ----
 
-If you want you can look at the [.nobr]#link:barcode-sheet.pdf[final
-results in PDF]#.
+If you want you can look at the [.nobr]#link:barcode-sheet.pdf[final results in PDF]#.
 
 == Conclusion
 

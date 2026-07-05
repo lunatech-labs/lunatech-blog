@@ -10,8 +10,7 @@ behind http://bitlogistics.com/[BitLogistics], and have developed
 their http://www.visiblelogistics.com/[VisibleLogistics] platform - a
 SaaS supply chain management solution. Lunatech implemented
 VisibleLogistics using a cutting-edge open-source technology stack,
-based on the http://en.wikipedia.org/wiki/Java_ee[Java Enterprise
-platform]. The project team,
+based on the http://en.wikipedia.org/wiki/Java_ee[Java Enterprise platform]. The project team,
 distributed across three countries, used an agile software development
 approach and Internet-based collaboration tools to maximise progress
 while controlling risk and costs.

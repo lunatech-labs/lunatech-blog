@@ -12,7 +12,6 @@ Framework](http://www.playframework.org/) presentation at
 link:http://vimeo.com/28769045[Play! Framework: to infinity and beyond]
 
 There are many more http://vimeo.com/javazone[JavaZone videos]; we
-especially recommend http://vimeo.com/28772382[CoffeeScript: JavaScript
-without the Fail].
+especially recommend http://vimeo.com/28772382[CoffeeScript: JavaScript without the Fail].
 
 

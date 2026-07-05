@@ -32,8 +32,7 @@ Spark has several cluster options:
 
 Kubernetes is a system to automate the deployment of containerized applications. In the context of spark, it means spark executors will run as containers. The spark driver also can be run in kubernetes as a container, this is the so-called cluster mode available for spark-submit command.
 
-There are many solutions to get a kubernetes instance running, either single local node for testing, or full production set-up on premises or cloud-based, see: https://kubernetes.io/docs/setup/pick-right-solution/[https://kubernetes.io/docs/setup/pick-right-solution/
-]
+There are many solutions to get a kubernetes instance running, either single local node for testing, or full production set-up on premises or cloud-based, see: https://kubernetes.io/docs/setup/pick-right-solution/[https://kubernetes.io/docs/setup/pick-right-solution/ ]
 We will work on Google Kubernetes Engine so we have a real multinode cluster without the burden of installation. Alternativelly, Minikube is the popular way to get started with kubernetes in single local node.
 
 From a user perspective, kubernetes is used with the kubectl command. kubectl must connect to a kubernetes master node to request execution of commands. The scope here is to get kubectl, and configure it to connect to the (gcloud) kubernetes cluster. Spark is dealing for us with the use of kubectl to deploy the spark-executor/driver containers.

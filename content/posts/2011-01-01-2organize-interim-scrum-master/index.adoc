@@ -17,8 +17,7 @@ results with better transparency and communication, and less project
 management overhead, while retaining the flexibility to respond to
 evolving customer requirements.
 
-Scrum, as summarised by the http://www.scrumalliance.org/[Scrum
-Alliance]:
+Scrum, as summarised by the http://www.scrumalliance.org/[Scrum Alliance]:
 
 ____
 Scrum is an iterative, incremental framework for developing any product

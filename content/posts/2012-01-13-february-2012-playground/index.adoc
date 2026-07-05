@@ -8,18 +8,15 @@ tags:
 ---
 By
 popular demand, we have arranged a bigger location for next month’s
-February Play!ground event, for http://www.playframework.org/[Play
-framework] users, because we have had
+February Play!ground event, for http://www.playframework.org/[Play framework] users, because we have had
 close registration for previous events that were full. Instead of using
 the Lunatech office, which limits us to thirty attendees, we have booked
 a location with capacity for 150 people.
 
 Almost three years ago, in February 2008, Lunatech organised a
-now-legendary JBUG event at http://www.paddymurphys.nl/[Paddy Murphy’s
-Irish Pub] in Rotterdam, with presentations from core JBoss developers
+now-legendary JBUG event at http://www.paddymurphys.nl/[Paddy Murphy’s Irish Pub] in Rotterdam, with presentations from core JBoss developers
 Pete Muir and Tom Baeyens
-(https://blog.lunatech.com/posts/2008-03-03-benelux-jboss-user-group-29-february-photos[February
-2008 event photos]).
+(https://blog.lunatech.com/posts/2008-03-03-benelux-jboss-user-group-29-february-photos[February 2008 event photos]).
 
 image:jbug-2008-02-photos-7.jpg[The audience watching the presentation]
 
@@ -29,8 +26,7 @@ Three years on, it’s time to return to ‘Paddy’s’ for our next event…
 
 * 15:00-18:00, Friday, 3 February 2012
 * Paddy Murphy’s -
-http://maps.google.com/maps?q=51.92125,4.48145(Paddy+Murphy’s,+Rodezand+15,+Rotterdam)&z=18[Rodezand
-15, Rotterdam (map)]
+http://maps.google.com/maps?q=51.92125,4.48145(Paddy+Murphy’s,+Rodezand+15,+Rotterdam)&z=18[Rodezand 15, Rotterdam (map)]
 * Open bar (i.e. free beer) sponsored by Lunatech
 
 Our Play events are the perfect opportunity to learn practical

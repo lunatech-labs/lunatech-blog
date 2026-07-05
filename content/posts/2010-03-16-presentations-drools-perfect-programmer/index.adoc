@@ -19,12 +19,10 @@ light-hearted look at the diversity of programmer backgrounds, and a
 serious point about what that means for programmers, and the people who
 hire or manage them. At least the jokes got a few laughs.
 
-link:decision-service.pdf[How to build a decision service using JBoss
-Rules (a.k.a. Drools)] (PDF, 639 KB) is a technical introduction to
+link:decision-service.pdf[How to build a decision service using JBoss Rules (a.k.a. Drools)] (PDF, 639 KB) is a technical introduction to
 Drools Expert, the rules engine in JBoss Rules, based on the example of
 a simple decision service, and focusing on what the code looks like. The
 decision service source code is available from the earlier article
-link:/2010/01/04/how-build-decision-service-using-jboss-rules-execution-server[How
-to build a decision service using JBoss Rules Execution Server], the
+link:/2010/01/04/how-build-decision-service-using-jboss-rules-execution-server[How to build a decision service using JBoss Rules Execution Server], the
 last of three articles that explain the decision service example in more
 detail.

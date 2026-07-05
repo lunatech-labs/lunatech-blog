@@ -15,22 +15,19 @@ than only using Scala, and more conferences than just Devoxx.
 
 == Software development
 
-https://blog.lunatech.com/posts/2013-08-05-lunatech-feeds-happy-melly[Lunatech
-feeds Happy Melly] was, I think, the most import new thing in software
+https://blog.lunatech.com/posts/2013-08-05-lunatech-feeds-happy-melly[Lunatech feeds Happy Melly] was, I think, the most import new thing in software
 development for us (as a company and as an industry) last year. Working
 with Happy Melly was our first taste of a different kind of
 customer-supplier relationship, combined with the next level of agile
 software development beyond Scrum, using Kanban with #NoEstimates.
 
-https://blog.lunatech.com/posts/2013-07-22-playframework-training-certification[Fast
-Track to Play training certification] was perhaps a final step in
+https://blog.lunatech.com/posts/2013-07-22-playframework-training-certification[Fast Track to Play training certification] was perhaps a final step in
 applying our Play framework experience, followed only by finally
 publishing the http://www.manning.com/hilton/[Play for Scala] book in
 October 2013. Typesafe’s training certification is the formalised
 version of the Play consultancy that we were already selling.
 
-https://blog.lunatech.com/posts/2013-04-19-good-bug-reports-come-in-four-parts[Good
-bug reports come in four parts] was 2013’s entry in the `how everyone
+https://blog.lunatech.com/posts/2013-04-19-good-bug-reports-come-in-four-parts[Good bug reports come in four parts] was 2013’s entry in the `how everyone
 can do a thing better but unfortunately don’t care about' category. It
 would be nice if software development project team members did actually
 care, but unfortunately it still seems to be okay to write terrible bug
@@ -39,8 +36,7 @@ IT.
 
 == Coding tutorials
 
-https://blog.lunatech.com/posts/2013-01-24-ios-core-data-sqlite-full-text-search[iOS
-full-text search with Core Data and SQLite] is Wolfert’s tutorial for
+https://blog.lunatech.com/posts/2013-01-24-ios-core-data-sqlite-full-text-search[iOS full-text search with Core Data and SQLite] is Wolfert’s tutorial for
 iOS developers, based on work on an iOS application for one of our
 customers. This is the kind of technique that is probably too specific
 to expect to be `in the manual' but that you hope Google finds when you
@@ -66,16 +62,13 @@ is left as an exercise for the reader.
 
 == Events
 
-https://blog.lunatech.com/posts/2013-03-07-summary-of-joy-of-coding-2013[The
-Joy of Coding 2013] was the year’s first first - a cool new conference
+https://blog.lunatech.com/posts/2013-03-07-summary-of-joy-of-coding-2013[The Joy of Coding 2013] was the year’s first first - a cool new conference
 in Rotterdam that we really enjoyed.
 
-https://blog.lunatech.com/posts/2013-05-27-sdu-royal-ten[Sdu Royal Ten - 10km
-business run] followed the previous team running event with another in
+https://blog.lunatech.com/posts/2013-05-27-sdu-royal-ten[Sdu Royal Ten - 10km business run] followed the previous team running event with another in
 the Hague, this time with an official photo (above).
 
-https://blog.lunatech.com/posts/2013-04-28-clojure-meetup-at-lunatech[Lunatech
-Hosts and Sponsors Clojure Meetup] was the other first: Clojure
+https://blog.lunatech.com/posts/2013-04-28-clojure-meetup-at-lunatech[Lunatech Hosts and Sponsors Clojure Meetup] was the other first: Clojure
 developer events at Lunatech. Because there’s always a more obscure
 programming language with a single supporter in the company (Vijay) than
 whatever else you’re already using, however new and shiny.

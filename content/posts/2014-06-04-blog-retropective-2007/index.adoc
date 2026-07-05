@@ -12,8 +12,7 @@ development topics that became the focus of the year’s events.
 
 image:/posts/2007-01-31-business-class-or-economy/business-class.jpg[Business class lounge]
 
-https://blog.lunatech.com/posts/2007-01-31-business-class-or-economy[Business
-Class or Economy?] discusses a question raised by
+https://blog.lunatech.com/posts/2007-01-31-business-class-or-economy[Business Class or Economy?] discusses a question raised by
 http://keith.harrison-broninski.info/[Keith Harrison-Broninski] in his
 JavaPolis 2006 presentation. I like this article because it explores a
 rarely-discussed question about commercial software development
@@ -39,14 +38,12 @@ Rails, Webwork or something with Perl or Python. In the end, for various
 reasons, we chose JSF with JBoss Seam as the next framework to use on a
 serious project.
 
-https://blog.lunatech.com/posts/2007-06-13-jsf-facelets-custom-date-converter[JSF-Facelets
-custom date converter] was an early example of one of the things that we
+https://blog.lunatech.com/posts/2007-06-13-jsf-facelets-custom-date-converter[JSF-Facelets custom date converter] was an early example of one of the things that we
 liked about Seam 1.2. Despite some complexity, you could customise the
 framework by providing alternative implementations of built-in
 components that would be easily reusable on other projects.
 
-https://blog.lunatech.com/posts/2007-11-07-changing-credentials-without-logging-again-seam-121[Changing
-credentials without logging in again in Seam 1.2.1] was an example of
+https://blog.lunatech.com/posts/2007-11-07-changing-credentials-without-logging-again-seam-121[Changing credentials without logging in again in Seam 1.2.1] was an example of
 the other side of the coin: some things turned out to be difficult, but
 possible once you looked at the source code and worked out which built
 in component to replace.
@@ -60,24 +57,17 @@ Rotterdam.
 
 image:/posts/2007-06-15-benelux-jboss-user-group-8-june-2007-first-photos/jbug-2007-06-photos-04.jpg[Tom Baeyens from JBoss (left) talks about Java Process Description Language]
 
-https://blog.lunatech.com/posts/2007-05-24-jboss-benelux-user-group-8-june-2007[JBoss
-Benelux User Group, 8 June 2007] was the first JBUG event in Rotterdam,
+https://blog.lunatech.com/posts/2007-05-24-jboss-benelux-user-group-8-june-2007[JBoss Benelux User Group, 8 June 2007] was the first JBUG event in Rotterdam,
 at which Tom Baeyens from JBoss spoke about business process management
 and Lunatech’s Peter Kaas spoke about EJB. As the
-https://blog.lunatech.com/posts/2007-06-15-benelux-jboss-user-group-8-june-2007-first-photos[photos
-of the event] suggest, it was lots of fun.
+https://blog.lunatech.com/posts/2007-06-15-benelux-jboss-user-group-8-june-2007-first-photos[photos of the event] suggest, it was lots of fun.
 
-https://blog.lunatech.com/posts/2007-10-01-benelux-jboss-user-group-2-november-2007[Benelux
-JBoss User Group, 2 November 2007] was the second event -
-https://blog.lunatech.com/posts/2007-11-11-benelux-jboss-user-group-2-november-2007-photos[photos
-of the event]. Bruno Georges from JBoss talked about ESB and Nicolas and
+https://blog.lunatech.com/posts/2007-10-01-benelux-jboss-user-group-2-november-2007[Benelux JBoss User Group, 2 November 2007] was the second event -
+https://blog.lunatech.com/posts/2007-11-11-benelux-jboss-user-group-2-november-2007-photos[photos of the event]. Bruno Georges from JBoss talked about ESB and Nicolas and
 I talked about our experiences so far with Seam.
 
-https://blog.lunatech.com/posts/2007-12-09-lunatech-javapolis-2007[Lunatech at
-JavaPolis 2007] rounded off the year, as usual. For us the event started
+https://blog.lunatech.com/posts/2007-12-09-lunatech-javapolis-2007[Lunatech at JavaPolis 2007] rounded off the year, as usual. For us the event started
 with Nicolas and me presenting
-https://blog.lunatech.com/posts/2007-12-14-seam-action-javapolis-presentation[Seam
-in action - JavaPolis presentation].
+https://blog.lunatech.com/posts/2007-12-14-seam-action-javapolis-presentation[Seam in action - JavaPolis presentation].
 
-_Photo: https://www.flickr.com/photos/21065622@N08/4899883747/[Matt @
-PEK]_
+_Photo: https://www.flickr.com/photos/21065622@N08/4899883747/[Matt @ PEK]_

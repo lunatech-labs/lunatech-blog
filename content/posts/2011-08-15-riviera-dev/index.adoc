@@ -5,10 +5,8 @@ tags:
 - "event"
 - "java"
 ---
-Lunatech Research, with the http://rivierajug.org[Riviera
-JUG] and the http://inria.fr[INRIA] French
-research institute are organising the http://rivieradev.fr[Riviera
-DEV] conference in Sophia-Antipolis on the 20/21
+Lunatech Research, with the http://rivierajug.org[Riviera JUG] and the http://inria.fr[INRIA] French
+research institute are organising the http://rivieradev.fr[Riviera DEV] conference in Sophia-Antipolis on the 20/21
 of October 2011.
 
 As you all know the Riviera JUG has been holding monthly conferences for

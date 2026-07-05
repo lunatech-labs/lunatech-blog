@@ -98,8 +98,7 @@ too little, too late.
 
 http://www.artima.com/shop/programming_in_scala[Programming In Scala]
 explains that there is a trade-off between
-http://www.artima.com/pins1ed/traits.html#12.2[thin versus rich
-interfaces]:
+http://www.artima.com/pins1ed/traits.html#12.2[thin versus rich interfaces]:
 
 ____
 Thin versus rich interfaces represents a commonly faced trade-off in
@@ -121,8 +120,7 @@ ____
 `java.lang.CharSequence` is a good example, with only four methods for
 accessing and manipulating strings, a very common programming task.
 However, half a million results for a
-http://www.google.com/search?q=stringutils[Google search for
-‘stringutils’] also mean that this is generally solved problem.
+http://www.google.com/search?q=stringutils[Google search for ‘stringutils’] also mean that this is generally solved problem.
 Meanwhile, `javax.servlet.http.HttpServletRequest` is more insidious,
 because several generations of Java web frameworks have considered its
 interface to be sufficient. In practice the interface manages to be
@@ -137,5 +135,4 @@ that HTTP can be easier to use with the APIs provided by PHP and Ruby on
 Rails. Or the Play framework.
 
 
-https://plus.google.com/107170847819841716154/posts/9rbWwmjrV7R[Comments
-on Google+]
+https://plus.google.com/107170847819841716154/posts/9rbWwmjrV7R[Comments on Google+]

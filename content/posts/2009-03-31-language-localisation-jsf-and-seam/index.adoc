@@ -133,7 +133,6 @@ placeholder.
 
 Unfortunately, these are not currently possible with the facilities in
 JSF, Seam and Facelets. You can either vote for
-https://javaserverfaces-spec-public.dev.java.net/issues/show_bug.cgi?id=517[javaserverfaces-spec-public
-issue 517] and wait for a new version of JSF 2, or you can write your
+https://javaserverfaces-spec-public.dev.java.net/issues/show_bug.cgi?id=517[javaserverfaces-spec-public issue 517] and wait for a new version of JSF 2, or you can write your
 own implementations.
 

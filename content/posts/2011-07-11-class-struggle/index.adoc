@@ -11,8 +11,7 @@ and its mark-up are open to the world, to both humans and machines. For
 better or for worse in terms of mark-up, English is the lingua franca.
 
 The Dutch government's web guidelines on
-http://www.webrichtlijnen.overheid.nl/richtlijnen/webrichtlijnen-1/r-pd-3-15[descriptive
-IDs and class names] don’t explicitly state it as a requirement but does
+http://www.webrichtlijnen.overheid.nl/richtlijnen/webrichtlijnen-1/r-pd-3-15[descriptive IDs and class names] don’t explicitly state it as a requirement but does
 leave the impression through their examples that we can use a language
 other than English. This notion is in my opinion complete and utter
 nonsense and even harmful. For one, lumping class names and IDs together
@@ -21,14 +20,12 @@ content. You may think that I’m splitting hairs but following the
 example of this ‘official’ guideline could lead to unmaintainable
 front-end.
 
-In the http://meyerweb.com/eric/thoughts/2010/05/19/the-web-stack/[web
-stack] a class name is strictly speaking not part of the content and
+In the http://meyerweb.com/eric/thoughts/2010/05/19/the-web-stack/[web stack] a class name is strictly speaking not part of the content and
 should from the outset be the same language as the mark-up. HTML is
 based on English and the metadata for that structure should at least
 also be in English. An ID on the other hand can be part of the content
 (ie http://en.wikipedia.org/wiki/Uniform_Resource_Locator[URL]
-hashes/http://en.wikipedia.org/wiki/Fragment_identifier[fragment
-identifier]) and when it is it ought to follow the content language of
+hashes/http://en.wikipedia.org/wiki/Fragment_identifier[fragment identifier]) and when it is it ought to follow the content language of
 the current document. It can get a little messy, but there is method to
 the madness.
 

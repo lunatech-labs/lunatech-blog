@@ -34,8 +34,7 @@ it is with Java Enterprise Edition (Java EE) conventions.
 For example, the Play! framework, like other modern web frameworks,
 provides first-class support for arbitrary 'clean' URLs, which has
 always been lacking from the Servlet API. It is no coincidence that at
-the time of writing, link:/2005/07/29/struts-urls[Struts URLs for
-perfectionists], a set of work-arounds for the Servlet API-based Struts
+the time of writing, link:/2005/07/29/struts-urls[Struts URLs for perfectionists], a set of work-arounds for the Servlet API-based Struts
 1.x web framework, remains the third-most popular out of 160 articles on
 _www.lunatech-research.com_ despite being a 2005 article about a
 previous-generation Java web technology.
@@ -110,8 +109,7 @@ usability, but usability for normal people is not the same as usability
 for programmers. In a way, usability for everyone is a higher standard
 than usability for programmers, when it comes to software, because
 programmers can cope better with poor usability. This is a bit like the
-http://www.designcouncil.org.uk/Case-Studies/All-Case-Studies/OXO-Good-Grips/[Good
-Grips] kitchen utensils: although they were originally designed to have
+http://www.designcouncil.org.uk/Case-Studies/All-Case-Studies/OXO-Good-Grips/[Good Grips] kitchen utensils: although they were originally designed to have
 better usability for elderly people with arthritis, it turns out that
 making tools easier to hold is better for all users.
 

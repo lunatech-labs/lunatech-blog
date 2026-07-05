@@ -7,8 +7,7 @@ tags:
 - "playground"
 ---
 Following a break for
-Devoxx and busy projects, we are now planning the next http://www.playframework.org/[Play
-Framework] event, for software developers
+Devoxx and busy projects, we are now planning the next http://www.playframework.org/[Play Framework] event, for software developers
 and technical managers.
 
 This event is the perfect opportunity to learn practical techniques,
@@ -19,8 +18,7 @@ developers. We also expect to have some fun.
 
 * 16:30, Friday, 2 December 2011
 * Lunatech Office -
-http://maps.google.com/maps?q=Lunatech+Research,rotterdam[Heemraadssingel
-70, 3021DD, Rotterdam]
+http://maps.google.com/maps?q=Lunatech+Research,rotterdam[Heemraadssingel 70, 3021DD, Rotterdam]
 
 == Programme
 

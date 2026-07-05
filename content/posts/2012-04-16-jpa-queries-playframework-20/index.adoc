@@ -125,8 +125,7 @@ The query is also type-safe. Type safety means that the compiler will
 validate types while compiling. If a wrong type is assigned to a
 variable an exception is thrown at compile time. As you probably know
 Play 2.0 is
-http://www.playframework.org/documentation/2.0/Philosophy[focused on
-type safety].
+http://www.playframework.org/documentation/2.0/Philosophy[focused on type safety].
 
 Because of the metamodels, the compiler knows the type of the variables.
 So you can’t for example do:
@@ -199,8 +198,6 @@ fewer runtime errors.
 
 == Sources
 
-http://jcp.org/aboutJava/communityprocess/final/jsr317/[JSR-317 - Java
-Persistence 2.0]
+http://jcp.org/aboutJava/communityprocess/final/jsr317/[JSR-317 - Java Persistence 2.0]
 
-http://docs.jboss.org/hibernate/jpamodelgen/1.0/reference/en-US/html_single[Hibernate
-JPA 2 Metamodel Generator]
+http://docs.jboss.org/hibernate/jpamodelgen/1.0/reference/en-US/html_single[Hibernate JPA 2 Metamodel Generator]

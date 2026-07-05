@@ -9,8 +9,7 @@ http://atechmedia.com/[aTech Media]. It tries to be a complete
 solution, including repository hosting, issue and time tracking, wiki
 and discussion forum. We are currently considering it as a
 http://gitorious.org/[Gitorious] replacement in the near future, and
-as a lightweight replacement for http://www.atlassian.com/software/jira/overview[Jira
-] and
+as a lightweight replacement for http://www.atlassian.com/software/jira/overview[Jira ] and
 http://www.atlassian.com/software/confluence/overview[Confluence]
 later. 
 
