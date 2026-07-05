@@ -29,6 +29,9 @@ jobs:
         # (canonical/OG/RSS/sitemap) at the preview host so the preview is
         # self-consistent. Output lands in target/roq for the Surge deploy.
         uses: quarkiverse/quarkus-roq@6ee673e6b6a4e36902901ad66fbaafbb4f683f61 # v1
+        env:
+          # Authenticates the author-name lookups against the GitHub users API
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           github-pages: 'false'
           java-version: '25'

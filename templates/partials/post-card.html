@@ -10,7 +10,7 @@
       {#else}
         <img class="author__avatar" src="/images/elty.jpg" alt="">
       {/if}
-      <p class="author__text">{author ?: 'Elty'}</p>
+      <p class="author__text">{cdi:authors.displayName(author) ?: 'Elty'}</p>
       <span></span>
       <p class="author__date">{cardPost.date.format('dd MMM yyyy')}</p>
     </div>
