@@ -27,20 +27,17 @@ now live in the post bundle and are served from `/posts/<slug>/<file>`, so the
 mapping is mechanical: replace `/media/` with `/posts/` (and apply the slug
 rename table below for the 36 renamed posts).
 
-External deep links to old `/media/` image URLs (hotlinks, cached RSS entries,
-image search results) break after cutover; GitHub Pages cannot redirect them.
-Decision: accept this for images.
+External deep links to old `/media/` URLs (hotlinks, cached RSS entries,
+image search results, and downloadable documents such as conference slides and
+cheat sheets) break after cutover; GitHub Pages cannot redirect them.
+Decision: accept this for every post asset, images and documents alike.
 
-Downloadable documents are the exception: the PDF, zip, jar, and xlsx files in
-post bundles are also copied verbatim into `public/media/<slug>/`, so their
-old URLs (for example the Play Framework cheat sheet at
-`/media/2010-06-08-play-framework-cheat-sheet/play-cheat-sheet.pdf`) keep
-working. The bundle copy stays canonical; the `public/media/` copy is a frozen
-legacy-URL shim for historical posts. Two posts are excluded (the 2007
-OpenSearch Confluence jar and the 2008 FPI Nice PDF): their old slugs contain
-non-ASCII characters that Roq slugifies even for `public/` files, so the old
-URL cannot be reproduced; those files remain available at their new bundle
-URLs only.
+This applies to downloadable documents (PDF, zip, jar, xlsx) too. They live in
+the post bundle and are served from `/posts/<slug>/<file>`, so a link that was
+`/media/2010-06-08-play-framework-cheat-sheet/play-cheat-sheet.pdf` becomes
+`/posts/2010-06-08-play-framework-cheat-sheet/play-cheat-sheet.pdf`. The
+in-post download links already point at the bundle path, so they keep working;
+only external inbound links to the old `/media/` document URLs break.
 
 ## Non-ASCII characters (9)
 

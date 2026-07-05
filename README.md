@@ -12,7 +12,7 @@ templates from `templates/`, and published to GitHub Pages.
 - `content/posts/<yyyy-MM-dd-title>/*.png`: images and other assets used by that post
 - `content/index.html`, `content/feed.xml`, `content/sitemap.xml`: site pages
 - `templates/`: Qute layouts and partials (theme)
-- `public/`: files copied verbatim to the site root (CSS, JS, shared images, legacy `/media/` downloads)
+- `public/`: files copied verbatim to the site root (CSS, JS, fonts, favicon)
 - `src/main/resources/application.properties`: site configuration
 - `docs/URL-CHANGES.md`: URL differences from the previous blog engine
 

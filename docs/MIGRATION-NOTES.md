@@ -55,8 +55,8 @@ Versions at migration time: Roq 2.1.4, Quarkus 3.37, Java 21.
   `<iframe>`.
 - `:imagesdir: ../media/...` emits relative `img` src that breaks from
   `/posts/x/`. Posts are page bundles (`content/posts/<slug>/index.adoc`) with
-  images co-located, referenced bare; shared assets live in `public/media`
-  (served at `/media/...`).
+  every asset (images and downloadable documents) co-located and referenced
+  bare, so they serve from `/posts/<slug>/<file>`.
 
 ## Roq data model for AsciiDoc posts (theme gotchas)
 
