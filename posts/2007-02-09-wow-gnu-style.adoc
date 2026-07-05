@@ -1,7 +1,0 @@
-= Wow GNU Style
-bartschuller
-v1.0, 2007-02-09
-:title: Wow GNU Style
-:tags: [fun]
-
-image:../media/2007-02-09-wow-gnu-style/wow-gnu-style.jpg[Wow GNU Style]

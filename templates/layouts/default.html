@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  {#seo page site /}
+  <link rel="alternate" type="application/rss+xml" title="{site.title}" href="{site.url('/feed/').absolute}"/>
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0">
+  <link rel="stylesheet" type="text/css" href="/css/main.css">
+
+  <!-- Plausible analytics -->
+  <script defer data-domain="blog.lunatech.com" src="https://plausible.io/js/script.file-downloads.hash.outbound-links.pageview-props.tagged-events.js"></script>
+  <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+</head>
+<body>
+  {#include partials/header /}
+
+  <main id="target">
+    {#insert /}
+  </main>
+
+  {#include partials/footer /}
+
+  <script src="/js/highlight.pack.js"></script>
+  <script>
+    (function () {
+      var hl = window.hljs && (hljs.highlightElement || hljs.highlightBlock);
+      if (hl) { document.querySelectorAll('pre.highlight code, pre.highlightjs code').forEach(function (b) { hl.call(hljs, b); }); }
+
+      var header = document.querySelector('header');
+      var pd = document.getElementById('progress-display');
+      var po = document.getElementById('progress-over');
+      var pi = document.getElementById('progress-impend');
+      var su = document.querySelector('.scroll-up');
+
+      window.addEventListener('scroll', function () {
+        var top = window.scrollY || document.documentElement.scrollTop;
+        if (header) { header.classList.toggle('scroll', top > 700); }
+        if (pd) {
+          pd.style.display = top >= 80 ? 'block' : 'none';
+          var h = document.documentElement.scrollHeight - window.innerHeight;
+          var pct = h > 0 ? (100 / h * top) : 0;
+          if (po) { po.style.width = pct + '%'; }
+          if (pi) { pi.style.width = (100 - pct) + '%'; }
+        }
+        if (su) { su.style.display = top >= 4000 ? 'flex' : 'none'; }
+      });
+      if (su) { su.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); }); }
+    })();
+  </script>
+</body>
+</html>

@@ -1,9 +1,0 @@
-= Spring fever
-Michael Pentowski
-v1.0, 2006-04-03
-:title: Spring fever
-:tags: [opinion]
-
-Ahh... after months of winter depression, it seems that spring has finally arrived. 'They' say there is a global warming problem, but you wouldn't notice that here in the Netherlands. At least not yet. Now I suppose we will all be suffering from spring fever; that yearning for a new relationship, business challenge, or... shudder...  the dreaded fear of work syndrome. Why is it when the days get longer, our attention span gets shorter? Or is this only when it comes to work?
-
-My advice on this lovely day: spring is when flowers bloom, trees blossom, and love is in the air. Seize the moment, take advantage of the change of season. And write code. It will be Fall before you know it.<
