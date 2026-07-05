@@ -40,7 +40,7 @@ link: /:collection/:year-:month-:day-:name
           {/for}
         </div>
         <div class="post__cover">
-          <img src="{page.url}background.png" alt="" onerror="this.parentNode.classList.add('post__cover--empty');this.remove();">
+          <img src="{page.url}background.png" alt="" onerror="this.onerror=null;this.src='/images/default-cover.png';">
         </div>
         <article id="progress-measure">{#insert /}</article>
       </section>

@@ -1,7 +1,7 @@
 {#let author=cardPost.data.get('author')}
 <a class="card" href="{cardPost.url}">
   <div class="card__cover">
-    <img src="{cardPost.url}background.png" alt="" onerror="this.parentNode.classList.add('card__cover--empty');this.remove();">
+    <img src="{cardPost.url}background.png" alt="" onerror="this.onerror=null;this.src='/images/default-cover.png';">
   </div>
   <div class="card__infos">
     <div class="author">
