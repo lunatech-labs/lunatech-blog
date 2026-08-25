@@ -5,6 +5,7 @@ tags:
 - "java"
 - "event"
 - "france"
+aliases: [posts/2008-12-05-mini-conf-rence-java-ee-le-14-janvier-2009-sophia-antipolis]
 ---
 http://www.lunatech-research.com[Lunatech Research] et l'http://www.iut.unice.fr[IUT de Nice Sophia-Antipolis] organisent une
 mini-conférence **gratuite** sur http://java.sun.com/javaee/[Java EE]

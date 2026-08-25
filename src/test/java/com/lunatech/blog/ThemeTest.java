@@ -53,7 +53,7 @@ public class ThemeTest {
                 feed.contains("<content:encoded><![CDATA[ <div"),
                 "post HTML must not be entity-escaped inside CDATA");
         org.junit.jupiter.api.Assertions.assertTrue(
-                feed.contains("href=\"https://blog.lunatech.com/feed/\" rel=\"self\""),
+                feed.contains("href=\"http://localhost:8080/feed/\" rel=\"self\""),
                 "feed self link must point at the feed's own URL");
     }
 }
