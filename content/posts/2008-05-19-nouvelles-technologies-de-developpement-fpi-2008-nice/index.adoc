@@ -4,6 +4,7 @@ author: "pepite"
 tags:
 - "java"
 - "event"
+aliases: [posts/2008-05-19-nouvelles-technologies-de-d-veloppement-fpi-2008-nice]
 ---
 Last week Stephane Epardaud and Nicolas Leroux,
 senior software developers at Lunatech Research, presented \"Nouvelles

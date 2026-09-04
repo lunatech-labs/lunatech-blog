@@ -9,6 +9,7 @@ tags:
 - "covid-19"
 - "securité"
 - "conférence"
+aliases: [posts/2021-10-08-devoxx-france-2021-edition-sp-ciale-9-3]
 ---
 :lang: fr
 

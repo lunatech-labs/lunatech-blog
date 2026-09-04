@@ -3,6 +3,7 @@ title: "The programmer’s private office"
 author: "hilton"
 tags:
 - "working-environment"
+aliases: [posts/2008-07-22-programmer's-private-office]
 ---
 In http://blog.stackoverflow.com/index.php/2008/05/podcast-7/[StackOverflow Podcast #] 7, http://www.joelonsoftware.com/[Joel Spoelsky] points out that 'I have yet to
 find another company except for Microsoft and Apple, I think, that has
