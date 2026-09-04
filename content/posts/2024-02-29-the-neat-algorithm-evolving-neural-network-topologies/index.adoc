@@ -126,7 +126,7 @@ Now, we can define every connection in the network as a pair of nodes (the _from
 .Identifying each connection between nodes (each input/output node pair) with a unique identifier.
 image::parent-networks-with-genomes.svg[]
 
-From now on, any network evolved by the algorithm from this network topology which connects the first input node (#1) to the first hidden node (#5) will have Innovation Number 8. All the candidate topologies which are evolved from this network will retain all the innovation numbers associated with the structure that lead to their current topology. Innovation Numbers, then, are 'historical markings' - they provide a means of tracking the history of a particular piece of structure within a Genome through the generations of evolution. Innovation Numbers enable a couple of elegant solutions to problems in this space.
+From now on, any network evolved by the algorithm from this network topology which connects the first input node (node 1) to the first hidden node (node 5) will have Innovation Number 8. All the candidate topologies which are evolved from this network will retain all the innovation numbers associated with the structure that lead to their current topology. Innovation Numbers, then, are 'historical markings' - they provide a means of tracking the history of a particular piece of structure within a Genome through the generations of evolution. Innovation Numbers enable a couple of elegant solutions to problems in this space.
 
 ==== Ensuring Viable Offspring
 
@@ -157,7 +157,7 @@ That leaves us with an offspring Genome which is _at least as complex_ as the mo
 .Demonstrating how the result of selecting genes from the parent results in a valid, fully-connected network as offspring.
 image::parent-genome-crossover.svg[]
 
-The result of the breeding is a new network which looks like Parent 2 but with the extra connection between nodes #1 and #5, which is represented by innovation number 8.
+The result of the breeding is a new network which looks like Parent 2 but with the extra connection between nodes 1 and 5, which is represented by innovation number 8.
 
 .The proud parent networks and their bouncing little baby.
 image::parent-offspring-networks.svg[]
