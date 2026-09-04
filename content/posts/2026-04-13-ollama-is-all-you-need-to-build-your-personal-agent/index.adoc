@@ -2,7 +2,6 @@
 boyuan-xiao-at-work
 v1.0, 2026-04-13
 :title: Ollama is (almost) all you need to build your personal agent
-:imagesdir: ../media/2026-04-13-ollama-is-all-you-need-to-build-your-personal-agent
 :lang: en
 :tags: [LLM, Python, AI agent, NLP pipeline, PGvector]
 
