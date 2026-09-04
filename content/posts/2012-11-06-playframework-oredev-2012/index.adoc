@@ -1,0 +1,13 @@
+---
+title: "Lunatech presents Play at Øredev 2012"
+author: "hilton"
+tags:
+- "conference"
+- "playframework"
+---
+This week, on 7
+November 2012, Peter Hilton will present http://oredev.org/2012/sessions/play-framework-2[Play Framework 2] at http://oredev.org/[Øredev 2012].
+
+image:oredev-logo.gif[Øredev,link=http://oredev.org/]
+
+

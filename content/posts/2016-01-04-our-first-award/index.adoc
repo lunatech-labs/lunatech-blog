@@ -1,0 +1,11 @@
+---
+title: "Our first award!"
+author: "pepite"
+tags:
+- "event"
+---
+Lunatech has been awarded by the “The National Business Success Award Institute” as branch winner 2015 in the category “ICT”.
+
+The jury cited the company's service quality, technology excellence and innovation. Representatives of the award winner also make appearances on the RTL television show "De Success Factor" .
+
+image:background.png[]

@@ -1,0 +1,7 @@
+---
+title: "Wow GNU Style"
+author: "bartschuller"
+tags:
+- "fun"
+---
+image:wow-gnu-style.jpg[Wow GNU Style]

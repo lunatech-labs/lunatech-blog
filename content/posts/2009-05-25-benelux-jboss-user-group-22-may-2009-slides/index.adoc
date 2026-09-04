@@ -1,0 +1,26 @@
+---
+title: "Benelux JBoss User Group, 22 May 2009 slides"
+author: "PeterHilton"
+tags:
+- "java"
+- "jbug"
+- "event"
+---
+Last Friday’s Benelux JBoss User Group was
+well-attended, and the weather played along with our plan to have a
+barbeque and drinks outside in the garden at the Lunatech office in
+Rotterdam. Here are the slides for the three presentations.
+
+{empty}1. link:Reloaded-20090522.pdf[JBoss Reloaded] (PDF, 240 Kb):
+
+image:Reloaded-20090522.png[JBoss Reloaded slides,link=Reloaded-20090522.pdf]
+
+{empty}2.
+http://www.slideshare.net/jorambarrez/presentation-jbpm-community-day-2009-first-steps-with-jbpm4?type=powerpoint[First steps with jBPM4] (slideshare.net):
+
+image:First_steps_with_jBPM4.png[First steps with jBPM4 slides,link=http://www.slideshare.net/jorambarrez/presentation-jbpm-community-day-2009-first-steps-with-jbpm4?type=powerpoint]
+
+{empty}3. link:Localisation_-_JBug_22_May_2009.pdf[Language localisation in Java, JSF and Seam] (PDF, 984 Kb):
+
+image:Localisation_-_JBug_22_May_2009.png[Language localisation in Java, JSF and Seam slides,link=Localisation_-_JBug_22_May_2009.pdf]
+

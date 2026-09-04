@@ -1,59 +1,150 @@
 # lunatech-blog
-## How It All Comes Together
-lunatech-blog contains our blog in [Asciidoctor](https://asciidoc.org/) format. We write blog posts in this repository. We then point a separate asciidoctor project (in our case currently [lunatech-blog-engine](https://github.com/lunatech-labs/lunatech-blog-engine)) to this project. That project then runs Asciidoctor on these files to convert and serve them as HTML.
 
-Each post is located in the `posts` directory with the following format: `yyyy-MM-dd-title.adoc`
+Lunatech's engineering blog at [blog.lunatech.com](https://blog.lunatech.com/).
 
-In the `media` directory there should be a matching image named `yyyy-MM-dd-title/background.png`
+The site is a static site generated with [Quarkus Roq](https://iamroq.com/).
+Posts are written in [AsciiDoc](https://asciidoc.org/), rendered with Qute
+templates from `templates/`, and published to GitHub Pages.
 
-All media used in the posts should be located in the `media` directory under a `yyyy-MM-dd-title` directory ie `media/yyy-MM-dd-title`
+## Repository layout
 
-To add your blog post:
-* Install giter8, via coursier
-```commandline
-brew install coursier/formulas/coursier
-cs install giter8
-```
-* Fork this repo
-* Checkout the forked repo
-* In the repo directory `g8 file://.`
-* Write your blog post
-* Submit a pull request and follow the template
+- `content/posts/<yyyy-MM-dd-title>/index.adoc`: one directory (bundle) per post
+- `content/posts/<yyyy-MM-dd-title>/*.png`: images and other assets used by that post
+- `content/index.html`, `content/feed.xml`, `content/sitemap.xml`: site pages
+- `templates/`: Qute layouts and partials (theme)
+- `public/`: files copied verbatim to the site root (CSS, JS, fonts, favicon)
+- `src/main/resources/application.properties`: site configuration
+- `scripts/`: single-file Java maintenance utilities, run directly with `java`
+- `src/test/java/`: theme smoke tests plus the post naming and availability checks
 
-# Information regarding giter8
+## Writing a post
 
-If you see this error :
+1. Fork or branch this repository.
+2. Create a bundle directory: `content/posts/yyyy-MM-dd-your-title/`. Use only
+   lowercase letters, digits and single hyphens in the name; see
+   [Post directory names](#post-directory-names).
+3. Write your post in `index.adoc` in that directory, starting with front matter:
 
-Error: giter8 has been disabled because it fetches unversioned dependencies at runtime!
+   ```
+   ---
+   title: "Your post title"
+   author: "your-github-username"
+   tags:
+   - "java"
+   - "quarkus"
+   ---
 
-Then you can bypass the warning message by doing the following:
+   Your AsciiDoc content here.
+   ```
 
-brew edit giter8
+   The author is your GitHub username; your GitHub avatar is shown on the post
+   card. Refer to images with plain relative paths, for example
+   `image::diagram.png[Diagram]`, and put the files in the same directory.
+4. Add a `background.png` in the bundle; it is used as the card and hero image.
+5. Open a pull request. CI builds the site and comments a preview URL
+   (Surge.sh) on the PR, rebuilt on every push.
 
-and delete this line:
+Posts dated in the future are excluded from the build until their date passes;
+the site rebuilds daily so they publish automatically on (or shortly after)
+their date.
 
-disable! because: "fetches unversioned dependencies at runtime"
+## Compress your images
 
-then run brew install giter8 again.
+Every post carries at least one image, so please keep them small. PNGs larger
+than 1 MB fail the PR check. Compress with `pngcrush`:
 
-# Provide compressed images
-Every blogpost has at least one image which makes the Lunatech blog relatively heavy in memory consumption.
-One way of to combat this is by compressing images using `pngcrush`. You can install it using brew:
 ```commandline
 brew install pngcrush
-```
-You can then create a compressed version of each image (png/jpeg/gif) you are submitting alongside your blogpost:
-```commandline
 pngcrush -rem allb -brute -reduce in.png out.png
 ```
-For very large images the command may take a long time to complete.
 
-# How to deploy your post
+## Previewing locally
 
-Merging your PR will update the `main` branch only. In order to share your blog post with the world,
-you'll need to deploy it first in [Acceptance](https://blog.acceptance.lunatech.com/), and then
-in [Production](https://blog.lunatech.com/).
+Run the site in dev mode with live reload (requires Java 25):
 
-You can do both with the help of GitHub Actions:
-* [Deploy Acceptance](https://github.com/lunatech-labs/lunatech-blog/actions/workflows/deploy_acceptance.yaml)
-* [Deploy Production](https://github.com/lunatech-labs/lunatech-blog/actions/workflows/deploy_production.yaml)
+```commandline
+./mvnw quarkus:dev
+```
+
+Then open http://localhost:8080. To generate the full static site into
+`target/roq`:
+
+```commandline
+./mvnw package quarkus:run -DskipTests -Dquarkus.roq.generator.batch=true
+```
+
+## Post directory names
+
+A post's URL is its directory name, so the two must match. Roq slugifies the
+name when it builds the URL: it lowercases, and replaces accents, curly quotes
+and punctuation with `-`, then collapses runs of `-` and trims the edges. A
+directory named outside that alphabet is therefore served at a URL that does
+not match it, which silently breaks anything working out a post URL from disk.
+
+So a post directory must already be its own slug:
+
+```
+yyyy-MM-dd- followed by lowercase letters, digits and single hyphens
+```
+
+No uppercase, no accents, no punctuation, no doubled hyphens, no trailing
+hyphen. Write accents and punctuation in the `title:` front matter instead,
+which is display text and unaffected. For example, a post titled
+"Mini-conférence Java EE" belongs in `2008-12-05-mini-conference-java-ee/`.
+
+`PostFolderNameTest` enforces this on every `./mvnw test`, so CI rejects a
+directory that breaks the rule. It only reads the filesystem, so it does not
+build the site and adds no measurable time to the build. When it fails it names
+each offending directory and the slug it should have:
+
+```commandline
+./mvnw test -Dtest=PostFolderNameTest
+```
+
+To fix offenders, use `scripts/RenamePosts.java`. It reports what it would do
+and changes nothing without `--apply`:
+
+```commandline
+java scripts/RenamePosts.java content/            # print the renames, exit 1 if any are pending
+java scripts/RenamePosts.java content/ --apply    # perform them with git mv
+```
+
+It refuses to act if a derived slug would collide with an existing directory,
+and routes a rename that only changes capitalisation through a temporary name,
+because macOS and Windows treat `Foo` and `foo` as the same path.
+
+Renaming a directory whose post is already published **changes a live URL**.
+Keep the old one working by adding the previous path to the front matter, which
+generates a redirect page at the old URL:
+
+```
+aliases: [posts/2008-12-05-mini-conf-rence-java-ee]
+```
+
+## Checking that posts are reachable
+
+`PostAvailabilityTest` starts the site and requests every post bundle in
+`content/posts/`, failing on any that does not answer HTTP 200. It runs with
+the rest of the suite, so CI will not deploy a post that stopped rendering:
+
+```commandline
+./mvnw test -Dtest=PostAvailabilityTest
+```
+
+It takes the post list from disk rather than from the sitemap on purpose. A
+post that fails to render never reaches the sitemap, so checking the sitemap
+alone would not notice it had gone; reading the directory means a post cannot
+disappear silently. When posts fail it lists all of them at once, rather than
+stopping at the first.
+
+It derives each URL from the directory name, which is correct only while the
+naming rule above holds. The two tests are a pair: break the naming rule and
+`PostFolderNameTest` fails, not this one.
+
+## Deployment
+
+Merging to `main` deploys straight to production: the
+[Deploy to GitHub Pages](https://github.com/lunatech-labs/lunatech-blog/actions/workflows/deploy_pages.yaml)
+workflow builds the site and publishes it to GitHub Pages. There is no
+separate acceptance environment; review your post on the PR preview before
+merging.

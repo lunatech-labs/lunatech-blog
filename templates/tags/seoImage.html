@@ -1,0 +1,12 @@
+{@io.quarkiverse.roq.frontmatter.runtime.model.Site site}
+{@io.quarkiverse.roq.frontmatter.runtime.model.Page page}
+
+<!-- SEO IMAGE -->
+<meta name="twitter:card" content="summary_large_image" />
+{#if page.image}
+<meta name="twitter:image:src" content="{page.image.absolute}" />
+<meta property="og:image" content="{page.image.absolute}" />
+{#else}
+<meta name="twitter:image:src" content="{site.url('/images/og-default.png').absolute}" />
+<meta property="og:image" content="{site.url('/images/og-default.png').absolute}" />
+{/if}

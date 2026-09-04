@@ -1,0 +1,23 @@
+---
+title: "RivieraDEV - the official pictures"
+author: "pepite"
+tags:
+- "event"
+---
+Thanks to http://touilleur-express.fr[Nicolas Martignole] I can now show some pictures
+from the http://rivieradev.fr[RivieraDEV] event.
+
+image:rivieradev-1.jpg[image]
+
+image:rivieradev-2.jpg[image]
+
+image:rivieradev-3.jpg[image]
+
+image:rivieradev-4.jpg[image]
+
+image:rivieradev-5.jpg[image]
+
+image:rivieradev-6.jpg[image]
+
+image:rivieradev-7.jpg[image]
+

@@ -1,0 +1,26 @@
+---
+link: /feed/
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title><![CDATA[{site.title.raw}]]></title>
+    <description><![CDATA[{site.description.raw}]]></description>
+    <link>{site.url.absolute}</link>
+    <atom:link href="{page.url.absolute}" rel="self" type="application/rss+xml"/>
+    <generator>Quarkus Roq</generator>
+    {#if site.collections.get('posts').size > 0}
+    <lastBuildDate>{site.collections.get('posts').get(0).date.rfc822}</lastBuildDate>
+    {/if}
+    {#for post in site.collections.get('posts').take(30)}
+    <item>
+      <title><![CDATA[{post.title.raw}]]></title>
+      <link>{post.url.absolute}</link>
+      <guid isPermaLink="false">{post.url.absolute}</guid>
+      <pubDate>{post.date.rfc822}</pubDate>
+      <description><![CDATA[{post.description.or('').raw}]]></description>
+      <content:encoded><![CDATA[{post.content.raw}]]></content:encoded>
+    </item>
+    {/for}
+  </channel>
+</rss>

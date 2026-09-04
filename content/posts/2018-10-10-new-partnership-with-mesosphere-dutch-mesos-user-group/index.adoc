@@ -1,0 +1,23 @@
+---
+title: "New Partnership With Mesosphere And Dutch Mesos User Group"
+author: "Antoine Laffez"
+tags:
+- "event"
+- "mesosphere"
+---
+As our expertise in Mesos was growing, Lunatech and Mesosphere signed a strategic partnership. We are very glad to increase our knowledge in DC/OS field. That's why we were hosted the first Dutch Mesos User Group in our Rotterdam offices:
+
+The first talk was a General introduction to Apache Mesos & DC/OS - By Taco Scargo Emerging technology specialist & Mesonaut at Mesosphere.
+
+++++
+<iframe width="560" height="315" src="https://www.youtube.com/embed/UoDWl9YOGW0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+++++
+
+In the second talk Willem Jan Glerum and Michael Haddon, both Software engineer at Lunatech showed us a working IoT pipeline with real hardware using Multiple Raspberry Pi Zero's collecting sensor data around the office.
+
+++++
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ua0_cO4kP8A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+++++
+
+
+If yourself are interested to participating or presenting you can subscribe to this https://www.meetup.com/Dutch-Mesos-User-Group/[Meetup page] to be part of the Dutch Mesos community. We are hoping to renew this experience very soon!

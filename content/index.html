@@ -1,0 +1,55 @@
+---
+title: Lunatech Blog
+description: Lunatech's engineer blog - articles on Scala, Java, Kotlin, functional programming and more.
+layout: page
+paginate:
+  collection: posts
+  size: 36
+---
+{#include partials/hero /}
+
+{#let posts=site.collections.posts.paginated(page.paginator)}
+{#if page.paginator.currentIndex == 1}
+<section class="p80-0 bg-gray">
+  <div class="wrapper-lg">
+    <h2>Latest articles</h2>
+    <p class="subtitle">The newest editions</p>
+    <div class="grid">
+      <div class="featured">
+        {#include partials/post-card cardPost=posts.get(0) /}
+      </div>
+      <div class="last">
+        {#include partials/post-card cardPost=posts.get(1) /}
+        {#include partials/post-card cardPost=posts.get(2) /}
+        {#include partials/post-card cardPost=posts.get(3) /}
+      </div>
+    </div>
+  </div>
+</section>
+{/if}
+
+<section class="p80-0">
+  <div class="wrapper-lg">
+    <h2>The Collection</h2>
+    <p class="subtitle">Browse the categories</p>
+    <div class="tag-slider">
+      <a class="tag" href="/tags/java">java</a>
+      <a class="tag" href="/tags/event">event</a>
+      <a class="tag" href="/tags/playframework">playframework</a>
+      <a class="tag" href="/tags/scala">scala</a>
+      <a class="tag" href="/tags/opinion">opinion</a>
+    </div>
+    <div class="card-list">
+      {#for post in posts}
+        {#if page.paginator.currentIndex != 1 || post_index >= 4}
+        {#include partials/post-card cardPost=post /}
+        {/if}
+      {/for}
+    </div>
+    <nav class="pagination">
+      {#if page.paginator.previous}<a href="{page.paginator.previous}">&laquo; Newer</a>{/if}
+      {#if page.paginator.next}<a href="{page.paginator.next}">Older &raquo;</a>{/if}
+    </nav>
+  </div>
+</section>
+{/let}
