@@ -1,0 +1,267 @@
+---
+title: "We adopted HTTP QUERY as a draft. The RFC changed fourteen strings."
+author: "LSRaGeUx"
+tags:
+- "http"
+- "quarkus"
+- "java"
+- "jax-rs"
+- "typescript"
+- "ietf"
+- "api-design"
+- "en"
+---
+:lang: en
+
+// Type scale for this post only, left out of the shared theme so no other post
+// shifts. The callouts sit below the prose they interrupt, the tables carry
+// content rather than footnotes, and inline code stops looming over the line.
+++++
+<style>
+  article .quoteblock p            { font-size: 1.125rem; line-height: 1.65; }
+  article table p                  { font-size: 1.0625rem; line-height: 1.55; }
+  article th                       { font-size: 0.8125rem; }
+  article p code, article li code  { font-size: 0.8em; }
+</style>
+++++
+
+QUERY is a new HTTP method, a GET that carries a request body. We integrated it into WeLearn, our internal learning platform, at revision -14 of the IETF draft, and engineered it the way you engineer against a draft, behind a flag, with a documented revert, with the old GET endpoint kept beside it. It runs in production today, serving the search page our colleagues use. Revision -14 is the text that became https://www.rfc-editor.org/rfc/rfc10008.html[RFC 10008]. So the hedge never paid out, and the bill for the work landed somewhere else entirely.
+
+== Part one: the verb
+
+=== The gap QUERY fills
+
+Search endpoints have always been squeezed between two verbs that each get half the job right.
+
+`GET /api/search?q=...` is safe and idempotent, which is what a search is, so intermediaries are allowed to cache it, retry it and prefetch it. The cost is that every criterion has to fit in a URL. There is a practical length ceiling, and the whole thing is written down: in the access log, in the browser history, and unless you have set a referrer policy, in the `Referer` header of every outbound click made from the results page. On a platform whose search covers your colleagues' names, that is not an aesthetic concern.
+
+`POST /api/search` gives you a body and takes away the semantics. A POST is neither safe nor idempotent by definition, so no proxy will ever cache or retry it, and no reader of your API can tell from the verb that the call changes nothing. You end up writing "this POST does not modify anything" in your documentation, which is the tell that the verb is wrong.
+
+QUERY is the missing corner: safe, idempotent, and it takes a body.
+
+.Where the verbs sit
+[cols="1,2,2", options="header"]
+|===
+| Semantics | No request body | Carries a body
+| Safe | GET | QUERY
+| Not safe | DELETE | POST
+|===
+
+=== What the spec promises
+
+"The HTTP QUERY Method" is RFC 10008, Standards Track, from the IETF HTTP working group. It is short, and the contract is four properties:
+
+* *Safe.* The client asks for nothing to change. Same guarantee a GET makes, which is what lets an intermediary retry or prefetch one.
+* *Idempotent.* Sending it twice is sending it once.
+* *It carries content.* A request body, with a `Content-Type` the request declares like any other.
+* *It is cacheable, with a caveat that matters.* Section 2.7: "the cache key for a QUERY request MUST incorporate the request content and related metadata". The body is part of the identity of the request, which is exactly the rule no cache applies to a POST.
+
+What the spec deliberately does not do is define a query language. The body is whatever media type you declare. JSON for us, and the resource says which types it takes. QUERY is a transport for criteria, not a schema for them.
+
+Which makes the goal a repair rather than a feature. The POST-for-reads pattern is everywhere: Elasticsearch's `_search`, every GraphQL read, every "advanced filters" call in every internal API, all of them safe operations wearing an unsafe verb because the body was worth more than the semantics. QUERY is the working group saying you should not have had to choose. Here is ours on the wire:
+
+[source,http]
+----
+QUERY /lunatech/api/search HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+
+{"query": "security",
+ "groups": ["TRAININGS", "THEMATICS"],
+ "thematicIds": ["6b1f...", "9c02..."],
+ "difficulties": ["ADVANCED"],
+ "limit": 20}
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Location: /lunatech/api/search/8Qk3ZP...
+Accept-Query: application/json
+
+{"trainings": [...], "thematics": [...], "users": []}
+----
+
+Two of those response headers are not ones an ordinary GET carries. They are the spec answering the problem the verb creates, and they are the subject of part two. Hold them.
+
+=== Why this endpoint
+
+Our results page sends which entity families to search, a thematic filter of up to twenty ids, a difficulty filter and a row count. Twenty UUIDs is roughly 740 characters of query string before anything else is in it, and the interesting field is the one that is not a UUID: the search term, which on this platform is very often a colleague's name. A query string writes that into the access log, the browser history and the `Referer` of every outbound click. A body writes it nowhere.
+
+The negative result is the part of this worth copying. Our first version was QUERY as a mirror of the GET: the same single field, moved into a body. It proved the plumbing and offered readers nothing, so nothing called it and we learned nothing from it. Today the two endpoints agree on the query text and on nothing else, and every criterion a query string should not carry lives on the body alone. The GET keeps the navbar type-ahead, correctly, because a two-character keystroke gains nothing from a body. *A new verb earns its place only where it does something the stable endpoint cannot.*
+
+=== Adoption is one annotation
+
+On Quarkus with Quarkus REST, the entire binding for a brand new HTTP method is one file, `QUERY.java`:
+
+[source,java]
+----
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+@HttpMethod("QUERY")
+@Documented
+public @interface QUERY {}
+----
+
+That is the same mechanism JAX-RS uses to define `@GET` and `@POST` themselves. No extension configuration, no filter, no route table. Annotate a resource method with it and the chain works end to end:
+
+* Vert.x parses the unknown verb without complaint, because its `HttpMethod` type has been an open set since Vert.x 4 rather than an enum.
+* Quarkus REST dispatches on the meta-annotation.
+* Quarkus OIDC authenticates it exactly like a GET, session cookies and all, and an anonymous caller gets the same 302 to Keycloak.
+* `@PermissionsAllowed` fires, because a class-level annotation covers the new method like any other.
+* Bean validation runs on the JSON body.
+
+The browser side is one line of `fetch`, with one trap in it: pass the method uppercase. The fetch spec only normalises casing for the standard verbs, so `method: 'query'` goes out lowercase on the wire and a case-sensitive server match will not find your endpoint.
+
+One annotation file, one request DTO, one handler, one client function. If you have been putting off trying QUERY because you assumed the framework would fight you, it will not.
+
+Which is the whole of the cheap part. Everything below is what it cost.
+
+== Part two: the cost
+
+=== The hedge, and what it was worth
+
+Adopting an unratified spec has an obvious risk, and we paid for it up front. The endpoint went behind a feature flag that is off by default, opted into per environment, and on in production. The old GET stayed exactly where it was. The revert was written down before it was needed, in two versions, a cheap one and a thorough one. Every new type we added carried an `@Experimental` marker saying it might change or disappear with the draft.
+
+Then the draft became RFC 10008, at the revision we had built against, and we got to settle the account. What did ratification demand of us?
+
+Nothing that runs. No rework, no migration, no behaviour change, not one line of logic. The section numbers we cite in comments are the section numbers the RFC publishes. What it retired was **fourteen strings across seven files**: the word "draft" in a handful of javadoc lines, four `@Experimental` messages, three frontend comments, and two OpenAPI descriptions that told API readers this was a draft method.
+
+Fourteen strings is the entire measurable cost of the risk we were managing. Which is worth sitting with, because the rest of the work was substantial, and none of it was about the spec's status:
+
+* *Discovering support by firing a QUERY and reading the failure.* Not reading section 3. `Accept-Query` was in revision -14 the whole time.
+* *Holding the search term in client state to keep it out of the URL.* Not reading section 2.3. `Content-Location` was there too.
+* *A feature gate, three classes, answering 501 when off.* Rollout caution, and it doubled as the production probe below. Unaffected by ratification.
+* *A client fallback to the GET, most of a module.* Proxies. An RFC does not make a load balancer forward an unknown verb. Unaffected by ratification.
+* *Keeping `GET /api/search` beside it.* The type-ahead needs a different contract. Nothing to do with the spec.
+* *The `@Experimental` markers and the draft wording.* The spec's status, and this line alone. Fourteen strings.
+
+So the hedge was cheap, and that is the useful finding rather than a boast: spec risk is the cheapest risk on the list and the easiest to feel diligent about managing, while the expensive ones sit in your infrastructure and in how carefully you read the document. Two of the six lines above are not costs of adoption at all. They are the cost of not reading.
+
+=== Read section 2 before you build anything around it
+
+Moving a query into a body takes it out of the URI, and in HTTP the URI _is_ identity. Everything that was addressable because it lived in a query string stops being addressable: bookmarking, the back button, sending a colleague your search, and every cache in the path. The spec knows, and answers it in four subsections of section 2, with a fifth mechanism in section 3.
+
+* *Content-Location, section 2.3.* "A successful response (2xx) can include a Content-Location header field containing an identifier for a resource corresponding to the results of the operation." There is your bookmarkable URL. The criteria travelled in the body; the results have a URI of their own, which a browser can hold and a cache can store.
+* *Location, section 2.4.* "A server can assign a URI to the equivalent resource of a QUERY request." That names the query rather than its results, so the URI re-runs it.
+* *303 See Other, section 2.5.* The redirect form of the same idea: "the original query can be accomplished via a normal retrieval request on the URI referenced by the Location response field."
+* *Caching, section 2.7.* "The cache key for a QUERY request MUST incorporate the request content and related metadata."
+* *Accept-Query, section 3.* A response header by which a resource advertises that it supports QUERY, and in which query format media types.
+
+We hand-rolled two of those before reading them. Both have since been replaced by the spec's version.
+
+*Capability discovery.* We used to learn whether a deployment took the verb by firing a QUERY and interpreting the failure, at a cost of one wasted request per page load everywhere the feature was off. `Accept-Query` is the designed answer, and it costs a header: our GET response now advertises `Accept-Query: application/json` when the structured search is available, so the type-ahead's very first call tells the client whether the structured path exists, on a request it was making anyway. One subtlety survives the fix, and it is the reason the fallback below did not get deleted along with the probe: *only the header's absence is conclusive.* A proxy that strips unknown methods forwards the GET carrying the header perfectly happily, so an origin server advertising support tells you nothing about what sits in front of it.
+
+*Addressability.* We solved it by taking the term out of the URL entirely and holding it in client state, which is private and unbookmarkable, and which cost us the back button within a day. `Content-Location` gets both properties at once: the QUERY response now names `GET /api/search/{token}`, an opaque server-minted result URI that is meaningless to a reader of your history or your logs, works as a link, survives a reload, and is cacheable by every cache that already exists. Which also retires the argument that QUERY's cacheability is theoretical. Caching the QUERY itself is theoretical. Caching the GET-addressable results it hands you works today.
+
+[quote]
+____
+Read section 2 first. Every problem we met downstream of the verb has a paragraph there, and we wrote code for two of them before finding it.
+____
+
+=== The one thing you cannot test from your laptop
+
+Somewhere in front of your application there is a load balancer or reverse proxy, and some of them implement HTTP by allowing the verbs they know and rejecting the rest. If yours does that, your endpoint answers 405 or a proxy error page, and no local testing will have told you, because your development machine has no proxy in it.
+
+This is the risk ratification does not touch. A published RFC does not oblige anybody's infrastructure to have heard of it.
+
+The technique that answers it costs nothing: gate the endpoint behind a feature flag that answers in _your own_ error format, then fire a request at production with the feature still off.
+
+[source,bash]
+----
+$ curl -i -X QUERY https://welearn.lunatech.com/lunatech/api/search \
+    -H 'Authorization: Bearer wl_...' \
+    -H 'Content-Type: application/json' \
+    --data '{"query":"sec"}'
+
+HTTP/1.1 501 Not Implemented
+Content-Type: application/problem+json
+X-Experimental: true
+Sozu-Id: 01M20G5X656Z8VWD50230BGN11
+
+{"code":"EXPERIMENTAL_DISABLED","title":"Not Implemented","status":501, ...}
+----
+
+That 501 is the good news. Our gate is a post-matching JAX-RS filter, so it runs after routing, after authentication and after the permission check, which means a body naming our own error code can only have been produced inside the JVM on a matched resource method. And `Sozu-Id` names https://github.com/sozu-proxy/sozu[Sozu] itself, the Rust reverse proxy Clever Cloud runs, stamping the response on its way out.
+
+[quote]
+____
+*Clever Cloud's proxy forwards HTTP QUERY*, with a body, unmodified. If you run there, that unknown is now known. With the flag on, the same call returns 200 and a result set byte for byte identical to the GET.
+____
+
+=== Fall back, and the proxy stops being a release blocker
+
+Do not gate a release on a piece of infrastructure you cannot inspect. Make the client stop caring about the answer instead. The whole of it, in `lib/api/search.ts`, hangs off one three-state verdict:
+
+[source,typescript]
+----
+type QuerySupport = 'unknown' | 'supported' | 'unsupported'
+----
+
+The first structured search of a page load goes out as QUERY. If the transport refuses it, the verdict flips to `unsupported` and every later search on that page is a plain GET. Worst case on a hostile proxy is one wasted request per page load, and the type-ahead never pays even that, because a two-character keystroke gains nothing from a body and stays on the GET where it belongs.
+
+That is what let us ship before we had the measurement above. It is also, on a deployment whose proxy does refuse the verb, the permanent operating mode, which is worth designing as a real state rather than an error path.
+
+=== The 400 that is not a refusal
+
+When you fall back between transports, you need a predicate that separates "this path does not work" from "this path worked and told you no". Those look alike in a status code and are opposites in meaning.
+
+405 is a rejected method. 501 is either our own gate or a proxy that does not implement the verb. Both mean stop trying.
+
+400 is where it goes wrong. A 400 can be our own bean validation telling the reader their search term is too long, and it can equally be a proxy that could not parse the request line. Treat that validation 400 as a refused verb and you have silently dropped the reader's filters for the rest of their session, over a typo. Nothing crashes, nothing logs, the filters just stop working.
+
+So the predicate that decides whether to fall back reads the body, not the status:
+
+[source,typescript]
+----
+function refusesTheVerb(error: ApiError): boolean {
+  if (error.status === 405 || error.status === 501) return true
+
+  return error.status === 400 && !error.code
+}
+----
+
+Our validation errors are https://www.rfc-editor.org/rfc/rfc9457[RFC 9457] problem details and carry a machine-readable `code`. A proxy that choked on the request line answers something else entirely. Anything that is neither a refusal nor a validation failure is rethrown, because a 403 has to reach the caller as a 403.
+
+=== Degrade loudly, or not at all
+
+Report a criterion as unapplied when it ran against incomplete data, not only when it was dropped. And do not report one that changed nothing. Both halves came from getting it wrong.
+
+The fallback path can honour some criteria and not others: a GET carries a query string, so the entity families, the difficulty filter and the row count can be applied to the response after the fact, while a thematic filter cannot, because a result row does not carry its thematics. We applied the difficulty filter client-side over the rows the GET returned, and the GET returns at most five per family. Five hard trainings at the top and forty easy ones behind them, filter for easy, get an empty page. The filter ran, and correctly. It was applied to the wrong universe and reported as applied. *A filter over a truncated window is worse than a filter that was skipped*, because skipping is something you can tell the reader about.
+
+The other half: our banner fired on every search, because "the client asked for twenty rows and the fallback returns five" is true whether or not anything was actually cut off. A warning that appears every time is a warning nobody reads on the day it matters.
+
+=== Check where your own URLs put what you moved into the body
+
+Moving criteria into the body buys nothing if your own entry path writes them into the address bar, which ours did: the navigation bar handed off to `/search?q=sec` and the results page read it back.
+
+Rank the surfaces before you fix anything, because they are not equal. The `Referer` was already covered, since we send `Referrer-Policy: strict-origin-when-cross-origin` and an outbound click therefore gives a third party our origin and nothing else. The access log barely saw it, because the hand-off is a client-side route change in a static export and never reaches the server. What was genuinely exposed was the browser history, on a machine that may be shared or syncing.
+
+What the address bar carries now is the section 2.3 token, and the choice inside it is the one worth stating: the token is the criteria _encrypted_, AES-256-GCM, rather than signed. A signed-but-readable token is the more ordinary thing to build and it would have put the search term straight back into the history and the log that the body exists to keep it out of. A server-side store would have moved it into our database instead. So: opaque to everyone but the server, seven-day expiry then a 410 that says so, and no capability of its own, since the endpoint behind it gates on the same permission as every other read. A token minted in another organisation and a token that never existed share one 404, because telling them apart would let a URL pasted into the wrong tenant prove it was a real search somewhere else.
+
+One deployment detail that is ours rather than the spec's: the browser-side address is `?s=<token>` while the API side is a path segment. Our frontend is a static export in which the tenant is the only dynamic segment, so `/search/<token>` is not a route that can exist. The token is opaque either way, and history, reload, back, forward and sharing all work on a URL that says nothing about what was searched.
+
+=== The ecosystem lags the RFC, and that is the real bill
+
+Every item below was true while QUERY was a draft and is still true now that it is a standard. None of them is spec risk, and all of them outlast it.
+
+* *Nothing caches the verb yet.* Section 2.7 says what a cache key must contain, but no browser and no CDN caches a QUERY response today. Until they do, the cacheable artefact is the result URI from section 2.3, not the QUERY itself.
+* *OpenAPI cannot describe it.* The OpenAPI 3.x path item object enumerates the standard verbs, so a QUERY operation may simply not appear in your generated document. Tolerable for one endpoint, a real problem if they multiply.
+* *CORS gets involved if you are cross-origin.* Same-origin for us, so nothing to do. QUERY is not a CORS-simple method, so a separately hosted frontend means an `OPTIONS` preflight on every call and `QUERY` in your allowed methods.
+* *Proxies are an open question per deployment.* Ours forwards it, measured. Yours is unmeasured until you measure it, which is why the fallback stays even now.
+* *A new verb is an onboarding cost.* Every engineer who meets `@QUERY` in the codebase has to be told what it is and why the endpoint beside it does nearly the same thing. One paragraph in the architecture docs, and worth counting.
+
+=== What we would tell you to do
+
+Give the verb a feature the stable endpoint cannot serve, or do not adopt it. Then, in the order the problems arrive:
+
+. Build against the latest revision, and check whether it has since been published. That is the difference between a hedge you can settle and one you carry forever.
+. Put it next to the stable endpoint, never in place of it.
+. Read section 2, and section 3 for `Accept-Query`, and take what is already specified rather than reinventing it.
+. Gate it with a flag that is off by default and answers in your own error format, so the disabled state is distinguishable from an infrastructure refusal. That gate is also your production probe.
+. Give the client a fallback, so the proxy question is not a release blocker, and keep it after you have the answer, because an origin that takes the verb says nothing about the hop in front of it.
+. Make the fallback's refusal predicate read the body, not the status.
+. Tell the reader what got degraded, and only what actually got degraded.
+. Check where your own URLs put the things you moved into the body.
+
+WeLearn is our internal platform, but the front door is open. https://welearn.lunatech.com/demo/start/[welearn.lunatech.com] drops you into a demo tenant in one click, no account and no email, wearing a made-up colleague's shoes. Search for something with the network tab open and you will watch the verb go out.
+
+_Measured against production on 8 September 2026, against the text now published as RFC 10008._ Sozu behaviour can change; re-check before relying on it.
