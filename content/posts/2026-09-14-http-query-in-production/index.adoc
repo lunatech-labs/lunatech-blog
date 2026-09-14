@@ -27,9 +27,24 @@ tags:
      catches the multi-author byline, since that branch of the template emits a
      <span> rather than an <a>. Without this the names render inside a 4px box. */
   .author span.author__text {
-    display: inline-flex; white-space: nowrap;
+    display: inline-flex; align-items: center; white-space: nowrap;
     background: none; height: auto; width: auto;
     border-radius: 0; margin: 0; opacity: 1;
+  }
+
+  /* A two-author byline gets the theme's generic avatar, because the layout only
+     builds a GitHub one for a single handle. Both faces belong here, and doing it
+     from this post's own stylesheet leaves every other post alone. */
+  .author__avatar-lg { content: url(https://github.com/LSRaGeUx.png); }
+
+  .author span.author__text::before {
+    content: "";
+    display: inline-block;
+    height: 48px; width: 48px;
+    margin-right: 12px;
+    border-radius: 5rem;
+    border: 1px solid rgba(201, 169, 97, 0.35);
+    background: url(https://github.com/me-no-code.png) center / cover, var(--pearl);
   }
 </style>
 ++++
