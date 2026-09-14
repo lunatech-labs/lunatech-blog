@@ -1,6 +1,6 @@
 ---
 title: "We adopted HTTP QUERY as a draft. The RFC changed fourteen strings."
-author: "LSRaGeUx"
+author: "LSRaGeUx; me-no-code"
 tags:
 - "http"
 - "quarkus"
