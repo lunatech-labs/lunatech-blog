@@ -22,6 +22,15 @@ tags:
   article table p                  { font-size: 1.0625rem; line-height: 1.55; }
   article th                       { font-size: 0.8125rem; }
   article p code, article li code  { font-size: 0.8em; }
+
+  /* The theme draws the byline's dot separators with `.author span`, which also
+     catches the multi-author byline, since that branch of the template emits a
+     <span> rather than an <a>. Without this the names render inside a 4px box. */
+  .author span.author__text {
+    display: inline-flex; white-space: nowrap;
+    background: none; height: auto; width: auto;
+    border-radius: 0; margin: 0; opacity: 1;
+  }
 </style>
 ++++
 
