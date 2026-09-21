@@ -104,7 +104,7 @@ Accept-Query: application/json
 {"trainings": [...], "thematics": [...], "users": []}
 ----
 
-Two of those response headers are not ones an ordinary GET carries. They are the spec answering the problem the verb creates, and they are the subject of part two. Hold them.
+Two of those response headers are not ones an ordinary GET carries. They are the spec answering the problem the verb creates, and they are the subject of part two. Hold them. The `/lunatech` in front of the path is our tenant segment, added by a rewrite filter; the resource itself declares `/api/search`, which is how the rest of this post refers to it.
 
 === Why this endpoint
 
