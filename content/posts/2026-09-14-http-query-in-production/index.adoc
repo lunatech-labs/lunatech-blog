@@ -59,7 +59,7 @@ Search endpoints have always been squeezed between two verbs that each get half 
 
 `GET /api/search?q=...` is safe and idempotent, which is what a search is, so intermediaries are allowed to cache it, retry it and prefetch it. The cost is that every criterion has to fit in a URL. There is a practical length ceiling, and the whole thing is written down: in the access log, in the browser history, and unless you have set a referrer policy, in the `Referer` header of every outbound click made from the results page. On a platform whose search covers your colleagues' names, that is not an aesthetic concern.
 
-`POST /api/search` gives you a body and takes away the semantics. A POST is neither safe nor idempotent by definition, so no proxy will ever cache or retry it, and no reader of your API can tell from the verb that the call changes nothing. You end up writing "this POST does not modify anything" in your documentation, which is the tell that the verb is wrong.
+`POST /api/search` gives you a body and takes away the semantics. A POST is neither safe nor idempotent by definition, so no cache will reuse a POST response for a later POST and no intermediary will retry one, and no reader of your API can tell from the verb that the call changes nothing. You end up writing "this POST does not modify anything" in your documentation, which is the tell that the verb is wrong.
 
 QUERY is the missing corner: safe, idempotent, and it takes a body.
 
@@ -76,7 +76,7 @@ QUERY is the missing corner: safe, idempotent, and it takes a body.
 "The HTTP QUERY Method" is RFC 10008, Standards Track, from the IETF HTTP working group. It is short, and the contract is four properties:
 
 * *Safe.* The client asks for nothing to change. Same guarantee a GET makes, which is what lets an intermediary retry or prefetch one.
-* *Idempotent.* Sending it twice is sending it once.
+* *Idempotent.* Sending it twice leaves the server as it was after sending it once.
 * *It carries content.* A request body, with a `Content-Type` the request declares like any other.
 * *It is cacheable, with a caveat that matters.* Section 2.7: "the cache key for a QUERY request MUST incorporate the request content and related metadata". The body is part of the identity of the request, which is exactly the rule no cache applies to a POST.
 
@@ -98,7 +98,7 @@ Accept: application/json
 
 HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Location: /lunatech/api/search/8Qk3ZP...
+Location: /lunatech/api/search/8Qk3ZP...
 Accept-Query: application/json
 
 {"trainings": [...], "thematics": [...], "users": []}
@@ -143,18 +143,18 @@ Which is the whole of the cheap part. Everything below is what it cost.
 
 === The hedge, and what it was worth
 
-Adopting an unratified spec has an obvious risk, and we paid for it up front. The endpoint went behind a feature flag that is off by default, opted into per environment, and on in production. The old GET stayed exactly where it was. The revert was written down before it was needed, in two versions, a cheap one and a thorough one. Every new type we added carried an `@Experimental` marker saying it might change or disappear with the draft.
+Adopting an unpublished draft has an obvious risk, and we paid for it up front. The endpoint went behind a feature flag that is off by default, opted into per environment, and on in production. The old GET stayed exactly where it was. The revert was written down before it was needed, in two versions, a cheap one and a thorough one. Every new type we added carried an `@Experimental` marker saying it might change or disappear with the draft.
 
-Then the draft became RFC 10008, at the revision we had built against, and we got to settle the account. What did ratification demand of us?
+Then the draft became RFC 10008, at the revision we had built against, and we got to settle the account. What did publication demand of us?
 
 Nothing that runs. No rework, no migration, no behaviour change, not one line of logic. The section numbers we cite in comments are the section numbers the RFC publishes. What it retired was **fourteen strings across seven files**: the word "draft" in a handful of javadoc lines, four `@Experimental` messages, three frontend comments, and two OpenAPI descriptions that told API readers this was a draft method.
 
 Fourteen strings is the entire measurable cost of the risk we were managing. Which is worth sitting with, because the rest of the work was substantial, and none of it was about the spec's status:
 
 * *Discovering support by firing a QUERY and reading the failure.* Not reading section 3. `Accept-Query` was in revision -14 the whole time.
-* *Holding the search term in client state to keep it out of the URL.* Not reading section 2.3. `Content-Location` was there too.
-* *A feature gate, three classes, answering 501 when off.* Rollout caution, and it doubled as the production probe below. Unaffected by ratification.
-* *A client fallback to the GET, most of a module.* Proxies. An RFC does not make a load balancer forward an unknown verb. Unaffected by ratification.
+* *Holding the search term in client state to keep it out of the URL.* Not reading section 2.4. The equivalent resource and `Location` were there too.
+* *A feature gate, three classes, answering 501 when off.* Rollout caution, and it doubled as the production probe below. Unaffected by publication.
+* *A client fallback to the GET, most of a module.* Proxies. An RFC does not make a load balancer forward an unknown verb. Unaffected by publication.
 * *Keeping `GET /api/search` beside it.* The type-ahead needs a different contract. Nothing to do with the spec.
 * *The `@Experimental` markers and the draft wording.* The spec's status, and this line alone. Fourteen strings.
 
@@ -164,8 +164,8 @@ So the hedge was cheap, and that is the useful finding rather than a boast: spec
 
 Moving a query into a body takes it out of the URI, and in HTTP the URI _is_ identity. Everything that was addressable because it lived in a query string stops being addressable: bookmarking, the back button, sending a colleague your search, and every cache in the path. The spec knows, and answers it in four subsections of section 2, with a fifth mechanism in section 3.
 
-* *Content-Location, section 2.3.* "A successful response (2xx) can include a Content-Location header field containing an identifier for a resource corresponding to the results of the operation." There is your bookmarkable URL. The criteria travelled in the body; the results have a URI of their own, which a browser can hold and a cache can store.
-* *Location, section 2.4.* "A server can assign a URI to the equivalent resource of a QUERY request." That names the query rather than its results, so the URI re-runs it.
+* *Content-Location, section 2.3.* "A successful response (2xx) can include a Content-Location header field containing an identifier for a resource corresponding to the results of the operation." The results of that one run get a URI of their own, which a browser can hold and a cache can store. The right answer when the server keeps the result set.
+* *Location, section 2.4.* "A server can assign a URI to the equivalent resource of a QUERY request." That names the query rather than its results, so the URI re-runs it. There is your bookmarkable URL, and the one we needed, though it took a reviewer to tell us which of the two we had built.
 * *303 See Other, section 2.5.* The redirect form of the same idea: "the original query can be accomplished via a normal retrieval request on the URI referenced by the Location response field."
 * *Caching, section 2.7.* "The cache key for a QUERY request MUST incorporate the request content and related metadata."
 * *Accept-Query, section 3.* A response header by which a resource advertises that it supports QUERY, and in which query format media types.
@@ -174,7 +174,7 @@ We hand-rolled two of those before reading them. Both have since been replaced b
 
 *Capability discovery.* We used to learn whether a deployment took the verb by firing a QUERY and interpreting the failure, at a cost of one wasted request per page load everywhere the feature was off. `Accept-Query` is the designed answer, and it costs a header: our GET response now advertises `Accept-Query: application/json` when the structured search is available, so the type-ahead's very first call tells the client whether the structured path exists, on a request it was making anyway. One subtlety survives the fix, and it is the reason the fallback below did not get deleted along with the probe: *only the header's absence is conclusive.* A proxy that strips unknown methods forwards the GET carrying the header perfectly happily, so an origin server advertising support tells you nothing about what sits in front of it.
 
-*Addressability.* We solved it by taking the term out of the URL entirely and holding it in client state, which is private and unbookmarkable, and which cost us the back button within a day. `Content-Location` gets both properties at once: the QUERY response now names `GET /api/search/{token}`, an opaque server-minted result URI that is meaningless to a reader of your history or your logs, works as a link, survives a reload, and is cacheable by every cache that already exists. Which also retires the argument that QUERY's cacheability is theoretical. Caching the QUERY itself is theoretical. Caching the GET-addressable results it hands you works today.
+*Addressability.* We solved it by taking the term out of the URL entirely and holding it in client state, which is private and unbookmarkable, and which cost us the back button within a day. `Location` gets both properties at once: the QUERY response now names `GET /api/search/{token}`, the equivalent resource of section 2.2, an opaque server-minted URI that is meaningless to a reader of your history or your logs, works as a link, survives a reload, and is cacheable by every cache that already exists. Which also retires the argument that QUERY's cacheability is theoretical. Caching the QUERY itself is theoretical. Caching the GET it hands you works today.
 
 [quote]
 ____
@@ -185,7 +185,7 @@ ____
 
 Somewhere in front of your application there is a load balancer or reverse proxy, and some of them implement HTTP by allowing the verbs they know and rejecting the rest. If yours does that, your endpoint answers 405 or a proxy error page, and no local testing will have told you, because your development machine has no proxy in it.
 
-This is the risk ratification does not touch. A published RFC does not oblige anybody's infrastructure to have heard of it.
+This is the risk publication does not touch. A published RFC does not oblige anybody's infrastructure to have heard of it.
 
 The technique that answers it costs nothing: gate the endpoint behind a feature flag that answers in _your own_ error format, then fire a request at production with the feature still off.
 
@@ -259,7 +259,7 @@ Moving criteria into the body buys nothing if your own entry path writes them in
 
 Rank the surfaces before you fix anything, because they are not equal. The `Referer` was already covered, since we send `Referrer-Policy: strict-origin-when-cross-origin` and an outbound click therefore gives a third party our origin and nothing else. The access log barely saw it, because the hand-off is a client-side route change in a static export and never reaches the server. What was genuinely exposed was the browser history, on a machine that may be shared or syncing.
 
-What the address bar carries now is the section 2.3 token, and the choice inside it is the one worth stating: the token is the criteria _encrypted_, AES-256-GCM, rather than signed. A signed-but-readable token is the more ordinary thing to build and it would have put the search term straight back into the history and the log that the body exists to keep it out of. A server-side store would have moved it into our database instead. So: opaque to everyone but the server, seven-day expiry then a 410 that says so, and no capability of its own, since the endpoint behind it gates on the same permission as every other read. A token minted in another organisation and a token that never existed share one 404, because telling them apart would let a URL pasted into the wrong tenant prove it was a real search somewhere else.
+What the address bar carries now is the section 2.4 token, and the choice inside it is the one worth stating: the token is the criteria _encrypted_, AES-256-GCM, rather than signed. A signed-but-readable token is the more ordinary thing to build and it would have put the search term straight back into the history and the log that the body exists to keep it out of. A server-side store would have moved it into our database instead. So: opaque to everyone but the server, seven-day expiry then a 410 that says so, and no capability of its own, since the endpoint behind it gates on the same permission as every other read. A token minted in another organisation and a token that never existed share one 404, because telling them apart would let a URL pasted into the wrong tenant prove it was a real search somewhere else.
 
 One deployment detail that is ours rather than the spec's: the browser-side address is `?s=<token>` while the API side is a path segment. Our frontend is a static export in which the tenant is the only dynamic segment, so `/search/<token>` is not a route that can exist. The token is opaque either way, and history, reload, back, forward and sharing all work on a URL that says nothing about what was searched.
 
@@ -267,7 +267,7 @@ One deployment detail that is ours rather than the spec's: the browser-side addr
 
 Every item below was true while QUERY was a draft and is still true now that it is a standard. None of them is spec risk, and all of them outlast it.
 
-* *Nothing caches the verb yet.* Section 2.7 says what a cache key must contain, but no browser and no CDN caches a QUERY response today. Until they do, the cacheable artefact is the result URI from section 2.3, not the QUERY itself.
+* *Nothing caches the verb yet.* Section 2.7 says what a cache key must contain, but no browser and no CDN caches a QUERY response today. Until they do, the cacheable artefact is the equivalent resource from section 2.4, not the QUERY itself.
 * *OpenAPI cannot describe it.* The OpenAPI 3.x path item object enumerates the standard verbs, so a QUERY operation may simply not appear in your generated document. Tolerable for one endpoint, a real problem if they multiply.
 * *CORS gets involved if you are cross-origin.* Same-origin for us, so nothing to do. QUERY is not a CORS-simple method, so a separately hosted frontend means an `OPTIONS` preflight on every call and `QUERY` in your allowed methods.
 * *Proxies are an open question per deployment.* Ours forwards it, measured. Yours is unmeasured until you measure it, which is why the fallback stays even now.
