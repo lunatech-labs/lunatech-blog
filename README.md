@@ -19,11 +19,10 @@ templates from `templates/`, and published to GitHub Pages.
 
 ## Writing a post
 
-1. Fork or branch this repository.
-2. Create a bundle directory: `content/posts/yyyy-MM-dd-your-title/`. Use only
+1. Create a bundle directory: `content/posts/yyyy-MM-dd-your-title/`. Use only
    lowercase letters, digits and single hyphens in the name; see
    [Post directory names](#post-directory-names).
-3. Write your post in `index.adoc` in that directory, starting with front matter:
+2. Write your post in `index.adoc` in that directory, starting with front matter:
 
    ```
    ---
@@ -40,8 +39,8 @@ templates from `templates/`, and published to GitHub Pages.
    The author is your GitHub username; your GitHub avatar is shown on the post
    card. Refer to images with plain relative paths, for example
    `image::diagram.png[Diagram]`, and put the files in the same directory.
-4. Add a `background.png` in the bundle; it is used as the card and hero image.
-5. Open a pull request. CI builds the site and comments a preview URL
+3. Add a `background.png` in the bundle; it is used as the card and hero image.
+4. Open a pull request. CI builds the site and comments a preview URL
    (Surge.sh) on the PR, rebuilt on every push.
 
 Posts dated in the future are excluded from the build until their date passes;
